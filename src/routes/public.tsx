@@ -3,7 +3,12 @@ import PublicLayout from '@app/components/templates/PublicLayout';
 const routes = [
   {
     element: <PublicLayout />,
-    children: [{ path: 'login', element: <div>Login Page</div> }],
+    children: [
+      {
+        path: 'login',
+        element: <div className='bg-black !p-2 font-bold text-white'>Login Page</div>,
+      },
+    ],
   },
 ];
 
