@@ -1,12 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { openModal } from '@app/components/molecules';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { ModalTypeEnum } from '@app/constants/modalType';
-import { ICON_URL } from '@app/constants/urlImage';
-import { notificationError, notificationSuccess } from '@app/helpers';
 import { GetUsersParams, UserDetail } from '@app/interface/user.interface';
 import {
   createUser,
@@ -15,8 +10,6 @@ import {
   getUsersAPI,
   resetPasswordApi,
   updateUser,
-  uploadAvatarApi,
-  removeAvatarApi,
 } from '@app/services';
 
 export const useCreateUser = () => {
@@ -74,38 +67,15 @@ export const useUpdateUser = () => {
 };
 
 export const useDeleteUser = () => {
-  return useMutation(
-    async (id: number) => {
-      const response = await deleteUserAPI(id);
-      return response.data;
-    },
-    {
-      onSuccess({ message }) {},
-    },
-  );
+  return useMutation(async (id: number) => {
+    const response = await deleteUserAPI(id);
+    return response.data;
+  });
 };
 
 export const useResetPassword = () => {
-  const { t } = useTranslation();
-
-  return useMutation(
-    async (id: number) => {
-      const response = await resetPasswordApi(id);
-      return response.data;
-    },
-    {
-      onSuccess({ data }) {
-        openModal(
-          () => {
-            navigator.clipboard.writeText(data.password);
-          },
-          ModalTypeEnum.SUCCESS,
-          ICON_URL.ICON_SUCCESS,
-          t<string>('MODAL.COPY_PASSWORD', { name: data.password }),
-          t<string>('MODAL.SUGGESTION_COPY_PASSWORD'),
-          t<string>('MODAL.COPY'),
-        );
-      },
-    },
-  );
+  return useMutation(async (id: number) => {
+    const response = await resetPasswordApi(id);
+    return response.data;
+  });
 };

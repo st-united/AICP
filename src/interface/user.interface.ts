@@ -1,12 +1,10 @@
 import { GetListParams } from './common.interface';
-import { Role, RoleApi } from './role.interface';
 
 export interface UserColumns {
   id: number;
   name: string;
   email: string;
   phone: string;
-  role: Role;
   status: string;
   operation: string;
 }
@@ -25,7 +23,6 @@ export interface UserProfile {
   gender: string;
   identityId: string;
   avatar: string;
-  role: RoleApi;
   permissions: string[];
 }
 
@@ -39,7 +36,6 @@ export interface UserDetail {
   gender: string;
   identityId: string;
   avatar: string;
-  role: RoleApi;
 }
 
 export interface ChangePassword {

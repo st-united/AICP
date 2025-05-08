@@ -320,4 +320,3 @@ For more configuration options and details, see the [configuration docs](https:/
    ```
 
 8. docker-compose up
-
