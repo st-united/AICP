@@ -1,5 +1,7 @@
 import { Button, Checkbox, Form, Input } from 'antd';
+import parse from 'html-react-parser';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { LuCheck, LuChevronLeft } from 'react-icons/lu';
 
 import { useRegister } from '@app/hooks';
@@ -8,6 +10,7 @@ import { RegisterUser } from '@app/interface/user.interface';
 const SignUp = () => {
   const [isLengthValid, setIsLengthValid] = useState(false);
   const [isComplexValid, setIsComplexValid] = useState(false);
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { mutate: registerUser, isLoading } = useRegister();
 
@@ -30,11 +33,14 @@ const SignUp = () => {
           <div className='flex items-center justify-center'>
             <LuChevronLeft size={24} />
           </div>
-          Quay về trang chủ
+          {t<string>('SIGN_UP.BACK_TO_HOME')}
         </p>
         <div>
-          <h1 className='text-4xl !text-white font-bold'>Đăng ký tài khoản</h1>
-          <p className='text-white !mb-8'>Bạn đã có tài khoản? Đăng nhập</p>
+          <h1 className='text-[40px] !text-white font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
+          <p className='text-white text-lg !mb-8 flex gap-2'>
+            <div>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
+            <div className='text-[#1890FF] cursor-pointer underline'>{t<string>('LOGIN.TEXT')}</div>
+          </p>
         </div>
         <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
           <Form.Item
@@ -96,27 +102,32 @@ const SignUp = () => {
               <div>
                 <LuCheck size={24} />
               </div>
-              <div>Mật khẩu trong khoảng 8-50 ký tự</div>
+              <div>{t<string>('SIGN_UP.PASSWORD_REQUIREMENT')}</div>
             </div>
             <div className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-white'}`}>
               <div>
                 <LuCheck size={24} />
               </div>
-              <div>
-                Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ
-                số
-              </div>
+              <div>{t<string>('SIGN_UP.PASSWORD_COMPLEXITY')}</div>
             </div>
-            <div className='flex gap-2 !mt-6'>
-              <Checkbox className='!text-lg !text-white'>
-                Tôi đã đọc và đồng ý với Điều khoản & Điều kiện cùng Chính sách bảo mật của DevPlus
-              </Checkbox>
+            <div className='flex gap-2 !mt-6 !text-[16px]'>
+              <Checkbox />
+              <div>
+                {parse(
+                  t<string>('SIGN_UP.AGREE_TERMS', {
+                    terms: `<a href="/terms" style="text-decoration: underline;">Điều khoản & Điều kiện</a>`,
+                    privacy: `<a href="/privacy" style="text-decoration: underline;">Chính sách bảo mật</a>`,
+                    company: 'DevPlus',
+                  }),
+                )}
+              </div>
+
               <div></div>
             </div>
           </div>
           <Form.Item>
             <Button type='primary' htmlType='submit' className='w-full'>
-              Đăng ký
+              {t<string>('SIGN_UP.CREATE_ACCOUNT')}
             </Button>
           </Form.Item>
         </Form>
