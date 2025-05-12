@@ -1,8 +1,18 @@
-export default function Button({ ...props }: { children: string }) {
-  const { children } = props;
+import { Button } from 'antd';
+interface ButtonProps {
+  children: string;
+  type?: 'primary' | 'default' | 'dashed' | 'text' | 'link' | 'ghost';
+  className?: string;
+}
+
+export default function ButtonComponent({ ...props }: ButtonProps) {
+  const { children, type, className } = props;
   return (
-    <button className='!text-white bg-[#1890FF] w-full h-11 rounded-md hover:bg-[#1955A0] transition-all duration-300 ease-in-out cursor-pointer'>
+    <Button
+      type={type ? type : 'primary'}
+      className={`${className} !h-12 !rounded-md !font-medium`}
+    >
       {children}
-    </button>
+    </Button>
   );
 }

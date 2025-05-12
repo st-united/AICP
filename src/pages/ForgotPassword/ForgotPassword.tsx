@@ -18,7 +18,9 @@ export default function ForgotPassword() {
         </div>
         <form className='!space-y-8'>
           <InputField type={'email'} placeholder={'Email *'} />
-          <Button>Đặt lại mật khẩu</Button>
+          <Button type='primary' className={'w-full'}>
+            Đặt lại mật khẩu
+          </Button>
         </form>
       </div>
     </div>
