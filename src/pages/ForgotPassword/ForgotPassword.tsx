@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 import { InputField, Button } from '@app/components/ui/index';
 
@@ -8,7 +8,7 @@ export default function ForgotPassword() {
       <div className='w-full'>
         <p className='text-white !mb-14 flex align-items gap-x-1'>
           <span>
-            <ArrowLeft className='translate-y-[1.5px]' size={20} />
+            <ArrowLeftOutlined className='-translate-y-[2px]' />
           </span>
           <span>Quay về trang đăng nhập</span>
         </p>
