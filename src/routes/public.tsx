@@ -1,5 +1,5 @@
 import { PublicLayout, AuthLayout } from '@app/components/templates/PublicLayout/index';
-import { ActivateAccount, ForgotPassword, SignUp } from '@app/pages/index';
+import { ForgotPassword, SignUp } from '@app/pages/index';
 
 const routes = [
   {
@@ -20,10 +20,6 @@ const routes = [
       {
         path: 'login',
         element: <div className='bg-black !p-2 font-bold text-white'>Login Page</div>,
-      },
-      {
-        path: '/activate/:token',
-        element: <ActivateAccount />,
       },
     ],
   },
