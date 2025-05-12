@@ -65,3 +65,10 @@ export interface GetUsersParams extends GetListParams {
   search: string;
   status: string | null;
 }
+
+export interface RegisterUser {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+}
