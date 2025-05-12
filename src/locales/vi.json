@@ -233,5 +233,12 @@
     "TERMS": "Điều khoản & Điều kiện",
     "PRIVACY": "Chính sách bảo mật",
     "COMPANY": "DevPlus"
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "Quên mật khẩu",
+    "RESET_PASSWORD": "Đặt lại mật khẩu",
+    "NO_ACCOUNT": "Bạn chưa có tài khoản?",
+    "REGISTER": "Đăng ký",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập"
   }
 }
