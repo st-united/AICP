@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^1.8.6",
     "@tailwindcss/postcss": "^4.1.5",
     "@tanstack/react-query": "^4.12.0",
+    "aicp-admin": "file:",
     "antd": "^4.23.5",
     "antd-img-crop": "^4.5.2",
     "axios": "^1.1.3",
