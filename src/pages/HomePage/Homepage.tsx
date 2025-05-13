@@ -1,20 +1,18 @@
-// import BackgroundImg from '@app/assets/images/background.png';
-import Header from '@app/components/Header/Header';
+import BackgroundImg from '@app/assets/images/background.png';
 
 const Homepage = () => {
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col w-full h-full'>
       <div
         className='h-screen w-full'
         style={{
-          //   backgroundImage: `url(${BackgroundImg})`,
+          backgroundImage: `url(${BackgroundImg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
       >
-        {/* <Header /> */}
-        <div className='flex justify-center items-center flex-col gap-12 h-screen !px-4'>
+        <div className='flex justify-center items-center flex-col gap-12 h-full !px-4'>
           <div className='lg:text-7xl md:text-5xl text-4xl max-w-[300px] md:max-w-full text-center leading-12 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#C05604] via-[#E16100] to-[#FFF] !p-4'>
             Khám Phá Năng Lực AI
           </div>

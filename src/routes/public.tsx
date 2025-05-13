@@ -1,3 +1,4 @@
+import ProfileLayout from '@app/components/templates/ProfileLayout';
 import PublicLayout from '@app/components/templates/PublicLayout/index';
 import { Homepage, Profile } from '@app/pages/index';
 
@@ -10,8 +11,17 @@ const routes = [
         element: <Homepage />,
       },
       {
-        path: '/profile',
-        element: <Profile />,
+        element: <ProfileLayout />,
+        children: [
+          {
+            path: 'profile',
+            element: <Profile />,
+          },
+          {
+            path: 'change-password',
+            element: <Profile />,
+          },
+        ],
       },
     ],
   },
