@@ -70,7 +70,7 @@ export const useRegister = () => {
       return data;
     },
     {
-      onSuccess: ({ data, message }) => {
+      onSuccess: ({ message }) => {
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
         navigate('/');
       },
