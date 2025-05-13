@@ -18,9 +18,9 @@ const PublicLayout: React.FC = () => {
   }, [isAuth, getStorageData(ACCESS_TOKEN)]);
 
   return (
-    <div className='flex flex-col'>
+    <div className='relative min-h-screen'>
       <Header />
-      <div className=''>
+      <div className='flex-1 flex justify-center items-center'>
         <Outlet />
       </div>
     </div>
