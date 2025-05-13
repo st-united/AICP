@@ -1,36 +1,102 @@
-import { Col, Row } from 'antd';
-import { FC, lazy, useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { Button, Form, Input } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { LuEye, LuEyeClosed, LuChevronLeft } from 'react-icons/lu';
 import { useNavigate } from 'react-router-dom';
 
-import { RootState } from '@app/redux/store';
-import './SignIn.scss';
+import { useLogin } from '@app/hooks';
+import { Credentials } from '@app/interface/user.interface';
+import './SignIn.scss'
 
-const SignInForm = lazy(() => import('./SignInForm'));
-
-const SignIn: FC = () => {
+const SignIn = () => {
+  const { mutate: loginUser } = useLogin();
+  const { t } = useTranslation();
   const navigate = useNavigate();
-
-  const { isAuth } = useSelector((state: RootState) => state.auth);
-  useEffect(() => {
-    if (isAuth) navigate('/');
-  }, [isAuth, navigate]);
-
-  const [previousValue, setPreviousValue] = useState({
-    email: '',
-    password: '',
-  });
-
-  const onInputChange = useCallback((name: string, value: string) => {
-    setPreviousValue((prev) => ({ ...prev, [name]: value }));
-  }, []);
+  const [form] = Form.useForm();
+  const onFinish = (values: Credentials) => {
+    console.log('Form Data:', values);
+    loginUser(values);
+  };
 
   return (
-    <Row className='container-box-login'>
-      <Col xs={24} sm={24} md={12} lg={9} className='login-box'>
-        <SignInForm onInputChange={onInputChange} previousValue={previousValue} />
-      </Col>
-    </Row>
+    <div className='flex justify-center'>
+      <div className='w-full md:w-4/5 h-full'>
+        <p className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-14 cursor-pointer hover:text-[#1890FF]'
+            onClick={() => navigate('/')}
+         >
+          <div className='flex items-center justify-center'>
+            <LuChevronLeft size={24} />
+          </div>
+          {t<string>('LOGIN.BACK_TO_HOME')}
+        </p>
+        <div>
+          <h1 className='text-[40px] !text-white font-bold'>{t<string>('LOGIN.TEXT')}</h1>
+          <p className='text-white text-lg !mb-8 flex gap-2'>
+            <div>{t<string>('LOGIN.NOT_HAVE_ACCOUNT')}</div>
+            <div
+              className='text-[#1890FF] cursor-pointer underline'
+              onClick={() => navigate('/sign-up')}
+            >
+                {t<string>('LOGIN.REGISTER')}
+            </div>
+          </p>
+        </div>
+        <Form 
+          form={form} 
+          layout='vertical' 
+          onFinish={onFinish}
+          className='grid grid-cols-2 gap-4 gap-1' 
+        >
+          <Form.Item
+            className='col-span-2'
+            name='email'
+            rules={[
+              { required: true, message: 'Vui lòng nhập email!' },
+              { type: 'email', message: 'Email không đúng định dạng!' },
+            ]}
+          >
+            <Input 
+              className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              placeholder='Email *'
+            />
+          </Form.Item>
+          <Form.Item
+            className='col-span-2'
+            name='password'
+            rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
+          >
+            <Input.Password
+              className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              placeholder='Mật khẩu *'
+              iconRender={(visible) =>
+                visible ? (
+                  <LuEye color='#69c0ff' size={24} />
+                ) : (
+                  <LuEyeClosed color='#69c0ff' size={24} />
+                )
+              }
+            />
+          </Form.Item>
+          <div className='col-span-2 text-lg text-white flex justify-between items-center'>
+            <div></div>
+            <div
+              className='text-[#1890FF] cursor-pointer underline hover:text-[#0056b3]'
+              onClick={() => navigate('/forgot-password')}
+            >
+              {t<string>('LOGIN.FORGOT_PASSWORD')}
+            </div>
+          </div>
+          <Form.Item className='col-span-2 !mt-2'>
+            <Button 
+              type='primary'
+              htmlType='submit'
+              className='w-full !bg-[#1890FF] !h-13 !text-[16px] !font-bold !border-none !outline-none !rounded-md !text-white'
+            >
+              {t<string>('LOGIN.LOGIN')}
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+    </div>
   );
 };
 

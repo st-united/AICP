@@ -8,6 +8,7 @@ import { Credentials } from '@app/interface/user.interface';
 import { logout, login } from '@app/redux/features/auth/authSlice';
 import { RootState } from '@app/redux/store';
 import { loginApi, getLogout } from '@app/services';
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/services/notification/notificationService';
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export const useLogin = () => {
         navigate('/');
       },
       onError({ response }) {
-        //
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
       },
     },
   );
