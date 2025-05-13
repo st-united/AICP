@@ -1,8 +1,22 @@
-import PublicLayout from '@app/components/templates/PublicLayout';
+import PublicLayout from '@app/components/templates/PublicLayout/index';
+import { Homepage, Profile } from '@app/pages/index';
 
 const routes = [
   {
     element: <PublicLayout />,
+    children: [
+      {
+        path: '/',
+        element: <Homepage />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
+    ],
+  },
+  {
+    // element: <AuthLayout />,
     children: [
       {
         path: 'login',
