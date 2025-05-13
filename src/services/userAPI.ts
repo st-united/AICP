@@ -20,3 +20,6 @@ export const createUser = async (formData: FormData) =>
   await axios.post(API_URL.USERS, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
+
+export const forgotPasswordApi = async (email: string) =>
+  await axios.post(API_URL.FORGOT_PASSWORD, { email });

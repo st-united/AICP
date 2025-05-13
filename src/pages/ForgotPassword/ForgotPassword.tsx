@@ -1,10 +1,40 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Form } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { InputField, Button } from '@app/components/ui/index';
+import { useForgotPassword } from '@app/hooks/useUser';
 
 export default function ForgotPassword() {
   const { t } = useTranslation();
+  const [form] = Form.useForm();
+
+  const { mutate } = useForgotPassword();
+  const onFinish = (values: { email: string }) => {
+    const { email } = values;
+    mutate(email, {
+      onSuccess: (data) => {
+        form.setFields([
+          {
+            name: 'email',
+            errors: [t('FORGOT_PASSWORD.SEND_EMAIL_SUCCESS')],
+          },
+        ]);
+      },
+      onError: (error: any) => {
+        form.setFields([
+          {
+            name: 'email',
+            errors: [error.response.data.message || t('FORGOT_PASSWORD.NOT_FOUND')],
+          },
+        ]);
+      },
+    });
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
   return (
     <div className='!p-12 flex justify-start h-full w-full'>
       <div className='w-full'>
@@ -20,12 +50,27 @@ export default function ForgotPassword() {
             {t('FORGOT_PASSWORD.TITLE')} {t('FORGOT_PASSWORD.REGISTER')}
           </p>
         </div>
-        <form className='!space-y-8'>
-          <InputField type={'email'} placeholder={'Email *'} />
+        <Form
+          form={form}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          className='!space-y-8'
+        >
+          <Form.Item
+            name={'email'}
+            rules={[
+              {
+                required: true,
+                message: t('VALIDATE.REQUIRED', { field: 'Email' }),
+              },
+            ]}
+          >
+            <InputField type={'email'} placeholder={'Email *'} />
+          </Form.Item>
           <Button type='primary' className={'w-full'}>
             {t('FORGOT_PASSWORD.RESET_PASSWORD')}
           </Button>
-        </form>
+        </Form>
       </div>
     </div>
   );

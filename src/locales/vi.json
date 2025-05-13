@@ -238,7 +238,9 @@
     "TITLE": "Quên mật khẩu",
     "RESET_PASSWORD": "Đặt lại mật khẩu",
     "NO_ACCOUNT": "Bạn chưa có tài khoản?",
+    "NOT_FOUND": "Người dùng không tồn tại!",
     "REGISTER": "Đăng ký",
+    "SEND_EMAIL_SUCCESS": "Đã gửi email thành công",
     "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập"
   }
 }

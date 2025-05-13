@@ -10,6 +10,7 @@ export default function ButtonComponent({ ...props }: ButtonProps) {
   return (
     <Button
       type={type ? type : 'primary'}
+      htmlType='submit'
       className={`${className} !h-12 !rounded-md !font-medium`}
     >
       {children}

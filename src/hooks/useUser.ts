@@ -10,6 +10,7 @@ import {
   getUsersAPI,
   resetPasswordApi,
   updateUser,
+  forgotPasswordApi,
 } from '@app/services';
 
 export const useCreateUser = () => {
@@ -76,6 +77,13 @@ export const useDeleteUser = () => {
 export const useResetPassword = () => {
   return useMutation(async (id: number) => {
     const response = await resetPasswordApi(id);
+    return response.data;
+  });
+};
+
+export const useForgotPassword = () => {
+  return useMutation(async (email: string) => {
+    const response = await forgotPasswordApi(email);
     return response.data;
   });
 };
