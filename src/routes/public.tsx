@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import ProfileLayout from '@app/components/templates/ProfileLayout';
+=======
+>>>>>>> 5c46566 (feat: [AICP-24] Implement Homepage)
 import PublicLayout from '@app/components/templates/PublicLayout/index';
 import { Homepage, Profile } from '@app/pages/index';
 
@@ -11,6 +14,7 @@ const routes = [
         element: <Homepage />,
       },
       {
+<<<<<<< HEAD
         element: <ProfileLayout />,
         children: [
           {
@@ -18,6 +22,10 @@ const routes = [
             element: <Profile />,
           },
         ],
+=======
+        path: '/profile',
+        element: <Profile />,
+>>>>>>> 5c46566 (feat: [AICP-24] Implement Homepage)
       },
     ],
   },

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Form, Input, DatePicker, Button } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useEffect, useState } from 'react';
@@ -146,4 +147,17 @@ const Profile = () => {
     </>
   );
 };
+=======
+const Profile = () => {
+  return (
+    <div className='flex flex-col'>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+      <div>123</div>
+    </div>
+  );
+};
+
+>>>>>>> 5c46566 (feat: [AICP-24] Implement Homepage)
 export default Profile;
