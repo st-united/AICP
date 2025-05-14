@@ -30,7 +30,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <Card className='flex !rounded-2xl flex-grow'>
+    <div className='flex !rounded-2xl bg-white !p-6'>
       <div className='grid grid-cols-1 gap-1 text-[16px] w-full'>
         {menuItems.map((item, index) => {
           const isActive = currentPath === item.path;
@@ -56,7 +56,7 @@ const Sidebar = () => {
           );
         })}
       </div>
-    </Card>
+    </div>
   );
 };
 

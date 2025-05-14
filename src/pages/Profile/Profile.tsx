@@ -13,7 +13,7 @@ const Profile = () => (
       </div>
     </div>
     <Form layout='vertical' className='w-full flex justify-center !mt-[120px] !px-4'>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[800px] w-full'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px] w-full'>
         <Form.Item
           name='name'
           label='Họ tên'
