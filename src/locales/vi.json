@@ -235,12 +235,21 @@
     "COMPANY": "DevPlus"
   },
   "FORGOT_PASSWORD": {
+    "EMAIL_VALID": "Email bắt buộc phải hợp lệ!",
     "TITLE": "Quên mật khẩu",
     "RESET_PASSWORD": "Đặt lại mật khẩu",
     "NO_ACCOUNT": "Bạn chưa có tài khoản?",
     "NOT_FOUND": "Người dùng không tồn tại!",
     "REGISTER": "Đăng ký",
     "SEND_EMAIL_SUCCESS": "Đã gửi email thành công",
-    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập"
+    "SEND_LOADING": "Đang gửi...",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Gửi email thành công!"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Đặt lại mật khẩu!",
+    "NEW_PASSWORD": "Mật khẩu mới",
+    "CONFIRM_PASSWORD": "Nhập lại mật khẩu mới *",
+    "CREATE_PASSWORD": "Tạo mới mật khẩu"
   }
 }
