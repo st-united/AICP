@@ -229,6 +229,9 @@
     "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
     "AGREE_TERMS": "Tôi đã đọc và đồng ý với {{terms}} cùng {{privacy}} của {{company}}",
     "CREATE_ACCOUNT": "Tạo tài khoản",
-    "CONFIRM_PASSWORD": "Xác nhận mật khẩu"
+    "CONFIRM_PASSWORD": "Xác nhận mật khẩu",
+    "TERMS": "Điều khoản & Điều kiện",
+    "PRIVACY": "Chính sách bảo mật",
+    "COMPANY": "DevPlus"
   }
 }

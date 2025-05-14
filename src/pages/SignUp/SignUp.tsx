@@ -151,9 +151,13 @@ const SignUp = () => {
               <div>
                 {parse(
                   t<string>('SIGN_UP.AGREE_TERMS', {
-                    terms: `<a href="/terms" style="text-decoration: underline;">Điều khoản & Điều kiện</a>`,
-                    privacy: `<a href="/privacy" style="text-decoration: underline;">Chính sách bảo mật</a>`,
-                    company: 'DevPlus',
+                    terms: `<a href="/terms" style="text-decoration: underline;">${t<string>(
+                      'SIGN_UP.TERMS',
+                    )}</a>`,
+                    privacy: `<a href="/privacy" style="text-decoration: underline;">${t<string>(
+                      'SIGN_UP.PRIVACY',
+                    )}</a>`,
+                    company: t<string>('SIGN_UP.COMPANY'),
                   }),
                 )}
               </div>
