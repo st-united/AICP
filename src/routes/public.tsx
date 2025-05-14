@@ -17,10 +17,6 @@ const routes = [
             path: 'profile',
             element: <Profile />,
           },
-          {
-            path: 'change-password',
-            element: <Profile />,
-          },
         ],
       },
     ],

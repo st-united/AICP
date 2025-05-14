@@ -1,30 +1,32 @@
 import { ProfileOutlined, LockOutlined, ContainerOutlined } from '@ant-design/icons';
-import { Card } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useLocation, Link } from 'react-router-dom';
 
 const Sidebar = () => {
+  const { t } = useTranslation();
+
   const location = useLocation();
   const currentPath = location.pathname;
 
   const menuItems = [
     {
       icon: ProfileOutlined,
-      label: 'Thông tin cá nhân',
+      label: t<string>('SIDEBAR.PERSONAL_PROFILE'),
       path: '/profile',
     },
     {
       icon: LockOutlined,
-      label: 'Đổi mới mật khẩu',
+      label: t<string>('SIDEBAR.CHANGE_PASSWORD'),
       path: '/change-password',
     },
     {
       icon: ContainerOutlined,
-      label: 'Lịch sử kiểm tra',
+      label: t<string>('SIDEBAR.HISTORY'),
       path: '/profile/history',
     },
     {
       icon: ContainerOutlined,
-      label: 'Khóa học trực tuyến',
+      label: t<string>('SIDEBAR.ONLINE_COURSES'),
       path: '/profile/courses',
     },
   ];
