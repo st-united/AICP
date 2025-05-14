@@ -4,30 +4,30 @@ import { useTranslation } from 'react-i18next';
 
 import { InputField, Button } from '@app/components/ui/index';
 import { useForgotPassword } from '@app/hooks/useUser';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 export default function ForgotPassword() {
   const { t } = useTranslation();
   const [form] = Form.useForm();
 
-  const { mutate } = useForgotPassword();
+  const { mutate: res, isLoading } = useForgotPassword();
   const onFinish = (values: { email: string }) => {
     const { email } = values;
-    mutate(email, {
+    res(email, {
       onSuccess: (data) => {
-        form.setFields([
-          {
-            name: 'email',
-            errors: [t('FORGOT_PASSWORD.SEND_EMAIL_SUCCESS')],
-          },
-        ]);
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('FORGOT_PASSWORD.SUCCESS'));
+        form.resetFields();
       },
       onError: (error: any) => {
         form.setFields([
           {
             name: 'email',
-            errors: [error.response.data.message || t('FORGOT_PASSWORD.NOT_FOUND')],
           },
         ]);
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('FORGOT_PASSWORD.NOT_FOUND'));
       },
     });
   };
@@ -47,7 +47,7 @@ export default function ForgotPassword() {
         <div>
           <h1 className='text-4xl !text-white !font-bold'>{t('FORGOT_PASSWORD.TITLE')}</h1>
           <p className='text-white !mb-8'>
-            {t('FORGOT_PASSWORD.TITLE')} {t('FORGOT_PASSWORD.REGISTER')}
+            {t('FORGOT_PASSWORD.NO_ACCOUNT')} {t('FORGOT_PASSWORD.REGISTER')}
           </p>
         </div>
         <Form
@@ -61,14 +61,18 @@ export default function ForgotPassword() {
             rules={[
               {
                 required: true,
-                message: t('VALIDATE.REQUIRED', { field: 'Email' }),
+                message: t('VALIDATE.REQUIRED', { field: 'Email' }) as string,
+              },
+              {
+                type: 'email',
+                message: t('FORGOT_PASSWORD.EMAIL_VALID', { field: 'Email' }) as string,
               },
             ]}
           >
-            <InputField type={'email'} placeholder={'Email *'} />
+            <InputField disabled={isLoading} type={'email'} placeholder={'Email *'} />
           </Form.Item>
-          <Button type='primary' className={'w-full'}>
-            {t('FORGOT_PASSWORD.RESET_PASSWORD')}
+          <Button disabled={isLoading} type='primary' className={'w-full'}>
+            {isLoading ? t('FORGOT_PASSWORD.SEND_LOADING') : t('FORGOT_PASSWORD.RESET_PASSWORD')}
           </Button>
         </Form>
       </div>
