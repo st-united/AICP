@@ -1,10 +1,12 @@
 import { Image } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import ProfileAvartar from './ProfileAvartar';
 import { DevPlus, DevPlusS } from '@app/assets/images';
 
 const Header = () => {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -34,7 +36,7 @@ const Header = () => {
           </div>
           <div className='flex items-center gap-4 md:gap-6'>
             <div className='flex item-center border !py-2 !px-6 md:!py-2 md:!px-8 text-white font-bold rounded-full text-md md:text-lg hover:bg-[#096DD9] hover:text-white transition-all duration-300 ease-in-out'>
-              Bắt đầu
+              {t<string>('HEADER.START')}
             </div>
             <ProfileAvartar />
           </div>

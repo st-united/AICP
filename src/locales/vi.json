@@ -198,7 +198,8 @@
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Thông tin cá nhân",
     "NULL_INFO": "Chưa có thông tin",
-    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
+    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới",
+    "LOGOUT": "Đăng xuất"
   },
   "LOGIN": {
     "TEXT": "Đăng nhập",
@@ -206,5 +207,19 @@
     "PASSWORD_INPUT": "Nhập mật khẩu",
     "EMAIL_INPUT": "Nhập email",
     "EMAIL": "Email"
+  },
+  "HOMEPAGE": {
+    "TITLE": "Khám phá năng lực AI",
+    "SUB_TITLE": "Tham gia bài kiểm tra đánh giá năng lực sử dụng AI để hiểu rõ khả năng của bạn và nhận lộ trình phát triển cá nhân hóa",
+    "BUTTON": "Khám phá ngay"
+  },
+  "HEADER": {
+    "START": "Bắt đầu"
+  },
+  "SIDEBAR": {
+    "ONLINE_COURSES": "Khóa học trực tuyến",
+    "HISTORY": "Lịch sử kiểm tra",
+    "PERSONAL_PROFILE": "Thông tin cá nhân",
+    "CHANGE_PASSWORD": "Đổi mật khẩu"
   }
 }

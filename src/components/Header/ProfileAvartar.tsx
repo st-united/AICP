@@ -1,8 +1,10 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown, Image } from 'antd';
+import { t } from 'i18next';
 
 import { LogOut, ProfileGG } from '@app/assets/svgs';
 import type { MenuProps } from 'antd';
+
 import './ProfileAvartar.scss';
 
 const items: MenuProps['items'] = [
@@ -11,7 +13,7 @@ const items: MenuProps['items'] = [
     label: (
       <div className='flex items-center gap-3 text-lg font-semibold !p-1 hover:!rounded-lg'>
         <Image className='!w-8 !h-8' src={ProfileGG} />
-        <div>Hồ sơ của tôi</div>
+        <div>{t<string>('PROFILE.PERSONAL_PROFILE')}</div>
       </div>
     ),
   },
@@ -20,7 +22,7 @@ const items: MenuProps['items'] = [
     label: (
       <div className='flex items-center gap-3 text-lg font-semibold !p-1 text-[#ED0909]'>
         <Image className='!w-8 !h-8' src={LogOut} />
-        <div>Đăng xuất</div>
+        <div>{t<string>('PROFILE.LOGOUT')}</div>
       </div>
     ),
   },
