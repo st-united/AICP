@@ -10,7 +10,6 @@ import { ACCESS_TOKEN, NAVIGATE_URL } from '@app/constants';
 import { logout } from '@app/redux/features/auth/authSlice';
 import { RootState } from '@app/redux/store';
 
-// import { iconLogout, iconProfile, logoAvatarDefault } from '@app/assets/images';
 import './DropProfile.scss';
 
 export const DropProfile: FC = () => {
@@ -40,7 +39,6 @@ export const DropProfile: FC = () => {
         </Typography>
       ),
       key: 'profile',
-      // icon: <img src={iconProfile} alt='icon-profile' />,
       className: 'item-profile',
     },
     {
@@ -51,7 +49,6 @@ export const DropProfile: FC = () => {
       ),
       key: NAVIGATE_URL.SIGN_OUT,
       danger: true,
-      // icon: <img src={iconLogout} alt='icon-logout' />,
       className: 'item-signout',
     },
   ];
