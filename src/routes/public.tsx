@@ -6,7 +6,7 @@ const routes = [
     element: <PublicLayout />,
     children: [
       {
-        path: 'sign-up',
+        path: 'register',
         element: <SignUp />,
       },
       {
