@@ -7,7 +7,10 @@ import { useTranslation } from 'react-i18next';
 import { LuCheck, LuChevronLeft, LuEye, LuEyeClosed } from 'react-icons/lu';
 
 import { useSignUpSchema } from './signUpSchema';
-import { PASSWORD_REGEX_PATTERN } from '@app/constants/regex';
+import {
+  NUMBER_LENGTH_REGEX,
+  PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER,
+} from '@app/constants/regex';
 import { yupSync } from '@app/helpers/yupSync';
 import { useRegister } from '@app/hooks';
 import { RegisterUser } from '@app/interface/user.interface';
@@ -34,8 +37,10 @@ const SignUp = () => {
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setIsLengthValid(value.length >= 8 && value.length <= 50);
-    setIsComplexValid(PASSWORD_REGEX_PATTERN.test(value));
+    setIsLengthValid(NUMBER_LENGTH_REGEX.test(value));
+    setIsComplexValid(
+      PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(value),
+    );
   };
 
   const validator = [yupSync(signUpSchema)] as unknown as Rule[];

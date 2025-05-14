@@ -4,8 +4,8 @@ import * as yup from 'yup';
 import {
   EMAIL_REGEX_PATTERN,
   PHONE_REGEX_PATTERN,
-  PASSWORD_REGEX_PATTERN,
   NO_SPECIAL_CHARACTER_IN_NAME,
+  PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER,
 } from '@app/constants/regex';
 
 export const useSignUpSchema = () => {
@@ -30,7 +30,12 @@ export const useSignUpSchema = () => {
     password: yup
       .string()
       .required(t('VALIDATE.PASSWORD_REQUIRED') as string)
-      .matches(PASSWORD_REGEX_PATTERN, t('VALIDATE.PASSWORD_COMPLEXITY') as string),
+      .min(8, t('VALIDATE.PASSWORD_MIN') as string)
+      .max(50, t('VALIDATE.PASSWORD_MAX') as string)
+      .matches(
+        PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER,
+        t('VALIDATE.PASSWORD_COMPLEXITY') as string,
+      ),
 
     confirm_password: yup.string().required(t('VALIDATE.CONFIRM_PASSWORD_REQUIRED') as string),
   });
