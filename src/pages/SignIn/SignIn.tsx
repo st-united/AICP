@@ -1,11 +1,12 @@
+import { LeftOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { LuEye, LuEyeClosed, LuChevronLeft } from 'react-icons/lu';
 import { useNavigate } from 'react-router-dom';
 
 import { useLogin } from '@app/hooks';
 import { Credentials } from '@app/interface/user.interface';
-import './SignIn.scss'
+
+import './SignIn.scss';
 
 const SignIn = () => {
   const { mutate: loginUser } = useLogin();
@@ -16,35 +17,39 @@ const SignIn = () => {
     console.log('Form Data:', values);
     loginUser(values);
   };
+  const handleOnClickHomePage = () => {
+    navigate('/');
+  };
 
   return (
     <div className='flex justify-center'>
       <div className='w-full md:w-4/5 h-full'>
-        <p className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-14 cursor-pointer hover:text-[#1890FF]'
-            onClick={() => navigate('/')}
-         >
+        <div
+          onClick={handleOnClickHomePage}
+          className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-14 cursor-pointer hover:text-[#1890FF]'
+        >
           <div className='flex items-center justify-center'>
-            <LuChevronLeft size={24} />
+            <LeftOutlined size={24} />
           </div>
           {t<string>('LOGIN.BACK_TO_HOME')}
-        </p>
+        </div>
         <div>
           <h1 className='text-[40px] !text-white font-bold'>{t<string>('LOGIN.TEXT')}</h1>
           <p className='text-white text-lg !mb-8 flex gap-2'>
             <div>{t<string>('LOGIN.NOT_HAVE_ACCOUNT')}</div>
-            <div
+            <button
               className='text-[#1890FF] cursor-pointer underline'
               onClick={() => navigate('/sign-up')}
             >
-                {t<string>('LOGIN.REGISTER')}
-            </div>
+              {t<string>('LOGIN.REGISTER')}
+            </button>
           </p>
         </div>
-        <Form 
-          form={form} 
-          layout='vertical' 
+        <Form
+          form={form}
+          layout='vertical'
           onFinish={onFinish}
-          className='grid grid-cols-2 gap-4 gap-1' 
+          className='grid grid-cols-2 gap-4 gap-1'
         >
           <Form.Item
             className='col-span-2'
@@ -54,7 +59,7 @@ const SignIn = () => {
               { type: 'email', message: 'Email không đúng định dạng!' },
             ]}
           >
-            <Input 
+            <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
               placeholder='Email *'
             />
@@ -69,9 +74,9 @@ const SignIn = () => {
               placeholder='Mật khẩu *'
               iconRender={(visible) =>
                 visible ? (
-                  <LuEye color='#69c0ff' size={24} />
+                  <EyeOutlined color='#69c0ff' size={24} />
                 ) : (
-                  <LuEyeClosed color='#69c0ff' size={24} />
+                  <EyeInvisibleOutlined color='#69c0ff' size={24} />
                 )
               }
             />
@@ -86,7 +91,7 @@ const SignIn = () => {
             </div>
           </div>
           <Form.Item className='col-span-2 !mt-2'>
-            <Button 
+            <Button
               type='primary'
               htmlType='submit'
               className='w-full !bg-[#1890FF] !h-13 !text-[16px] !font-bold !border-none !outline-none !rounded-md !text-white'
