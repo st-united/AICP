@@ -4,10 +4,6 @@ import { ForgotPassword, SignUp } from '@app/pages/index';
 const routes = [
   {
     element: <PublicLayout />,
-    children: [],
-  },
-  {
-    element: <AuthLayout />,
     children: [
       {
         path: 'sign-up',
