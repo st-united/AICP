@@ -1,22 +1,18 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
-import { getStorageData } from '@app/config';
-import { ACCESS_TOKEN } from '@app/constants';
-import { RootState } from '@app/redux/store';
+const AuthLayout: React.FC = () => {
+  return (
+    <div className='h-screen w-full grid md:grid-cols-2 !p-10 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/background.png)]'>
+      <div className='sm:w-full md:w-6/6 lg:w-6/6 xl:w-5/6 h-full'>
+        <Outlet />
+      </div>
 
-const PublicLayout: React.FC = () => {
-  const navigate = useNavigate();
-  const { isAuth } = useSelector((state: RootState) => state.auth);
-
-  useEffect(() => {
-    if (getStorageData(ACCESS_TOKEN) && isAuth) {
-      navigate('/');
-    }
-  }, [isAuth, getStorageData(ACCESS_TOKEN)]);
-
-  return <Outlet />;
+      <div className='flex justify-end'>
+        <div className='bg-white rounded-4xl md:w-6/6 lg:w-6/6 xl:w-5/6 h-full'></div>
+      </div>
+    </div>
+  );
 };
 
-export default PublicLayout;
+export default AuthLayout;
