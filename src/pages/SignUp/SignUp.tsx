@@ -1,9 +1,12 @@
 import { Button, Checkbox, Form, Input } from 'antd';
+import { Rule } from 'antd/lib/form';
 import parse from 'html-react-parser';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LuCheck, LuChevronLeft, LuEye, LuEyeClosed } from 'react-icons/lu';
 
+import { useSignUpSchema } from './signUpSchema';
+import { yupSync } from '@app/helpers/yupSync';
 import { useRegister } from '@app/hooks';
 import { RegisterUser } from '@app/interface/user.interface';
 import './SignUp.scss';
@@ -15,6 +18,7 @@ const SignUp = () => {
   const [form] = Form.useForm();
   const { mutate: registerUser, isLoading } = useRegister();
   const [isChecked, setIsChecked] = useState(false);
+  const signUpSchema = useSignUpSchema();
 
   const handleCheckboxChange = (e: any) => {
     setIsChecked(e.target.checked);
@@ -31,15 +35,17 @@ const SignUp = () => {
     setIsComplexValid(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value));
   };
 
+  const validator = [yupSync(signUpSchema)] as unknown as Rule[];
+
   return (
     <div className='flex justify-center'>
       <div className='w-full md:w-4/5 h-full'>
-        <p className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8'>
+        <div className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8'>
           <div className='flex items-center justify-center'>
             <LuChevronLeft size={24} />
           </div>
           {t<string>('SIGN_UP.BACK_TO_HOME')}
-        </p>
+        </div>
         <div>
           <h1 className='text-[40px] !text-white font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
           <div className='text-white text-lg !mb-4 flex gap-2'>
@@ -52,52 +58,31 @@ const SignUp = () => {
           layout='vertical'
           onFinish={onFinish}
           className='grid grid-cols-2 md:gap-4 gap-1'
+          validateTrigger={['onChange', 'onBlur']}
         >
-          <Form.Item
-            className='md:col-span-1 col-span-2'
-            name='fullName'
-            rules={[{ required: true, message: 'Vui lòng nhập họ tên!' }]}
-          >
+          <Form.Item className='md:col-span-1 col-span-2' name='fullName' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder='Họ tên *'
+              placeholder={t<string>('SIGN_UP.FULL_NAME')}
             />
           </Form.Item>
-          <Form.Item
-            className='md:col-span-1 col-span-2'
-            name='phoneNumber'
-            rules={[
-              { required: true, message: 'Vui lòng nhập số điện thoại!' },
-              { pattern: /^\+?[0-9]{7,15}$/, message: 'Số điện thoại không đúng định dạng!' },
-            ]}
-          >
+          <Form.Item className='md:col-span-1 col-span-2' name='phoneNumber' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder='Số điện thoại *'
+              placeholder={t<string>('SIGN_UP.PHONE')}
             />
           </Form.Item>
-          <Form.Item
-            className='col-span-2'
-            name='email'
-            rules={[
-              { required: true, message: 'Vui lòng nhập email!' },
-              { type: 'email', message: 'Email không đúng định dạng!' },
-            ]}
-          >
+          <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder='Email *'
+              placeholder={t<string>('SIGN_UP.EMAIL')}
             />
           </Form.Item>
-          <Form.Item
-            className='col-span-2'
-            name='password'
-            rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
-          >
+          <Form.Item className='col-span-2' name='password' rules={validator}>
             <Input.Password
               onChange={handlePasswordChange}
               className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder='Mật khẩu *'
+              placeholder={t<string>('SIGN_UP.PASSWORD')}
               iconRender={(visible) =>
                 visible ? (
                   <LuEye color='#69c0ff' size={24} />
@@ -112,20 +97,24 @@ const SignUp = () => {
             name='confirm_password'
             dependencies={['password']}
             rules={[
-              { required: true, message: 'Vui lòng nhập lại mật khẩu!' },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('Mật khẩu nhập lại chưa đúng!'));
+                  return Promise.reject(
+                    new Error(
+                      t<string>('VALIDATE.MATCH', { field: t<string>('SIGN_UP.PASSWORD') }),
+                    ),
+                  );
                 },
               }),
+              ...validator,
             ]}
           >
             <Input.Password
               className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder='Nhập lại mật khẩu *'
+              placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
               iconRender={(visible) =>
                 visible ? (
                   <LuEye color='#69c0ff' size={24} />

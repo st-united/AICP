@@ -1,5 +1,5 @@
-import { PublicLayout, AuthLayout } from '@app/components/templates/PublicLayout/index';
-import { ForgotPassword, SignUp } from '@app/pages/index';
+import { PublicLayout } from '@app/components/templates/PublicLayout/index';
+import { SignUp } from '@app/pages/index';
 
 const routes = [
   {
@@ -8,10 +8,6 @@ const routes = [
       {
         path: 'sign-up',
         element: <SignUp />,
-      },
-      {
-        path: 'forgot-password',
-        element: <ForgotPassword />,
       },
       {
         path: 'login',
