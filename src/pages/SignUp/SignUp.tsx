@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { LuCheck, LuChevronLeft, LuEye, LuEyeClosed } from 'react-icons/lu';
 
 import { useSignUpSchema } from './signUpSchema';
+import { PASSWORD_REGEX_PATTERN } from '@app/constants/regex';
 import { yupSync } from '@app/helpers/yupSync';
 import { useRegister } from '@app/hooks';
 import { RegisterUser } from '@app/interface/user.interface';
@@ -32,7 +33,7 @@ const SignUp = () => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setIsLengthValid(value.length >= 8 && value.length <= 50);
-    setIsComplexValid(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value));
+    setIsComplexValid(PASSWORD_REGEX_PATTERN.test(value));
   };
 
   const validator = [yupSync(signUpSchema)] as unknown as Rule[];
