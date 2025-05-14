@@ -1,4 +1,5 @@
 import { Button, Checkbox, Form, Input } from 'antd';
+import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { Rule } from 'antd/lib/form';
 import parse from 'html-react-parser';
 import { useState } from 'react';
@@ -10,6 +11,7 @@ import { PASSWORD_REGEX_PATTERN } from '@app/constants/regex';
 import { yupSync } from '@app/helpers/yupSync';
 import { useRegister } from '@app/hooks';
 import { RegisterUser } from '@app/interface/user.interface';
+
 import './SignUp.scss';
 
 const SignUp = () => {
@@ -21,7 +23,7 @@ const SignUp = () => {
   const [isChecked, setIsChecked] = useState(false);
   const signUpSchema = useSignUpSchema();
 
-  const handleCheckboxChange = (e: any) => {
+  const handleCheckboxChange = (e: CheckboxChangeEvent) => {
     setIsChecked(e.target.checked);
   };
 
