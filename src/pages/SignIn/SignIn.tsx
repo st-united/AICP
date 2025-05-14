@@ -3,9 +3,10 @@ import { Button, Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { useSignInSchema } from './signInSchema';
+import { yupSync } from '@app/helpers/yupSync';
 import { useLogin } from '@app/hooks';
 import { Credentials } from '@app/interface/user.interface';
-import { useSignInSchema } from './signInSchema';
 
 import './SignIn.scss';
 
@@ -23,6 +24,8 @@ const SignIn = () => {
   const handleOnClickHomePage = () => {
     navigate('/');
   };
+
+  const validator = [yupSync(signInSchema)];
 
   return (
     <div className='flex justify-center'>
@@ -54,33 +57,13 @@ const SignIn = () => {
           onFinish={onFinish}
           className='grid grid-cols-2 gap-4 gap-1'
         >
-          <Form.Item
-            className='col-span-2'
-            name='email'
-            rules={[
-              {
-                validator: async (_, value) => {
-                  await signInSchema.validateAt('email', { email: value });
-                },
-              },
-            ]}
-          >
+          <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
               placeholder={t<string>('LOGIN.EMAIL')}
             />
           </Form.Item>
-          <Form.Item
-            className='col-span-2'
-            name='password'
-            rules={[
-              {
-                validator: async (_, value) => {
-                  await signInSchema.validateAt('password', { password: value });
-                },
-              },
-            ]}
-          >
+          <Form.Item className='col-span-2' name='password' rules={validator}>
             <Input.Password
               className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
               placeholder={t<string>('LOGIN.PASSWORD')}

@@ -9,9 +9,11 @@ export const useSignInSchema = () => {
   return yup.object().shape({
     email: yup
       .string()
-      .required(t('LOGIN.EMAIL_REQUIRED') as string)
-      .matches(EMAIL_REGEX_PATTERN, t('LOGIN.EMAIL_INVALID') as string),
+      .required(t('VALIDATE.REQUIRED', { field: t('LOGIN.EMAIL') }) as string)
+      .matches(EMAIL_REGEX_PATTERN, t('VALIDATE.INVALID', { field: t('LOGIN.EMAIL') }) as string),
 
-    password: yup.string().required(t('LOGIN.PASSWORD_REQUIRED') as string),
+    password: yup
+      .string()
+      .required(t('VALIDATE.REQUIRED', { field: t('LOGIN.PASSWORD') }) as string),
   });
 };
