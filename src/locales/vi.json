@@ -203,8 +203,11 @@
   "LOGIN": {
     "LOGIN": "Đăng nhập",
     "TEXT": "Chào mừng bạn trở lại",
-    "EMAIL": "Email",
-    "PASSWORD": "Mật khẩu",
+    "EMAIL": "Email *",
+    "EMAIL_REQUIRED": "Vui lòng nhập email",
+    "EMAIL_INVALID": "Email không hợp lệ",
+    "PASSWORD": "Mật khẩu *",
+    "PASSWORD_REQUIRED": "Vui lòng nhập mật khẩu",
     "PASSWORD_INPUT": "Nhập mật khẩu",
     "FORGOT_PASSWORD": "Quên mật khẩu?",
     "REGISTER": "Đăng ký",

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useLogin } from '@app/hooks';
 import { Credentials } from '@app/interface/user.interface';
+import { useSignInSchema } from './signInSchema';
 
 import './SignIn.scss';
 
@@ -13,6 +14,8 @@ const SignIn = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const signInSchema = useSignInSchema();
+
   const onFinish = (values: Credentials) => {
     console.log('Form Data:', values);
     loginUser(values);
@@ -55,23 +58,32 @@ const SignIn = () => {
             className='col-span-2'
             name='email'
             rules={[
-              { required: true, message: 'Vui lòng nhập email!' },
-              { type: 'email', message: 'Email không đúng định dạng!' },
+              {
+                validator: async (_, value) => {
+                  await signInSchema.validateAt('email', { email: value });
+                },
+              },
             ]}
           >
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder='Email *'
+              placeholder={t<string>('LOGIN.EMAIL')}
             />
           </Form.Item>
           <Form.Item
             className='col-span-2'
             name='password'
-            rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
+            rules={[
+              {
+                validator: async (_, value) => {
+                  await signInSchema.validateAt('password', { password: value });
+                },
+              },
+            ]}
           >
             <Input.Password
               className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder='Mật khẩu *'
+              placeholder={t<string>('LOGIN.PASSWORD')}
               iconRender={(visible) =>
                 visible ? (
                   <EyeOutlined color='#69c0ff' size={24} />
