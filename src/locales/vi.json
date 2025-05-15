@@ -187,7 +187,13 @@
     "IMAGE_MIN_SIZE": "Dung lượng hình ảnh tối thiểu là 10Kb",
     "IMAGE_VALIDATE_SIZE": "Kích thước ảnh phải nhỏ hơn hoặc bằng 400x600",
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
-    "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau"
+    "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
+    "FULL_NAME_REQUIRED": "Họ tên là bắt buộc",
+    "EMAIL_REQUIRED": "Email là bắt buộc",
+    "PHONE_REQUIRED": "Số điện thoại là bắt buộc",
+    "DATE_NOT_FUTURE": "Ngày sinh không được lớn hơn ngày hiện tại",
+    "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối",
+    "NO_TWO_SPACE": "Không được có 2 khoảng trống liên tiếp"
   },
   "PROFILE": {
     "CHANGE_PASSWORD": "Đổi mật khẩu",
@@ -199,7 +205,23 @@
     "PERSONAL_PROFILE": "Thông tin cá nhân",
     "NULL_INFO": "Chưa có thông tin",
     "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới",
-    "LOGOUT": "Đăng xuất"
+    "LOGOUT": "Đăng xuất",
+    "FULLNAME_PLACEHOLDER": "Vui lòng nhập họ tên",
+    "FULLNAME": "Họ tên",
+    "PHONE": "Số điện thoại",
+    "PHONE_PLACEHOLDER": "Nhập số điện thoại",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "Nhập email",
+    "DOB": "Ngày sinh",
+    "DOB_PLACEHOLDER": "Chọn ngày sinh",
+    "COUNTRY": "Quốc gia",
+    "COUNTRY_PLACEHOLDER": "Chọn quốc gia",
+    "PROVINCE": "Tỉnh thành",
+    "PROVINCE_PLACEHOLDER": "Chọn tỉnh thành",
+    "OCCUPATION": "Nghề nghiệp",
+    "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
+    "REFERRAL": "Mã giới thiệu",
+    "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu"
   },
   "LOGIN": {
     "TEXT": "Đăng nhập",
@@ -221,5 +243,10 @@
     "HISTORY": "Lịch sử kiểm tra",
     "PERSONAL_PROFILE": "Thông tin cá nhân",
     "CHANGE_PASSWORD": "Đổi mật khẩu"
+  },
+  "PLACEHOLDER": {
+    "SELECT_COUNTRY": "Chọn quốc gia",
+    "SELECT_CITY": "Chọn tỉnh thành",
+    "SELECT_JOB": "Chọn công việc"
   }
 }

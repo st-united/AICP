@@ -1,20 +1,30 @@
 import { Select, SelectProps } from 'antd';
 import './CustomSelect.scss';
+import { useTranslation } from 'react-i18next';
 
 interface ProvinceSelectProps extends SelectProps {
   options?: { value: string; label: JSX.Element }[];
 }
 
-const countryOptions = [
-  { value: 'vn', label: <span>Việt Nam</span> },
-  { value: 'us', label: <span>United States</span> },
-  { value: 'jp', label: <span>Japan</span> },
+const jobOptions = [
+  { value: 'developer', label: 'Developer' },
+  { value: 'designer', label: 'Designer' },
+  { value: 'manager', label: 'Manager' },
+  { value: 'qa', label: 'QA' },
+  { value: 'hr', label: 'HR' },
+  { value: 'other', label: 'Other' },
 ];
 
 const JobSelect: React.FC<ProvinceSelectProps> = (props) => {
+  const { t } = useTranslation();
   return (
     <div id='customSelect'>
-      <Select options={countryOptions} placeholder='Chọn quốc gia' {...props} />
+      <Select
+        allowClear
+        options={jobOptions}
+        placeholder={t<string>('PLACEHOLDER.SELECT_JOB')}
+        {...props}
+      />
     </div>
   );
 };
