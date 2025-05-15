@@ -250,6 +250,7 @@
     "TITLE": "Đặt lại mật khẩu!",
     "NEW_PASSWORD": "Mật khẩu mới",
     "CONFIRM_PASSWORD": "Nhập lại mật khẩu mới *",
-    "CREATE_PASSWORD": "Tạo mới mật khẩu"
+    "CREATE_PASSWORD": "Tạo mới mật khẩu",
+    "EXPIRED": "Liên kết đã hết hạn"
   }
 }
