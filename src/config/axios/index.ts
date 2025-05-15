@@ -7,10 +7,6 @@ import { refreshTokenApi } from '@app/services';
 const BASE_URL = import.meta.env.VITE_BASE_URL_API;
 axios.defaults.baseURL = BASE_URL;
 
-// Manual access token for development
-const MANUAL_ACCESS_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YjFkMGQzMy1lYTliLTQ5YTItYWI4Mi0xYzFhZDg4MzIyNGQiLCJlbWFpbCI6ImJ1aXh1YW50aGllbi4wMTA1QGdtYWlsLmNvbSIsImlhdCI6MTc0NzIwNTE2MSwiZXhwIjoxNzQ3MjkxNTYxfQ.wQT8aHVWDM_jqzxlulda_xKWW0Mm03sTlhzIBMFD5yU';
-
 axios.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     if (config.url === API_URL.LOGIN) {
@@ -26,8 +22,10 @@ axios.interceptors.request.use(
       return config;
     }
 
-    // Use manual access token for all requests
-    config.headers['Authorization'] = `Bearer ${MANUAL_ACCESS_TOKEN}`;
+    const accessToken = getStorageData(ACCESS_TOKEN);
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
 
     return config;
   },
