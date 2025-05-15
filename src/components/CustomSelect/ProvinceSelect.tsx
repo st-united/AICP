@@ -1,5 +1,6 @@
 import { Select, SelectProps } from 'antd';
 import './CustomSelect.scss';
+import { useTranslation } from 'react-i18next';
 
 interface ProvinceSelectProps extends SelectProps {
   options?: { value: string; label: JSX.Element }[];
@@ -12,9 +13,15 @@ const countryOptions = [
 ];
 
 const ProvinceSelect: React.FC<ProvinceSelectProps> = (props) => {
+  const { t } = useTranslation();
   return (
     <div id='customSelect'>
-      <Select options={countryOptions} placeholder='Chọn tỉnh thành' {...props} />
+      <Select
+        allowClear
+        options={countryOptions}
+        placeholder={t<string>('PLACEHOLDER.SELECT_CITY')}
+        {...props}
+      />
     </div>
   );
 };
