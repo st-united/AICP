@@ -46,19 +46,19 @@ const SignUp = () => {
   const validator = [yupSync(signUpSchema)] as unknown as Rule[];
 
   return (
-    <div className='flex justify-center'>
+    <div id='container-sign-up' className='flex justify-center'>
       <div className='w-full md:w-4/5 h-full'>
         <div className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8'>
           <div className='flex items-center justify-center'>
             <LeftOutlined />
           </div>
-          {t<string>('SIGN_UP.BACK_TO_HOME')}
+          {t('SIGN_UP.BACK_TO_HOME')}
         </div>
         <div>
-          <h1 className='text-[40px] !text-white font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
+          <h1 className='text-[40px] !text-white font-bold'>{t('SIGN_UP.TITLE')}</h1>
           <div className='text-white text-lg !mb-4 flex gap-2'>
-            <div>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
-            <div className='text-[#1890FF] cursor-pointer underline'>{t<string>('LOGIN.TEXT')}</div>
+            <div>{t('SIGN_UP.HAVE_ACCOUNT')}</div>
+            <div className='text-[#1890FF] cursor-pointer underline'>{t('LOGIN.LOGIN')}</div>
           </div>
         </div>
         <Form
@@ -71,19 +71,19 @@ const SignUp = () => {
           <Form.Item className='md:col-span-1 col-span-2' name='fullName' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('SIGN_UP.FULL_NAME')}
+              placeholder={t('SIGN_UP.FULL_NAME') as string}
             />
           </Form.Item>
           <Form.Item className='md:col-span-1 col-span-2' name='phoneNumber' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('SIGN_UP.PHONE')}
+              placeholder={t('SIGN_UP.PHONE') as string}
             />
           </Form.Item>
           <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('SIGN_UP.EMAIL')}
+              placeholder={t('SIGN_UP.EMAIL') as string}
             />
           </Form.Item>
           <Form.Item className='col-span-2' name='password' rules={validator}>
@@ -105,9 +105,7 @@ const SignUp = () => {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    new Error(
-                      t<string>('VALIDATE.MATCH', { field: t<string>('SIGN_UP.PASSWORD') }),
-                    ),
+                    new Error(String(t('VALIDATE.MATCH', { field: t('SIGN_UP.PASSWORD') }))),
                   );
                 },
               }),
@@ -134,14 +132,14 @@ const SignUp = () => {
               <Checkbox onChange={handleCheckboxChange} />
               <div>
                 {parse(
-                  t<string>('SIGN_UP.AGREE_TERMS', {
-                    terms: `<a href="/terms" style="text-decoration: underline;">${t<string>(
+                  t('SIGN_UP.AGREE_TERMS', {
+                    terms: `<a href="/terms" style="text-decoration: underline;">${t(
                       'SIGN_UP.TERMS',
                     )}</a>`,
-                    privacy: `<a href="/privacy" style="text-decoration: underline;">${t<string>(
+                    privacy: `<a href="/privacy" style="text-decoration: underline;">${t(
                       'SIGN_UP.PRIVACY',
                     )}</a>`,
-                    company: t<string>('SIGN_UP.COMPANY'),
+                    company: t('SIGN_UP.COMPANY'),
                   }),
                 )}
               </div>
@@ -155,7 +153,7 @@ const SignUp = () => {
               loading={isLoading}
               disabled={!isChecked}
             >
-              {t<string>('SIGN_UP.CREATE_ACCOUNT')}
+              {t('SIGN_UP.CREATE_ACCOUNT')}
             </Button>
           </Form.Item>
         </Form>

@@ -1,3 +1,4 @@
-import LeftLine from './mingcute_left-line.svg';
+import ProfileGG from './gg_profile.svg';
+import LogOut from './log-out.svg';
 
-export { LeftLine };
+export { ProfileGG, LogOut };

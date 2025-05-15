@@ -35,7 +35,7 @@ export const DropProfile: FC = () => {
     {
       label: (
         <Typography style={{ color: '#121212', fontWeight: 600 }}>
-          {t<string>('DROPDOWN_PROFILE.PROFILE')}
+          {t('DROPDOWN_PROFILE.PROFILE')}
         </Typography>
       ),
       key: 'profile',
@@ -44,7 +44,7 @@ export const DropProfile: FC = () => {
     {
       label: (
         <Typography style={{ color: '#FB303E', fontWeight: 600 }}>
-          {t<string>('DROPDOWN_PROFILE.SIGN_OUT')}
+          {t('DROPDOWN_PROFILE.SIGN_OUT')}
         </Typography>
       ),
       key: NAVIGATE_URL.SIGN_OUT,
@@ -69,7 +69,7 @@ export const DropProfile: FC = () => {
     >
       <div>
         <Avatar size={40} className='drop-avatar' src={user?.avatar ? user?.avatar : null} />
-        <span className='drop-name'>{user?.name}</span>
+        <span className='drop-name'>{user?.fullName}</span>
         {activeItem === true ? (
           <CaretUpOutlined className='drop-name' />
         ) : (
