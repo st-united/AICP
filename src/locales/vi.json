@@ -211,11 +211,16 @@
     "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
   },
   "LOGIN": {
-    "TEXT": "Đăng nhập",
+    "LOGIN": "Đăng nhập",
+    "TEXT": "Chào mừng bạn trở lại",
+    "EMAIL": "Email",
     "PASSWORD": "Mật khẩu",
+    "FORGOT_PASSWORD": "Quên mật khẩu?",
+    "REGISTER": "Đăng ký",
+    "BACK_TO_HOME": "Quay về trang chủ",
+    "NOT_HAVE_ACCOUNT": "Bạn chưa có tài khoản?",
     "PASSWORD_INPUT": "Nhập mật khẩu",
-    "EMAIL_INPUT": "Nhập email",
-    "EMAIL": "Email"
+    "EMAIL_INPUT": "Nhập email"
   },
   "SIGN_UP": {
     "TITLE": "Đăng ký tài khoản",
