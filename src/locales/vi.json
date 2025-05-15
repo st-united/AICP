@@ -69,7 +69,9 @@
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
     "PROFILE": "Cá nhân",
-    "SIGN_OUT": "Đăng xuất"
+    "SIGN_OUT": "Đăng xuất",
+    "SIGN_UP": "Đăng ký",
+    "SIGN_IN": "Đăng nhập"
   },
   "NOT_FOUND": {
     "TITLE": "404",

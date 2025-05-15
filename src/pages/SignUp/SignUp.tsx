@@ -5,6 +5,7 @@ import { Rule } from 'antd/lib/form';
 import parse from 'html-react-parser';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import { useSignUpSchema } from './signUpSchema';
 import {
@@ -48,17 +49,19 @@ const SignUp = () => {
   return (
     <div id='container-sign-up' className='flex justify-center'>
       <div className='w-full md:w-4/5 h-full'>
-        <div className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8'>
+        <Link className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8' to={'/'}>
           <div className='flex items-center justify-center'>
             <LeftOutlined />
           </div>
           {t('SIGN_UP.BACK_TO_HOME')}
-        </div>
+        </Link>
         <div>
           <h1 className='text-[40px] !text-white font-bold'>{t('SIGN_UP.TITLE')}</h1>
           <div className='text-white text-lg !mb-4 flex gap-2'>
             <div>{t('SIGN_UP.HAVE_ACCOUNT')}</div>
-            <div className='text-[#1890FF] cursor-pointer underline'>{t('LOGIN.LOGIN')}</div>
+            <Link className='text-[#1890FF] cursor-pointer underline' to={'/login'}>
+              {t('LOGIN.LOGIN')}
+            </Link>
           </div>
         </div>
         <Form

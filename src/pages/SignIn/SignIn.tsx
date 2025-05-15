@@ -2,7 +2,7 @@ import { LeftOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/ico
 import { Button, Form, Input } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useSignInSchema } from './signInSchema';
 import { yupSync } from '@app/helpers/yupSync';
@@ -35,23 +35,26 @@ const SignIn = () => {
           className='bg-transparent border-0 p-0 m-0 text-inherit cursor-pointer w-auto'
           type='button'
         >
-          <div className='flex items-center justify-start text-[#B2B2B2] text-lg !mb-14 hover:text-[#1890FF]'>
+          <Link
+            className='flex items-center justify-start text-[#B2B2B2] text-lg !mb-14 hover:text-[#1890FF] cursor-pointer'
+            to={'/'}
+          >
             <div className='flex items-center justify-center'>
               <LeftOutlined size={24} />
             </div>
             {t<string>('LOGIN.BACK_TO_HOME')}
-          </div>
+          </Link>
         </button>
         <div>
           <h1 className='text-[40px] !text-white font-bold'>{t<string>('LOGIN.TEXT')}</h1>
           <p className='text-white text-lg !mb-8 flex gap-2'>
             <div>{t<string>('LOGIN.NOT_HAVE_ACCOUNT')}</div>
-            <button
+            <Link
               className='!text-[#1890FF] cursor-pointer underline hover:!text-[#0056b3] bg-transparent border-none outline-none'
-              onClick={() => navigate('/sign-up')}
+              to={'/register'}
             >
               {t<string>('LOGIN.REGISTER')}
-            </button>
+            </Link>
           </p>
         </div>
         <Form
