@@ -19,7 +19,7 @@ const ProvinceSelect: React.FC<ProvinceSelectProps> = (props) => {
       <Select
         allowClear
         options={countryOptions}
-        placeholder={t<string>('PLACEHOLDER.SELECT_CITY')}
+        placeholder={t('PLACEHOLDER.SELECT_CITY')}
         {...props}
       />
     </div>

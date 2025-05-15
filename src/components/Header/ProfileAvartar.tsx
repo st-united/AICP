@@ -5,7 +5,7 @@ import { t } from 'i18next';
 import { LogOut, ProfileGG } from '@app/assets/svgs';
 import type { MenuProps } from 'antd';
 
-import './ProfileAvartar.scss';
+import './ProfileAvatar.scss';
 
 const items: MenuProps['items'] = [
   {

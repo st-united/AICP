@@ -12,22 +12,22 @@ const Sidebar = () => {
   const menuItems = [
     {
       icon: ProfileOutlined,
-      label: t<string>('SIDEBAR.PERSONAL_PROFILE'),
+      label: t('SIDEBAR.PERSONAL_PROFILE'),
       path: '/profile',
     },
     {
       icon: LockOutlined,
-      label: t<string>('SIDEBAR.CHANGE_PASSWORD'),
+      label: t('SIDEBAR.CHANGE_PASSWORD'),
       path: '/change-password',
     },
     {
       icon: ContainerOutlined,
-      label: t<string>('SIDEBAR.HISTORY'),
+      label: t('SIDEBAR.HISTORY'),
       path: '/profile/history',
     },
     {
       icon: ContainerOutlined,
-      label: t<string>('SIDEBAR.ONLINE_COURSES'),
+      label: t('SIDEBAR.ONLINE_COURSES'),
       path: '/profile/courses',
     },
   ];

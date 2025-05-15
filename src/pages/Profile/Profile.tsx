@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useProfileSchema } from './profileSchema';
-import CustomAvartar from '@app/components/CustomAvartar/CustomAvartar';
+import CustomAvartar from '@app/components/CustomAvatar/CustomAvatar';
 import CountrySelect from '@app/components/CustomSelect/CountrySelect';
 import JobSelect from '@app/components/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/CustomSelect/ProvinceSelect';
@@ -69,45 +69,45 @@ const Profile = () => {
           }}
         >
           <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px] w-full'>
-            <Form.Item name='fullName' label={t<string>('PROFILE.FULLNAME')} rules={validator}>
+            <Form.Item name='fullName' label={t('PROFILE.FULLNAME')} rules={validator}>
               <Input
                 className='!px-6 !py-3 !rounded-lg'
-                placeholder={t<string>('PROFILE.FULLNAME_PLACEHOLDER')}
+                placeholder={t('PROFILE.FULLNAME_PLACEHOLDER') as string}
                 disabled={!isEdit}
               />
             </Form.Item>
-            <Form.Item name='email' label={t<string>('PROFILE.EMAIL')}>
+            <Form.Item name='email' label={t('PROFILE.EMAIL')}>
               <Input
                 className='!px-6 !py-3 !rounded-lg'
-                placeholder={t<string>('PROFILE.EMAIL_PLACEHOLDER')}
+                placeholder={t('PROFILE.EMAIL_PLACEHOLDER') as string}
                 disabled
               />
             </Form.Item>
-            <Form.Item name='phone' label={t<string>('PROFILE.PHONE')} rules={validator}>
+            <Form.Item name='phone' label={t('PROFILE.PHONE')} rules={validator}>
               <Input
                 className='!px-6 !py-3 !rounded-lg'
-                placeholder={t<string>('PROFILE.PHONE_PLACEHOLDER')}
+                placeholder={t('PROFILE.PHONE_PLACEHOLDER') as string}
                 disabled={!isEdit}
               />
             </Form.Item>
-            <Form.Item name='dob' label={t<string>('PROFILE.DOB')} rules={validator}>
+            <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
               <DatePicker
                 className='!px-6 !py-3 !rounded-lg w-full'
                 format='DD/MM/YYYY'
-                placeholder={t<string>('PROFILE.DOB_PLACEHOLDER')}
+                placeholder={t('PROFILE.DOB_PLACEHOLDER') as string}
                 disabled={!isEdit}
               />
             </Form.Item>
-            <Form.Item name='country' label={t<string>('PROFILE.COUNTRY')} rules={validator}>
+            <Form.Item name='country' label={t('PROFILE.COUNTRY')} rules={validator}>
               <CountrySelect disabled={!isEdit} />
             </Form.Item>
-            <Form.Item name='province' label={t<string>('PROFILE.PROVINCE')} rules={validator}>
+            <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
               <ProvinceSelect disabled={!isEdit} />
             </Form.Item>
-            <Form.Item name='occupation' label={t<string>('PROFILE.OCCUPATION')} rules={validator}>
+            <Form.Item name='occupation' label={t('PROFILE.OCCUPATION')} rules={validator}>
               <JobSelect disabled={!isEdit} />
             </Form.Item>
-            <Form.Item name='referral' label={t<string>('PROFILE.REFERRAL')} rules={validator}>
+            <Form.Item name='referral' label={t('PROFILE.REFERRAL')} rules={validator}>
               <Input disabled defaultValue='jKvs500' className='!px-6 !py-3 !rounded-lg' />
             </Form.Item>
             <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>

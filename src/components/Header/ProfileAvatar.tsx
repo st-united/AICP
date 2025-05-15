@@ -5,7 +5,7 @@ import { LuCircleUserRound, LuLogOut } from 'react-icons/lu';
 
 import type { MenuProps } from 'antd';
 
-import './ProfileAvartar.scss';
+import './ProfileAvatar.scss';
 
 const ProfileAvatar = () => {
   const { t } = useTranslation();

@@ -28,7 +28,7 @@ const CountrySelect: React.FC<CountrySelectProps> = (props) => {
       <Select
         allowClear
         options={countryOptions}
-        placeholder={t<string>('PLACEHOLDER.SELECT_COUNTRY')}
+        placeholder={t('PLACEHOLDER.SELECT_COUNTRY')}
         loading={isLoading}
         notFoundContent={isLoading ? <Spin size='small' /> : null}
         {...props}

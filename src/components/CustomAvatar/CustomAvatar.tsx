@@ -6,7 +6,7 @@ interface Props {
   isEdit?: boolean;
 }
 
-const CustomAvartar = ({ avatar, isEdit }: Props) => {
+const CustomAvatar = ({ avatar, isEdit }: Props) => {
   return (
     <div className='relative'>
       <Avatar
@@ -23,4 +23,4 @@ const CustomAvartar = ({ avatar, isEdit }: Props) => {
   );
 };
 
-export default CustomAvartar;
+export default CustomAvatar;

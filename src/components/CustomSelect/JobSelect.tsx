@@ -22,7 +22,7 @@ const JobSelect: React.FC<ProvinceSelectProps> = (props) => {
       <Select
         allowClear
         options={jobOptions}
-        placeholder={t<string>('PLACEHOLDER.SELECT_JOB')}
+        placeholder={t('PLACEHOLDER.SELECT_JOB')}
         {...props}
       />
     </div>
