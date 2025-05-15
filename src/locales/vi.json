@@ -188,12 +188,19 @@
     "IMAGE_VALIDATE_SIZE": "Kích thước ảnh phải nhỏ hơn hoặc bằng 400x600",
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
     "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
-    "FULL_NAME_REQUIRED": "Họ tên là bắt buộc",
-    "EMAIL_REQUIRED": "Email là bắt buộc",
-    "PHONE_REQUIRED": "Số điện thoại là bắt buộc",
     "DATE_NOT_FUTURE": "Ngày sinh không được lớn hơn ngày hiện tại",
     "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối",
-    "NO_TWO_SPACE": "Không được có 2 khoảng trống liên tiếp"
+    "NO_TWO_SPACE": "Không được có 2 khoảng trống liên tiếp",
+    "FULL_NAME_REQUIRED": "Vui lòng nhập họ tên!",
+    "PHONE_REQUIRED": "Vui lòng nhập số điện thoại!",
+    "PHONE_INVALID": "Số điện thoại không đúng định dạng!",
+    "EMAIL_REQUIRED": "Vui lòng nhập email!",
+    "EMAIL_INVALID": "Email không đúng định dạng!",
+    "PASSWORD_REQUIRED": "Vui lòng nhập mật khẩu!",
+    "PASSWORD_MIN": "Mật khẩu phải có ít nhất 8 ký tự",
+    "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
+    "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
+    "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!"
   },
   "PROFILE": {
     "CHANGE_PASSWORD": "Đổi mật khẩu",
@@ -224,11 +231,16 @@
     "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu"
   },
   "LOGIN": {
-    "TEXT": "Đăng nhập",
+    "LOGIN": "Đăng nhập",
+    "TEXT": "Chào mừng bạn trở lại",
+    "EMAIL": "Email",
     "PASSWORD": "Mật khẩu",
+    "FORGOT_PASSWORD": "Quên mật khẩu?",
+    "REGISTER": "Đăng ký",
+    "BACK_TO_HOME": "Quay về trang chủ",
+    "NOT_HAVE_ACCOUNT": "Bạn chưa có tài khoản?",
     "PASSWORD_INPUT": "Nhập mật khẩu",
-    "EMAIL_INPUT": "Nhập email",
-    "EMAIL": "Email"
+    "EMAIL_INPUT": "Nhập email"
   },
   "HOMEPAGE": {
     "TITLE": "Khám phá năng lực AI",

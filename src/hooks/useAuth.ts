@@ -1,13 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { removeStorageData, setStorageData } from '@app/config';
 import { ACCESS_TOKEN, NAVIGATE_URL, REFRESH_TOKEN, USER_PROFILE } from '@app/constants';
-import { Credentials } from '@app/interface/user.interface';
+import { Credentials, RegisterUser } from '@app/interface/user.interface';
 import { logout, login } from '@app/redux/features/auth/authSlice';
-import { RootState } from '@app/redux/store';
-import { loginApi, getLogout } from '@app/services';
+import { loginApi, getLogout, registerApi } from '@app/services';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -19,7 +22,7 @@ export const useLogin = () => {
       return data;
     },
     {
-      onSuccess: ({ data, message }) => {
+      onSuccess: ({ data }) => {
         dispatchAuth(login());
 
         setStorageData(ACCESS_TOKEN, data.accessToken);
@@ -28,7 +31,7 @@ export const useLogin = () => {
         navigate('/');
       },
       onError({ response }) {
-        //
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
       },
     },
   );
@@ -44,7 +47,7 @@ export const useLogout = () => {
       return data;
     },
     {
-      onSuccess: ({ message }) => {
+      onSuccess: () => {
         removeStorageData(ACCESS_TOKEN);
         removeStorageData(REFRESH_TOKEN);
         removeStorageData(USER_PROFILE);
@@ -52,6 +55,26 @@ export const useLogout = () => {
         dispatchAuth(logout());
 
         navigate(NAVIGATE_URL.SIGN_IN);
+      },
+    },
+  );
+};
+
+export const useRegister = () => {
+  const navigate = useNavigate();
+
+  return useMutation(
+    async (registerUserDto: RegisterUser) => {
+      const { data } = await registerApi(registerUserDto);
+      return data;
+    },
+    {
+      onSuccess: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+        navigate('/');
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
       },
     },
   );
