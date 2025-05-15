@@ -187,7 +187,17 @@
     "IMAGE_MIN_SIZE": "Dung lượng hình ảnh tối thiểu là 10Kb",
     "IMAGE_VALIDATE_SIZE": "Kích thước ảnh phải nhỏ hơn hoặc bằng 400x600",
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
-    "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau"
+    "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
+    "FULL_NAME_REQUIRED": "Vui lòng nhập họ tên!",
+    "PHONE_REQUIRED": "Vui lòng nhập số điện thoại!",
+    "PHONE_INVALID": "Số điện thoại không đúng định dạng!",
+    "EMAIL_REQUIRED": "Vui lòng nhập email!",
+    "EMAIL_INVALID": "Email không đúng định dạng!",
+    "PASSWORD_REQUIRED": "Vui lòng nhập mật khẩu!",
+    "PASSWORD_MIN": "Mật khẩu phải có ít nhất 8 ký tự",
+    "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
+    "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
+    "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!"
   },
   "PROFILE": {
     "CHANGE_PASSWORD": "Đổi mật khẩu",
@@ -201,10 +211,32 @@
     "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
   },
   "LOGIN": {
-    "TEXT": "Đăng nhập",
+    "LOGIN": "Đăng nhập",
+    "TEXT": "Chào mừng bạn trở lại",
+    "EMAIL": "Email",
     "PASSWORD": "Mật khẩu",
+    "FORGOT_PASSWORD": "Quên mật khẩu?",
+    "REGISTER": "Đăng ký",
+    "BACK_TO_HOME": "Quay về trang chủ",
+    "NOT_HAVE_ACCOUNT": "Bạn chưa có tài khoản?",
     "PASSWORD_INPUT": "Nhập mật khẩu",
-    "EMAIL_INPUT": "Nhập email",
-    "EMAIL": "Email"
+    "EMAIL_INPUT": "Nhập email"
+  },
+  "SIGN_UP": {
+    "TITLE": "Đăng ký tài khoản",
+    "FULL_NAME": "Họ tên",
+    "EMAIL": "Email",
+    "PHONE": "Số điện thoại",
+    "PASSWORD": "Mật khẩu",
+    "BACK_TO_HOME": "Quay về trang chủ",
+    "HAVE_ACCOUNT": "Bạn đã có tài khoản?",
+    "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",
+    "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
+    "AGREE_TERMS": "Tôi đã đọc và đồng ý với {{terms}} cùng {{privacy}} của {{company}}",
+    "CREATE_ACCOUNT": "Tạo tài khoản",
+    "CONFIRM_PASSWORD": "Xác nhận mật khẩu",
+    "TERMS": "Điều khoản & Điều kiện",
+    "PRIVACY": "Chính sách bảo mật",
+    "COMPANY": "DevPlus"
   }
 }

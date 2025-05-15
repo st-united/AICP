@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-// import { iconLogout, iconProfile, logoAvatarDefault } from '@app/assets/images';
 import { removeStorageData } from '@app/config';
 import { ACCESS_TOKEN, NAVIGATE_URL } from '@app/constants';
 import { logout } from '@app/redux/features/auth/authSlice';
 import { RootState } from '@app/redux/store';
+
 import './DropProfile.scss';
 
 export const DropProfile: FC = () => {
@@ -39,7 +39,6 @@ export const DropProfile: FC = () => {
         </Typography>
       ),
       key: 'profile',
-      // icon: <img src={iconProfile} alt='icon-profile' />,
       className: 'item-profile',
     },
     {
@@ -50,7 +49,6 @@ export const DropProfile: FC = () => {
       ),
       key: NAVIGATE_URL.SIGN_OUT,
       danger: true,
-      // icon: <img src={iconLogout} alt='icon-logout' />,
       className: 'item-signout',
     },
   ];
