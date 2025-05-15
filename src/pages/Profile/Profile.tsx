@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useProfileSchema } from './profileSchema';
-import CustomAvartar from '@app/components/CustomAvatar/CustomAvatar';
+import CustomAvartar from '@app/components/CustomAvartar/CustomAvartar';
 import CountrySelect from '@app/components/CustomSelect/CountrySelect';
 import JobSelect from '@app/components/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/CustomSelect/ProvinceSelect';
@@ -49,7 +49,7 @@ const Profile = () => {
       <div className='relative rounded-2xl bg-white'>
         <div className='bg-[#3D6ADA] h-[145px] rounded-t-2xl '>
           <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
-            <CustomAvartar avatar={data?.avatar || ''} isEdit={isEdit} />
+            <CustomAvartar />
           </div>
         </div>
         <Form
