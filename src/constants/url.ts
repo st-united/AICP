@@ -16,6 +16,8 @@ export const API_URL = {
   ALL_ROLES: '/roles/all',
   CHANGE_PASSWORD: '/users/change-password',
   RESET_PASSWORD: 'users/reset-password',
+  FORGOT_PASSWORD: 'users/forgot-password',
+  UPDATE_FORGOT_PASSWORD: 'users/update-forgot-password',
   LOGOUT: '/auth/logout',
   TEACHERS: '/teachers',
   TEACHERS_BY_COURSE: '/teachers/course-teacher',
