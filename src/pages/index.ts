@@ -4,4 +4,4 @@ import ResetPassword from './ResetPassword/ResetPassword';
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
 
-export { SignIn, NotFound, ForgotPassword, ResetPassword };
+export { SignIn, NotFound, ForgotPassword, ResetPassword, SignUp };
