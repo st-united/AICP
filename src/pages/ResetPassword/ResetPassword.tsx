@@ -1,6 +1,6 @@
 import { Form } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { InputField, Button } from '@app/components/ui/index';
 import { PASSWORD_REGEX_PATTERN } from '@app/constants/regex';
@@ -10,11 +10,14 @@ import {
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
 
+// import { NAVIGATE_URL } from '@app/constants/navigate'
+
 export default function ResetPassword() {
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const [searchParams, _] = useSearchParams();
   const token = searchParams.get('token');
+  const navigate = useNavigate();
 
   const { mutate: res, isLoading } = useUpdateForgotPassword();
   const onFinish = (values: { password: string }) => {
@@ -27,6 +30,7 @@ export default function ResetPassword() {
       onSuccess: (data) => {
         form.resetFields();
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('MODAL.SUGGESTION_COPY_PASSWORD'));
+        navigate('/login', { replace: true });
       },
       onError: (error) => {
         form.resetFields();
