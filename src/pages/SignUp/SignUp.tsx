@@ -52,15 +52,13 @@ const SignUp = () => {
           <div className='flex items-center justify-center'>
             <LuChevronLeft size={24} />
           </div>
-          {t<string>('SIGN_UP.BACK_TO_HOME')}
+          {t('SIGN_UP.BACK_TO_HOME')}
         </div>
         <div>
-          <h1 className='text-[40px] !text-white font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
+          <h1 className='text-[40px] !text-white font-bold'>{t('SIGN_UP.TITLE')}</h1>
           <div className='text-white text-lg !mb-4 flex gap-2'>
-            <div>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
-            <div className='text-[#1890FF] cursor-pointer underline'>
-              {t<string>('LOGIN.LOGIN')}
-            </div>
+            <div>{t('SIGN_UP.HAVE_ACCOUNT')}</div>
+            <div className='text-[#1890FF] cursor-pointer underline'>{t('LOGIN.LOGIN')}</div>
           </div>
         </div>
         <Form
@@ -73,26 +71,26 @@ const SignUp = () => {
           <Form.Item className='md:col-span-1 col-span-2' name='fullName' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('SIGN_UP.FULL_NAME')}
+              placeholder={t('SIGN_UP.FULL_NAME') as string}
             />
           </Form.Item>
           <Form.Item className='md:col-span-1 col-span-2' name='phoneNumber' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('SIGN_UP.PHONE')}
+              placeholder={t('SIGN_UP.PHONE') as string}
             />
           </Form.Item>
           <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('SIGN_UP.EMAIL')}
+              placeholder={t('SIGN_UP.EMAIL') as string}
             />
           </Form.Item>
           <Form.Item className='col-span-2' name='password' rules={validator}>
             <Input.Password
               onChange={handlePasswordChange}
               className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('SIGN_UP.PASSWORD')}
+              placeholder={t('SIGN_UP.PASSWORD') as string}
               iconRender={(visible) =>
                 visible ? (
                   <LuEye color='#69c0ff' size={24} />
@@ -113,9 +111,7 @@ const SignUp = () => {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    new Error(
-                      t<string>('VALIDATE.MATCH', { field: t<string>('SIGN_UP.PASSWORD') }),
-                    ),
+                    new Error(String(t('VALIDATE.MATCH', { field: t('SIGN_UP.PASSWORD') }))),
                   );
                 },
               }),
@@ -124,7 +120,7 @@ const SignUp = () => {
           >
             <Input.Password
               className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
+              placeholder={t('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD') as string}
               iconRender={(visible) =>
                 visible ? (
                   <LuEye color='#69c0ff' size={24} />
@@ -140,26 +136,26 @@ const SignUp = () => {
               <div>
                 <LuCheck size={24} />
               </div>
-              <div>{t<string>('SIGN_UP.PASSWORD_REQUIREMENT')}</div>
+              <div>{t('SIGN_UP.PASSWORD_REQUIREMENT')}</div>
             </div>
             <div className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-white'}`}>
               <div>
                 <LuCheck size={24} />
               </div>
-              <div>{t<string>('SIGN_UP.PASSWORD_COMPLEXITY')}</div>
+              <div>{t('SIGN_UP.PASSWORD_COMPLEXITY')}</div>
             </div>
             <div className='flex gap-2 !mt-6 !text-[16px]'>
               <Checkbox onChange={handleCheckboxChange} />
               <div>
                 {parse(
-                  t<string>('SIGN_UP.AGREE_TERMS', {
-                    terms: `<a href="/terms" style="text-decoration: underline;">${t<string>(
+                  t('SIGN_UP.AGREE_TERMS', {
+                    terms: `<a href="/terms" style="text-decoration: underline;">${t(
                       'SIGN_UP.TERMS',
                     )}</a>`,
-                    privacy: `<a href="/privacy" style="text-decoration: underline;">${t<string>(
+                    privacy: `<a href="/privacy" style="text-decoration: underline;">${t(
                       'SIGN_UP.PRIVACY',
                     )}</a>`,
-                    company: t<string>('SIGN_UP.COMPANY'),
+                    company: t('SIGN_UP.COMPANY'),
                   }),
                 )}
               </div>
@@ -173,7 +169,7 @@ const SignUp = () => {
               loading={isLoading}
               disabled={!isChecked}
             >
-              {t<string>('SIGN_UP.CREATE_ACCOUNT')}
+              {t('SIGN_UP.CREATE_ACCOUNT')}
             </Button>
           </Form.Item>
         </Form>
