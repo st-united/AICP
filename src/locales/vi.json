@@ -260,5 +260,22 @@
     "SELECT_COUNTRY": "Chọn quốc gia",
     "SELECT_CITY": "Chọn tỉnh thành",
     "SELECT_JOB": "Chọn công việc"
+  },
+  "SIGN_UP": {
+    "TITLE": "Đăng ký tài khoản",
+    "FULL_NAME": "Họ tên",
+    "EMAIL": "Email",
+    "PHONE": "Số điện thoại",
+    "PASSWORD": "Mật khẩu",
+    "BACK_TO_HOME": "Quay về trang chủ",
+    "HAVE_ACCOUNT": "Bạn đã có tài khoản?",
+    "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",
+    "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
+    "AGREE_TERMS": "Tôi đã đọc và đồng ý với {{terms}} cùng {{privacy}} của {{company}}",
+    "CREATE_ACCOUNT": "Tạo tài khoản",
+    "CONFIRM_PASSWORD": "Xác nhận mật khẩu",
+    "TERMS": "Điều khoản & Điều kiện",
+    "PRIVACY": "Chính sách bảo mật",
+    "COMPANY": "DevPlus"
   }
 }

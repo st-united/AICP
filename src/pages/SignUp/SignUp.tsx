@@ -46,7 +46,7 @@ const SignUp = () => {
   const validator = [yupSync(signUpSchema)] as unknown as Rule[];
 
   return (
-    <div className='flex justify-center'>
+    <div id='container-sign-up' className='flex justify-center'>
       <div className='w-full md:w-4/5 h-full'>
         <div className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8'>
           <div className='flex items-center justify-center'>
@@ -58,7 +58,9 @@ const SignUp = () => {
           <h1 className='text-[40px] !text-white font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
           <div className='text-white text-lg !mb-4 flex gap-2'>
             <div>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
-            <div className='text-[#1890FF] cursor-pointer underline'>{t<string>('LOGIN.TEXT')}</div>
+            <div className='text-[#1890FF] cursor-pointer underline'>
+              {t<string>('LOGIN.LOGIN')}
+            </div>
           </div>
         </div>
         <Form
