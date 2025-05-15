@@ -2,7 +2,6 @@ import { Form, Input, DatePicker, Button } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import * as yup from 'yup';
 
 import { useProfileSchema } from './profileSchema';
 import CustomAvartar from '@app/components/CustomAvartar/CustomAvartar';

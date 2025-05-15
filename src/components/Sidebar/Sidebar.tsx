@@ -1,4 +1,5 @@
 import { ProfileOutlined, LockOutlined, ContainerOutlined } from '@ant-design/icons';
+import { Card } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useLocation, Link } from 'react-router-dom';
 
