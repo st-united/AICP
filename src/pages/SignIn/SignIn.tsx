@@ -28,7 +28,7 @@ const SignIn = () => {
   const validator = [yupSync(signInSchema)] as unknown as Rule[];
 
   return (
-    <div className='flex justify-center'>
+    <div id='container-sign-in' className='flex justify-center'>
       <div className='w-full md:w-4/5 h-full'>
         <button
           onClick={handleOnClickHomePage}
