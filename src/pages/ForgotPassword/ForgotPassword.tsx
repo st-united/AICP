@@ -69,7 +69,7 @@ export default function ForgotPassword() {
               },
             ]}
           >
-            <InputField disabled={isLoading} type={'email'} placeholder={'Email *'} />
+            <InputField disabled={isLoading} type={'text'} placeholder={'Email *'} />
           </Form.Item>
           <Button disabled={isLoading} type='primary' className={'w-full'}>
             {isLoading ? t('FORGOT_PASSWORD.SEND_LOADING') : t('FORGOT_PASSWORD.RESET_PASSWORD')}
