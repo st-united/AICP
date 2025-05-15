@@ -1,5 +1,6 @@
 import NotFound from './NotFound/NotFound';
 import ResetPassword from './ResetPassword/ResetPassword';
+import ForgotPassword from './ForgotPassword/ForgotPassword';
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
 
