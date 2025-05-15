@@ -13,7 +13,7 @@ export default function ButtonComponent({ ...props }: ButtonProps) {
       type={type ? type : 'primary'}
       disabled={disabled}
       htmlType='submit'
-      className={`${className} !h-12 !rounded-md !font-medium`}
+      className={`${className} text-lg h-[48px] sm:h-[48px] md:h-[52px] xl:h-[60px] rounded-md font-medium text-sm sm:text-sm md:text-md xl:text-lg`}
     >
       {children}
     </Button>

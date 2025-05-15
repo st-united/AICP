@@ -44,10 +44,12 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className='!p-12 flex justify-start h-full w-full'>
+    <div className='flex justify-start'>
       <div className='w-full'>
-        <div className='!mt-14 !mb-14'>
-          <h1 className='text-4xl !text-white !font-bold'>{t('RESET_PASSWORD.TITLE')}</h1>
+        <div className='mt-14 mb-14'>
+          <h1 className='text-3xl sm:text-3xl md:text-4xl lg:text-4xl text-white font-bold'>
+            {t('RESET_PASSWORD.TITLE')}
+          </h1>
         </div>
         <Form
           form={form}
@@ -71,7 +73,7 @@ export default function ResetPassword() {
             <InputField
               disabled={isLoading}
               type={'password'}
-              placeholder={t('RESET_PASSWORD.NEW_PASSWORD') as string}
+              placeholder={t<string>('RESET_PASSWORD.NEW_PASSWORD')}
             />
           </Form.Item>
           <Form.Item
@@ -80,7 +82,7 @@ export default function ResetPassword() {
             rules={[
               {
                 required: true,
-                message: t('VALIDATE.REQUIRED', { field: 'Password' }) as string,
+                message: t<string>('VALIDATE.REQUIRED', { field: 'Password' }),
               },
               ({ getFieldValue }) => ({
                 validator(_, value) {
@@ -97,7 +99,7 @@ export default function ResetPassword() {
             <InputField
               disabled={isLoading}
               type={'password'}
-              placeholder={t('RESET_PASSWORD.CONFIRM_PASSWORD') as string}
+              placeholder={t<string>('RESET_PASSWORD.CONFIRM_PASSWORD')}
             />
           </Form.Item>
           <Button disabled={isLoading} type='primary' className={'w-full'}>
