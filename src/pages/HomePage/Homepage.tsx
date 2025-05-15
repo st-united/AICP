@@ -23,7 +23,7 @@ const Homepage = () => {
           <div className='lg:text-2xl md:text-lg text-lg text-white font-semibold !p-4 lg:max-w-[980px] md:max-w-[700px] text-center leading-10'>
             {t('HOMEPAGE.SUB_TITLE')}
           </div>
-          <div className='!uppercase !rounded-full !md:py-4 !md:px-10 !py-3 !px-8 bg-white text-lg md:text-xl text-[#096DD9] font-bold hover:bg-[#096DD9] hover:text-white transition-all duration-300 ease-in-out'>
+          <div className='!uppercase cursor-pointer !rounded-full !md:py-4 !md:px-10 !py-3 !px-8 bg-white text-lg md:text-xl text-[#096DD9] font-bold hover:bg-[#096DD9] hover:text-white transition-all duration-300 ease-in-out'>
             {t('HOMEPAGE.BUTTON')}
           </div>
         </div>
