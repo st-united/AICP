@@ -1,7 +1,6 @@
-import { UserOutlined } from '@ant-design/icons';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { LuCircleUserRound, LuLogOut } from 'react-icons/lu';
 
 import type { MenuProps } from 'antd';
 
@@ -15,7 +14,7 @@ const ProfileAvatar = () => {
       key: '1',
       label: (
         <div className='flex items-center gap-3 text-lg font-semibold !p-1 hover:!rounded-lg'>
-          <LuCircleUserRound size={28} />
+          <UserOutlined />
           <div>{t('PROFILE.PERSONAL_PROFILE')}</div>
         </div>
       ),
@@ -24,7 +23,7 @@ const ProfileAvatar = () => {
       key: '2',
       label: (
         <div className='flex items-center gap-3 text-lg font-semibold !p-1 text-[#ED0909]'>
-          <LuLogOut size={28} />
+          <LogoutOutlined />
           <div>{t('PROFILE.LOGOUT')}</div>
         </div>
       ),

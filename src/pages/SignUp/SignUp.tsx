@@ -1,10 +1,10 @@
+import { CheckOutlined, EyeInvisibleOutlined, EyeOutlined, LeftOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { Rule } from 'antd/lib/form';
 import parse from 'html-react-parser';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LuCheck, LuChevronLeft, LuEye, LuEyeClosed } from 'react-icons/lu';
 
 import { useSignUpSchema } from './signUpSchema';
 import {
@@ -50,7 +50,7 @@ const SignUp = () => {
       <div className='w-full md:w-4/5 h-full'>
         <div className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8'>
           <div className='flex items-center justify-center'>
-            <LuChevronLeft size={24} />
+            <LeftOutlined />
           </div>
           {t('SIGN_UP.BACK_TO_HOME')}
         </div>
@@ -90,14 +90,8 @@ const SignUp = () => {
             <Input.Password
               onChange={handlePasswordChange}
               className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t('SIGN_UP.PASSWORD') as string}
-              iconRender={(visible) =>
-                visible ? (
-                  <LuEye color='#69c0ff' size={24} />
-                ) : (
-                  <LuEyeClosed color='#69c0ff' size={24} />
-                )
-              }
+              placeholder={t<string>('SIGN_UP.PASSWORD')}
+              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
           <Form.Item
@@ -120,29 +114,19 @@ const SignUp = () => {
           >
             <Input.Password
               className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD') as string}
-              iconRender={(visible) =>
-                visible ? (
-                  <LuEye color='#69c0ff' size={24} />
-                ) : (
-                  <LuEyeClosed color='#69c0ff' size={24} />
-                )
-              }
+              placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
+              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
 
           <div className='col-span-2 text-lg text-white'>
             <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-white'}`}>
-              <div>
-                <LuCheck size={24} />
-              </div>
-              <div>{t('SIGN_UP.PASSWORD_REQUIREMENT')}</div>
+              <CheckOutlined />
+              <div>{t<string>('SIGN_UP.PASSWORD_REQUIREMENT')}</div>
             </div>
             <div className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-white'}`}>
-              <div>
-                <LuCheck size={24} />
-              </div>
-              <div>{t('SIGN_UP.PASSWORD_COMPLEXITY')}</div>
+              <CheckOutlined />
+              <div>{t<string>('SIGN_UP.PASSWORD_COMPLEXITY')}</div>
             </div>
             <div className='flex gap-2 !mt-6 !text-[16px]'>
               <Checkbox onChange={handleCheckboxChange} />
