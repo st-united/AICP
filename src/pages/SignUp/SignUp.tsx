@@ -47,7 +47,7 @@ const SignUp = () => {
   const validator = [yupSync(signUpSchema)] as unknown as Rule[];
 
   return (
-    <div className='flex justify-center' id='sign-up-page'>
+    <div className='flex justify-center' id='container-sign-up'>
       <div className='w-full md:w-4/5 h-full'>
         <Link className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8' to={'/'}>
           <div className='flex items-center justify-center'>

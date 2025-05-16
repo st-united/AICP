@@ -13,6 +13,7 @@ import { yupSync } from '@app/helpers/yupSync';
 import { useChangePassword } from '@app/hooks';
 import { ChangePassword } from '@app/interface/user.interface';
 import type { Rule } from 'antd/lib/form';
+import './changePassword.scss';
 
 const PasswordChangeForm = () => {
   const { t } = useTranslation();
