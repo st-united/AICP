@@ -70,6 +70,7 @@ export interface RegisterUser {
   fullName: string;
   email: string;
   phoneNumber: string;
+  password: string;
 }
 export interface UpdateForgotPassword {
   token: string | null;
