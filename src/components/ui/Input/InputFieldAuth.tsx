@@ -11,7 +11,22 @@ export default function InputField({ ...props }: CustomInputFieldProps) {
 
   if (type === 'password') {
     return (
-      <Input.Password
+      <div id='container-input-field'>
+        <Input.Password
+          {...props}
+          type={type || 'text'}
+          alt={alt}
+          disabled={disabled}
+          className={customClassName}
+          placeholder={placeholder}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div id='container-input-field'>
+      <Input
         {...props}
         type={type || 'text'}
         alt={alt}
@@ -19,17 +34,6 @@ export default function InputField({ ...props }: CustomInputFieldProps) {
         className={customClassName}
         placeholder={placeholder}
       />
-    );
-  }
-
-  return (
-    <Input
-      {...props}
-      type={type || 'text'}
-      alt={alt}
-      disabled={disabled}
-      className={customClassName}
-      placeholder={placeholder}
-    />
+    </div>
   );
 }
