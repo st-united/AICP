@@ -70,5 +70,8 @@ export interface RegisterUser {
   fullName: string;
   email: string;
   phoneNumber: string;
+}
+export interface UpdateForgotPassword {
+  token: string | null;
   password: string;
 }
