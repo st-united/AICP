@@ -52,8 +52,8 @@ const PasswordChangeForm = () => {
   const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
 
   return (
-    <div className='flex justify-center'>
-      <div className='w-full max-w-md sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl bg-white rounded-lg p-6 shadow-md'>
+    <div className='flex justify-center w-full'>
+      <div className='w-full max-w-full bg-white rounded-lg p-6 shadow-md flex flex-col items-center'>
         {/* Lock image */}
         <div className='flex justify-center'>
           <div className='bg-blue-100 rounded-full p-4 sm:p-6'>
@@ -72,6 +72,7 @@ const PasswordChangeForm = () => {
           layout='vertical'
           onFinish={onFinish}
           validateTrigger={['onChange', 'onBlur']}
+          className='w-full md:w-full xl:w-1/2'
         >
           {/* Old Password */}
           <Form.Item
