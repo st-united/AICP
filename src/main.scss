@@ -7,3 +7,17 @@
   margin: 0;
   font-family: 'Quicksand', sans-serif;
 }
+
+// edit antd for required mark from left to right
+.ant-form-item-required {
+  flex-direction: row-reverse;
+}
+
+.ant-form-item-required::before {
+  margin-left: 4px;
+}
+
+.ant-form-item-required::after {
+  width: 0;
+  margin: 0 !important;
+}

@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { useLogout } from './useAuth';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { ChangePassword, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
@@ -12,6 +13,10 @@ import {
   updateProfileApi,
   uploadAvatarApi,
 } from '@app/services';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 export const useGetProfile = () => {
   const dispatch = useDispatch();
@@ -31,7 +36,7 @@ export const useGetProfile = () => {
 };
 
 export const useChangePassword = () => {
-  const navigate = useNavigate();
+  const { mutate: logout } = useLogout();
 
   return useMutation(
     async (password: ChangePassword) => {
@@ -39,11 +44,12 @@ export const useChangePassword = () => {
       return response.data;
     },
     {
-      onSuccess({ message }) {
-        navigate(NAVIGATE_URL.PROFILE);
+      onSuccess: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+        logout();
       },
       onError({ response }) {
-        console.log(response);
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
       },
     },
   );
