@@ -36,8 +36,7 @@ export const useGetProfile = () => {
 };
 
 export const useChangePassword = () => {
-  const { mutate: logout } = useLogout();
-
+  const navigate = useNavigate();
   return useMutation(
     async (password: ChangePassword) => {
       const response = await changePassword(password);
@@ -46,7 +45,7 @@ export const useChangePassword = () => {
     {
       onSuccess: ({ message }) => {
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        logout();
+        navigate(NAVIGATE_URL.PROFILE);
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
