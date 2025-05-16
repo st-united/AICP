@@ -1,21 +1,24 @@
 import { Form } from 'antd';
+import { Rule } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
-import { InputField, Button } from '@app/components/ui/index';
-import { PASSWORD_REGEX_PATTERN } from '@app/constants/regex';
+import { useResetPasswordSchema } from './ResetPasswordSchema';
+import { Button, InputField } from '@app/components/ui/index';
+import { yupSync } from '@app/helpers/yupSync';
 import { useUpdateForgotPassword } from '@app/hooks/useUser';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
 
-// import { NAVIGATE_URL } from '@app/constants/navigate'
-
 export default function ResetPassword() {
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const [searchParams, _] = useSearchParams();
+  const ResetPasswordSchema = useResetPasswordSchema();
+  const validator = [yupSync(ResetPasswordSchema)] as unknown as Rule[];
+
   const token = searchParams.get('token');
   const navigate = useNavigate();
 
@@ -57,19 +60,7 @@ export default function ResetPassword() {
           onFinishFailed={onFinishFailed}
           className='!space-y-8'
         >
-          <Form.Item
-            name={'password'}
-            rules={[
-              {
-                required: true,
-                message: t<string>('VALIDATE.REQUIRED', { field: 'Password' }),
-              },
-              {
-                pattern: PASSWORD_REGEX_PATTERN,
-                message: t<string>('VALIDATE.RULE_PASSWORD', { field: 'Password' }),
-              },
-            ]}
-          >
+          <Form.Item name={'password'} rules={validator}>
             <InputField
               disabled={isLoading}
               type={'password'}

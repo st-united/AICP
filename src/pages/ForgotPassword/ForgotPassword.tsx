@@ -1,9 +1,12 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
+import { Rule } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
+import { useForgotPasswordSchema } from './ForgotPasswordSchema';
 import { InputField, Button } from '@app/components/ui/index';
+import { yupSync } from '@app/helpers/yupSync';
 import { useForgotPassword } from '@app/hooks/useUser';
 import {
   NotificationTypeEnum,
@@ -13,6 +16,8 @@ import {
 export default function ForgotPassword() {
   const { t } = useTranslation();
   const [form] = Form.useForm();
+  const forgotPasswordSchema = useForgotPasswordSchema();
+  const validator = [yupSync(forgotPasswordSchema)] as unknown as Rule[];
 
   const { mutate: res, isLoading } = useForgotPassword();
   const onFinish = (values: { email: string }) => {
@@ -41,7 +46,7 @@ export default function ForgotPassword() {
       <div className='w-full'>
         <Link
           to={'/login'}
-          className='text-white !mb-14 flex align-items gap-x-1 text-[#B2B2B2] text-lg hover:text-[#1890FF]'
+          className='!mb-14 flex align-items gap-x-1 text-[#B2B2B2] text-lg hover:text-[#1890FF]'
         >
           <span>
             <ArrowLeftOutlined className='-translate-y-[2px]' />
@@ -49,7 +54,7 @@ export default function ForgotPassword() {
           <span>{t('FORGOT_PASSWORD.TURN_BACK_SIGN_IN')}</span>
         </Link>
         <div>
-          <h1 className='text-3xl sm:text-3xl md:text-4xl lg:text-4xl !text-white !font-bold'>
+          <h1 className='text-3xl sm:text-3xl md:text-4xl lg:text-4xl text-white !font-bold'>
             {t('FORGOT_PASSWORD.TITLE')}
           </h1>
           <p className='text-white mt-4 mb-6 sm:my-4 md:my-6 lg:my-8 text-lg'>
@@ -60,19 +65,7 @@ export default function ForgotPassword() {
           </p>
         </div>
         <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed} className='space-y-2'>
-          <Form.Item
-            name={'email'}
-            rules={[
-              {
-                required: true,
-                message: t('VALIDATE.REQUIRED', { field: 'Email' }) as string,
-              },
-              {
-                type: 'email',
-                message: t('FORGOT_PASSWORD.EMAIL_VALID', { field: 'Email' }) as string,
-              },
-            ]}
-          >
+          <Form.Item name={'email'} rules={validator}>
             <InputField disabled={isLoading} type={'text'} placeholder={'Email *'} />
           </Form.Item>
           <Button disabled={isLoading} type='primary' className={'w-full'}>
