@@ -42,10 +42,6 @@ export default function ResetPassword() {
     });
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
-
   return (
     <div className='flex justify-start'>
       <div className='w-full'>
@@ -54,12 +50,7 @@ export default function ResetPassword() {
             {t('RESET_PASSWORD.TITLE')}
           </h1>
         </div>
-        <Form
-          form={form}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          className='!space-y-8'
-        >
+        <Form form={form} onFinish={onFinish} className='!space-y-8'>
           <Form.Item name={'password'} rules={validator}>
             <InputField
               disabled={isLoading}

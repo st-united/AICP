@@ -11,16 +11,5 @@ export const useResetPasswordSchema = () => {
       .string()
       .required(t<string>('VALIDATE.REQUIRED', { field: 'Password' }))
       .matches(PASSWORD_REGEX_PATTERN, t<string>('VALIDATE.RULE_PASSWORD', { field: 'Password' })),
-
-    confirm_password: yup
-      .string()
-      .required(t<string>('VALIDATE.REQUIRED', { field: 'Password' }))
-      .test(
-        'passwords-match',
-        t<string>('VALIDATE.MATCH', { field: 'Password' }),
-        function (value) {
-          return this.parent.password === value;
-        },
-      ),
   });
 };

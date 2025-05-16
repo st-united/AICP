@@ -38,9 +38,6 @@ export default function ForgotPassword() {
     });
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
   return (
     <div className='flex justify-start h-full w-full'>
       <div className='w-full'>
@@ -64,7 +61,7 @@ export default function ForgotPassword() {
             </Link>
           </p>
         </div>
-        <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed} className='space-y-2'>
+        <Form form={form} onFinish={onFinish} className='space-y-2'>
           <Form.Item name={'email'} rules={validator}>
             <InputField disabled={isLoading} type={'text'} placeholder={'Email *'} />
           </Form.Item>
