@@ -19,10 +19,10 @@ export default function ForgotPassword() {
   const forgotPasswordSchema = useForgotPasswordSchema();
   const validator = [yupSync(forgotPasswordSchema)] as unknown as Rule[];
 
-  const { mutate: res, isLoading } = useForgotPassword();
+  const { mutate: handleForgotPassword, isLoading } = useForgotPassword();
   const onFinish = (values: { email: string }) => {
     const { email } = values;
-    res(email, {
+    handleForgotPassword(email, {
       onSuccess: (data) => {
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('FORGOT_PASSWORD.SUCCESS'));
         form.resetFields();

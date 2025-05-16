@@ -22,14 +22,14 @@ export default function ResetPassword() {
   const token = searchParams.get('token');
   const navigate = useNavigate();
 
-  const { mutate: res, isLoading } = useUpdateForgotPassword();
+  const { mutate: handleUpdateForgotPassword, isLoading } = useUpdateForgotPassword();
   const onFinish = (values: { password: string }) => {
     const { password } = values;
     const payload = {
       password,
       token,
     };
-    res(payload, {
+    handleUpdateForgotPassword(payload, {
       onSuccess: (data) => {
         form.resetFields();
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('MODAL.SUGGESTION_COPY_PASSWORD'));
@@ -64,16 +64,14 @@ export default function ResetPassword() {
             rules={[
               {
                 required: true,
-                message: t<string>('VALIDATE.REQUIRED', { field: 'Password' }),
+                message: t<string>('RESET_PASSWORD.REQUIRE_PASSWORD'),
               },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(
-                    new Error(t<string>('VALIDATE.MATCH', { field: 'Password' })),
-                  );
+                  return Promise.reject(new Error(t<string>('RESET_PASSWORD.MATCH')));
                 },
               }),
             ]}

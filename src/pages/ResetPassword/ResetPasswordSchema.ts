@@ -9,7 +9,7 @@ export const useResetPasswordSchema = () => {
   return yup.object().shape({
     password: yup
       .string()
-      .required(t<string>('VALIDATE.REQUIRED', { field: 'Password' }))
-      .matches(PASSWORD_REGEX_PATTERN, t<string>('VALIDATE.RULE_PASSWORD', { field: 'Password' })),
+      .required(t<string>('RESET_PASSWORD.REQUIRE_PASSWORD'))
+      .matches(PASSWORD_REGEX_PATTERN, t<string>('RESET_PASSWORD.REGEX_PASSWORD')),
   });
 };
