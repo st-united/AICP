@@ -1,7 +1,7 @@
+import { CheckOutlined, EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LuCheck, LuEye, LuEyeClosed } from 'react-icons/lu';
 
 import { useChangePasswordSchema } from './changePasswordSchema';
 import { lock } from '@app/assets/images';
@@ -84,7 +84,7 @@ const PasswordChangeForm = () => {
           >
             <Input.Password
               placeholder={t<string>('PROFILE.PLACEHOLDER_OLD_PASSWORD')}
-              iconRender={(visible) => (visible ? <LuEye size={18} /> : <LuEyeClosed size={18} />)}
+              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
               className='rounded-md px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg'
             />
           </Form.Item>
@@ -98,7 +98,7 @@ const PasswordChangeForm = () => {
           >
             <Input.Password
               placeholder={t<string>('PROFILE.PLACEHOLDER_NEW_PASSWORD')}
-              iconRender={(visible) => (visible ? <LuEye size={18} /> : <LuEyeClosed size={18} />)}
+              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
               onCopy={(e) => e.preventDefault()}
               className='rounded-md px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg'
             />
@@ -129,7 +129,7 @@ const PasswordChangeForm = () => {
           >
             <Input.Password
               placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
-              iconRender={(visible) => (visible ? <LuEye size={18} /> : <LuEyeClosed size={18} />)}
+              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
               className='rounded-md px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg'
               onPaste={(e) => e.preventDefault()}
             />
@@ -139,13 +139,13 @@ const PasswordChangeForm = () => {
           <div className='text-lg sm:text-base text-gray-600 mb-4'>
             <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-grey'}`}>
               <div>
-                <LuCheck size={24} />
+                <CheckOutlined style={{ fontSize: '24px' }} />
               </div>
               <div>{t<string>('PROFILE.PASSWORD_REQUIREMENT')}</div>
             </div>
             <div className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-grey'}`}>
               <div>
-                <LuCheck size={24} />
+                <CheckOutlined style={{ fontSize: '24px' }} />
               </div>
               <div>{t<string>('PROFILE.PASSWORD_COMPLEXITY')}</div>
             </div>
