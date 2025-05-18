@@ -69,7 +69,9 @@
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
     "PROFILE": "Cá nhân",
-    "SIGN_OUT": "Đăng xuất"
+    "SIGN_OUT": "Đăng xuất",
+    "SIGN_UP": "Đăng ký",
+    "SIGN_IN": "Đăng nhập"
   },
   "NOT_FOUND": {
     "TITLE": "404",
@@ -188,6 +190,9 @@
     "IMAGE_VALIDATE_SIZE": "Kích thước ảnh phải nhỏ hơn hoặc bằng 400x600",
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
     "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
+    "DATE_NOT_FUTURE": "Ngày sinh không được lớn hơn ngày hiện tại",
+    "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối",
+    "NO_TWO_SPACE": "Không được có 2 khoảng trống liên tiếp",
     "FULL_NAME_REQUIRED": "Vui lòng nhập họ tên!",
     "PHONE_REQUIRED": "Vui lòng nhập số điện thoại!",
     "PHONE_INVALID": "Số điện thoại không đúng định dạng!",
@@ -208,7 +213,24 @@
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Thông tin cá nhân",
     "NULL_INFO": "Chưa có thông tin",
-    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
+    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới",
+    "LOGOUT": "Đăng xuất",
+    "FULLNAME_PLACEHOLDER": "Vui lòng nhập họ tên",
+    "FULLNAME": "Họ tên",
+    "PHONE": "Số điện thoại",
+    "PHONE_PLACEHOLDER": "Nhập số điện thoại",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "Nhập email",
+    "DOB": "Ngày sinh",
+    "DOB_PLACEHOLDER": "Chọn ngày sinh",
+    "COUNTRY": "Quốc gia",
+    "COUNTRY_PLACEHOLDER": "Chọn quốc gia",
+    "PROVINCE": "Tỉnh thành",
+    "PROVINCE_PLACEHOLDER": "Chọn tỉnh thành",
+    "OCCUPATION": "Nghề nghiệp",
+    "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
+    "REFERRAL": "Mã giới thiệu",
+    "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu"
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -221,6 +243,25 @@
     "NOT_HAVE_ACCOUNT": "Bạn chưa có tài khoản?",
     "PASSWORD_INPUT": "Nhập mật khẩu",
     "EMAIL_INPUT": "Nhập email"
+  },
+  "HOMEPAGE": {
+    "TITLE": "Khám phá năng lực AI",
+    "SUB_TITLE": "Tham gia bài kiểm tra đánh giá năng lực sử dụng AI để hiểu rõ khả năng của bạn và nhận lộ trình phát triển cá nhân hóa",
+    "BUTTON": "Khám phá ngay"
+  },
+  "HEADER": {
+    "START": "Bắt đầu"
+  },
+  "SIDEBAR": {
+    "ONLINE_COURSES": "Khóa học trực tuyến",
+    "HISTORY": "Lịch sử kiểm tra",
+    "PERSONAL_PROFILE": "Thông tin cá nhân",
+    "CHANGE_PASSWORD": "Đổi mật khẩu"
+  },
+  "PLACEHOLDER": {
+    "SELECT_COUNTRY": "Chọn quốc gia",
+    "SELECT_CITY": "Chọn tỉnh thành",
+    "SELECT_JOB": "Chọn công việc"
   },
   "SIGN_UP": {
     "TITLE": "Đăng ký tài khoản",
@@ -238,5 +279,27 @@
     "TERMS": "Điều khoản & Điều kiện",
     "PRIVACY": "Chính sách bảo mật",
     "COMPANY": "DevPlus"
+  },
+  "FORGOT_PASSWORD": {
+    "EMAIL_VALID": "Email bắt buộc phải hợp lệ!",
+    "TITLE": "Quên mật khẩu",
+    "RESET_PASSWORD": "Đặt lại mật khẩu",
+    "NO_ACCOUNT": "Bạn chưa có tài khoản?",
+    "NOT_FOUND": "Người dùng không tồn tại!",
+    "REGISTER": "Đăng ký",
+    "SEND_EMAIL_SUCCESS": "Đã gửi email thành công",
+    "SEND_LOADING": "Đang gửi...",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Gửi email thành công!"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Đặt lại mật khẩu!",
+    "NEW_PASSWORD": "Mật khẩu mới",
+    "REQUIRE_PASSWORD": "Mật khẩu không được để trống!",
+    "CONFIRM_PASSWORD": "Nhập lại mật khẩu mới *",
+    "CREATE_PASSWORD": "Tạo mới mật khẩu",
+    "REGEX_PASSWORD": "Mật khẩu phải có ít nhất 8 ký tự, có số, chữ thường, chữ viết hoa và ký tự đặc biệt!",
+    "MATCH": "Mật khẩu không khớp!",
+    "EXPIRED": "Liên kết đã hết hạn"
   }
 }

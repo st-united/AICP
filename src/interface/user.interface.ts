@@ -15,7 +15,7 @@ export interface Credentials {
 }
 
 export interface UserProfile {
-  name: string;
+  fullName: string;
   email: string;
   phone: string;
   dateOfBirth: string;
@@ -70,5 +70,9 @@ export interface RegisterUser {
   fullName: string;
   email: string;
   phoneNumber: string;
+  password: string;
+}
+export interface UpdateForgotPassword {
+  token: string | null;
   password: string;
 }
