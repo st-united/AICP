@@ -16,15 +16,15 @@ import './main.scss';
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <I18nextProvider i18n={i18n}>
-        <Provider store={store}>
-          <Suspense fallback={<Spin />}>
-            <RouterProvider router={router} />
-          </Suspense>
-        </Provider>
-      </I18nextProvider>
-    </QueryClientProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <I18nextProvider i18n={i18n}>
+      <Provider store={store}>
+        <Suspense fallback={<Spin />}>
+          <RouterProvider router={router} />
+        </Suspense>
+      </Provider>
+    </I18nextProvider>
+  </QueryClientProvider>,
+  // </React.StrictMode>,
 );

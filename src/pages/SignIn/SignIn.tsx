@@ -27,6 +27,7 @@ const SignIn = () => {
 
     if (activateToken) {
       activateAccount(activateToken);
+      navigate('/login', { replace: true });
     }
   }, []);
 
