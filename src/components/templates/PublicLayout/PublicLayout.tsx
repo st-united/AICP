@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 
 import PublicLayoutCarousel from './PublicLayoutCarousel';
+import { DevPlus } from '@app/assets/images/index';
 import {
-  devplus,
   carousel_1,
   carousel_2,
   carousel_3,
@@ -16,20 +16,13 @@ const PublicLayout: React.FC = () => {
         <Outlet />
       </div>
 
-      <div className='flex justify-end'>
-        <div className='rounded-3xl p-12 overflow-hidden lg:block hidden w-full bg-white sm:w-6/6 md:w-6/6 lg:w-6/6 xl:w-5/6 h-full'>
+      <div className='flex-1 flex justify-end max-h-screen'>
+        <div className='rounded-3xl p-12 overflow-hidden lg:block hidden w-full bg-white sm:w-6/6 md:w-6/6 lg:w-6/6 xl:w-5/6 max-h-screen'>
           <div className='flex flex-col justify-between h-full'>
             <div className='h-[80px] w-[200px] flex items-start'>
-              <img src={devplus} className='w-full h-full' alt='dev plus' />
+              <img src={DevPlus} className='w-full h-full' alt='dev plus' />
             </div>
-            <PublicLayoutCarousel
-              autoplayOptions={{
-                delay: 4000,
-                stopOnInteraction: true,
-                stopOnMouseEnter: true,
-              }}
-              images={[carousel_1, carousel_2, carousel_3, carousel_4]}
-            />
+            <PublicLayoutCarousel images={[carousel_1, carousel_2, carousel_3, carousel_4]} />
           </div>
         </div>
       </div>
