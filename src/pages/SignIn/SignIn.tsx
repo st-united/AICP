@@ -1,12 +1,13 @@
 import { LeftOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { Rule } from 'antd/lib/form';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useSignInSchema } from './signInSchema';
 import { yupSync } from '@app/helpers/yupSync';
-import { useLogin } from '@app/hooks';
+import { useActivateAccount, useLogin } from '@app/hooks';
 import { Credentials } from '@app/interface/user.interface';
 
 import './SignIn.scss';
@@ -17,6 +18,18 @@ const SignIn = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const signInSchema = useSignInSchema();
+
+  const { mutate: activateAccount } = useActivateAccount();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const activateToken = searchParams.get('activateToken');
+
+    if (activateToken) {
+      activateAccount(activateToken);
+      navigate('/login', { replace: true });
+    }
+  }, []);
 
   const onFinish = (values: Credentials) => {
     loginUser(values);

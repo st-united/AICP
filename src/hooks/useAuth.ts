@@ -6,7 +6,7 @@ import { removeStorageData, setStorageData } from '@app/config';
 import { ACCESS_TOKEN, NAVIGATE_URL, REFRESH_TOKEN, USER_PROFILE } from '@app/constants';
 import { Credentials, RegisterUser } from '@app/interface/user.interface';
 import { logout, login } from '@app/redux/features/auth/authSlice';
-import { loginApi, getLogout, registerApi } from '@app/services';
+import { loginApi, getLogout, registerApi, getActivateAccount } from '@app/services';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -72,6 +72,23 @@ export const useRegister = () => {
       onSuccess: ({ message }) => {
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
         navigate('/');
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
+};
+
+export const useActivateAccount = () => {
+  return useMutation(
+    async (token: string) => {
+      const { data } = await getActivateAccount(token);
+      return data;
+    },
+    {
+      onSuccess: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
