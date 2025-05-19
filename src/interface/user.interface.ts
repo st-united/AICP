@@ -17,13 +17,17 @@ export interface Credentials {
 export interface UserProfile {
   fullName: string;
   email: string;
-  phone: string;
-  dateOfBirth: string;
+  phoneNumber: string;
+  dob: string;
   address: string;
   gender: string;
   identityId: string;
   avatar: string;
   permissions: string[];
+  country: string;
+  province: string;
+  job: string;
+  referralCode: string;
 }
 
 export interface UserDetail {
