@@ -30,7 +30,6 @@ const PasswordChangeForm = () => {
 
   const isLengthValid = useMemo(() => {
     return (
-      NUMBER_LENGTH_REGEX.test(values?.oldPassword || '') &&
       NUMBER_LENGTH_REGEX.test(values?.newPassword || '') &&
       NUMBER_LENGTH_REGEX.test(values?.confirmPassword || '')
     );
@@ -38,9 +37,6 @@ const PasswordChangeForm = () => {
 
   const isComplexValid = useMemo(() => {
     return (
-      PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(
-        values?.oldPassword || '',
-      ) &&
       PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(
         values?.newPassword || '',
       ) &&

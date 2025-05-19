@@ -12,18 +12,7 @@ export const useChangePasswordSchema = () => {
   return yup.object().shape({
     oldPassword: yup
       .string()
-      .required(t('VALIDATE.REQUIRED', { field: t('PROFILE.OLD_PASSWORD') }) as string)
-      .test(
-        'length',
-        t('VALIDATE.PASSWORD_MIN') as string,
-        (value) => !value || NUMBER_LENGTH_REGEX.test(value),
-      )
-      .test(
-        'complexity',
-        t('VALIDATE.PASSWORD_COMPLEXITY') as string,
-        (value) =>
-          !value || PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(value),
-      ),
+      .required(t('VALIDATE.REQUIRED', { field: t('PROFILE.OLD_PASSWORD') }) as string),
 
     newPassword: yup
       .string()
