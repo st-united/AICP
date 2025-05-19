@@ -10,9 +10,9 @@ module.exports = {
           bold: 'var(--primary-color-bold)',
           gray: 'var(--primary-gray-color)',
         },
-        pharagraph: {
-          DEFAULT: 'var(--pharagraph-color)',
-          light: 'var(--pharagraph-light-color)',
+        paragraph: {
+          DEFAULT: 'var(--paragraph-color)',
+          light: 'var(--paragraph-light-color)',
         },
       },
     },
