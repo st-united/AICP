@@ -7,3 +7,14 @@
   margin: 0;
   font-family: 'Quicksand', sans-serif;
 }
+
+@layer base {
+  :root {
+    --primary-color: #fe7743;
+    --primary-color-light: #fe9871;
+    --primary-color-bold: #a22d00;
+    --primary-gray-color: #686868;
+    --pharagraph-color: #444444;
+    --pharagraph-light-color: #e5e5e5;
+  }
+}
