@@ -53,7 +53,7 @@ const PasswordChangeForm = () => {
   const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
 
   return (
-    <div className='flex justify-center w-full'>
+    <div className='flex justify-center w-full' id='change-password-form'>
       <div className='w-full max-w-full bg-white rounded-lg p-6 shadow-md flex flex-col items-center'>
         {/* Lock image */}
         <div className='flex justify-center'>
