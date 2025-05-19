@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import PublicLayoutCarousel from './PublicLayoutCarousel';
-import { DevPlus } from '@app/assets/images/index';
+import { SlideImage } from './PublicLayoutCarousel';
 import {
   carousel_1,
   carousel_2,
@@ -19,10 +18,7 @@ const PublicLayout: React.FC = () => {
       <div className='flex justify-end max-h-screen p-10'>
         <div className='shadow-md rounded-3xl p-12 overflow-hidden lg:block hidden w-full bg-white sm:w-6/6 md:w-6/6 lg:w-6/6 xl:w-5/6 max-h-screen'>
           <div className='flex flex-col justify-between h-full'>
-            <div className='h-[80px] w-[200px] flex items-start'>
-              <img src={DevPlus} className='w-full h-full' alt='dev plus' />
-            </div>
-            <PublicLayoutCarousel images={[carousel_1, carousel_2, carousel_3, carousel_4]} />
+            <SlideImage images={[carousel_1, carousel_2, carousel_3, carousel_4]} />
           </div>
         </div>
       </div>
