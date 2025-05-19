@@ -54,7 +54,7 @@ export default function PublicLayoutCarousel({
       <div className='flex mb-28'>
         {images.map((item: string, index: number) => (
           <div key={index} className='embla__slide'>
-            <img draggable={false} src={item} alt={item} />
+            <img draggable={false} src={item} alt={`carousel-${index}`} />
           </div>
         ))}
       </div>
