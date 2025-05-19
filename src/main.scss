@@ -11,3 +11,14 @@
 body {
   background-color: #f3f8fa;
 }
+
+@layer base {
+  :root {
+    --primary-color: #fe7743;
+    --primary-color-light: #fe9871;
+    --primary-color-bold: #a22d00;
+    --primary-gray-color: #686868;
+    --paragraph-color: #444444;
+    --paragraph-light-color: #e5e5e5;
+  }
+}
