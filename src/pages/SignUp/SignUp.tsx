@@ -55,10 +55,12 @@ const SignUp = () => {
           {t<string>('SIGN_UP.BACK_TO_HOME')}
         </div>
         <div>
-          <h1 className='text-[40px] !text-white font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
+          <h1 className='text-[40px] !text-[#FE7743] font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
           <div className='text-white text-lg !mb-4 flex gap-2'>
-            <div>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
-            <div className='text-[#1890FF] cursor-pointer underline'>{t<string>('LOGIN.TEXT')}</div>
+            <div className='text-[#686868]'>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
+            <div className='text-[#A22D00] cursor-pointer underline'>
+              {t<string>('LOGIN.LOGIN')}
+            </div>
           </div>
         </div>
         <Form
@@ -68,34 +70,42 @@ const SignUp = () => {
           className='grid grid-cols-2 md:gap-4 gap-1'
           validateTrigger={['onChange', 'onBlur']}
         >
-          <Form.Item className='md:col-span-1 col-span-2' name='fullName' rules={validator}>
+          <Form.Item
+            className='md:col-span-1 col-span-2 border rounded-lg'
+            name='fullName'
+            rules={validator}
+          >
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
               placeholder={t<string>('SIGN_UP.FULL_NAME')}
             />
           </Form.Item>
-          <Form.Item className='md:col-span-1 col-span-2' name='phoneNumber' rules={validator}>
+          <Form.Item
+            className='md:col-span-1 col-span-2 border rounded-lg'
+            name='phoneNumber'
+            rules={validator}
+          >
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
               placeholder={t<string>('SIGN_UP.PHONE')}
             />
           </Form.Item>
-          <Form.Item className='col-span-2' name='email' rules={validator}>
+          <Form.Item className='col-span-2 border rounded-lg' name='email' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
               placeholder={t<string>('SIGN_UP.EMAIL')}
             />
           </Form.Item>
-          <Form.Item className='col-span-2' name='password' rules={validator}>
+          <Form.Item className='col-span-2 border rounded-lg' name='password' rules={validator}>
             <Input.Password
               onChange={handlePasswordChange}
-              className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              className='col-span-2 w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
               placeholder={t<string>('SIGN_UP.PASSWORD')}
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
           <Form.Item
-            className='col-span-2'
+            className='col-span-2 border rounded-lg'
             name='confirm_password'
             dependencies={['password']}
             rules={[
@@ -115,18 +125,18 @@ const SignUp = () => {
             ]}
           >
             <Input.Password
-              className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              className='col-span-2 w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
               placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
 
-          <div className='col-span-2 text-lg text-white'>
-            <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-white'}`}>
+          <div className='col-span-2 text-lg text-[#686868]'>
+            <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-[#686868]'}`}>
               <CheckOutlined />
               <div>{t<string>('SIGN_UP.PASSWORD_REQUIREMENT')}</div>
             </div>
-            <div className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-white'}`}>
+            <div className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-[#686868]'}`}>
               <CheckOutlined />
               <div>{t<string>('SIGN_UP.PASSWORD_COMPLEXITY')}</div>
             </div>
@@ -135,10 +145,10 @@ const SignUp = () => {
               <div>
                 {parse(
                   t<string>('SIGN_UP.AGREE_TERMS', {
-                    terms: `<a href="/terms" style="text-decoration: underline;">${t<string>(
+                    terms: `<a href="/terms" style="text-decoration: underline; color: #A22D00;">${t<string>(
                       'SIGN_UP.TERMS',
                     )}</a>`,
-                    privacy: `<a href="/privacy" style="text-decoration: underline;">${t<string>(
+                    privacy: `<a href="/privacy" style="text-decoration: underline; color: #A22D00;">${t<string>(
                       'SIGN_UP.PRIVACY',
                     )}</a>`,
                     company: t<string>('SIGN_UP.COMPANY'),
@@ -151,7 +161,7 @@ const SignUp = () => {
           <Form.Item className='col-span-2 !mt-2'>
             <Button
               htmlType='submit'
-              className='w-full !bg-[#1890FF] !h-13 !text-[16px] !font-bold !border-none !outline-none !rounded-md !text-white'
+              className='w-full !bg-[#A22D00] !h-14 px-4 !text-[16px] !font-bold !border-none !outline-none !rounded-lg !text-white'
               loading={isLoading}
               disabled={!isChecked}
             >
