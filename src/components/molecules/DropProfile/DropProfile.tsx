@@ -1,4 +1,9 @@
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
+import {
+  CaretDownOutlined,
+  CaretUpOutlined,
+  UserOutlined,
+  LogoutOutlined,
+} from '@ant-design/icons';
 import { Avatar, Dropdown, MenuProps, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -34,18 +39,39 @@ export const DropProfile: FC = () => {
   const items: MenuProps['items'] = [
     {
       label: (
-        <Typography style={{ color: '#121212', fontWeight: 600 }}>
-          {t('DROPDOWN_PROFILE.PROFILE')}
-        </Typography>
+        <div className='flex gap-2 items-center'>
+          <UserOutlined
+            className='profile-icon'
+            style={{
+              fontSize: '24px',
+              color: '#121212',
+              border: '1px solid #121212',
+              borderRadius: '50%',
+              padding: '2px',
+            }}
+          />
+          <Typography style={{ color: '#121212', fontWeight: 600, fontSize: '16px' }}>
+            {t('PROFILE.PERSONAL_PROFILE')}
+          </Typography>
+        </div>
       ),
       key: 'profile',
       className: 'item-profile',
     },
     {
       label: (
-        <Typography style={{ color: '#FB303E', fontWeight: 600 }}>
-          {t('DROPDOWN_PROFILE.SIGN_OUT')}
-        </Typography>
+        <div className='flex gap-2 items-center'>
+          <LogoutOutlined
+            className='profile-icon'
+            style={{
+              fontSize: '24px',
+              padding: '2px',
+            }}
+          />
+          <Typography style={{ color: '#FB303E', fontWeight: 600, fontSize: '16px' }}>
+            {t('PROFILE.LOGOUT')}
+          </Typography>
+        </div>
       ),
       key: NAVIGATE_URL.SIGN_OUT,
       danger: true,
@@ -76,13 +102,10 @@ export const DropProfile: FC = () => {
       onOpenChange={() => setActiveItem(!activeItem)}
     >
       <div>
-        <Avatar size={40} className='drop-avatar' src={user?.avatar ? user?.avatar : null} />
-        <span className='drop-name'>{user?.fullName}</span>
-        {activeItem === true ? (
-          <CaretUpOutlined className='drop-name' />
-        ) : (
-          <CaretDownOutlined className='drop-name' />
-        )}
+        <Avatar
+          className='drop-avatar w-[40px] h-[40px] md:w-[50px] md:h-[50px]'
+          src={user?.avatar ? user?.avatar : null}
+        />
       </div>
     </Dropdown>
   );
