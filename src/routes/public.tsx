@@ -27,6 +27,19 @@ const routes = [
       },
     ],
   },
+  {
+    element: <AuthLayout />,
+    children: [
+      {
+        path: 'forgot-password',
+        element: <ForgotPassword />,
+      },
+      {
+        path: 'reset-password',
+        element: <ResetPassword />,
+      },
+    ],
+  },
 ];
 
 export default routes;
