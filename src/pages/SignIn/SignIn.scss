@@ -4,33 +4,11 @@
     color: var(--primary-gray-color) !important;
   }
 
-  .ant-input-password-icon.anticon {
-    color: var(--primary-gray-color) !important;
-  }
-
   .ant-input::placeholder {
     color: var(--primary-gray-color) !important;
   }
 
   .ant-input-password input::placeholder {
     color: var(--primary-gray-color) !important;
-  }
-
-  // Ví dụ sử dụng biến cho các class custom
-  .signin-link {
-    color: var(--primary-color-bold);
-    &:hover {
-      color: var(--primary-color-light);
-    }
-  }
-  .signin-title {
-    color: var(--primary-color);
-  }
-  .signin-btn {
-    background: var(--primary-color-bold);
-    color: var(--paragraph-light-color);
-    &:hover {
-      background: var(--primary-color-light);
-    }
   }
 }
