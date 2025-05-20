@@ -7,11 +7,11 @@ interface CustomInputFieldProps extends InputProps {
 export default function InputField({ ...props }: CustomInputFieldProps) {
   const { type, placeholder, alt, className, disabled } = props;
 
-  const customClassName = `text-sm sm:text-sm md:text-md lg:text-md xl:text-lg w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md ${className}`;
+  const customClassName = `hover:shadow-gray-200 text-sm sm:text-sm md:text-md lg:text-md xl:text-lg w-full text-primary-gray px-6 py-4 border-gray-200 hover:border-gray-200 !outline-none rounded-md ${className}`;
 
   if (type === 'password') {
     return (
-      <div id='container-input-field'>
+      <div id='container-input-field-auth'>
         <Input.Password
           {...props}
           type={type || 'text'}
@@ -25,7 +25,7 @@ export default function InputField({ ...props }: CustomInputFieldProps) {
   }
 
   return (
-    <div id='container-input-field'>
+    <div id='container-input-field-auth'>
       <Input
         {...props}
         type={type || 'text'}
