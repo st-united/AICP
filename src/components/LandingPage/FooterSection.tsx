@@ -87,7 +87,7 @@ const FooterSection = () => {
       </Row>
       <UpCircleFilled
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className='!text-[#FE7743] hover:scale-125 shadow-md absolute bottom-20 right-20 border-none !p-0 !m-0 text-6xl rounded-full'
+        className='!text-[#FE7743] hover:scale-125 shadow-md absolute  bottom-10 right-10    md:bottom-20 md:right-20 border-none !p-0 !m-0 text-5xl md:text-6xl rounded-full'
       />
     </div>
   );
