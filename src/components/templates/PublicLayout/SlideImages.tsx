@@ -1,14 +1,18 @@
 import { Carousel } from 'antd';
 import React from 'react';
 
-import './PublicLayoutCarousel.scss';
 import { DevPlus } from '@app/assets/images/index';
+import {
+  carousel_1,
+  carousel_2,
+  carousel_3,
+  carousel_4,
+} from '@app/assets/images/publicLayoutImages/index';
+import './SlideImages.scss';
 
-interface ImageSlideProps {
-  images: string[];
-}
+const images = [carousel_1, carousel_2, carousel_3, carousel_4];
 
-export const SlideImage = ({ images }: ImageSlideProps) => {
+const SlideImage = () => {
   return (
     <>
       <div className='h-[80px] w-[200px] flex items-start'>
@@ -23,7 +27,7 @@ export const SlideImage = ({ images }: ImageSlideProps) => {
           touchMove={true}
         >
           {images.map((item: string, index: number) => (
-            <div key={index} className=''>
+            <div key={index}>
               <img draggable={false} src={item} alt={item} />
             </div>
           ))}
@@ -32,3 +36,5 @@ export const SlideImage = ({ images }: ImageSlideProps) => {
     </>
   );
 };
+
+export default SlideImage;

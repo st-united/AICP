@@ -1,12 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { SlideImage } from './PublicLayoutCarousel';
-import {
-  carousel_1,
-  carousel_2,
-  carousel_3,
-  carousel_4,
-} from '@app/assets/images/publicLayoutImages/index';
+import SlideImages from './SlideImages';
 
 const PublicLayout: React.FC = () => {
   return (
@@ -18,7 +12,7 @@ const PublicLayout: React.FC = () => {
       <div className='flex justify-end max-h-screen p-10'>
         <div className='shadow-md rounded-3xl p-12 overflow-hidden lg:block hidden w-full bg-white sm:w-6/6 md:w-6/6 lg:w-6/6 xl:w-5/6 max-h-screen'>
           <div className='flex flex-col justify-between h-full'>
-            <SlideImage images={[carousel_1, carousel_2, carousel_3, carousel_4]} />
+            <SlideImages />
           </div>
         </div>
       </div>
