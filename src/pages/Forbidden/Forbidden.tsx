@@ -10,11 +10,11 @@ const Forbidden: React.FC = () => {
   return (
     <Result
       status='403'
-      title={t<string>('FORBIDDEN.TITLE')}
-      subTitle={t<string>('FORBIDDEN.SUB_TITLE')}
+      title={t('FORBIDDEN.TITLE')}
+      subTitle={t('FORBIDDEN.SUB_TITLE')}
       extra={
         <Button type='primary' onClick={() => navigate('/')}>
-          {t<string>('FORBIDDEN.BACK_HOME')}
+          {t('FORBIDDEN.BACK_HOME')}
         </Button>
       }
     />

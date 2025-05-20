@@ -38,14 +38,14 @@ export const openModal = (
     ),
     cancelText: (
       <Typography style={{ fontWeight: 500 }}>
-        <Translation>{(t) => t<string>('BUTTON.CANCEL')}</Translation>
+        <Translation>{(t) => t('BUTTON.CANCEL')}</Translation>
       </Typography>
     ),
     okText: textBtn ? (
       textBtn
     ) : (
       <Typography style={{ fontWeight: 500, color: '#FFFFFF' }}>
-        <Translation>{(t) => t<string>('BUTTON.OK')}</Translation>
+        <Translation>{(t) => t('BUTTON.OK')}</Translation>
       </Typography>
     ),
     onOk() {

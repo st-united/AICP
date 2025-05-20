@@ -1,5 +1,6 @@
-import { PublicLayout } from '@app/components/templates/PublicLayout/index';
-import { SignUp, SignIn } from '@app/pages/index';
+import { PublicLayout } from '@app/components/templates/PublicLayout';
+import { SignIn } from '@app/pages/index';
+import SignUp from '@app/pages/SignUp/SignUp';
 
 const routes = [
   {
