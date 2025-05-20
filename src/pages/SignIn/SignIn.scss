@@ -1,25 +1,25 @@
 #container-sign-in {
   .ant-input {
-    background-color: #1955a0 !important;
-    color: #ffffff !important;
+    background-color: #ffffff !important;
+    color: var(--primary-gray-color) !important;
   }
 
   .ant-input-password-icon.anticon {
-    color: #69c0ff !important;
+    color: var(--primary-gray-color) !important;
   }
 
   .ant-input::placeholder {
-    color: #69c0ff !important;
+    color: var(--primary-gray-color) !important;
   }
 
   .ant-input-password input::placeholder {
-    color: #69c0ff !important;
+    color: var(--primary-gray-color) !important;
   }
 
   .ant-input:-webkit-autofill,
   .ant-input-password input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px #1955a0 inset !important;
-    box-shadow: 0 0 0 30px #1955a0 inset !important;
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    box-shadow: 0 0 0 30px #ffffff inset !important;
     -webkit-text-fill-color: #fff !important;
     transition: background-color 5000s ease-in-out 0s;
   }
@@ -30,8 +30,26 @@
   .ant-input-password input:-webkit-autofill:focus,
   .ant-input:-webkit-autofill:active,
   .ant-input-password input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #1955a0 inset !important;
-    box-shadow: 0 0 0 30px #1955a0 inset !important;
-    -webkit-text-fill-color: #fff !important;
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    box-shadow: 0 0 0 30px #ffffff inset !important;
+    -webkit-text-fill-color: #686868 !important;
+  }
+
+  // Ví dụ sử dụng biến cho các class custom
+  .signin-link {
+    color: var(--primary-color-bold);
+    &:hover {
+      color: var(--primary-color-light);
+    }
+  }
+  .signin-title {
+    color: var(--primary-color);
+  }
+  .signin-btn {
+    background: var(--primary-color-bold);
+    color: var(--paragraph-light-color);
+    &:hover {
+      background: var(--primary-color-light);
+    }
   }
 }

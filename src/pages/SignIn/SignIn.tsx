@@ -42,50 +42,47 @@ const SignIn = () => {
 
   return (
     <div id='container-sign-in' className='flex justify-center'>
-      <div className='w-full md:w-4/5 h-full'>
+      <div className='w-full md:w-5/5 h-full'>
         <button
           onClick={handleOnClickHomePage}
           className='bg-transparent border-0 p-0 m-0 text-inherit cursor-pointer w-auto'
           type='button'
         >
           <Link
-            className='flex items-center justify-start text-[#B2B2B2] text-lg !mb-14 hover:text-[#1890FF] cursor-pointer'
+            className='sign-in-link flex items-center justify-start text-lg !mb-14 hover:text-[#fe9871] cursor-pointer'
             to={'/'}
           >
             <div className='flex items-center justify-center'>
               <LeftOutlined size={24} />
             </div>
-            {t<string>('LOGIN.BACK_TO_HOME')}
+            {t('LOGIN.BACK_TO_HOME')}
           </Link>
         </button>
         <div>
-          <h1 className='text-[40px] !text-white font-bold'>{t<string>('LOGIN.TEXT')}</h1>
-          <p className='text-white text-lg !mb-8 flex gap-2'>
+          <h1 className='signin-title text-3xl sm:text-3xl md:text-3xl lg:text-4xl font-bold mb-4'>
+            {t<string>('LOGIN.TEXT')}
+          </h1>
+          <div className='text-[#686868] text-lg !mb-8 flex gap-2'>
             <div>{t<string>('LOGIN.NOT_HAVE_ACCOUNT')}</div>
             <Link
-              className='!text-[#1890FF] cursor-pointer underline hover:!text-[#0056b3] bg-transparent border-none outline-none'
+              className='signin-link font-bold cursor-pointer underline hover:!text-[#fe9871] bg-transparent border-none outline-none'
               to={'/register'}
             >
-              {t<string>('LOGIN.REGISTER')}
+              {t('LOGIN.REGISTER')}
             </Link>
-          </p>
+          </div>
         </div>
-        <Form
-          form={form}
-          layout='vertical'
-          onFinish={onFinish}
-          className='grid grid-cols-2 gap-4 gap-1'
-        >
+        <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
           <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('LOGIN.EMAIL')}
+              placeholder={t('LOGIN.EMAIL') ?? ''}
             />
           </Form.Item>
           <Form.Item className='col-span-2' name='password' rules={validator}>
             <Input.Password
-              className='col-span-2 w-full !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('LOGIN.PASSWORD')}
+              className='col-span-2 w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              placeholder={t('LOGIN.PASSWORD') ?? ''}
               iconRender={(visible) =>
                 visible ? (
                   <EyeOutlined color='#69c0ff' size={24} />
@@ -97,19 +94,19 @@ const SignIn = () => {
           </Form.Item>
           <div className='col-span-2 text-lg text-white flex justify-end items-center'>
             <button
-              className='!text-[#1890FF] cursor-pointer underline hover:!text-[#0056b3]'
+              className='!text-[#A22D00] font-bold cursor-pointer underline hover:!text-[#fe9871]'
               onClick={() => navigate('/forgot-password')}
             >
-              {t<string>('LOGIN.FORGOT_PASSWORD')}
+              {t('LOGIN.FORGOT_PASSWORD')}
             </button>
           </div>
           <Form.Item className='col-span-2 !mt-2'>
             <Button
               type='primary'
               htmlType='submit'
-              className='w-full !bg-[#1890FF] !h-13 !text-[16px] !font-bold !border-none !outline-none !rounded-md !text-white'
+              className='signin-btn w-full h-[3.75rem] !text-[16px] !font-bold !border-none !outline-none !rounded-md !text-white'
             >
-              {t<string>('LOGIN.LOGIN')}
+              {t('LOGIN.LOGIN')}
             </Button>
           </Form.Item>
         </Form>
