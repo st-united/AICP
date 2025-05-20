@@ -17,16 +17,12 @@ export interface Credentials {
 export interface UserProfile {
   fullName: string;
   email: string;
-  phoneNumber: string;
-  dob: string;
-  address: string;
-  gender: string;
-  identityId: string;
-  avatar: string;
-  permissions: string[];
-  country: string;
-  province: string;
-  job: string;
+  phoneNumber?: string;
+  dob?: string;
+  avatar?: string;
+  permissions?: string[];
+  province?: string;
+  job?: string;
   referralCode: string;
 }
 

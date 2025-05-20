@@ -233,6 +233,8 @@
     "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
     "REFERRAL": "Mã giới thiệu",
     "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu",
+    "UPDATE_SUCCESS": "Cập nhật hồ sơ thành công!",
+    "UPDATE_FAILED": "Cập nhật hồ sơ thất bại. Vui lòng thử lại.",
     "PLACEHOLDER_OLD_PASSWORD": "Nhập mật khẩu cũ",
     "PLACEHOLDER_NEW_PASSWORD": "Nhập mật khẩu mới",
     "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",

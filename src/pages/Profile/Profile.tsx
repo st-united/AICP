@@ -10,13 +10,19 @@ import CountrySelect from '@app/components/atoms/CustomSelect/CountrySelect';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/atoms/CustomSelect/ProvinceSelect';
 import { yupSync } from '@app/helpers';
-import { useGetProfile } from '@app/hooks';
+import { useGetProfile, useUpdateProfile } from '@app/hooks';
+import { UserProfile } from '@app/interface/user.interface';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 const Profile = () => {
   const [avatar, setAvatar] = useState<string>();
   const [isEdit, setIsEdit] = useState(false);
   const [form] = Form.useForm();
   const { data } = useGetProfile();
+  const updateProfileMutation = useUpdateProfile();
   const { t } = useTranslation();
   const validator = [yupSync(useProfileSchema())] as unknown as Rule[];
 
@@ -25,12 +31,11 @@ const Profile = () => {
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
-        phone: data.phoneNumber || '',
+        phoneNumber: data.phoneNumber || '',
         dob: data.dob ? moment(data.dob) : null,
-        country: data.country || null,
         province: data.province || null,
-        occupation: data.job || null,
-        referral: data.referralCode || null,
+        job: data.job || null,
+        referralCode: data.referralCode || null,
       });
     }
   }, [data, form]);
@@ -41,10 +46,16 @@ const Profile = () => {
     form.resetFields();
   };
 
-  const handleSubmit = async (values: any) => {
-    console.log('Form values:', values);
-    // TODO: Add update profile API call here
-    setIsEdit(false);
+  const handleSubmit = async (values: UserProfile) => {
+    updateProfileMutation.mutate(values, {
+      onSuccess: () => {
+        setIsEdit(false);
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PROFILE.UPDATE_SUCCESS'));
+      },
+      onError: (error) => {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PROFILE.UPDATE_FAILED'));
+      },
+    });
   };
 
   return (
@@ -63,12 +74,11 @@ const Profile = () => {
           initialValues={{
             fullName: data?.fullName ?? '',
             email: data?.email ?? '',
-            phone: data?.phoneNumber ?? '',
+            phoneNumber: data?.phoneNumber ?? '',
             dob: data?.dob ? moment(data?.dob) : null,
-            country: data?.country ?? null,
             province: data?.province ?? null,
-            occupation: data?.job ?? null,
-            referral: data?.referralCode ?? null,
+            job: data?.job ?? null,
+            referralCode: data?.referralCode ?? null,
           }}
         >
           <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px] w-full'>
@@ -86,7 +96,7 @@ const Profile = () => {
                 disabled
               />
             </Form.Item>
-            <Form.Item name='phone' label={t('PROFILE.PHONE')} rules={validator}>
+            <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator}>
               <Input
                 className='!px-6 !py-3 !rounded-lg'
                 placeholder={t('PROFILE.PHONE_PLACEHOLDER') as string}
@@ -104,10 +114,10 @@ const Profile = () => {
             <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
               <ProvinceSelect disabled={!isEdit} />
             </Form.Item>
-            <Form.Item name='occupation' label={t('PROFILE.OCCUPATION')} rules={validator}>
+            <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
               <JobSelect disabled={!isEdit} />
             </Form.Item>
-            <Form.Item name='referral' label={t('PROFILE.REFERRAL')} rules={validator}>
+            <Form.Item name='referralCode' label={t('PROFILE.REFERRAL')} rules={validator}>
               <Input disabled defaultValue='jKvs500' className='!px-6 !py-3 !rounded-lg' />
             </Form.Item>
             <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
