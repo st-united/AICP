@@ -43,7 +43,7 @@ export default function ForgotPassword() {
       <div className='w-full'>
         <Link
           to={'/login'}
-          className='!mb-14 flex align-items gap-x-1 text-[#B2B2B2] text-lg hover:text-[#1890FF]'
+          className='mb-14 font-medium flex align-items gap-x-1 text-primary-gray text-lg hover:text-primary'
         >
           <span>
             <ArrowLeftOutlined className='-translate-y-[2px]' />
@@ -51,12 +51,17 @@ export default function ForgotPassword() {
           <span>{t('FORGOT_PASSWORD.TURN_BACK_SIGN_IN')}</span>
         </Link>
         <div>
-          <h1 className='text-3xl sm:text-3xl md:text-4xl lg:text-4xl text-white !font-bold'>
+          <h1 className='text-3xl sm:text-3xl md:text-4xl lg:text-4xl text-primary font-bold'>
             {t('FORGOT_PASSWORD.TITLE')}
           </h1>
-          <p className='text-white mt-4 mb-6 sm:my-4 md:my-6 lg:my-8 text-lg'>
-            <span>{t('FORGOT_PASSWORD.NO_ACCOUNT')}</span>{' '}
-            <Link className={'text-[#1890FF] underline hover:underline'} to={'/register'}>
+          <p className='text-primary-gray mt-4 mb-6 sm:my-4 md:my-6 lg:my-8 text-lg'>
+            <span className='font-medium'>{t('FORGOT_PASSWORD.NO_ACCOUNT')}</span>{' '}
+            <Link
+              className={
+                'text-primary-bold font-medium underline hover:underline hover:text-primary'
+              }
+              to={'/register'}
+            >
               {t('FORGOT_PASSWORD.REGISTER')}
             </Link>
           </p>
