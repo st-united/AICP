@@ -152,7 +152,7 @@ const SignUp = () => {
           <Form.Item className='col-span-2 !mt-2'>
             <Button
               htmlType='submit'
-              className='w-full !bg-[#A22D00] !h-14 px-4 !text-[16px] !font-bold !border-none !rounded-lg !text-white'
+              className='w-full !bg-[#A22D00] !h-14 px-4 !text-[16px] !font-bold !rounded-lg !text-white'
               loading={isLoading}
               disabled={!isChecked}
             >
