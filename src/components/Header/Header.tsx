@@ -35,7 +35,7 @@ const Header = () => {
             />
           </div>
           <div className='flex items-center gap-4 md:gap-6'>
-            <div className='flex item-center border !py-2 !px-6 md:!py-2 md:!px-8 text-white font-bold rounded-full text-md md:text-lg hover:bg-[#096DD9] hover:text-white transition-all duration-300 ease-in-out'>
+            <div className='flex item-center border !py-2 !px-6 md:!py-2 md:!px-8 text-[#FE7743] font-bold rounded-full border-[#FE7743] bg-white text-md md:text-lg hover:bg-[#096DD9] hover:text-white transition-all duration-300 ease-in-out'>
               {t('HEADER.START')}
             </div>
             <ProfileAvatar />
