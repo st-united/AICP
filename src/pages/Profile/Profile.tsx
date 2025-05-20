@@ -1,17 +1,19 @@
 import { Form, Input, DatePicker, Button } from 'antd';
 import { Rule } from 'antd/lib/form';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useProfileSchema } from './profileSchema';
-import CustomAvartar from '@app/components/CustomAvartar/CustomAvartar';
-import CountrySelect from '@app/components/CustomSelect/CountrySelect';
-import JobSelect from '@app/components/CustomSelect/JobSelect';
-import ProvinceSelect from '@app/components/CustomSelect/ProvinceSelect';
+import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
+import CountrySelect from '@app/components/atoms/CustomSelect/CountrySelect';
+import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
+import ProvinceSelect from '@app/components/atoms/CustomSelect/ProvinceSelect';
 import { yupSync } from '@app/helpers';
 import { useGetProfile } from '@app/hooks';
 
 const Profile = () => {
+  const [avatar, setAvatar] = useState<string>();
   const [isEdit, setIsEdit] = useState(false);
   const [form] = Form.useForm();
   const { data } = useGetProfile();
@@ -23,17 +25,18 @@ const Profile = () => {
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
-        phone: data.phone || '',
-        // dob: data.dob ? new Date(data.dob) : null,
-        // country: data.country || null,
-        // province: data.province || null,
-        // occupation: data.occupation || null,
-        // referral: data.referral || null,
+        phone: data.phoneNumber || '',
+        dob: data.dob ? moment(data.dob) : null,
+        country: data.country || null,
+        province: data.province || null,
+        occupation: data.job || null,
+        referral: data.referralCode || null,
       });
     }
   }, [data, form]);
 
   const handleCancel = () => {
+    setAvatar('');
     setIsEdit(false);
     form.resetFields();
   };
@@ -47,9 +50,9 @@ const Profile = () => {
   return (
     <>
       <div className='relative rounded-2xl bg-white'>
-        <div className='bg-[#3D6ADA] h-[145px] rounded-t-2xl '>
+        <div className='bg-[#FF8C5F] h-[145px] rounded-t-2xl '>
           <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
-            <CustomAvartar />
+            <CustomAvatar avatar={avatar} isEdit={isEdit} onAvatarChange={setAvatar} />
           </div>
         </div>
         <Form
@@ -60,12 +63,12 @@ const Profile = () => {
           initialValues={{
             fullName: data?.fullName ?? '',
             email: data?.email ?? '',
-            phone: data?.phone ?? '',
-            // dob: data?.dob ? new Date(data.dob) : null,
-            // country: data?.country ?? null,
-            // province: data?.province ?? null,
-            // occupation: data?.occupation ?? null,
-            // referral: data?.referral ?? null,
+            phone: data?.phoneNumber ?? '',
+            dob: data?.dob ? moment(data?.dob) : null,
+            country: data?.country ?? null,
+            province: data?.province ?? null,
+            occupation: data?.job ?? null,
+            referral: data?.referralCode ?? null,
           }}
         >
           <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px] w-full'>
@@ -98,9 +101,6 @@ const Profile = () => {
                 disabled={!isEdit}
               />
             </Form.Item>
-            <Form.Item name='country' label={t('PROFILE.COUNTRY')} rules={validator}>
-              <CountrySelect disabled={!isEdit} />
-            </Form.Item>
             <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
               <ProvinceSelect disabled={!isEdit} />
             </Form.Item>
@@ -116,7 +116,7 @@ const Profile = () => {
                   <>
                     <Button
                       onClick={() => setIsEdit(true)}
-                      className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#3D6ADA] !text-white'
+                      className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white'
                     >
                       Chỉnh sửa
                     </Button>
@@ -125,14 +125,14 @@ const Profile = () => {
                   <>
                     <Button
                       onClick={handleCancel}
-                      className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#3D6ADA] !text-[#3D6ADA] !text-md hover:!bg-[#3D6ADA] hover:!text-white'
+                      className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
                     >
                       Hủy bỏ
                     </Button>
                     <Button
                       type='primary'
                       htmlType='submit'
-                      className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#3D6ADA] !text-white'
+                      className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white'
                     >
                       Lưu
                     </Button>

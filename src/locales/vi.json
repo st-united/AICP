@@ -202,9 +202,11 @@
     "PASSWORD_MIN": "Mật khẩu phải có ít nhất 8 ký tự",
     "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
-    "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!"
+    "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
+    "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại"
   },
   "PROFILE": {
+    "AVATAR": "Ảnh đại diện",
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "OLD_PASSWORD": "Mật khẩu cũ",
     "NEW_PASSWORD": "Mật khẩu mới",

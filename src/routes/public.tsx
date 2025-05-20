@@ -27,28 +27,6 @@ const routes = [
       },
     ],
   },
-  {
-    element: <AuthLayout />,
-    children: [
-      {
-        path: '/',
-        element: <Homepage />,
-      },
-      {
-        element: <ProfileLayout />,
-        children: [
-          {
-            path: 'profile',
-            element: <Profile />,
-          },
-          {
-            path: 'change-password',
-            element: <PasswordChangeForm />,
-          },
-        ],
-      },
-    ],
-  },
 ];
 
 export default routes;

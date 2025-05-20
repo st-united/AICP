@@ -2,23 +2,26 @@ import { Select, SelectProps } from 'antd';
 import './CustomSelect.scss';
 import { useTranslation } from 'react-i18next';
 
+import { useGetProvince } from '@app/hooks/useLocation';
+
 interface ProvinceSelectProps extends SelectProps {
   options?: { value: string; label: JSX.Element }[];
 }
 
-const countryOptions = [
-  { value: 'vn', label: <span>Việt Nam</span> },
-  { value: 'us', label: <span>United States</span> },
-  { value: 'jp', label: <span>Japan</span> },
-];
-
 const ProvinceSelect: React.FC<ProvinceSelectProps> = (props) => {
   const { t } = useTranslation();
+  const { data } = useGetProvince();
+
+  const provinceOptions =
+    data?.map((province: any) => ({
+      value: province.name,
+      label: province.codeName,
+    })) || [];
   return (
     <div id='customSelect'>
       <Select
+        options={provinceOptions}
         allowClear
-        options={countryOptions}
         placeholder={t('PLACEHOLDER.SELECT_CITY')}
         {...props}
       />
