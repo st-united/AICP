@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import SlideImages from './SlideImages';
+import { SlideImages } from '../../molecules/index';
 
 const PublicLayout: React.FC = () => {
   return (

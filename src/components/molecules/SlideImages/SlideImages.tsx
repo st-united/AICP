@@ -7,12 +7,12 @@ import {
   carousel_2,
   carousel_3,
   carousel_4,
-} from '@app/assets/images/publicLayoutImages/index';
+} from '@app/assets/images/SlideImages/index';
 import './SlideImages.scss';
 
 const images = [carousel_1, carousel_2, carousel_3, carousel_4];
 
-const SlideImage = () => {
+export const SlideImages = () => {
   return (
     <>
       <div className='h-[80px] w-[200px] flex items-start'>
@@ -36,5 +36,3 @@ const SlideImage = () => {
     </>
   );
 };
-
-export default SlideImage;
