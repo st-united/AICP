@@ -70,42 +70,34 @@ const SignUp = () => {
           className='grid grid-cols-2 md:gap-4 gap-1'
           validateTrigger={['onChange', 'onBlur']}
         >
-          <Form.Item
-            className='md:col-span-1 col-span-2 border rounded-lg'
-            name='fullName'
-            rules={validator}
-          >
+          <Form.Item className='md:col-span-1 col-span-2' name='fullName' rules={validator}>
             <Input
-              className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              className='w-full !px-6 !py-4 !rounded-md !text-lg'
               placeholder={t<string>('SIGN_UP.FULL_NAME')}
             />
           </Form.Item>
-          <Form.Item
-            className='md:col-span-1 col-span-2 border rounded-lg'
-            name='phoneNumber'
-            rules={validator}
-          >
+          <Form.Item className='md:col-span-1 col-span-2' name='phoneNumber' rules={validator}>
             <Input
-              className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              className='w-full !px-6 !py-4 !rounded-md !text-lg'
               placeholder={t<string>('SIGN_UP.PHONE')}
             />
           </Form.Item>
-          <Form.Item className='col-span-2 border rounded-lg' name='email' rules={validator}>
+          <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
-              className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              className='w-full !px-6 !py-4 !rounded-md !text-lg'
               placeholder={t<string>('SIGN_UP.EMAIL')}
             />
           </Form.Item>
-          <Form.Item className='col-span-2 border rounded-lg' name='password' rules={validator}>
+          <Form.Item className='col-span-2' name='password' rules={validator}>
             <Input.Password
               onChange={handlePasswordChange}
-              className='col-span-2 w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              className='col-span-2 w-full !px-6 !py-4 !rounded-md !text-lg'
               placeholder={t<string>('SIGN_UP.PASSWORD')}
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
           <Form.Item
-            className='col-span-2 border rounded-lg'
+            className='col-span-2'
             name='confirm_password'
             dependencies={['password']}
             rules={[
@@ -125,7 +117,7 @@ const SignUp = () => {
             ]}
           >
             <Input.Password
-              className='col-span-2 w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              className='col-span-2 w-full !px-6 !py-4 !rounded-md !text-lg'
               placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
             />
@@ -161,7 +153,7 @@ const SignUp = () => {
           <Form.Item className='col-span-2 !mt-2'>
             <Button
               htmlType='submit'
-              className='w-full !bg-[#A22D00] !h-14 px-4 !text-[16px] !font-bold !border-none !outline-none !rounded-lg !text-white'
+              className='w-full !bg-[#A22D00] !h-14 px-4 !text-[16px] !font-bold !rounded-lg !text-white'
               loading={isLoading}
               disabled={!isChecked}
             >
