@@ -71,7 +71,7 @@ export const useRegister = () => {
     {
       onSuccess: ({ message }) => {
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        navigate('/');
+        navigate('/login');
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
