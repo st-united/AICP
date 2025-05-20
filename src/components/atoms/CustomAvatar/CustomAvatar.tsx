@@ -2,6 +2,7 @@ import { CameraFilled, UserOutlined } from '@ant-design/icons';
 import { Avatar, Upload, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 
+import { validateFile } from '@app/helpers/fileValidation';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -21,26 +22,17 @@ const CustomAvatar = ({ avatar, isEdit, onAvatarChange }: Props) => {
   const handleChange = (info: UploadChangeParam) => {
     const file = info.fileList[0]?.originFileObj;
     if (!file) return;
-
-    if (!ACCEPTED_TYPES.includes(file.type)) {
+    const validation = validateFile(file, ACCEPTED_TYPES, MAX_FILE_SIZE_MB);
+    if (!validation.isValid) {
       openNotificationWithIcon(
         NotificationTypeEnum.WARNING,
-        t('VALIDATE.INVALID', { field: t('PROFILE.AVATAR') }),
-      );
-      return;
-    }
-    const isTooLarge = file.size / 1024 / 1024 > MAX_FILE_SIZE_MB;
-    if (isTooLarge) {
-      openNotificationWithIcon(
-        NotificationTypeEnum.WARNING,
-        t('VALIDATE.FILE_TOO_LARGE', {
+        t(validation.errorMessageKey!, {
           field: t('PROFILE.AVATAR'),
-          max: MAX_FILE_SIZE_MB,
+          ...validation.errorMessageParams,
         }),
       );
       return;
     }
-
     const reader = new FileReader();
     reader.onload = (e) => {
       const base64 = e.target?.result as string;
