@@ -1,6 +1,7 @@
 import { MailOutlined, EnvironmentOutlined, UpCircleFilled } from '@ant-design/icons';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import { DevplusLogo, FooterBackground } from '@app/assets/svgs';
 
@@ -77,7 +78,9 @@ const FooterSection = () => {
           </h3>
           <ul className='space-y-2 md:text-sm lg:text-lg'>
             {activities.map((activity, index) => (
-              <li key={index}>{activity}</li>
+              <Link key={index} to='https://devplus.edu.vn/#devplus-activities'>
+                <li key={index}>{activity}</li>
+              </Link>
             ))}
           </ul>
         </Col>

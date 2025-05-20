@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 
 import LandingLayout from '@app/components/LandingPage/LandingLayout';
-import LazySection from '@app/components/LandingPage/LazySection';
 import MainScreen from '@app/components/LandingPage/MainScreen';
 
 const smoothScrollTo = (targetY: number, duration = 1200) => {
@@ -44,23 +43,8 @@ const Homepage = () => {
 
       {/* Section 2 */}
       <div ref={section2Ref}>
-        <LazySection className='h-screen'>
-          <LandingLayout />
-        </LazySection>
+        <LandingLayout />
       </div>
-
-      {/* <LazySection className='h-screen bg-gray-100'>
-        <div className='flex items-center justify-center h-full'>
-          <h2 className='text-3xl font-bold'>Section 3 Loaded</h2>
-        </div>
-      </LazySection>
-
-     
-      <LazySection className='h-screen bg-blue-100'>
-        <div className='flex items-center justify-center h-full'>
-          <h2 className='text-3xl font-bold'>Section 4 Loaded</h2>
-        </div>
-      </LazySection> */}
     </div>
   );
 };

@@ -7,7 +7,7 @@ type LazySectionProps = {
   className?: string;
 };
 
-const LazySection = ({ children, className }: LazySectionProps) => {
+const LazyComponent = ({ children, className }: LazySectionProps) => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
   const { ref: inViewRef, inView } = useInView({
@@ -30,4 +30,4 @@ const LazySection = ({ children, className }: LazySectionProps) => {
   );
 };
 
-export default LazySection;
+export default LazyComponent;
