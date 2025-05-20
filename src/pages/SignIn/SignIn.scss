@@ -16,25 +16,6 @@
     color: var(--primary-gray-color) !important;
   }
 
-  .ant-input:-webkit-autofill,
-  .ant-input-password input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
-    box-shadow: 0 0 0 30px #ffffff inset !important;
-    -webkit-text-fill-color: #fff !important;
-    transition: background-color 5000s ease-in-out 0s;
-  }
-
-  .ant-input:-webkit-autofill:hover,
-  .ant-input-password input:-webkit-autofill:hover,
-  .ant-input:-webkit-autofill:focus,
-  .ant-input-password input:-webkit-autofill:focus,
-  .ant-input:-webkit-autofill:active,
-  .ant-input-password input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
-    box-shadow: 0 0 0 30px #ffffff inset !important;
-    -webkit-text-fill-color: #686868 !important;
-  }
-
   // Ví dụ sử dụng biến cho các class custom
   .signin-link {
     color: var(--primary-color-bold);
