@@ -69,7 +69,9 @@
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
     "PROFILE": "Cá nhân",
-    "SIGN_OUT": "Đăng xuất"
+    "SIGN_OUT": "Đăng xuất",
+    "SIGN_UP": "Đăng ký",
+    "SIGN_IN": "Đăng nhập"
   },
   "NOT_FOUND": {
     "TITLE": "404",
@@ -208,7 +210,7 @@
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "OLD_PASSWORD": "Mật khẩu cũ",
     "NEW_PASSWORD": "Mật khẩu mới",
-    "CONFIRM_PASSWORD": "Xác thực mật khẩu",
+    "CONFIRM_PASSWORD": "Xác nhận mật khẩu",
     "TITLE": "Thông tin người dùng",
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Thông tin cá nhân",
@@ -230,7 +232,12 @@
     "OCCUPATION": "Nghề nghiệp",
     "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
     "REFERRAL": "Mã giới thiệu",
-    "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu"
+    "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu",
+    "PLACEHOLDER_OLD_PASSWORD": "Nhập mật khẩu cũ",
+    "PLACEHOLDER_NEW_PASSWORD": "Nhập mật khẩu mới",
+    "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",
+    "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
+    "SAVE": "Lưu"
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -279,5 +286,27 @@
     "TERMS": "Điều khoản & Điều kiện",
     "PRIVACY": "Chính sách bảo mật",
     "COMPANY": "DevPlus"
+  },
+  "FORGOT_PASSWORD": {
+    "EMAIL_VALID": "Email bắt buộc phải hợp lệ!",
+    "TITLE": "Quên mật khẩu",
+    "RESET_PASSWORD": "Đặt lại mật khẩu",
+    "NO_ACCOUNT": "Bạn chưa có tài khoản?",
+    "NOT_FOUND": "Người dùng không tồn tại!",
+    "REGISTER": "Đăng ký",
+    "SEND_EMAIL_SUCCESS": "Đã gửi email thành công",
+    "SEND_LOADING": "Đang gửi...",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Gửi email thành công!"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Đặt lại mật khẩu!",
+    "NEW_PASSWORD": "Mật khẩu mới",
+    "REQUIRE_PASSWORD": "Mật khẩu không được để trống!",
+    "CONFIRM_PASSWORD": "Nhập lại mật khẩu mới *",
+    "CREATE_PASSWORD": "Tạo mới mật khẩu",
+    "REGEX_PASSWORD": "Mật khẩu phải có ít nhất 8 ký tự, có số, chữ thường, chữ viết hoa và ký tự đặc biệt!",
+    "MATCH": "Mật khẩu không khớp!",
+    "EXPIRED": "Liên kết đã hết hạn"
   }
 }

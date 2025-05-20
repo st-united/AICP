@@ -1,6 +1,7 @@
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { LoginOutlined, LogoutOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import type { MenuProps } from 'antd';
 
@@ -18,6 +19,7 @@ const ProfileAvatar = () => {
           <div>{t('PROFILE.PERSONAL_PROFILE')}</div>
         </div>
       ),
+      style: { display: !localStorage.getItem('access_token') ? 'none' : 'block' },
     },
     {
       key: '2',
@@ -27,6 +29,27 @@ const ProfileAvatar = () => {
           <div>{t('PROFILE.LOGOUT')}</div>
         </div>
       ),
+      style: { display: !localStorage.getItem('access_token') ? 'none' : 'block' },
+    },
+    {
+      key: '3',
+      label: (
+        <Link className='flex items-center gap-3 text-lg font-semibold !p-1' to={'/login'}>
+          <LoginOutlined />
+          <div>{t('DROPDOWN_PROFILE.SIGN_IN')}</div>
+        </Link>
+      ),
+      style: { display: localStorage.getItem('access_token') ? 'none' : 'block' },
+    },
+    {
+      key: '4',
+      label: (
+        <Link className='flex items-center gap-3 text-lg font-semibold !p-1' to={'/register'}>
+          <UserAddOutlined />
+          <div>{t('DROPDOWN_PROFILE.SIGN_UP')}</div>
+        </Link>
+      ),
+      style: { display: localStorage.getItem('access_token') ? 'none' : 'block' },
     },
   ];
 

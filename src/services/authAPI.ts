@@ -11,3 +11,6 @@ export const getLogout = () => axios.get(API_URL.LOGOUT);
 
 export const registerApi = (registerUserDto: RegisterUser) =>
   axios.post(API_URL.REGISTER_USER, registerUserDto);
+
+export const getActivateAccount = (token: string) =>
+  axios.get(`${API_URL.ACTIVATE_ACCOUNT}?token=${token}`);
