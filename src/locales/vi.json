@@ -230,7 +230,9 @@
     "OCCUPATION": "Nghề nghiệp",
     "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
     "REFERRAL": "Mã giới thiệu",
-    "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu"
+    "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu",
+    "UPDATE_SUCCESS": "Cập nhật hồ sơ thành công!",
+    "UPDATE_FAILED": "Cập nhật hồ sơ thất bại. Vui lòng thử lại."
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",

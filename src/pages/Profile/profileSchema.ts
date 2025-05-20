@@ -29,7 +29,7 @@ export const useProfileSchema = () => {
         t('VALIDATE.NO_TWO_SPACE', { field: t('PROFILE.FULLNAME') }) as string,
       ),
 
-    phone: yup
+    phoneNumber: yup
       .string()
       .required(t('VALIDATE.PHONE_REQUIRED') as string)
       .matches(PHONE_REGEX_PATTERN, t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string),
@@ -43,8 +43,8 @@ export const useProfileSchema = () => {
 
     province: yup.string().nullable(),
 
-    occupation: yup.string().nullable(),
+    job: yup.string().nullable(),
 
-    referral: yup.string().nullable(),
+    referralCode: yup.string().nullable(),
   });
 };
