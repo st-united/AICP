@@ -2,6 +2,7 @@ import { CameraFilled, UserOutlined } from '@ant-design/icons';
 import { Avatar, Upload, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 
+import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB } from '@app/constants/file';
 import { validateFile } from '@app/helpers/fileValidation';
 import {
   NotificationTypeEnum,
@@ -14,15 +15,13 @@ interface Props {
   isEdit?: boolean;
   onAvatarChange?: (base64: string) => void;
 }
-const MAX_FILE_SIZE_MB = 5;
-const ACCEPTED_TYPES = ['image/jpeg', 'image/png'];
 
 const CustomAvatar = ({ avatar, isEdit, onAvatarChange }: Props) => {
   const { t } = useTranslation();
   const handleChange = (info: UploadChangeParam) => {
     const file = info.fileList[0]?.originFileObj;
     if (!file) return;
-    const validation = validateFile(file, ACCEPTED_TYPES, MAX_FILE_SIZE_MB);
+    const validation = validateFile(file, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB);
     if (!validation.isValid) {
       openNotificationWithIcon(
         NotificationTypeEnum.WARNING,
