@@ -93,18 +93,20 @@ const SignIn = () => {
             />
           </Form.Item>
           <div className='col-span-2 text-lg text-white flex justify-end items-center'>
-            <button
-              className='!text-primary-bold font-bold cursor-pointer underline hover:!text-primary-light'
-              onClick={() => navigate('/forgot-password')}
-            >
-              {t('LOGIN.FORGOT_PASSWORD')}
+            <button className='cursor-pointer'>
+              <Link
+                to='/forgot-password'
+                className='text-primary-bold font-bold underline hover:!text-primary-light transition duration-300'
+              >
+                {t('LOGIN.FORGOT_PASSWORD')}
+              </Link>
             </button>
           </div>
           <Form.Item className='col-span-2 !mt-2'>
             <Button
               type='primary'
               htmlType='submit'
-              className='w-full h-[3.75rem] !bg-primary-bold text-[1rem] text-white font-bold !border-none !outline-none !rounded-md hover:bg-primary-light hover:text-black'
+              className='w-full h-[3.75rem] !bg-primary-bold text-[1rem] text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:text-black transition duration-300'
             >
               {t('LOGIN.LOGIN')}
             </Button>
