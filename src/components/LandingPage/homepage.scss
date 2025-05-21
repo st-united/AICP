@@ -30,7 +30,7 @@
 @keyframes slideUp {
   0% {
     opacity: 0;
-    transform: translateY(200px);
+    transform: translateY(600px);
   }
   100% {
     opacity: 1;
@@ -40,11 +40,11 @@
 
 .slide-up {
   opacity: 0;
-  animation: slideUp 1s ease-out forwards;
+  animation: slideUp 1.5s ease-out forwards;
 }
-@keyframes zoomOut {
+@keyframes zoomIn {
   0% {
-    transform: scale(1.2);
+    transform: scale(0);
     opacity: 0;
   }
   100% {
@@ -53,8 +53,8 @@
   }
 }
 
-.bg-zoom-out {
-  animation: zoomOut 4s ease-out forwards;
+.bg-zoom-in {
+  animation: zoomIn 1s ease-out forwards;
   transform-origin: center center;
 }
 @keyframes fadeInUp {

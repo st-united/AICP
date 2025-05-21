@@ -9,7 +9,7 @@ const FooterSection = () => {
   const activities = t('HOMEPAGE.FOOTER_ACTIVITIES_LIST', { returnObjects: true }) as Array<string>;
   return (
     <div
-      className='text-white px-6 md:px-20 py-10 relative flex md:justify-start justify-center md:items-start items-center md:text-start text-center bg-cover bg-no-repeat bg-center]'
+      className='text-white px-6 md:px-20 py-20 relative flex md:justify-start justify-center md:items-start items-center md:text-start text-center bg-cover bg-no-repeat bg-center]'
       style={{
         backgroundImage: `url(${FooterBackground})`,
       }}
