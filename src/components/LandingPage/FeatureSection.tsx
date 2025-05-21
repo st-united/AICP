@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import LazyComponent from './LazyComponent';
 import { LandingFeatSection1, LandingFeatSection2, LandingFeatSection3 } from '@app/assets/svgs';
+
 const imageList = [LandingFeatSection1, LandingFeatSection2, LandingFeatSection3];
 
 const FeatureSection = () => {
@@ -9,6 +10,7 @@ const FeatureSection = () => {
   const feats = t('HOMEPAGE.FEATURES_BENEFITS', { returnObjects: true }) as Array<{
     TITLE: string;
   }>;
+
   return (
     <div className='bg-[#FFFBF9] w-full px-6 md:py-12 '>
       <div className='text-center'>
@@ -22,11 +24,11 @@ const FeatureSection = () => {
         <LazyComponent>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
             {feats.map((benefit, index) => (
-              <div key={index} className='flex flex-col items-center rounded-2xl mr-16'>
+              <div key={index} className='flex flex-col items-center rounded-2xl'>
                 <img
                   src={imageList[index]}
                   alt={benefit.TITLE}
-                  className='w-full h-full object-contain mb-4 slide-up'
+                  className='w-full h-full object-contain mb-4 slide-up mr-10'
                 />
                 <h3 className='fade-in-text text-2xl font-[800] text-gray-900'>{benefit.TITLE}</h3>
               </div>

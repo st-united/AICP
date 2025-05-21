@@ -1,9 +1,4 @@
-import {
-  CaretDownOutlined,
-  CaretUpOutlined,
-  UserOutlined,
-  LogoutOutlined,
-} from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown, MenuProps, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';

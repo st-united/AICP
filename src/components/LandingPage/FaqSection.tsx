@@ -1,6 +1,11 @@
-import { TikTokFilled, LinkedinFilled, FacebookFilled } from '@ant-design/icons';
+import {
+  MinusOutlined,
+  PlusOutlined,
+  TikTokFilled,
+  LinkedinFilled,
+  FacebookFilled,
+} from '@ant-design/icons';
 import { Collapse } from 'antd';
-import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 

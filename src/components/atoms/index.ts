@@ -1,2 +1,2 @@
 export * from './Table/Table';
-export * from './TypingText/typingText';
+export * from './TypingText/TypingText';

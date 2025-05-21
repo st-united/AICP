@@ -6,7 +6,7 @@ type TypingTextProps = {
   className?: string;
 };
 
-const TypingText = ({ text, speed = 100, className }: TypingTextProps) => {
+export const TypingText = ({ text, speed = 100, className }: TypingTextProps) => {
   const [displayed, setDisplayed] = useState('');
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -29,5 +29,3 @@ const TypingText = ({ text, speed = 100, className }: TypingTextProps) => {
 
   return <div className={className}>{displayed}</div>;
 };
-
-export default TypingText;

@@ -1,6 +1,7 @@
 import { MailOutlined, EnvironmentOutlined, UpCircleFilled } from '@ant-design/icons';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
+
 import { DevplusLogo, FooterBackground } from '@app/assets/svgs';
 
 const FooterSection = () => {
@@ -8,7 +9,7 @@ const FooterSection = () => {
   const activities = t('HOMEPAGE.FOOTER_ACTIVITIES_LIST', { returnObjects: true }) as Array<string>;
   return (
     <div
-      className=' text-white px-6 md:px-20 py-10 relative flex md:justify-start justify-center md:items-start items-center md:text-start text-center bg-cover bg-no-repeat bg-center bg-[url(./assets/images/footer-background.svg)]'
+      className='text-white px-6 md:px-20 py-10 relative flex md:justify-start justify-center md:items-start items-center md:text-start text-center bg-cover bg-no-repeat bg-center]'
       style={{
         backgroundImage: `url(${FooterBackground})`,
       }}
@@ -65,9 +66,8 @@ const FooterSection = () => {
         <Col
           xs={{ order: 5, span: 24 }}
           sm={{ order: 5, span: 24 }}
-          md={{ order: 5, span: 6 }}
-        ></Col>
-        <Col xs={{ order: 5, span: 24 }} sm={{ order: 5, span: 24 }} md={{ order: 5, span: 8 }}>
+          md={{ order: 5, span: 8, offset: 6 }}
+        >
           <h3 className='md:text-sm lg:text-lg font-semibold mb-2 text-white'>
             {t('HOMEPAGE.FOOTER_ACTIVITIES')}
           </h3>

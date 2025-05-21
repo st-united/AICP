@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import './homepage.scss';
 import { background } from '@app/assets/svgs';
-import TypingText from '@app/components/atoms/TypingText/typingText';
+import { TypingText } from '@app/components/atoms/';
 
 type Props = {
   onScrollToNext: () => void;
