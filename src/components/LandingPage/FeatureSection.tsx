@@ -2,15 +2,15 @@ import { useTranslation } from 'react-i18next';
 
 import LazyComponent from './LazyComponent';
 import { LandingFeatSection1, LandingFeatSection2, LandingFeatSection3 } from '@app/assets/svgs';
+const imageList = [LandingFeatSection1, LandingFeatSection2, LandingFeatSection3];
 
 const FeatureSection = () => {
   const { t } = useTranslation();
-  const imageList = [LandingFeatSection1, LandingFeatSection2, LandingFeatSection3];
   const feats = t('HOMEPAGE.FEATURES_BENEFITS', { returnObjects: true }) as Array<{
     TITLE: string;
   }>;
   return (
-    <div className='bg-[#FFFBF9] w-screen px-6 md:py-12 '>
+    <div className='bg-[#FFFBF9] w-full px-6 md:py-12 '>
       <div className='text-center'>
         <p className='text-[#FE7743] font-semibold mb-2 text-xl'>{t('HOMEPAGE.FEATURES_LABEL')}</p>
         <h2 className='text-3xl md:text-4xl font-bold text-[#FE7743] mb-4'>

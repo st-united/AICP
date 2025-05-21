@@ -8,11 +8,9 @@ const StepSection = () => {
   const { t } = useTranslation();
   return (
     <div
+      className='bg-cover bg-center bg-no-repeat'
       style={{
         backgroundImage: `url(${LandingPageStepBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
       }}
     >
       <div className='max-w-6xl mx-auto text-center py-12 px-6 md:px-12 '>
