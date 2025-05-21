@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import './homepage.scss';
 import { background } from '@app/assets/svgs';
-import TypingText from '@app/helpers/typingText';
+import { TypingText } from '@app/components/atoms/';
 
 type Props = {
   onScrollToNext: () => void;
@@ -15,12 +15,9 @@ const MainScreen = ({ onScrollToNext }: Props) => {
   return (
     <div className='flex flex-col w-full h-full'>
       <div
-        className='h-screen w-full'
+        className='h-screen w-full bg-cover bg-no-repeat bg-center'
         style={{
           backgroundImage: `url(${background})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
         }}
       >
         <div className='flex justify-center items-center md:items-start  flex-col gap-6 h-full !px-4 md:mx-16'>
@@ -44,7 +41,7 @@ const MainScreen = ({ onScrollToNext }: Props) => {
         </div>
       </div>
       <DownCircleFilled
-        className='!text-[#FE7743] hover:scale-125 shadow-md absolute bottom-10 right-10    md:bottom-20 md:right-20 border-none !p-0 !m-0 text-5xl md:text-6xl rounded-full'
+        className='!text-[#FE7743] hover:scale-125 shadow-md absolute bottom-10 right-10 md:bottom-20 md:right-20 border-none !p-0 !m-0 text-5xl md:text-6xl rounded-full'
         onClick={onScrollToNext}
       />
     </div>

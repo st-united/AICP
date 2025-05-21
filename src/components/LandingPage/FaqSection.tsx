@@ -1,9 +1,13 @@
-import { TikTokFilled, LinkedinFilled, FacebookFilled } from '@ant-design/icons';
+import {
+  MinusOutlined,
+  PlusOutlined,
+  TikTokFilled,
+  LinkedinFilled,
+  FacebookFilled,
+} from '@ant-design/icons';
 import { Collapse } from 'antd';
-import { MinusIcon, PlusIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 const FaqSection = () => {
   const [expanded, setExpanded] = useState<string>();
@@ -25,24 +29,24 @@ const FaqSection = () => {
         </h2>
         <p className='text-gray-700 mb-6 text-2xl'>{t('HOMEPAGE.FAQ_CONTACT')}</p>
         <div className='flex gap-4 '>
-          <Link
-            to='https://www.tiktok.com/'
+          <a
+            href='https://www.tiktok.com/'
             className='text-[#FE7743] text-6xl !rounded-xl bg-transparent'
             title='TikTok'
             target='_blank'
             rel='noopener noreferrer'
           >
             <TikTokFilled />
-          </Link>
-          <Link
-            to='https://www.tiktok.com/'
+          </a>
+          <a
+            href='https://www.linkedin.com/'
             className='text-[#FE7743] text-6xl !rounded-xl bg-transparent'
-            title='TikTok'
+            title='Linkedin'
             target='_blank'
             rel='noopener noreferrer'
           >
             <LinkedinFilled />
-          </Link>
+          </a>
           <a
             href='https://www.facebook.com/'
             className='text-[#FE7743] text-6xl rounded-xl'
@@ -63,7 +67,11 @@ const FaqSection = () => {
           expandIconPosition='end'
           bordered={false}
           expandIcon={({ isActive }) =>
-            isActive ? <MinusIcon className='text-white' /> : <PlusIcon />
+            isActive ? (
+              <MinusOutlined style={{ fontSize: '16px', color: 'white' }} />
+            ) : (
+              <PlusOutlined style={{ fontSize: '16px' }} />
+            )
           }
           onChange={(val) => setExpanded(val as string)}
         >
@@ -88,7 +96,7 @@ const FaqSection = () => {
                 <div className='faq-panel-content'>
                   <p
                     className={`mt-3 text-sm font-sans ${
-                      expanded === String(index) ? 'text-white' : 'bg-[#FFE9E1]'
+                      expanded === String(index) && 'text-white'
                     }`}
                   >
                     {faq.ANSWER}

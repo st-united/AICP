@@ -6,20 +6,20 @@ type TypingTextProps = {
   className?: string;
 };
 
-const TypingText = ({ text, speed = 100, className }: TypingTextProps) => {
+export const TypingText = ({ text, speed = 100, className }: TypingTextProps) => {
   const [displayed, setDisplayed] = useState('');
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setDisplayed('');
     let index = 0;
-    const characters = Array.from(text || '');
-    if (!text || characters.length === 0) return;
+    if (!text) return;
+
     intervalRef.current = setInterval(() => {
-      setDisplayed(characters.slice(0, index + 1).join(''));
+      setDisplayed(text.substring(0, index + 1));
       index++;
-      if (index >= characters.length) {
-        if (intervalRef.current) clearInterval(intervalRef.current);
+      if (index >= text.length && intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
     }, speed);
     return () => {
@@ -29,5 +29,3 @@ const TypingText = ({ text, speed = 100, className }: TypingTextProps) => {
 
   return <div className={className}>{displayed}</div>;
 };
-
-export default TypingText;
