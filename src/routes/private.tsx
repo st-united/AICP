@@ -11,7 +11,7 @@ const Forbidden = lazy(() => import('@app/pages/Forbidden/Forbidden'));
 
 const routes = [
   {
-    element: <PrivateLayout />,
+    // element: <PrivateLayout />,
     children: [
       {
         path: '404',
