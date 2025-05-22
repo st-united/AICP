@@ -1,4 +1,4 @@
-import background from './background.svg';
+import Background from './background.svg';
 import DevplusLogo from './devplus_logo.svg';
 import FooterBackground from './footer_background.svg';
 import ProfileGG from './gg_profile.svg';
@@ -11,7 +11,7 @@ import LogOut from './log-out.svg';
 export {
   ProfileGG,
   LogOut,
-  background,
+  Background,
   LandingStepBg,
   LandingFeatSection1,
   LandingFeatSection2,

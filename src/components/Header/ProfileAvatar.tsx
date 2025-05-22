@@ -56,7 +56,7 @@ const ProfileAvatar = () => {
   return (
     <Dropdown menu={{ items }} placement='bottomRight' arrow>
       <Avatar
-        className='border border-[2px] !w-[40px] !h-[40px] md:!w-[50px] md:!h-[50px] cursor-pointer'
+        className='border-[2px] !w-[40px] !h-[40px] md:!w-[50px] md:!h-[50px] cursor-pointer'
         icon={
           <div className='flex items-center justify-center w-full h-full'>
             <UserOutlined />
