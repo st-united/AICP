@@ -8,7 +8,7 @@ export default function ButtonComponent({ ...props }: ButtonProps) {
       type={type ? type : 'dashed'}
       disabled={disabled}
       htmlType='submit'
-      className={`${className} w-full h-[52px] sm:h-[52px] md:h-[52px] xl:h-[60px] rounded-md font-medium text-sm sm:text-sm md:text-md xl:text-lg`}
+      className={`${className} focus:bg-primary-bold bg-primary-bold hover:bg-primary border-none w-full h-[52px] sm:h-[52px] md:h-[52px] xl:h-[60px] rounded-md font-medium text-sm sm:text-sm md:text-md xl:text-lg`}
     >
       {children}
     </Button>
