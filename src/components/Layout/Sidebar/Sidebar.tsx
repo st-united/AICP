@@ -45,7 +45,7 @@ const Sidebar = () => {
                   isActive ? 'bg-[#FFF2E8]' : ''
                 }`}
               >
-                <Icon style={{ fontSize: '24px', color: isActive ? '#FF7A45' : '#5B5B5B' }} />
+                <Icon className={`text-2xl ${isActive ? 'text-[#FF7A45]' : 'text-[#5B5B5B]'}`} />
                 <div
                   className={`${
                     isActive ? 'text-[#FF7A45] font-semibold' : 'text-[#5B5B5B] font-medium'
