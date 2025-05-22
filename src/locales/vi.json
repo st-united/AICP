@@ -323,7 +323,8 @@
   "PLACEHOLDER": {
     "SELECT_COUNTRY": "Chọn quốc gia",
     "SELECT_CITY": "Chọn tỉnh thành",
-    "SELECT_JOB": "Chọn công việc"
+    "SELECT_JOB": "Chọn công việc",
+    "FIELD_REQUIRED": "{{field}} *"
   },
   "SIGN_UP": {
     "TITLE": "Đăng ký tài khoản",
