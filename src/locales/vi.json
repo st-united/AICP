@@ -240,8 +240,8 @@
   "LOGIN": {
     "LOGIN": "Đăng nhập",
     "TEXT": "Chào mừng bạn trở lại",
-    "EMAIL": "Email",
-    "PASSWORD": "Mật khẩu",
+    "EMAIL": "Email *",
+    "PASSWORD": "Mật khẩu *",
     "FORGOT_PASSWORD": "Quên mật khẩu?",
     "REGISTER": "Đăng ký",
     "BACK_TO_HOME": "Quay về trang chủ",
