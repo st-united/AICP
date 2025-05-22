@@ -21,22 +21,24 @@ const FaqSection = () => {
       {/* LEFT SIDE */}
       <div className='justify-center md:justify-start flex flex-col items-center md:items-start'>
         <p className='text-[#FF7A00] font-semibold text-lg md:text-xl mb-10'>{t('HOMEPAGE.FAQ')}</p>
-        <h2 className='text-3xl md:text-4xl font-bold text-[#FE7743] mb-4'>
+        <h2 className='text-2xl md:text-3xl font-bold text-[#FE7743] mb-4'>
           {t('HOMEPAGE.FAQ_TITLE1')}
         </h2>
-        <h2 className='text-3xl md:text-4xl font-bold text-[#FE7743] mb-4'>
+        <h2 className='text-2xl md:text-3xl font-bold text-[#FE7743] mb-4'>
           {t('HOMEPAGE.FAQ_TITLE2')}
         </h2>
-        <p className='text-gray-700 mb-6 text-2xl'>{t('HOMEPAGE.FAQ_CONTACT')}</p>
+        <p className='text-gray-700 mb-6 text-xl text-center md:text-2xl sm:text-start'>
+          {t('HOMEPAGE.FAQ_CONTACT')}
+        </p>
         <div className='flex gap-4 '>
           <a
-            href='https://www.tiktok.com/'
+            href='https://www.facebook.com/'
             className='text-[#FE7743] text-6xl !rounded-xl bg-transparent'
-            title='TikTok'
+            title='Facebook'
             target='_blank'
             rel='noopener noreferrer'
           >
-            <TikTokFilled />
+            <FacebookFilled />
           </a>
           <a
             href='https://www.linkedin.com/'
@@ -48,13 +50,13 @@ const FaqSection = () => {
             <LinkedinFilled />
           </a>
           <a
-            href='https://www.facebook.com/'
+            href='https://www.tiktok.com/'
             className='text-[#FE7743] text-6xl rounded-xl'
-            title='Facebook'
+            title='TikTok'
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FacebookFilled />
+            <TikTokFilled />
           </a>
         </div>
       </div>

@@ -14,11 +14,14 @@ const StepSection = () => {
       }}
     >
       <div className='max-w-6xl mx-auto text-center py-12 px-6 md:px-12 '>
-        <p className='text-[#FE7743] font-semibold mb-2 text-xl'> {t('HOMEPAGE.STEP_LABEL')}</p>
-        <h2 className='text-[#FE7743] text-3xl md:text-4xl font-bold mb-4'>
+        <p className='text-[#FE7743] font-semibold mb-4 text-base sm:text-xl md:text-2xl'>
+          {' '}
+          {t('HOMEPAGE.STEP_LABEL')}
+        </p>
+        <h2 className='text-[#FE7743] text-xl md:text-4xl font-bold mb-4 sm:mb-8'>
           {t('HOMEPAGE.STEP_TITLE')}
         </h2>
-        <p className='text-gray-700 text-base md:text-2xl max-w-2xl mx-auto font-[800]'>
+        <p className='text-gray-700 text-base md:text-2xl max-w-2xl mx-auto my-3 font-[800]'>
           {t('HOMEPAGE.STEP_SUBTITLE')}
         </p>
       </div>

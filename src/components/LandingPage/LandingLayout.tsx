@@ -1,4 +1,4 @@
-import FaqSection from './FaqSection';
+import FaqSection from '../Layout/FaqSection/FaqSection';
 import FeatureSection from './FeatureSection';
 import FooterSection from './FooterSection';
 import StepSection from './StepSection';
