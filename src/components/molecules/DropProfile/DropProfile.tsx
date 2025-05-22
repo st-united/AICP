@@ -1,9 +1,4 @@
-import {
-  CaretDownOutlined,
-  CaretUpOutlined,
-  UserOutlined,
-  LogoutOutlined,
-} from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown, MenuProps, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -40,17 +35,8 @@ export const DropProfile: FC = () => {
     {
       label: (
         <div className='flex gap-2 items-center'>
-          <UserOutlined
-            className='profile-icon'
-            style={{
-              fontSize: '24px',
-              color: '#121212',
-              border: '1px solid #121212',
-              borderRadius: '50%',
-              padding: '2px',
-            }}
-          />
-          <Typography style={{ color: '#121212', fontWeight: 600, fontSize: '16px' }}>
+          <UserOutlined className='profile-icon text-[24px] border border-[#121212] rounded-full p-[2px]' />
+          <Typography className='text-[#121212] font-semibold text-base'>
             {t('PROFILE.PERSONAL_PROFILE')}
           </Typography>
         </div>
@@ -61,14 +47,8 @@ export const DropProfile: FC = () => {
     {
       label: (
         <div className='flex gap-2 items-center'>
-          <LogoutOutlined
-            className='profile-icon'
-            style={{
-              fontSize: '24px',
-              padding: '2px',
-            }}
-          />
-          <Typography style={{ color: '#FB303E', fontWeight: 600, fontSize: '16px' }}>
+          <LogoutOutlined className='profile-icon text-[24px] p-[2px]' />
+          <Typography className='text-base text-[#FB303E] font-semibold'>
             {t('PROFILE.LOGOUT')}
           </Typography>
         </div>

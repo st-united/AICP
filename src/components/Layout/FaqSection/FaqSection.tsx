@@ -1,9 +1,13 @@
-import { TikTokFilled, LinkedinFilled, FacebookFilled } from '@ant-design/icons';
+import {
+  MinusOutlined,
+  PlusOutlined,
+  TikTokFilled,
+  LinkedinFilled,
+  FacebookFilled,
+} from '@ant-design/icons';
 import { Collapse } from 'antd';
-import { MinusIcon, PlusIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 const FaqSection = () => {
   const [expanded, setExpanded] = useState<string>();
@@ -17,40 +21,42 @@ const FaqSection = () => {
       {/* LEFT SIDE */}
       <div className='justify-center md:justify-start flex flex-col items-center md:items-start'>
         <p className='text-[#FF7A00] font-semibold text-lg md:text-xl mb-10'>{t('HOMEPAGE.FAQ')}</p>
-        <h2 className='text-3xl md:text-4xl font-bold text-[#FE7743] mb-4'>
+        <h2 className='text-2xl md:text-3xl font-bold text-[#FE7743] mb-4'>
           {t('HOMEPAGE.FAQ_TITLE1')}
         </h2>
-        <h2 className='text-3xl md:text-4xl font-bold text-[#FE7743] mb-4'>
+        <h2 className='text-2xl md:text-3xl font-bold text-[#FE7743] mb-4'>
           {t('HOMEPAGE.FAQ_TITLE2')}
         </h2>
-        <p className='text-gray-700 mb-6 text-2xl'>{t('HOMEPAGE.FAQ_CONTACT')}</p>
+        <p className='text-gray-700 mb-6 text-xl text-center md:text-2xl sm:text-start'>
+          {t('HOMEPAGE.FAQ_CONTACT')}
+        </p>
         <div className='flex gap-4 '>
-          <Link
-            to='https://www.tiktok.com/'
-            className='text-[#FE7743] text-6xl !rounded-xl bg-transparent'
-            title='TikTok'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <TikTokFilled />
-          </Link>
-          <Link
-            to='https://www.tiktok.com/'
-            className='text-[#FE7743] text-6xl !rounded-xl bg-transparent'
-            title='TikTok'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <LinkedinFilled />
-          </Link>
           <a
             href='https://www.facebook.com/'
-            className='text-[#FE7743] text-6xl rounded-xl'
+            className='text-[#FE7743] text-6xl !rounded-xl bg-transparent'
             title='Facebook'
             target='_blank'
             rel='noopener noreferrer'
           >
             <FacebookFilled />
+          </a>
+          <a
+            href='https://www.linkedin.com/'
+            className='text-[#FE7743] text-6xl !rounded-xl bg-transparent'
+            title='Linkedin'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <LinkedinFilled />
+          </a>
+          <a
+            href='https://www.tiktok.com/'
+            className='text-[#FE7743] text-6xl rounded-xl'
+            title='TikTok'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <TikTokFilled />
           </a>
         </div>
       </div>
@@ -63,7 +69,11 @@ const FaqSection = () => {
           expandIconPosition='end'
           bordered={false}
           expandIcon={({ isActive }) =>
-            isActive ? <MinusIcon className='text-white' /> : <PlusIcon />
+            isActive ? (
+              <MinusOutlined style={{ fontSize: '16px', color: 'white' }} />
+            ) : (
+              <PlusOutlined style={{ fontSize: '16px' }} />
+            )
           }
           onChange={(val) => setExpanded(val as string)}
         >
@@ -88,7 +98,7 @@ const FaqSection = () => {
                 <div className='faq-panel-content'>
                   <p
                     className={`mt-3 text-sm font-sans ${
-                      expanded === String(index) ? 'text-white' : 'bg-[#FFE9E1]'
+                      expanded === String(index) && 'text-white'
                     }`}
                   >
                     {faq.ANSWER}

@@ -1,7 +1,6 @@
 import { MailOutlined, EnvironmentOutlined, UpCircleFilled } from '@ant-design/icons';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 import { DevplusLogo, FooterBackground } from '@app/assets/svgs';
 
@@ -10,12 +9,9 @@ const FooterSection = () => {
   const activities = t('HOMEPAGE.FOOTER_ACTIVITIES_LIST', { returnObjects: true }) as Array<string>;
   return (
     <div
-      className=' text-white px-6 md:px-20 py-10 relative flex md:justify-start justify-center md:items-start items-center md:text-start text-center'
+      className='text-white px-6 md:px-20 py-20 relative flex md:justify-start justify-center md:items-start items-center md:text-start text-center bg-cover bg-no-repeat bg-center]'
       style={{
         backgroundImage: `url(${FooterBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
       }}
     >
       <Row className='container mx-auto mt-16 !md:mt-0'>
@@ -70,17 +66,22 @@ const FooterSection = () => {
         <Col
           xs={{ order: 5, span: 24 }}
           sm={{ order: 5, span: 24 }}
-          md={{ order: 5, span: 6 }}
-        ></Col>
-        <Col xs={{ order: 5, span: 24 }} sm={{ order: 5, span: 24 }} md={{ order: 5, span: 8 }}>
+          md={{ order: 5, span: 8, offset: 6 }}
+        >
           <h3 className='md:text-sm lg:text-lg font-semibold mb-2 text-white'>
             {t('HOMEPAGE.FOOTER_ACTIVITIES')}
           </h3>
           <ul className='space-y-2 md:text-sm lg:text-lg'>
             {activities.map((activity, index) => (
-              <Link key={index} to='https://devplus.edu.vn/#devplus-activities'>
-                <li key={index}>{activity}</li>
-              </Link>
+              <li key={index}>
+                <a
+                  href='https://devplus.edu.vn/#devplus-activities'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {activity}
+                </a>
+              </li>
             ))}
           </ul>
         </Col>

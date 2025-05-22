@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Sidebar from '@app/components/Sidebar/Sidebar';
+import Sidebar from '@app/components/Layout/Sidebar/Sidebar';
 
 const ProfileLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
