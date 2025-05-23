@@ -301,7 +301,9 @@
     "FOOTER_PHONE": "(+84) 368492885"
   },
   "HEADER": {
-    "START": "Bắt đầu"
+    "START": "Bắt đầu",
+    "REGISTER": "Đăng ký",
+    "LOGIN": "Đăng nhập"
   },
   "SIDEBAR": {
     "ONLINE_COURSES": "Khóa học trực tuyến",

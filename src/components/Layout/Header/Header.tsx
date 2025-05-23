@@ -1,16 +1,21 @@
 import { Image } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { DropProfile } from '../../molecules';
 import { DevPlus, DevPlusS } from '@app/assets/images';
+import ButtonHeader from '@app/components/atoms/Button/ButtonHeader';
 
 const Header = () => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const isAuth = useSelector((state: any) => state.auth.isAuth);
 
   const isHomePage = pathname === '/';
+  const handleRegisterClick = () => navigate('/register');
+  const handleLoginClick = () => navigate('/login');
 
   return (
     <div
@@ -34,12 +39,17 @@ const Header = () => {
               preview={false}
             />
           </div>
-          <div className='flex items-center gap-4 md:gap-6'>
-            <div className='flex item-center border border-[#FE7743] !py-2 !px-6 md:!py-2 md:!px-8 text-[#FE7743] font-bold rounded-full text-md md:text-lg hover:bg-[#FE7743] hover:text-white transition-all duration-300 ease-in-out'>
-              {t('HEADER.START')}
+          {isAuth ? (
+            <div className='flex items-center gap-4 md:gap-6'>
+              <ButtonHeader>{t('HEADER.START')}</ButtonHeader>
+              <DropProfile />
             </div>
-            <DropProfile />
-          </div>
+          ) : (
+            <div className='flex items-center gap-4 md:gap-6'>
+              <ButtonHeader onClick={handleRegisterClick}>{t('HEADER.REGISTER')}</ButtonHeader>
+              <ButtonHeader onClick={handleLoginClick}>{t('HEADER.LOGIN')}</ButtonHeader>
+            </div>
+          )}
         </div>
       </div>
     </div>
