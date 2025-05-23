@@ -1,67 +1,16 @@
-.profile-dropdown {
-  user-select: none;
-  cursor: pointer;
-  width: fit-content;
-  float: right;
-  border-radius: 12px;
-  .drop-avatar {
-    margin-right: 9px;
-    @media only screen and (max-width: 989px) {
-      margin-right: 20px;
-    }
-  }
-  .drop-name {
-    margin-right: 9px;
-    @media only screen and (max-width: 989px) {
-      display: none;
-    }
-  }
-}
-
-.profile-menu {
-  z-index: 99999 !important;
-  width: 200px;
+.profile-dropdown-menu {
   .ant-dropdown-menu {
-    padding: 8px 8px;
-    margin-right: 16px;
-    border-radius: 12px;
+    padding: 5px;
+    border-radius: 8px;
+  }
 
-    li {
-      height: 48px;
-    }
+  .ant-dropdown-menu-item {
+    border-radius: 6px !important;
+    // padding: 5px 12px; // Nếu muốn custom padding cho từng item
+  }
 
-    .item-profile:hover {
-      background: #fff2e8 !important;
-      & .ant-typography {
-        color: #ff7a45 !important;
-      }
-      & .ant-dropdown-menu-item-icon {
-        content: url('../../../assets/images/icon-profile-blue.svg');
-      }
-      .ant-dropdown-menu-item {
-        border-radius: 12px;
-        background: #0c0c6880;
-      }
-      .profile-icon {
-        color: #ff7a45 !important;
-        border: 1px solid #ff7a45 !important;
-      }
-    }
-
-    .item-signout:hover {
-      background: #fff2e8 !important;
-      color: #fb303e;
-      .profile-icon {
-        color: #ff7a45 !important;
-      }
-      & .ant-typography {
-        color: #ff7a45 !important;
-      }
-    }
-
-    .ant-dropdown-menu-item:hover {
-      border-radius: 12px;
-      background: #d2d2f280;
-    }
+  .ant-dropdown-menu-item:hover {
+    border-radius: 6px !important;
+    background: #d2d2f280 !important;
   }
 }
