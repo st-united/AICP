@@ -25,10 +25,6 @@ const routes = [
         element: <AuthLayout />,
         children: [
           {
-            path: '/',
-            element: <Homepage />,
-          },
-          {
             element: <ProfileLayout />,
             children: [
               {

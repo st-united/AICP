@@ -2,7 +2,7 @@ import { DownCircleFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
 import './homepage.scss';
-import { TypingText } from '@app/components/atoms/';
+import { TextTyping } from '@app/components/atoms/';
 
 type Props = {
   onScrollToNext: () => void;
@@ -18,12 +18,12 @@ const MainScreen = ({ onScrollToNext }: Props) => {
           <div className='text-base sm:text-3xl lg:text-6xl md:text-4xl max-w-[300px] md:max-w-full text-center leading-12 font-bold !p-4 !py-0'>
             {t('HOMEPAGE.PRIMARY_TITLE')}
           </div>
-          <TypingText
+          <TextTyping
             text={t('HOMEPAGE.TITLE') || ''}
             speed={50}
             className='text-2xl sm:text-3xl lg:text-7xl md:text-5xl max-w-[300px] md:max-w-full text-center leading-12 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#C05604] via-[#E16100] to-[#986262] !p-4'
           />
-          <TypingText
+          <TextTyping
             text={t('HOMEPAGE.SUB_TITLE') || ''}
             speed={10}
             className='sm:w-3/5 text-base text-center lg:text-2xl md:text-lg text-[#273F4F] font-semibold !p-4 md:text-start leading-10'
