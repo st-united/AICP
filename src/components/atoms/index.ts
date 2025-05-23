@@ -1,3 +1,3 @@
 export * from './Table/Table';
-export * from './TypingText/TypingText';
+export * from './TextTyping/TextTyping';
 export * from './Button/ButtonHeader';

@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 
-type TypingTextProps = {
+type TextTypingProps = {
   text?: string;
   speed?: number;
   className?: string;
 };
 
-export const TypingText = ({ text, speed = 100, className }: TypingTextProps) => {
+export const TextTyping = ({ text, speed = 100, className }: TextTypingProps) => {
   const [displayed, setDisplayed] = useState('');
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
