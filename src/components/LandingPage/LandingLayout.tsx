@@ -1,7 +1,7 @@
 import FeatureSection from './FeatureSection';
-import FooterSection from './FooterSection';
 import StepSection from './StepSection';
 import FaqSection from '../Layout/FaqSection/FaqSection';
+import FooterSection from '../Layout/Footer/FooterSection';
 
 const LandingLayout = () => {
   return (

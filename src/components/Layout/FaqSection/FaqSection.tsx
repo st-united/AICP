@@ -17,9 +17,9 @@ const FaqSection = () => {
     ANSWER: string;
   }>;
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 gap-12 py-32 bg-inherit px-6 md:px-16'>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-12 py-28 px-6 md:px-16'>
       {/* LEFT SIDE */}
-      <div className='justify-center md:justify-start flex flex-col items-center md:items-start'>
+      <div className='w-full sm:w-[80%] justify-center md:justify-start flex flex-col items-center md:items-start'>
         <p className='text-[#FF7A00] font-semibold text-lg md:text-xl mb-10'>{t('HOMEPAGE.FAQ')}</p>
         <h2 className='text-2xl md:text-3xl font-bold text-[#FE7743] mb-4'>
           {t('HOMEPAGE.FAQ_TITLE1')}
@@ -30,7 +30,7 @@ const FaqSection = () => {
         <p className='text-gray-700 mb-6 text-xl text-center md:text-2xl sm:text-start'>
           {t('HOMEPAGE.FAQ_CONTACT')}
         </p>
-        <div className='flex gap-4 '>
+        <div className='flex gap-4'>
           <a
             href='https://www.facebook.com/'
             className='text-[#FE7743] text-6xl !rounded-xl bg-transparent'
@@ -70,9 +70,9 @@ const FaqSection = () => {
           bordered={false}
           expandIcon={({ isActive }) =>
             isActive ? (
-              <MinusOutlined style={{ fontSize: '16px', color: 'white' }} />
+              <MinusOutlined className='!text-base text-white' />
             ) : (
-              <PlusOutlined style={{ fontSize: '16px' }} />
+              <PlusOutlined className='!text-base' />
             )
           }
           onChange={(val) => setExpanded(val as string)}

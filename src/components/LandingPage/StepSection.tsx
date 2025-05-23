@@ -9,13 +9,13 @@ const StepSection = () => {
     <div>
       <div className='w-full h-screen bg-cover bg-center bg-no-repeat bg-[url(./assets/images/landingpage_step_bg.png)]'>
         <div className='max-w-6xl mx-auto text-center py-12 px-6 md:px-12 '>
-          <p className='text-[#FE7743] font-semibold mb-4 text-base sm:text-xl md:text-2xl'>
+          <p className='text-base sm:text-xl md:text-2xl text-[#FE7743] font-semibold mb-4 '>
             {t('HOMEPAGE.STEP_LABEL')}
           </p>
-          <h2 className='text-[#FE7743] text-xl md:text-4xl font-bold mb-4 sm:mb-8'>
+          <h2 className='text-xl md:text-4xl text-[#FE7743] font-bold mb-4 sm:mb-8'>
             {t('HOMEPAGE.STEP_TITLE')}
           </h2>
-          <p className='text-gray-700 text-base md:text-2xl max-w-2xl mx-auto my-3 font-[800]'>
+          <p className='text-base md:text-2xl text-gray-700 max-w-2xl mx-auto my-3 font-[800]'>
             {t('HOMEPAGE.STEP_SUBTITLE')}
           </p>
         </div>
@@ -27,7 +27,7 @@ const StepSection = () => {
                   <img
                     src={LandingMonitor}
                     alt='Monitor'
-                    className='!w-100 !h-100'
+                    className='!w-100 !h-100 slide-up-then-left'
                     width={400}
                     height={300}
                   />
@@ -47,7 +47,7 @@ const StepSection = () => {
                 {t('HOMEPAGE.STEP1_TITLE')}
               </p>
               <p className='text-white text-sm md:text-base mb-6'>{t('HOMEPAGE.STEP1_DESC')}</p>
-              <button className='bg-white text-[#FE7743] font-semibold px-6 py-3 rounded-full shadow-md hover:bg-orange-100 transition'>
+              <button className='bg-white text-[#FE7743] font-semibold px-6 py-3 rounded-full shadow-md hover:bg-[#FE7743] hover:text-black transition'>
                 {t('HOMEPAGE.BUTTON')}
               </button>
             </div>

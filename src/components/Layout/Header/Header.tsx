@@ -16,7 +16,7 @@ const Header = () => {
     <div
       className={`${
         isHomePage ? 'absolute bg-transparent' : ''
-      } flex justify-center item-center w-full z-9999 `}
+      } flex justify-center item-center w-full z-50`}
     >
       <div className='container !md:px-0 !px-4'>
         <div className='flex items-center justify-between'>

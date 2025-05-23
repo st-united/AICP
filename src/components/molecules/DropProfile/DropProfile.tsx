@@ -34,28 +34,28 @@ export const DropProfile: FC = () => {
   const items: MenuProps['items'] = [
     {
       label: (
-        <div className='flex gap-2 items-center'>
-          <UserOutlined className='profile-icon text-[24px] border border-[#121212] rounded-full p-[2px]' />
+        <div className='flex gap-2 items-center hover:border-[#ff7a45] hover:rounded-2xl'>
+          <UserOutlined className='text-[1rem] border border-[#121212] rounded-full p-1' />
           <Typography className='text-[#121212] font-semibold text-base'>
             {t('PROFILE.PERSONAL_PROFILE')}
           </Typography>
         </div>
       ),
       key: 'profile',
-      className: 'item-profile',
+      className: 'hover:bg-[#fff2e8]',
     },
     {
       label: (
         <div className='flex gap-2 items-center'>
-          <LogoutOutlined className='profile-icon text-[24px] p-[2px]' />
-          <Typography className='text-base text-[#FB303E] font-semibold'>
+          <LogoutOutlined className='text-[1.5rem] text-[#FB303E] p-[2px]' />
+          <Typography className='text-base text-[#FB303E] font-semibol'>
             {t('PROFILE.LOGOUT')}
           </Typography>
         </div>
       ),
       key: NAVIGATE_URL.SIGN_OUT,
       danger: true,
-      className: 'item-signout',
+      className: 'hover:bg-[#fff2e8] text-[#fb303e]',
     },
   ];
 
@@ -68,16 +68,13 @@ export const DropProfile: FC = () => {
         },
       }}
       trigger={['click']}
-      className='profile-dropdown'
-      overlayClassName='profile-menu'
-      placement='bottom'
+      className='cursor-pointer'
+      overlayClassName='w-[12rem] profile-dropdown-menu'
+      placement='bottomRight'
       onOpenChange={() => setActiveItem(!activeItem)}
     >
       <div>
-        <Avatar
-          className='drop-avatar w-[40px] h-[40px] md:w-[50px] md:h-[50px]'
-          src={user?.avatar ? user?.avatar : null}
-        />
+        <Avatar className='w-[3rem] h-[3rem]' src={user?.avatar ? user?.avatar : null} />
       </div>
     </Dropdown>
   );
