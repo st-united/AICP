@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useChangePasswordSchema } from './changePasswordSchema';
-import { lock } from '@app/assets/images';
+import { Lock } from '@app/assets/images';
 import {
   NUMBER_LENGTH_REGEX,
   PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER,
@@ -56,7 +56,7 @@ const PasswordChangeForm = () => {
           <div className='bg-blue-100 rounded-full p-4 sm:p-6'>
             <div className='bg-blue-200 rounded-full p-3 sm:p-4'>
               <img
-                src={lock}
+                src={Lock}
                 alt='Lock Icon'
                 className='w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24'
               />

@@ -1,8 +1,8 @@
 import DevPlusS from './devplus-s.png';
 import DevPlus from './devplus.png';
 import LandingPageStepBackground from './landingpage_step_bg.png';
-import lock from './lock_change_password.png';
-import loginBackground from './login-background.png';
+import Lock from './lock_change_password.png';
+import LoginBackground from './login-background.png';
 import Logo from './logo.svg';
 
-export { Logo, DevPlus, DevPlusS, lock, loginBackground, LandingPageStepBackground };
+export { Logo, DevPlus, DevPlusS, Lock, LoginBackground, LandingPageStepBackground };

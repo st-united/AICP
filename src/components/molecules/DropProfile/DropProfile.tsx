@@ -57,14 +57,6 @@ export const DropProfile: FC = () => {
       danger: true,
       className: 'hover:bg-[#fff2e8] text-[#fb303e]',
     },
-    {
-      label: (
-        <Typography style={{ color: '#FB303E', fontWeight: 600 }}>
-          {t('DROPDOWN_PROFILE.SIGN_IN')}
-        </Typography>
-      ),
-      key: NAVIGATE_URL.SIGN_IN,
-    },
   ];
 
   return (
