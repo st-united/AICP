@@ -2,7 +2,7 @@ import { Image } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import ProfileAvatar from './ProfileAvatar';
+import { DropProfile } from '../../molecules';
 import { DevPlus, DevPlusS } from '@app/assets/images';
 
 const Header = () => {
@@ -15,8 +15,8 @@ const Header = () => {
   return (
     <div
       className={`${
-        isHomePage ? 'absolute bg-transparent' : 'bg-[#080140]'
-      } flex justify-center item-center w-full z-9999 `}
+        isHomePage ? 'absolute bg-transparent' : ''
+      } flex justify-center item-center w-full z-50`}
     >
       <div className='container !md:px-0 !px-4'>
         <div className='flex items-center justify-between'>
@@ -35,10 +35,10 @@ const Header = () => {
             />
           </div>
           <div className='flex items-center gap-4 md:gap-6'>
-            <div className='flex item-center border !py-2 !px-6 md:!py-2 md:!px-8 text-white font-bold rounded-full text-md md:text-lg hover:bg-[#096DD9] hover:text-white transition-all duration-300 ease-in-out'>
+            <div className='flex item-center border border-[#FE7743] !py-2 !px-6 md:!py-2 md:!px-8 text-[#FE7743] font-bold rounded-full text-md md:text-lg hover:bg-[#FE7743] hover:text-white transition-all duration-300 ease-in-out'>
               {t('HEADER.START')}
             </div>
-            <ProfileAvatar />
+            <DropProfile />
           </div>
         </div>
       </div>

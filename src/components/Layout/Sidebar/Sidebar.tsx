@@ -32,8 +32,8 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className='flex !rounded-2xl bg-white !p-6'>
-      <div className='grid grid-cols-1 gap-1 text-[16px] w-full'>
+    <div className='flex !rounded-2xl bg-white !p-6 h-full'>
+      <div className='grid grid-cols-1 gap-1 text-[16px] w-full h-fit'>
         {menuItems.map((item, index) => {
           const isActive = currentPath === item.path;
           const Icon = item.icon;
@@ -41,14 +41,14 @@ const Sidebar = () => {
           return (
             <Link to={item.path} key={index}>
               <div
-                className={`flex flex-row gap-2 items-center justify-start !px-6 !p-4 hover:bg-[#EDF9FF] rounded-lg cursor-pointer ${
-                  isActive ? 'bg-[#EDF9FF]' : ''
+                className={`flex flex-row gap-2 items-center justify-start hover:bg-[#FFF2E8] !px-6 !p-4 rounded-lg cursor-pointer ${
+                  isActive ? 'bg-[#FFF2E8]' : ''
                 }`}
               >
-                <Icon style={{ fontSize: '24px', color: isActive ? '#3D6ADA' : '#5B5B5B' }} />
+                <Icon className={`text-2xl ${isActive ? 'text-[#FF7A45]' : 'text-[#5B5B5B]'}`} />
                 <div
                   className={`${
-                    isActive ? 'text-[#3D6ADA] font-semibold' : 'text-[#5B5B5B] font-medium'
+                    isActive ? 'text-[#FF7A45] font-semibold' : 'text-[#5B5B5B] font-medium'
                   }`}
                 >
                   {item.label}
