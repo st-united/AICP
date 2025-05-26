@@ -5,7 +5,7 @@ import { Rule } from 'antd/lib/form';
 import parse from 'html-react-parser';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useSignUpSchema } from './signUpSchema';
 import {
@@ -26,6 +26,7 @@ const SignUp = () => {
   const { mutate: registerUser, isLoading } = useRegister();
   const [isChecked, setIsChecked] = useState(false);
   const signUpSchema = useSignUpSchema();
+  const navigate = useNavigate();
 
   const handleCheckboxChange = (e: CheckboxChangeEvent) => {
     setIsChecked(e.target.checked);
@@ -49,17 +50,24 @@ const SignUp = () => {
   return (
     <div className='flex justify-center' id='container-sign-up'>
       <div className='w-full md:w-4/5 h-full'>
-        <Link className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8' to={'/'}>
-          <div className='flex items-center justify-center'>
-            <LeftOutlined />
-          </div>
-          {t('SIGN_UP.BACK_TO_HOME')}
-        </Link>
+        <div
+          onClick={() => navigate('/')}
+          aria-hidden='true'
+          className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8 cursor-pointer gap-2 hover:text-[#A22D00]'
+        >
+          <LeftOutlined />
+          <div>{t<string>('SIGN_UP.BACK_TO_HOME')}</div>
+        </div>
+
         <div>
           <h1 className='text-[40px] !text-[#FE7743] font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
           <div className='text-white text-lg !mb-4 flex gap-2'>
             <div className='text-[#686868]'>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
-            <div className='text-[#A22D00] cursor-pointer underline'>
+            <div
+              className='text-[#A22D00] cursor-pointer underline'
+              onClick={() => navigate('/login')}
+              aria-hidden='true'
+            >
               {t<string>('LOGIN.LOGIN')}
             </div>
           </div>
