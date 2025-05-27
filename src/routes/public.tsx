@@ -1,5 +1,5 @@
 import { PublicLayout } from '@app/components/templates/PublicLayout/index';
-import { SignUp, SignIn } from '@app/pages/index';
+import { SignUp, SignIn, AptitudeTest } from '@app/pages/index';
 
 const routes = [
   {
@@ -14,6 +14,10 @@ const routes = [
         element: <SignIn />,
       },
     ],
+  },
+  {
+    path: 'aptitude-test',
+    element: <AptitudeTest />,
   },
 ];
 

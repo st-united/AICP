@@ -238,5 +238,15 @@
     "TERMS": "Điều khoản & Điều kiện",
     "PRIVACY": "Chính sách bảo mật",
     "COMPANY": "DevPlus"
+  },
+  "TEST": {
+    "TEST_TITLE": "Bài kiểm tra năng lực",
+    "TEST_TITLE_AI": "Ứng dụng AI",
+    "SUB_TITLE": "Hãy trả lời lần lượt các câu hỏi dưới đây để khám phá khả năng ứng dụng AI của bạn.",
+    "TIME_LEFT": "Thời gian còn lại",
+    "HOURS": "Giờ",
+    "MINUTES": "Phút",
+    "SECONDS": "Giây",
+    "QUESTION_INDEX": "Mục lục câu hỏi"
   }
 }
