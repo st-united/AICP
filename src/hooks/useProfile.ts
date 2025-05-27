@@ -16,7 +16,7 @@ import {
 export const useGetProfile = () => {
   const dispatch = useDispatch();
 
-  return useQuery(
+  return useQuery<UserProfile>(
     [QUERY_KEY.PROFILE],
     async () => {
       const { data } = await getProfileApi();
