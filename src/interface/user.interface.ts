@@ -72,3 +72,9 @@ export interface RegisterUser {
   phoneNumber: string;
   password: string;
 }
+
+export interface HasTakenExam {
+  hasTakenExam: boolean;
+  examSetDuration: number;
+  examId?: string;
+}

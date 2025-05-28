@@ -2,8 +2,9 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { GetUsersParams, UserDetail } from '@app/interface/user.interface';
+import { GetUsersParams, HasTakenExam, UserDetail } from '@app/interface/user.interface';
 import {
+  checkHasTakenExam,
   createUser,
   deleteUserAPI,
   getUserByIdAPI,
@@ -40,6 +41,12 @@ export const useGetUsers = (params: GetUsersParams) =>
       cacheTime: 0,
     },
   );
+
+export const useHasTakenExam = (examSetId: string) =>
+  useQuery([QUERY_KEY.HAS_TAKEN_EXAM, examSetId], async (): Promise<HasTakenExam> => {
+    const { data } = await checkHasTakenExam(examSetId);
+    return data;
+  });
 
 export const useGetUserById = (id: number) =>
   useQuery([QUERY_KEY.USERS, id], async () => {

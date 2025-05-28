@@ -67,6 +67,7 @@ export const API_URL = {
   DATA_CARD: '/report-1/dashboard-data-card',
   DATA_CHART: '/report-1/dashboard-data-chart',
   REGISTER_USER: '/auth/register',
+  CHECK_TAKEN_EXAM: '/exam/has-taken-exam/',
 };
 
 export const VEHICLES_URL = '/vehicles';
