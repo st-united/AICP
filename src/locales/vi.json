@@ -366,5 +366,45 @@
     "REGEX_PASSWORD": "Mật khẩu phải có ít nhất 8 ký tự, có số, chữ thường, chữ viết hoa và ký tự đặc biệt!",
     "MATCH": "Mật khẩu không khớp!",
     "EXPIRED": "Liên kết đã hết hạn"
+  },
+  "HOMEPAGE_LOGIN": {
+    "TITLE": "Xin chào {{name}}, 👋",
+    "TEXT_READY": "Sẵn sàng nâng tầm năng lực ứng dụng AI của bạn chưa?",
+    "START": "Bắt đầu ngay",
+    "DESCRIPTION": "Hoàn thành bài kiểm tra, nhận lộ trình cá nhân hoá, và kết nối với cơ hội nghề nghiệp",
+    "TEXT_PEOPLE": "Hơn 15,000 người đã nâng tầm sự nghiệp với AI - Bạn là người tiếp theo?"
+  },
+  "DASHBOARD": {
+    "TITLE": "Bảng điều khiển của bạn",
+    "DESCRIPTION": "Theo dõi bài kiểm tra, lịch phỏng vấn và các cơ hội nghề nghiệp của bạn.",
+    "TEST_STATUS": {
+      "TITLE": "Trạng thái bài kiểm tra",
+      "DESCRIPTION": "Chưa bắt đầu",
+      "BUTTON": "Bắt đầu bài kiểm tra"
+    },
+    "INTERVIEW_SCHEDULE": {
+      "TITLE": "Lịch phỏng vấn",
+      "DESCRIPTION": "Chưa bắt đầu",
+      "BUTTON": "Đặt lịch phỏng vấn"
+    },
+    "LEARNING_PATH": {
+      "TITLE": "Lộ trình học tập",
+      "DESCRIPTION": "Hoàn thành bài kiểm tra để nhận lộ trình cá nhân hoá",
+      "BUTTON": "Bắt đầu bài kiểm tra"
+    },
+    "BUSINESS_CONTENT": {
+      "TITLE": "Kết nối doanh nghiệp",
+      "DESCRIPTION": "03 cơ hội đang chờ bạn",
+      "BUTTON": "Khám phá cơ hội"
+    }
+  },
+  "RECOMMEND": {
+    "TITLE": "Gợi ý dành cho bạn",
+    "DESCRIPTION": "Tham gia các khoá học trực tuyến để nâng tầm kỹ năng của bạn.",
+    "COURSE_1": {
+      "TITLE": "Khoá học: AI cơ bản",
+      "DESCRIPTION": "Nắm vững các khái niệm AI cơ bản để bắt đầu hành trình của bạn",
+      "LINK": "Xem chi tiết"
+    }
   }
 }

@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { removeStorageData, setStorageData } from '@app/config';
 import { ACCESS_TOKEN, NAVIGATE_URL, REFRESH_TOKEN, USER_PROFILE } from '@app/constants';
 import { Credentials, RegisterUser } from '@app/interface/user.interface';
-import { logout, login } from '@app/redux/features/auth/authSlice';
+import { logout, login, setAuth } from '@app/redux/features/auth/authSlice';
 import { loginApi, getLogout, registerApi, getActivateAccount } from '@app/services';
+
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -24,7 +25,12 @@ export const useLogin = () => {
     {
       onSuccess: ({ data, message }) => {
         dispatchAuth(login());
-
+        dispatchAuth(
+          setAuth({
+            user: { name: data.name },
+            permissions: [],
+          }),
+        );
         setStorageData(ACCESS_TOKEN, data.accessToken);
         setStorageData(REFRESH_TOKEN, data.refreshToken);
         setStorageData(USER_PROFILE, data.name);
