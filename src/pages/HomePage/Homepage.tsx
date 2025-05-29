@@ -2,8 +2,8 @@ import { useCallback, useRef } from 'react';
 
 import LandingLayout from '@app/components/LandingPage/LandingLayout';
 import MainScreen from '@app/components/LandingPage/MainScreen';
-import { smoothScrollTo } from '@app/utils/scroll';
 import Header from '@app/components/Layout/Header/Header';
+import { smoothScrollTo } from '@app/utils/scroll';
 
 const Homepage = () => {
   const section2Ref = useRef<HTMLDivElement>(null);
