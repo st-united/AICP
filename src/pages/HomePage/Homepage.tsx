@@ -18,7 +18,7 @@ const Homepage = () => {
     }
   }, []);
 
-  if (isAuth) return <UserPage name={user?.name} />;
+  if (isAuth) return <UserPage name={user.name} />;
 
   return (
     <div className='w-full min-h-screen scroll-smooth'>

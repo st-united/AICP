@@ -14,11 +14,7 @@ const checkAuth = (): boolean => Boolean(getStorageData(ACCESS_TOKEN));
 const getUserProfile = (): UserProfile | null => {
   const data = getStorageData(USER_PROFILE);
   if (!data) return null;
-  try {
-    return JSON.parse(data) as UserProfile;
-  } catch {
-    return null;
-  }
+  return data;
 };
 
 const initialState: AuthState = {

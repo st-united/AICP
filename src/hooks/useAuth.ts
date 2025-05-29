@@ -33,8 +33,9 @@ export const useLogin = () => {
         );
         setStorageData(ACCESS_TOKEN, data.accessToken);
         setStorageData(REFRESH_TOKEN, data.refreshToken);
-        setStorageData(USER_PROFILE, data.name);
+        setStorageData(USER_PROFILE, { name: data.name });
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+
         navigate('/');
       },
       onError({ response }) {
