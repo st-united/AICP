@@ -1,6 +1,5 @@
 import { PublicLayout } from '@app/components/templates/PublicLayout/index';
 import { SignUp, SignIn } from '@app/pages/index';
-import ModalTestPlayground from '@app/pages/test/TestModal';
 
 const routes = [
   {
@@ -13,10 +12,6 @@ const routes = [
       {
         path: 'login',
         element: <SignIn />,
-      },
-      {
-        path: 'test',
-        element: <ModalTestPlayground />,
       },
     ],
   },
