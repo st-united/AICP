@@ -75,7 +75,7 @@ const FaqSection = () => {
               <PlusOutlined className='!text-base' />
             )
           }
-          onChange={(val) => setExpanded(val as string)}
+          onChange={(val) => setExpanded(val as unknown as string)}
         >
           {Array.isArray(faqs) &&
             faqs.map((faq, index) => (
