@@ -17,7 +17,7 @@ const FaqSection = () => {
     ANSWER: string;
   }>;
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 gap-12 py-28 px-6 md:px-16'>
+    <div className='container w-full h-[32rem] grid grid-cols-1 md:grid-cols-2 gap-12 mx-auto'>
       {/* LEFT SIDE */}
       <div className='w-full sm:w-[80%] justify-center md:justify-start flex flex-col items-center md:items-start'>
         <p className='text-[#FF7A00] font-semibold text-lg md:text-xl mb-10'>{t('HOMEPAGE.FAQ')}</p>
@@ -33,12 +33,12 @@ const FaqSection = () => {
         <div className='flex gap-4'>
           <a
             href='https://www.facebook.com/'
-            className='text-[#FE7743] text-6xl !rounded-xl bg-transparent'
+            className='text-[#FE7743] text-6xl bg-transparent'
             title='Facebook'
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FacebookFilled />
+            <FacebookFilled className='!hover:bg-[#ea9c77]' />
           </a>
           <a
             href='https://www.linkedin.com/'
