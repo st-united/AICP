@@ -17,96 +17,103 @@ const FaqSection = () => {
     ANSWER: string;
   }>;
   return (
-    <div className='container w-full h-[32rem] grid grid-cols-1 md:grid-cols-2 gap-12 mx-auto'>
-      {/* LEFT SIDE */}
-      <div className='w-full sm:w-[80%] justify-center md:justify-start flex flex-col items-center md:items-start'>
-        <p className='text-[#FF7A00] font-semibold text-lg md:text-xl mb-10'>{t('HOMEPAGE.FAQ')}</p>
-        <h2 className='text-2xl md:text-3xl font-bold text-[#FE7743] mb-4'>
-          {t('HOMEPAGE.FAQ_TITLE1')}
-        </h2>
-        <h2 className='text-2xl md:text-3xl font-bold text-[#FE7743] mb-4'>
-          {t('HOMEPAGE.FAQ_TITLE2')}
-        </h2>
-        <p className='text-gray-700 mb-6 text-xl text-center md:text-2xl sm:text-start'>
-          {t('HOMEPAGE.FAQ_CONTACT')}
-        </p>
-        <div className='flex gap-4'>
-          <a
-            href='https://www.facebook.com/'
-            className='text-[#FE7743] text-6xl bg-transparent'
-            title='Facebook'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <FacebookFilled className='!hover:bg-[#ea9c77]' />
-          </a>
-          <a
-            href='https://www.linkedin.com/'
-            className='text-[#FE7743] text-6xl !rounded-xl bg-transparent'
-            title='Linkedin'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <LinkedinFilled />
-          </a>
-          <a
-            href='https://www.tiktok.com/'
-            className='text-[#FE7743] text-6xl rounded-xl'
-            title='TikTok'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <TikTokFilled />
-          </a>
-        </div>
+    <div className='w-full h-screen py-16 bg-[#FFFBF9]'>
+      <div className='container text-[#FF7A00] font-bold text-base sm:text-xl mb-20 mx-auto'>
+        {t('HOMEPAGE.FAQ')}
       </div>
+      <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12'>
+        {/* LEFT SIDE */}
+        <div className='w-full flex flex-col items-center md:items-start justify-start'>
+          <h2 className='text-2xl md:text-4xl font-bold text-[#FE7743] mb-4 text-center md:text-left'>
+            {t('HOMEPAGE.FAQ_TITLE1')}
+          </h2>
+          <h2 className='text-2xl md:text-4xl font-bold text-[#FE7743] mb-8 text-center md:text-left'>
+            {t('HOMEPAGE.FAQ_TITLE2')}
+          </h2>
+          <p className='text-[#444444] mb-8 text-xl md:text-2xl text-center md:text-left font-medium'>
+            {t('HOMEPAGE.FAQ_CONTACT')}
+          </p>
+          <div className='flex gap-4'>
+            <a
+              href='https://www.facebook.com/'
+              className='w-12 h-12 flex items-center justify-center rounded-[10px] bg-[#FE7743] hover:bg-[#FF9A5A] transition'
+              title='Facebook'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <FacebookFilled className='text-white text-2xl' />
+            </a>
+            <a
+              href='https://www.linkedin.com/'
+              className='w-12 h-12 flex items-center justify-center rounded-[10px] bg-[#FE7743] hover:bg-[#FF9A5A] transition'
+              title='Linkedin'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <LinkedinFilled className='text-white text-2xl' />
+            </a>
+            <a
+              href='https://www.tiktok.com/'
+              className='w-10 h-10 flex items-center justify-center transition'
+              title='TikTok'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <TikTokFilled className='text-[#FE7743] text-5xl hover:bg-[#FF9A5A]' />
+            </a>
+          </div>
+        </div>
 
-      {/* RIGHT SIDE: ACCORDION */}
-      <div className='flex flex-col gap-3'>
-        <Collapse
-          accordion
-          className='bg-white rounded-xl'
-          expandIconPosition='end'
-          bordered={false}
-          expandIcon={({ isActive }) =>
-            isActive ? (
-              <MinusOutlined className='!text-base text-white' />
-            ) : (
-              <PlusOutlined className='!text-base' />
-            )
-          }
-          onChange={(val) => setExpanded(val as string)}
-        >
-          {Array.isArray(faqs) &&
-            faqs.map((faq, index) => (
-              <Collapse.Panel
-                header={
-                  <span
-                    className={`text-lg font-sans font-[600]  ${
-                      expanded === String(index) && 'text-white'
+        {/* RIGHT SIDE: ACCORDION */}
+        <div className='flex flex-col gap-3'>
+          <Collapse
+            accordion
+            className='bg-transparent'
+            expandIconPosition='end'
+            bordered={false}
+            expandIcon={({ isActive }) =>
+              isActive ? (
+                <MinusOutlined className='!text-base text-white' />
+              ) : (
+                <PlusOutlined className='!text-base text-[#444444]' />
+              )
+            }
+            onChange={(val) => setExpanded(val as string)}
+          >
+            {Array.isArray(faqs) &&
+              faqs.map((faq, index) => {
+                const isActive = expanded === String(index);
+                return (
+                  <Collapse.Panel
+                    header={
+                      <span
+                        className={`text-lg font-semibold ${
+                          isActive ? 'text-white' : 'text-[#444444]'
+                        }`}
+                      >
+                        {faq.QUESTION}
+                      </span>
+                    }
+                    key={index}
+                    className={`!rounded-xl !mb-2 border-none shadow-none ${
+                      isActive ? 'bg-[#FE7743]' : 'bg-[#FFE9E1]'
                     }`}
+                    extra={null}
                   >
-                    {faq.QUESTION}
-                  </span>
-                }
-                key={index}
-                className={`!rounded-xl !mb-2 ${
-                  expanded === String(index) ? 'bg-[#FE7743]' : 'bg-[#FFE9E1]'
-                }`}
-                extra={null}
-              >
-                <div className='faq-panel-content'>
-                  <p
-                    className={`mt-3 text-sm font-sans ${
-                      expanded === String(index) && 'text-white'
-                    }`}
-                  >
-                    {faq.ANSWER}
-                  </p>
-                </div>
-              </Collapse.Panel>
-            ))}
-        </Collapse>
+                    <div className='faq-panel-content'>
+                      <p
+                        className={`mt-3 text-base font-normal ${
+                          isActive ? 'text-white' : 'text-[#6B6B6B]'
+                        }`}
+                      >
+                        {faq.ANSWER}
+                      </p>
+                    </div>
+                  </Collapse.Panel>
+                );
+              })}
+          </Collapse>
+        </div>
       </div>
     </div>
   );

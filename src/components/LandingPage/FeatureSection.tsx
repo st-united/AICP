@@ -13,7 +13,9 @@ const FeatureSection = () => {
 
   return (
     <div className='bg-[#FFFBF9] w-full px-20 sm:px-20 md:px-16 md:py-12 text-center'>
-      <p className=' text-[#FE7743] font-semibold mt-2 mb-4'>{t('HOMEPAGE.FEATURES_LABEL')}</p>
+      <p className='text-2xl text-[#FE7743] font-semibold mt-2 mb-4'>
+        {t('HOMEPAGE.FEATURES_LABEL')}
+      </p>
       <h2 className='text-xl sm:text-2xl md:text-[2.5rem] font-bold text-[#FE7743] mb-4 sm:mb-8'>
         {t('HOMEPAGE.FEATURES_TITLE')}
       </h2>
