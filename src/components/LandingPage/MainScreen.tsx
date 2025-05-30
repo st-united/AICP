@@ -1,6 +1,6 @@
 import { DownCircleFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { Logo2 } from '@app/assets/images';
+import { CyborgHand } from '@app/assets/images';
 import './homepage.scss';
 import { TextTyping } from '@app/components/atoms/';
 
@@ -13,16 +13,16 @@ const MainScreen = ({ onScrollToNext }: Props) => {
 
   return (
     <div className='flex flex-col w-full h-screen'>
-      <div className='min-h-screen w-full bg-cover bg-no-repeat bg-center bg-[url(./assets/images/logo1-bg.png)]'>
-        <img className='hidden absolute bottom-0 right-20 md:block' src={Logo2} alt='' />
+      <div className='min-h-screen w-full bg-cover bg-no-repeat bg-center bg-[url(./assets/images/homepage-bg.png)]'>
+        <img className='hidden absolute bottom-0 right-20 md:block' src={CyborgHand} alt='' />
         <div className='container flex flex-col items-center justify-center gap-6 h-full mx-auto md:items-start '>
-          <div className='text-center text-xl md:text-2xl md:text-start lg:text-5xl leading-12 font-bold max-w-[300px] md:max-w-full !p-4'>
+          <div className='text-center text-xl md:text-2xl md:text-start lg:text-5xl leading-12 font-bold max-w-[300px] md:max-w-full sm:p-4'>
             {t('HOMEPAGE.PRIMARY_TITLE')}
           </div>
           <TextTyping
             text={t('HOMEPAGE.TITLE') || ''}
             speed={50}
-            className='text-base text-[#FE7743] text-center sm:text-3xl lg:text-7xl md:text-5xl md:max-w-full leading-10 font-bold !p-4'
+            className='text-3xl text-[#FE7743] text-center sm:text-3xl lg:text-7xl md:text-5xl md:max-w-full leading-10 font-bold sm:p-4'
           />
           <TextTyping
             text={t('HOMEPAGE.SUB_TITLE') || ''}

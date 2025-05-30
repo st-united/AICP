@@ -7,7 +7,7 @@ const FooterSection = () => {
   const { t } = useTranslation();
   const activities = t('HOMEPAGE.FOOTER_ACTIVITIES_LIST', { returnObjects: true }) as Array<string>;
   return (
-    <div className='text-white px-6 md:px-20 py-5 sm:py-20 relative flex md:justify-start justify-center md:items-start items-center md:text-start text-center bg-cover bg-no-repeat bg-center bg-[url(./assets/svgs/footer_background.svg)]'>
+    <div className='text-white  px-6 md:px-20 py-20 relative flex md:justify-start justify-center md:items-start items-center md:text-start text-center bg-cover bg-no-repeat bg-center bg-[url(./assets/svgs/footer_background.svg)]'>
       <Row className='container mx-auto mt-16 !md:mt-0'>
         <Col
           xs={{ order: 1, span: 24 }}
@@ -82,7 +82,7 @@ const FooterSection = () => {
       </Row>
       <UpCircleFilled
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className='!text-[#FE7743] text-5xl [&>svg]:scale-100 hover:scale-125 shadow-md absolute bottom-10 right-10 md:bottom-20 md:right-20 border-none rounded-full'
+        className='!text-[#FE7743] text-4xl [&>svg]:scale-100 hover:scale-125 shadow-md absolute bottom-10 right-10 md:bottom-20 md:right-20 border-none rounded-full'
       />
     </div>
   );

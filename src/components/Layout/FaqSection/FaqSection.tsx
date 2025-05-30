@@ -17,12 +17,11 @@ const FaqSection = () => {
     ANSWER: string;
   }>;
   return (
-    <div className='w-full h-screen py-16 bg-[#FFFBF9]'>
-      <div className='container text-[#FF7A00] font-bold text-base sm:text-xl mb-20 mx-auto'>
+    <div className='w-full lg:h-screen py-16 bg-[#FFFBF9]'>
+      <div className='container text-[#FF7A00] text-center font-bold text-base sm:text-xl md:text-start mb-10 md:mb-20 mx-auto'>
         {t('HOMEPAGE.FAQ')}
       </div>
-      <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12'>
-        {/* LEFT SIDE */}
+      <div className='mx-4 md:container md:mx-auto grid grid-cols-1 md:grid-cols-2 gap-12'>
         <div className='w-full flex flex-col items-center md:items-start justify-start'>
           <h2 className='text-2xl md:text-4xl font-bold text-[#FE7743] mb-4 text-center md:text-left'>
             {t('HOMEPAGE.FAQ_TITLE1')}
@@ -54,17 +53,15 @@ const FaqSection = () => {
             </a>
             <a
               href='https://www.tiktok.com/'
-              className='w-10 h-10 flex items-center justify-center transition'
+              className='w-12 h-12 flex items-center justify-center rounded-[10px] bg-[#FE7743] hover:bg-[#FF9A5A] transition'
               title='TikTok'
               target='_blank'
               rel='noopener noreferrer'
             >
-              <TikTokFilled className='text-[#FE7743] text-5xl hover:bg-[#FF9A5A]' />
+              <TikTokFilled className='text-white text-2xl' />
             </a>
           </div>
         </div>
-
-        {/* RIGHT SIDE: ACCORDION */}
         <div className='flex flex-col gap-3'>
           <Collapse
             accordion
