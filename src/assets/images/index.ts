@@ -1,3 +1,8 @@
-import logo from './logo.svg';
+import DevPlusS from './devplus-s.png';
+import DevPlus from './devplus.png';
+import LandingPageStepBackground from './landingpage_step_bg.png';
+import Logo from './logo.svg';
+import InovationPana from './inovation-pana.png';
+import FooterBackground from './bg-footer.png';
 
-export { logo };
+export { Logo, DevPlus, DevPlusS, LandingPageStepBackground, InovationPana, FooterBackground };

@@ -170,6 +170,9 @@
     "IMAGE_VALIDATE_SIZE": "Kích thước ảnh phải nhỏ hơn hoặc bằng 400x600",
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
     "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
+    "DATE_NOT_FUTURE": "Ngày sinh không được lớn hơn ngày hiện tại",
+    "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối",
+    "NO_TWO_SPACE": "Không được có 2 khoảng trống liên tiếp",
     "FULL_NAME_REQUIRED": "Vui lòng nhập họ tên!",
     "PHONE_REQUIRED": "Vui lòng nhập số điện thoại!",
     "PHONE_INVALID": "Số điện thoại không đúng định dạng!",
@@ -188,9 +191,26 @@
     "CONFIRM_PASSWORD": "Xác thực mật khẩu",
     "TITLE": "Thông tin người dùng",
     "ACCOUNT_TITLE": "Thông tin tài khoản",
-    "PERSONAL_PROFILE": "Thông tin cá nhân",
+    "PERSONAL_PROFILE": "Hồ sơ của tôi",
     "NULL_INFO": "Chưa có thông tin",
-    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
+    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới",
+    "LOGOUT": "Đăng xuất",
+    "FULLNAME_PLACEHOLDER": "Vui lòng nhập họ tên",
+    "FULLNAME": "Họ tên",
+    "PHONE": "Số điện thoại",
+    "PHONE_PLACEHOLDER": "Nhập số điện thoại",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "Nhập email",
+    "DOB": "Ngày sinh",
+    "DOB_PLACEHOLDER": "Chọn ngày sinh",
+    "COUNTRY": "Quốc gia",
+    "COUNTRY_PLACEHOLDER": "Chọn quốc gia",
+    "PROVINCE": "Tỉnh thành",
+    "PROVINCE_PLACEHOLDER": "Chọn tỉnh thành",
+    "OCCUPATION": "Nghề nghiệp",
+    "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
+    "REFERRAL": "Mã giới thiệu",
+    "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu"
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -203,6 +223,80 @@
     "NOT_HAVE_ACCOUNT": "Bạn chưa có tài khoản?",
     "PASSWORD_INPUT": "Nhập mật khẩu",
     "EMAIL_INPUT": "Nhập email"
+  },
+  "HOMEPAGE": {
+    "PRIMARY_TITLE": "Khám phá",
+    "TITLE": "Năng lực ứng dụng AI",
+    "SUB_TITLE": "Tham gia bài kiểm tra đánh giá năng lực sử dụng AI để hiểu rõ khả năng của bạn và nhận lộ trình phát triển cá nhân hóa",
+    "BUTTON": "Khám phá ngay",
+    "FAQ": "FAQ",
+    "FAQ_TITLE1": "Bạn có thắc mắc?",
+    "FAQ_TITLE2": "Chúng tôi sẵn sàng giải đáp!",
+    "FAQ_CONTACT": "Liên hệ với chúng tôi – chúng tôi sẽ trả lời câu hỏi của bạn nhanh chóng.",
+    "TIKTOK": "TikTok",
+    "LINKEDIN": "LinkedIn",
+    "FACEBOOK": "Facebook",
+    "FAQ_QUESTIONS": [
+      {
+        "QUESTION": "Bài kiểm tra năng lực AI là gì và phù hợp với ai?",
+        "ANSWER": "Bài kiểm tra giúp bạn xác định mức độ hiểu biết và ứng dụng AI trong công việc hoặc học tập."
+      },
+      {
+        "QUESTION": "Kết quả bài kiểm tra sẽ được sử dụng như thế nào?",
+        "ANSWER": "Kết quả giúp bạn hiểu rõ điểm mạnh, điểm yếu trong việc ứng dụng AI. Bạn sẽ nhận được báo cáo chi tiết, lộ trình học tập cá nhân hoá, gợi ý khoá học, và hỗ trợ kết nối với doanh nghiệp trong mạng lưới của chúng tôi."
+      },
+      {
+        "QUESTION": "Làm thế nào để biết kết quả bài kiểm tra?",
+        "ANSWER": "Bạn sẽ nhận kết quả ngay sau khi hoàn thành bài kiểm tra qua email hoặc trong tài khoản."
+      },
+      {
+        "QUESTION": "Ai là những chuyên gia thực hiện phỏng vấn 1-1?",
+        "ANSWER": "Là các chuyên gia AI, mentor từ các công ty công nghệ hàng đầu."
+      },
+      {
+        "QUESTION": "Tôi có thể làm lại bài kiểm tra nếu không hài lòng với kết quả?",
+        "ANSWER": "Bạn có thể đăng ký làm lại sau một thời gian nhất định để theo dõi sự tiến bộ."
+      }
+    ],
+    "FEATURES_LABEL": "Lợi ích",
+    "FEATURES_TITLE": "Tại sao nên tham gia?",
+    "FEATURES_SUBTITLE": "Khám phá hành trình phát triển năng lực ứng dụng AI toàn diện, kết nối cơ hội nghề nghiệp và tăng tốc thành công trong kỷ nguyên AI",
+    "FEATURES_BENEFITS": [
+      { "TITLE": "Đánh giá chính xác" },
+      { "TITLE": "Kết nối chuyên gia" },
+      { "TITLE": "Lộ trình hóa cá nhân" }
+    ],
+    "STEP_LABEL": "Bước thực hiện",
+    "STEP_TITLE": "Khám phá năng lực AI của bạn",
+    "STEP_SUBTITLE": "DevPlus sẽ luôn đồng hành cùng bạn trên chặng đường nâng cao năng lực AI và phát triển cơ hội nghề nghiệp",
+    "STEP_MONITOR_NOTE": "Khám phá tiềm năng AI của bạn ngay hôm nay – Chỉ 2 phút để bắt đầu!",
+    "STEP1": "Bước 1",
+    "STEP1_TITLE": "Tham gia bài kiểm tra trực tuyến",
+    "STEP1_DESC": "Đăng ký tài khoản và hoàn thành bài kiểm tra trực tuyến (30 - 45 phút) để đánh giá năng lực ứng dụng AI của bạn",
+    "STEP1_BUTTON": "Tham gia ngay",
+    "FOOTER_ABOUT": "VỀ DEVPLUS",
+    "FOOTER_ABOUT_DESC": "DevPlus là chương trình Sandbox Bootcamp kết hợp học trực tuyến và trực tiếp, giúp sinh viên nâng cao kỹ năng thực hành theo mô hình #Ready-to-work, đáp ứng ngay yêu cầu doanh nghiệp và sẵn sàng bước vào sự nghiệp IT.",
+    "FOOTER_ACTIVITIES": "HOẠT ĐỘNG CỦA DEVPLUS",
+    "FOOTER_ACTIVITIES_LIST": ["Workshop", "Sự kiện", "Cộng đồng", "Hoạt động ngoại khóa"],
+    "FOOTER_ADDRESS": "116 - 118 Mai Thuc Lan, My An, Ngu Hanh Son, Da Nang",
+    "FOOTER_EMAIL": "hello@devplus.edu.vn",
+    "FOOTER_PHONE": "(+84) 368492885"
+  },
+  "HEADER": {
+    "START": "Bắt đầu",
+    "REGISTER": "Đăng ký",
+    "LOGIN": "Đăng nhập"
+  },
+  "SIDEBAR": {
+    "ONLINE_COURSES": "Khóa học trực tuyến",
+    "HISTORY": "Lịch sử kiểm tra",
+    "PERSONAL_PROFILE": "Thông tin cá nhân",
+    "CHANGE_PASSWORD": "Đổi mật khẩu"
+  },
+  "PLACEHOLDER": {
+    "SELECT_COUNTRY": "Chọn quốc gia",
+    "SELECT_CITY": "Chọn tỉnh thành",
+    "SELECT_JOB": "Chọn công việc"
   },
   "SIGN_UP": {
     "TITLE": "Đăng ký tài khoản",
@@ -220,5 +314,45 @@
     "TERMS": "Điều khoản & Điều kiện",
     "PRIVACY": "Chính sách bảo mật",
     "COMPANY": "DevPlus"
+  },
+  "HOMEPAGE_LOGIN": {
+    "TITLE": "Xin chào {{name}}, 👋",
+    "TEXT_READY": "Sẵn sàng nâng tầm năng lực ứng dụng AI của bạn chưa?",
+    "START": "Bắt đầu ngay",
+    "DESCRIPTION": "Hoàn thành bài kiểm tra, nhận lộ trình cá nhân hoá, và kết nối với cơ hội nghề nghiệp",
+    "TEXT_PEOPLE": "Hơn 15,000 người đã nâng tầm sự nghiệp với AI - Bạn là người tiếp theo?"
+  },
+  "DASHBOARD": {
+    "TITLE": "Bảng điều khiển của bạn",
+    "DESCRIPTION": "Theo dõi bài kiểm tra, lịch phỏng vấn và các cơ hội nghề nghiệp của bạn.",
+    "TEST_STATUS": {
+      "TITLE": "Trạng thái bài kiểm tra",
+      "DESCRIPTION": "Chưa bắt đầu",
+      "BUTTON": "Bắt đầu bài kiểm tra"
+    },
+    "INTERVIEW_SCHEDULE": {
+      "TITLE": "Lịch phỏng vấn",
+      "DESCRIPTION": "Chưa bắt đầu",
+      "BUTTON": "Đặt lịch phỏng vấn"
+    },
+    "LEARNING_PATH": {
+      "TITLE": "Lộ trình học tập",
+      "DESCRIPTION": "Hoàn thành bài kiểm tra để nhận lộ trình cá nhân hoá",
+      "BUTTON": "Bắt đầu bài kiểm tra"
+    },
+    "BUSINESS_CONTENT": {
+      "TITLE": "Kết nối doanh nghiệp",
+      "DESCRIPTION": "03 cơ hội đang chờ bạn",
+      "BUTTON": "Khám phá cơ hội"
+    }
+  },
+  "RECOMMEND": {
+    "TITLE": "Gợi ý dành cho bạn",
+    "DESCRIPTION": "Tham gia các khoá học trực tuyến để nâng tầm kỹ năng của bạn.",
+    "COURSE_1": {
+      "TITLE": "Khoá học: AI cơ bản",
+      "DESCRIPTION": "Nắm vững các khái niệm AI cơ bản để bắt đầu hành trình của bạn",
+      "LINK": "Xem chi tiết"
+    }
   }
 }
