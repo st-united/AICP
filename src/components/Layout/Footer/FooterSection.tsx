@@ -1,6 +1,7 @@
 import { MailOutlined, EnvironmentOutlined, UpCircleFilled } from '@ant-design/icons';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
+
 import { DevplusLogo } from '@app/assets/svgs';
 
 const FooterSection = () => {

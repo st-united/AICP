@@ -1,11 +1,12 @@
-import DashboardCard from '../atoms/Card/DashboardCard';
-import { useTranslation } from 'react-i18next';
 import {
   CalendarOutlined,
   FileTextOutlined,
   ApartmentOutlined,
   ProjectOutlined,
 } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+
+import DashboardCard from '../atoms/Card/DashboardCard';
 
 const DashboardSection = () => {
   const { t } = useTranslation();

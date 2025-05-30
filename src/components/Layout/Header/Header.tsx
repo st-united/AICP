@@ -1,11 +1,11 @@
 import { Image } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { DropProfile } from '../../molecules';
 import { DevPlus, DevPlusS } from '@app/assets/images';
-import ButtonHeader from '@app/components/atoms/Button/ButtonHeader';
+import { ButtonHeader } from '@app/components/atoms';
 
 const Header = () => {
   const { t } = useTranslation();

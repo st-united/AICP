@@ -24,12 +24,12 @@ const RecommendCard: React.FC<RecommendCardProps> = ({
       <div className='flex flex-col h-full justify-between min-h-[12rem]'>
         <h3 className='text-white text-xl sm:text-2xl font-semibold mb-3'>{title}</h3>
         <p className='text-base sm:text-xl mb-4'>{description}</p>
-        <a
+        <button
           className='!text-[#FE7743] font-semibold underline cursor-pointer mt-auto hover:!text-[#ea9c77]'
           onClick={onLinkClick}
         >
           {linkText}
-        </a>
+        </button>
       </div>
     </Card>
   );

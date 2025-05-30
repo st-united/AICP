@@ -1,12 +1,16 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TextTyping } from '@app/components/atoms/';
+
+import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 import { InovationPana } from '@app/assets/images';
+import { TextTyping } from '@app/components/atoms/';
 
 interface WelcomeSectionProps {
   name?: string;
 }
 const WelcomeSection = ({ name }: WelcomeSectionProps) => {
   const { t } = useTranslation();
+  const [open, setIsOpen] = useState(false);
   return (
     <section className='w-full bg-white h-screen flex items-center'>
       <div className='container mx-auto flex flex-row sm:h-full items-center"'>
@@ -27,7 +31,12 @@ const WelcomeSection = ({ name }: WelcomeSectionProps) => {
                 className='text-base leading-5 text-center lg:text-2xl md:text-lg text-[#686868] font-semibold !p-4 md:text-start md:leading-10'
               />
 
-              <button className='slide-in-left !uppercase cursor-pointer !rounded-full !md:py-4 !md:px-10 !py-3 ml-4 !px-8 bg-[#FE7743] text-lg md:text-xl font-bold hover:bg-[#ea9c77] transition-all duration-300 ease-in-out shadow-[#FE774380] shadow-lg text-white'>
+              <button
+                onClick={() => {
+                  setIsOpen(true);
+                }}
+                className='slide-in-left !uppercase cursor-pointer !rounded-full !md:py-4 !md:px-10 !py-3 ml-4 !px-8 bg-[#FE7743] text-lg md:text-xl font-bold hover:bg-[#ea9c77] transition-all duration-300 ease-in-out shadow-[#FE774380] shadow-lg text-white'
+              >
                 {t('HOMEPAGE_LOGIN.START')}
               </button>
               <p className='text-base text-center md:text-start text-[#686868] p-4'>
@@ -37,9 +46,10 @@ const WelcomeSection = ({ name }: WelcomeSectionProps) => {
           </div>
         </div>
         <div className='hidden lg:flex md:items-center w-[40rem] p-4 mt-16'>
-          <img src={InovationPana} className='w-[25rem] h-[25rem]' />
+          <img src={InovationPana} alt='Innovation illustration' className='w-[25rem] h-[25rem]' />
         </div>
       </div>
+      <ConfirmBeforeTestModal open={open} onClose={() => setIsOpen(false)} />
     </section>
   );
 };

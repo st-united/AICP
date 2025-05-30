@@ -1,9 +1,10 @@
 import { useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
+
+import UserPage from '../UserPage/UserPage';
 import LandingLayout from '@app/components/LandingPage/LandingLayout';
 import MainScreen from '@app/components/LandingPage/MainScreen';
 import { smoothScrollTo } from '@app/utils/scroll';
-import UserPage from '../UserPage/UserPage';
 
 const Homepage = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);

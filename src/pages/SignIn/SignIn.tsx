@@ -44,7 +44,7 @@ const SignIn = () => {
         </button>
         <div>
           <h1 className='text-[40px] !text-white font-bold'>{t<string>('LOGIN.TEXT')}</h1>
-          <p className='text-white text-lg !mb-8 flex gap-2'>
+          <div className='text-white text-lg !mb-8 flex gap-2'>
             <div>{t<string>('LOGIN.NOT_HAVE_ACCOUNT')}</div>
             <button
               className='!text-[#1890FF] cursor-pointer underline hover:!text-[#0056b3] bg-transparent border-none outline-none'
@@ -52,7 +52,7 @@ const SignIn = () => {
             >
               {t<string>('LOGIN.REGISTER')}
             </button>
-          </p>
+          </div>
         </div>
         <Form
           form={form}

@@ -5,6 +5,7 @@ import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { GetUsersParams, HasTakenExam, UserDetail } from '@app/interface/user.interface';
 import {
   checkHasTakenExam,
+  checkHasTakenExamDefault,
   createUser,
   deleteUserAPI,
   getUserByIdAPI,
@@ -45,7 +46,13 @@ export const useGetUsers = (params: GetUsersParams) =>
 export const useHasTakenExam = (examSetId: string) =>
   useQuery([QUERY_KEY.HAS_TAKEN_EXAM, examSetId], async (): Promise<HasTakenExam> => {
     const { data } = await checkHasTakenExam(examSetId);
-    return data;
+    return data.data;
+  });
+
+export const useHasTakenExamDefault = () =>
+  useQuery([QUERY_KEY.HAS_TAKEN_EXAM_DEFAULT], async (): Promise<HasTakenExam> => {
+    const { data } = await checkHasTakenExamDefault();
+    return data.data;
   });
 
 export const useGetUserById = (id: number) =>

@@ -1,4 +1,5 @@
 import { DownCircleFilled } from '@ant-design/icons';
+import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import './homepage.scss';

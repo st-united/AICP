@@ -1,5 +1,6 @@
-import RecommendCard from '@app/components/atoms/Card/RecommendCard';
 import { useTranslation } from 'react-i18next';
+
+import RecommendCard from '@app/components/atoms/Card/RecommendCard';
 
 const RecommendSection = () => {
   const { t } = useTranslation();
