@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-
 import LazyComponent from './LazyComponent';
 import { LandingFeatSection1, LandingFeatSection2, LandingFeatSection3 } from '@app/assets/svgs';
 
@@ -12,7 +11,7 @@ const FeatureSection = () => {
   }>;
 
   return (
-    <div className='bg-[#FFFBF9] w-full px-10 sm:px-20 md:px-16 md:py-12 text-center'>
+    <div className='bg-[#FFFBF9] w-full h-full md:h-4/5 xl:h-screen px-10 sm:px-20 md:px-16 md:py-12 text-center '>
       <p className='text-base sm:text-2xl text-[#FE7743] font-semibold mt-8 sm:mt-2 mb-4'>
         {t('HOMEPAGE.FEATURES_LABEL')}
       </p>
@@ -31,10 +30,10 @@ const FeatureSection = () => {
                 <img
                   src={imageList[index]}
                   alt={benefit.TITLE}
-                  className='w-full object-cover slide-up absolute left-[-50px] bottom-0'
+                  className='w-full object-cover slide-up absolute left-[-50px] bottom-0 md:bottom-2 md:left-[-20px] xl:left-[-60px] xl:bottom-0'
                 />
               </div>
-              <h3 className='fade-in-text mt-12 sm:mt-6 text-xl md:text-2xl font-[800] text-gray-900'>
+              <h3 className='fade-in-text w-[18rem] lg:w-full mt-12 sm:mt-6 text-xl md:text-2xl font-[800] text-gray-900'>
                 {benefit.TITLE}
               </h3>
             </div>

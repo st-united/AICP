@@ -1,9 +1,7 @@
-import { Carousel } from 'antd';
 import { useTranslation } from 'react-i18next';
-
 import LazyComponent from './LazyComponent';
-import { HalfCircle } from '@app/assets/images';
 import { LandingMonitor } from '@app/assets/svgs';
+import { Button, Carousel } from 'antd';
 
 const StepSection = () => {
   const { t } = useTranslation();
@@ -40,7 +38,7 @@ const StepSection = () => {
   ];
 
   return (
-    <div className='w-full h-full lg:min-h-screen mb-20 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/landingpage_step_bg.png)]'>
+    <div className='w-full h-full xl:min-h-screen mb-20 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/landingpage_step_bg.png)]'>
       <div className='max-w-6xl mx-auto text-center py-12 px-6 md:px-12'>
         <p className='text-base sm:text-xl md:text-2xl text-[#FE7743] font-semibold mb-4'>
           {t('HOMEPAGE.STEP_LABEL')}
@@ -52,33 +50,35 @@ const StepSection = () => {
           {t('HOMEPAGE.STEP_SUBTITLE')}
         </p>
       </div>
-      <div className='md:container bg-[#FF7A00] rounded-3xl text-white mx-10 px-10 md:px-12 md:mx-auto bg-cover bg-center bg-[url(./assets/images/step-bg.png)]'>
-        <div className='relative min-h-[420px] md:min-h-[480px] flex items-center'>
+      <div className='md:container w-4/5 md:w-5/6 xl:w-full bg-[#FF7A00] rounded-3xl text-white mx-10 px-10 md:px-12 md:mx-auto bg-cover bg-center bg-[url(./assets/images/step-bg.png)]'>
+        <div className='relative min-h-[26rem] md:min-h-[30rem] flex items-center'>
           <Carousel dots vertical className='w-full h-full'>
             {steps.map((step, idx) => (
-              <div key={idx} className='h-[420px] md:h-[480px] flex items-center'>
+              <div key={idx} className='h-[26rem] md:h-[30rem] flex items-center'>
                 <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full'>
                   <div className='hidden md:flex flex-col items-center justify-center h-full'>
                     <LazyComponent>
                       <img
                         src={step.image}
                         alt={`Monitor step ${idx + 1}`}
-                        className='slide-up-then-left mb-4 max-w-[340px] max-h-[260px]'
+                        className='slide-up-then-left mb-4 max-w-[21rem] max-h-[16rem]'
                         width={340}
                         height={260}
                       />
                     </LazyComponent>
-                    <p className='text-white text-xl text-center max-w-xs'>{step.note}</p>
+                    <p className='text-white text-xl text-center max-w-sm'>{step.note}</p>
                   </div>
                   <div className='flex flex-col justify-center h-full'>
-                    <p className='text-white text-3xl md:text-4xl font-bold mb-10'>{step.label}</p>
-                    <p className='text-white font-semibold text-xl md:text-2xl mb-3'>
+                    <p className='text-white text-3xl md:text-4xl font-bold mb-10 xl:mb-16'>
+                      {step.label}
+                    </p>
+                    <p className='text-white font-semibold text-xl md:text-2xl mb-4'>
                       {step.title}
                     </p>
-                    <p className='text-white text-sm md:text-base mb-6'>{step.desc}</p>
-                    <button className='bg-white text-[#FE7743] font-semibold px-6 py-3 rounded-full shadow-md hover:bg-[#FE7743] hover:text-white transition w-fit'>
-                      {t('HOMEPAGE.BUTTON')}
-                    </button>
+                    <p className='!text-white text-sm md:text-base mb-6'>{step.desc}</p>
+                    <Button className='bg-white h-12 w-44 text-lg text-[#FE7743] font-bold rounded-full border-none shadow-md hover:bg-[#FE7743] hover:text-white transition'>
+                      {t('HOMEPAGE.STEP_BUTTON')}
+                    </Button>
                   </div>
                 </div>
               </div>

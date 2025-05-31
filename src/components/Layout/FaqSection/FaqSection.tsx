@@ -17,7 +17,7 @@ const FaqSection = () => {
     ANSWER: string;
   }>;
   return (
-    <div className='w-full lg:h-screen py-16 bg-[#FFFBF9]'>
+    <div className='mx-auto w-full xl:h-screen py-16 md:px-6 xl:px-0 lg:px-8 bg-[#FFFBF9]'>
       <div className='container text-[#FF7A00] text-center font-bold text-base sm:text-xl md:text-start mb-10 md:mb-20 mx-auto'>
         {t('HOMEPAGE.FAQ')}
       </div>
@@ -70,12 +70,18 @@ const FaqSection = () => {
             bordered={false}
             expandIcon={({ isActive }) =>
               isActive ? (
-                <MinusOutlined className='!text-base text-white' />
+                <MinusOutlined className='!text-base !text-white' />
               ) : (
-                <PlusOutlined className='!text-base text-[#444444]' />
+                <PlusOutlined className='!text-base !text-[#444444]' />
               )
             }
-            onChange={(val) => setExpanded(val as string)}
+            onChange={(val) => {
+              if (Array.isArray(val)) {
+                setExpanded(val[0]);
+              } else {
+                setExpanded(val as string | undefined);
+              }
+            }}
           >
             {Array.isArray(faqs) &&
               faqs.map((faq, index) => {
