@@ -35,8 +35,7 @@ const MainScreen = ({ onScrollToNext }: Props) => {
             speed={10}
             className='sm:w-3/5 text-base text-center lg:text-2xl md:text-lg !text-[#273F4F] font-semibold !p-4 md:text-start leading-10 xl:p-2'
           />
-
-          <Button className='!text-white h-16 md:ml-4 xl:mx-2 text-lg md:text-xl font-bold border-none slide-in-left !uppercase cursor-pointer !rounded-full px-8 bg-[#FE7743] hover:!bg-[#ea9c77] transition-all duration-300 shadow-[#FE774380] shadow-lg'>
+          <Button className='!text-white h-12 border-none md:ml-4 xl:mx-2 text-lg md:text-xl font-bold slide-in-left !uppercase cursor-pointer !rounded-full px-8 bg-[#FE7743] transition-all duration-300 shadow-[#FE774380] shadow-lg'>
             {t('HOMEPAGE.BUTTON')}
           </Button>
         </div>
