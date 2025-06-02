@@ -1,9 +1,14 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { QUERY_KEY } from '@app/constants';
 import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
-import { getExamSetsApi, submitExamSetApi } from '@app/services';
+import { getExamSetsApi, submitDraftQuestionApi, submitExamSetApi } from '@app/services';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 export const useCountdown = (initialTime: number) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
@@ -85,7 +90,7 @@ export const useQuestionNavigation = (
   return { setQuestionRef, scrollToQuestion };
 };
 
-export const useGetExamSetById = () =>
+export const useGetExamSet = () =>
   useQuery<ExamSetDetail>(
     [QUERY_KEY.EXAM_SETS],
     async () => {
@@ -94,9 +99,34 @@ export const useGetExamSetById = () =>
     },
     {
       keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchInterval: false,
+      refetchIntervalInBackground: false,
     },
   );
 
+export const useSubmitDraftQuestion = () => {
+  return useMutation((params: SubmitExamSetPayload) => submitDraftQuestionApi(params));
+};
+
 export const useSubmitExamSet = () => {
-  return useMutation((params: SubmitExamSetPayload) => submitExamSetApi(params));
+  const navigate = useNavigate();
+
+  return useMutation(
+    async (examSetId: string) => {
+      const { data } = await submitExamSetApi(examSetId);
+      return data;
+    },
+    {
+      onSuccess({ message }) {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+        navigate('/');
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
 };

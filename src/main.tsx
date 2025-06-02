@@ -1,11 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Spin } from 'antd';
+import { ConfigProvider, Spin } from 'antd';
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
-import 'antd/dist/antd.css';
 
 import store from './redux/store';
 import i18n from '@app/config/i18n';
@@ -16,7 +15,15 @@ import './main.scss';
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: '#fe7743',
+        fontFamily: 'Nunito, sans-serif',
+      },
+    }}
+  >
     <QueryClientProvider client={queryClient}>
       <I18nextProvider i18n={i18n}>
         <Provider store={store}>
@@ -26,5 +33,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         </Provider>
       </I18nextProvider>
     </QueryClientProvider>
-  </React.StrictMode>,
+  </ConfigProvider>,
+  // </React.StrictMode>,
 );

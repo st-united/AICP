@@ -1,5 +1,7 @@
 import { lazy } from 'react';
 
+import { AptitudeTest } from '@app/pages';
+
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
 const Forbidden = lazy(() => import('@app/pages/Forbidden/Forbidden'));
@@ -15,6 +17,10 @@ const routes = [
       {
         path: '403',
         element: <Forbidden />,
+      },
+      {
+        path: 'aptitude-test',
+        element: <AptitudeTest />,
       },
     ],
   },

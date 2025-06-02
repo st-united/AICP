@@ -3,6 +3,7 @@ export interface ExamSetDetail {
   name: string;
   description: string;
   questions: Question[];
+  duration: number;
 }
 
 export interface Question {
@@ -28,6 +29,6 @@ export enum AnswerChoice {
 export interface SubmitExamSetPayload {
   examSetId: string;
   questionId: string;
-  answerId: string[];
+  answers: string[];
   type: AnswerChoice;
 }

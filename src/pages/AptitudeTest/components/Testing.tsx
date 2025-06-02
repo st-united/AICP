@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import CountdownTimer from './CountdownTimer';
 import QuestionDisplay from './QuestionDisplay';
 import QuestionIndexPanel from './QuestionIndexPanel';
-import { useGetExamSetById, useSubmitExamSet } from '@app/hooks';
+import { useGetExamSet, useSubmitDraftQuestion, useSubmitExamSet } from '@app/hooks';
 import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 
 const Testing = () => {
@@ -23,8 +23,10 @@ const Testing = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [unansweredQuestions, setUnansweredQuestions] = useState<Question[]>([]);
-  const { data: examSet } = useGetExamSetById();
-  const submitExamSetMutation = useSubmitExamSet();
+  const { data: examSet } = useGetExamSet();
+  const submitDraftQuestionMutation = useSubmitDraftQuestion();
+  const { mutate: submitExamSet } = useSubmitExamSet();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleQuestionSelect = useCallback((questionId: string) => {
     setCurrentQuestion(questionId);
@@ -53,10 +55,10 @@ const Testing = () => {
           newAnswers = [answerId];
         }
 
-        submitExamSetMutation.mutate({
+        submitDraftQuestionMutation.mutate({
           examSetId: examSet?.id || '',
           questionId,
-          answerId: newAnswers,
+          answers: newAnswers,
           type: question.type,
         });
 
@@ -83,11 +85,22 @@ const Testing = () => {
     );
     setUnansweredQuestions(unanswered);
     setIsSubmitModalOpen(true);
-  }, [answeredQuestions, examSet]);
+  }, []);
 
   const handleConfirmSubmit = useCallback(() => {
     setIsSubmitModalOpen(false);
   }, [selectedAnswers]);
+
+  const handleCloseModal = useCallback(() => {
+    if (!examSet?.questions) return;
+    const unanswered = examSet.questions.filter(
+      (question) => !answeredQuestions.includes(question.id),
+    );
+    if (unanswered.length > 0) {
+      setUnansweredQuestions(unanswered);
+    }
+    setIsModalOpen(true);
+  }, []);
 
   if (!examSet) {
     return <div>Loading...</div>;
@@ -95,11 +108,26 @@ const Testing = () => {
 
   return (
     <div className='overflow-hidden'>
+      <div className='absolute top-10 right-10'>
+        <CloseOutlined
+          onClick={handleCloseModal}
+          className='text-lg p-1 rounded-full bg-white flex shadow-xl cursor-pointer'
+        />
+      </div>
+      <div className='flex flex-col justify-start items-center w-full py-8 px-6 gap-4'>
+        <div className='flex text-xl smM:text-2xl leading-[22px] font-extrabold gap-2 smM:flex-row flex-col text-center'>
+          <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
+          <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
+        </div>
+        <span className='text-[#686868] max-w-[500px] smM:max-w-none smM:min-w-[600px] text-lg smM:text-xl font-semibold text-center'>
+          {t('TEST.SUB_TITLE')}
+        </span>
+      </div>
       <div className='flex h-full'>
         <div className='hidden smM:block fixed left-0 top-[115px] w-[300px] smM:w-80 md:w-96 h-[calc(100vh-145px)] p-3 smM:p-6 pt-0 z-10'>
           <div className='flex flex-col space-y-6 h-full'>
             <CountdownTimer
-              duration={2929}
+              duration={examSet.duration * 60}
               onTimeUp={() => {
                 handleSubmit();
                 handleConfirmSubmit();
@@ -116,7 +144,7 @@ const Testing = () => {
           </div>
         </div>
 
-        <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg'>
+        <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
           <MenuUnfoldOutlined
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className='flex text-2xl'
@@ -137,10 +165,11 @@ const Testing = () => {
             />
             <div className='fixed bg-white z-10 left-2 top-24 rounded-3xl w-[300px]'>
               <CountdownTimer
-                duration={2929}
+                duration={examSet.duration * 60}
                 onTimeUp={() => {
                   handleSubmit();
                   handleConfirmSubmit();
+                  submitExamSet(examSet.id);
                 }}
               />
               <div className='fixed top-52 p-3 left-[280px] bg-white z-10 rounded-full shadow-lg'>
@@ -210,8 +239,8 @@ const Testing = () => {
         cancelText={t('BUTTON.CANCEL')}
         footer={null}
         closeIcon={
-          <div className='flex border border-black rounded-full cursor-pointer h-10 w-10 items-center justify-center mt-3'>
-            <CloseOutlined className='flex text-xl text-black' />
+          <div className='flex border border-black rounded-full cursor-pointer items-center justify-center'>
+            <CloseOutlined className='flex text-xl text-black p-2' />
           </div>
         }
       >
@@ -254,7 +283,10 @@ const Testing = () => {
             </div>
             <span className='text-lg font-medium'>{t('TEST.CHECK_ANSWER')}</span>
             <div className='flex items-center justify-center gap-4 mt-6 flex-col smM:flex-row'>
-              <Button className='border-2 border-[#FE7743] rounded-3xl text-[#FE7743] px-8 py-2 h-full text-lg font-bold hover:border-[#ff5029] hover:text-[#ff5029]'>
+              <Button
+                onClick={() => submitExamSet(examSet.id)}
+                className='border-2 border-[#FE7743] rounded-3xl text-[#FE7743] px-8 py-2 h-full text-lg font-bold hover:border-[#ff5029] hover:text-[#ff5029]'
+              >
                 {t('BUTTON.SUBMMIT_NOW')}
               </Button>
               <Button
@@ -289,12 +321,58 @@ const Testing = () => {
               >
                 {t('BUTTON.CANCEL_TEST')}
               </Button>
-              <Button className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'>
+              <Button
+                onClick={() => submitExamSet(examSet.id)}
+                className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
+              >
                 {t('BUTTON.SUBMIT')}
               </Button>
             </div>
           </div>
         )}
+      </Modal>
+
+      <Modal
+        width={700}
+        open={isModalOpen}
+        footer={null}
+        closable={true}
+        maskClosable={true}
+        onCancel={() => setIsModalOpen(false)}
+        centered
+      >
+        <div className='flex flex-col gap-4 p-4'>
+          <div className='flex items-center justify-center '>
+            <div className='p-3 bg-[#FEEEEE] rounded-full'>
+              <div className='flex p-4 bg-[#FFDEDE] rounded-full'>
+                <WarningOutlined className='flex text-[45px] text-[#FF0000]' />
+              </div>
+            </div>
+          </div>
+          <h2 className='text-2xl font-bold text-black mb-4 text-center'>
+            {t('TEST.CLOSE_WARNING_TITLE')}
+          </h2>
+          <p className='text-lg font-medium mb-4 sm:text-left text-center'>
+            {t('SUBMIT.UNANSWERED_NUMBERS_MESSAGE', { count: unansweredQuestions.length })}
+          </p>
+          <div className='flex gap-1 items-start justify-start'>
+            <p className='flex text-lg font-bold min-w-[67px] uppercase text-[#FF7236]'>
+              {t('SUBMIT.NOTE')}:
+            </p>
+            <p className='text-lg font-medium'>{t('SUBMIT.NOTE_MESSAGE')}</p>
+          </div>
+          <div className='flex items-center justify-center mt-4 gap-4'>
+            <Button
+              onClick={() => setIsSubmitModalOpen(false)}
+              className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
+            >
+              {t('BUTTON.EXIT_NOW')}
+            </Button>
+            <Button className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'>
+              {t('BUTTON.CONTINUE_NOW')}
+            </Button>
+          </div>
+        </div>
       </Modal>
     </div>
   );

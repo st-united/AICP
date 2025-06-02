@@ -9,10 +9,10 @@ import './PrivateLayout.scss';
 const { Content } = Layout;
 
 const PrivateLayout: FC = () => {
-  // const { isLoading } = useGetProfile();
-  // if (isLoading) {
-  //   return <Spin />;
-  // }
+  const { isLoading } = useGetProfile();
+  if (isLoading) {
+    return <Spin />;
+  }
 
   return (
     <Layout>

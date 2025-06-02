@@ -68,7 +68,9 @@
     "SUBMMIT_NOW": "Nộp bài ngay",
     "CONTINUE": "Tiếp tục",
     "CONTINUE_NOW": "Tiếp tục làm bài",
-    "CANCEL_TEST": "Hủy bỏ"
+    "CANCEL_TEST": "Hủy bỏ",
+    "EXIT_NOW": "Thoát ngay",
+    "CANCEL_NOW": "Hủy ngay"
   },
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
@@ -275,6 +277,10 @@
   "SUBMIT": {
     "TITLE": "Cảnh báo: Bài làm chưa hoàn tất",
     "UNANSWERED_MESSAGE": "Bạn vẫn còn {{count}} câu hỏi chưa trả lời. Vui lòng kiểm tra lại trước khi nộp bài.",
-    "UNANSWERED_NUMBERS": "Question numbers: {{numbers}}"
+    "UNANSWERED_NUMBERS": "Question numbers: {{numbers}}",
+    "UNANSWERED_NUMBERS_MESSAGE": "Bạn còn {{count}} câu hỏi nữa. Bạn có muốn tiếp tục.",
+    "NOTE": "Lưu ý",
+    "NOTE_MESSAGE": "Nếu bạn thoát ngay bây giờ, hệ thống sẽ không lưu lại kết quả làm bài.",
+    "SUBMIT_NOW": "Nộp bài ngay"
   }
 }
