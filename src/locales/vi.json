@@ -133,33 +133,15 @@
     "ITEM": "mục"
   },
   "MODAL": {
-    "CONFIRM_DELETE_AVATAR": "Bạn muốn xoá ảnh đại diện?",
-    "NOTE_DELETE_AVATAR": "Nếu bạn xóa hình ảnh hồ sơ của mình, hình ảnh đó sẽ được thay thế bằng một hình ảnh mặc định.",
-    "CONFIRM_DELETE": "Bạn có chắc chắn muốn xóa {{name}} không?",
-    "CONFIRM_DELETE_SESSION": "Bạn có chắc chắn muốn xóa phiên học của {{name}} không?",
-    "CONFIRM_SYNC": "Bạn có chắc chắn muốn đồng bộ {{name}} này không?",
-    "CONFIRM_EXPORT": "Bạn có chắc chắn muốn xuất bản dữ liệu thành tệp trang tính không?",
-    "CONFIRM_EXPORT_TITLE": "Xuất dữ liệu",
-    "TITLE_DELETE": "Xóa {{name}}",
-    "TITLE_SYNC": "Đồng bộ {{name}}",
-    "TITLE_RESET_PASSWORD": "Đặt lại mật khẩu",
-    "CONFIRM_RESET_PASSWORD": "Bạn có chắc chắn muốn đặt lại mật khẩu cho {{name}} không?",
-    "SUGGESTION_COPY_PASSWORD": "Đặt lại mật khẩu thành công",
-    "COPY_PASSWORD": "Mật khẩu hiện tại là: {{name}}",
-    "COPY": "Sao chép",
-    "AVATAR": "Ảnh đại diện",
-    "EDIT_IMAGE": "Cắt ảnh",
-    "IMPORT_COURSE": "Nhập báo cáo 1",
-    "IMPORT_TEACHER": "Import giáo viên",
-    "EXPORT_TEACHER": "Export giáo viên",
-    "NOTE_AVATAR": "Ảnh hồ sơ giúp người khác nhận ra bạn và cũng giúp bạn nhận biết được rằng mình đã đăng nhập vào tài khoản",
-    "NOTE_AVATAR_STUDENT": "Ảnh hồ sơ giúp người khác nhận ra học viên",
-    "CONFIRM_REVERT": "Bạn có chắc muốn thu hồi thẻ {{name}} không?",
-    "TITLE_REVERT": "Thu hồi {{name}}",
-    "IMPORT_MODAL_SUB_CONTENT": "Chỉ hỗ trợ đăng tải một file. Định dạng file được chấp nhận là {{fileExtensions}}",
-    "IMPORT_ERROR_REPORT": "Lỗi nhập BC1 khóa {{course}}",
-    "IMPORT_WARNING_REPORT": "Lỗi tạo mới khóa sau khóa {{course}}",
-    "IMPORT_VEHICLE": "Import xe"
+    "TITLE_CONFIRM_TAKE_NEW_TEST": "Bạn đã sẵn sàng làm bài?",
+    "DURATION_CONFIRM_TAKE_NEW_TEST": "Bài kiểm tra kéo dài <bold>{{duration}} phút</bold>, phù hợp với mọi cấp độ, không yêu cầu chuẩn bị đặc biệt.",
+    "TITLE_CONFIRM_IMPROVE_TEST": "Bạn đã sẵn sàng cải thiện?",
+    "DURATION_CONFIRM_IMPROVE_TEST": "Bài kiểm tra kéo dài <bold>{{duration}} phút</bold>, được thiết kế ở mức độ cao hơn so với trình độ hiện tại của bạn, nhằm đánh giá khả năng phát triển tiềm năng.",
+    "RESULT_CONFIRM_TEST": "Sau khi hoàn thành, bạn sẽ nhận được bản đánh giá năng lực AI ở dạng dự thảo và chuyển sang bước tiếp theo: đặt lịch phỏng vấn với đội ngũ chuyên gia để hoàn thiện và xác nhận năng lực AI một cách chính xác nhất.",
+    "WARNING_CONFIRM_TEST": "Bạn chỉ được làm bài đánh giá một lần trước khi có kết quả chính thức. Ngay sau khi nhận được phản hồi từ đội ngũ cố vấn, bạn sẽ có thể tiếp tục với bài kiểm tra tiếp theo.",
+    "START_CONFIRM_TEST": "Bắt đầu ngay",
+    "REVIEW_RESULT": "Xem lại kết quả",
+    "NOTE_CONFIRM_TEST": "LƯU Ý"
   },
   "VALIDATE": {
     "MIN": " {{field}} phải lớn hơn hoặc bằng {{number}}",
@@ -380,5 +362,45 @@
     "REGEX_PASSWORD": "Mật khẩu phải có ít nhất 8 ký tự, có số, chữ thường, chữ viết hoa và ký tự đặc biệt!",
     "MATCH": "Mật khẩu không khớp!",
     "EXPIRED": "Liên kết đã hết hạn"
+  },
+  "HOMEPAGE_LOGIN": {
+    "TITLE": "Xin chào {{name}}, 👋",
+    "TEXT_READY": "Sẵn sàng nâng tầm năng lực ứng dụng AI của bạn chưa?",
+    "START": "Bắt đầu ngay",
+    "DESCRIPTION": "Hoàn thành bài kiểm tra, nhận lộ trình cá nhân hoá, và kết nối với cơ hội nghề nghiệp",
+    "TEXT_PEOPLE": "Hơn 15,000 người đã nâng tầm sự nghiệp với AI - Bạn là người tiếp theo?"
+  },
+  "DASHBOARD": {
+    "TITLE": "Bảng điều khiển của bạn",
+    "DESCRIPTION": "Theo dõi bài kiểm tra, lịch phỏng vấn và các cơ hội nghề nghiệp của bạn.",
+    "TEST_STATUS": {
+      "TITLE": "Trạng thái bài kiểm tra",
+      "DESCRIPTION": "Chưa bắt đầu",
+      "BUTTON": "Bắt đầu bài kiểm tra"
+    },
+    "INTERVIEW_SCHEDULE": {
+      "TITLE": "Lịch phỏng vấn",
+      "DESCRIPTION": "Chưa bắt đầu",
+      "BUTTON": "Đặt lịch phỏng vấn"
+    },
+    "LEARNING_PATH": {
+      "TITLE": "Lộ trình học tập",
+      "DESCRIPTION": "Hoàn thành bài kiểm tra để nhận lộ trình cá nhân hoá",
+      "BUTTON": "Bắt đầu bài kiểm tra"
+    },
+    "BUSINESS_CONTENT": {
+      "TITLE": "Kết nối doanh nghiệp",
+      "DESCRIPTION": "03 cơ hội đang chờ bạn",
+      "BUTTON": "Khám phá cơ hội"
+    }
+  },
+  "RECOMMEND": {
+    "TITLE": "Gợi ý dành cho bạn",
+    "DESCRIPTION": "Tham gia các khoá học trực tuyến để nâng tầm kỹ năng của bạn.",
+    "COURSE_1": {
+      "TITLE": "Khoá học: AI cơ bản",
+      "DESCRIPTION": "Nắm vững các khái niệm AI cơ bản để bắt đầu hành trình của bạn",
+      "LINK": "Xem chi tiết"
+    }
   }
 }

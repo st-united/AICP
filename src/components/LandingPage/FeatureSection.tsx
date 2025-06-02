@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+
 import LazyComponent from './LazyComponent';
 import { LandingFeatSection1, LandingFeatSection2, LandingFeatSection3 } from '@app/assets/svgs';
 

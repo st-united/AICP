@@ -4,7 +4,7 @@ import Header from '@app/components/Layout/Header/Header';
 
 const AuthLayout = () => {
   return (
-    <div>
+    <div className='flex min-h-screen flex-col'>
       <Header />
       <Outlet />
     </div>

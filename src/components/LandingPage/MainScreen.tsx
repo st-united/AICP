@@ -1,9 +1,10 @@
 import { DownCircleFilled } from '@ant-design/icons';
+import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
+
 import { CyborgHand } from '@app/assets/images';
 import './homepage.scss';
 import { TextTyping } from '@app/components/atoms/';
-import { Button } from 'antd';
 
 type Props = {
   onScrollToNext: () => void;

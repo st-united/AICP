@@ -1,7 +1,8 @@
+import { Button, Carousel } from 'antd';
 import { useTranslation } from 'react-i18next';
+
 import LazyComponent from './LazyComponent';
 import { LandingMonitor } from '@app/assets/svgs';
-import { Button, Carousel } from 'antd';
 
 const StepSection = () => {
   const { t } = useTranslation();

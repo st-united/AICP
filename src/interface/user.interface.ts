@@ -76,3 +76,8 @@ export interface UpdateForgotPassword {
   token: string | null;
   password: string;
 }
+export interface HasTakenExam {
+  hasTakenExam: boolean;
+  examSetDuration: number;
+  examId?: string;
+}
