@@ -1,245 +1,301 @@
-import { useState } from 'react';
+import {
+  CloseOutlined,
+  MenuUnfoldOutlined,
+  WarningOutlined,
+  QuestionOutlined,
+} from '@ant-design/icons';
+import { Button, Divider, Modal, Progress } from 'antd';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import CountTime from './CountTime';
-import Question from './Question';
+import CountdownTimer from './CountdownTimer';
+import QuestionDisplay from './QuestionDisplay';
 import QuestionIndexPanel from './QuestionIndexPanel';
-
-const data = [
-  {
-    id: 1,
-    name: 'Question 1',
-    description: 'Description for question 1',
-  },
-  {
-    id: 2,
-    name: 'Question 2',
-    description: 'Description for question 2',
-  },
-  {
-    id: 3,
-    name: 'Question 3',
-    description: 'Description for question 3',
-  },
-  {
-    id: 4,
-    name: 'Question 4',
-    description: 'Description for question 4',
-  },
-  {
-    id: 5,
-    name: 'Question 5',
-    description: 'Description for question 5',
-  },
-  {
-    id: 6,
-    name: 'Question 6',
-    description: 'Description for question 6',
-  },
-  {
-    id: 7,
-    name: 'Question 7',
-    description: 'Description for question 7',
-  },
-  {
-    id: 8,
-    name: 'Question 8',
-    description: 'Description for question 8',
-  },
-  {
-    id: 9,
-    name: 'Question 9',
-    description: 'Description for question 9',
-  },
-  {
-    id: 10,
-    name: 'Question 10',
-    description: 'Description for question 10',
-  },
-  {
-    id: 11,
-    name: 'Question 11',
-    description: 'Description for question 11',
-  },
-  {
-    id: 12,
-    name: 'Question 12',
-    description: 'Description for question 12',
-  },
-  {
-    id: 13,
-    name: 'Question 13',
-    description: 'Description for question 13',
-  },
-  {
-    id: 14,
-    name: 'Question 14',
-    description: 'Description for question 14',
-  },
-  {
-    id: 15,
-    name: 'Question 15',
-    description: 'Description for question 15',
-  },
-  {
-    id: 16,
-    name: 'Question 16',
-    description: 'Description for question 16',
-  },
-  {
-    id: 17,
-    name: 'Question 17',
-    description: 'Description for question 17',
-  },
-  {
-    id: 18,
-    name: 'Question 18',
-    description: 'Description for question 18',
-  },
-  {
-    id: 19,
-    name: 'Question 19',
-    description: 'Description for question 19',
-  },
-  {
-    id: 20,
-    name: 'Question 20',
-    description: 'Description for question 20',
-  },
-  {
-    id: 21,
-    name: 'Question 21',
-    description: 'Description for question 21',
-  },
-  {
-    id: 22,
-    name: 'Question 22',
-    description: 'Description for question 22',
-  },
-  {
-    id: 23,
-    name: 'Question 23',
-    description: 'Description for question 23',
-  },
-  {
-    id: 24,
-    name: 'Question 24',
-    description: 'Description for question 24',
-  },
-  {
-    id: 25,
-    name: 'Question 25',
-    description: 'Description for question 25',
-  },
-  {
-    id: 26,
-    name: 'Question 26',
-    description: 'Description for question 26',
-  },
-  {
-    id: 27,
-    name: 'Question 27',
-    description: 'Description for question 27',
-  },
-  {
-    id: 28,
-    name: 'Question 28',
-    description: 'Description for question 28',
-  },
-  {
-    id: 29,
-    name: 'Question 29',
-    description: 'Description for question 29',
-  },
-  {
-    id: 30,
-    name: 'Question 30',
-    description: 'Description for question 30',
-  },
-  {
-    id: 31,
-    name: 'Question 31',
-    description: 'Description for question 31',
-  },
-  {
-    id: 32,
-    name: 'Question 32',
-    description: 'Description for question 32',
-  },
-  {
-    id: 33,
-    name: 'Question 33',
-    description: 'Description for question 33',
-  },
-  {
-    id: 34,
-    name: 'Question 34',
-    description: 'Description for question 34',
-  },
-  {
-    id: 35,
-    name: 'Question 35',
-    description: 'Description for question 35',
-  },
-  {
-    id: 36,
-    name: 'Question 36',
-    description: 'Description for question 36',
-  },
-  {
-    id: 37,
-    name: 'Question 37',
-    description: 'Description for question 37',
-  },
-  {
-    id: 38,
-    name: 'Question 38',
-    description: 'Description for question 38',
-  },
-  {
-    id: 39,
-    name: 'Question 39',
-    description: 'Description for question 39',
-  },
-  {
-    id: 40,
-    name: 'Question 40',
-    description: 'Description for question 40',
-  },
-];
+import { useGetExamSetById, useSubmitExamSet } from '@app/hooks';
+import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 
 const Testing = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(1);
-  const [answeredQuestions, setAnsweredQuestions] = useState<number[]>([4]);
-  const [flaggedQuestions, setFlaggedQuestions] = useState<number[]>([1, 2, 3]);
+  const { t } = useTranslation();
+  const [currentQuestion, setCurrentQuestion] = useState<string>('');
+  const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
+  const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  const [unansweredQuestions, setUnansweredQuestions] = useState<Question[]>([]);
+  const { data: examSet } = useGetExamSetById();
+  const submitExamSetMutation = useSubmitExamSet();
 
-  const handleFlagToggle = (id: number) => {
+  const handleQuestionSelect = useCallback((questionId: string) => {
+    setCurrentQuestion(questionId);
+  }, []);
+
+  const handleFlagToggle = useCallback((questionId: string) => {
     setFlaggedQuestions((prev) =>
-      prev.includes(id) ? prev.filter((q) => q !== id) : [...prev, id],
+      prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
     );
-  };
+  }, []);
+
+  const handleAnswerSelect = useCallback(
+    (questionId: string, answerId: string) => {
+      const question = examSet?.questions.find((q: Question) => q.id === questionId);
+      if (!question) return;
+
+      setSelectedAnswers((prev) => {
+        const currentAnswers = prev[question.id] || [];
+        let newAnswers: string[];
+
+        if (question.type === AnswerChoice.MULTIPLE_CHOICE) {
+          newAnswers = currentAnswers.includes(answerId)
+            ? currentAnswers.filter((id) => id !== answerId)
+            : [...currentAnswers, answerId];
+        } else {
+          newAnswers = [answerId];
+        }
+
+        submitExamSetMutation.mutate({
+          examSetId: examSet?.id || '',
+          questionId,
+          answerId: newAnswers,
+          type: question.type,
+        });
+
+        if (newAnswers.length > 0 && !answeredQuestions.includes(question.id)) {
+          setAnsweredQuestions((prev) => [...prev, question.id]);
+        } else if (newAnswers.length === 0 && answeredQuestions.includes(question.id)) {
+          setAnsweredQuestions((prev) => prev.filter((id) => id !== question.id));
+        }
+
+        return {
+          ...prev,
+          [question.id]: newAnswers,
+        };
+      });
+    },
+    [answeredQuestions, examSet?.questions],
+  );
+
+  const handleSubmit = useCallback(() => {
+    if (!examSet) return;
+
+    const unanswered = examSet.questions.filter(
+      (question) => !answeredQuestions.includes(question.id),
+    );
+    setUnansweredQuestions(unanswered);
+    setIsSubmitModalOpen(true);
+  }, [answeredQuestions, examSet]);
+
+  const handleConfirmSubmit = useCallback(() => {
+    setIsSubmitModalOpen(false);
+  }, [selectedAnswers]);
+
+  if (!examSet) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className='container mx-auto p-4'>
-      <div className='grid grid-cols-1 md:grid-cols-[25%_75%] gap-4'>
-        <div className='flex flex-col gap-6'>
-          <CountTime initialTime={40 * 60} />
-          <QuestionIndexPanel
-            questions={data}
-            currentQuestion={currentQuestion}
-            answeredQuestions={answeredQuestions}
-            flaggedQuestions={flaggedQuestions}
-            onFlagToggle={handleFlagToggle}
-            onQuestionSelect={setCurrentQuestion}
+    <div className='overflow-hidden'>
+      <div className='flex h-full'>
+        <div className='hidden smM:block fixed left-0 top-[115px] w-[300px] smM:w-80 md:w-96 h-[calc(100vh-145px)] p-3 smM:p-6 pt-0 z-10'>
+          <div className='flex flex-col space-y-6 h-full'>
+            <CountdownTimer
+              duration={2929}
+              onTimeUp={() => {
+                handleSubmit();
+                handleConfirmSubmit();
+              }}
+            />
+            <QuestionIndexPanel
+              questions={examSet.questions}
+              currentQuestion={currentQuestion}
+              answeredQuestions={answeredQuestions}
+              flaggedQuestions={flaggedQuestions}
+              onFlagToggle={handleFlagToggle}
+              onQuestionSelect={handleQuestionSelect}
+            />
+          </div>
+        </div>
+
+        <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg'>
+          <MenuUnfoldOutlined
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className='flex text-2xl'
           />
         </div>
-        <div className=''>
-          <Question
-            questions={data}
-            currentQuestion={currentQuestion}
-            onQuestionInViewChange={(id) => setCurrentQuestion(id)}
-          />
+
+        {isMenuOpen && (
+          <div className='smM:hidden'>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setIsMenuOpen(!isMenuOpen);
+                }
+              }}
+              className='fixed top-0 left-0 w-full h-full bg-black/50 z-10'
+              aria-label='Close menu overlay'
+            />
+            <div className='fixed bg-white z-10 left-2 top-24 rounded-3xl w-[300px]'>
+              <CountdownTimer
+                duration={2929}
+                onTimeUp={() => {
+                  handleSubmit();
+                  handleConfirmSubmit();
+                }}
+              />
+              <div className='fixed top-52 p-3 left-[280px] bg-white z-10 rounded-full shadow-lg'>
+                <MenuUnfoldOutlined
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className='flex text-2xl'
+                />
+              </div>
+              <QuestionIndexPanel
+                questions={examSet.questions}
+                currentQuestion={currentQuestion}
+                answeredQuestions={answeredQuestions}
+                flaggedQuestions={flaggedQuestions}
+                onFlagToggle={handleFlagToggle}
+                onQuestionSelect={handleQuestionSelect}
+              />
+            </div>
+          </div>
+        )}
+
+        <div className='ml-6 smM:ml-80 md:ml-96 flex-1 mr-6'>
+          <div className='flex flex-col w-full bg-white p-6 mdM:p-10 rounded-xl mdM:pr-0 pr-0'>
+            <Progress
+              className='pr-6 mdM:pr-10'
+              percent={Math.round((answeredQuestions.length / examSet.questions.length) * 100)}
+              strokeColor='#001342'
+              strokeWidth={16}
+            />
+            <div className='pr-6 mdM:pr-10'>
+              <Divider />
+            </div>
+            <div className='overflow-y-auto mdM:h-[calc(100vh-320px)] smM:h-[calc(100vh-310px)] h-[calc(100vh-330px)]'>
+              <QuestionDisplay
+                questions={examSet.questions}
+                currentQuestion={currentQuestion}
+                onQuestionInViewChange={setCurrentQuestion}
+                flaggedQuestions={flaggedQuestions}
+                onFlagToggle={handleFlagToggle}
+                onQuestionSelect={handleQuestionSelect}
+                answeredQuestions={answeredQuestions}
+                onAnswerSelect={(questionId, answerId) => {
+                  const question = examSet.questions.find((q: Question) => q.id === questionId);
+                  if (question) {
+                    handleAnswerSelect(question.id, answerId);
+                  }
+                }}
+              />
+              <div className='flex justify-center mb-2'>
+                <Button
+                  className='bg-[#FE7743] rounded-3xl text-white px-12 py-2 h-full text-lg font-bold border-[#FE7743] hover:border-2 hover:border-[#FE7743] hover:bg-white hover:text-[#FE7743] hover:cursor-pointer'
+                  onClick={handleSubmit}
+                >
+                  {t('BUTTON.SUBMIT')}
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <Modal
+        width={750}
+        open={isSubmitModalOpen}
+        onOk={handleConfirmSubmit}
+        onCancel={() => setIsSubmitModalOpen(false)}
+        okText={t('BUTTON.CONFIRM')}
+        cancelText={t('BUTTON.CANCEL')}
+        footer={null}
+        closeIcon={
+          <div className='flex border border-black rounded-full cursor-pointer h-10 w-10 items-center justify-center mt-3'>
+            <CloseOutlined className='flex text-xl text-black' />
+          </div>
+        }
+      >
+        {unansweredQuestions.length > 0 ? (
+          <div className='flex item-center justify-center flex-col gap-3 p-4'>
+            <div className='flex items-center justify-center '>
+              <div className='p-3 bg-[#FEEEEE] rounded-full'>
+                <div className='flex p-4 bg-[#FFDEDE] rounded-full'>
+                  <WarningOutlined className='flex text-[45px] text-[#FF0000]' />
+                </div>
+              </div>
+            </div>
+            <p className='text-lg font-medium text-center py-4'>
+              {t('SUBMIT.UNANSWERED_MESSAGE', { count: unansweredQuestions.length })}
+            </p>
+            <div className='text-lg flex flex-col gap-2 font-medium'>
+              <div className='flex gap-2'>
+                <span>{t('TEST.TOTAL_QUESTION')}:</span>
+                <span className='font-bold'>{examSet.questions.length}</span>
+              </div>
+              <div className='flex gap-2'>
+                <span>{t('TEST.ANSWERED_QUESTION')}:</span>
+                <span className='font-bold'>{answeredQuestions.length}</span>
+              </div>
+              <div className='flex gap-2'>
+                <span>{t('TEST.UNANSWERED_QUESTION')}:</span>
+                <span className='font-bold text-[#FE7743]'>
+                  {unansweredQuestions
+                    .slice(0, 3)
+                    .map((question) => {
+                      const index = examSet.questions.findIndex((q) => q.id === question.id) + 1;
+                      return `Câu ${index}`;
+                    })
+                    .join(', ')}
+                  <span className='text-[#FE7743] cursor-pointer'>
+                    {unansweredQuestions.length > 3 && ` ( ${t('TEST.MORE')} )`}
+                  </span>
+                </span>
+              </div>
+            </div>
+            <span className='text-lg font-medium'>{t('TEST.CHECK_ANSWER')}</span>
+            <div className='flex items-center justify-center gap-4 mt-6 flex-col smM:flex-row'>
+              <Button className='border-2 border-[#FE7743] rounded-3xl text-[#FE7743] px-8 py-2 h-full text-lg font-bold hover:border-[#ff5029] hover:text-[#ff5029]'>
+                {t('BUTTON.SUBMMIT_NOW')}
+              </Button>
+              <Button
+                onClick={() => setIsSubmitModalOpen(false)}
+                className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
+              >
+                {t('BUTTON.CONTINUE_NOW')}
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className='flex item-center justify-center flex-col gap-4 p-4'>
+            <div className='flex items-center justify-center '>
+              <div className='p-3 bg-[#E6F1FF] rounded-full'>
+                <div className='flex p-4 bg-[#BBDBFF] rounded-full'>
+                  <QuestionOutlined className='flex text-[45px] text-[#0069E2]' />
+                </div>
+              </div>
+            </div>
+            <p className='text-2xl font-bold text-center py-4'>{t('TEST.CONFIRM')}</p>
+            <span className='text-lg flex flex-col gap-2 font-medium text-justify'>
+              {t('TEST.CHECK_CONFIRM')}
+            </span>
+            <div className='text-justify'>
+              <span className='text-lg font-bold text-[#FF7236]'>{t('TEST.WARNING')}: </span>
+              <span className='text-lg font-medium'>{t('TEST.CONFIRM_WARNING')}</span>
+            </div>
+            <div className='flex items-center justify-center gap-4 mt-6'>
+              <Button
+                onClick={() => setIsSubmitModalOpen(false)}
+                className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
+              >
+                {t('BUTTON.CANCEL_TEST')}
+              </Button>
+              <Button className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'>
+                {t('BUTTON.SUBMIT')}
+              </Button>
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };

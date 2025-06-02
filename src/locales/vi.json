@@ -63,9 +63,13 @@
     "UPLOAD": "Tải ảnh",
     "EXPORT": "Export",
     "START": "Bắt đầu",
-    "CONFIRM": "Xác nhận"
+    "CONFIRM": "Xác nhận",
+    "SUBMIT": "Nộp bài",
+    "SUBMMIT_NOW": "Nộp bài ngay",
+    "CONTINUE": "Tiếp tục",
+    "CONTINUE_NOW": "Tiếp tục làm bài",
+    "CANCEL_TEST": "Hủy bỏ"
   },
-
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
     "PROFILE": "Cá nhân",
@@ -241,12 +245,36 @@
   },
   "TEST": {
     "TEST_TITLE": "Bài kiểm tra năng lực",
-    "TEST_TITLE_AI": "Ứng dụng AI",
+    "TEST_TITLE_AI": "ứng dụng AI",
     "SUB_TITLE": "Hãy trả lời lần lượt các câu hỏi dưới đây để khám phá khả năng ứng dụng AI của bạn.",
     "TIME_LEFT": "Thời gian còn lại",
     "HOURS": "Giờ",
     "MINUTES": "Phút",
     "SECONDS": "Giây",
-    "QUESTION_INDEX": "Mục lục câu hỏi"
+    "QUESTION_INDEX": "Mục lục câu hỏi",
+    "QUESTION": "Câu hỏi",
+    "FLAG_QUESTION": "Đánh dấu câu hỏi",
+    "MULTIPLE_CHOICE": "Chọn 1 đáp án đúng:",
+    "SINGLE_CHOICE": "Chọn nhiều đáp án đúng:",
+    "TOTAL_QUESTION": "Tổng số câu hỏi",
+    "ANSWERED_QUESTION": "Số câu hỏi đã trả lời",
+    "UNANSWERED_QUESTION": "Số câu hỏi chưa trả lời",
+    "CHECK_ANSWER": "Bạn nên xem lại các câu hỏi trước khi nộp.",
+    "MORE": "Xem thêm",
+    "CONFIRM": "Xác nhận nộp bài",
+    "CHECK_CONFIRM": "Bạn có chắc chắn muốn gửi bài làm của mình ngay bây giờ không? Hãy đảm bảo rằng bạn đã hoàn tất mọi nội dung trước khi nộp.",
+    "WARNING": "Cảnh báo",
+    "CONFIRM_WARNING": "Sau khi nộp, bạn sẽ không thể thay đổi hoặc cập nhật nội dung đã nộp.",
+    "TIME_UP": "Hết thời gian làm bài",
+    "TIME_UP_MESSAGE": "Thời gian quy định để hoàn thành bài làm của bạn đã kết thúc.",
+    "AUTO_SUBMIT_MESSAGE": "Thời gian quy định để hoàn thành bài làm của bạn đã kết thúc.",
+    "AUTO_SUBMIT_MESSAGE_2": "Bài làm sẽ tự động nộp sau {{countdown}} giây.",
+    "CLOSE_WARNING_TITLE": "Cảnh báo: Bài làm chưa được lưu",
+    "CLOSE_WARNING_MESSAGE": "Nếu bạn rời khỏi trang này, bài làm của bạn sẽ không được lưu lại. Bạn có chắc chắn muốn rời khỏi không?"
+  },
+  "SUBMIT": {
+    "TITLE": "Cảnh báo: Bài làm chưa hoàn tất",
+    "UNANSWERED_MESSAGE": "Bạn vẫn còn {{count}} câu hỏi chưa trả lời. Vui lòng kiểm tra lại trước khi nộp bài.",
+    "UNANSWERED_NUMBERS": "Question numbers: {{numbers}}"
   }
 }
