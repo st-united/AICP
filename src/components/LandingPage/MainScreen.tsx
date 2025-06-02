@@ -17,7 +17,7 @@ const MainScreen = ({ onScrollToNext }: Props) => {
     <div className='flex flex-col w-full h-screen'>
       <div className='min-h-screen w-full bg-cover bg-no-repeat bg-center bg-[url(./assets/images/homepage-bg.png)]'>
         <img
-          className='hidden absolute bottom-0 right-0 lg:right-20 md:block '
+          className='hidden absolute bottom-0 right-0 lg:right-20 md:block'
           src={CyborgHand}
           alt=''
         />

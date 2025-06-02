@@ -20,7 +20,7 @@ module.exports = {
           bold: 'var(--primary-color-bold)',
           gray: 'var(--primary-gray-color)',
         },
-        base: '#fe7743',
+        // base: '#fe7743',
         secondary: '#686868',
         error: '#F23030',
         disabled: '#F5F5F7',
