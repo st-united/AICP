@@ -13,7 +13,7 @@ interface QuestionIndexPanelProps {
   onQuestionSelect: (id: string) => void;
 }
 
-const QuestionGrid = ({
+const QuestionIndexPanel = ({
   questions,
   currentQuestion,
   answeredQuestions,
@@ -79,4 +79,4 @@ const QuestionGrid = ({
   );
 };
 
-export default QuestionGrid;
+export default QuestionIndexPanel;

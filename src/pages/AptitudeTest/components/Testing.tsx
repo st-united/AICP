@@ -85,7 +85,7 @@ const Testing = () => {
     );
     setUnansweredQuestions(unanswered);
     setIsSubmitModalOpen(true);
-  }, []);
+  }, [examSet, answeredQuestions, setUnansweredQuestions]);
 
   const handleConfirmSubmit = useCallback(() => {
     setIsSubmitModalOpen(false);
@@ -100,7 +100,7 @@ const Testing = () => {
       setUnansweredQuestions(unanswered);
     }
     setIsModalOpen(true);
-  }, []);
+  }, [examSet, answeredQuestions, setUnansweredQuestions]);
 
   if (!examSet) {
     return <div>Loading...</div>;
@@ -196,7 +196,7 @@ const Testing = () => {
               className='pr-6 mdM:pr-10'
               percent={Math.round((answeredQuestions.length / examSet.questions.length) * 100)}
               strokeColor='#001342'
-              strokeWidth={16}
+              size={['100%', 16]}
             />
             <div className='pr-6 mdM:pr-10'>
               <Divider />
@@ -208,8 +208,6 @@ const Testing = () => {
                 onQuestionInViewChange={setCurrentQuestion}
                 flaggedQuestions={flaggedQuestions}
                 onFlagToggle={handleFlagToggle}
-                onQuestionSelect={handleQuestionSelect}
-                answeredQuestions={answeredQuestions}
                 onAnswerSelect={(questionId, answerId) => {
                   const question = examSet.questions.find((q: Question) => q.id === questionId);
                   if (question) {

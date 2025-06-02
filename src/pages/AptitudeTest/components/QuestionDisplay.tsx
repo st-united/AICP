@@ -13,8 +13,6 @@ interface QuestionProps {
   onQuestionInViewChange: (id: string) => void;
   flaggedQuestions: string[];
   onFlagToggle: (id: string) => void;
-  onQuestionSelect: (id: string) => void;
-  answeredQuestions: string[];
   onAnswerSelect: (questionId: string, answerId: string) => void;
 }
 
@@ -24,8 +22,6 @@ const QuestionDisplay = ({
   onQuestionInViewChange,
   flaggedQuestions,
   onFlagToggle,
-  onQuestionSelect,
-  answeredQuestions,
   onAnswerSelect,
 }: QuestionProps) => {
   const { setQuestionRef, scrollToQuestion } = useQuestionNavigation(
@@ -112,7 +108,7 @@ const QuestionDisplay = ({
               <h3 className='text-2xl font-bold text-black'>
                 {t('TEST.QUESTION')} {index + 1}:
               </h3>
-              <Tooltip title={t('TEST.FLAG_QUESTION')} placement='top'>
+              <Tooltip title={t('TEST.FLAG_QUESTION')} placement='top' trigger={'hover'}>
                 <FlagOutlined
                   className={`flex text-xl border p-2 rounded-lg cursor-pointer ${
                     flaggedQuestions.includes(question.id)
