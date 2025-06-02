@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -31,14 +32,14 @@ const WelcomeSection = ({ name }: WelcomeSectionProps) => {
                 className='text-base leading-5 text-center lg:text-2xl md:text-lg text-[#686868] font-semibold !p-4 md:text-start md:leading-10'
               />
 
-              <button
+              <Button
                 onClick={() => {
                   setIsOpen(true);
                 }}
                 className='slide-in-left !uppercase cursor-pointer !rounded-full !md:py-4 !md:px-10 !py-3 ml-4 !px-8 bg-[#FE7743] text-lg md:text-xl font-bold hover:bg-[#ea9c77] transition-all duration-300 ease-in-out shadow-[#FE774380] shadow-lg text-white'
               >
                 {t('HOMEPAGE_LOGIN.START')}
-              </button>
+              </Button>
               <p className='text-base text-center md:text-start text-[#686868] p-4'>
                 {t('HOMEPAGE_LOGIN.TEXT_PEOPLE')}
               </p>
