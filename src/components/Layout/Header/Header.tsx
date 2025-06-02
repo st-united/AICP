@@ -1,7 +1,7 @@
 import { Image } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { DropProfile } from '../../molecules';
 import { DevPlus, DevPlusS } from '@app/assets/images';
@@ -22,7 +22,7 @@ const Header = () => {
         isHomePage ? 'absolute bg-transparent' : ''
       } flex justify-center item-center w-full`}
     >
-      <div className='container max-w mx-auto p-1'>
+      <div className='container max-w mx-4 lg:mx-8 xl:mx-auto'>
         <div className='flex justify-between'>
           <div className='cursor-pointer flex items-center justify-center'>
             <Image
