@@ -14,17 +14,16 @@ const Header = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
 
   const isHomePage = pathname === '/';
-  const handleRegisterClick = () => navigate('/register');
   const handleLoginClick = () => navigate('/login');
 
   return (
     <div
       className={`${
         isHomePage ? 'absolute bg-transparent' : ''
-      } flex justify-center item-center w-full z-50`}
+      } flex justify-center item-center w-full`}
     >
-      <div className='container !md:px-0 !px-4'>
-        <div className='flex items-center justify-between'>
+      <div className='container max-w mx-4 lg:mx-8 xl:mx-auto'>
+        <div className='flex justify-between'>
           <div className='cursor-pointer flex items-center justify-center'>
             <Image
               onClick={() => navigate('/')}
@@ -41,12 +40,16 @@ const Header = () => {
           </div>
           {isAuth ? (
             <div className='flex items-center gap-4 md:gap-6'>
-              <ButtonHeader>{t('HEADER.START')}</ButtonHeader>
               <DropProfile />
             </div>
           ) : (
             <div className='flex items-center gap-4 md:gap-6'>
-              <ButtonHeader onClick={handleRegisterClick}>{t('HEADER.REGISTER')}</ButtonHeader>
+              <a
+                href='/register'
+                className='text-[#FE7743] font-bold text-md md:text-lg hover:text-[#ea9c77]'
+              >
+                {t('HEADER.REGISTER')}
+              </a>
               <ButtonHeader onClick={handleLoginClick}>{t('HEADER.LOGIN')}</ButtonHeader>
             </div>
           )}
