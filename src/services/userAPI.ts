@@ -8,6 +8,12 @@ export const getUsersAPI = async (params: GetUsersParams) =>
 
 export const getUserByIdAPI = async (id: number) => await axios.get(`${API_URL.USERS}/${id}`);
 
+export const checkHasTakenExam = async (examSetId: string) =>
+  await axios.get(`${API_URL.CHECK_TAKEN_EXAM}/${examSetId}`);
+
+export const checkHasTakenExamDefault = async () =>
+  await axios.get(API_URL.CHECK_TAKEN_EXAM_DEFAULT);
+
 export const updateUser = async (user: UserDetail) =>
   await axios.patch(`${API_URL.USERS}/${user.id}`, user);
 
