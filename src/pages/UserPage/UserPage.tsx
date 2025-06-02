@@ -1,8 +1,9 @@
-import WelcomeSection from '@app/components/UserPage/WelcomeSection';
+import { useSelector } from 'react-redux';
+
+import FooterSection from '@app/components/Layout/Footer/FooterSection';
 import DashboardSection from '@app/components/UserPage/DashboardSection';
 import RecommendSection from '@app/components/UserPage/RecommentSection';
-import FooterSection from '@app/components/Layout/Footer/FooterSection';
-import { useSelector } from 'react-redux';
+import WelcomeSection from '@app/components/UserPage/WelcomeSection';
 
 interface UserPageProps {
   name?: string;

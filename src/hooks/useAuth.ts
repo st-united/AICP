@@ -7,7 +7,6 @@ import { ACCESS_TOKEN, NAVIGATE_URL, REFRESH_TOKEN, USER_PROFILE } from '@app/co
 import { Credentials, RegisterUser } from '@app/interface/user.interface';
 import { logout, login, setAuth } from '@app/redux/features/auth/authSlice';
 import { loginApi, getLogout, registerApi, getActivateAccount } from '@app/services';
-
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { TextTyping } from '@app/components/atoms/';
+
 import { InovationPana } from '@app/assets/images';
+import { TextTyping } from '@app/components/atoms/';
 
 interface WelcomeSectionProps {
   name?: string;
@@ -37,7 +38,7 @@ const WelcomeSection = ({ name }: WelcomeSectionProps) => {
           </div>
         </div>
         <div className='hidden lg:flex md:items-center w-[40rem] p-4 mt-16'>
-          <img src={InovationPana} className='w-[25rem] h-[25rem]' />
+          <img src={InovationPana} alt='innovation' className='w-[25rem] h-[25rem]' />
         </div>
       </div>
     </section>
