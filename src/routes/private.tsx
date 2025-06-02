@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
-import { Homepage, Profile, SignIn } from '@app/pages/index';
+import { AptitudeTest, Profile } from '@app/pages';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
@@ -38,6 +38,10 @@ const routes = [
             ],
           },
         ],
+      },
+      {
+        path: 'aptitude-test',
+        element: <AptitudeTest />,
       },
     ],
   },

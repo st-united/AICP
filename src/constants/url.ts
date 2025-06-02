@@ -72,6 +72,8 @@ export const API_URL = {
   ACTIVATE_ACCOUNT: '/auth/activate',
   CHECK_TAKEN_EXAM: '/exam/has-taken-exam',
   CHECK_TAKEN_EXAM_DEFAULT: '/exam/taken-input-test',
+  EXAM_SETS_INPUT_TEST: '/exam-sets/input-test',
+  ANSWERS: '/answers',
 };
 
 export const VEHICLES_URL = '/vehicles';
