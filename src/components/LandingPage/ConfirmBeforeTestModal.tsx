@@ -104,8 +104,8 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
       open={confirmProps.open}
       onCancel={confirmProps.onClose}
       footer={null}
-      destroyOnClose={true}
-      closable
+      destroyOnHidden={true}
+      closable={false}
     >
       {hasTakenExam?.hasTakenExam ? <ImproveTestModal /> : <NewTestModal />}
     </Modal>
