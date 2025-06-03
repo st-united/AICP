@@ -1,0 +1,379 @@
+import {
+  CloseOutlined,
+  MenuUnfoldOutlined,
+  WarningOutlined,
+  QuestionOutlined,
+} from '@ant-design/icons';
+import { Button, Divider, Modal, Progress } from 'antd';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import CountdownTimer from './CountdownTimer';
+import QuestionDisplay from './QuestionDisplay';
+import QuestionIndexPanel from './QuestionIndexPanel';
+import { useGetExamSet, useSubmitDraftQuestion, useSubmitExamSet } from '@app/hooks';
+import { AnswerChoice, Question } from '@app/interface/examSet.interface';
+
+const Testing = () => {
+  const { t } = useTranslation();
+  const [currentQuestion, setCurrentQuestion] = useState<string>('');
+  const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
+  const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  const [unansweredQuestions, setUnansweredQuestions] = useState<Question[]>([]);
+  const { data: examSet } = useGetExamSet();
+  const submitDraftQuestionMutation = useSubmitDraftQuestion();
+  const { mutate: submitExamSet } = useSubmitExamSet();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleQuestionSelect = useCallback((questionId: string) => {
+    setCurrentQuestion(questionId);
+  }, []);
+
+  const handleFlagToggle = useCallback((questionId: string) => {
+    setFlaggedQuestions((prev) =>
+      prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
+    );
+  }, []);
+
+  const handleAnswerSelect = useCallback(
+    (questionId: string, answerId: string) => {
+      const question = examSet?.questions.find((q: Question) => q.id === questionId);
+      if (!question) return;
+
+      setSelectedAnswers((prev) => {
+        const currentAnswers = prev[question.id] || [];
+        let newAnswers: string[];
+
+        if (question.type === AnswerChoice.MULTIPLE_CHOICE) {
+          newAnswers = currentAnswers.includes(answerId)
+            ? currentAnswers.filter((id) => id !== answerId)
+            : [...currentAnswers, answerId];
+        } else {
+          newAnswers = [answerId];
+        }
+
+        submitDraftQuestionMutation.mutate({
+          examSetId: examSet?.id || '',
+          questionId,
+          answers: newAnswers,
+          type: question.type,
+        });
+
+        if (newAnswers.length > 0 && !answeredQuestions.includes(question.id)) {
+          setAnsweredQuestions((prev) => [...prev, question.id]);
+        } else if (newAnswers.length === 0 && answeredQuestions.includes(question.id)) {
+          setAnsweredQuestions((prev) => prev.filter((id) => id !== question.id));
+        }
+
+        return {
+          ...prev,
+          [question.id]: newAnswers,
+        };
+      });
+    },
+    [answeredQuestions, examSet?.questions],
+  );
+
+  const handleSubmit = useCallback(() => {
+    if (!examSet) return;
+
+    const unanswered = examSet.questions.filter(
+      (question) => !answeredQuestions.includes(question.id),
+    );
+    setUnansweredQuestions(unanswered);
+    setIsSubmitModalOpen(true);
+  }, [examSet, answeredQuestions, setUnansweredQuestions]);
+
+  const handleConfirmSubmit = useCallback(() => {
+    setIsSubmitModalOpen(false);
+  }, [selectedAnswers]);
+
+  const handleCloseModal = useCallback(() => {
+    if (!examSet?.questions) return;
+    const unanswered = examSet.questions.filter(
+      (question) => !answeredQuestions.includes(question.id),
+    );
+    if (unanswered.length > 0) {
+      setUnansweredQuestions(unanswered);
+    }
+    setIsModalOpen(true);
+  }, [examSet, answeredQuestions, setUnansweredQuestions]);
+
+  if (!examSet) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className='overflow-hidden'>
+      <div className='absolute top-10 right-10'>
+        <CloseOutlined
+          onClick={handleCloseModal}
+          className='text-lg p-1 rounded-full bg-white flex shadow-xl cursor-pointer'
+        />
+      </div>
+      <div className='flex flex-col justify-start items-center w-full py-8 px-6 gap-4'>
+        <div className='flex text-xl smM:text-2xl leading-[22px] font-extrabold gap-2 smM:flex-row flex-col text-center'>
+          <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
+          <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
+        </div>
+        <span className='text-[#686868] max-w-[500px] smM:max-w-none smM:min-w-[600px] text-lg smM:text-xl font-semibold text-center'>
+          {t('TEST.SUB_TITLE')}
+        </span>
+      </div>
+      <div className='flex h-full'>
+        <div className='hidden smM:block fixed left-0 top-[115px] w-[300px] smM:w-80 md:w-96 h-[calc(100vh-145px)] p-3 smM:p-6 pt-0 z-10'>
+          <div className='flex flex-col space-y-6 h-full'>
+            <CountdownTimer
+              duration={examSet.duration * 60}
+              onTimeUp={() => {
+                handleSubmit();
+                handleConfirmSubmit();
+              }}
+            />
+            <QuestionIndexPanel
+              questions={examSet.questions}
+              currentQuestion={currentQuestion}
+              answeredQuestions={answeredQuestions}
+              flaggedQuestions={flaggedQuestions}
+              onFlagToggle={handleFlagToggle}
+              onQuestionSelect={handleQuestionSelect}
+            />
+          </div>
+        </div>
+
+        <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
+          <MenuUnfoldOutlined
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className='flex text-2xl'
+          />
+        </div>
+
+        {isMenuOpen && (
+          <div className='smM:hidden'>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setIsMenuOpen(!isMenuOpen);
+                }
+              }}
+              className='fixed top-0 left-0 w-full h-full bg-black/50 z-10'
+              aria-label='Close menu overlay'
+            />
+            <div className='fixed bg-white z-10 left-2 top-24 rounded-3xl w-[300px]'>
+              <CountdownTimer
+                duration={examSet.duration * 60}
+                onTimeUp={() => {
+                  handleSubmit();
+                  handleConfirmSubmit();
+                  submitExamSet(examSet.id);
+                }}
+              />
+              <div className='fixed top-52 p-3 left-[280px] bg-white z-10 rounded-full shadow-lg'>
+                <MenuUnfoldOutlined
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className='flex text-2xl'
+                />
+              </div>
+              <QuestionIndexPanel
+                questions={examSet.questions}
+                currentQuestion={currentQuestion}
+                answeredQuestions={answeredQuestions}
+                flaggedQuestions={flaggedQuestions}
+                onFlagToggle={handleFlagToggle}
+                onQuestionSelect={handleQuestionSelect}
+              />
+            </div>
+          </div>
+        )}
+
+        <div className='smM:ml-80 md:ml-96 flex-1'>
+          <div className='flex flex-col w-full bg-white p-6 mdM:p-10 rounded-xl mdM:pr-0 pr-0'>
+            <Progress
+              className='pr-6 mdM:pr-10'
+              percent={Math.round((answeredQuestions.length / examSet.questions.length) * 100)}
+              strokeColor='#001342'
+              size={['100%', 16]}
+            />
+            <div className='pr-6 mdM:pr-10'>
+              <Divider />
+            </div>
+            <div className='overflow-y-auto mdM:h-[calc(100vh-320px)] smM:h-[calc(100vh-310px)] h-[calc(100vh-330px)]'>
+              <QuestionDisplay
+                questions={examSet.questions}
+                currentQuestion={currentQuestion}
+                onQuestionInViewChange={setCurrentQuestion}
+                flaggedQuestions={flaggedQuestions}
+                onFlagToggle={handleFlagToggle}
+                onAnswerSelect={(questionId, answerId) => {
+                  const question = examSet.questions.find((q: Question) => q.id === questionId);
+                  if (question) {
+                    handleAnswerSelect(question.id, answerId);
+                  }
+                }}
+              />
+              <div className='flex justify-center mb-2'>
+                <Button
+                  className='bg-[#FE7743] rounded-3xl text-white px-12 py-2 h-full text-lg font-bold border-[#FE7743] hover:border-2 hover:border-[#FE7743] hover:bg-white hover:text-[#FE7743] hover:cursor-pointer'
+                  onClick={handleSubmit}
+                >
+                  {t('BUTTON.SUBMIT')}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Modal
+        width={750}
+        open={isSubmitModalOpen}
+        onOk={handleConfirmSubmit}
+        onCancel={() => setIsSubmitModalOpen(false)}
+        okText={t('BUTTON.CONFIRM')}
+        cancelText={t('BUTTON.CANCEL')}
+        footer={null}
+        closeIcon={
+          <div className='flex border border-black rounded-full cursor-pointer items-center justify-center'>
+            <CloseOutlined className='flex text-xl text-black p-2' />
+          </div>
+        }
+      >
+        {unansweredQuestions.length > 0 ? (
+          <div className='flex item-center justify-center flex-col gap-3 p-4'>
+            <div className='flex items-center justify-center '>
+              <div className='p-3 bg-[#FEEEEE] rounded-full'>
+                <div className='flex p-4 bg-[#FFDEDE] rounded-full'>
+                  <WarningOutlined className='flex text-[45px] text-[#FF0000]' />
+                </div>
+              </div>
+            </div>
+            <p className='text-lg font-medium text-center py-4'>
+              {t('SUBMIT.UNANSWERED_MESSAGE', { count: unansweredQuestions.length })}
+            </p>
+            <div className='text-lg flex flex-col gap-2 font-medium'>
+              <div className='flex gap-2'>
+                <span>{t('TEST.TOTAL_QUESTION')}:</span>
+                <span className='font-bold'>{examSet.questions.length}</span>
+              </div>
+              <div className='flex gap-2'>
+                <span>{t('TEST.ANSWERED_QUESTION')}:</span>
+                <span className='font-bold'>{answeredQuestions.length}</span>
+              </div>
+              <div className='flex gap-2'>
+                <span>{t('TEST.UNANSWERED_QUESTION')}:</span>
+                <span className='font-bold text-[#FE7743]'>
+                  {unansweredQuestions
+                    .slice(0, 3)
+                    .map((question) => {
+                      const index = examSet.questions.findIndex((q) => q.id === question.id) + 1;
+                      return `Câu ${index}`;
+                    })
+                    .join(', ')}
+                  <span className='text-[#FE7743] cursor-pointer'>
+                    {unansweredQuestions.length > 3 && ` ( ${t('TEST.MORE')} )`}
+                  </span>
+                </span>
+              </div>
+            </div>
+            <span className='text-lg font-medium'>{t('TEST.CHECK_ANSWER')}</span>
+            <div className='flex items-center justify-center gap-4 mt-6 flex-col smM:flex-row'>
+              <Button
+                onClick={() => submitExamSet(examSet.id)}
+                className='border-2 border-[#FE7743] rounded-3xl text-[#FE7743] px-8 py-2 h-full text-lg font-bold hover:border-[#ff5029] hover:text-[#ff5029]'
+              >
+                {t('BUTTON.SUBMMIT_NOW')}
+              </Button>
+              <Button
+                onClick={() => setIsSubmitModalOpen(false)}
+                className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
+              >
+                {t('BUTTON.CONTINUE_NOW')}
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className='flex item-center justify-center flex-col gap-4 p-4'>
+            <div className='flex items-center justify-center '>
+              <div className='p-3 bg-[#E6F1FF] rounded-full'>
+                <div className='flex p-4 bg-[#BBDBFF] rounded-full'>
+                  <QuestionOutlined className='flex text-[45px] text-[#0069E2]' />
+                </div>
+              </div>
+            </div>
+            <p className='text-2xl font-bold text-center py-4'>{t('TEST.CONFIRM')}</p>
+            <span className='text-lg flex flex-col gap-2 font-medium text-justify'>
+              {t('TEST.CHECK_CONFIRM')}
+            </span>
+            <div className='text-justify'>
+              <span className='text-lg font-bold text-[#FF7236]'>{t('TEST.WARNING')}: </span>
+              <span className='text-lg font-medium'>{t('TEST.CONFIRM_WARNING')}</span>
+            </div>
+            <div className='flex items-center justify-center gap-4 mt-6'>
+              <Button
+                onClick={() => setIsSubmitModalOpen(false)}
+                className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
+              >
+                {t('BUTTON.CANCEL_TEST')}
+              </Button>
+              <Button
+                onClick={() => submitExamSet(examSet.id)}
+                className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
+              >
+                {t('BUTTON.SUBMIT')}
+              </Button>
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      <Modal
+        width={700}
+        open={isModalOpen}
+        footer={null}
+        closable={true}
+        maskClosable={true}
+        onCancel={() => setIsModalOpen(false)}
+        centered
+      >
+        <div className='flex flex-col gap-4 p-4'>
+          <div className='flex items-center justify-center '>
+            <div className='p-3 bg-[#FEEEEE] rounded-full'>
+              <div className='flex p-4 bg-[#FFDEDE] rounded-full'>
+                <WarningOutlined className='flex text-[45px] text-[#FF0000]' />
+              </div>
+            </div>
+          </div>
+          <h2 className='text-2xl font-bold text-black mb-4 text-center'>
+            {t('TEST.CLOSE_WARNING_TITLE')}
+          </h2>
+          <p className='text-lg font-medium mb-4 sm:text-left text-center'>
+            {t('SUBMIT.UNANSWERED_NUMBERS_MESSAGE', { count: unansweredQuestions.length })}
+          </p>
+          <div className='flex gap-1 items-start justify-start'>
+            <p className='flex text-lg font-bold min-w-[67px] uppercase text-[#FF7236]'>
+              {t('SUBMIT.NOTE')}:
+            </p>
+            <p className='text-lg font-medium'>{t('SUBMIT.NOTE_MESSAGE')}</p>
+          </div>
+          <div className='flex items-center justify-center mt-4 gap-4'>
+            <Button
+              onClick={() => setIsSubmitModalOpen(false)}
+              className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
+            >
+              {t('BUTTON.EXIT_NOW')}
+            </Button>
+            <Button className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'>
+              {t('BUTTON.CONTINUE_NOW')}
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+export default Testing;
