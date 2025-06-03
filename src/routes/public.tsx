@@ -1,6 +1,7 @@
 import AuthLayout from '@app/components/templates/AuthLayout';
+import ProfileLayout from '@app/components/templates/ProfileLayout';
 import PublicLayout from '@app/components/templates/PublicLayout';
-import { Homepage, SignIn, ForgotPassword, ResetPassword } from '@app/pages/index';
+import { Homepage, Profile, SignIn, ForgotPassword, ResetPassword } from '@app/pages/index';
 import SignUp from '@app/pages/SignUp/SignUp';
 
 const routes = [
@@ -31,6 +32,15 @@ const routes = [
       {
         path: '/',
         element: <Homepage />,
+      },
+      {
+        element: <ProfileLayout />,
+        children: [
+          {
+            path: 'profile',
+            element: <Profile />,
+          },
+        ],
       },
     ],
   },

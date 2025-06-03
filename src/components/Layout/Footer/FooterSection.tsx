@@ -8,8 +8,8 @@ const FooterSection = () => {
   const { t } = useTranslation();
   const activities = t('HOMEPAGE.FOOTER_ACTIVITIES_LIST', { returnObjects: true }) as Array<string>;
   return (
-    <div className='text-white px-6 lg:px-20 py-20 relative flex md:justify-start justify-center md:items-start items-center md:text-start text-center bg-cover bg-no-repeat bg-center bg-[url(./assets/svgs/footer_background.svg)]'>
-      <Row className='container mx-auto mt-16 !md:mt-0'>
+    <div className='text-white px-6 lg:px-20 py-20 relative flex md:justify-start justify-center md:items-start items-center md:text-start text-center bg-cover bg-no-repeat bg-center bg-[url(./assets/images/footer-new-bg.png)]'>
+      <Row className='container mx-auto xl:py-16'>
         <Col
           xs={{ order: 1, span: 24 }}
           sm={{ order: 1, span: 24 }}
