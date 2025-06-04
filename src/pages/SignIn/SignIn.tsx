@@ -54,12 +54,7 @@ const SignIn = () => {
             </button>
           </p>
         </div>
-        <Form
-          form={form}
-          layout='vertical'
-          onFinish={onFinish}
-          className='grid grid-cols-2 gap-4 gap-1'
-        >
+        <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
           <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'

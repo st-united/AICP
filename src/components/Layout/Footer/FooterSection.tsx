@@ -1,6 +1,7 @@
 import { MailOutlined, EnvironmentOutlined, UpCircleFilled } from '@ant-design/icons';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
+
 import { DevplusLogo } from '@app/assets/svgs';
 
 const FooterSection = () => {
@@ -13,9 +14,9 @@ const FooterSection = () => {
           xs={{ order: 1, span: 24 }}
           sm={{ order: 1, span: 24 }}
           md={{ order: 1, span: 8 }}
-          className='flex md:justify-start justify-center'
+          className='flex md:justify-start justify-center '
         >
-          <img alt='devpluslogo' src={DevplusLogo} className='h-20' />
+          <img alt='devpluslogo' src={DevplusLogo} className='h-16 lg:h-20' />
         </Col>
         <Col
           xs={{ order: 3, span: 24 }}
