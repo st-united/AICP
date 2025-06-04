@@ -1,5 +1,4 @@
 import { Button } from 'antd';
-import { t } from 'i18next';
 import React from 'react';
 
 interface ActionButtonsProps {
@@ -9,21 +8,36 @@ interface ActionButtonsProps {
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({ onInterviewClick, onOtherClick }) => {
   return (
-    <div className='flex justify-center gap-4 mt-12'>
+    <div className='flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-2 sm:px-0'>
       <Button
         size='large'
         onClick={onOtherClick}
-        className='px-8 py-3 h-auto border-gray-300 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-300'
+        className='w-full sm:w-auto px-6 sm:px-8 py-3 h-auto border border-gray-300 
+                   shadow-[0_0_10px_2px_rgba(99,102,241,0.4)] 
+                   text-[#686868] hover:bg-gray-50 
+                   rounded-full transition-all duration-300 font-bold text-sm sm:text-base
+                   flex items-center justify-center'
+        style={{ borderRadius: '25px' }}
       >
-        {t<string>('DRAFT.BUTTON_PAST')}
+        Lúc khác
       </Button>
+
       <Button
         type='primary'
         size='large'
         onClick={onInterviewClick}
-        className='px-8 py-3 h-auto bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 border-none rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105'
+        className='w-full sm:w-auto px-6 sm:px-8 py-3 h-auto 
+                   border-none rounded-full shadow-lg 
+                   hover:shadow-xl transition-all duration-300 
+                   transform hover:scale-105 font-bold text-white text-sm sm:text-base
+                   flex items-center justify-center'
+        style={{
+          backgroundColor: '#FE7743',
+          borderRadius: '25px',
+          borderColor: '#FE7743',
+        }}
       >
-        {t<string>('DRAFT.BUTTON_SCHEDULE')}
+        Chọn lịch phỏng vấn
       </Button>
     </div>
   );

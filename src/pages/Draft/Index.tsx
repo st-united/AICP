@@ -6,6 +6,8 @@ import ActionButtons from '@app/components/ai-assessment/ActionButtons';
 import SkillsList from '@app/components/ai-assessment/SkillList';
 import SkillRadarChart from '@app/components/ai-assessment/SkillRadarChart';
 
+import './style.scss';
+
 const Index = () => {
   const chartData = [
     { skill: 'AI Foundation', value: 75, fullMark: 100 },
@@ -48,20 +50,27 @@ const Index = () => {
 
         <Card className='bg-white rounded-3xl shadow-xl p-8 border-0'>
           <div className='text-center mb-8'>
-            <h1 className='text-4xl font-bold mb-4'>
-              <span className='text-orange-500'>{t<string>('DRAFT.TITLE1')}:</span>{' '}
-              <span className='text-blue-900'>{t<string>('DRAFT.TITLE2')}</span>{' '}
-              <span className='text-orange-500'>{t<string>('DRAFT.TITLE3')}</span>
+            <h1 className='text-xl sm:text-4xl font-bold mb-3 sm:mb-4 leading-tight'>
+              <span className='text-[#FE7743]'>{t<string>('DRAFT.TITLE1')}:</span>{' '}
+              <span className='text-[#02185B]'>{t<string>('DRAFT.TITLE2')}</span>{' '}
+              <span className='text-[#FE7743]'>{t<string>('DRAFT.TITLE3')}</span>
             </h1>
-            <p className='text-gray-600 text-lg mb-2'>{t<string>('DRAFT.SUBTITLE')}s</p>
-            <p className='text-gray-600'>{t<string>('DRAFT.CALL_TO_ACTION')}</p>
+            <p className='text-[#686868] text-sm sm:text-lg '>{t<string>('DRAFT.SUBTITLE')}</p>
+            <p className='text-[#686868] text-sm sm:text-lg'>{t<string>('DRAFT.CALL_TO_ACTION')}</p>
+            <hr className='my-8 border-t border-gray-300' />
           </div>
 
-          <div className='grid lg:grid-cols-2 gap-12 items-center'>
+          <div className='grid lg:grid-cols-2 lg:gap-12 items-start relative'>
             <SkillsList skills={skillsData} />
-            <SkillRadarChart data={chartData} averageScore={72} />
+            <div className='my-8 h-px w-full bg-gray-300   lg:my-0 lg:absolute lg:left-1/2 lg:top-0 lg:h-64 lg:w-px lg:-translate-x-1/2 lg:translate-y-0 lg:bg-gray-300' />
+            <div className='flex flex-col gap-6'>
+              <SkillRadarChart data={chartData} averageScore={72} />
+              <ActionButtons
+                onInterviewClick={handleInterviewClick}
+                onOtherClick={handleOtherClick}
+              />
+            </div>
           </div>
-          <ActionButtons onInterviewClick={handleInterviewClick} onOtherClick={handleOtherClick} />
         </Card>
       </div>
     </div>

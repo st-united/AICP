@@ -238,5 +238,24 @@
     "TERMS": "Điều khoản & Điều kiện",
     "PRIVACY": "Chính sách bảo mật",
     "COMPANY": "DevPlus"
+  },
+  "DRAFT": {
+    "TITLE1": "Kết quả đánh giá",
+    "TITLE2": "năng lực AI",
+    "TITLE3": "(Sơ bộ)",
+    "SUBTITLE": "Dưới đây là kết quả đánh giá sơ bộ của bạn.",
+    "CALL_TO_ACTION": "Để nhận kết quả chính xác, vui lòng chọn cố vấn và lịch phỏng vấn.",
+    "LEVEL_LABEL": "Mức năng lực",
+    "LEVEL_VALUE": "Beginner",
+    "AI_KNOWLEDGE": "Kiến thức AI",
+    "AI_KNOWLEDGE_SCORE": "75/100",
+    "PROGRAMMING_SKILL": "Kỹ năng lập trình",
+    "PROGRAMMING_SKILL_SCORE": "65/100",
+    "PRACTICAL_APPLICATION": "Áp dụng thực tế",
+    "PRACTICAL_APPLICATION_SCORE": "70/100",
+    "NOTE": "Kết quả này là bản nháp. Phỏng vấn với cố vấn sẽ xác định năng lực chính xác.",
+    "AVG_SCORE_LABEL": "Avg Score",
+    "BUTTON_PAST": "Lúc khác",
+    "BUTTON_SCHEDULE": "Chọn lịch phỏng vấn"
   }
 }
