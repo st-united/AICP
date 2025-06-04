@@ -19,6 +19,7 @@ export interface Question {
 export interface AnswerOption {
   id: string;
   content: string;
+  selected: boolean;
 }
 
 export enum AnswerChoice {

@@ -5,7 +5,7 @@ import {
   QuestionOutlined,
 } from '@ant-design/icons';
 import { Button, Divider, Modal, Progress } from 'antd';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CountdownTimer from './CountdownTimer';
@@ -27,6 +27,26 @@ const Testing = () => {
   const submitDraftQuestionMutation = useSubmitDraftQuestion();
   const { mutate: submitExamSet } = useSubmitExamSet();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (examSet?.questions) {
+      examSet.questions.forEach((question) => {
+        const selectedOptions = question.answerOptions
+          .filter((option) => !!option.selected)
+          .map((option) => {
+            return option.id;
+          });
+
+        if (selectedOptions.length > 0) {
+          setSelectedAnswers((prev) => ({
+            ...prev,
+            [question.id]: selectedOptions,
+          }));
+          setAnsweredQuestions((prev) => [...prev, question.id]);
+        }
+      });
+    }
+  }, [examSet]);
 
   const handleQuestionSelect = useCallback((questionId: string) => {
     setCurrentQuestion(questionId);
@@ -214,6 +234,7 @@ const Testing = () => {
                     handleAnswerSelect(question.id, answerId);
                   }
                 }}
+                selectedAnswers={selectedAnswers}
               />
               <div className='flex justify-center mb-2'>
                 <Button
