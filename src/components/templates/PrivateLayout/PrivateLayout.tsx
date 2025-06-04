@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 import ProtectedRoute from '../ProtectedRoute';
 import { useGetProfile } from '@app/hooks/useProfile';
+import './PrivateLayout.scss';
 
 const { Content } = Layout;
 
