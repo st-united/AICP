@@ -14,6 +14,7 @@ interface QuestionProps {
   flaggedQuestions: string[];
   onFlagToggle: (id: string) => void;
   onAnswerSelect: (questionId: string, answerId: string) => void;
+  selectedAnswers: Record<string, string[]>;
 }
 
 const QuestionDisplay = ({
@@ -23,6 +24,7 @@ const QuestionDisplay = ({
   flaggedQuestions,
   onFlagToggle,
   onAnswerSelect,
+  selectedAnswers,
 }: QuestionProps) => {
   const { setQuestionRef, scrollToQuestion } = useQuestionNavigation(
     questions,
@@ -30,7 +32,6 @@ const QuestionDisplay = ({
   );
   const { t } = useTranslation();
   const prevQuestionRef = useRef(currentQuestion);
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
 
   useEffect(() => {
     if (prevQuestionRef.current !== currentQuestion) {
@@ -40,28 +41,6 @@ const QuestionDisplay = ({
   }, [currentQuestion, scrollToQuestion]);
 
   const handleAnswerSelect = (questionId: string, answerId: string) => {
-    const question = questions.find((q) => q.id === questionId);
-    if (!question) return;
-
-    setSelectedAnswers((prev) => {
-      const currentAnswers = prev[questionId] || [];
-
-      if (question.type === AnswerChoice.MULTIPLE_CHOICE) {
-        const newAnswers = currentAnswers.includes(answerId)
-          ? currentAnswers.filter((id) => id !== answerId)
-          : [...currentAnswers, answerId];
-
-        return {
-          ...prev,
-          [questionId]: newAnswers,
-        };
-      } else {
-        return {
-          ...prev,
-          [questionId]: [answerId],
-        };
-      }
-    });
     onAnswerSelect(questionId, answerId);
   };
 
