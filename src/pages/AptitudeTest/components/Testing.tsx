@@ -210,7 +210,7 @@ const Testing = () => {
           </div>
         )}
 
-        <div className='smM:ml-80 md:ml-96 flex-1'>
+        <div className='smM:ml-80 md:ml-96 flex-1 md:mr-6 mx-4'>
           <div className='flex flex-col w-full bg-white p-6 mdM:p-10 rounded-xl mdM:pr-0 pr-0'>
             <Progress
               className='pr-6 mdM:pr-10'
