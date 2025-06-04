@@ -53,7 +53,14 @@ const StepSection = () => {
       </div>
       <div className='md:container w-4/5 md:w-5/6 xl:w-full bg-[#FF7A00] rounded-3xl text-white mx-10 px-10 md:px-12 md:mx-auto bg-cover bg-center bg-[url(./assets/images/step-bg.png)]'>
         <div className='relative min-h-[26rem] md:min-h-[30rem] flex items-center'>
-          <Carousel dots vertical className='w-full h-full'>
+          <Carousel
+            dots={false}
+            vertical
+            draggable={true}
+            autoplay
+            autoplaySpeed={3000}
+            className='w-full h-full'
+          >
             {steps.map((step, idx) => (
               <div key={idx} className='h-[26rem] md:h-[30rem] flex items-center'>
                 <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full'>
