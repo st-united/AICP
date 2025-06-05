@@ -57,8 +57,6 @@ const InterviewScheduler: React.FC<InterviewSchedulerProps> = ({
   };
 
   const handleConfirm = () => {
-    console.log(user);
-
     if (!selectedDate || !selectedTime) {
       message.warning(t('INTERVIEW_SCHEDULER.SELECT_DATE_TIME_WARNING'));
       return;
