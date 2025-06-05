@@ -8,6 +8,7 @@ import LandingPageStepBackground from './landingpage_step_bg.png';
 import Lock from './lock_change_password.png';
 import LoginBackground from './login-background.png';
 import Logo from './logo.svg';
+import DefaultAvatar from './defaultAvatar.png';
 
 export {
   Logo,
@@ -20,4 +21,5 @@ export {
   FooterBackground,
   CyborgHand,
   HalfCircle,
+  DefaultAvatar,
 };
