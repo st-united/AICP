@@ -1,5 +1,7 @@
 import { lazy } from 'react';
 
+import { NAVIGATE_URL } from '@app/constants';
+
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
 const Forbidden = lazy(() => import('@app/pages/Forbidden/Forbidden'));
@@ -9,11 +11,11 @@ const routes = [
     element: <PrivateLayout />,
     children: [
       {
-        path: '404',
+        path: NAVIGATE_URL.NOTFOUND,
         element: <NotFound />,
       },
       {
-        path: '403',
+        path: NAVIGATE_URL.FORBIDDEN,
         element: <Forbidden />,
       },
     ],
