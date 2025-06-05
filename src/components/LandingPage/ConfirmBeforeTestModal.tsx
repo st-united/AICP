@@ -1,10 +1,11 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { Trans, useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { Modal } from '@app/components/molecules';
+import { NAVIGATE_URL } from '@app/constants';
 import { useHasTakenExamDefault } from '@app/hooks';
-import { useNavigate } from 'react-router-dom';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
@@ -12,15 +13,15 @@ interface ConfirmBeforeTestModalProps {
 }
 
 export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestModalProps) {
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { data: hasTakenExam } = useHasTakenExamDefault();
 
   const handleStartTest = () => {
-    navigate('/aptitude-test');
+    navigate(NAVIGATE_URL.TEST);
   };
   const handleReviewResult = () => {
-    // TODO
+    navigate(NAVIGATE_URL.TEST_RESULT);
   };
 
   const ModalHeader = ({ title }: { title: string }) => (
