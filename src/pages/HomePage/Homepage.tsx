@@ -23,7 +23,6 @@ const Homepage = () => {
   return (
     <div className='w-full min-h-screen scroll-smooth'>
       <div className='h-screen'>
-        <Header />
         <MainScreen onScrollToNext={handleNext} />
       </div>
       <div ref={section2Ref}>
