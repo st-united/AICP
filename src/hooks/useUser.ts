@@ -2,10 +2,16 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { GetUsersParams, UserDetail } from '@app/interface/user.interface';
+import {
+  GetHistoryParams,
+  GetUsersParams,
+  HistoryTesting,
+  UserDetail,
+} from '@app/interface/user.interface';
 import {
   createUser,
   deleteUserAPI,
+  getHistoryTestingApi,
   getUserByIdAPI,
   getUsersAPI,
   resetPasswordApi,
@@ -78,4 +84,17 @@ export const useResetPassword = () => {
     const response = await resetPasswordApi(id);
     return response.data;
   });
+};
+
+export const useGetHistory = (params?: GetHistoryParams) => {
+  return useQuery<HistoryTesting[]>(
+    [QUERY_KEY.EXAM_HISTORY, params],
+    async () => {
+      const { data } = await getHistoryTestingApi(params);
+      return data.data;
+    },
+    {
+      enabled: true,
+    },
+  );
 };

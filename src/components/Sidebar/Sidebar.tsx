@@ -22,7 +22,7 @@ const Sidebar = () => {
     {
       icon: ContainerOutlined,
       label: t('SIDEBAR.HISTORY'),
-      path: '/profile/history',
+      path: '/history',
     },
     {
       icon: ContainerOutlined,

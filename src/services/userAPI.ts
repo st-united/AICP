@@ -1,12 +1,15 @@
 import axios from 'axios';
 
 import { API_URL } from '@app/constants';
-import { GetUsersParams, UserDetail } from '@app/interface/user.interface';
+import { GetHistoryParams, GetUsersParams, UserDetail } from '@app/interface/user.interface';
 
 export const getUsersAPI = async (params: GetUsersParams) =>
   await axios.get(API_URL.USERS, { params });
 
 export const getUserByIdAPI = async (id: number) => await axios.get(`${API_URL.USERS}/${id}`);
+
+export const getHistoryTestingApi = (params?: GetHistoryParams) =>
+  axios.get(API_URL.HISTORY_TESTING, { params });
 
 export const updateUser = async (user: UserDetail) =>
   await axios.patch(`${API_URL.USERS}/${user.id}`, user);

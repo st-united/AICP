@@ -279,5 +279,38 @@
     "TERMS": "Điều khoản & Điều kiện",
     "PRIVACY": "Chính sách bảo mật",
     "COMPANY": "DevPlus"
+  },
+  "EXAM": {
+    "TITLE": "Bài kiểm tra",
+    "QUIZ_LIST_TITLE": "Danh sách bài kiểm tra",
+    "DOWNLOAD_ALL": "Tải xuống tất cả",
+    "START_NEW_QUIZ": "Bắt đầu bài mới",
+    "START_FIRST_QUIZ": "Bắt đầu ngay",
+    "DATE_FILTER_PLACEHOLDER": "Chọn ngày bắt đầu - Chọn ngày kết thúc",
+    "NO_QUIZ_MESSAGE": "Chưa có bài kiểm tra nào",
+    "LOADING_MESSAGE": "Đang tải danh sách bài kiểm tra...",
+    "ERROR_TITLE": "Lỗi tải dữ liệu",
+    "ERROR_DESCRIPTION": "Không thể tải danh sách bài kiểm tra. Vui lòng thử lại.",
+    "RETRY_BUTTON": "Thử lại",
+    "QUIZ_ID_PREFIX": "Bài kiểm tra",
+    "CREATED_TIME": "Thời gian tạo:",
+    "COMPETENCY_LEVEL": "Mức năng lực:",
+    "DATE_FILTER_START": "Ngày bắt đầu",
+    "DATE_FILTER_END": "Ngày kết thúc",
+    "NO_QUIZ_TITLE": "Bắt đầu bài kiểm tra đầu tiên của bạn!",
+    "NO_QUIZ_DESC_1": "Bạn chỉ cần vài phút để hoàn thành bài kiểm tra này.",
+    "NO_QUIZ_DESC_2": "Hãy thử sức và khám phá xem bạn đang ở đâu trong hành trình phát triển của mình.",
+    "STATUS": {
+      "IN_PROGRESS": "Đang làm bài",
+      "SUBMITTED": "Đã nộp bài",
+      "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+      "GRADED": "Đã chấm điểm"
+    },
+    "LEVEL": {
+      "FOUNDATION": "Mức nền tảng",
+      "INTERMEDIATE": "Mức trung cấp",
+      "ADVANCED": "Mức nâng cao",
+      "EXPERT": "Chuyên gia"
+    }
   }
 }
