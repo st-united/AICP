@@ -15,15 +15,14 @@ export interface Credentials {
 }
 
 export interface UserProfile {
+  id: string;
   name: string;
   email: string;
   phone: string;
   dateOfBirth: string;
   address: string;
   gender: string;
-  identityId: string;
   avatar: string;
-  permissions: string[];
 }
 
 export interface UserDetail {

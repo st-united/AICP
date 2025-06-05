@@ -5,13 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { ChangePassword, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
-import {
-  changePassword,
-  getProfileApi,
-  removeAvatarApi,
-  updateProfileApi,
-  uploadAvatarApi,
-} from '@app/services';
+import { changePassword, getProfileApi, updateProfileApi, uploadAvatarApi } from '@app/services';
 
 export const useGetProfile = () => {
   const dispatch = useDispatch();
@@ -72,21 +66,6 @@ export const useUploadAvatar = () => {
   return useMutation(
     async (data: { identityId: string; formData: FormData }) => {
       const response = await uploadAvatarApi(data.identityId, data.formData);
-      return response.data;
-    },
-    {
-      onSuccess({ message }) {
-        queryClient.refetchQueries([QUERY_KEY.PROFILE]);
-      },
-    },
-  );
-};
-
-export const useRemoveAvatar = () => {
-  const queryClient = useQueryClient();
-  return useMutation(
-    async (data: { identityId: string }) => {
-      const response = await removeAvatarApi(data.identityId);
       return response.data;
     },
     {
