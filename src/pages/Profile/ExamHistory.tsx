@@ -65,7 +65,7 @@ const ExamHistory = () => {
   }, [historyData]);
 
   if (isLoading) {
-    return <Spin className='flex items-center justify-center min-h-screen' />;
+    return <Spin className='flex items-center justify-center h-full' />;
   }
   if (error) {
     return <ErrorState onRetry={refetch} />;
@@ -75,7 +75,7 @@ const ExamHistory = () => {
 
   return (
     <div className='h-full !rounded-2xl bg-gray-50 p-2 sm:p-6'>
-      <div className='max-w-4xl mx-auto space-y-4'>
+      <div className='max-w-4xl mx-auto space-y-4 h-full flex flex-col'>
         <QuizHeader
           onDownloadAll={handleDownloadAll}
           onStartNew={handleStartNew}
@@ -88,7 +88,7 @@ const ExamHistory = () => {
         {!hasQuizzes ? (
           <EmptyState onStartFirst={handleStartFirst} />
         ) : (
-          <div className='space-y-4'>
+          <div className='overflow-y-auto flex-1 space-y-4 pr-2'>
             {historyData.map((quiz) => (
               <QuizCard
                 key={quiz.id}
