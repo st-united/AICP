@@ -18,13 +18,13 @@ const ProfileLayout = () => {
         </div>
 
         <div
-          className={`hidden md:block top-0 left-0 h-full z-40 lg:col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 2xl:col-span-1`}
+          className={`hidden md:block top-0 left-0 h-full z-40 lg:col-span-1 md:col-span-2 xl:col-span-2 2xl:col-span-1`}
         >
           <Sidebar />
         </div>
 
         {/* Main Content */}
-        <div className='lg:col-span-3 md:col-span-3 lg:col-span-3 xl:col-span-4 2xl:col-span-4 h-full'>
+        <div className='lg:col-span-3 md:col-span-3 xl:col-span-4 2xl:col-span-4 h-full'>
           <Outlet />
         </div>
       </div>
