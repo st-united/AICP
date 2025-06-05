@@ -4,6 +4,7 @@ import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { AptitudeTest, Profile } from '@app/pages';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
+import ExamHistory from '@app/pages/Profile/ExamHistory';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
@@ -34,6 +35,10 @@ const routes = [
               {
                 path: 'change-password',
                 element: <PasswordChangeForm />,
+              },
+              {
+                path: 'history',
+                element: <ExamHistory />,
               },
             ],
           },

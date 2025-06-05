@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import {
+  GetHistoryParams,
   GetUsersParams,
+  HistoryTesting,
   UserDetail,
   UpdateForgotPassword,
   HasTakenExam,
@@ -13,6 +15,7 @@ import {
   checkHasTakenExamDefault,
   createUser,
   deleteUserAPI,
+  getHistoryTestingApi,
   getUserByIdAPI,
   getUsersAPI,
   resetPasswordApi,
@@ -113,4 +116,17 @@ export const useUpdateForgotPassword = () => {
     const response = await updateForgotPasswordApi(payload);
     return response.data;
   });
+};
+
+export const useGetHistory = (params?: GetHistoryParams) => {
+  return useQuery<HistoryTesting[]>(
+    [QUERY_KEY.EXAM_HISTORY, params],
+    async () => {
+      const { data } = await getHistoryTestingApi(params);
+      return data.data;
+    },
+    {
+      enabled: true,
+    },
+  );
 };

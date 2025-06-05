@@ -1,4 +1,5 @@
 import { GetListParams } from './common.interface';
+import { ExamStatusEnum, LevelOfDomainEnum } from '@app/constants/enum';
 
 export interface UserColumns {
   id: number;
@@ -80,4 +81,15 @@ export interface HasTakenExam {
   hasTakenExam: boolean;
   examSetDuration: number;
   examId?: string;
+}
+export interface HistoryTesting {
+  id: string;
+  examStatus: ExamStatusEnum;
+  levelOfDomain: LevelOfDomainEnum;
+  createdAt: Date;
+}
+
+export interface GetHistoryParams {
+  startDate?: string;
+  endDate?: string;
 }
