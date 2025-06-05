@@ -13,45 +13,36 @@ const WelcomeSection = ({ name }: WelcomeSectionProps) => {
   const { t } = useTranslation();
   const [open, setIsOpen] = useState(false);
   return (
-    <section className='w-full bg-white h-screen flex items-center pt-8 sm:pt-0'>
-      <div className='container mx-auto flex flex-row sm:h-full items-center"'>
-        <div className='flex flex-col w-full h-full'>
-          <div className='h-full w-full'>
-            <div className='flex items-center md:w-4/5 lg:w-full h-full md:justify-center md:items-start flex-col gap-6 md:px-5 xl:px-0'>
-              <div className='text-[#273F4F] text-center text-2xl sm:text-3xl md:text-start lg:text-5xl max-w-full leading-12 font-bold md:!py-4 px-2'>
-                {t('HOMEPAGE_LOGIN.TITLE', { name })}
-              </div>
-              <TextTyping
-                text={t('HOMEPAGE_LOGIN.TEXT_READY') ?? ''}
-                speed={30}
-                className='leading-10 text-2xl sm:text-3xl lg:text-5xl text-[#FE7743] md:max-w-full text-center md:text-start font-bold md:!py-4 px-2'
-              />
-              <TextTyping
-                text={t('HOMEPAGE_LOGIN.DESCRIPTION') ?? ''}
-                speed={30}
-                className='text-base leading-8 xl:leading-5 text-center lg:text-2xl md:text-lg !text-[#686868] font-semibold !py-4 px-6 md:px-3 xl:px-2 md:text-start md:leading-10'
-              />
-              <img src={InnovationPana} alt='innovation' className='h-[8rem] w-[10rem] sm:hidden' />
-              {/* <Button className='h-12 slide-in-left !uppercase cursor-pointer !rounded-full !md:py-4 !md:px-10 !py-3 ml-4 !px-8 bg-[#FE7743] text-lg md:text-xl font-bold hover:bg-[#ea9c77] transition-all duration-300 ease-in-out shadow-[#FE774380] shadow-lg text-white'>
-                {t('HOMEPAGE_LOGIN.START')}
-              </Button>
-              <p className='text-base text-center leading-8 md:text-lg md:text-start !text-[#686868] py-4 px-4 xl:px-2'> */}
-
-              <Button
-                onClick={() => {
-                  setIsOpen(true);
-                }}
-                className='h-12 slide-in-left !uppercase cursor-pointer !rounded-full !md:py-4 !md:px-10 !py-3 ml-4 !px-8 bg-[#FE7743] text-lg md:text-xl font-bold transition-all duration-300 ease-in-out shadow-[#FE774380] shadow-lg text-white'
-              >
-                {t('HOMEPAGE_LOGIN.START')}
-              </Button>
-              <p className='text-base text-center md:text-start text-[#686868] p-4'>
-                {t('HOMEPAGE_LOGIN.TEXT_PEOPLE')}
-              </p>
-            </div>
+    <section className='w-full h-full bg-white items-center'>
+      <div className='flex flex-row container w-full h-full gap-6 mx-auto py-28 xsM:w-[90%] smM:pl-2 smM:py-36 smM:items-center mdM:h-screen xl:w-[90%]'>
+        <div className='flex flex-col items-center h-full ssM:text-start smM:justify-center smM:items-start mdM:justify-center mdM:w-full gap-6'>
+          <div className='text-center text-[#273F4F] font-bold mb-4 text-2xl smM:text-3xl smM:text-start xl:text-4xl'>
+            {t('HOMEPAGE_LOGIN.TITLE', { name })}
           </div>
+          <TextTyping
+            text={t('HOMEPAGE_LOGIN.TEXT_READY') ?? ''}
+            speed={30}
+            className='text-primary !font-extrabold text-center text-2xl xsM:text-3xl smS:mb-8 smM:text-start smM:text-4xl mdM:leading-10 xl:text-6xl'
+          />
+          <TextTyping
+            text={t('HOMEPAGE_LOGIN.DESCRIPTION') ?? ''}
+            speed={30}
+            className='!text-[#273F4F] font-normal leading-6 text-center smS:mb-8 smM:text-start mdL:w-[45%] mdL:!leading-relaxed text-lg xsM:text-xl mdM:text-2xl xl:text-3xl'
+          />
+          <img src={InnovationPana} alt='innovation' className='h-[10rem] w-[12rem] smM:hidden' />
+          <Button
+            onClick={() => {
+              setIsOpen(true);
+            }}
+            className='h-12 mdL:h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
+          >
+            {t('HOMEPAGE_LOGIN.START')}
+          </Button>
+          <p className='text-base text-center smM:text-start text-[#686868] smM:leading-6'>
+            {t('HOMEPAGE_LOGIN.TEXT_PEOPLE')}
+          </p>
         </div>
-        <div className='hidden lg:flex md:items-center w-[40rem] p-4 mt-16'>
+        <div className='hidden smM:block smM:w-[30rem] mdM:w-[40rem]'>
           <img src={InnovationPana} alt='innovation' className='w-[25rem] h-[25rem]' />
         </div>
       </div>

@@ -22,7 +22,7 @@ const MainScreen = ({ onScrollToNext }: Props) => {
           alt='CyborgHand'
         />
         <div className='flex flex-col items-center justify-center container w-full h-full gap-6 mx-auto xsM:w-[90%] smM:pl-2 smM:py-4 smM:items-start xl:w-[90%]'>
-          <div className='text-center text-[#273F4F] font-bold mb-4 text-2xl smM:text-3xl smM:text-start xl:text-4xl '>
+          <div className='text-center text-[#273F4F] font-bold mb-4 text-2xl smM:text-3xl smM:text-start xl:text-4xl'>
             {t('HOMEPAGE.PRIMARY_TITLE')}
           </div>
           <TextTyping
