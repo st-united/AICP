@@ -31,9 +31,8 @@ const authSlice = createSlice({
       state.isAuth = true;
     },
     setAuth(state, action) {
-      const { user, permissions } = action.payload;
-      state.user = user;
-      state.permissions = permissions;
+      const data = action.payload;
+      state.user = data;
     },
     logout(state) {
       state.isAuth = false;
