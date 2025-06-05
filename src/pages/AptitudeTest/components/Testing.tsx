@@ -5,7 +5,7 @@ import {
   QuestionOutlined,
 } from '@ant-design/icons';
 import { Button, Divider, Modal, Progress } from 'antd';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CountdownTimer from './CountdownTimer';
@@ -25,7 +25,7 @@ const Testing = () => {
   const [unansweredQuestions, setUnansweredQuestions] = useState<Question[]>([]);
   const { data: examSet } = useGetExamSet();
   const submitDraftQuestionMutation = useSubmitDraftQuestion();
-  const { mutate: submitExamSet } = useSubmitExamSet();
+  const { mutate: submitExamSet, isLoading: isSubmitting } = useSubmitExamSet();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -108,8 +108,13 @@ const Testing = () => {
   }, [examSet, answeredQuestions, setUnansweredQuestions]);
 
   const handleConfirmSubmit = useCallback(() => {
-    setIsSubmitModalOpen(false);
-  }, [selectedAnswers]);
+    if (!examSet) return;
+    submitExamSet(examSet.id, {
+      onSuccess: () => {
+        setIsSubmitModalOpen(false);
+      },
+    });
+  }, [examSet, submitExamSet]);
 
   const handleCloseModal = useCallback(() => {
     if (!examSet?.questions) return;
@@ -121,6 +126,15 @@ const Testing = () => {
     }
     setIsModalOpen(true);
   }, [examSet, answeredQuestions, setUnansweredQuestions]);
+
+  const handleQuestionClick = useCallback((questionId: string) => {
+    setIsSubmitModalOpen(false);
+    setCurrentQuestion(questionId);
+    const questionElement = document.getElementById(`question-${questionId}`);
+    if (questionElement) {
+      questionElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
 
   if (!examSet) {
     return <div>Loading...</div>;
@@ -287,14 +301,38 @@ const Testing = () => {
               <div className='flex gap-2'>
                 <span>{t('TEST.UNANSWERED_QUESTION')}:</span>
                 <span className='font-bold text-[#FE7743]'>
-                  {unansweredQuestions
-                    .slice(0, 3)
-                    .map((question) => {
-                      const index = examSet.questions.findIndex((q) => q.id === question.id) + 1;
-                      return `Câu ${index}`;
-                    })
-                    .join(', ')}
-                  <span className='text-[#FE7743] cursor-pointer'>
+                  {unansweredQuestions.slice(0, 3).map((question, index) => {
+                    const questionIndex =
+                      examSet.questions.findIndex((q) => q.id === question.id) + 1;
+                    return (
+                      <React.Fragment key={question.id}>
+                        {index > 0 && ', '}
+                        <button
+                          type='button'
+                          onClick={() => handleQuestionClick(question.id)}
+                          className='text-[#FE7743] hover:underline focus:outline-none focus:underline'
+                          aria-label={`Go to question ${questionIndex}`}
+                        >
+                          {`Câu ${questionIndex}`}
+                        </button>
+                      </React.Fragment>
+                    );
+                  })}
+                  <span
+                    className='text-[#FE7743] cursor-pointer hover:underline'
+                    onClick={() => {
+                      if (unansweredQuestions.length > 3) {
+                        handleQuestionClick(unansweredQuestions[0].id);
+                      }
+                    }}
+                    role='button'
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && unansweredQuestions.length > 3) {
+                        handleQuestionClick(unansweredQuestions[0].id);
+                      }
+                    }}
+                  >
                     {unansweredQuestions.length > 3 && ` ( ${t('TEST.MORE')} )`}
                   </span>
                 </span>
@@ -304,12 +342,15 @@ const Testing = () => {
             <div className='flex items-center justify-center gap-4 mt-6 flex-col smM:flex-row'>
               <Button
                 onClick={() => submitExamSet(examSet.id)}
+                loading={isSubmitting}
+                disabled={isSubmitting}
                 className='border-2 border-[#FE7743] rounded-3xl text-[#FE7743] px-8 py-2 h-full text-lg font-bold hover:border-[#ff5029] hover:text-[#ff5029]'
               >
                 {t('BUTTON.SUBMMIT_NOW')}
               </Button>
               <Button
                 onClick={() => setIsSubmitModalOpen(false)}
+                disabled={isSubmitting}
                 className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
               >
                 {t('BUTTON.CONTINUE_NOW')}
@@ -336,12 +377,15 @@ const Testing = () => {
             <div className='flex items-center justify-center gap-4 mt-6'>
               <Button
                 onClick={() => setIsSubmitModalOpen(false)}
+                disabled={isSubmitting}
                 className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
               >
                 {t('BUTTON.CANCEL_TEST')}
               </Button>
               <Button
                 onClick={() => submitExamSet(examSet.id)}
+                loading={isSubmitting}
+                disabled={isSubmitting}
                 className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
               >
                 {t('BUTTON.SUBMIT')}
