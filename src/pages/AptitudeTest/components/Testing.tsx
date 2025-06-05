@@ -163,8 +163,9 @@ const Testing = () => {
             <CountdownTimer
               duration={examSet.duration * 60}
               onTimeUp={() => {
-                handleSubmit();
-                handleConfirmSubmit();
+                if (examSet) {
+                  submitExamSet(examSet.id);
+                }
               }}
             />
             <QuestionIndexPanel
@@ -201,9 +202,9 @@ const Testing = () => {
               <CountdownTimer
                 duration={examSet.duration * 60}
                 onTimeUp={() => {
-                  handleSubmit();
-                  handleConfirmSubmit();
-                  submitExamSet(examSet.id);
+                  if (examSet) {
+                    submitExamSet(examSet.id);
+                  }
                 }}
               />
               <div className='fixed top-52 p-3 left-[280px] bg-white z-10 rounded-full shadow-lg'>
