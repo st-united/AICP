@@ -40,7 +40,7 @@ const StepSection = () => {
 
   return (
     <div className='w-full h-full xl:min-h-screen bg-cover bg-center bg-no-repeat bg-[url(./assets/images/landingpage_step_bg.png)]'>
-      <div className='text-center py-10'>
+      <div className='text-center px-4 smM:px-0 py-10'>
         <p className='text-primary font-bold text-base sm:text-2xl mdM::text-3xl my-8'>
           {t('HOMEPAGE.STEP_LABEL')}
         </p>
