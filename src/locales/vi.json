@@ -63,13 +63,21 @@
     "UPLOAD": "Tải ảnh",
     "EXPORT": "Export",
     "START": "Bắt đầu",
-    "CONFIRM": "Xác nhận"
+    "CONFIRM": "Xác nhận",
+    "SUBMIT": "Nộp bài",
+    "SUBMMIT_NOW": "Nộp bài ngay",
+    "CONTINUE": "Tiếp tục",
+    "CONTINUE_NOW": "Tiếp tục làm bài",
+    "CANCEL_TEST": "Hủy bỏ",
+    "EXIT_NOW": "Thoát ngay",
+    "CANCEL_NOW": "Hủy ngay"
   },
-
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
     "PROFILE": "Cá nhân",
-    "SIGN_OUT": "Đăng xuất"
+    "SIGN_OUT": "Đăng xuất",
+    "SIGN_UP": "Đăng ký",
+    "SIGN_IN": "Đăng nhập"
   },
   "NOT_FOUND": {
     "TITLE": "404",
@@ -131,33 +139,15 @@
     "ITEM": "mục"
   },
   "MODAL": {
-    "CONFIRM_DELETE_AVATAR": "Bạn muốn xoá ảnh đại diện?",
-    "NOTE_DELETE_AVATAR": "Nếu bạn xóa hình ảnh hồ sơ của mình, hình ảnh đó sẽ được thay thế bằng một hình ảnh mặc định.",
-    "CONFIRM_DELETE": "Bạn có chắc chắn muốn xóa {{name}} không?",
-    "CONFIRM_DELETE_SESSION": "Bạn có chắc chắn muốn xóa phiên học của {{name}} không?",
-    "CONFIRM_SYNC": "Bạn có chắc chắn muốn đồng bộ {{name}} này không?",
-    "CONFIRM_EXPORT": "Bạn có chắc chắn muốn xuất bản dữ liệu thành tệp trang tính không?",
-    "CONFIRM_EXPORT_TITLE": "Xuất dữ liệu",
-    "TITLE_DELETE": "Xóa {{name}}",
-    "TITLE_SYNC": "Đồng bộ {{name}}",
-    "TITLE_RESET_PASSWORD": "Đặt lại mật khẩu",
-    "CONFIRM_RESET_PASSWORD": "Bạn có chắc chắn muốn đặt lại mật khẩu cho {{name}} không?",
-    "SUGGESTION_COPY_PASSWORD": "Đặt lại mật khẩu thành công",
-    "COPY_PASSWORD": "Mật khẩu hiện tại là: {{name}}",
-    "COPY": "Sao chép",
-    "AVATAR": "Ảnh đại diện",
-    "EDIT_IMAGE": "Cắt ảnh",
-    "IMPORT_COURSE": "Nhập báo cáo 1",
-    "IMPORT_TEACHER": "Import giáo viên",
-    "EXPORT_TEACHER": "Export giáo viên",
-    "NOTE_AVATAR": "Ảnh hồ sơ giúp người khác nhận ra bạn và cũng giúp bạn nhận biết được rằng mình đã đăng nhập vào tài khoản",
-    "NOTE_AVATAR_STUDENT": "Ảnh hồ sơ giúp người khác nhận ra học viên",
-    "CONFIRM_REVERT": "Bạn có chắc muốn thu hồi thẻ {{name}} không?",
-    "TITLE_REVERT": "Thu hồi {{name}}",
-    "IMPORT_MODAL_SUB_CONTENT": "Chỉ hỗ trợ đăng tải một file. Định dạng file được chấp nhận là {{fileExtensions}}",
-    "IMPORT_ERROR_REPORT": "Lỗi nhập BC1 khóa {{course}}",
-    "IMPORT_WARNING_REPORT": "Lỗi tạo mới khóa sau khóa {{course}}",
-    "IMPORT_VEHICLE": "Import xe"
+    "TITLE_CONFIRM_TAKE_NEW_TEST": "Bạn đã sẵn sàng làm bài?",
+    "DURATION_CONFIRM_TAKE_NEW_TEST": "Bài kiểm tra kéo dài <bold>{{duration}} phút</bold>, phù hợp với mọi cấp độ, không yêu cầu chuẩn bị đặc biệt.",
+    "TITLE_CONFIRM_IMPROVE_TEST": "Bạn đã sẵn sàng cải thiện?",
+    "DURATION_CONFIRM_IMPROVE_TEST": "Bài kiểm tra kéo dài <bold>{{duration}} phút</bold>, được thiết kế ở mức độ cao hơn so với trình độ hiện tại của bạn, nhằm đánh giá khả năng phát triển tiềm năng.",
+    "RESULT_CONFIRM_TEST": "Sau khi hoàn thành, bạn sẽ nhận được bản đánh giá năng lực AI ở dạng dự thảo và chuyển sang bước tiếp theo: đặt lịch phỏng vấn với đội ngũ chuyên gia để hoàn thiện và xác nhận năng lực AI một cách chính xác nhất.",
+    "WARNING_CONFIRM_TEST": "Bạn chỉ được làm bài đánh giá một lần trước khi có kết quả chính thức. Ngay sau khi nhận được phản hồi từ đội ngũ cố vấn, bạn sẽ có thể tiếp tục với bài kiểm tra tiếp theo.",
+    "START_CONFIRM_TEST": "Bắt đầu ngay",
+    "REVIEW_RESULT": "Xem lại kết quả",
+    "NOTE_CONFIRM_TEST": "LƯU Ý"
   },
   "VALIDATE": {
     "MIN": " {{field}} phải lớn hơn hoặc bằng {{number}}",
@@ -200,13 +190,15 @@
     "PASSWORD_MIN": "Mật khẩu phải có ít nhất 8 ký tự",
     "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
-    "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!"
+    "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
+    "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại"
   },
   "PROFILE": {
+    "AVATAR": "Ảnh đại diện",
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "OLD_PASSWORD": "Mật khẩu cũ",
     "NEW_PASSWORD": "Mật khẩu mới",
-    "CONFIRM_PASSWORD": "Xác thực mật khẩu",
+    "CONFIRM_PASSWORD": "Xác nhận mật khẩu",
     "TITLE": "Thông tin người dùng",
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Hồ sơ của tôi",
@@ -228,7 +220,14 @@
     "OCCUPATION": "Nghề nghiệp",
     "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
     "REFERRAL": "Mã giới thiệu",
-    "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu"
+    "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu",
+    "UPDATE_SUCCESS": "Cập nhật hồ sơ thành công!",
+    "UPDATE_FAILED": "Cập nhật hồ sơ thất bại. Vui lòng thử lại.",
+    "PLACEHOLDER_OLD_PASSWORD": "Nhập mật khẩu cũ",
+    "PLACEHOLDER_NEW_PASSWORD": "Nhập mật khẩu mới",
+    "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",
+    "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
+    "SAVE": "Lưu"
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -328,7 +327,8 @@
   "PLACEHOLDER": {
     "SELECT_COUNTRY": "Chọn quốc gia",
     "SELECT_CITY": "Chọn tỉnh thành",
-    "SELECT_JOB": "Chọn công việc"
+    "SELECT_JOB": "Chọn công việc",
+    "FIELD_REQUIRED": "{{field}} *"
   },
   "SIGN_UP": {
     "TITLE": "Đăng ký tài khoản",
@@ -346,6 +346,28 @@
     "TERMS": "Điều khoản & Điều kiện",
     "PRIVACY": "Chính sách bảo mật",
     "COMPANY": "DevPlus"
+  },
+  "FORGOT_PASSWORD": {
+    "EMAIL_VALID": "Email bắt buộc phải hợp lệ!",
+    "TITLE": "Quên mật khẩu",
+    "RESET_PASSWORD": "Đặt lại mật khẩu",
+    "NO_ACCOUNT": "Bạn chưa có tài khoản?",
+    "NOT_FOUND": "Người dùng không tồn tại!",
+    "REGISTER": "Đăng ký",
+    "SEND_EMAIL_SUCCESS": "Đã gửi email thành công",
+    "SEND_LOADING": "Đang gửi...",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Gửi email thành công!"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Đặt lại mật khẩu!",
+    "NEW_PASSWORD": "Mật khẩu mới",
+    "REQUIRE_PASSWORD": "Mật khẩu không được để trống!",
+    "CONFIRM_PASSWORD": "Nhập lại mật khẩu mới *",
+    "CREATE_PASSWORD": "Tạo mới mật khẩu",
+    "REGEX_PASSWORD": "Mật khẩu phải có ít nhất 8 ký tự, có số, chữ thường, chữ viết hoa và ký tự đặc biệt!",
+    "MATCH": "Mật khẩu không khớp!",
+    "EXPIRED": "Liên kết đã hết hạn"
   },
   "HOMEPAGE_LOGIN": {
     "TITLE": "Xin chào {{name}}, 👋",
@@ -386,5 +408,43 @@
       "DESCRIPTION": "Nắm vững các khái niệm AI cơ bản để bắt đầu hành trình của bạn",
       "LINK": "Xem chi tiết"
     }
+  },
+  "TEST": {
+    "TEST_TITLE": "Bài kiểm tra năng lực",
+    "TEST_TITLE_AI": "ứng dụng AI",
+    "SUB_TITLE": "Hãy trả lời lần lượt các câu hỏi dưới đây để khám phá khả năng ứng dụng AI của bạn.",
+    "TIME_LEFT": "Thời gian còn lại",
+    "HOURS": "Giờ",
+    "MINUTES": "Phút",
+    "SECONDS": "Giây",
+    "QUESTION_INDEX": "Mục lục câu hỏi",
+    "QUESTION": "Câu hỏi",
+    "FLAG_QUESTION": "Đánh dấu câu hỏi",
+    "MULTIPLE_CHOICE": "Chọn 1 đáp án đúng:",
+    "SINGLE_CHOICE": "Chọn nhiều đáp án đúng:",
+    "TOTAL_QUESTION": "Tổng số câu hỏi",
+    "ANSWERED_QUESTION": "Số câu hỏi đã trả lời",
+    "UNANSWERED_QUESTION": "Số câu hỏi chưa trả lời",
+    "CHECK_ANSWER": "Bạn nên xem lại các câu hỏi trước khi nộp.",
+    "MORE": "Xem thêm",
+    "CONFIRM": "Xác nhận nộp bài",
+    "CHECK_CONFIRM": "Bạn có chắc chắn muốn gửi bài làm của mình ngay bây giờ không? Hãy đảm bảo rằng bạn đã hoàn tất mọi nội dung trước khi nộp.",
+    "WARNING": "Cảnh báo",
+    "CONFIRM_WARNING": "Sau khi nộp, bạn sẽ không thể thay đổi hoặc cập nhật nội dung đã nộp.",
+    "TIME_UP": "Hết thời gian làm bài",
+    "TIME_UP_MESSAGE": "Thời gian quy định để hoàn thành bài làm của bạn đã kết thúc.",
+    "AUTO_SUBMIT_MESSAGE": "Thời gian quy định để hoàn thành bài làm của bạn đã kết thúc.",
+    "AUTO_SUBMIT_MESSAGE_2": "Bài làm sẽ tự động nộp sau {{countdown}} giây.",
+    "CLOSE_WARNING_TITLE": "Cảnh báo: Bài làm chưa được lưu",
+    "CLOSE_WARNING_MESSAGE": "Nếu bạn rời khỏi trang này, bài làm của bạn sẽ không được lưu lại. Bạn có chắc chắn muốn rời khỏi không?"
+  },
+  "SUBMIT": {
+    "TITLE": "Cảnh báo: Bài làm chưa hoàn tất",
+    "UNANSWERED_MESSAGE": "Bạn vẫn còn {{count}} câu hỏi chưa trả lời. Vui lòng kiểm tra lại trước khi nộp bài.",
+    "UNANSWERED_NUMBERS": "Question numbers: {{numbers}}",
+    "UNANSWERED_NUMBERS_MESSAGE": "Bạn còn {{count}} câu hỏi nữa. Bạn có muốn tiếp tục.",
+    "NOTE": "Lưu ý",
+    "NOTE_MESSAGE": "Nếu bạn thoát ngay bây giờ, hệ thống sẽ không lưu lại kết quả làm bài.",
+    "SUBMIT_NOW": "Nộp bài ngay"
   }
 }

@@ -15,3 +15,8 @@ export interface CountriesResponse {
   code: string;
   message: string | null;
 }
+
+export interface Province {
+  codeName: string;
+  name: string;
+}

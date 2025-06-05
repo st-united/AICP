@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-
 import FooterSection from '@app/components/Layout/Footer/FooterSection';
 import DashboardSection from '@app/components/UserPage/DashboardSection';
 import RecommendSection from '@app/components/UserPage/RecommentSection';
@@ -10,8 +8,6 @@ interface UserPageProps {
 }
 
 const UserPage = ({ name }: UserPageProps) => {
-  const auth = useSelector((state: any) => state.auth);
-  console.log(auth);
   return (
     <>
       <WelcomeSection name={name} />

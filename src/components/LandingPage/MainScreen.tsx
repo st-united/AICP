@@ -3,8 +3,8 @@ import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { CyborgHand } from '@app/assets/images';
-import './homepage.scss';
 import { TextTyping } from '@app/components/atoms/';
+import './homepage.scss';
 
 type Props = {
   onScrollToNext: () => void;
@@ -17,7 +17,7 @@ const MainScreen = ({ onScrollToNext }: Props) => {
     <div className='flex flex-col w-full h-screen'>
       <div className='min-h-screen w-full bg-cover bg-no-repeat bg-center bg-[url(./assets/images/homepage-bg.png)]'>
         <img
-          className='hidden absolute bottom-0 right-0 lg:right-20 md:block '
+          className='hidden absolute bottom-0 right-0 lg:right-20 md:block'
           src={CyborgHand}
           alt=''
         />
@@ -33,10 +33,9 @@ const MainScreen = ({ onScrollToNext }: Props) => {
           <TextTyping
             text={t('HOMEPAGE.SUB_TITLE') || ''}
             speed={10}
-            className='sm:w-3/5 text-base text-center lg:text-2xl md:text-lg text-[#273F4F] font-semibold !p-4 md:text-start leading-10 xl:p-2'
+            className='sm:w-3/5 text-base text-center lg:text-2xl md:text-lg !text-[#273F4F] font-semibold !p-4 md:text-start leading-10 xl:p-2'
           />
-
-          <Button className='!text-white h-16 md:ml-4 xl:mx-2 text-lg md:text-xl font-bold border-none slide-in-left !uppercase cursor-pointer !rounded-full px-8 bg-[#FE7743] hover:!bg-[#ea9c77] transition-all duration-300 shadow-[#FE774380] shadow-lg'>
+          <Button className='!text-white h-12 border-none md:ml-4 xl:mx-2 text-lg md:text-xl font-bold slide-in-left !uppercase cursor-pointer !rounded-full px-8 bg-[#FE7743] transition-all duration-300 shadow-[#FE774380] shadow-lg'>
             {t('HOMEPAGE.BUTTON')}
           </Button>
         </div>

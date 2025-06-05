@@ -16,6 +16,8 @@ export const API_URL = {
   ALL_ROLES: '/roles/all',
   CHANGE_PASSWORD: '/users/change-password',
   RESET_PASSWORD: 'users/reset-password',
+  FORGOT_PASSWORD: 'users/forgot-password',
+  UPDATE_FORGOT_PASSWORD: 'users/update-forgot-password',
   LOGOUT: '/auth/logout',
   TEACHERS: '/teachers',
   TEACHERS_BY_COURSE: '/teachers/course-teacher',
@@ -67,6 +69,11 @@ export const API_URL = {
   DATA_CARD: '/report-1/dashboard-data-card',
   DATA_CHART: '/report-1/dashboard-data-chart',
   REGISTER_USER: '/auth/register',
+  ACTIVATE_ACCOUNT: '/auth/activate',
+  CHECK_TAKEN_EXAM: '/exam/has-taken-exam',
+  CHECK_TAKEN_EXAM_DEFAULT: '/exam/taken-input-test',
+  EXAM_SETS_INPUT_TEST: '/exam-sets/input-test',
+  ANSWERS: '/answers',
 };
 
 export const VEHICLES_URL = '/vehicles';

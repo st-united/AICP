@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-// import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
+import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 import { InnovationPana } from '@app/assets/images';
 import { TextTyping } from '@app/components/atoms/';
 
@@ -11,7 +11,7 @@ interface WelcomeSectionProps {
 }
 const WelcomeSection = ({ name }: WelcomeSectionProps) => {
   const { t } = useTranslation();
-  // const [open, setIsOpen] = useState(false);
+  const [open, setIsOpen] = useState(false);
   return (
     <section className='w-full bg-white h-screen flex items-center pt-8 sm:pt-0'>
       <div className='container mx-auto flex flex-row sm:h-full items-center"'>
@@ -39,7 +39,7 @@ const WelcomeSection = ({ name }: WelcomeSectionProps) => {
 
               <Button
                 onClick={() => {
-                  // setIsOpen(true);
+                  setIsOpen(true);
                 }}
                 className='h-12 slide-in-left !uppercase cursor-pointer !rounded-full !md:py-4 !md:px-10 !py-3 ml-4 !px-8 bg-[#FE7743] text-lg md:text-xl font-bold transition-all duration-300 ease-in-out shadow-[#FE774380] shadow-lg text-white'
               >
@@ -55,7 +55,7 @@ const WelcomeSection = ({ name }: WelcomeSectionProps) => {
           <img src={InnovationPana} alt='innovation' className='w-[25rem] h-[25rem]' />
         </div>
       </div>
-      {/* <ConfirmBeforeTestModal open={open} onClose={() => setIsOpen(false)} /> */}
+      <ConfirmBeforeTestModal open={open} onClose={() => setIsOpen(false)} />
     </section>
   );
 };

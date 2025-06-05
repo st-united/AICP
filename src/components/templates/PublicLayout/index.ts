@@ -1,3 +1,3 @@
 import PublicLayout from './PublicLayout';
 
-export { PublicLayout };
+export default PublicLayout;
