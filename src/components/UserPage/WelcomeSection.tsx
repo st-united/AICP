@@ -46,7 +46,7 @@ const WelcomeSection = () => {
           <img src={InnovationPana} alt='innovation' className='w-[25rem] h-[25rem]' />
         </div>
       </div>
-      <ConfirmBeforeTestModal open={open} onClose={() => setIsOpen(false)} />
+      {open && <ConfirmBeforeTestModal open={open} onClose={() => setIsOpen(false)} />}
     </section>
   );
 };
