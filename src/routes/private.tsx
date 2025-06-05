@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
-import { Homepage, Profile, SignIn } from '@app/pages/index';
+import { Homepage, Profile } from '@app/pages/index';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));

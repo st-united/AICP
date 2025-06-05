@@ -74,7 +74,7 @@ const ExamHistory = () => {
   const hasQuizzes = historyData && historyData.length > 0;
 
   return (
-    <div className='min-h-screen bg-gray-50 p-2 sm:p-6'>
+    <div className='h-full !rounded-2xl bg-gray-50 p-2 sm:p-6'>
       <div className='max-w-4xl mx-auto space-y-4'>
         <QuizHeader
           onDownloadAll={handleDownloadAll}
