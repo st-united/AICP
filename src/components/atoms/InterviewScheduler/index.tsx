@@ -61,24 +61,24 @@ const InterviewScheduler: React.FC<InterviewSchedulerProps> = ({
       message.warning(t('INTERVIEW_SCHEDULER.SELECT_DATE_TIME_WARNING'));
       return;
     }
-
-    const payload = {
-      userId: '130f586b-c44c-413e-97aa-cd9e5529f66d',
-      mentorId: userSelected,
-      scheduledAt: selectedDate.format('YYYY-MM-DD'),
-      timeSlot: selectedTime,
-    };
-
-    createSchedule(payload, {
-      onSuccess: (response) => {
-        setDataModal(response.data?.data);
-        setShowModal(true);
-        setSelectedTime(null);
-      },
-      onError: () => {
-        message.error(t('INTERVIEW_SCHEDULER.BOOK_FAILED'));
-      },
-    });
+    if (user) {
+      const payload = {
+        userId: user?.id,
+        mentorId: userSelected,
+        scheduledAt: selectedDate.format('YYYY-MM-DD'),
+        timeSlot: selectedTime,
+      };
+      createSchedule(payload, {
+        onSuccess: (response) => {
+          setDataModal(response.data?.data);
+          setShowModal(true);
+          setSelectedTime(null);
+        },
+        onError: () => {
+          message.error(t('INTERVIEW_SCHEDULER.BOOK_FAILED'));
+        },
+      });
+    }
   };
 
   useEffect(() => {
