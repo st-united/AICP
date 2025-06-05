@@ -22,7 +22,7 @@ const Header = () => {
         isHomePage ? 'absolute bg-transparent' : ''
       } flex justify-center item-center w-full`}
     >
-      <div className='container max-w mx-4 lg:mx-8 xl:mx-auto'>
+      <div className='container w-full mx-auto xsM:w-[90%] smM:py-4 xl:w-[90%]'>
         <div className='flex justify-between'>
           <div className='cursor-pointer flex items-center justify-center'>
             <Image
@@ -39,18 +39,23 @@ const Header = () => {
             />
           </div>
           {isAuth ? (
-            <div className='flex items-center gap-4 md:gap-6'>
+            <div className='flex items-center gap-4 md:gap-6 smM:pr-2'>
               <DropProfile />
             </div>
           ) : (
-            <div className='flex items-center gap-4 md:gap-6'>
+            <div className='flex items-center gap-4 md:gap-6 smM:pr-2'>
               <a
                 href='/register'
                 className='text-[#FE7743] font-bold text-md md:text-lg hover:text-[#ea9c77]'
               >
                 {t('HEADER.REGISTER')}
               </a>
-              <ButtonHeader onClick={handleLoginClick}>{t('HEADER.LOGIN')}</ButtonHeader>
+              <ButtonHeader
+                className='hover:!bg-primary hover:!text-white'
+                onClick={handleLoginClick}
+              >
+                {t('HEADER.LOGIN')}
+              </ButtonHeader>
             </div>
           )}
         </div>

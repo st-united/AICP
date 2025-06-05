@@ -15,8 +15,8 @@ const PrivateLayout: FC = () => {
   }
 
   return (
-    <Layout className='height-vh bg-[#efeff5] overflow-hidden'>
-      <Content className='flex justify-center items-center mb-4 overflow-y-auto-auto'>
+    <Layout className='bg-[#efeff5] overflow-hidden'>
+      <Content className='flex justify-center items-center mb-4 overflow-y-auto'>
         <Suspense fallback={<Spin />}>
           <ProtectedRoute>
             <Col className='outlet-layout'>

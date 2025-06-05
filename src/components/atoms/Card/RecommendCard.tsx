@@ -16,17 +16,17 @@ const RecommendCard: React.FC<RecommendCardProps> = ({
   onLinkClick,
 }) => {
   return (
-    <Card className='h-[12rem] sm:h-full relative bg-[#02185B] text-white my-3 rounded-3xl sm:mx-6 sm:p-4 lg:mx-4 lg:p-6 w-[20rem] md:w-[24rem] max-w-full sm:max-w-sm'>
-      <div className='absolute top-10 sm:top-7 left-0 h-3/5 sm:h-4/5 w-1 bg-[#FE7743] rounded-r-full'></div>
-      <div className='flex flex-col h-full sm:justify-between min-h-[12rem]'>
-        <h3 className='text-white text-xl text-center sm:text-start sm:text-2xl md:text-xl lg:text-2xl font-semibold mb-3'>
+    <Card className='h-full w-full relative bg-[#02185B] text-white rounded-3xl'>
+      <div className='absolute top-9 smM:top-7 left-0 h-3/5 mdM:h-4/5 w-1 bg-primary rounded-r-full'></div>
+      <div className='flex flex-col h-full smM:justify-between mdM:gap-6 mdM:py-6'>
+        <h3 className='text-white text-xl text-center smM:text-start smM::text-2xl font-semibold mb-3'>
           {title}
         </h3>
-        <p className='!text-white text-base text-center sm:text-start sm:text-xl md:text-base lg:text-xl mb-4'>
+        <p className='!text-white text-base text-center smM:text-start smM:text-lg mdM:text-xl mb-4'>
           {description}
         </p>
         <Link
-          className='!text-[#FE7743] text-center sm:text-start font-semibold underline cursor-pointer hover:!text-[#ea9c77]'
+          className='!text-primary text-center text-base smM:text-lg mdM:text-xl smM:text-start font-semibold underline cursor-pointer hover:!text-[#ea9c77]'
           onClick={onLinkClick}
           to={''}
         >

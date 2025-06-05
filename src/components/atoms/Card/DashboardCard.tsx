@@ -1,5 +1,6 @@
 import { Card, Button } from 'antd';
 import React from 'react';
+import './DashboardCard.scss';
 
 interface DashboardCardProps {
   title: string;
@@ -17,20 +18,25 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   onClick,
 }) => {
   return (
-    <Card className='h-4/5 md:h-full w-[20rem] sm:w-[25rem] md:w-[20rem] xl:w-[25rem] rounded-xl shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-transform duration-300 hover:scale-105 bg-white'>
-      <div className='flex justify-between'>
-        <div className='w-[15rem] flex flex-col md:justify-between h-[11rem] md:h-[12rem]'>
-          <h2 className='text-lg font-semibold mb-1'>{title}</h2>
-          <p className='text-black mb-8 md:mb-12'>{description}</p>
+    <Card className='custom-card w-full mdM:w-[90%] rounded-xl py-4 shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-transform duration-300 hover:scale-105 bg-white'>
+      <div className='flex flex-col justify-between h-full'>
+        <div className='flex justify-between'>
+          <div className='flex flex-col md:justify-between mdM:mb-12'>
+            <h2 className='text-lg mdM:text-2xl font-semibold mb-1 mdM:mb-6'>{title}</h2>
+            <p className='text-black mb-8 mdM:text-xl'>{description}</p>
+          </div>
+          <span className='text-3xl smM:text-5xl text-[#02185B] '>{icon}</span>
+        </div>
+
+        <div className='flex items-center justify-center smM:justify-start'>
           <Button
             type='primary'
             onClick={onClick}
-            className='w-[12rem] sm:w-[15rem] !text-white h-10 !rounded-full outline-none border-none bg-[#FE7743] text-lg md:text-xl font-bold hover:bg-[#ea9c77] transition-all duration-300'
+            className='h-12 mdL:h-14 px-8 !text-white border !border-primary !rounded-full outline-none !bg-primary text-lg md:text-xl font-bold hover:!bg-white hover:!text-primary transition-all duration-300'
           >
             {buttonText}
           </Button>
         </div>
-        <span className='text-3xl sm:text-5xl text-[#02185B] '>{icon}</span>
       </div>
     </Card>
   );
