@@ -4,7 +4,7 @@ import {
   WarningOutlined,
   QuestionOutlined,
 } from '@ant-design/icons';
-import { Button, Divider, Modal, Progress } from 'antd';
+import { Button, Divider, Modal, Progress, Spin } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -137,7 +137,11 @@ const Testing = () => {
   }, []);
 
   if (!examSet) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex justify-center items-center'>
+        <Spin />
+      </div>
+    );
   }
 
   return (

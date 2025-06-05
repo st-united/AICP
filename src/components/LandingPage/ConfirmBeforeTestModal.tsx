@@ -4,6 +4,7 @@ import { Trans, useTranslation } from 'react-i18next';
 
 import { Modal } from '@app/components/molecules';
 import { useHasTakenExamDefault } from '@app/hooks';
+import { useNavigate } from 'react-router-dom';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
@@ -11,11 +12,12 @@ interface ConfirmBeforeTestModalProps {
 }
 
 export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestModalProps) {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { data: hasTakenExam } = useHasTakenExamDefault();
 
   const handleStartTest = () => {
-    // TODO
+    navigate('/aptitude-test');
   };
   const handleReviewResult = () => {
     // TODO

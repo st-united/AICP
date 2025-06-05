@@ -5,7 +5,6 @@ import {
   getMentorsAvailableAPI,
 } from '@app/services/mentorAPI';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 
 export const useMentorInfinite = ({
   search,

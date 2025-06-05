@@ -122,7 +122,7 @@ export const useSubmitExamSet = () => {
     {
       onSuccess({ message }) {
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        navigate('/');
+        navigate('/scheduler');
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);

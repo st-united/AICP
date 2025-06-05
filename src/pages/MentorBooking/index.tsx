@@ -5,10 +5,11 @@ import { Button, Typography } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useBookedSlots } from '@app/hooks/useMentor';
+import { useNavigate } from 'react-router-dom';
 
 const Booking = () => {
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
   const [dateTime, setDateTime] = useState<{ date: string | null; timeSlot: string | null }>({
     date: null,
     timeSlot: null,
@@ -25,11 +26,12 @@ const Booking = () => {
   };
 
   return (
-    <div className='bg-[#FFFBF9] p-4 md:p-8 min-h-screen'>
+    <div className='h-full'>
       <Button
         icon={<LeftOutlined />}
         type='link'
         className='p-0 !text-secondary hover:!text-primary text-lg mb-6'
+        onClick={() => navigate('/')}
       >
         {t('MENTOR_BOOKING.BACK_HOME')}
       </Button>

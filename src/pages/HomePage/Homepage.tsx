@@ -9,7 +9,6 @@ import { smoothScrollTo } from '@app/utils/scroll';
 
 const Homepage = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
-  const user = useSelector((state: any) => state.auth.user);
   const section2Ref = useRef<HTMLDivElement>(null);
   const handleNext = useCallback(() => {
     const target = section2Ref.current;
@@ -19,7 +18,7 @@ const Homepage = () => {
     }
   }, []);
 
-  if (isAuth) return <UserPage name={user.name} />;
+  if (isAuth) return <UserPage />;
 
   return (
     <div className='w-full min-h-screen scroll-smooth'>

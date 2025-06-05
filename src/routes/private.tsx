@@ -1,9 +1,10 @@
 import { lazy } from 'react';
 
-import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { AptitudeTest, Profile } from '@app/pages';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
+import Booking from '@app/pages/MentorBooking';
+import BaseLayout from '@app/components/templates/BaseLayout';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
@@ -22,7 +23,7 @@ const routes = [
         element: <Forbidden />,
       },
       {
-        element: <AuthLayout />,
+        element: <BaseLayout />,
         children: [
           {
             element: <ProfileLayout />,
@@ -37,11 +38,15 @@ const routes = [
               },
             ],
           },
+          {
+            path: 'scheduler',
+            element: <Booking />,
+          },
+          {
+            path: 'aptitude-test',
+            element: <AptitudeTest />,
+          },
         ],
-      },
-      {
-        path: 'aptitude-test',
-        element: <AptitudeTest />,
       },
     ],
   },

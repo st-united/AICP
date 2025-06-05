@@ -59,7 +59,7 @@ const MentorList = ({ slotSelected, mentorSelected, setMentorSelected }: MentorL
       <Card className='border-none !p-0 w-full max-w-full flex-1' loading={isLoading}>
         <div
           ref={scrollContainerRef}
-          className='overflow-auto h-[calc(100vh-10rem)] lg:!h-[calc(100vh-17rem)] w-full max-w-full [&::-webkit-scrollbar]:w-2 '
+          className='overflow-auto h-[calc(100vh-18rem)] w-full max-w-full [&::-webkit-scrollbar]:w-2 '
         >
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-full'>
             {data?.pages.map((page) =>

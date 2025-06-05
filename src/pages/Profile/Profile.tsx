@@ -60,7 +60,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className='relative rounded-2xl bg-white'>
+      <div className='relative rounded-2xl bg-white pb-10'>
         <div className='bg-[#FF8C5F] h-[145px] rounded-t-2xl '>
           <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
             <CustomAvatar avatar={avatar} isEdit={isEdit} onAvatarChange={setAvatar} />
