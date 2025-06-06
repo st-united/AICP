@@ -34,15 +34,6 @@ const routes = [
         index: true,
         element: <Homepage />,
       },
-      {
-        element: <ProfileLayout />,
-        children: [
-          {
-            path: NAVIGATE_URL.PROFILE,
-            element: <Profile />,
-          },
-        ],
-      },
     ],
   },
 ];

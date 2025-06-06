@@ -27,25 +27,25 @@ const routes = [
         element: <BaseLayout />,
         children: [
           {
-            element: <ProfileLayout />,
-            children: [
-              {
-                path: 'profile',
-                element: <Profile />,
-              },
-              {
-                path: 'change-password',
-                element: <PasswordChangeForm />,
-              },
-            ],
-          },
-          {
             path: 'scheduler',
             element: <Booking />,
           },
           {
             path: 'aptitude-test',
             element: <AptitudeTest />,
+          },
+        ],
+      },
+      {
+        element: <ProfileLayout />,
+        children: [
+          {
+            path: 'profile',
+            element: <Profile />,
+          },
+          {
+            path: 'change-password',
+            element: <PasswordChangeForm />,
           },
         ],
       },

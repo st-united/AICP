@@ -6,10 +6,10 @@ import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 import { InnovationPana } from '@app/assets/images';
 import { TextTyping } from '@app/components/atoms/';
 import { useSelector } from 'react-redux';
+import { RootState } from '@app/redux/store';
 
 const WelcomeSection = () => {
-  const user = useSelector((state: any) => state.auth.user);
-
+  const { user } = useSelector((state: RootState) => state.auth);
   const { t } = useTranslation();
   const [open, setIsOpen] = useState(false);
   return (
@@ -17,7 +17,7 @@ const WelcomeSection = () => {
       <div className='flex flex-row container w-full h-full gap-6 mx-auto py-28 xsM:w-[90%] smM:pl-2 smM:py-36 smM:items-center mdM:h-screen xl:w-[90%]'>
         <div className='flex flex-col items-center h-full ssM:text-start smM:justify-center smM:items-start mdM:justify-center mdM:w-full gap-6'>
           <div className='text-center text-[#273F4F] font-bold mb-4 text-2xl smM:text-3xl smM:text-start xl:text-4xl'>
-            {t('HOMEPAGE_LOGIN.TITLE', { name: user?.name })}
+            {t('HOMEPAGE_LOGIN.TITLE', { name: user?.fullName })}
           </div>
           <TextTyping
             text={t('HOMEPAGE_LOGIN.TEXT_READY') ?? ''}

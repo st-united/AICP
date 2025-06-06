@@ -11,6 +11,7 @@ import { logout } from '@app/redux/features/auth/authSlice';
 import { RootState } from '@app/redux/store';
 
 import './DropProfile.scss';
+import { DefaultAvatar } from '@app/assets/images';
 
 export const DropProfile: FC = () => {
   const { t } = useTranslation();
@@ -74,7 +75,7 @@ export const DropProfile: FC = () => {
       onOpenChange={() => setActiveItem(!activeItem)}
     >
       <div>
-        <Avatar className='w-[3rem] h-[3rem]' src={user?.avatar ? user?.avatar : null} />
+        <Avatar className='w-[3rem] h-[3rem]' src={user?.avatar ? user?.avatar : DefaultAvatar} />
       </div>
     </Dropdown>
   );
