@@ -1,4 +1,10 @@
-import { ProfileOutlined, LockOutlined, ContainerOutlined } from '@ant-design/icons';
+import {
+  ProfileOutlined,
+  LockOutlined,
+  ContainerOutlined,
+  CheckSquareOutlined,
+  ReadOutlined,
+} from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useLocation, Link } from 'react-router-dom';
 
@@ -20,12 +26,12 @@ const Sidebar = () => {
       path: '/change-password',
     },
     {
-      icon: ContainerOutlined,
+      icon: CheckSquareOutlined,
       label: t('SIDEBAR.HISTORY'),
       path: '/profile/history',
     },
     {
-      icon: ContainerOutlined,
+      icon: ReadOutlined,
       label: t('SIDEBAR.ONLINE_COURSES'),
       path: '/profile/courses',
     },
