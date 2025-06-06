@@ -47,7 +47,7 @@ const StepSection = () => {
         <h2 className='text-primary font-extrabold text-2xl sm:text-3xl md:text-4xl mdM:text-5xl mb-8'>
           {t('HOMEPAGE.STEP_TITLE')}
         </h2>
-        <p className='text-[#444444] font-medium !leading-10 mb-8 text-lg smM:px-16 md:px-36 mdL:text-3xl'>
+        <p className='text-[#444444] font-medium !leading-10 mb-8 text-lg px-4 smM:px-16 md:px-36 mdL:text-3xl'>
           {t('HOMEPAGE.STEP_SUBTITLE')}
         </p>
       </div>
