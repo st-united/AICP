@@ -88,7 +88,7 @@ const ExamHistory = () => {
         {!hasQuizzes ? (
           <EmptyState onStartFirst={handleStartFirst} />
         ) : (
-          <div className='overflow-y-auto flex-1 space-y-4 pr-2'>
+          <div className='overflow-y-auto flex-1 space-y-4 p-2'>
             {historyData.map((quiz) => (
               <QuizCard
                 key={quiz.id}

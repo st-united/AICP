@@ -2,6 +2,7 @@ import { lazy } from 'react';
 
 import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
+import { NAVIGATE_URL } from '@app/constants';
 import { Homepage, Profile } from '@app/pages/index';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
 
@@ -36,7 +37,7 @@ const routes = [
                 element: <Profile />,
               },
               {
-                path: 'history',
+                path: NAVIGATE_URL.TEST_RESULT,
                 element: <ExamHistory />,
               },
             ],

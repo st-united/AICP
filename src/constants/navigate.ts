@@ -8,4 +8,5 @@ export const NAVIGATE_URL = {
   SIGN_IN: '/login',
   SIGN_OUT: '/sign-out',
   PROFILE: '/profile',
+  TEST_RESULT: '/history',
 };
