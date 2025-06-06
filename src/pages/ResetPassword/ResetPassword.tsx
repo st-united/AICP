@@ -32,7 +32,7 @@ export default function ResetPassword() {
     handleUpdateForgotPassword(payload, {
       onSuccess: (data) => {
         form.resetFields();
-        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('MODAL.SUGGESTION_COPY_PASSWORD'));
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('RESET_PASSWORD.RESET_SUCCESS'));
         navigate('/login', { replace: true });
       },
       onError: (error) => {
