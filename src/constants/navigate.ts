@@ -1,5 +1,7 @@
 export const NAVIGATE_URL = {
+  LANDING_PAGE: '/',
   FORBIDDEN: '/403',
+  NOTFOUND: '/404',
   USERS: '/users',
   USER_UPDATE: '/users/update',
   USER_CREATE: '/users/create',
@@ -9,4 +11,6 @@ export const NAVIGATE_URL = {
   SIGN_UP: '/register',
   SIGN_OUT: '/sign-out',
   PROFILE: '/profile',
+  TEST: '/aptitude-test',
+  TEST_RESULT: '/history',
 };

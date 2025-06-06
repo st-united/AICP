@@ -16,6 +16,7 @@ export interface Credentials {
 }
 
 export interface UserProfile {
+  id: string;
   fullName: string;
   email: string;
   phoneNumber?: string;

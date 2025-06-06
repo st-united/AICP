@@ -1,5 +1,6 @@
 import FooterBackground from './bg-footer.png';
 import CyborgHand from './cyborg-hand.png';
+import DefaultAvatar from './defaultAvatar.png';
 import DevPlusS from './devplus-s.png';
 import DevPlus from './devplus.png';
 import HalfCircle from './half-circle.png';
@@ -22,4 +23,5 @@ export {
   CyborgHand,
   HalfCircle,
   noExamHistory,
+  DefaultAvatar,
 };

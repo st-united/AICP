@@ -4,7 +4,7 @@ import {
   WarningOutlined,
   QuestionOutlined,
 } from '@ant-design/icons';
-import { Button, Divider, Modal, Progress } from 'antd';
+import { Button, Divider, Modal, Progress, Spin } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -137,7 +137,11 @@ const Testing = () => {
   }, []);
 
   if (!examSet) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex justify-center items-center'>
+        <Spin />
+      </div>
+    );
   }
 
   return (
@@ -163,8 +167,9 @@ const Testing = () => {
             <CountdownTimer
               duration={examSet.duration * 60}
               onTimeUp={() => {
-                handleSubmit();
-                handleConfirmSubmit();
+                if (examSet) {
+                  submitExamSet(examSet.id);
+                }
               }}
             />
             <QuestionIndexPanel
@@ -201,9 +206,9 @@ const Testing = () => {
               <CountdownTimer
                 duration={examSet.duration * 60}
                 onTimeUp={() => {
-                  handleSubmit();
-                  handleConfirmSubmit();
-                  submitExamSet(examSet.id);
+                  if (examSet) {
+                    submitExamSet(examSet.id);
+                  }
                 }}
               />
               <div className='fixed top-52 p-3 left-[280px] bg-white z-10 rounded-full shadow-lg'>

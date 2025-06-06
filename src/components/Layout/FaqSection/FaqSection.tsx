@@ -17,105 +17,107 @@ const FaqSection = () => {
     ANSWER: string;
   }>;
   return (
-    <div className=' mx-auto w-full h-full xl:h-screen xl:items-center py-16 md:px-6 xl:px-0 lg:px-8 bg-[#FFFBF9]'>
-      <div className='container text-[#FF7A00] text-center font-bold text-base sm:text-xl md:text-start mb-10 md:mb-20 mx-auto'>
-        {t('HOMEPAGE.FAQ')}
-      </div>
-      <div className='mx-4 md:container md:mx-auto grid grid-cols-1 md:grid-cols-2 gap-12'>
-        <div className='w-full flex flex-col items-center md:items-start justify-start'>
-          <h2 className='text-2xl md:text-4xl font-bold text-[#FE7743] mb-4 text-center md:text-left'>
-            {t('HOMEPAGE.FAQ_TITLE1')}
-          </h2>
-          <h2 className='text-2xl md:text-4xl font-bold text-[#FE7743] mb-8 text-center md:text-left'>
-            {t('HOMEPAGE.FAQ_TITLE2')}
-          </h2>
-          <p className='text-[#444444] mb-8 text-xl md:text-2xl text-center md:text-left font-medium'>
-            {t('HOMEPAGE.FAQ_CONTACT')}
-          </p>
-          <div className='flex gap-4'>
-            <a
-              href='https://www.facebook.com/'
-              className='w-12 h-12 flex items-center justify-center rounded-[10px] bg-[#FE7743] hover:bg-[#FF9A5A] transition'
-              title='Facebook'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <FacebookFilled className='text-white text-2xl' />
-            </a>
-            <a
-              href='https://www.linkedin.com/'
-              className='w-12 h-12 flex items-center justify-center rounded-[10px] bg-[#FE7743] hover:bg-[#FF9A5A] transition'
-              title='Linkedin'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <LinkedinFilled className='text-white text-2xl' />
-            </a>
-            <a
-              href='https://www.tiktok.com/'
-              className='w-12 h-12 flex items-center justify-center rounded-[10px] bg-[#FE7743] hover:bg-[#FF9A5A] transition'
-              title='TikTok'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <TikTokFilled className='text-white text-2xl' />
-            </a>
-          </div>
+    <div className='w-full h-full pt-8 mdM:pt-20 pb-40 bg-[#FFFBF9]'>
+      <div className='container w-full h-full mx-auto xsM:w-[90%] smM:px-2 py-10'>
+        <div className='text-primary font-bold text-center text-base sm:text-2xl mdM::text-3xl mdM:text-start mb-10 md:mb-20'>
+          {t('HOMEPAGE.FAQ')}
         </div>
-        <div className='flex flex-col gap-3'>
-          <Collapse
-            accordion
-            className='bg-transparent'
-            expandIconPosition='end'
-            bordered={false}
-            expandIcon={({ isActive }) =>
-              isActive ? (
-                <MinusOutlined className='!text-base !text-white' />
-              ) : (
-                <PlusOutlined className='!text-base !text-black' />
-              )
-            }
-            onChange={(val) => {
-              if (Array.isArray(val)) {
-                setExpanded(val[0]);
-              } else {
-                setExpanded(val as string | undefined);
+        <div className='grid grid-cols-1 smM:grid-cols-2 gap-12'>
+          <div className='w-full flex flex-col items-center smM:items-start justify-start'>
+            <h2 className='text-primary font-extrabold text-2xl sm:text-3xl md:text-4xl mdM:text-5xl mb-4'>
+              {t('HOMEPAGE.FAQ_TITLE1')}
+            </h2>
+            <h2 className='text-primary font-extrabold text-2xl sm:text-3xl md:text-4xl mdM:text-5xl mb-8 text-center smM:text-start'>
+              {t('HOMEPAGE.FAQ_TITLE2')}
+            </h2>
+            <p className='text-[#444444] text-center smM:text-start font-medium !leading-8 mb-8 text-lg mdL:text-3xl'>
+              {t('HOMEPAGE.FAQ_CONTACT')}
+            </p>
+            <div className='flex gap-4'>
+              <a
+                href='https://www.facebook.com/'
+                className='w-12 h-12 flex items-center justify-center rounded-[10px] bg-[#FE7743] hover:bg-[#FF9A5A] transition'
+                title='Facebook'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <FacebookFilled className='text-white text-2xl' />
+              </a>
+              <a
+                href='https://www.linkedin.com/'
+                className='w-12 h-12 flex items-center justify-center rounded-[10px] bg-[#FE7743] hover:bg-[#FF9A5A] transition'
+                title='Linkedin'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <LinkedinFilled className='text-white text-2xl' />
+              </a>
+              <a
+                href='https://www.tiktok.com/'
+                className='w-12 h-12 flex items-center justify-center rounded-[10px] bg-[#FE7743] hover:bg-[#FF9A5A] transition'
+                title='TikTok'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <TikTokFilled className='text-white text-2xl' />
+              </a>
+            </div>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Collapse
+              accordion
+              className='bg-transparent'
+              expandIconPosition='end'
+              bordered={false}
+              expandIcon={({ isActive }) =>
+                isActive ? (
+                  <MinusOutlined className='!text-base !text-white' />
+                ) : (
+                  <PlusOutlined className='!text-base !text-black' />
+                )
               }
-            }}
-          >
-            {Array.isArray(faqs) &&
-              faqs.map((faq, index) => {
-                const isActive = expanded === String(index);
-                return (
-                  <Collapse.Panel
-                    header={
-                      <span
-                        className={`text-lg font-semibold ${
-                          isActive ? 'text-white' : 'text-[#444444]'
-                        }`}
-                      >
-                        {faq.QUESTION}
-                      </span>
-                    }
-                    key={index}
-                    className={`!rounded-xl !mb-2 border-none shadow-none ${
-                      isActive ? 'bg-[#FE7743]' : 'bg-[#FFE9E1]'
-                    }`}
-                    extra={null}
-                  >
-                    <div className='faq-panel-content'>
-                      <p
-                        className={`mt-3 text-base font-normal ${
-                          isActive ? 'text-white' : 'text-[#6B6B6B]'
-                        }`}
-                      >
-                        {faq.ANSWER}
-                      </p>
-                    </div>
-                  </Collapse.Panel>
-                );
-              })}
-          </Collapse>
+              onChange={(val) => {
+                if (Array.isArray(val)) {
+                  setExpanded(val[0]);
+                } else {
+                  setExpanded(val as string | undefined);
+                }
+              }}
+            >
+              {Array.isArray(faqs) &&
+                faqs.map((faq, index) => {
+                  const isActive = expanded === String(index);
+                  return (
+                    <Collapse.Panel
+                      header={
+                        <span
+                          className={`text-lg font-semibold ${
+                            isActive ? 'text-white' : 'text-[#444444]'
+                          }`}
+                        >
+                          {faq.QUESTION}
+                        </span>
+                      }
+                      key={index}
+                      className={`!rounded-xl !mb-2 border-none shadow-none ${
+                        isActive ? 'bg-[#FE7743]' : 'bg-[#FFE9E1]'
+                      }`}
+                      extra={null}
+                    >
+                      <div className='faq-panel-content'>
+                        <p
+                          className={`mt-3 text-base font-normal ${
+                            isActive ? 'text-white' : 'text-[#6B6B6B]'
+                          }`}
+                        >
+                          {faq.ANSWER}
+                        </p>
+                      </div>
+                    </Collapse.Panel>
+                  );
+                })}
+            </Collapse>
+          </div>
         </div>
       </div>
     </div>

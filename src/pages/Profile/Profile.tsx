@@ -59,101 +59,99 @@ const Profile = () => {
   };
 
   return (
-    <>
-      <div className='relative rounded-2xl bg-white'>
-        <div className='bg-[#FF8C5F] h-[145px] rounded-t-2xl '>
-          <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
-            <CustomAvatar avatar={avatar} isEdit={isEdit} onAvatarChange={setAvatar} />
-          </div>
+    <div className='relative rounded-2xl bg-white h-full shadow overflow-auto'>
+      <div className='bg-[#FF8C5F] h-[145px] rounded-t-2xl '>
+        <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
+          <CustomAvatar avatar={avatar} isEdit={isEdit} onAvatarChange={setAvatar} />
         </div>
-        <Form
-          form={form}
-          layout='vertical'
-          className='w-full flex justify-center !mt-[120px] !px-4'
-          onFinish={handleSubmit}
-          initialValues={{
-            fullName: data?.fullName ?? '',
-            email: data?.email ?? '',
-            phoneNumber: data?.phoneNumber ?? '',
-            dob: data?.dob ? moment(data?.dob) : null,
-            province: data?.province ?? null,
-            job: data?.job ?? null,
-            referralCode: data?.referralCode ?? null,
-          }}
-        >
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px] w-full'>
-            <Form.Item name='fullName' label={t('PROFILE.FULLNAME')} rules={validator}>
-              <Input
-                className='!px-6 !py-3 !rounded-lg'
-                placeholder={t('PROFILE.FULLNAME_PLACEHOLDER') as string}
-                disabled={!isEdit}
-              />
-            </Form.Item>
-            <Form.Item name='email' label={t('PROFILE.EMAIL')}>
-              <Input
-                className='!px-6 !py-3 !rounded-lg'
-                placeholder={t('PROFILE.EMAIL_PLACEHOLDER') as string}
-                disabled
-              />
-            </Form.Item>
-            <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator}>
-              <Input
-                className='!px-6 !py-3 !rounded-lg'
-                placeholder={t('PROFILE.PHONE_PLACEHOLDER') as string}
-                disabled={!isEdit}
-              />
-            </Form.Item>
-            <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
-              <DatePicker
-                className='!px-6 !py-3 !rounded-lg w-full'
-                format='DD/MM/YYYY'
-                placeholder={t('PROFILE.DOB_PLACEHOLDER') as string}
-                disabled={!isEdit}
-              />
-            </Form.Item>
-            <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
-              <ProvinceSelect disabled={!isEdit} />
-            </Form.Item>
-            <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
-              <JobSelect disabled={!isEdit} />
-            </Form.Item>
-            <Form.Item name='referralCode' label={t('PROFILE.REFERRAL')} rules={validator}>
-              <Input disabled defaultValue='jKvs500' className='!px-6 !py-3 !rounded-lg' />
-            </Form.Item>
-            <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
-              <div className='flex justify-end gap-2 !flex-row'>
-                {!isEdit ? (
-                  <>
-                    <Button
-                      onClick={() => setIsEdit(true)}
-                      className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white'
-                    >
-                      Chỉnh sửa
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <Button
-                      onClick={handleCancel}
-                      className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
-                    >
-                      Hủy bỏ
-                    </Button>
-                    <Button
-                      type='primary'
-                      htmlType='submit'
-                      className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white'
-                    >
-                      Lưu
-                    </Button>
-                  </>
-                )}
-              </div>
-            </Form.Item>
-          </div>
-        </Form>
       </div>
-    </>
+      <Form
+        form={form}
+        layout='vertical'
+        className='w-full flex justify-center !mt-[120px] !px-4'
+        onFinish={handleSubmit}
+        initialValues={{
+          fullName: data?.fullName ?? '',
+          email: data?.email ?? '',
+          phoneNumber: data?.phoneNumber ?? '',
+          dob: data?.dob ? moment(data?.dob) : null,
+          province: data?.province ?? null,
+          job: data?.job ?? null,
+          referralCode: data?.referralCode ?? null,
+        }}
+      >
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px] w-full'>
+          <Form.Item name='fullName' label={t('PROFILE.FULLNAME')} rules={validator}>
+            <Input
+              className='!px-6 !py-3 !rounded-lg'
+              placeholder={t('PROFILE.FULLNAME_PLACEHOLDER') as string}
+              disabled={!isEdit}
+            />
+          </Form.Item>
+          <Form.Item name='email' label={t('PROFILE.EMAIL')}>
+            <Input
+              className='!px-6 !py-3 !rounded-lg'
+              placeholder={t('PROFILE.EMAIL_PLACEHOLDER') as string}
+              disabled
+            />
+          </Form.Item>
+          <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator}>
+            <Input
+              className='!px-6 !py-3 !rounded-lg'
+              placeholder={t('PROFILE.PHONE_PLACEHOLDER') as string}
+              disabled={!isEdit}
+            />
+          </Form.Item>
+          <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
+            <DatePicker
+              className='!px-6 !py-3 !rounded-lg w-full'
+              format='DD/MM/YYYY'
+              placeholder={t('PROFILE.DOB_PLACEHOLDER') as string}
+              disabled={!isEdit}
+            />
+          </Form.Item>
+          <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
+            <ProvinceSelect disabled={!isEdit} />
+          </Form.Item>
+          <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
+            <JobSelect disabled={!isEdit} />
+          </Form.Item>
+          <Form.Item name='referralCode' label={t('PROFILE.REFERRAL')} rules={validator}>
+            <Input disabled defaultValue='jKvs500' className='!px-6 !py-3 !rounded-lg' />
+          </Form.Item>
+          <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
+            <div className='flex justify-end gap-2 !flex-row'>
+              {!isEdit ? (
+                <>
+                  <Button
+                    onClick={() => setIsEdit(true)}
+                    className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white'
+                  >
+                    Chỉnh sửa
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    onClick={handleCancel}
+                    className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
+                  >
+                    Hủy bỏ
+                  </Button>
+                  <Button
+                    type='primary'
+                    htmlType='submit'
+                    className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white'
+                  >
+                    Lưu
+                  </Button>
+                </>
+              )}
+            </div>
+          </Form.Item>
+        </div>
+      </Form>
+    </div>
   );
 };
 export default Profile;
