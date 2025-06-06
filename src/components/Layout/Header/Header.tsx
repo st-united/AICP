@@ -1,7 +1,7 @@
 import { Image, Layout } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { DropProfile } from '../../molecules';
 import { DevPlus, DevPlusS } from '@app/assets/images';
@@ -10,12 +10,18 @@ import { ButtonHeader } from '@app/components/atoms';
 const Header = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const isAuth = useSelector((state: any) => state.auth.isAuth);
 
+  const isHomePage = pathname === '/';
   const handleLoginClick = () => navigate('/login');
 
   return (
-    <Layout.Header className='flex justify-between w-full items-center bg-white h-[6rem]'>
+    <Layout.Header
+      className={`${
+        isHomePage ? 'absolute bg-transparent' : 'bg-white'
+      } flex justify-between w-full items-center h-[6rem]`}
+    >
       <div className='cursor-pointer flex items-center justify-center'>
         <Image
           onClick={() => navigate('/')}
