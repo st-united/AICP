@@ -4,7 +4,7 @@ import HeaderComponent from '@app/components/Layout/Header/Header';
 
 import { Layout } from 'antd';
 
-const { Header, Content, Sider } = Layout;
+const { Content } = Layout;
 
 const BaseLayout = () => {
   return (

@@ -1,34 +1,65 @@
 import { MenuOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Button, Drawer, Layout, Grid } from 'antd';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Sidebar from '@app/components/Layout/Sidebar/Sidebar';
+import SidebarContent from '@app/components/Layout/Sidebar/Sidebar';
+import HeaderComponent from '@app/components/Layout/Header/Header';
+
+const { Sider, Content } = Layout;
+const { useBreakpoint } = Grid;
 
 const ProfileLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const screens = useBreakpoint();
+
+  const isMobile = !screens.md;
 
   return (
-    <div className='flex justify-center item-center w-full'>
-      <div className='lg:container grid 2xl:grid-cols-5 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-5 grid-cols-1 md:gap-6 gap-4 md:!p-8 !p-4 w-full'>
-        <div className='md:hidden z-50'>
-          <Button type='text' onClick={() => setIsSidebarOpen(!isSidebarOpen)} className='!p-0'>
-            <MenuOutlined className='text-2xl' />
-          </Button>
-        </div>
+    <Layout className='min-h-screen'>
+      <HeaderComponent />
 
-        <div
-          className={`hidden md:block top-0 left-0 h-full z-40 lg:col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 2xl:col-span-1`}
-        >
-          <Sidebar />
-        </div>
+      <Layout className='p-4'>
+        {/* Mobile Sidebar with Drawer */}
+        {isMobile ? (
+          <>
+            <Button
+              type='text'
+              icon={<MenuOutlined />}
+              className='mb-4'
+              onClick={() => setDrawerVisible(true)}
+            />
+            <Drawer
+              title=''
+              placement='left'
+              onClose={() => setDrawerVisible(false)}
+              open={drawerVisible}
+              className='p-0'
+            >
+              <SidebarContent />
+            </Drawer>
+          </>
+        ) : (
+          <Sider
+            width={300}
+            collapsible={false}
+            collapsed={collapsed}
+            onCollapse={setCollapsed}
+            breakpoint='md'
+            className='bg-white shadow-md rounded-2xl'
+          >
+            <SidebarContent />
+          </Sider>
+        )}
 
-        {/* Main Content */}
-        <div className='lg:col-span-3 md:col-span-3 lg:col-span-3 xl:col-span-4 2xl:col-span-4'>
-          <Outlet />
-        </div>
-      </div>
-    </div>
+        <Content className='ml-0 sm:ml-4 w-full'>
+          <div className='h-full'>
+            <Outlet />
+          </div>
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 
