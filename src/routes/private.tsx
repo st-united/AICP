@@ -3,9 +3,10 @@ import { lazy } from 'react';
 import BaseLayout from '@app/components/templates/BaseLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { NAVIGATE_URL } from '@app/constants';
-import { AptitudeTest, Profile } from '@app/pages';
+import { AptitudeTest, Profile, Homepage } from '@app/pages';
 import Booking from '@app/pages/MentorBooking';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
+import ExamHistory from '@app/pages/Profile/ExamHistory';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
@@ -46,6 +47,10 @@ const routes = [
           {
             path: 'change-password',
             element: <PasswordChangeForm />,
+          },
+          {
+            path: NAVIGATE_URL.TEST_RESULT,
+            element: <ExamHistory />,
           },
         ],
       },
