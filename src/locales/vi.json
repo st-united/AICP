@@ -365,9 +365,10 @@
     "REQUIRE_PASSWORD": "Mật khẩu không được để trống!",
     "CONFIRM_PASSWORD": "Nhập lại mật khẩu mới *",
     "CREATE_PASSWORD": "Tạo mới mật khẩu",
-    "REGEX_PASSWORD": "Mật khẩu phải có ít nhất 8 ký tự, có số, chữ thường, chữ viết hoa và ký tự đặc biệt!",
+    "REGEX_PASSWORD": "Mật khẩu phải có ít nhất 8 ký tự, có số, chữ thường và chữ viết hoa!",
     "MATCH": "Mật khẩu không khớp!",
-    "EXPIRED": "Liên kết đã hết hạn"
+    "EXPIRED": "Liên kết đã hết hạn",
+    "RESET_SUCCESS": "Thay đổi mật khẩu thành công!"
   },
   "HOMEPAGE_LOGIN": {
     "TITLE": "Xin chào {{name}}, 👋",
