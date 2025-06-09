@@ -16,18 +16,15 @@ export interface Credentials {
 }
 
 export interface UserProfile {
+  id: string;
   fullName: string;
   email: string;
-  phoneNumber: string;
-  dob: string;
-  address: string;
-  gender: string;
-  identityId: string;
-  avatar: string;
-  permissions: string[];
-  country: string;
-  province: string;
-  job: string;
+  phoneNumber?: string;
+  dob?: string;
+  avatar?: string;
+  permissions?: string[];
+  province?: string;
+  job?: string;
   referralCode: string;
 }
 
@@ -88,4 +85,13 @@ export interface HistoryTesting {
 export interface GetHistoryParams {
   startDate?: string;
   endDate?: string;
+}
+export interface UpdateForgotPassword {
+  token: string | null;
+  password: string;
+}
+export interface HasTakenExam {
+  hasTakenExam: boolean;
+  examSetDuration: number;
+  examId?: string;
 }

@@ -16,7 +16,3 @@ export const uploadAvatarApi = async (identityId: string, formData: FormData) =>
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
-
-export const removeAvatarApi = async (identityId: string) => {
-  return await axios.patch(`${API_URL.REMOVE_AVATAR}/${identityId}`);
-};

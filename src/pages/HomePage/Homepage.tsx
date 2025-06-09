@@ -1,32 +1,32 @@
-import { useTranslation } from 'react-i18next';
+import { useCallback, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
-import BackgroundImg from '@app/assets/images/background.png';
+import UserPage from '../UserPage/UserPage';
+import LandingLayout from '@app/components/LandingPage/LandingLayout';
+import MainScreen from '@app/components/LandingPage/MainScreen';
+import Header from '@app/components/Layout/Header/Header';
+import { smoothScrollTo } from '@app/utils/scroll';
 
 const Homepage = () => {
-  const { t } = useTranslation();
+  const isAuth = useSelector((state: any) => state.auth.isAuth);
+  const section2Ref = useRef<HTMLDivElement>(null);
+  const handleNext = useCallback(() => {
+    const target = section2Ref.current;
+    if (target) {
+      const y = target.offsetTop;
+      smoothScrollTo(y, 1200);
+    }
+  }, []);
+
+  if (isAuth) return <UserPage />;
 
   return (
-    <div className='flex flex-col w-full h-full'>
-      <div
-        className='h-screen w-full'
-        style={{
-          backgroundImage: `url(${BackgroundImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        <div className='flex justify-center items-center flex-col gap-12 h-full !px-4'>
-          <div className='lg:text-7xl md:text-5xl text-4xl max-w-[300px] md:max-w-full text-center leading-12 font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#C05604] via-[#E16100] to-[#FFF] !p-4'>
-            {t('HOMEPAGE.TITLE')}
-          </div>
-          <div className='lg:text-2xl md:text-lg text-lg text-white font-semibold !p-4 lg:max-w-[980px] md:max-w-[700px] text-center leading-10'>
-            {t('HOMEPAGE.SUB_TITLE')}
-          </div>
-          <div className='!uppercase cursor-pointer !rounded-full !md:py-4 !md:px-10 !py-3 !px-8 bg-white text-lg md:text-xl text-[#096DD9] font-bold hover:bg-[#096DD9] hover:text-white transition-all duration-300 ease-in-out'>
-            {t('HOMEPAGE.BUTTON')}
-          </div>
-        </div>
+    <div className='w-full min-h-screen scroll-smooth'>
+      <div className='h-screen'>
+        <MainScreen onScrollToNext={handleNext} />
+      </div>
+      <div ref={section2Ref}>
+        <LandingLayout />
       </div>
     </div>
   );

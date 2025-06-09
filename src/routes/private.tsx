@@ -1,9 +1,11 @@
 import { lazy } from 'react';
 
-import AuthLayout from '@app/components/templates/AuthLayout';
+import BaseLayout from '@app/components/templates/BaseLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { NAVIGATE_URL } from '@app/constants';
-import { Homepage, Profile } from '@app/pages/index';
+import { Profile, AptitudeTest } from '@app/pages/index';
+import Booking from '@app/pages/MentorBooking';
+import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
@@ -15,32 +17,40 @@ const routes = [
     element: <PrivateLayout />,
     children: [
       {
-        path: '404',
+        path: NAVIGATE_URL.NOTFOUND,
         element: <NotFound />,
       },
       {
-        path: '403',
+        path: NAVIGATE_URL.FORBIDDEN,
         element: <Forbidden />,
       },
       {
-        element: <AuthLayout />,
+        element: <BaseLayout />,
         children: [
           {
-            path: '/',
-            element: <Homepage />,
+            path: 'scheduler',
+            element: <Booking />,
           },
           {
-            element: <ProfileLayout />,
-            children: [
-              {
-                path: 'profile',
-                element: <Profile />,
-              },
-              {
-                path: NAVIGATE_URL.TEST_RESULT,
-                element: <ExamHistory />,
-              },
-            ],
+            path: 'aptitude-test',
+            element: <AptitudeTest />,
+          },
+        ],
+      },
+      {
+        element: <ProfileLayout />,
+        children: [
+          {
+            path: 'profile',
+            element: <Profile />,
+          },
+          {
+            path: 'change-password',
+            element: <PasswordChangeForm />,
+          },
+          {
+            path: NAVIGATE_URL.TEST_RESULT,
+            element: <ExamHistory />,
           },
         ],
       },

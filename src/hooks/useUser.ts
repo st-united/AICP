@@ -3,12 +3,16 @@ import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import {
-  GetHistoryParams,
   GetUsersParams,
-  HistoryTesting,
+  GetHistoryParams,
   UserDetail,
+  UpdateForgotPassword,
+  HasTakenExam,
+  HistoryTesting,
 } from '@app/interface/user.interface';
 import {
+  checkHasTakenExam,
+  checkHasTakenExamDefault,
   createUser,
   deleteUserAPI,
   getHistoryTestingApi,
@@ -16,6 +20,8 @@ import {
   getUsersAPI,
   resetPasswordApi,
   updateUser,
+  forgotPasswordApi,
+  updateForgotPasswordApi,
 } from '@app/services';
 
 export const useCreateUser = () => {
@@ -46,6 +52,18 @@ export const useGetUsers = (params: GetUsersParams) =>
       cacheTime: 0,
     },
   );
+
+export const useHasTakenExam = (examSetId: string) =>
+  useQuery([QUERY_KEY.HAS_TAKEN_EXAM, examSetId], async (): Promise<HasTakenExam> => {
+    const { data } = await checkHasTakenExam(examSetId);
+    return data.data;
+  });
+
+export const useHasTakenExamDefault = () =>
+  useQuery([QUERY_KEY.HAS_TAKEN_EXAM_DEFAULT], async (): Promise<HasTakenExam> => {
+    const { data } = await checkHasTakenExamDefault();
+    return data.data;
+  });
 
 export const useGetUserById = (id: number) =>
   useQuery([QUERY_KEY.USERS, id], async () => {
@@ -90,5 +108,18 @@ export const useGetHistory = (params?: GetHistoryParams) => {
   return useQuery<HistoryTesting[]>([QUERY_KEY.EXAM_HISTORY, params], async () => {
     const { data } = await getHistoryTestingApi(params);
     return data.data;
+  });
+};
+export const useForgotPassword = () => {
+  return useMutation(async (email: string) => {
+    const response = await forgotPasswordApi(email);
+    return response.data;
+  });
+};
+
+export const useUpdateForgotPassword = () => {
+  return useMutation(async (payload: UpdateForgotPassword) => {
+    const response = await updateForgotPasswordApi(payload);
+    return response.data;
   });
 };
