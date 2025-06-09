@@ -87,14 +87,8 @@ export const useResetPassword = () => {
 };
 
 export const useGetHistory = (params?: GetHistoryParams) => {
-  return useQuery<HistoryTesting[]>(
-    [QUERY_KEY.EXAM_HISTORY, params],
-    async () => {
-      const { data } = await getHistoryTestingApi(params);
-      return data.data;
-    },
-    {
-      enabled: true,
-    },
-  );
+  return useQuery<HistoryTesting[]>([QUERY_KEY.EXAM_HISTORY, params], async () => {
+    const { data } = await getHistoryTestingApi(params);
+    return data.data;
+  });
 };
