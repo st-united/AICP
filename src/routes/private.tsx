@@ -28,11 +28,11 @@ const routes = [
         element: <BaseLayout />,
         children: [
           {
-            path: 'scheduler',
+            path: NAVIGATE_URL.SCHEDULE,
             element: <Booking />,
           },
           {
-            path: 'aptitude-test',
+            path: NAVIGATE_URL.TEST,
             element: <AptitudeTest />,
           },
         ],
@@ -41,11 +41,11 @@ const routes = [
         element: <ProfileLayout />,
         children: [
           {
-            path: 'profile',
+            path: NAVIGATE_URL.PROFILE,
             element: <Profile />,
           },
           {
-            path: 'change-password',
+            path: NAVIGATE_URL.CHANGE_PASSWORD,
             element: <PasswordChangeForm />,
           },
           {
