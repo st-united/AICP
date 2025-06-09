@@ -1,5 +1,5 @@
 import { Spin } from 'antd';
-import { Moment } from 'moment';
+import { Dayjs } from 'dayjs';
 import { useState, useMemo } from 'react';
 
 import DateFilter from './QuizManagement/DateFilterProps';
@@ -13,7 +13,7 @@ import { useGetHistory } from '@app/hooks';
 
 const ExamHistory = () => {
   const [selectedQuizzes, setSelectedQuizzes] = useState<Set<string>>(new Set());
-  const [dateRange, setDateRange] = useState<[Moment | null, Moment | null] | null>(null);
+  const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
 
   const apiParams = useMemo(() => {
     if (!dateRange || !dateRange[0] || !dateRange[1]) {
@@ -37,7 +37,7 @@ const ExamHistory = () => {
     setSelectedQuizzes(newSelectedQuizzes);
   };
 
-  const handleDateChange = (dates: [Moment | null, Moment | null] | null) => {
+  const handleDateChange = (dates: [Dayjs | null, Dayjs | null] | null) => {
     setDateRange(dates);
   };
 

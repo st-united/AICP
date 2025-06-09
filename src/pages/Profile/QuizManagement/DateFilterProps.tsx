@@ -3,11 +3,11 @@ import { DatePicker } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { DATE_TIME } from '@app/constants';
-import type { Moment } from 'moment';
+import type { Dayjs } from 'dayjs';
 
 interface DateFilterProps {
-  onDateChange: (dates: [Moment | null, Moment | null] | null) => void;
-  value?: [Moment | null, Moment | null] | null;
+  onDateChange: (dates: [Dayjs | null, Dayjs | null] | null) => void;
+  value?: [Dayjs | null, Dayjs | null] | null;
 }
 
 const DateFilter = ({ onDateChange, value }: DateFilterProps) => {
@@ -15,11 +15,11 @@ const DateFilter = ({ onDateChange, value }: DateFilterProps) => {
 
   const [startDate, endDate] = value || [null, null];
 
-  const handleStartChange = (date: Moment | null) => {
+  const handleStartChange = (date: Dayjs | null) => {
     onDateChange([date, endDate]);
   };
 
-  const handleEndChange = (date: Moment | null) => {
+  const handleEndChange = (date: Dayjs | null) => {
     onDateChange([startDate, date]);
   };
 

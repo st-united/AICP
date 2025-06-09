@@ -1,7 +1,7 @@
 import { ClockCircleOutlined, TrophyOutlined } from '@ant-design/icons';
 import { Card, Tag, Checkbox } from 'antd';
-import { format } from 'date-fns';
-import { vi } from 'date-fns/locale';
+import dayjs from 'dayjs';
+import 'dayjs/locale/vi';
 import { useTranslation } from 'react-i18next';
 
 import { DATE_TIME } from '@app/constants';
@@ -19,8 +19,8 @@ const QuizCard = ({ quiz, onCheckboxChange, isChecked }: QuizCardProps) => {
 
   const formatDateTime = (dateString: string) => {
     try {
-      const date = new Date(dateString);
-      return format(date, DATE_TIME.WEEKDAY_DAY_MONTH_YEAR_TIME, { locale: vi });
+      dayjs.locale('vi');
+      return dayjs(dateString).format(DATE_TIME.WEEKDAY_DAY_MONTH_YEAR_TIME);
     } catch (error) {
       return dateString;
     }
