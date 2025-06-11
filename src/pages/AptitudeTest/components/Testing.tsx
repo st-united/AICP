@@ -16,8 +16,12 @@ import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 
 const Testing = () => {
   const { t } = useTranslation();
-  const [currentQuestion, setCurrentQuestion] = useState<string>('');
+  const [currentQuestion, setCurrentQuestion] = useState<{ id: string; timestamp: number }>({
+    id: '',
+    timestamp: 0,
+  });
   const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(null);
   const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,8 +53,12 @@ const Testing = () => {
   }, [examSet]);
 
   const handleQuestionSelect = useCallback((questionId: string) => {
-    setCurrentQuestion(questionId);
+    setCurrentQuestion({ id: questionId, timestamp: Date.now() });
   }, []);
+
+  useEffect(() => {
+    console.log('✅ Updated state:', currentQuestion);
+  }, [currentQuestion]);
 
   const handleFlagToggle = useCallback((questionId: string) => {
     setFlaggedQuestions((prev) =>
@@ -129,7 +137,7 @@ const Testing = () => {
 
   const handleQuestionClick = useCallback((questionId: string) => {
     setIsSubmitModalOpen(false);
-    setCurrentQuestion(questionId);
+    setCurrentQuestion({ id: questionId, timestamp: Date.now() });
     const questionElement = document.getElementById(`question-${questionId}`);
     if (questionElement) {
       questionElement.scrollIntoView({ behavior: 'smooth' });
@@ -140,6 +148,9 @@ const Testing = () => {
     return <div>Loading...</div>;
   }
 
+  const handleQuestionInViewChange = (id: string, timestamp?: number) => {
+    setCurrentQuestion({ id, timestamp: timestamp ?? Date.now() });
+  };
   return (
     <div className='overflow-hidden'>
       <div className='absolute top-10 right-10'>
@@ -240,7 +251,7 @@ const Testing = () => {
               <QuestionDisplay
                 questions={examSet.questions}
                 currentQuestion={currentQuestion}
-                onQuestionInViewChange={setCurrentQuestion}
+                onQuestionInViewChange={handleQuestionInViewChange}
                 flaggedQuestions={flaggedQuestions}
                 onFlagToggle={handleFlagToggle}
                 onAnswerSelect={(questionId, answerId) => {
@@ -319,22 +330,26 @@ const Testing = () => {
                       </React.Fragment>
                     );
                   })}
-                  <span
-                    className='text-[#FE7743] cursor-pointer hover:underline'
-                    onClick={() => {
-                      if (unansweredQuestions.length > 3) {
-                        handleQuestionClick(unansweredQuestions[0].id);
-                      }
-                    }}
-                    role='button'
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' && unansweredQuestions.length > 3) {
-                        handleQuestionClick(unansweredQuestions[0].id);
-                      }
-                    }}
-                  >
-                    {unansweredQuestions.length > 3 && ` ( ${t('TEST.MORE')} )`}
+                  <span className='text-[#FE7743]'>
+                    {' ('}
+                    <span
+                      className='cursor-pointer hover:underline'
+                      onClick={() => {
+                        if (unansweredQuestions.length > 3) {
+                          handleQuestionClick(unansweredQuestions[0].id);
+                        }
+                      }}
+                      role='button'
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && unansweredQuestions.length > 3) {
+                          handleQuestionClick(unansweredQuestions[0].id);
+                        }
+                      }}
+                    >
+                      {t('TEST.MORE')}
+                    </span>
+                    {')'}
                   </span>
                 </span>
               </div>

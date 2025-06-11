@@ -6,7 +6,7 @@ import { Question } from '@app/interface/examSet.interface';
 
 interface QuestionIndexPanelProps {
   questions: Question[];
-  currentQuestion: string;
+  currentQuestion: { id: string; timestamp: number };
   answeredQuestions: string[];
   flaggedQuestions: string[];
   onFlagToggle: (id: string) => void;
@@ -34,7 +34,7 @@ const QuestionIndexPanel = ({
 
   const getQuestionClasses = useCallback(
     (id: string) => {
-      const isCurrent = id === currentQuestion;
+      const isCurrent = id === currentQuestion.id;
       const status = getQuestionStatus(id);
 
       const baseClasses =
@@ -50,7 +50,7 @@ const QuestionIndexPanel = ({
 
       return `${baseClasses} ${statusClasses[status]} ${currentClass}`;
     },
-    [currentQuestion, getQuestionStatus],
+    [currentQuestion.timestamp, getQuestionStatus],
   );
 
   return (

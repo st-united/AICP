@@ -9,8 +9,8 @@ import { AnswerChoice, AnswerOption, Question } from '@app/interface/examSet.int
 
 interface QuestionProps {
   questions: Question[];
-  currentQuestion: string;
-  onQuestionInViewChange: (id: string) => void;
+  currentQuestion: { id: string; timestamp: number };
+  onQuestionInViewChange: (id: string, timestamp?: number) => void;
   flaggedQuestions: string[];
   onFlagToggle: (id: string) => void;
   onAnswerSelect: (questionId: string, answerId: string) => void;
@@ -35,10 +35,38 @@ const QuestionDisplay = ({
 
   useEffect(() => {
     if (prevQuestionRef.current !== currentQuestion) {
-      scrollToQuestion(currentQuestion);
+      scrollToQuestion(currentQuestion.id);
       prevQuestionRef.current = currentQuestion;
     }
-  }, [currentQuestion, scrollToQuestion]);
+  }, [currentQuestion.timestamp, scrollToQuestion]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('data-question-id');
+          if (entry.isIntersecting && id) {
+            onQuestionInViewChange(id);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5,
+      },
+    );
+    console.log(currentQuestion);
+
+    const elements = document.querySelectorAll('[data-question-id]');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, [currentQuestion.id]);
+
+  console.log(prevQuestionRef.current);
 
   const handleAnswerSelect = (questionId: string, answerId: string) => {
     onAnswerSelect(questionId, answerId);
