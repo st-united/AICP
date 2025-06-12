@@ -17,4 +17,5 @@ export const API_URL = {
   EXAM_SETS_INPUT_TEST: '/exam-sets/input-test',
   ANSWERS: '/answers',
   MENTORS_AVAILABLE: '/mentors/available',
+  PORTFOLIO: '/users/portfolio',
 };

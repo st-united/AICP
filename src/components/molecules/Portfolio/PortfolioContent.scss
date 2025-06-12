@@ -1,0 +1,43 @@
+.custom-upload {
+  .ant-upload {
+    width: 100%;
+
+    .ant-upload-text {
+      color: #1890ff;
+      font-weight: bold;
+    }
+  }
+}
+
+.custom-img {
+  width: 100px !important;
+  aspect-ratio: 1;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  .ant-image-img {
+    width: 100px !important;
+    aspect-ratio: 1;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 10px !important;
+    border: 1px solid #e0e0e0 !important;
+    transition: all 0.3s ease;
+  }
+
+  .ant-image {
+    width: 100px !important;
+    aspect-ratio: 1;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 10px !important;
+    transition: all 0.3s ease;
+  }
+
+  .ant-image-mask {
+    border-radius: 10px !important;
+  }
+}

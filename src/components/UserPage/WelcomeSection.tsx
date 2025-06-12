@@ -1,11 +1,11 @@
 import { Button } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 import { InnovationPana } from '@app/assets/images';
 import { TextTyping } from '@app/components/atoms/';
-import { useSelector } from 'react-redux';
 import { RootState } from '@app/redux/store';
 
 const WelcomeSection = () => {
