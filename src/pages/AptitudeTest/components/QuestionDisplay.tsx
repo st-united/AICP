@@ -16,6 +16,7 @@ interface QuestionProps {
   onFlagToggle: (id: string) => void;
   onAnswerSelect: (questionId: string, answerId: string) => void;
   selectedAnswers: Record<string, string[]>;
+  setIsAutoScrolling: (val: boolean) => void;
 }
 
 const QuestionDisplay = ({
@@ -27,40 +28,62 @@ const QuestionDisplay = ({
   onFlagToggle,
   onAnswerSelect,
   selectedAnswers,
+  setIsAutoScrolling,
 }: QuestionProps) => {
   const { setQuestionRef, scrollToQuestion } = useQuestionNavigation(
     questions,
     onQuestionInViewChange,
   );
+
   const { t } = useTranslation();
   const prevQuestionRef = useRef(currentQuestion);
   const isAutoScrollingRef = useRef(true);
+  const isAutoScrollingRefs = useRef(true);
   const autoScrollResetTimeout = useRef<NodeJS.Timeout | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const hasMounted = useRef(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.getAttribute('data-question-id');
+
           if (entry.isIntersecting && id) {
+            if (!hasMounted.current) {
+              console.log('[observer] Initial trigger - accepting:', id);
+              hasMounted.current = true;
+              onQuestionInViewChange(id);
+              return;
+            }
+            if (!isAutoScrollingRefs.current) {
+              console.log('[observer] Ignored due to auto scroll:', id);
+              return;
+            }
+
+            console.log('[observer] Manual scroll - accepting:', id);
             isAutoScrollingRef.current = false;
             onQuestionInViewChange(id);
+
             if (autoScrollResetTimeout.current) {
               clearTimeout(autoScrollResetTimeout.current);
             }
 
             autoScrollResetTimeout.current = setTimeout(() => {
               isAutoScrollingRef.current = true;
+              isAutoScrollingRefs.current = true;
+              setIsAutoScrolling(false);
+              console.log('[observer] Auto scroll re-enabled');
             }, 1000);
           }
         });
       },
       {
         root: null,
-        rootMargin: '0px',
         threshold: 0.5,
       },
     );
+
     const elements = document.querySelectorAll('[data-question-id]');
     elements.forEach((el) => observer.observe(el));
 
@@ -73,10 +96,41 @@ const QuestionDisplay = ({
   }, [currentQuestionScroll]);
 
   useEffect(() => {
+    if (!observerRef.current) return;
+
+    const elements = document.querySelectorAll('[data-question-id]');
+    elements.forEach((el) => observerRef.current!.observe(el));
+
+    return () => {
+      elements.forEach((el) => observerRef.current!.unobserve(el));
+    };
+  }, [currentQuestionScroll]);
+
+  useEffect(() => {
     if (prevQuestionRef.current !== currentQuestion) {
       if (!isAutoScrollingRef.current) return;
+
+      isAutoScrollingRef.current = false;
+      isAutoScrollingRefs.current = false;
+
+      const el = document.querySelector(`[data-question-id="${currentQuestion.id}"]`);
+
+      if (observerRef.current && el) {
+        observerRef.current.unobserve(el);
+      }
+      setIsAutoScrolling(true);
       scrollToQuestion(currentQuestion.id);
       prevQuestionRef.current = currentQuestion;
+
+      setTimeout(() => {
+        if (el && observerRef.current) {
+          observerRef.current.observe(el);
+        }
+        isAutoScrollingRef.current = true;
+        isAutoScrollingRefs.current = true;
+        setIsAutoScrolling(false);
+        console.log('[scroll effect] Re-enabled observer & flags');
+      }, 800);
     }
   }, [currentQuestion.timestamp, scrollToQuestion]);
 

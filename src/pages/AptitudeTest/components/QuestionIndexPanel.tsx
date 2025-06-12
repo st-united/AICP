@@ -7,19 +7,23 @@ import { Question } from '@app/interface/examSet.interface';
 interface QuestionIndexPanelProps {
   questions: Question[];
   currentQuestion: { id: string; timestamp: number };
+  currentQuestionScroll: string;
   answeredQuestions: string[];
   flaggedQuestions: string[];
   onFlagToggle: (id: string) => void;
   onQuestionSelect: (id: string) => void;
+  isAutoScrolling: boolean;
 }
 
 const QuestionIndexPanel = ({
   questions,
   currentQuestion,
+  currentQuestionScroll,
   answeredQuestions,
   flaggedQuestions,
   onFlagToggle,
   onQuestionSelect,
+  isAutoScrolling,
 }: QuestionIndexPanelProps) => {
   const { t } = useTranslation();
 
@@ -50,7 +54,7 @@ const QuestionIndexPanel = ({
 
       return `${baseClasses} ${statusClasses[status]} ${currentClass}`;
     },
-    [currentQuestion.timestamp, getQuestionStatus],
+    [currentQuestion.id, getQuestionStatus],
   );
 
   return (
@@ -62,6 +66,7 @@ const QuestionIndexPanel = ({
           {questions.map((question, index) => (
             <button
               key={question.id}
+              disabled={isAutoScrolling}
               className={getQuestionClasses(question.id)}
               onClick={() => onQuestionSelect(question.id)}
               onContextMenu={(e) => {

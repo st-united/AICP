@@ -31,6 +31,7 @@ const Testing = () => {
   const submitDraftQuestionMutation = useSubmitDraftQuestion();
   const { mutate: submitExamSet, isLoading: isSubmitting } = useSubmitExamSet();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(false);
 
   useEffect(() => {
     if (examSet?.questions) {
@@ -183,10 +184,12 @@ const Testing = () => {
             <QuestionIndexPanel
               questions={examSet.questions}
               currentQuestion={currentQuestion}
+              currentQuestionScroll={currentQuestionScroll}
               answeredQuestions={answeredQuestions}
               flaggedQuestions={flaggedQuestions}
               onFlagToggle={handleFlagToggle}
               onQuestionSelect={handleQuestionSelect}
+              isAutoScrolling={isAutoScrolling}
             />
           </div>
         </div>
@@ -228,10 +231,12 @@ const Testing = () => {
               <QuestionIndexPanel
                 questions={examSet.questions}
                 currentQuestion={currentQuestion}
+                currentQuestionScroll={currentQuestionScroll}
                 answeredQuestions={answeredQuestions}
                 flaggedQuestions={flaggedQuestions}
                 onFlagToggle={handleFlagToggle}
                 onQuestionSelect={handleQuestionSelect}
+                isAutoScrolling={isAutoScrolling}
               />
             </div>
           </div>
@@ -252,7 +257,7 @@ const Testing = () => {
               <QuestionDisplay
                 questions={examSet.questions}
                 currentQuestion={currentQuestion}
-                setCurrentQuestionScroll={currentQuestionScroll}
+                currentQuestionScroll={currentQuestionScroll}
                 onQuestionInViewChange={handleQuestionInViewChange}
                 flaggedQuestions={flaggedQuestions}
                 onFlagToggle={handleFlagToggle}
@@ -263,6 +268,7 @@ const Testing = () => {
                   }
                 }}
                 selectedAnswers={selectedAnswers}
+                setIsAutoScrolling={setIsAutoScrolling}
               />
               <div className='flex justify-center mb-2'>
                 <Button
