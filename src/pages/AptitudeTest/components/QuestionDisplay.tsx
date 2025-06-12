@@ -10,6 +10,7 @@ import { AnswerChoice, AnswerOption, Question } from '@app/interface/examSet.int
 interface QuestionProps {
   questions: Question[];
   currentQuestion: { id: string; timestamp: number };
+  currentQuestionScroll: string;
   onQuestionInViewChange: (id: string, timestamp?: number) => void;
   flaggedQuestions: string[];
   onFlagToggle: (id: string) => void;
@@ -20,6 +21,7 @@ interface QuestionProps {
 const QuestionDisplay = ({
   questions,
   currentQuestion,
+  currentQuestionScroll,
   onQuestionInViewChange,
   flaggedQuestions,
   onFlagToggle,
@@ -32,13 +34,8 @@ const QuestionDisplay = ({
   );
   const { t } = useTranslation();
   const prevQuestionRef = useRef(currentQuestion);
-
-  useEffect(() => {
-    if (prevQuestionRef.current !== currentQuestion) {
-      scrollToQuestion(currentQuestion.id);
-      prevQuestionRef.current = currentQuestion;
-    }
-  }, [currentQuestion.timestamp, scrollToQuestion]);
+  const isAutoScrollingRef = useRef(true);
+  const autoScrollResetTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,7 +43,15 @@ const QuestionDisplay = ({
         entries.forEach((entry) => {
           const id = entry.target.getAttribute('data-question-id');
           if (entry.isIntersecting && id) {
+            isAutoScrollingRef.current = false;
             onQuestionInViewChange(id);
+            if (autoScrollResetTimeout.current) {
+              clearTimeout(autoScrollResetTimeout.current);
+            }
+
+            autoScrollResetTimeout.current = setTimeout(() => {
+              isAutoScrollingRef.current = true;
+            }, 1000);
           }
         });
       },
@@ -56,15 +61,24 @@ const QuestionDisplay = ({
         threshold: 0.5,
       },
     );
-    console.log(currentQuestion);
-
     const elements = document.querySelectorAll('[data-question-id]');
     elements.forEach((el) => observer.observe(el));
 
     return () => {
       elements.forEach((el) => observer.unobserve(el));
+      if (autoScrollResetTimeout.current) {
+        clearTimeout(autoScrollResetTimeout.current);
+      }
     };
-  }, [currentQuestion.id]);
+  }, [currentQuestionScroll]);
+
+  useEffect(() => {
+    if (prevQuestionRef.current !== currentQuestion) {
+      if (!isAutoScrollingRef.current) return;
+      scrollToQuestion(currentQuestion.id);
+      prevQuestionRef.current = currentQuestion;
+    }
+  }, [currentQuestion.timestamp, scrollToQuestion]);
 
   console.log(prevQuestionRef.current);
 

@@ -21,7 +21,7 @@ const Testing = () => {
     timestamp: 0,
   });
   const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(null);
+  const [currentQuestionScroll, setCurrentQuestionScroll] = useState<string>('');
   const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,6 +54,7 @@ const Testing = () => {
 
   const handleQuestionSelect = useCallback((questionId: string) => {
     setCurrentQuestion({ id: questionId, timestamp: Date.now() });
+    setCurrentQuestionScroll(questionId);
   }, []);
 
   useEffect(() => {
@@ -251,6 +252,7 @@ const Testing = () => {
               <QuestionDisplay
                 questions={examSet.questions}
                 currentQuestion={currentQuestion}
+                setCurrentQuestionScroll={currentQuestionScroll}
                 onQuestionInViewChange={handleQuestionInViewChange}
                 flaggedQuestions={flaggedQuestions}
                 onFlagToggle={handleFlagToggle}
