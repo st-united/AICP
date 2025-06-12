@@ -8,6 +8,7 @@ import LandingFeatSection3 from './landing_featsection_3.svg';
 import LandingMonitor from './landing_monitor.svg';
 import LandingStepBg from './landing_step_bg.svg';
 import LogOut from './log-out.svg';
+import GoogleIcon from './google_icon.svg';
 export {
   ProfileGG,
   LogOut,
@@ -19,4 +20,5 @@ export {
   LandingMonitor,
   DevplusLogo,
   FooterBackground,
+  GoogleIcon,
 };

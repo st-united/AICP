@@ -15,6 +15,10 @@ export interface Credentials {
   password: string;
 }
 
+export interface GoogleCredentials {
+  idToken: string;
+}
+
 export interface UserProfile {
   id: string;
   fullName: string;
