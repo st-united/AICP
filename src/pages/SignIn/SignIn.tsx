@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useSignInSchema } from './signInSchema';
+import { NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers/yupSync';
 import { useActivateAccount, useLogin } from '@app/hooks';
 import { Credentials } from '@app/interface/user.interface';
@@ -95,7 +96,7 @@ const SignIn = () => {
           <div className='col-span-2 text-lg text-white flex justify-end items-center'>
             <button className='cursor-pointer'>
               <Link
-                to='/forgot-password'
+                to={NAVIGATE_URL.FORGOT_PASSWORD}
                 className='text-primary-bold font-bold underline hover:!text-primary-light transition duration-300'
               >
                 {t('LOGIN.FORGOT_PASSWORD')}

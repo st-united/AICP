@@ -11,6 +11,7 @@ export const API_URL = {
   UPDATE_FORGOT_PASSWORD: 'users/update-forgot-password',
   LOGOUT: '/auth/logout',
   REGISTER_USER: '/auth/register',
+  HISTORY_TESTING: '/exam/history-exam/',
   ACTIVATE_ACCOUNT: '/auth/activate',
   CHECK_TAKEN_EXAM: '/exam/has-taken-exam',
   CHECK_TAKEN_EXAM_DEFAULT: '/exam/taken-input-test',
