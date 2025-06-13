@@ -52,9 +52,12 @@ const QuestionIndexPanel = ({
 
       const currentClass = isCurrent ? 'ring-2 ring-[#FE7743] ring-offset-2' : '';
 
-      return `${baseClasses} ${statusClasses[status]} ${currentClass}`;
+      const disabledDuringScrollClass =
+        isAutoScrolling && !isCurrent ? 'opacity-50 grayscale pointer-events-none' : '';
+
+      return `${baseClasses} ${statusClasses[status]} ${currentClass} ${disabledDuringScrollClass}`;
     },
-    [currentQuestion.id, getQuestionStatus],
+    [currentQuestion.id, getQuestionStatus, isAutoScrolling],
   );
 
   return (
