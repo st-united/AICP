@@ -4,7 +4,7 @@ import {
   WarningOutlined,
   QuestionOutlined,
 } from '@ant-design/icons';
-import { Button, Divider, Modal, Progress, Spin } from 'antd';
+import { Button, Divider, Modal, Progress } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -16,8 +16,12 @@ import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 
 const Testing = () => {
   const { t } = useTranslation();
-  const [currentQuestion, setCurrentQuestion] = useState<string>('');
+  const [currentQuestion, setCurrentQuestion] = useState<{ id: string; timestamp: number }>({
+    id: '',
+    timestamp: 0,
+  });
   const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
+  const [currentQuestionScroll, setCurrentQuestionScroll] = useState<string>('');
   const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,6 +31,7 @@ const Testing = () => {
   const submitDraftQuestionMutation = useSubmitDraftQuestion();
   const { mutate: submitExamSet, isLoading: isSubmitting } = useSubmitExamSet();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(false);
 
   useEffect(() => {
     if (examSet?.questions) {
@@ -49,8 +54,13 @@ const Testing = () => {
   }, [examSet]);
 
   const handleQuestionSelect = useCallback((questionId: string) => {
-    setCurrentQuestion(questionId);
+    setCurrentQuestion({ id: questionId, timestamp: Date.now() });
+    setCurrentQuestionScroll(questionId);
   }, []);
+
+  useEffect(() => {
+    console.log('✅ Updated state:', currentQuestion);
+  }, [currentQuestion]);
 
   const handleFlagToggle = useCallback((questionId: string) => {
     setFlaggedQuestions((prev) =>
@@ -129,7 +139,7 @@ const Testing = () => {
 
   const handleQuestionClick = useCallback((questionId: string) => {
     setIsSubmitModalOpen(false);
-    setCurrentQuestion(questionId);
+    setCurrentQuestion({ id: questionId, timestamp: Date.now() });
     const questionElement = document.getElementById(`question-${questionId}`);
     if (questionElement) {
       questionElement.scrollIntoView({ behavior: 'smooth' });
@@ -137,13 +147,12 @@ const Testing = () => {
   }, []);
 
   if (!examSet) {
-    return (
-      <div className='flex justify-center items-center'>
-        <Spin />
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
+  const handleQuestionInViewChange = (id: string, timestamp?: number) => {
+    setCurrentQuestion({ id, timestamp: timestamp ?? Date.now() });
+  };
   return (
     <div className='overflow-hidden h-full'>
       <div className='flex flex-col h-full gap-6'>
@@ -175,10 +184,12 @@ const Testing = () => {
             <QuestionIndexPanel
               questions={examSet.questions}
               currentQuestion={currentQuestion}
+              currentQuestionScroll={currentQuestionScroll}
               answeredQuestions={answeredQuestions}
               flaggedQuestions={flaggedQuestions}
               onFlagToggle={handleFlagToggle}
               onQuestionSelect={handleQuestionSelect}
+              isAutoScrolling={isAutoScrolling}
             />
           </div>
           <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
@@ -217,10 +228,12 @@ const Testing = () => {
                 <QuestionIndexPanel
                   questions={examSet.questions}
                   currentQuestion={currentQuestion}
+                  currentQuestionScroll={currentQuestionScroll}
                   answeredQuestions={answeredQuestions}
                   flaggedQuestions={flaggedQuestions}
                   onFlagToggle={handleFlagToggle}
                   onQuestionSelect={handleQuestionSelect}
+                  isAutoScrolling={isAutoScrolling}
                 />
               </div>
             </div>
@@ -239,7 +252,8 @@ const Testing = () => {
               <QuestionDisplay
                 questions={examSet.questions}
                 currentQuestion={currentQuestion}
-                onQuestionInViewChange={setCurrentQuestion}
+                currentQuestionScroll={currentQuestionScroll}
+                onQuestionInViewChange={handleQuestionInViewChange}
                 flaggedQuestions={flaggedQuestions}
                 onFlagToggle={handleFlagToggle}
                 onAnswerSelect={(questionId, answerId) => {
@@ -249,6 +263,7 @@ const Testing = () => {
                   }
                 }}
                 selectedAnswers={selectedAnswers}
+                setIsAutoScrolling={setIsAutoScrolling}
               />
               <div className='flex justify-center mb-2'>
                 <Button
@@ -318,22 +333,26 @@ const Testing = () => {
                       </React.Fragment>
                     );
                   })}
-                  <span
-                    className='text-[#FE7743] cursor-pointer hover:underline'
-                    onClick={() => {
-                      if (unansweredQuestions.length > 3) {
-                        handleQuestionClick(unansweredQuestions[0].id);
-                      }
-                    }}
-                    role='button'
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' && unansweredQuestions.length > 3) {
-                        handleQuestionClick(unansweredQuestions[0].id);
-                      }
-                    }}
-                  >
-                    {unansweredQuestions.length > 3 && ` ( ${t('TEST.MORE')} )`}
+                  <span className='text-[#FE7743]'>
+                    {' ('}
+                    <span
+                      className='cursor-pointer hover:underline'
+                      onClick={() => {
+                        if (unansweredQuestions.length > 3) {
+                          handleQuestionClick(unansweredQuestions[0].id);
+                        }
+                      }}
+                      role='button'
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && unansweredQuestions.length > 3) {
+                          handleQuestionClick(unansweredQuestions[0].id);
+                        }
+                      }}
+                    >
+                      {t('TEST.MORE')}
+                    </span>
+                    {')'}
                   </span>
                 </span>
               </div>

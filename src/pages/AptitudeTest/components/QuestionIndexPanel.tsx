@@ -6,20 +6,24 @@ import { Question } from '@app/interface/examSet.interface';
 
 interface QuestionIndexPanelProps {
   questions: Question[];
-  currentQuestion: string;
+  currentQuestion: { id: string; timestamp: number };
+  currentQuestionScroll: string;
   answeredQuestions: string[];
   flaggedQuestions: string[];
   onFlagToggle: (id: string) => void;
   onQuestionSelect: (id: string) => void;
+  isAutoScrolling: boolean;
 }
 
 const QuestionIndexPanel = ({
   questions,
   currentQuestion,
+  currentQuestionScroll,
   answeredQuestions,
   flaggedQuestions,
   onFlagToggle,
   onQuestionSelect,
+  isAutoScrolling,
 }: QuestionIndexPanelProps) => {
   const { t } = useTranslation();
 
@@ -34,7 +38,7 @@ const QuestionIndexPanel = ({
 
   const getQuestionClasses = useCallback(
     (id: string) => {
-      const isCurrent = id === currentQuestion;
+      const isCurrent = id === currentQuestion.id;
       const status = getQuestionStatus(id);
 
       const baseClasses =
@@ -48,9 +52,12 @@ const QuestionIndexPanel = ({
 
       const currentClass = isCurrent ? 'ring-2 ring-[#FE7743] ring-offset-2' : '';
 
-      return `${baseClasses} ${statusClasses[status]} ${currentClass}`;
+      const disabledDuringScrollClass =
+        isAutoScrolling && !isCurrent ? 'opacity-50 grayscale pointer-events-none' : '';
+
+      return `${baseClasses} ${statusClasses[status]} ${currentClass} ${disabledDuringScrollClass}`;
     },
-    [currentQuestion, getQuestionStatus],
+    [currentQuestion.id, getQuestionStatus, isAutoScrolling],
   );
 
   return (
@@ -62,6 +69,7 @@ const QuestionIndexPanel = ({
           {questions.map((question, index) => (
             <button
               key={question.id}
+              disabled={isAutoScrolling}
               className={getQuestionClasses(question.id)}
               onClick={() => onQuestionSelect(question.id)}
               onContextMenu={(e) => {
