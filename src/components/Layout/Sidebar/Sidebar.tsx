@@ -1,9 +1,9 @@
 import {
   ProfileOutlined,
   LockOutlined,
-  ContainerOutlined,
   CheckSquareOutlined,
   ReadOutlined,
+  FolderOpenOutlined,
 } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useLocation, Link } from 'react-router-dom';
@@ -36,7 +36,7 @@ const Sidebar = () => {
       path: '/profile/courses',
     },
     {
-      icon: ReadOutlined,
+      icon: FolderOpenOutlined,
       label: t('SIDEBAR.PORTFOLIO'),
       path: '/portfolio',
     },

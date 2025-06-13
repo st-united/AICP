@@ -1,11 +1,15 @@
 import {
   DeleteFilled,
+  DownloadOutlined,
   FilePdfOutlined,
-  FileWordOutlined,
+  FileWordFilled,
   FolderAddFilled,
 } from '@ant-design/icons';
 import { Form, Input, Button, Upload, UploadFile, Image, Divider, Modal, Spin } from 'antd';
 import { Rule } from 'antd/lib/form';
+import DOMPurify from 'dompurify';
+import html2pdf from 'html2pdf.js';
+import mammoth from 'mammoth';
 import React, { useState, useMemo, useCallback, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -21,6 +25,11 @@ import {
 
 const { Dragger } = Upload;
 
+const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png'];
+const MAX_FILE_COUNT = 20;
+const ACCEPTED_FILE_TYPES = '.png,.jpg,.jpeg,.docx,.doc,.pdf';
+const PDF_MIME_TYPES = ['application/pdf', 'pdf'];
+
 interface PortfolioContentProps {
   edit?: boolean;
   cancelLabel?: string;
@@ -29,17 +38,24 @@ interface PortfolioContentProps {
   saveLabel?: string;
 }
 
+type ExtendedUploadFile = UploadFile & { originalUrl?: string };
+
 interface FileItemProps {
-  file: UploadFile;
+  file: ExtendedUploadFile;
   type: 'certification' | 'experience';
-  onRemove: (file: UploadFile, type: 'certification' | 'experience') => void;
-  onPreview: (file: UploadFile) => void;
+  onRemove: (file: ExtendedUploadFile, type: 'certification' | 'experience') => void;
+  onPreview: (file: ExtendedUploadFile) => void;
   isEdit: boolean;
 }
-const imageExtensions = ['jpg', 'jpeg', 'png'];
+
+type UploadContentProps = {
+  t: (key: string) => string;
+};
 
 const FileItem: React.FC<FileItemProps> = memo(
   ({ file, type, onRemove, onPreview, isEdit }: FileItemProps) => {
+    const [isConverting, setIsConverting] = useState(false);
+
     const fileSrc = useMemo(() => {
       let src = file.url || file.thumbUrl;
       if (!src && file.originFileObj) {
@@ -50,22 +66,97 @@ const FileItem: React.FC<FileItemProps> = memo(
 
     const isImageFile = useMemo(() => {
       return (
-        (file.type && imageExtensions.some((ext) => file.type?.includes(ext))) ||
+        (file.type && IMAGE_EXTENSIONS.some((ext) => file.type?.includes(ext))) ||
         file.type?.startsWith('image/')
       );
+    }, [file.type]);
+
+    const isPdfFile = useMemo(() => {
+      return file.type && PDF_MIME_TYPES.some((type) => file.type?.includes(type));
     }, [file.type]);
 
     const handleRemove = useCallback(() => {
       onRemove(file, type);
     }, [file, type, onRemove]);
 
+    const convertWordToPdf = useCallback(
+      async (file: File) => {
+        try {
+          setIsConverting(true);
+          const arrayBuffer = await file.arrayBuffer();
+          const result = await mammoth.convertToHtml({ arrayBuffer });
+          const html = DOMPurify.sanitize(result.value);
+
+          const element = document.createElement('div');
+          element.innerHTML = html;
+          document.body.appendChild(element);
+
+          const opt = {
+            margin: 1,
+            filename: `${file.name.split('.')[0]}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+          };
+          const pdf = await html2pdf().set(opt).from(element).output('blob');
+          const pdfUrl = URL.createObjectURL(pdf);
+          const fileData: ExtendedUploadFile = {
+            ...file,
+            url: pdfUrl,
+            uid: Date.now().toString(),
+          };
+          onPreview(fileData);
+          document.body.removeChild(element);
+        } catch (error) {
+          openNotificationWithIcon(NotificationTypeEnum.ERROR, error as string);
+        } finally {
+          setIsConverting(false);
+        }
+      },
+      [onPreview],
+    );
+
+    const handleNewFilePreview = useCallback(() => {
+      if (isPdfFile) {
+        const pdfUrl = URL.createObjectURL(file.originFileObj as File);
+        onPreview({ ...file, url: pdfUrl, originalUrl: pdfUrl });
+      } else {
+        convertWordToPdf(file.originFileObj as File);
+      }
+    }, [file, isPdfFile, onPreview, convertWordToPdf]);
+
+    const handleExistingFilePreview = useCallback(() => {
+      if (isPdfFile) {
+        onPreview(file);
+      } else {
+        const officeUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(
+          file.url || '',
+        )}&embedded=true`;
+        onPreview({ ...file, url: officeUrl, originalUrl: file.url });
+      }
+    }, [file, isPdfFile, onPreview]);
+
     const handlePreview = useCallback(() => {
-      onPreview(file);
-    }, [file, onPreview]);
+      if (file.originFileObj) {
+        handleNewFilePreview();
+      } else {
+        handleExistingFilePreview();
+      }
+    }, [file.originFileObj, handleNewFilePreview, handleExistingFilePreview]);
 
     return (
-      <div key={file.uid}>
-        <div className='flex flex-col md:flex-row justify-between w-full items-center gap-0 px-12 py-2'>
+      <div
+        key={file.uid}
+        className={`${
+          file.originFileObj &&
+          'relative rounded-xl p-[2px] my-2 bg-gradient-to-br from-[#ff9946] via-[#f3f3f3] to-[#fd7200] animate-gradient'
+        }`}
+      >
+        <div
+          className={`flex flex-col md:flex-row justify-between w-full items-center gap-0 px-12 py-2 ${
+            file.originFileObj && 'bg-white'
+          } rounded-xl p-6`}
+        >
           <div className='relative w-1/2'>
             {isEdit && (
               <Button
@@ -89,16 +180,23 @@ const FileItem: React.FC<FileItemProps> = memo(
                 </div>
               ) : (
                 <div className='flex items-center justify-center p-5'>
-                  {file.type === 'pdf' ? (
+                  {isPdfFile ? (
                     <FilePdfOutlined
-                      className='!text-6xl !text-[#c87351] cursor-pointer hover:!text-[#a85f42] transition-colors'
+                      className='!text-6xl !text-[#c87351] cursor-pointer hover:!text-[#a85f42] hover:scale-105 transition-colors'
                       onClick={handlePreview}
                     />
                   ) : (
-                    <FileWordOutlined
-                      className='!text-6xl !text-[#c87351] cursor-pointer hover:!text-[#a85f42] transition-colors'
-                      onClick={handlePreview}
-                    />
+                    <div className='relative'>
+                      <FileWordFilled
+                        className='!text-6xl !text-[#2a318a] cursor-pointer hover:!text-[#5a58e0] hover:scale-105 transition-colors'
+                        onClick={handlePreview}
+                      />
+                      {isConverting && (
+                        <div className='absolute inset-0 flex items-center justify-center'>
+                          <Spin size='small' />
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
               )}
@@ -106,7 +204,7 @@ const FileItem: React.FC<FileItemProps> = memo(
           </div>
           <span className='text-end flex-wrap text-ellipsis md:w-1/2'>{file.name}</span>
         </div>
-        {isEdit && <Divider className='bg-[#E5E5E5] !my-2 md:!my-0' />}
+        {isEdit && !file.originFileObj && <Divider className='bg-[#E5E5E5] !my-2 md:!my-0' />}
       </div>
     );
   },
@@ -114,16 +212,38 @@ const FileItem: React.FC<FileItemProps> = memo(
 
 FileItem.displayName = 'FileItem';
 
+const UploadContent = memo<UploadContentProps>(({ t }: UploadContentProps) => (
+  <div className='w-full flex items-center justify-center text-gray-400'>
+    <div className='flex flex-col items-center justify-center p-4 rounded-xl gap-2'>
+      <FolderAddFilled className='text-4xl !text-[#FF8C5F]' />
+      <span className='text-sm px-10'>{t('PORTFOLIO.CHOOSE_FILE')}</span>
+      <Divider orientation='center' className='!text-sm !my-0 !text-gray-400'>
+        {t('PORTFOLIO.OR')}
+      </Divider>
+      <div className='text-sm text-[#FF8C5F] border-[#FF8C5F] border-2 border-solid rounded-xl px-2 py-1'>
+        {t('PORTFOLIO.PICK_FILE')}
+      </div>
+    </div>
+  </div>
+));
+
+UploadContent.displayName = 'UploadContent';
+
+const getPreviewSrc = (file: UploadFile | null) => {
+  if (!file) return '';
+  return file.url || file.thumbUrl || '';
+};
+
 const PortfolioContent: React.FC<PortfolioContentProps> = memo(
   ({ edit = false, cancelLabel, saveLabel, onCancel, onSave }: PortfolioContentProps) => {
     const [form] = Form.useForm();
     const [isEdit, setIsEdit] = useState(edit);
-    const [selectedFile, setSelectedFile] = useState<UploadFile | null>(null);
-    const [certificationFiles, setCertificationFiles] = useState<UploadFile[]>([]);
-    const [experienceFiles, setExperienceFiles] = useState<UploadFile[]>([]);
+    const [selectedFile, setSelectedFile] = useState<ExtendedUploadFile | null>(null);
+    const [certificationFiles, setCertificationFiles] = useState<ExtendedUploadFile[]>([]);
+    const [experienceFiles, setExperienceFiles] = useState<ExtendedUploadFile[]>([]);
     const [deletedBECertificationFiles, setDeletedBECertificationFiles] = useState<string[]>([]);
     const [deletedBEExperiencesFiles, setDeletedBEExperiencesFiles] = useState<string[]>([]);
-    console.log(selectedFile);
+
     const { t } = useTranslation();
     const portfolioSchema = usePortfolioSchema();
     const updatePortfolioMutation = useUpdatePortfolio();
@@ -134,7 +254,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
       [portfolioSchema],
     );
 
-    const beCertificationFiles = useMemo(
+    const beCertificationFiles: UploadFile[] = useMemo(
       () =>
         (getPortfolio?.certifications || [])
           .filter((url: string) => !deletedBECertificationFiles.includes(url))
@@ -149,7 +269,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
       [getPortfolio?.certifications, deletedBECertificationFiles],
     );
 
-    const beExperienceFiles = useMemo(
+    const beExperienceFiles: UploadFile[] = useMemo(
       () =>
         (getPortfolio?.experiences || [])
           .filter((url: string) => !deletedBEExperiencesFiles.includes(url))
@@ -164,12 +284,12 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
       [getPortfolio?.experiences, deletedBEExperiencesFiles],
     );
 
-    const allCertificationFiles = useMemo(
+    const allCertificationFiles: UploadFile[] = useMemo(
       () => [...beCertificationFiles, ...certificationFiles],
       [beCertificationFiles, certificationFiles],
     );
 
-    const allExperienceFiles = useMemo(
+    const allExperienceFiles: UploadFile[] = useMemo(
       () => [...beExperienceFiles, ...experienceFiles],
       [beExperienceFiles, experienceFiles],
     );
@@ -177,7 +297,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
     const initialValues = useMemo(() => getPortfolio || {}, [getPortfolio]);
 
     const handleRemoveUploadedFile = useCallback(
-      (file: UploadFile, type: 'certification' | 'experience') => {
+      (file: ExtendedUploadFile, type: 'certification' | 'experience') => {
         if (file.url) {
           if (type === 'certification') {
             setDeletedBECertificationFiles((prev) => [...prev, file.url as string]);
@@ -196,7 +316,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
       [],
     );
 
-    const handleFilePreview = useCallback((file: UploadFile) => {
+    const handleFilePreview = useCallback((file: ExtendedUploadFile) => {
       setSelectedFile(file);
     }, []);
 
@@ -212,7 +332,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
       setExperienceFiles([]);
       setDeletedBECertificationFiles([]);
       setDeletedBEExperiencesFiles([]);
-    }, [form, setIsEdit, onCancel]);
+    }, [form, onCancel]);
 
     const handleSubmit = useCallback(
       async (values: Portfolio) => {
@@ -243,6 +363,10 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
           onSuccess: () => {
             setIsEdit(false);
             openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PORTFOLIO.UPDATE_SUCCESS'));
+            setCertificationFiles([]);
+            setExperienceFiles([]);
+            setDeletedBECertificationFiles([]);
+            setDeletedBEExperiencesFiles([]);
             onSave?.();
           },
           onError: () => {
@@ -258,39 +382,26 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
         updatePortfolioMutation,
         t,
         onSave,
-        setIsEdit,
       ],
     );
 
-    const handleCertificationChange = useCallback(({ fileList }: { fileList: UploadFile[] }) => {
-      setCertificationFiles(fileList.filter((f) => !f.url));
-    }, []);
+    const handleCertificationChange = useCallback(
+      ({ fileList }: { fileList: ExtendedUploadFile[] }) => {
+        setCertificationFiles(fileList.filter((f) => !f.url));
+      },
+      [],
+    );
 
-    const handleExperienceChange = useCallback(({ fileList }: { fileList: UploadFile[] }) => {
-      setExperienceFiles(fileList.filter((f) => !f.url));
-    }, []);
+    const handleExperienceChange = useCallback(
+      ({ fileList }: { fileList: ExtendedUploadFile[] }) => {
+        setExperienceFiles(fileList.filter((f) => !f.url));
+      },
+      [],
+    );
 
     const handleEditToggle = useCallback(() => {
       setIsEdit(true);
     }, []);
-
-    const uploadContent = useMemo(
-      () => (
-        <div className='w-full flex items-center justify-center text-gray-400'>
-          <div className='flex flex-col items-center justify-center p-4 rounded-xl gap-2'>
-            <FolderAddFilled className='text-4xl !text-[#FF8C5F]' />
-            <span className='text-sm px-10'>{t('PORTFOLIO.CHOOSE_FILE')}</span>
-            <Divider orientation='center' className='!text-sm !my-0 !text-gray-400'>
-              {t('PORTFOLIO.OR')}
-            </Divider>
-            <div className='text-sm text-[#FF8C5F] border-[#FF8C5F] border-2 border-solid rounded-xl px-2 py-1'>
-              {t('PORTFOLIO.PICK_FILE')}
-            </div>
-          </div>
-        </div>
-      ),
-      [t],
-    );
 
     if (!getPortfolio && isLoading) {
       return (
@@ -301,30 +412,26 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
     }
 
     return (
-      <div className='h-full p-6 overflow-auto bg-white shadow rounded-2xl'>
-        <header className='flex flex-col mx-auto mb-8 text-center'>
-          <h1 className='text-[40px] font-[700] text-[#FF8C5F] mb-6'>{t('PORTFOLIO.TITLE')}</h1>
-          <p className='mx-auto text-lg text-[#686868] center tex-font-semibold'>
-            {t('PORTFOLIO.SUB_TITLE')}
-          </p>
+      <div className='portfolio-content h-full p-6 overflow-auto bg-white shadow rounded-2xl'>
+        <header className='portfolio-content__header'>
+          <h1>{t('PORTFOLIO.TITLE')}</h1>
+          <p>{t('PORTFOLIO.SUB_TITLE')}</p>
           <div className='w-1/2 mx-auto'>
             <Divider className='bg-[#FF8C5F]' />
           </div>
-          <p className='mx-auto mb-4 text-sm center tex-font-semibold'>
-            {t('PORTFOLIO.SUB_TITLE_2')}
-          </p>
+          <p className='mx-auto mb-4 text-sm'>{t('PORTFOLIO.SUB_TITLE_2')}</p>
         </header>
 
         <Form
           form={form}
           layout='vertical'
-          className='w-full max-w-[900px] mx-auto'
+          className='portfolio-content__form'
           onFinish={handleSubmit}
           initialValues={initialValues}
         >
           <div className='flex flex-col justify-around gap-4'>
-            <section>
-              <h2 className='mb-4 text-xl font-semibold'>{t('PORTFOLIO.URL')}</h2>
+            <section className='portfolio-content__section'>
+              <h2>{t('PORTFOLIO.URL')}</h2>
               <Form.Item name='linkedInUrl' rules={validator}>
                 <Input
                   className='!px-6 !py-3 !rounded-lg'
@@ -349,22 +456,22 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
                     className='custom-upload'
                     multiple
                     listType='picture'
-                    maxCount={5}
-                    accept='.png,.jpg,.jpeg,.docx,.doc,.pdf'
+                    maxCount={MAX_FILE_COUNT}
+                    accept={ACCEPTED_FILE_TYPES}
                     beforeUpload={() => false}
                     onChange={handleCertificationChange}
                     disabled={!isEdit}
                     showUploadList={false}
                     fileList={allCertificationFiles}
                   >
-                    {uploadContent}
+                    <UploadContent t={t} />
                   </Dragger>
                   <p className='text-sm text-gray-400 text-center mt-2'>
                     {t('PORTFOLIO.VALIDATION')}
                   </p>
                 </section>
               )}
-              <div className={`w-full mt-4 p-4  rounded-lg ${isEdit ? 'bg-white' : 'bg-gray-100'}`}>
+              <div className={`w-full mt-4 p-4 rounded-lg ${isEdit ? 'bg-white' : 'bg-gray-100'}`}>
                 {allCertificationFiles.map((file) => (
                   <FileItem
                     key={file.uid}
@@ -383,22 +490,22 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
                     className='custom-upload'
                     multiple
                     listType='picture'
-                    maxCount={5}
-                    accept='.png,.jpg,.jpeg,.docx,.doc,.pdf'
+                    maxCount={MAX_FILE_COUNT}
+                    accept={ACCEPTED_FILE_TYPES}
                     beforeUpload={() => false}
                     onChange={handleExperienceChange}
                     disabled={!isEdit}
                     showUploadList={false}
                     fileList={allExperienceFiles}
                   >
-                    {uploadContent}
+                    <UploadContent t={t} />
                   </Dragger>
                   <p className='text-sm text-gray-400 text-center mt-2'>
                     {t('PORTFOLIO.VALIDATION')}
                   </p>
                 </section>
               )}
-              <div className={`w-full mt-4 p-4  rounded-lg ${isEdit ? 'bg-white' : 'bg-gray-100'}`}>
+              <div className={`w-full mt-4 p-4 rounded-lg ${isEdit ? 'bg-white' : 'bg-gray-100'}`}>
                 {allExperienceFiles.map((file) => (
                   <FileItem
                     key={file.uid}
@@ -412,7 +519,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
               </div>
             </div>
           </div>
-          <Form.Item className='border-t border-[#E5E5E5] !mt-16 !py-8'>
+          <Form.Item className='portfolio-content__actions'>
             <div className='flex justify-end gap-2 !flex-row'>
               {!isEdit ? (
                 <Button
@@ -444,12 +551,21 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
 
         <Modal open={!!selectedFile} onCancel={handleModalClose} footer={null}>
           <div className='w-[90vw] md:w-[80vw] lg:w-[70vw] xl:w-[60vw] h-[90vh] aspect-video !py-10'>
+            {!selectedFile?.type?.includes('pdf') && selectedFile?.originalUrl && (
+              <div className='mb-4 flex justify-end'>
+                <DownloadOutlined
+                  onClick={() => {
+                    if (selectedFile?.originalUrl) {
+                      window.open(selectedFile.originalUrl, '_blank');
+                    }
+                  }}
+                  className='!text-[#ce6339] hover:!text-[#967569] !text-4xl mr-6'
+                />
+              </div>
+            )}
+
             <iframe
-              src={
-                selectedFile?.url ||
-                selectedFile?.thumbUrl ||
-                (selectedFile?.originFileObj ? URL.createObjectURL(selectedFile.originFileObj) : '')
-              }
+              src={getPreviewSrc(selectedFile)}
               title='Document Preview'
               className='w-full h-full border rounded'
             />
