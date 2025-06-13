@@ -1,11 +1,7 @@
-import { UserOutlined } from '@ant-design/icons';
 import { Modal, Steps } from 'antd';
 import { useState } from 'react';
 
 import './StepModal.scss';
-import DashboardSection from '@app/components/UserPage/DashboardSection';
-import RecommendSection from '@app/components/UserPage/RecommentSection';
-import WelcomeSection from '@app/components/UserPage/WelcomeSection';
 
 interface StepModalProps {
   current?: number;
