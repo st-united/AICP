@@ -20,6 +20,7 @@ const ProvinceSelect: React.FC<ProvinceSelectProps> = (props) => {
   return (
     <div id='customSelect'>
       <Select
+        className='h-10 flex items-center'
         options={provinceOptions}
         allowClear
         placeholder={t('PLACEHOLDER.SELECT_CITY')}

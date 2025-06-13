@@ -20,6 +20,7 @@ const JobSelect: React.FC<ProvinceSelectProps> = (props) => {
   return (
     <div id='customSelect'>
       <Select
+        className='h-10 flex items-center'
         allowClear
         options={jobOptions}
         placeholder={t('PLACEHOLDER.SELECT_JOB')}
