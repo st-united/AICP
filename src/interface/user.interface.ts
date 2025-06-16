@@ -1,5 +1,5 @@
 import { GetListParams } from './common.interface';
-import { ExamStatusEnum, LevelOfDomainEnum } from '@app/constants/enum';
+import { ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 
 export interface UserColumns {
   id: number;
@@ -78,7 +78,7 @@ export interface RegisterUser {
 export interface HistoryTesting {
   id: string;
   examStatus: ExamStatusEnum;
-  levelOfDomain: LevelOfDomainEnum;
+  sfiaLevel: SFIALevel;
   createdAt: Date;
 }
 
@@ -94,4 +94,20 @@ export interface HasTakenExam {
   hasTakenExam: boolean;
   examSetDuration: number;
   examId?: string;
+}
+
+export interface DetailExam {
+  id: string;
+  startedAt: string;
+  sfiaLevel: SFIALevel | null;
+  mindsetScore: number;
+  skillsetScore: number;
+  toolsetScore: number;
+  overallScore: number;
+  examStatus: ExamStatusEnum;
+  createdAt: string;
+  examSet: {
+    id: string;
+    name: string;
+  };
 }

@@ -24,7 +24,7 @@ const DateFilter = ({ onDateChange, value }: DateFilterProps) => {
   };
 
   return (
-    <div className='relative p-4 md:p-6 shadow-sm bg-white rounded-xl md:rounded-2xl hover:shadow-md transition-shadow duration-200'>
+    <div className='relative p-4 md:p-6 mx-2 shadow-sm bg-white rounded-xl md:rounded-2xl hover:shadow-md transition-shadow duration-200'>
       <div className='flex flex-col md:flex-row gap-3'>
         <DatePicker
           placeholder={t<string>('EXAM.DATE_FILTER_START')}
