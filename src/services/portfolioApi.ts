@@ -14,6 +14,7 @@ export const getPortfolioApi = async () => {
 export const uploadPortfolioFilesApi = async (
   formData: FormData,
   onProgress: (percent: number) => void,
+  controller?: AbortController,
 ) => {
   return await axios.post(API_URL.PORTFOLIO_UPLOAD_FILE, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
@@ -21,6 +22,7 @@ export const uploadPortfolioFilesApi = async (
       const percent = Math.round((event.loaded * 100) / (event.total || 1));
       onProgress(percent);
     },
+    signal: controller?.signal,
   });
 };
 

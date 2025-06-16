@@ -11,6 +11,9 @@ export interface Portfolio {
 export type ExtendedUploadFile = UploadFile & {
   originalUrl?: string;
   progress?: number;
+  uploadController?: AbortController;
+  uploadStatus?: 'uploading' | 'paused' | 'canceled' | 'done' | 'error';
+  remainingTime?: number;
 };
 export interface FileItemProps {
   file: ExtendedUploadFile;

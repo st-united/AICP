@@ -1,4 +1,9 @@
-import { DeleteFilled, FilePdfOutlined, FileWordFilled } from '@ant-design/icons';
+import {
+  DeleteFilled,
+  FilePdfOutlined,
+  FileWordFilled,
+  CloseCircleOutlined,
+} from '@ant-design/icons';
 import { Button, Image, Divider, Progress } from 'antd';
 import React, { useMemo, useCallback, memo } from 'react';
 
@@ -33,6 +38,12 @@ const FileItem: React.FC<FileItemProps> = memo(
       )}&embedded=true`;
       onPreview({ ...file, url: officeUrl, originalUrl: file.url });
     }, [file, onPreview]);
+
+    const handleCancel = useCallback(() => {
+      if (file.uploadController) {
+        file.uploadController.abort();
+      }
+    }, [file]);
 
     return (
       <div
@@ -90,18 +101,27 @@ const FileItem: React.FC<FileItemProps> = memo(
           <div className='text-end flex-wrap text-ellipsis md:w-1/2'>
             <div className='flex items-center justify-center md:justify-end gap-2'>
               {file.status === 'uploading' ? (
-                <Progress
-                  percent={file.progress}
-                  size='small'
-                  status='active'
-                  className='!w-100'
-                  strokeColor={{
-                    '0%': '#ffdf52',
-                    '100%': '#fd7200',
-                  }}
-                />
+                <>
+                  <Progress
+                    percent={file.progress}
+                    size='small'
+                    status='active'
+                    className='!w-100'
+                    strokeColor={{
+                      '0%': '#ffdf52',
+                      '100%': '#fd7200',
+                    }}
+                  />
+                  <CloseCircleOutlined
+                    className='ml-2 text-red-500 text-xl cursor-pointer'
+                    title='Hủy tải lên'
+                    onClick={handleCancel}
+                  />
+                </>
+              ) : file.status === 'removed' ? (
+                <span className='text-red-500'>Đã hủy</span>
               ) : (
-                <span className='text-center'>{file.name}</span>
+                <span className='text-center md:text-end'>{file.name}</span>
               )}
             </div>
           </div>

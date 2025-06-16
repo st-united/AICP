@@ -30,13 +30,15 @@ export const useGetPortfolio = (): UseQueryResult<Portfolio> => {
 
 export const useUploadPortfolioFiles = () => {
   return useMutation({
-    mutationFn: ({
+    mutationFn: async ({
       formData,
       onProgress,
+      controller,
     }: {
       formData: FormData;
       onProgress: (percent: number) => void;
-    }) => uploadPortfolioFilesApi(formData, onProgress),
+      controller?: AbortController;
+    }) => uploadPortfolioFilesApi(formData, onProgress, controller),
   });
 };
 

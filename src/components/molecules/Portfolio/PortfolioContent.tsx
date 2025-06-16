@@ -118,8 +118,10 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
         const data: Portfolio = {
           linkedInUrl: values.linkedInUrl,
           githubUrl: values.githubUrl,
-          certifications: certificationFiles.map((f) => f.url || ''),
-          experiences: experienceFiles.map((f) => f.url || ''),
+          certifications: certificationFiles
+            .filter((f) => f.status === 'done')
+            .map((f) => f.url || ''),
+          experiences: experienceFiles.filter((f) => f.status === 'done').map((f) => f.url || ''),
         };
 
         updatePortfolioMutation.mutate(data, {
@@ -144,12 +146,15 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
         const fileId = `${type}-${Date.now()}`;
         const setter = type === 'certification' ? setCertificationFiles : setExperienceFiles;
 
+        const controller = new AbortController();
         const newFile: ExtendedUploadFile = {
           uid: fileId,
           name: file.name,
           status: 'uploading' as UploadFileStatus,
           originFileObj: file,
           progress: 0,
+          uploadController: controller,
+          type: file.type,
         };
 
         setter((prev) => [...prev, newFile]);
@@ -162,16 +167,24 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
             formData,
             onProgress: (percent: number) => {
               setter((prev) =>
-                prev.map((f) => (f.uid === fileId ? { ...f, progress: percent } : f)),
+                prev.map((f) =>
+                  f.uid === fileId ? { ...f, progress: percent, status: 'uploading' } : f,
+                ),
               );
             },
+            controller,
           });
 
           const url = response.data.data;
           setter((prev) =>
             prev.map((f) =>
               f.uid === fileId
-                ? { ...f, url, status: 'done' as UploadFileStatus, progress: 100 }
+                ? {
+                    ...f,
+                    url,
+                    status: 'done' as UploadFileStatus,
+                    progress: 100,
+                  }
                 : f,
             ),
           );
@@ -185,10 +198,18 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
             );
           }, 2000);
         } catch (err: any) {
-          console.error(err);
-          onError(err);
-          setter((prev) => prev.filter((f) => f.uid !== fileId));
-          openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PORTFOLIO.UPLOAD_FAILED'));
+          if (controller.signal.aborted) {
+            setter((prev) =>
+              prev.map((f) =>
+                f.uid === fileId ? { ...f, status: 'removed' as UploadFileStatus } : f,
+              ),
+            );
+            openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PORTFOLIO.UPLOAD_FAILED'));
+          } else {
+            onError(err);
+            setter((prev) => prev.filter((f) => f.uid !== fileId));
+            openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PORTFOLIO.UPLOAD_FAILED'));
+          }
         }
       },
       [uploadPortfolioFilesMutation, t],
@@ -221,7 +242,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
             window.URL.revokeObjectURL(blobUrl);
             openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PORTFOLIO.DOWNLOAD_SUCCESS'));
           },
-          onError: (error: any) => {
+          onError: () => {
             openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PORTFOLIO.DOWNLOAD_FAILED'));
             window.open(url, '_blank');
           },
@@ -376,7 +397,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
             <div className='mb-4 flex justify-end'>
               <DownloadOutlined
                 onClick={handleDownload}
-                className='!text-[#ce6339] hover:!text-[#967569] !text-4xl mr-6'
+                className='!text-[#ce6339] hover:!text-[#967569] !text-3xl mr-6'
               />
             </div>
 
