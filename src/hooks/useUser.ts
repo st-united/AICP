@@ -12,6 +12,7 @@ import {
   updateUser,
   forgotPasswordApi,
   updateForgotPasswordApi,
+  checkResetPasswordTokenApi,
 } from '@app/services';
 
 export const useCreateUser = () => {
@@ -93,5 +94,17 @@ export const useUpdateForgotPassword = () => {
   return useMutation(async (payload: UpdateForgotPassword) => {
     const response = await updateForgotPasswordApi(payload);
     return response.data;
+  });
+};
+
+export const useCheckResetPasswordToken = (token: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEY.CHECK_RESET_PASSWORD_TOKEN, token],
+    queryFn: async () => {
+      const response = await checkResetPasswordTokenApi(token);
+      return response.data;
+    },
+    enabled: !!token,
+    retry: false,
   });
 };
