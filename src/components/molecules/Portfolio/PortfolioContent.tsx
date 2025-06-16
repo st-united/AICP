@@ -319,6 +319,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
               <div className={`w-full mt-4 p-4 rounded-lg ${isEdit ? 'bg-white' : 'bg-gray-100'}`}>
                 {certificationFiles.map((file) => (
                   <FileItem
+                    t={t}
                     key={file.uid}
                     file={file}
                     type='certification'
@@ -351,6 +352,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
               <div className={`w-full mt-4 p-4 rounded-lg ${isEdit ? 'bg-white' : 'bg-gray-100'}`}>
                 {experienceFiles.map((file) => (
                   <FileItem
+                    t={t}
                     key={file.uid}
                     file={file}
                     type='experience'

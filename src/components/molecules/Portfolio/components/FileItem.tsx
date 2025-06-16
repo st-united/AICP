@@ -11,7 +11,7 @@ import { IMAGE_EXTENSIONS, PDF_MIME_TYPES } from '../constants';
 import { FileItemProps } from '@app/interface/portfolio.interface';
 
 const FileItem: React.FC<FileItemProps> = memo(
-  ({ file, type, onRemove, onPreview, isEdit }: FileItemProps) => {
+  ({ file, type, onRemove, onPreview, isEdit, t }: FileItemProps) => {
     const fileSrc = useMemo(() => {
       let src = file.url || file.thumbUrl;
       if (!src && file.originFileObj) {
@@ -119,7 +119,7 @@ const FileItem: React.FC<FileItemProps> = memo(
                   />
                 </>
               ) : file.status === 'removed' ? (
-                <span className='text-red-500'>Đã hủy</span>
+                <span className='text-red-500'>{t('PORTFOLIO.CANCEL_UPLOAD')}</span>
               ) : (
                 <span className='text-center md:text-end'>{file.name}</span>
               )}

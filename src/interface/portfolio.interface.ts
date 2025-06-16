@@ -16,6 +16,7 @@ export type ExtendedUploadFile = UploadFile & {
   remainingTime?: number;
 };
 export interface FileItemProps {
+  t: (key: string) => string;
   file: ExtendedUploadFile;
   type: 'certification' | 'experience';
   onRemove: (file: ExtendedUploadFile, type: 'certification' | 'experience') => void;
