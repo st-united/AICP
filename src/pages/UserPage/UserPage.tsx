@@ -3,14 +3,10 @@ import DashboardSection from '@app/components/UserPage/DashboardSection';
 import RecommendSection from '@app/components/UserPage/RecommentSection';
 import WelcomeSection from '@app/components/UserPage/WelcomeSection';
 
-interface UserPageProps {
-  name?: string;
-}
-
-const UserPage = ({ name }: UserPageProps) => {
+const UserPage = () => {
   return (
     <>
-      <WelcomeSection name={name} />
+      <WelcomeSection />
       <DashboardSection />
       <RecommendSection />
       <FooterSection />

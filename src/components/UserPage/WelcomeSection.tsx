@@ -1,15 +1,15 @@
 import { Button } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 import { InnovationPana } from '@app/assets/images';
 import { TextTyping } from '@app/components/atoms/';
+import { RootState } from '@app/redux/store';
 
-interface WelcomeSectionProps {
-  name?: string;
-}
-const WelcomeSection = ({ name }: WelcomeSectionProps) => {
+const WelcomeSection = () => {
+  const { user } = useSelector((state: RootState) => state.auth);
   const { t } = useTranslation();
   const [open, setIsOpen] = useState(false);
   return (
@@ -17,7 +17,7 @@ const WelcomeSection = ({ name }: WelcomeSectionProps) => {
       <div className='flex flex-row container w-full h-full gap-6 mx-auto py-28 xsM:w-[90%] smM:pl-2 smM:py-36 smM:items-center mdM:h-screen xl:w-[90%]'>
         <div className='flex flex-col items-center h-full ssM:text-start smM:justify-center smM:items-start mdM:justify-center mdM:w-full gap-6'>
           <div className='text-center text-[#273F4F] font-bold mb-4 text-2xl smM:text-3xl smM:text-start xl:text-4xl'>
-            {t('HOMEPAGE_LOGIN.TITLE', { name })}
+            {t('HOMEPAGE_LOGIN.TITLE', { name: user?.fullName })}
           </div>
           <TextTyping
             text={t('HOMEPAGE_LOGIN.TEXT_READY') ?? ''}
@@ -34,7 +34,7 @@ const WelcomeSection = ({ name }: WelcomeSectionProps) => {
             onClick={() => {
               setIsOpen(true);
             }}
-            className='h-12 mdL:h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
+            className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
           >
             {t('HOMEPAGE_LOGIN.START')}
           </Button>
@@ -46,7 +46,7 @@ const WelcomeSection = ({ name }: WelcomeSectionProps) => {
           <img src={InnovationPana} alt='innovation' className='w-[25rem] h-[25rem]' />
         </div>
       </div>
-      <ConfirmBeforeTestModal open={open} onClose={() => setIsOpen(false)} />
+      {open && <ConfirmBeforeTestModal open={open} onClose={() => setIsOpen(false)} />}
     </section>
   );
 };

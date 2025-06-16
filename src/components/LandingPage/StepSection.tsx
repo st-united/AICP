@@ -1,11 +1,14 @@
 import { Button, Carousel } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import LazyComponent from './LazyComponent';
 import { LandingMonitor } from '@app/assets/svgs';
 
 const StepSection = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const handleLoginClick = () => navigate('/login');
 
   const steps = [
     {
@@ -40,14 +43,14 @@ const StepSection = () => {
 
   return (
     <div className='w-full h-full xl:min-h-screen bg-cover bg-center bg-no-repeat bg-[url(./assets/images/landingpage_step_bg.png)]'>
-      <div className='text-center px-4 smM:px-0 py-10'>
+      <div className='text-center py-10'>
         <p className='text-primary font-bold text-base sm:text-2xl mdM::text-3xl my-8'>
           {t('HOMEPAGE.STEP_LABEL')}
         </p>
         <h2 className='text-primary font-extrabold text-2xl sm:text-3xl md:text-4xl mdM:text-5xl mb-8'>
           {t('HOMEPAGE.STEP_TITLE')}
         </h2>
-        <p className='text-[#444444] font-medium !leading-10 mb-8 text-lg smM:px-16 md:px-36 mdL:text-3xl'>
+        <p className='text-[#444444] font-medium !leading-10 mb-8 text-lg px-4 smM:px-16 md:px-36 mdL:text-3xl'>
           {t('HOMEPAGE.STEP_SUBTITLE')}
         </p>
       </div>
@@ -89,7 +92,10 @@ const StepSection = () => {
                       <p className='w-full mdM:w-[70%] !text-white leading-relaxed text-sm md:text-base mb-6'>
                         {step.desc}
                       </p>
-                      <Button className='bg-white h-12 w-44 text-lg text-primary font-bold rounded-full border-none shadow-md hover:!bg-primary hover:!text-white transition'>
+                      <Button
+                        className='bg-white h-12 w-44 text-lg text-primary font-bold rounded-full border-none shadow-md hover:!bg-primary hover:!text-white transition'
+                        onClick={handleLoginClick}
+                      >
                         {t('HOMEPAGE.STEP_BUTTON')}
                       </Button>
                     </div>

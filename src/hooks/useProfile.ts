@@ -2,23 +2,16 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { useLogout } from './useAuth';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { ChangePassword, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
-import {
-  changePassword,
-  getProfileApi,
-  removeAvatarApi,
-  updateProfileApi,
-  uploadAvatarApi,
-} from '@app/services';
+import { changePassword, getProfileApi, updateProfileApi, uploadAvatarApi } from '@app/services';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
 
-export const useGetProfile = () => {
+export const useGetProfile = (params, options = {}) => {
   const dispatch = useDispatch();
 
   return useQuery<UserProfile>(
@@ -31,6 +24,7 @@ export const useGetProfile = () => {
       onSuccess(data) {
         dispatch(setAuth(data));
       },
+      ...options,
     },
   );
 };
@@ -77,21 +71,6 @@ export const useUploadAvatar = () => {
   return useMutation(
     async (data: { identityId: string; formData: FormData }) => {
       const response = await uploadAvatarApi(data.identityId, data.formData);
-      return response.data;
-    },
-    {
-      onSuccess({ message }) {
-        queryClient.refetchQueries([QUERY_KEY.PROFILE]);
-      },
-    },
-  );
-};
-
-export const useRemoveAvatar = () => {
-  const queryClient = useQueryClient();
-  return useMutation(
-    async (data: { identityId: string }) => {
-      const response = await removeAvatarApi(data.identityId);
       return response.data;
     },
     {
