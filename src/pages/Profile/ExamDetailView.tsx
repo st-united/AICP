@@ -21,12 +21,14 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
 
   return (
     <>
-      <div className='flex items-center space-x-2'>
-        <ClockCircleOutlined className='text-gray-600 text-lg sm:text-xl hidden sm:block' />
-        <span className='text-sm sm:text-base'>
-          {t('EXAM.CREATED_TIME')}
-          <span className='font-medium ml-1'>{formatDateTime(exam.createdAt.toString())}</span>
-        </span>
+      <div className='flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mb-4 px-1'>
+        <div className='flex items-center gap-2'>
+          <ClockCircleOutlined className='text-gray-600 text-lg sm:text-xl' />
+          <span className='text-sm sm:text-base'>
+            {t('EXAM.CREATED_TIME')}
+            <span className='font-medium ml-1'>{formatDateTime(exam.createdAt.toString())}</span>
+          </span>
+        </div>
 
         <Tag
           color={getStatusColor(exam.examStatus)}
@@ -35,6 +37,7 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
           {getStatusText(exam.examStatus)}
         </Tag>
       </div>
+
       <Card className='p-3 sm:p-8 rounded-xl shadow-lg bg-white' classNames={{ body: '!p-0' }}>
         <div className='mb-6 text-center sm:text-start border-b pb-6'>
           <h1 className='text-2xl sm:text-3xl font-bold text-gray-800 mb-2'>
