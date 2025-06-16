@@ -18,4 +18,6 @@ export const API_URL = {
   ANSWERS: '/answers',
   MENTORS_AVAILABLE: '/mentors/available',
   PORTFOLIO: '/users/portfolio',
+  PORTFOLIO_DOWNLOAD: '/users/portfolio/download',
+  PORTFOLIO_UPLOAD_FILE: '/users/portfolio/files',
 };

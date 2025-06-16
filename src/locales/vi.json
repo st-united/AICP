@@ -510,6 +510,10 @@
     "UPDATE_SUCCESS": "Cập nhật hồ sơ thành công",
     "UPDATE_FAILED": "Cập nhật hồ sơ thất bại",
     "CREATE_SUCCESS": "Tạo hồ sơ thành công",
-    "CREATE_FAILED": "Tạo hồ sơ thất bại"
+    "CREATE_FAILED": "Tạo hồ sơ thất bại",
+    "UPLOAD_SUCCESS": "Tải lên tệp thành công",
+    "UPLOAD_FAILED": "Tải lên tệp thất bại",
+    "DOWNLOAD_SUCCESS": "Tải xuống tệp thành công",
+    "DOWNLOAD_FAILED": "Tải xuống tệp thất bại"
   }
 }

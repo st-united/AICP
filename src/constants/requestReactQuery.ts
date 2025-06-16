@@ -36,6 +36,7 @@ export const QUERY_KEY = {
   DATA_CHART: 'DATA_CHART',
   CABINS: 'CABINS',
   EXAM_SETS: 'EXAM_SETS',
+  PORTFOLIO: 'PORTFOLIO',
 };
 
 export const REACT_QUERY = {
