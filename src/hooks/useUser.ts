@@ -4,15 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import {
   GetUsersParams,
+  GetHistoryParams,
   UserDetail,
   UpdateForgotPassword,
   HasTakenExam,
+  HistoryTesting,
 } from '@app/interface/user.interface';
 import {
   checkHasTakenExam,
   checkHasTakenExamDefault,
   createUser,
   deleteUserAPI,
+  getHistoryTestingApi,
   getUserByIdAPI,
   getUsersAPI,
   resetPasswordApi,
@@ -102,6 +105,12 @@ export const useResetPassword = () => {
   });
 };
 
+export const useGetHistory = (params?: GetHistoryParams) => {
+  return useQuery<HistoryTesting[]>([QUERY_KEY.EXAM_HISTORY, params], async () => {
+    const { data } = await getHistoryTestingApi(params);
+    return data.data;
+  });
+};
 export const useForgotPassword = () => {
   return useMutation(async (email: string) => {
     const response = await forgotPasswordApi(email);
