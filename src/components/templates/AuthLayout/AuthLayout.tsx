@@ -3,11 +3,12 @@ import { Outlet } from 'react-router-dom';
 import Header from '@app/components/Layout/Header/Header';
 import { useGetProfile } from '@app/hooks/useProfile';
 import { Spin } from 'antd';
+import { useSelector } from 'react-redux';
 
 const AuthLayout = () => {
-  const { data, isLoading } = useGetProfile();
-
-  if (isLoading) {
+  const isAuth = useSelector((state: any) => state.auth.isAuth);
+  const { data, isLoading } = useGetProfile(undefined, { enabled: isAuth });
+  if (isAuth && isLoading) {
     return (
       <div className='flex justify-center items-center'>
         <Spin />
@@ -16,7 +17,7 @@ const AuthLayout = () => {
   }
 
   return (
-    <div className='flex h-screen flex-col'>
+    <div className='flex min-h-screen flex-col'>
       <Header />
       <Outlet />
     </div>
