@@ -7,6 +7,7 @@ export const API_URL = {
   UPLOAD_AVATAR: '/users/avatar',
   CHANGE_PASSWORD: '/users/change-password',
   RESET_PASSWORD: 'users/reset-password',
+  CHECK_RESET_TOKEN: 'users/check-reset-token',
   FORGOT_PASSWORD: 'users/forgot-password',
   UPDATE_FORGOT_PASSWORD: 'users/update-forgot-password',
   LOGOUT: '/auth/logout',
