@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 const AuthLayout = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
-  const { data, isLoading } = useGetProfile(undefined, { enabled: isAuth });
+  const { isLoading } = useGetProfile(isAuth);
   if (isAuth && isLoading) {
     return (
       <div className='flex justify-center items-center'>

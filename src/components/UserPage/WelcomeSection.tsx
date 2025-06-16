@@ -6,10 +6,6 @@ import { useSelector } from 'react-redux';
 import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 import { InnovationPana } from '@app/assets/images';
 import { TextTyping } from '@app/components/atoms/';
-<<<<<<< HEAD
-import { useSelector } from 'react-redux';
-=======
->>>>>>> feat/AICP-24-68
 import { RootState } from '@app/redux/store';
 
 const WelcomeSection = () => {

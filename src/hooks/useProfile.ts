@@ -11,7 +11,7 @@ import {
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
 
-export const useGetProfile = (params, options = {}) => {
+export const useGetProfile = (isAuth = true) => {
   const dispatch = useDispatch();
 
   return useQuery<UserProfile>(
@@ -24,7 +24,7 @@ export const useGetProfile = (params, options = {}) => {
       onSuccess(data) {
         dispatch(setAuth(data));
       },
-      ...options,
+      enabled: isAuth,
     },
   );
 };
