@@ -1,11 +1,14 @@
 import { Button, Carousel } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import LazyComponent from './LazyComponent';
 import { LandingMonitor } from '@app/assets/svgs';
 
 const StepSection = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const handleLoginClick = () => navigate('/login');
 
   const steps = [
     {
@@ -89,7 +92,10 @@ const StepSection = () => {
                       <p className='w-full mdM:w-[70%] !text-white leading-relaxed text-sm md:text-base mb-6'>
                         {step.desc}
                       </p>
-                      <Button className='bg-white h-12 w-44 text-lg text-primary font-bold rounded-full border-none shadow-md hover:!bg-primary hover:!text-white transition'>
+                      <Button
+                        className='bg-white h-12 w-44 text-lg text-primary font-bold rounded-full border-none shadow-md hover:!bg-primary hover:!text-white transition'
+                        onClick={handleLoginClick}
+                      >
                         {t('HOMEPAGE.STEP_BUTTON')}
                       </Button>
                     </div>

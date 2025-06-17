@@ -54,11 +54,11 @@ const QuestionIndexPanel = ({
   );
 
   return (
-    <div className='flex flex-col items-center justify-center bg-white rounded-xl p-6 shadow-lg border border-gray-100'>
+    <div className='flex flex-col items-center justify-center bg-white rounded-xl p-6 shadow-lg border border-gray-100 h-full'>
       <div className='text-2xl font-bold text-center text-blue-900'>{t('TEST.QUESTION_INDEX')}</div>
       <Divider />
       <div className='flex-1'>
-        <div className='grid grid-cols-4 gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 p-2 w-full h-[calc(100vh-490px)]'>
+        <div className='grid grid-cols-4 gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 p-2 w-full h-[calc(100vh-590px)]'>
           {questions.map((question, index) => (
             <button
               key={question.id}

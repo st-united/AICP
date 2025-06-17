@@ -3,8 +3,8 @@ import { Button, Drawer, Layout, Grid } from 'antd';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import SidebarContent from '@app/components/Layout/Sidebar/Sidebar';
 import HeaderComponent from '@app/components/Layout/Header/Header';
+import SidebarContent from '@app/components/Layout/Sidebar/Sidebar';
 
 const { Sider, Content } = Layout;
 const { useBreakpoint } = Grid;

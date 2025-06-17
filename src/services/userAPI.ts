@@ -1,7 +1,12 @@
 import axios from 'axios';
 
 import { API_URL } from '@app/constants';
-import { GetUsersParams, UserDetail, UpdateForgotPassword } from '@app/interface/user.interface';
+import {
+  GetUsersParams,
+  UserDetail,
+  UpdateForgotPassword,
+  GetHistoryParams,
+} from '@app/interface/user.interface';
 
 export const getUsersAPI = async (params: GetUsersParams) =>
   await axios.get(API_URL.USERS, { params });
@@ -13,6 +18,9 @@ export const checkHasTakenExam = async (examSetId: string) =>
 
 export const checkHasTakenExamDefault = async () =>
   await axios.get(API_URL.CHECK_TAKEN_EXAM_DEFAULT);
+
+export const getHistoryTestingApi = (params?: GetHistoryParams) =>
+  axios.get(API_URL.HISTORY_TESTING, { params });
 
 export const updateUser = async (user: UserDetail) =>
   await axios.patch(`${API_URL.USERS}/${user.id}`, user);
