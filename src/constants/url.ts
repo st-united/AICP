@@ -1,6 +1,7 @@
 export const API_URL = {
   USERS: '/users',
   LOGIN: '/auth/login',
+  LOGIN_WITH_GOOGLE: '/auth/login-google',
   REFRESH_TOKEN: '/auth/refresh',
   GET_PROFILE: '/users/me',
   UPDATE_PROFILE: '/users/profile',

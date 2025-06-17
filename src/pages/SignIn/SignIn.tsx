@@ -1,5 +1,5 @@
 import { LeftOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Image } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,13 +8,18 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useSignInSchema } from './signInSchema';
 import { NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers/yupSync';
-import { useActivateAccount, useLogin } from '@app/hooks';
-import { Credentials } from '@app/interface/user.interface';
+import { useActivateAccount, useLogin, useLoginWithGoogle } from '@app/hooks';
+import { Credentials, GoogleCredentials } from '@app/interface/user.interface';
+
+import { auth, provider } from '../../config/firebase';
+import { signInWithPopup } from 'firebase/auth';
+import { GoogleIcon } from '@app/assets/svgs';
 
 import './SignIn.scss';
 
 const SignIn = () => {
   const { mutate: loginUser } = useLogin();
+  const { mutate: loginWithGoogle } = useLoginWithGoogle();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -37,6 +42,13 @@ const SignIn = () => {
   };
   const handleOnClickHomePage = () => {
     navigate('/');
+  };
+
+  const handleGoogleLogin = async () => {
+    const result = await signInWithPopup(auth, provider);
+    const googleIdToken = await result.user.getIdToken();
+    const credentialsToPass: GoogleCredentials = { idToken: googleIdToken };
+    loginWithGoogle(credentialsToPass);
   };
 
   const validator = [yupSync(signInSchema)] as unknown as Rule[];
@@ -110,6 +122,22 @@ const SignIn = () => {
               className='w-full h-[3.75rem] !bg-primary-bold text-[1rem] text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:text-black transition duration-300'
             >
               {t('LOGIN.LOGIN')}
+            </Button>
+          </Form.Item>
+          <div className='col-span-2 text-center italic text-gray-500 my-2'>{t('LOGIN.OR')}</div>
+
+          <Form.Item className='col-span-2'>
+            <Button
+              onClick={handleGoogleLogin}
+              className='w-full h-[3.75rem] font-semibold text-gray-700 rounded-md hover:bg-gray-100 transition duration-300'
+            >
+              <Image
+                src={GoogleIcon}
+                alt='Google Icon'
+                preview={false}
+                className='!w-5 !h-5 mr-2'
+              />
+              {t('LOGIN.LOGIN_WITH_GOOGLE')}
             </Button>
           </Form.Item>
         </Form>
