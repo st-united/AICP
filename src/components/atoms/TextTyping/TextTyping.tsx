@@ -27,5 +27,10 @@ export const TextTyping = ({ text, speed = 100, className }: TextTypingProps) =>
     };
   }, [text, speed]);
 
-  return <div className={className}>{displayed}</div>;
+  return (
+    <span className={`relative inline-block ${className}`}>
+      <span className='opacity-0 select-none'>{text}</span>
+      <span className='absolute left-0 top-0 whitespace-pre-line'>{displayed}</span>
+    </span>
+  );
 };

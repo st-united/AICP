@@ -1,11 +1,11 @@
 import { Button } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 import { InnovationPana } from '@app/assets/images';
 import { TextTyping } from '@app/components/atoms/';
-import { useSelector } from 'react-redux';
 import { RootState } from '@app/redux/store';
 
 const WelcomeSection = () => {
@@ -34,7 +34,7 @@ const WelcomeSection = () => {
             onClick={() => {
               setIsOpen(true);
             }}
-            className='h-12 mdL:h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
+            className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
           >
             {t('HOMEPAGE_LOGIN.START')}
           </Button>
