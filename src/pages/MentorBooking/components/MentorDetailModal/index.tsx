@@ -1,6 +1,7 @@
-import React from 'react';
-import { Modal, Avatar, Typography, Descriptions, Button, Space } from 'antd';
 import { UserOutlined, LaptopOutlined, RobotOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { Modal, Avatar, Typography, Descriptions, Button, Space } from 'antd';
+import React from 'react';
+
 import { DefaultAvatar } from '@app/assets/images';
 
 const { Title, Paragraph } = Typography;

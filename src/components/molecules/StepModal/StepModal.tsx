@@ -1,7 +1,10 @@
-import { Modal, Steps } from 'antd';
-import { useState } from 'react';
+import { Button, Modal, Steps } from 'antd';
+import { useEffect, useState } from 'react';
 
 import './StepModal.scss';
+import PortfolioContent from '../Portfolio/PortfolioContent';
+import { useGetPortfolio } from '@app/hooks/usePortfolio';
+import PortfolioPage from '@app/pages/Portfolio/PortfolioPage';
 
 interface StepModalProps {
   current?: number;
@@ -20,40 +23,64 @@ interface Step {
 
 const StepModal = ({ current, onClose, open }: StepModalProps) => {
   const [currentStep, setCurrentStep] = useState(current || 0);
+  const { data: portfolio, isSuccess: isHavePortfolio } = useGetPortfolio();
 
+  const handleChangeToPortfolioStep = () => {
+    if (isHavePortfolio) {
+      setCurrentStep(2);
+    } else setCurrentStep(1);
+  };
+  const handleVerifyStep = () => {
+    setCurrentStep(0);
+  };
+  const handleChangeToTestNoteStep = () => {
+    setCurrentStep(2);
+  };
+  const handleEndStep = () => {
+    setCurrentStep(2);
+  };
   const steps: Step[] = [
     {
       title: 'Personal Info',
       component: (
-        <p>
-          Content 1 Content 1 Content 1 Content 1 Content 1 Content 1 Content 1 Content 1 Content 1
-          Content 1 Content 1
-        </p>
+        <Button
+          type='primary'
+          onClick={() => {
+            handleChangeToPortfolioStep();
+          }}
+        >
+          Next
+        </Button>
       ),
     },
     {
       title: 'Portfolio',
       component: (
-        <p>
-          Content 2 Content 2 Content 2 Content 2 Content 2 Content 2 Content 2 Content 2 Content 2
-          Content 2 Content 2
-        </p>
+        <PortfolioPage
+          portfolio={portfolio || undefined}
+          onSave={() => {
+            handleChangeToTestNoteStep();
+          }}
+          onCancel={() => {
+            handleChangeToTestNoteStep();
+          }}
+        />
       ),
     },
     {
       title: 'Review',
       component: (
-        <p>
-          Content 3 Content 3Content 3Content 3Content 3Content 3Content 3Content 3Content 3Content
-          3 Content 3 Content 3
-        </p>
+        <Button
+          type='primary'
+          onClick={() => {
+            handleEndStep();
+          }}
+        >
+          Next
+        </Button>
       ),
     },
   ];
-
-  const handleStepChange = (step: number) => {
-    setCurrentStep(step);
-  };
 
   return (
     <Modal
@@ -69,7 +96,6 @@ const StepModal = ({ current, onClose, open }: StepModalProps) => {
           <Steps
             size='default'
             current={currentStep}
-            onChange={handleStepChange}
             items={steps.map((step) => ({
               title: step.title,
               status: step.status,

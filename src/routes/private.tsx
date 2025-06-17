@@ -1,11 +1,11 @@
 import { lazy } from 'react';
 
+import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
 import BaseLayout from '@app/components/templates/BaseLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { NAVIGATE_URL } from '@app/constants';
 import { AptitudeTest, Profile } from '@app/pages';
 import Booking from '@app/pages/MentorBooking';
-import PortfolioPage from '@app/pages/Portfolio/PortfolioPage';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
@@ -50,7 +50,7 @@ const routes = [
           },
           {
             path: 'portfolio',
-            element: <PortfolioPage />,
+            element: <PortfolioContent />,
           },
         ],
       },

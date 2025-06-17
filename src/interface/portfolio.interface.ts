@@ -4,8 +4,8 @@ export interface Portfolio {
   userId?: string;
   linkedInUrl?: string;
   githubUrl?: string;
-  certifications?: string[];
-  experiences?: string[];
+  certificateFiles?: string[];
+  experienceFiles?: string[];
 }
 
 export type ExtendedUploadFile = UploadFile & {
@@ -18,8 +18,8 @@ export type ExtendedUploadFile = UploadFile & {
 export interface FileItemProps {
   t: (key: string) => string;
   file: ExtendedUploadFile;
-  type: 'certification' | 'experience';
-  onRemove: (file: ExtendedUploadFile, type: 'certification' | 'experience') => void;
+  type: 'certificateFiles' | 'experienceFiles';
+  onRemove: (file: ExtendedUploadFile, type: 'certificateFiles' | 'experienceFiles') => void;
   onPreview: (file: ExtendedUploadFile) => void;
   isEdit: boolean;
 }

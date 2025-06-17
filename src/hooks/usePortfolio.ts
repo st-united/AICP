@@ -19,12 +19,14 @@ export const useUpdatePortfolio = () => {
   });
 };
 
-export const useGetPortfolio = (): UseQueryResult<Portfolio> => {
+export const useGetPortfolio = (portfolio?: Portfolio): UseQueryResult<Portfolio> => {
   return useQuery({
     queryKey: [QUERY_KEY.PORTFOLIO],
     queryFn: getPortfolioApi,
     select: (data) => data.data.data,
     refetchOnWindowFocus: false,
+    retry: false,
+    enabled: !portfolio,
   });
 };
 

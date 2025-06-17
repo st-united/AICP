@@ -1,5 +1,5 @@
 import { DownloadOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Upload, Divider, Modal, Spin } from 'antd';
+import { Form, Input, Button, Upload, Divider, Modal, Spin, Empty, Typography } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { UploadFileStatus } from 'antd/lib/upload/interface';
 import React, { useState, useMemo, useCallback, memo, useEffect } from 'react';
@@ -31,17 +31,37 @@ interface PortfolioContentProps {
   onCancel?: () => void;
   onSave?: () => void;
   saveLabel?: string;
+  portfolio?: Portfolio;
 }
-
+const mapFiles = (urls: string[] = [], prefix: string) =>
+  urls.map((url: string, idx: number) => ({
+    uid: `${prefix}-${idx}`,
+    name: url.split('/').pop()?.split('+').slice(1).join('+') || `${prefix}-${idx + 1}`,
+    status: 'done' as UploadFileStatus,
+    url,
+    thumbUrl: url,
+    type: url.split('.').pop(),
+  }));
 const PortfolioContent: React.FC<PortfolioContentProps> = memo(
-  ({ edit = false, cancelLabel, saveLabel, onCancel, onSave }: PortfolioContentProps) => {
+  ({
+    edit = false,
+    cancelLabel,
+    saveLabel,
+    onCancel,
+    onSave,
+    portfolio,
+  }: PortfolioContentProps) => {
     const [form] = Form.useForm();
     const [isEdit, setIsEdit] = useState(edit);
     const [selectedFile, setSelectedFile] = useState<ExtendedUploadFile | null>(null);
-    const { data: getPortfolio } = useGetPortfolio();
+    const { data: getPortfolio, isLoading } = useGetPortfolio(portfolio);
     const updatePortfolioMutation = useUpdatePortfolio();
-    const [certificationFiles, setCertificationFiles] = useState<ExtendedUploadFile[]>([]);
-    const [experienceFiles, setExperienceFiles] = useState<ExtendedUploadFile[]>([]);
+    const [certificationFiles, setCertificationFiles] = useState<ExtendedUploadFile[]>(
+      mapFiles(portfolio?.certificateFiles || [], 'cert'),
+    );
+    const [experienceFiles, setExperienceFiles] = useState<ExtendedUploadFile[]>(
+      mapFiles(portfolio?.experienceFiles || [], 'exp'),
+    );
 
     const { t } = useTranslation();
     const portfolioSchema = usePortfolioSchema();
@@ -57,24 +77,14 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
 
     useEffect(() => {
       if (getPortfolio) {
-        const mapFiles = (urls: string[] = [], prefix: string) =>
-          urls.map((url: string, idx: number) => ({
-            uid: `${prefix}-${idx}`,
-            name: url.split('/').pop()?.split('+').slice(1).join('+') || `${prefix}-${idx + 1}`,
-            status: 'done' as UploadFileStatus,
-            url,
-            thumbUrl: url,
-            type: url.split('.').pop(),
-          }));
-
-        setCertificationFiles(mapFiles(getPortfolio.certifications, 'cert'));
-        setExperienceFiles(mapFiles(getPortfolio.experiences, 'exp'));
+        setCertificationFiles(mapFiles(getPortfolio.certificateFiles, 'cert'));
+        setExperienceFiles(mapFiles(getPortfolio.experienceFiles, 'exp'));
       }
     }, [getPortfolio]);
 
     const handleRemove = useCallback(
-      (file: ExtendedUploadFile, type: 'certification' | 'experience') => {
-        const setter = type === 'certification' ? setCertificationFiles : setExperienceFiles;
+      (file: ExtendedUploadFile, type: 'certificateFiles' | 'experienceFiles') => {
+        const setter = type === 'certificateFiles' ? setCertificationFiles : setExperienceFiles;
         setter((prev) => prev.filter((f) => f.uid !== file.uid));
         return false;
       },
@@ -91,19 +101,8 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
 
     const resetFiles = useCallback(() => {
       if (!getPortfolio) return;
-
-      const mapFiles = (urls: string[] = [], prefix: string) =>
-        urls.map((url: string, idx: number) => ({
-          uid: `${prefix}-${idx}`,
-          name: url.split('/').pop()?.split('+').slice(1).join('+') || `${prefix}-${idx + 1}`,
-          status: 'done' as UploadFileStatus,
-          url,
-          thumbUrl: url,
-          type: url.split('.').pop(),
-        }));
-
-      setCertificationFiles(mapFiles(getPortfolio.certifications, 'cert'));
-      setExperienceFiles(mapFiles(getPortfolio.experiences, 'exp'));
+      setCertificationFiles(mapFiles(getPortfolio.certificateFiles, 'cert'));
+      setExperienceFiles(mapFiles(getPortfolio.experienceFiles, 'exp'));
     }, [getPortfolio]);
 
     const handleCancel = useCallback(() => {
@@ -115,13 +114,24 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
 
     const handleSubmit = useCallback(
       async (values: Portfolio) => {
+        const isAllEmpty =
+          !values.linkedInUrl?.trim() &&
+          !values.githubUrl?.trim() &&
+          certificationFiles.filter((f) => f.status === 'done').length === 0 &&
+          experienceFiles.filter((f) => f.status === 'done').length === 0;
+        if (isAllEmpty) {
+          openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PORTFOLIO.NO_INFO'));
+          return;
+        }
         const data: Portfolio = {
           linkedInUrl: values.linkedInUrl,
           githubUrl: values.githubUrl,
-          certifications: certificationFiles
+          certificateFiles: certificationFiles
             .filter((f) => f.status === 'done')
             .map((f) => f.url || ''),
-          experiences: experienceFiles.filter((f) => f.status === 'done').map((f) => f.url || ''),
+          experienceFiles: experienceFiles
+            .filter((f) => f.status === 'done')
+            .map((f) => f.url || ''),
         };
 
         updatePortfolioMutation.mutate(data, {
@@ -141,10 +151,11 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
     );
 
     const handleCustomUpload = useCallback(
-      async (options: any, type: 'certification' | 'experience') => {
+      async (options: any, type: 'certificateFiles' | 'experienceFiles') => {
         const { file, onSuccess, onError } = options;
-        const fileId = `${type}-${Date.now()}`;
-        const setter = type === 'certification' ? setCertificationFiles : setExperienceFiles;
+        const randomString = Math.random().toString(36).substring(2, 15);
+        const fileId = `${type}-${Date.now()}-${randomString}`;
+        const setter = type === 'certificateFiles' ? setCertificationFiles : setExperienceFiles;
 
         const controller = new AbortController();
         const newFile: ExtendedUploadFile = {
@@ -250,9 +261,9 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
       );
     }, [selectedFile, downloadPortfolioFileMutation, t]);
 
-    if (!getPortfolio) {
+    if (!getPortfolio && isLoading) {
       return (
-        <div className='h-full flex items-center justify-center text-lg'>
+        <div className='h-full w-full flex items-center justify-center text-lg'>
           <Spin />
         </div>
       );
@@ -303,7 +314,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
                     className='custom-upload'
                     multiple
                     listType='picture'
-                    customRequest={(option) => handleCustomUpload(option, 'certification')}
+                    customRequest={(option) => handleCustomUpload(option, 'certificateFiles')}
                     maxCount={MAX_FILE_COUNT}
                     accept={ACCEPTED_FILE_TYPES}
                     disabled={!isEdit}
@@ -316,18 +327,28 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
                   </p>
                 </section>
               )}
-              <div className={`w-full mt-4 p-4 rounded-lg ${isEdit ? 'bg-white' : 'bg-gray-100'}`}>
-                {certificationFiles.map((file) => (
-                  <FileItem
-                    t={t}
-                    key={file.uid}
-                    file={file}
-                    type='certification'
-                    onRemove={handleRemove}
-                    onPreview={handleFilePreview}
-                    isEdit={isEdit}
+              <div
+                className={`w-full mt-4 p-4 rounded-lg ${
+                  isEdit ? 'bg-white' : 'bg-gray-100'
+                } flex justify-center flex-col`}
+              >
+                {certificationFiles.length > 0 ? (
+                  certificationFiles.map((file) => (
+                    <FileItem
+                      t={t}
+                      key={file.uid}
+                      file={file}
+                      type='certificateFiles'
+                      onRemove={handleRemove}
+                      onPreview={handleFilePreview}
+                      isEdit={isEdit}
+                    />
+                  ))
+                ) : (
+                  <Empty
+                    description={<Typography.Text>{t('PORTFOLIO.NO_DATA')}</Typography.Text>}
                   />
-                ))}
+                )}
               </div>
               <h2 className='mb-4 text-xl font-semibold'>{t('PORTFOLIO.EXPERIENCE')}</h2>
               {isEdit && (
@@ -338,7 +359,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
                     listType='picture'
                     maxCount={MAX_FILE_COUNT}
                     accept={ACCEPTED_FILE_TYPES}
-                    customRequest={(option) => handleCustomUpload(option, 'experience')}
+                    customRequest={(option) => handleCustomUpload(option, 'experienceFiles')}
                     disabled={!isEdit}
                     showUploadList={false}
                   >
@@ -349,18 +370,28 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
                   </p>
                 </section>
               )}
-              <div className={`w-full mt-4 p-4 rounded-lg ${isEdit ? 'bg-white' : 'bg-gray-100'}`}>
-                {experienceFiles.map((file) => (
-                  <FileItem
-                    t={t}
-                    key={file.uid}
-                    file={file}
-                    type='experience'
-                    onRemove={handleRemove}
-                    onPreview={handleFilePreview}
-                    isEdit={isEdit}
+              <div
+                className={`w-full mt-4 p-4 rounded-lg ${
+                  isEdit ? 'bg-white' : 'bg-gray-100'
+                } flex justify-center flex-col`}
+              >
+                {experienceFiles.length > 0 ? (
+                  experienceFiles.map((file) => (
+                    <FileItem
+                      t={t}
+                      key={file.uid}
+                      file={file}
+                      type='experienceFiles'
+                      onRemove={handleRemove}
+                      onPreview={handleFilePreview}
+                      isEdit={isEdit}
+                    />
+                  ))
+                ) : (
+                  <Empty
+                    description={<Typography.Text>{t('PORTFOLIO.NO_DATA')}</Typography.Text>}
                   />
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -404,7 +435,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = memo(
             </div>
 
             <iframe
-              src={selectedFile?.url}
+              src={selectedFile?.url || selectedFile?.thumbUrl}
               title='Document Preview'
               className='w-full h-full border rounded'
             />

@@ -1,31 +1,26 @@
-import React, { useCallback, useMemo, memo } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import React, { useMemo, memo } from 'react';
 
 import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
-// import { NAVIGATE_URL } from '@app/constants';
-const PortfolioPage: React.FC = memo(() => {
-  // const navigate = useNavigate();
-  // const handleSave = useCallback(() => {
-  //   console.log('Portfolio save action triggered');
-  //   navigate(NAVIGATE_URL.LANDING_PAGE);
-  // }, [navigate]);
-
-  // const handleCancel = useCallback(() => {
-  //   console.log('Portfolio cancel action triggered');
-  //   navigate(NAVIGATE_URL.SIGN_OUT);
-  // }, [navigate]);
-
-  // const portfolioConfig = useMemo(
-  //   () => ({
-  //     edit: true,
-  //     saveLabel: 'Hoàn tất',
-  //     cancelLabel: 'Để sau',
-  //   }),
-  //   [],
-  // );
-  return <PortfolioContent />;
-  //  return <PortfolioContent {...portfolioConfig} onSave={handleSave} onCancel={handleCancel} />;
-});
+import { Portfolio } from '@app/interface/portfolio.interface';
+interface PortfolioPageProps {
+  portfolio?: Portfolio;
+  onSave?: () => void;
+  onCancel?: () => void;
+}
+const PortfolioPage: React.FC<PortfolioPageProps> = memo(
+  ({ portfolio, onSave, onCancel }: PortfolioPageProps) => {
+    return (
+      <PortfolioContent
+        onSave={onSave}
+        onCancel={onCancel}
+        edit={true}
+        saveLabel='Hoàn tất'
+        cancelLabel='Để sau'
+        portfolio={portfolio}
+      />
+    );
+  },
+);
 
 PortfolioPage.displayName = 'PortfolioPage';
 

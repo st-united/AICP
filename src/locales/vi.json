@@ -508,6 +508,7 @@
     "CANCEL": "Hủy bỏ",
     "CANCEL_UPLOAD": "Đã hủy",
     "SAVE": "Lưu",
+    "NO_DATA": "Không có dữ liệu",
     "UPDATE_SUCCESS": "Cập nhật hồ sơ thành công",
     "UPDATE_FAILED": "Cập nhật hồ sơ thất bại",
     "CREATE_SUCCESS": "Tạo hồ sơ thành công",
@@ -515,6 +516,7 @@
     "UPLOAD_SUCCESS": "Tải lên tệp thành công",
     "UPLOAD_FAILED": "Tải lên tệp thất bại",
     "DOWNLOAD_SUCCESS": "Tải xuống tệp thành công",
-    "DOWNLOAD_FAILED": "Tải xuống tệp thất bại"
+    "DOWNLOAD_FAILED": "Tải xuống tệp thất bại",
+    "NO_INFO": "Vui lòng cung cấp thông tin để cập nhật hồ sơ"
   }
 }
