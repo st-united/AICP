@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
+import StepModal from '../molecules/StepModal/StepModal';
 import { InnovationPana } from '@app/assets/images';
 import { TextTyping } from '@app/components/atoms/';
 import { RootState } from '@app/redux/store';
@@ -46,7 +47,7 @@ const WelcomeSection = () => {
           <img src={InnovationPana} alt='innovation' className='w-[25rem] h-[25rem]' />
         </div>
       </div>
-      {open && <ConfirmBeforeTestModal open={open} onClose={() => setIsOpen(false)} />}
+      {open && <StepModal current={0} open={open} onClose={() => setIsOpen(false)} />}
     </section>
   );
 };
