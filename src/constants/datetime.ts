@@ -7,4 +7,5 @@ export const DATE_TIME = {
   TIME_HH_MM_SS: 'HH:mm:ss',
   TIME_HH_MM: 'HH:mm',
   YEAR_MONTH_DATE_TIME: 'YYYY-MM-DD HH:mm:ss',
+  WEEKDAY_DAY_MONTH_YEAR_TIME: 'dddd, DD/MM/YYYY - HH:mm',
 };

@@ -1,6 +1,7 @@
 export const API_URL = {
   USERS: '/users',
   LOGIN: '/auth/login',
+  LOGIN_WITH_GOOGLE: '/auth/login-google',
   REFRESH_TOKEN: '/auth/refresh',
   GET_PROFILE: '/users/me',
   UPDATE_PROFILE: '/users/profile',
@@ -11,6 +12,7 @@ export const API_URL = {
   UPDATE_FORGOT_PASSWORD: 'users/update-forgot-password',
   LOGOUT: '/auth/logout',
   REGISTER_USER: '/auth/register',
+  HISTORY_TESTING: '/exam/history-exam/',
   ACTIVATE_ACCOUNT: '/auth/activate',
   CHECK_TAKEN_EXAM: '/exam/has-taken-exam',
   CHECK_TAKEN_EXAM_DEFAULT: '/exam/taken-input-test',

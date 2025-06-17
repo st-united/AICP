@@ -28,7 +28,7 @@ const Sidebar = () => {
     {
       icon: CheckSquareOutlined,
       label: t('SIDEBAR.HISTORY'),
-      path: '/profile/history',
+      path: '/history',
     },
     {
       icon: ReadOutlined,

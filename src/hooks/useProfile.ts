@@ -2,7 +2,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { useLogout } from './useAuth';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { ChangePassword, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
@@ -12,7 +11,7 @@ import {
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
 
-export const useGetProfile = (enabled = true) => {
+export const useGetProfile = (isAuth = true) => {
   const dispatch = useDispatch();
 
   return useQuery<UserProfile>(
@@ -25,7 +24,7 @@ export const useGetProfile = (enabled = true) => {
       onSuccess(data) {
         dispatch(setAuth(data));
       },
-      enabled,
+      enabled: isAuth,
     },
   );
 };
