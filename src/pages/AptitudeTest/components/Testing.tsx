@@ -58,10 +58,6 @@ const Testing = () => {
     setCurrentQuestionScroll(questionId);
   }, []);
 
-  useEffect(() => {
-    console.log('✅ Updated state:', currentQuestion);
-  }, [currentQuestion]);
-
   const handleFlagToggle = useCallback((questionId: string) => {
     setFlaggedQuestions((prev) =>
       prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
