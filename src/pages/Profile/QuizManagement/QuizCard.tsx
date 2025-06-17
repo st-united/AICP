@@ -88,8 +88,8 @@ const QuizCard = ({ quiz, onCheckboxChange, isChecked }: QuizCardProps) => {
 
   return (
     <Card className='rounded-xl md:rounded-2xl shadow-sm border-0 bg-white hover:shadow-md transition-shadow duration-200 w-full'>
-      <div className='flex flex-col sm:flex-row items-start sm:items-center space-y-0 sm:space-x-4'>
-        <div className='flex-shrink-0'>
+      <div className='flex flex-col sm:flex-row items-start sm:items-start space-y-0 sm:space-x-4'>
+        <div className='flex-shrink-0 mt-0.5'>
           <Checkbox
             checked={isChecked}
             onChange={(e) => onCheckboxChange(quiz.id, e.target.checked)}
