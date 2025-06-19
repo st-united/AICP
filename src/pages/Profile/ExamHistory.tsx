@@ -1,6 +1,7 @@
-import { Spin } from 'antd';
+import { Spin, Checkbox } from 'antd';
 import { Dayjs } from 'dayjs';
 import { useState, useMemo } from 'react';
+import { DownloadOutlined } from '@ant-design/icons';
 
 import DateFilter from './QuizManagement/DateFilterProps';
 import EmptyState from './QuizManagement/EmptyState';
@@ -16,13 +17,20 @@ const ExamHistory = () => {
   const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
 
   const apiParams = useMemo(() => {
-    if (!dateRange || !dateRange[0] || !dateRange[1]) {
-      return undefined;
+    const [start, end] = dateRange || [];
+    if (!start && !end) return undefined;
+
+    const result: Record<string, string> = {};
+
+    if (start) {
+      result.startDate = start.format(DATE_TIME.YEAR_MONTH_DATE);
     }
-    return {
-      startDate: dateRange[0].format(DATE_TIME.YEAR_MONTH_DATE),
-      endDate: dateRange[1].format(DATE_TIME.YEAR_MONTH_DATE),
-    };
+
+    if (end) {
+      result.endDate = end.format(DATE_TIME.YEAR_MONTH_DATE);
+    }
+
+    return result;
   }, [dateRange]);
 
   const { data: historyData, isLoading, error, refetch } = useGetHistory(apiParams);
@@ -35,6 +43,11 @@ const ExamHistory = () => {
       newSelectedQuizzes.delete(quizId);
     }
     setSelectedQuizzes(newSelectedQuizzes);
+  };
+
+  const handleCheckAll = (checked: boolean) => {
+    if (!historyData) return;
+    setSelectedQuizzes(checked ? new Set(historyData.map((quiz) => quiz.id)) : new Set());
   };
 
   const handleDateChange = (dates: [Dayjs | null, Dayjs | null] | null) => {
@@ -64,12 +77,11 @@ const ExamHistory = () => {
     );
   }, [historyData]);
 
-  if (isLoading) {
-    return <Spin className='flex items-center justify-center h-full' />;
-  }
-  if (error) {
-    return <ErrorState onRetry={refetch} />;
-  }
+  const totalQuizzes = historyData?.length || 0;
+  const selectedCount = selectedQuizzes.size;
+
+  const allChecked = totalQuizzes > 0 && selectedCount === totalQuizzes;
+  const someChecked = selectedCount > 0 && !allChecked;
 
   const hasQuizzes = historyData && historyData.length > 0;
 
@@ -85,11 +97,35 @@ const ExamHistory = () => {
 
         <DateFilter onDateChange={handleDateChange} value={dateRange} />
 
-        {!hasQuizzes ? (
+        {error ? (
+          <ErrorState onRetry={refetch} />
+        ) : !hasQuizzes && !isLoading ? (
           <EmptyState onStartFirst={handleStartFirst} />
         ) : (
-          <div className='overflow-y-auto flex-1 space-y-4 p-2'>
-            {historyData.map((quiz) => (
+          <div className='relative overflow-y-auto flex-1 space-y-4 p-2'>
+            {isLoading && (
+              <div className='absolute inset-0 bg-white/60 flex items-center justify-center z-10'>
+                <Spin />
+              </div>
+            )}
+
+            <div className='flex items-center space-x-2 mb-2 z-0'>
+              <Checkbox
+                checked={allChecked}
+                indeterminate={someChecked}
+                onChange={(e) => handleCheckAll(e.target.checked)}
+              />
+              <p className='font-medium'>Chọn tất cả</p>
+
+              <button
+                onClick={handleDownloadAll}
+                className='w-[25px] h-[25px] flex items-center justify-center rounded-md border border-orange-500 text-orange-500 hover:bg-orange-50 transition'
+              >
+                <DownloadOutlined className='text-base' />
+              </button>
+            </div>
+
+            {historyData?.map((quiz) => (
               <QuizCard
                 key={quiz.id}
                 quiz={quiz}
