@@ -11,7 +11,7 @@ const EmptyState = ({ onStartFirst }: EmptyStateProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className='w-full flex flex-col items-center justify-center sm:mx-auto px-6 sm:px-8 shadow-sm bg-white rounded-xl sm:rounded-2xl hover:shadow-md transition-shadow duration-200 max-w-4xl mx-auto'>
+    <div className='w-full flex flex-col items-center justify-center sm:mx-auto px-6 sm:px-8 shadow-sm bg-white rounded-xl sm:rounded-2xl hover:shadow-md transition-shadow duration-200'>
       <div className='flex flex-col items-center justify-center p-6'>
         <img
           src={noExamHistory}

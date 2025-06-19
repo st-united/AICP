@@ -2,101 +2,113 @@ import { ClockCircleOutlined, TrophyOutlined } from '@ant-design/icons';
 import { Card, Tag, Checkbox } from 'antd';
 import dayjs from 'dayjs';
 import 'dayjs/locale/vi';
-import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 
 import { DATE_TIME } from '@app/constants';
-import { ExamStatusEnum, LevelOfDomainEnum } from '@app/constants/enum';
+import { ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 import { HistoryTesting } from '@app/interface/user.interface';
 
 interface QuizCardProps {
   quiz: HistoryTesting;
   onCheckboxChange: (quizId: string, checked: boolean) => void;
   isChecked: boolean;
+  onClick: (quizId: string) => void;
 }
 
-const QuizCard = ({ quiz, onCheckboxChange, isChecked }: QuizCardProps) => {
-  const { t } = useTranslation();
+export const getStatusText = (status: ExamStatusEnum) => {
+  switch (status) {
+    case ExamStatusEnum.IN_PROGRESS:
+      return t('EXAM.STATUS.IN_PROGRESS');
+    case ExamStatusEnum.SUBMITTED:
+      return t('EXAM.STATUS.SUBMITTED');
+    case ExamStatusEnum.WAITING_FOR_REVIEW:
+      return t('EXAM.STATUS.WAITING_FOR_REVIEW');
+    case ExamStatusEnum.GRADED:
+      return t('EXAM.STATUS.GRADED');
+    default:
+      return status;
+  }
+};
 
-  const formatDateTime = (dateString: string) => {
-    try {
-      dayjs.locale('vi');
-      return dayjs(dateString).format(DATE_TIME.WEEKDAY_DAY_MONTH_YEAR_TIME);
-    } catch (error) {
-      return dateString;
-    }
-  };
+export const getLevelText = (level: SFIALevel) => {
+  switch (level) {
+    case SFIALevel.LEVEL_1_AWARENESS:
+      return t('EXAM.LEVEL.LEVEL_1_AWARENESS');
+    case SFIALevel.LEVEL_2_FOUNDATION:
+      return t('EXAM.LEVEL.LEVEL_2_FOUNDATION');
+    case SFIALevel.LEVEL_3_APPLICATION:
+      return t('EXAM.LEVEL.LEVEL_3_APPLICATION');
+    case SFIALevel.LEVEL_4_INTEGRATION:
+      return t('EXAM.LEVEL.LEVEL_4_INTEGRATION');
+    case SFIALevel.LEVEL_5_INNOVATION:
+      return t('EXAM.LEVEL.LEVEL_5_INNOVATION');
+    case SFIALevel.LEVEL_6_LEADERSHIP:
+      return t('EXAM.LEVEL.LEVEL_6_LEADERSHIP');
+    case SFIALevel.LEVEL_7_MASTERY:
+      return t('EXAM.LEVEL.LEVEL_7_MASTERY');
+    default:
+      return level;
+  }
+};
 
-  const getStatusColor = (statusKey: string) => {
-    switch (statusKey) {
-      case ExamStatusEnum.IN_PROGRESS:
-        return 'processing';
-      case ExamStatusEnum.SUBMITTED:
-        return 'warning';
-      case ExamStatusEnum.WAITING_FOR_REVIEW:
-        return 'default';
-      case ExamStatusEnum.GRADED:
-        return 'success';
-      default:
-        return 'default';
-    }
-  };
+export const getStatusColor = (statusKey: string) => {
+  switch (statusKey) {
+    case ExamStatusEnum.IN_PROGRESS:
+      return 'processing';
+    case ExamStatusEnum.SUBMITTED:
+      return 'warning';
+    case ExamStatusEnum.WAITING_FOR_REVIEW:
+      return 'default';
+    case ExamStatusEnum.GRADED:
+      return 'success';
+    default:
+      return 'default';
+  }
+};
 
+export const formatDateTime = (dateString: string) => {
+  try {
+    dayjs.locale('vi');
+    return dayjs(dateString).format(DATE_TIME.WEEKDAY_DAY_MONTH_YEAR_TIME);
+  } catch (error) {
+    return dateString;
+  }
+};
+
+const QuizCard = ({ quiz, onCheckboxChange, isChecked, onClick }: QuizCardProps) => {
   const getLevelColor = (levelKey: string) => {
     switch (levelKey) {
-      case LevelOfDomainEnum.FOUNDATION_L1_L2:
+      case SFIALevel.LEVEL_1_AWARENESS:
+      case SFIALevel.LEVEL_2_FOUNDATION:
         return 'text-green-500';
-      case LevelOfDomainEnum.INTERMEDIATE_L3_L4:
+      case SFIALevel.LEVEL_3_APPLICATION:
+      case SFIALevel.LEVEL_4_INTEGRATION:
         return 'text-blue-500';
-      case LevelOfDomainEnum.ADVANCED_L5_L6:
+      case SFIALevel.LEVEL_5_INNOVATION:
+      case SFIALevel.LEVEL_6_LEADERSHIP:
         return 'text-orange-500';
-      case LevelOfDomainEnum.EXPERT_L7:
+      case SFIALevel.LEVEL_7_MASTERY:
         return 'text-red-500';
       default:
         return 'text-orange-500';
     }
   };
 
-  const getStatusText = (status: ExamStatusEnum) => {
-    switch (status) {
-      case ExamStatusEnum.IN_PROGRESS:
-        return t('EXAM.STATUS.IN_PROGRESS');
-      case ExamStatusEnum.SUBMITTED:
-        return t('EXAM.STATUS.SUBMITTED');
-      case ExamStatusEnum.WAITING_FOR_REVIEW:
-        return t('EXAM.STATUS.WAITING_FOR_REVIEW');
-      case ExamStatusEnum.GRADED:
-        return t('EXAM.STATUS.GRADED');
-      default:
-        return status;
-    }
-  };
-
-  const getLevelText = (level: LevelOfDomainEnum) => {
-    switch (level) {
-      case LevelOfDomainEnum.FOUNDATION_L1_L2:
-        return t('EXAM.LEVEL.FOUNDATION');
-      case LevelOfDomainEnum.INTERMEDIATE_L3_L4:
-        return t('EXAM.LEVEL.INTERMEDIATE');
-      case LevelOfDomainEnum.ADVANCED_L5_L6:
-        return t('EXAM.LEVEL.ADVANCED');
-      case LevelOfDomainEnum.EXPERT_L7:
-        return t('EXAM.LEVEL.EXPERT');
-      default:
-        return level;
-    }
-  };
-
   return (
-    <Card className='rounded-xl md:rounded-2xl shadow-sm border-0 bg-white hover:shadow-md transition-shadow duration-200 w-full'>
-      <div className='flex flex-col sm:flex-row items-start sm:items-start space-y-0 sm:space-x-4'>
-        <div className='flex-shrink-0 mt-0.5'>
+    <Card
+      className='rounded-xl md:rounded-2xl shadow-sm border-0 bg-white hover:shadow-md transition-shadow duration-200 w-full'
+      onClick={() => onClick(quiz.id)}
+    >
+      <div className='flex flex-col sm:flex-row items-start sm:items-center space-y-0 sm:space-x-4'>
+        <div className='flex-shrink-0'>
           <Checkbox
             checked={isChecked}
             onChange={(e) => onCheckboxChange(quiz.id, e.target.checked)}
+            onClick={(e) => e.stopPropagation()}
           />
         </div>
 
-        <div className='flex-1 text-sm sm:text-base space-y-2 w-full'>
+        <div className='flex-1 text-base sm:text-lg space-y-2 w-full cursor-pointer'>
           <div className='flex flex-col items-center sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3'>
             <div className='text-gray-600 font-medium'>
               {t('EXAM.QUIZ_ID_PREFIX')}
@@ -104,26 +116,26 @@ const QuizCard = ({ quiz, onCheckboxChange, isChecked }: QuizCardProps) => {
             </div>
             <Tag
               color={getStatusColor(quiz.examStatus)}
-              className='rounded-xl px-2 sm:px-3 py-1 text-xs sm:text-sm font-bold border-none w-fit'
+              className='rounded-xl px-2 sm:px-3 py-1 text-sm sm:text-base font-bold border-none w-fit'
             >
               {getStatusText(quiz.examStatus)}
             </Tag>
           </div>
 
           <div className='flex items-center space-x-2'>
-            <ClockCircleOutlined className='text-gray-600 text-base sm:text-lg hidden sm:block' />
-            <span className='text-xs sm:text-sm'>
+            <ClockCircleOutlined className='text-gray-600 text-lg sm:text-xl hidden sm:block' />
+            <span className='text-sm sm:text-base'>
               {t('EXAM.CREATED_TIME')}
               <span className='font-medium ml-1'>{formatDateTime(quiz.createdAt.toString())}</span>
             </span>
           </div>
 
           <div className='flex items-center space-x-2'>
-            <TrophyOutlined className='text-gray-600 text-base sm:text-lg hidden sm:block' />
-            <span className='text-xs sm:text-sm'>
+            <TrophyOutlined className='text-gray-600 text-lg sm:text-xl hidden sm:block' />
+            <span className='text-sm sm:text-base'>
               {t('EXAM.COMPETENCY_LEVEL')}{' '}
-              <span className={`font-medium ${getLevelColor(quiz.levelOfDomain)}`}>
-                {getLevelText(quiz.levelOfDomain)}
+              <span className={`font-medium ${getLevelColor(quiz.sfiaLevel)}`}>
+                {getLevelText(quiz.sfiaLevel)}
               </span>
             </span>
           </div>
