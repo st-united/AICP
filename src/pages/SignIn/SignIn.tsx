@@ -45,12 +45,8 @@ const SignIn = () => {
 
   const handleGoogleLogin = async () => {
     const result = await signInWithPopup(auth, provider);
-    console.log(result);
-
     const googleIdToken = await result.user.getIdToken();
     const credentialsToPass: GoogleCredentials = { idToken: googleIdToken };
-    console.log(credentialsToPass);
-
     loginWithGoogle(credentialsToPass);
   };
 
