@@ -3,10 +3,11 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { ChangePassword, UserProfile } from '@app/interface/user.interface';
+import { ChangePassword, Job, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
 import {
   changePassword,
+  getjobApi,
   getProfileApi,
   removeAvatarApi,
   updateProfileApi,
@@ -28,6 +29,13 @@ export const useGetProfile = () => {
       },
     },
   );
+};
+
+export const useGetJob = () => {
+  return useQuery<Job[]>([QUERY_KEY.JOB], async () => {
+    const { data } = await getjobApi();
+    return data.data;
+  });
 };
 
 export const useChangePassword = () => {

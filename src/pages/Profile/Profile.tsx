@@ -107,9 +107,6 @@ const Profile = () => {
             <Form.Item name='occupation' label={t('PROFILE.OCCUPATION')} rules={validator}>
               <JobSelect disabled={!isEdit} />
             </Form.Item>
-            <Form.Item name='referral' label={t('PROFILE.REFERRAL')} rules={validator}>
-              <Input disabled defaultValue='jKvs500' className='!px-6 !py-3 !rounded-lg' />
-            </Form.Item>
             <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
               <div className='flex justify-end gap-2 !flex-row'>
                 {!isEdit ? (

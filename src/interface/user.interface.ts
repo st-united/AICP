@@ -76,3 +76,8 @@ export interface RegisterUser {
   phoneNumber: string;
   password: string;
 }
+
+export interface Job {
+  id: number;
+  name: string;
+}
