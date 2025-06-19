@@ -2,58 +2,81 @@ import { Modal, Steps } from 'antd';
 import { useState } from 'react';
 
 import './StepModal.scss';
+import { DemoComponent } from './StepComponent/DemoComponent';
+import DemoCondition from './StepCondition/DemoCondition';
+import { StepItem, StepModalProps } from '@app/interface/stepSection.interface';
 
-interface StepModalProps {
-  current?: number;
-  onClose: () => void;
-  open: boolean;
-}
+const StepModal = ({ onClose, open, onFinish }: StepModalProps) => {
+  const [current, setCurrent] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-type StepStatus = 'finish' | 'wait' | 'process' | 'error';
+  const resolveShouldSkip = async (index: number): Promise<boolean> => {
+    const step = steps[index];
+    if (step.shouldSkip) {
+      const result = await step.shouldSkip();
+      return result;
+    }
+    return false;
+  };
 
-interface Step {
-  title: string;
-  icon?: React.ReactNode;
-  status?: StepStatus;
-  component: React.ReactNode;
-}
+  const findNextStepIndex = async (from: number): Promise<number | null> => {
+    for (let i = from + 1; i < steps.length; i++) {
+      const skip = await resolveShouldSkip(i);
+      if (!skip) return i;
+    }
+    return null;
+  };
 
-const StepModal = ({ current, onClose, open }: StepModalProps) => {
-  const [currentStep, setCurrentStep] = useState(current || 0);
+  const findPrevStepIndex = async (from: number): Promise<number | null> => {
+    for (let i = from - 1; i >= 0; i--) {
+      const skip = await resolveShouldSkip(i);
+      if (!skip) return i;
+    }
+    return null;
+  };
+  const goNext = async () => {
+    setLoading(true);
+    const next = await findNextStepIndex(current);
+    setLoading(false);
 
-  const steps: Step[] = [
+    if (next !== null) {
+      setCurrent(next);
+    } else {
+      onFinish?.();
+    }
+  };
+
+  const goBack = async () => {
+    setLoading(true);
+    const prev = await findPrevStepIndex(current);
+    setLoading(false);
+    if (prev !== null) {
+      setCurrent(prev);
+    } else {
+      onClose?.();
+    }
+  };
+  const steps: StepItem[] = [
     {
       title: 'Personal Info',
-      component: (
-        <p>
-          Content 1 Content 1 Content 1 Content 1 Content 1 Content 1 Content 1 Content 1 Content 1
-          Content 1 Content 1
-        </p>
-      ),
+      render: (props) => <DemoComponent {...props} />,
+      shouldSkip: DemoCondition,
     },
     {
       title: 'Portfolio',
-      component: (
-        <p>
-          Content 2 Content 2 Content 2 Content 2 Content 2 Content 2 Content 2 Content 2 Content 2
-          Content 2 Content 2
-        </p>
-      ),
+      render: (props) => <DemoComponent {...props} />,
+      shouldSkip: () => {
+        return true;
+      },
     },
     {
       title: 'Review',
-      component: (
-        <p>
-          Content 3 Content 3Content 3Content 3Content 3Content 3Content 3Content 3Content 3Content
-          3 Content 3 Content 3
-        </p>
-      ),
+      render: (props) => <DemoComponent {...props} />,
+      shouldSkip: () => {
+        return false;
+      },
     },
   ];
-
-  const handleStepChange = (step: number) => {
-    setCurrentStep(step);
-  };
 
   return (
     <Modal
@@ -68,17 +91,17 @@ const StepModal = ({ current, onClose, open }: StepModalProps) => {
         <div className='w-full sticky top-0 z-10 bg-white custom-steps'>
           <Steps
             size='default'
-            current={currentStep}
-            onChange={handleStepChange}
+            current={current}
+            onChange={() => {
+              console.log('onChange');
+            }}
             items={steps.map((step) => ({
               title: step.title,
-              status: step.status,
-              icon: step.icon,
             }))}
           />
         </div>
         <div className='flex flex-col gap-4 h-[calc(100vh-200px)] max-w-[1000px] overflow-y-auto custom-scrollbar'>
-          {steps[currentStep]?.component}
+          {!loading && steps[current]?.render({ goNext, goBack })}
         </div>
       </div>
     </Modal>
