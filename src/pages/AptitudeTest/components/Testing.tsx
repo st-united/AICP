@@ -82,7 +82,7 @@ const Testing = () => {
         }
 
         submitDraftQuestionMutation.mutate({
-          examSetId: examSet?.id || '',
+          examId: examSet?.examId || '',
           questionId,
           answers: newAnswers,
           type: question.type,
@@ -174,7 +174,7 @@ const Testing = () => {
         <div className='hidden smM:block fixed left-0 top-[115px] w-[300px] smM:w-80 md:w-96 h-[calc(100vh-145px)] p-3 smM:p-6 pt-0 z-10'>
           <div className='flex flex-col space-y-6 h-full'>
             <CountdownTimer
-              duration={examSet.duration * 60}
+              duration={examSet.timeLimitMinutes * 60}
               onTimeUp={() => {
                 if (examSet) {
                   submitExamSet(examSet.id);
@@ -215,7 +215,7 @@ const Testing = () => {
             />
             <div className='fixed bg-white z-10 left-2 top-24 rounded-3xl w-[300px]'>
               <CountdownTimer
-                duration={examSet.duration * 60}
+                duration={examSet.timeLimitMinutes * 60}
                 onTimeUp={() => {
                   if (examSet) {
                     submitExamSet(examSet.id);
