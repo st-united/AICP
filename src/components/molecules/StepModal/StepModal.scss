@@ -31,9 +31,40 @@
       &-title {
         font-weight: 700;
         font-size: 14px;
-
         @media (max-width: 768px) {
           font-size: 12px;
+        }
+      }
+      &-icon {
+        width: 32px;
+        height: 32px;
+        background-color: #fcfcfc;
+        border: 2px solid #e76b05;
+        font-size: 16px;
+        font-weight: 1000;
+      }
+      &-process {
+        .ant-steps-item-icon {
+          background-color: #ffc79a;
+          width: 32px;
+          height: 32px;
+          padding: 0;
+        }
+      }
+      &-wait {
+        .ant-steps-item-icon {
+          background-color: #f0ecd9c9;
+          width: 32px;
+          height: 32px;
+          padding: 0;
+        }
+      }
+      &-finish {
+        .ant-steps-item-icon {
+          background-color: #9fb889;
+          width: 32px;
+          height: 32px;
+          padding: 0;
         }
       }
     }
