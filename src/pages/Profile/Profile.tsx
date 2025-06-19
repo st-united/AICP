@@ -31,7 +31,7 @@ const Profile = () => {
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
-        phone: data.phoneNumber || '',
+        phoneNumber: data.phoneNumber || '',
         dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
         job: data.job || null,
@@ -115,9 +115,6 @@ const Profile = () => {
           </Form.Item>
           <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
             <JobSelect disabled={!isEdit} />
-          </Form.Item>
-          <Form.Item name='referralCode' label={t('PROFILE.REFERRAL')} rules={validator}>
-            <Input disabled defaultValue='jKvs500' className='!px-6 !py-3 !rounded-lg' />
           </Form.Item>
           <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
             <div className='flex justify-end gap-2 !flex-row'>
