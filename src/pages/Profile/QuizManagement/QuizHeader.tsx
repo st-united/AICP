@@ -6,6 +6,7 @@ interface QuizHeaderProps {
   onStartNew: () => void;
   hasQuizzes: boolean;
   startNewDisabled: boolean;
+  examId?: string | null;
 }
 
 const QuizHeader = ({
@@ -13,27 +14,29 @@ const QuizHeader = ({
   onStartNew,
   hasQuizzes,
   startNewDisabled,
+  examId,
 }: QuizHeaderProps) => {
   const { t } = useTranslation();
 
   return (
     <div className='flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 px-4 sm:px-0'>
-      <h1 className='text-xl sm:text-2xl font-semibold text-gray-900 text-center sm:text-left w-full sm:w-auto'>
-        {t('EXAM.QUIZ_LIST_TITLE')}
+      <h1 className='text-2xl sm:text-3xl font-semibold text-gray-900 text-center sm:text-left w-full sm:w-auto'>
+        {examId ? t('EXAM.QUIZ_ID_PREFIX') : t('EXAM.QUIZ_LIST_TITLE')}
+        {examId && <span className='font-bold text-black'> #{examId.slice(0, 8)}</span>}
       </h1>
       <Space className='flex flex-col sm:flex-row w-full sm:w-auto gap-3 sm:gap-2'>
         <Button
           type='default'
-          className='!border-orange-400 !text-orange-500 !hover:border-orange-500 !hover:text-orange-600 rounded-full px-4 sm:px-6 py-2 sm:py-3 w-full h-full text-sm sm:text-base font-bold'
+          className='!border-orange-400 !text-orange-500 !hover:border-orange-500 !hover:text-orange-600 rounded-full px-4 sm:px-6 py-2 sm:py-3 w-full h-full text-base sm:text-lg font-bold'
           disabled={!hasQuizzes}
           onClick={onDownloadAll}
         >
-          {t('EXAM.DOWNLOAD_ALL')}
+          {!examId ? t('EXAM.DOWNLOAD_ALL') : t('EXAM.DOWNLOAD_QUIZ')}
         </Button>
         <Button
           disabled={startNewDisabled}
           type='primary'
-          className='!bg-orange-500 !hover:bg-orange-600 !border-orange-500 !hover:border-orange-600 rounded-full px-4 sm:px-6 py-2 sm:py-3 w-full h-full text-sm sm:text-base font-bold'
+          className='!bg-orange-500 !hover:bg-orange-600 !border-orange-500 !hover:border-orange-600 rounded-full px-4 sm:px-6 py-2 sm:py-3 w-full h-full text-base sm:text-lg font-bold'
           onClick={onStartNew}
         >
           {t('EXAM.START_NEW_QUIZ')}

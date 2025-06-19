@@ -20,4 +20,5 @@ export const API_URL = {
   ANSWERS: '/answers',
   MENTORS_AVAILABLE: '/mentors/available',
   GET_JOB: 'domain/names',
+  DETAIL_EXAM: '/exam',
 };
