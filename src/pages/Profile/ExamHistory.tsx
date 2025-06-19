@@ -1,5 +1,7 @@
-import { Spin } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
+import { Spin, Checkbox } from 'antd';
 import { Dayjs } from 'dayjs';
+import { t } from 'i18next';
 import { useState, useMemo } from 'react';
 
 import ExamDetailView from './ExamDetailView';
@@ -40,6 +42,10 @@ const ExamHistory = () => {
   const isLoading = isExamLoading && isDetailLoading;
   const hasQuizzes = !!historyData?.length;
   const showDetailView = selectedQuizId && examDetail;
+  const totalQuizzes = historyData?.length || 0;
+  const selectedCount = selectedQuizzes.size;
+  const allChecked = totalQuizzes > 0 && selectedCount === totalQuizzes;
+  const someChecked = selectedCount > 0 && !allChecked;
 
   const hasInProgressQuiz = useMemo(() => {
     if (!historyData) return false;
@@ -53,11 +59,18 @@ const ExamHistory = () => {
   }, [historyData]);
 
   const handleCheckboxChange = (quizId: string, checked: boolean) => {
-    setSelectedQuizzes((prev) => {
-      const newSet = new Set(prev);
-      checked ? newSet.add(quizId) : newSet.delete(quizId);
-      return newSet;
-    });
+    const newSelectedQuizzes = new Set(selectedQuizzes);
+    if (checked) {
+      newSelectedQuizzes.add(quizId);
+    } else {
+      newSelectedQuizzes.delete(quizId);
+    }
+    setSelectedQuizzes(newSelectedQuizzes);
+  };
+
+  const handleCheckAll = (checked: boolean) => {
+    if (!historyData) return;
+    setSelectedQuizzes(checked ? new Set(historyData.map((quiz) => quiz.id)) : new Set());
   };
 
   const handleDownloadAll = () => {
@@ -76,8 +89,8 @@ const ExamHistory = () => {
   if (examError || detailError) return <ErrorState onRetry={refetch} />;
 
   return (
-    <div className='h-full !rounded-2xl p-2 sm:p-6'>
-      <div className='max-w-7xl mx-auto space-y-4 h-full flex flex-col overflow-y-auto'>
+    <div className='h-full !rounded-2xl'>
+      <div className='max-w-7xl mx-auto space-y-4 h-full flex flex-col overflow-y-auto px-2'>
         <QuizHeader
           onDownloadAll={handleDownloadAll}
           onStartNew={handleStartNew}
@@ -94,7 +107,22 @@ const ExamHistory = () => {
             {!hasQuizzes ? (
               <EmptyState onStartFirst={handleStartFirst} />
             ) : (
-              <div className='overflow-y-auto flex-1 space-y-4 p-2'>
+              <div className='overflow-y-auto flex-1 space-y-4 px-1'>
+                <div className='flex items-center space-x-2 mb-2 z-0'>
+                  <Checkbox
+                    checked={allChecked}
+                    indeterminate={someChecked}
+                    onChange={(e) => handleCheckAll(e.target.checked)}
+                  />
+                  <p className='font-medium'>{t('EXAM.SELECT_ALL')}</p>
+
+                  <button
+                    onClick={handleDownloadAll}
+                    className='w-[25px] h-[25px] flex items-center justify-center rounded-md border border-orange-500 text-orange-500 hover:bg-orange-50 transition'
+                  >
+                    <DownloadOutlined className='text-base' />
+                  </button>
+                </div>
                 {historyData.map((quiz) => (
                   <QuizCard
                     key={quiz.id}
