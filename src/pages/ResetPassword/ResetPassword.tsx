@@ -1,12 +1,13 @@
-import { Form } from 'antd';
+import { Form, Spin } from 'antd';
 import { Rule } from 'antd/lib/form';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { useResetPasswordSchema } from './ResetPasswordSchema';
 import { Button, InputField } from '@app/components/ui/index';
 import { yupSync } from '@app/helpers/yupSync';
-import { useUpdateForgotPassword } from '@app/hooks/useUser';
+import { useCheckResetPasswordToken, useUpdateForgotPassword } from '@app/hooks/useUser';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -18,11 +19,18 @@ export default function ResetPassword() {
   const [searchParams, _] = useSearchParams();
   const ResetPasswordSchema = useResetPasswordSchema();
   const validator = [yupSync(ResetPasswordSchema)] as unknown as Rule[];
-
   const token = searchParams.get('token');
   const navigate = useNavigate();
 
+  const { isError } = useCheckResetPasswordToken(token || '');
   const { mutate: handleUpdateForgotPassword, isLoading } = useUpdateForgotPassword();
+  useEffect(() => {
+    if (isError) {
+      openNotificationWithIcon(NotificationTypeEnum.ERROR, t('RESET_PASSWORD.EXPIRED'));
+      navigate('/login', { replace: true });
+    }
+  }, [navigate, t, isError]);
+
   const onFinish = (values: { password: string }) => {
     const { password } = values;
     const payload = {
@@ -30,18 +38,17 @@ export default function ResetPassword() {
       token,
     };
     handleUpdateForgotPassword(payload, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         form.resetFields();
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('RESET_PASSWORD.RESET_SUCCESS'));
         navigate('/login', { replace: true });
       },
-      onError: (error) => {
+      onError: () => {
         form.resetFields();
         openNotificationWithIcon(NotificationTypeEnum.ERROR, t('RESET_PASSWORD.EXPIRED'));
       },
     });
   };
-
   return (
     <div className='flex justify-start'>
       <div className='w-full'>
