@@ -1,6 +1,6 @@
 import { Form, Input, DatePicker, Button } from 'antd';
 import { Rule } from 'antd/lib/form';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -31,8 +31,8 @@ const Profile = () => {
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
-        phoneNumber: data.phoneNumber || '',
-        dob: data.dob ? moment(data.dob) : null,
+        phone: data.phoneNumber || '',
+        dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
         job: data.job || null,
         referralCode: data.referralCode || null,
@@ -74,7 +74,7 @@ const Profile = () => {
           fullName: data?.fullName ?? '',
           email: data?.email ?? '',
           phoneNumber: data?.phoneNumber ?? '',
-          dob: data?.dob ? moment(data?.dob) : null,
+          dob: data?.dob ? dayjs(data?.dob) : null,
           province: data?.province ?? null,
           job: data?.job ?? null,
           referralCode: data?.referralCode ?? null,
