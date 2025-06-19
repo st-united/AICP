@@ -129,13 +129,13 @@ const SignIn = () => {
           <Form.Item className='col-span-2'>
             <Button
               onClick={handleGoogleLogin}
-              className='w-full h-[3.75rem] font-semibold text-gray-700 rounded-md hover:bg-gray-100 transition duration-300'
+              className='w-full h-[3.75rem] font-semibold text-gray-700 rounded-md hover:bg-gray-100 transition duration-300 text-base'
             >
               <Image
                 src={GoogleIcon}
                 alt='Google Icon'
                 preview={false}
-                className='!w-5 !h-5 mr-2'
+                className='!w-7 !h-7 mr-3'
               />
               {t('LOGIN.LOGIN_WITH_GOOGLE')}
             </Button>
