@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 
@@ -8,7 +9,7 @@ import {
   NO_SPACE_START_END,
   NO_TWO_SPACE,
 } from '@app/constants/regex';
-
+const MIN_AGE = 15;
 export const useProfileSchema = () => {
   const { t } = useTranslation();
 
@@ -35,9 +36,19 @@ export const useProfileSchema = () => {
       .matches(PHONE_REGEX_PATTERN, t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string),
 
     dob: yup
-      .date()
+      .mixed()
       .nullable()
-      .max(new Date(), t('VALIDATE.DATE_NOT_FUTURE') as string),
+      .test('is-valid-date', t('VALIDATE.DATE_NOT_FUTURE') as string, (value) => {
+        if (!value) return true; // cho phép null
+        const date = dayjs(value);
+        return date.isValid() && date.isBefore(dayjs().add(1, 'day'));
+      })
+      .test('is-min-age', t('VALIDATE.MIN_AGE', { age: MIN_AGE }) as string, (value) => {
+        if (!value) return true;
+        const date = dayjs(value);
+        const minDate = dayjs().subtract(MIN_AGE, 'year');
+        return date.isBefore(minDate) || date.isSame(minDate, 'day');
+      }),
 
     country: yup.string().nullable(),
 
