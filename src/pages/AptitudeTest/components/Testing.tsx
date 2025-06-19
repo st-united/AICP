@@ -144,7 +144,7 @@ const Testing = () => {
 
   if (!examSet) {
     return (
-      <div style={{ textAlign: 'center', padding: '40px' }}>
+      <div className='text-center p-10'>
         <Spin size='large' />
       </div>
     );
