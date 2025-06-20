@@ -154,7 +154,7 @@ const Testing = () => {
     setCurrentQuestion({ id, timestamp: timestamp ?? Date.now() });
   };
   return (
-    <div className='overflow-hidden'>
+    <div className='relative overflow-hidden'>
       <div className='absolute top-10 right-10'>
         <CloseOutlined
           onClick={handleCloseModal}
@@ -170,28 +170,29 @@ const Testing = () => {
           {t('TEST.SUB_TITLE')}
         </span>
       </div>
-      <div className='flex h-full'>
-        <div className='hidden smM:block fixed left-0 top-[115px] w-[300px] smM:w-80 md:w-96 h-[calc(100vh-145px)] p-3 smM:p-6 pt-0 z-10'>
-          <div className='flex flex-col space-y-6 h-full'>
-            <CountdownTimer
-              duration={examSet.timeLimitMinutes * 60}
-              onTimeUp={() => {
-                if (examSet) {
-                  submitExamSet(examSet.id);
-                }
-              }}
-            />
-            <QuestionIndexPanel
-              questions={examSet.questions}
-              currentQuestion={currentQuestion}
-              currentQuestionScroll={currentQuestionScroll}
-              answeredQuestions={answeredQuestions}
-              flaggedQuestions={flaggedQuestions}
-              onFlagToggle={handleFlagToggle}
-              onQuestionSelect={handleQuestionSelect}
-              isAutoScrolling={isAutoScrolling}
-            />
-          </div>
+
+      <div className='smM:flex h-[calc(100vh-145px)] p-3 smM:p-6'>
+        <div className='hidden smM:flex flex-col w-[300px] smM:w-80 md:w-96 space-y-6'>
+          {/* <div className='flex flex-col space-y-6 h-full'> */}
+          <CountdownTimer
+            duration={examSet.timeLimitMinutes * 60}
+            onTimeUp={() => {
+              if (examSet) {
+                submitExamSet(examSet.id);
+              }
+            }}
+          />
+          <QuestionIndexPanel
+            questions={examSet.questions}
+            currentQuestion={currentQuestion}
+            currentQuestionScroll={currentQuestionScroll}
+            answeredQuestions={answeredQuestions}
+            flaggedQuestions={flaggedQuestions}
+            onFlagToggle={handleFlagToggle}
+            onQuestionSelect={handleQuestionSelect}
+            isAutoScrolling={isAutoScrolling}
+          />
+          {/* </div> */}
         </div>
 
         <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
@@ -242,7 +243,7 @@ const Testing = () => {
           </div>
         )}
 
-        <div className='smM:ml-80 md:ml-96 flex-1'>
+        <div className='flex-1 smM:ml-6'>
           <div className='flex flex-col w-full bg-white p-6 mdM:p-10 rounded-xl mdM:pr-0 pr-0'>
             <Progress
               className='pr-6 mdM:pr-10'
