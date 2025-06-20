@@ -19,6 +19,7 @@ export const API_URL = {
   EXAM_SETS_INPUT_TEST: '/exam-sets/input-test',
   ANSWERS: '/answers',
   MENTORS_AVAILABLE: '/mentors/available',
+  ACTIVE_MENTOR_BY_LINK: '/mentors/activate-link-account',
   GET_JOB: 'domain/names',
   DETAIL_EXAM: '/exam',
 };

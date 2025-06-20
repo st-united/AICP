@@ -1,6 +1,7 @@
 import AuthLayout from '@app/components/templates/AuthLayout';
 import PublicLayout from '@app/components/templates/PublicLayout';
 import { NAVIGATE_URL } from '@app/constants';
+import AccountActivation from '@app/pages/AccountActivation/AccountActivation';
 import { Homepage, SignIn, ForgotPassword, ResetPassword } from '@app/pages/index';
 import SignUp from '@app/pages/SignUp/SignUp';
 
@@ -23,6 +24,10 @@ const routes = [
       {
         path: NAVIGATE_URL.RESET_PASSWORD,
         element: <ResetPassword />,
+      },
+      {
+        path: NAVIGATE_URL.MENTOR_ACTIVATION,
+        element: <AccountActivation />,
       },
     ],
   },

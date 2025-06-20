@@ -1,10 +1,12 @@
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+
 import { CreateScheduleParams, UseMentorInfiniteParams } from '@app/interface/mentor.interface';
 import {
   createBookedSlots,
   fetchBookedSlots,
   getMentorsAvailableAPI,
+  mentorSelfActivationApi,
 } from '@app/services/mentorAPI';
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useMentorInfinite = ({
   search,
@@ -55,5 +57,12 @@ export const useCreateSchedule = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bookedSlots'] });
     },
+  });
+};
+
+export const useActivateMentorByLink = () => {
+  return useMutation(async (token: string) => {
+    const response = await mentorSelfActivationApi(token);
+    return response;
   });
 };
