@@ -6,7 +6,9 @@ export const NAVIGATE_URL = {
   USER_UPDATE: '/users/update',
   USER_CREATE: '/users/create',
   PROFILE_UPDATE: '/profile/update',
-  CHANGE_PASSWORD: '/profile/change-password',
+  CHANGE_PASSWORD: '/change-password',
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
   SIGN_IN: '/login',
   SIGN_UP: '/register',
   SIGN_OUT: '/sign-out',
@@ -14,4 +16,5 @@ export const NAVIGATE_URL = {
   TEST: '/aptitude-test',
   TEST_RESULT: '/history',
   MENTOR_ACTIVATION: 'mentor-activation/:token',
+  SCHEDULE: '/scheduler',
 };

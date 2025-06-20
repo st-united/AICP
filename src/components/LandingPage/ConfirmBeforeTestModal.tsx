@@ -28,47 +28,47 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
     <>
       <CloseCircleOutlined
         onClick={confirmProps.onClose}
-        className='absolute right-0 top-0 text-2xl text-gray-500 hover:text-gray-700 cursor-pointer sm:text-3xl'
+        className='absolute right-0 top-0 text-2xl cursor-pointer text-gray-500 hover:text-gray-700 md:text-3xl'
       />
 
-      <div className='bg-blue-100 rounded-full p-4 sm:p-4'>
-        <div className='bg-blue-300 rounded-full p-3 sm:p-6'>
-          <span className='text-3xl font-medium text-blue-500 m-3 sm:text-4xl'>?</span>
+      <div className='bg-blue-100 rounded-full p-3 md:p-4'>
+        <div className='bg-blue-300 rounded-full p-3 md:p-6'>
+          <span className='text-2xl font-medium text-blue-500 m-2 md:text-4xl'>?</span>
         </div>
       </div>
 
-      <h2 className='text-2xl font-bold my-2 text-center sm:px-4 sm:text-3xl sm:mb-6 sm:mt-6'>
+      <h2 className='text-xl font-bold my-2 text-center px-2 md:text-3xl md:px-4 md:my-6'>
         {title}
       </h2>
     </>
   );
 
   const ModalContent = ({ durationKey }: { durationKey: string }) => (
-    <div className='px-0 space-y-1 sm:space-y-2 sm:px-6'>
-      <p className='text-lg text-gray-900 sm:text-xl'>
+    <div className='px-2 space-y-2 md:px-6 md:space-y-3'>
+      <p className='text-base text-gray-900 md:text-xl'>
         <Trans
           i18nKey={durationKey}
           values={{ duration: hasTakenExam?.examSetDuration }}
           components={{ bold: <span className='font-bold' /> }}
         />
       </p>
-      <p className='text-lg text-gray-900 sm:text-xl'>{t('MODAL.RESULT_CONFIRM_TEST')}</p>
-      <p className='text-lg text-gray-900 sm:text-xl'>
+
+      <p className='text-base text-gray-900 md:text-xl'>{t('MODAL.RESULT_CONFIRM_TEST')}</p>
+      <p className='text-base text-gray-900 md:text-xl'>
         <span className='text-orange-500 font-semibold'>{t('MODAL.NOTE_CONFIRM_TEST')}:</span>{' '}
         {t('MODAL.WARNING_CONFIRM_TEST')}
       </p>
     </div>
   );
-
   const NewTestModal = () => (
-    <div className='relative flex flex-col items-center'>
+    <div className='relative flex flex-col items-center justify-center'>
       <ModalHeader title={t('MODAL.TITLE_CONFIRM_TAKE_NEW_TEST')} />
       <ModalContent durationKey='MODAL.DURATION_CONFIRM_TAKE_NEW_TEST' />
 
-      <div className='mt-6 px-4 w-full sm:mt-8'>
+      <div className='mt-4 px-3 w-full flex justify-center md:my-6'>
         <Button
           onClick={handleStartTest}
-          className='w-full h-full border-none text-xl font-semibold px-6 py-3 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 mx-auto block sm:w-auto sm:min-w-48 sm:px-8 sm:py-3.5 sm:text-xl'
+          className='w-full h-full border-none text-lg font-semibold px-4 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-8 md:py-3 md:text-xl'
         >
           {t('MODAL.START_CONFIRM_TEST')}
         </Button>
@@ -81,17 +81,17 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
       <ModalHeader title={t('MODAL.TITLE_CONFIRM_IMPROVE_TEST')} />
       <ModalContent durationKey='MODAL.DURATION_CONFIRM_IMPROVE_TEST' />
 
-      <div className='mt-6 px-4 w-full sm:mt-8'>
-        <div className='flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4'>
+      <div className='px-3 w-full md:my-6'>
+        <div className='flex flex-col gap-2 md:flex-row md:justify-center md:gap-4'>
           <Button
             onClick={handleReviewResult}
-            className='w-full h-full text-lg font-semibold px-4 py-3 rounded-full bg-white border-2 !border-orange-500 !text-orange-500 hover:border-orange-600 hover:text-orange-600 active:border-orange-700 active:text-orange-700 transition-colors duration-200 sm:w-48 sm:px-6 sm:py-3.5 sm:text-xl'
+            className='w-full h-full text-base font-semibold px-3 py-2 rounded-full bg-white border-2 !border-orange-500 !text-orange-500 hover:border-orange-600 hover:text-orange-600 active:border-orange-700 active:text-orange-700 transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
           >
             {t('MODAL.REVIEW_RESULT')}
           </Button>
           <Button
             onClick={handleStartTest}
-            className='w-full h-full text-lg font-semibold border-none px-4 py-3 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 sm:w-48 sm:px-6 sm:py-3.5 sm:text-xl'
+            className='w-full h-full text-base font-semibold border-none px-3 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
           >
             {t('MODAL.START_CONFIRM_TEST')}
           </Button>
@@ -108,6 +108,19 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
       destroyOnHidden={true}
       closable={false}
       className='p-3 sm:p-5'
+      classNames={{ content: '!rounded-3xl' }}
+      width={{
+        xs: '90%',
+        sm: '80%',
+        md: '70%',
+        lg: '60%',
+        xl: '50%',
+        xxl: '40%',
+      }}
+      style={{
+        maxWidth: '100%',
+        margin: '10px auto',
+      }}
     >
       {hasTakenExam?.hasTakenExam ? <ImproveTestModal /> : <NewTestModal />}
     </Modal>

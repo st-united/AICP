@@ -1,4 +1,5 @@
 import { GetListParams } from './common.interface';
+import { ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 
 export interface UserColumns {
   id: number;
@@ -12,6 +13,10 @@ export interface UserColumns {
 export interface Credentials {
   email: string;
   password: string;
+}
+
+export interface GoogleCredentials {
+  idToken: string;
 }
 
 export interface UserProfile {
@@ -81,4 +86,35 @@ export interface HasTakenExam {
   hasTakenExam: boolean;
   examSetDuration: number;
   examId?: string;
+}
+
+export interface HistoryTesting {
+  id: string;
+  examStatus: ExamStatusEnum;
+  sfiaLevel: SFIALevel;
+  createdAt: Date;
+}
+
+export interface GetHistoryParams {
+  startDate?: string;
+  endDate?: string;
+}
+export interface Job {
+  id: number;
+  name: string;
+}
+export interface DetailExam {
+  id: string;
+  startedAt: string;
+  sfiaLevel: SFIALevel | null;
+  mindsetScore: number;
+  skillsetScore: number;
+  toolsetScore: number;
+  overallScore: number;
+  examStatus: ExamStatusEnum;
+  createdAt: string;
+  examSet: {
+    id: string;
+    name: string;
+  };
 }
