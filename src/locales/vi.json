@@ -486,5 +486,16 @@
       "PM_04_05": "04 - 05 CH",
       "PM_05_06": "05 - 06 CH"
     }
+  },
+  "MENTOR_ACTIVATION": {
+    "WELCOME": "Chào mừng đến với",
+    "DEVPLUS": "DevPlus",
+    "DESCRIPTION": "Nhấn vào nút bên dưới để kích hoạt tài khoản cố vấn và bắt đầu hành trình cùng chúng tôi.",
+    "ACTIVATE_BUTTON": "Kích hoạt tài khoản",
+    "LOADING": "Đang kích hoạt tài khoản của bạn...",
+    "SUCCESS_TITLE": "Kích hoạt tài khoản thành công!",
+    "SUCCESS_SUBTITLE": "Bạn sẽ được chuyển hướng đến trang đăng nhập trong giây lát...",
+    "ERROR_TITLE": "Kích hoạt thất bại",
+    "ERROR_SUBTITLE": "Vui lòng thử lại hoặc liên hệ hỗ trợ. Đang chuyển hướng đến trang chủ..."
   }
 }

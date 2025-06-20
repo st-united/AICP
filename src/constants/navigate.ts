@@ -13,4 +13,5 @@ export const NAVIGATE_URL = {
   PROFILE: '/profile',
   TEST: '/aptitude-test',
   TEST_RESULT: '/history',
+  MENTOR_ACTIVATION: 'mentor-activation/:token',
 };

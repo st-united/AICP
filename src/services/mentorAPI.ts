@@ -15,3 +15,6 @@ export const fetchBookedSlots = async (mentorId: string) => {
 export const createBookedSlots = async (data: CreateScheduleParams) => {
   return await axios.post(`/mentors/create-scheduler`, data);
 };
+export const mentorSelfActivationApi = async (token: string) => {
+  await axios.patch(API_URL.ACTIVE_MENTOR_BY_LINK, { token });
+};
