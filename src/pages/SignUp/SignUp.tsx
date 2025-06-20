@@ -144,10 +144,10 @@ const SignUp = () => {
               <div>
                 {parse(
                   t<string>('SIGN_UP.AGREE_TERMS', {
-                    terms: `<a href="/terms" style="text-decoration: underline; color: #A22D00;">${t<string>(
+                    terms: `<a href="/terms-and-conditions" style="text-decoration: underline; color: #A22D00;">${t<string>(
                       'SIGN_UP.TERMS',
                     )}</a>`,
-                    privacy: `<a href="/privacy" style="text-decoration: underline; color: #A22D00;">${t<string>(
+                    privacy: `<a href="/privacy-policy" style="text-decoration: underline; color: #A22D00;">${t<string>(
                       'SIGN_UP.PRIVACY',
                     )}</a>`,
                     company: t('SIGN_UP.COMPANY'),
