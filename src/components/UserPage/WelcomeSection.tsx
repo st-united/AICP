@@ -47,7 +47,9 @@ const WelcomeSection = () => {
           <img src={InnovationPana} alt='innovation' className='w-[25rem] h-[25rem]' />
         </div>
       </div>
-      {open && <StepModal current={0} open={open} onClose={() => setIsOpen(false)} />}
+      {open && (
+        <StepModal open={open} onClose={() => setIsOpen(false)} onFinish={() => setIsOpen(false)} />
+      )}
     </section>
   );
 };
