@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import CountdownTimer from './CountdownTimer';
 import QuestionDisplay from './QuestionDisplay';
 import QuestionIndexPanel from './QuestionIndexPanel';
-import { useGetExamSet, useSubmitDraftQuestion, useSubmitExamSet } from '@app/hooks';
+import { useGetExamSet, useSubmitDraftQuestion, useSubmitExam } from '@app/hooks';
 import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 
 const Testing = () => {
@@ -29,7 +29,7 @@ const Testing = () => {
   const [unansweredQuestions, setUnansweredQuestions] = useState<Question[]>([]);
   const { data: examSet } = useGetExamSet();
   const submitDraftQuestionMutation = useSubmitDraftQuestion();
-  const { mutate: submitExamSet, isLoading: isSubmitting } = useSubmitExamSet();
+  const { mutate: submitExam, isLoading: isSubmitting } = useSubmitExam();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
 
@@ -115,12 +115,12 @@ const Testing = () => {
 
   const handleConfirmSubmit = useCallback(() => {
     if (!examSet) return;
-    submitExamSet(examSet.id, {
+    submitExam(examSet.examId, {
       onSuccess: () => {
         setIsSubmitModalOpen(false);
       },
     });
-  }, [examSet, submitExamSet]);
+  }, [examSet, submitExam]);
 
   const handleCloseModal = useCallback(() => {
     if (!examSet?.questions) return;
@@ -178,7 +178,7 @@ const Testing = () => {
             duration={examSet.timeLimitMinutes * 60}
             onTimeUp={() => {
               if (examSet) {
-                submitExamSet(examSet.id);
+                submitExam(examSet.examId);
               }
             }}
           />
@@ -219,7 +219,7 @@ const Testing = () => {
                 duration={examSet.timeLimitMinutes * 60}
                 onTimeUp={() => {
                   if (examSet) {
-                    submitExamSet(examSet.id);
+                    submitExam(examSet.examId);
                   }
                 }}
               />
@@ -366,7 +366,7 @@ const Testing = () => {
             <span className='text-lg font-medium'>{t('TEST.CHECK_ANSWER')}</span>
             <div className='flex items-center justify-center gap-4 mt-6 flex-col smM:flex-row'>
               <Button
-                onClick={() => submitExamSet(examSet.id)}
+                onClick={() => submitExam(examSet.examId)}
                 loading={isSubmitting}
                 disabled={isSubmitting}
                 className='border-2 border-[#FE7743] rounded-3xl text-[#FE7743] px-8 py-2 h-full text-lg font-bold hover:border-[#ff5029] hover:text-[#ff5029]'
@@ -408,7 +408,7 @@ const Testing = () => {
                 {t('BUTTON.CANCEL_TEST')}
               </Button>
               <Button
-                onClick={() => submitExamSet(examSet.id)}
+                onClick={() => submitExam(examSet.examId)}
                 loading={isSubmitting}
                 disabled={isSubmitting}
                 className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
