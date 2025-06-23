@@ -1,5 +1,6 @@
 import { Button } from 'antd';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface ActionButtonsProps {
   onInterviewClick: () => void;
@@ -7,6 +8,7 @@ interface ActionButtonsProps {
 }
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({ onInterviewClick, onOtherClick }) => {
+  const { t } = useTranslation();
   return (
     <div className='flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-2 sm:px-0'>
       <Button
@@ -19,7 +21,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onInterviewClick, onOther
                    flex items-center justify-center'
         style={{ borderRadius: '25px' }}
       >
-        Lúc khác
+        {t<string>('BUTTON.OTHER_TIMES')}
       </Button>
 
       <Button
@@ -36,8 +38,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onInterviewClick, onOther
           borderRadius: '25px',
           borderColor: '#FE7743',
         }}
+        disabled={true}
       >
-        Chọn lịch phỏng vấn
+        {t<string>('BUTTON.BUTTON_SCHEDULE')}
       </Button>
     </div>
   );

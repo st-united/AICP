@@ -36,7 +36,7 @@ const routes = [
             element: <AptitudeTest />,
           },
           {
-            path: 'capacity',
+            path: NAVIGATE_URL.CAPACITY,
             element: <Capacity />,
           },
         ],
