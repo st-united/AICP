@@ -120,9 +120,9 @@ export const useSubmitExam = () => {
       return data;
     },
     {
-      onSuccess({ message }, examSetId) {
+      onSuccess({ message }, examId) {
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        navigate(NAVIGATE_URL.CAPACITY_DYNAMIC(examSetId));
+        navigate(NAVIGATE_URL.CAPACITY_DYNAMIC(examId));
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
