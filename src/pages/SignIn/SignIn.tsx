@@ -41,15 +41,15 @@ const SignIn = () => {
   const validator = [yupSync(signInSchema)] as unknown as Rule[];
 
   return (
-    <div id='container-sign-in' className='flex justify-center'>
-      <div className='w-full md:w-5/5 h-full'>
+    <div id='container-sign-in' className='flex justify-center h-full'>
+      <div className='w-full md:w-4/5 h-full'>
         <button
           onClick={handleOnClickHomePage}
           className='bg-transparent cursor-pointer w-auto'
           type='button'
         >
           <Link
-            className='flex items-center justify-start text-lg !mb-14 hover:text-primary-light cursor-pointer'
+            className='flex text-primary-gray items-center justify-start text-lg !mb-14 hover:text-primary-light cursor-pointer'
             to={'/'}
           >
             <div className='flex items-center justify-center'>
