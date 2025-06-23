@@ -1,9 +1,7 @@
-// Variables
 $primary-color: #ff8c5f;
 $border-radius: 10px;
 $transition-duration: 0.3s;
 
-// Upload component styles
 .custom-upload {
   .ant-upload {
     width: 100%;
@@ -22,7 +20,6 @@ $transition-duration: 0.3s;
   }
 }
 
-// Image component styles
 .custom-img {
   width: 100px !important;
   aspect-ratio: 1;
@@ -67,7 +64,6 @@ $transition-duration: 0.3s;
   }
 }
 
-// Portfolio content styles
 .portfolio-content {
   &__header {
     text-align: center;

@@ -517,6 +517,9 @@
     "UPLOAD_FAILED": "Tải lên tệp thất bại",
     "DOWNLOAD_SUCCESS": "Tải xuống tệp thành công",
     "DOWNLOAD_FAILED": "Tải xuống tệp thất bại",
-    "NO_INFO": "Vui lòng cung cấp thông tin để cập nhật hồ sơ"
+    "NO_INFO": "Vui lòng cung cấp thông tin để cập nhật hồ sơ",
+    "NOT_SUPPORT_PREVIEW": "Chưa hỗ trợ xem trước định dạng này",
+    "UNSUPPORTED_FORMAT": "Định dạng file không hỗ trợ xem trước",
+    "DOWNLOAD": "Tải xuống"
   }
 }

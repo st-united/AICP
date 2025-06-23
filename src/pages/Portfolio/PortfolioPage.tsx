@@ -1,9 +1,9 @@
 import React, { useMemo, memo } from 'react';
 
 import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
-import { Portfolio } from '@app/interface/portfolio.interface';
+import { PortfolioResponse } from '@app/interface/portfolio.interface';
 interface PortfolioPageProps {
-  portfolio?: Portfolio;
+  portfolio?: PortfolioResponse;
   onSave?: () => void;
   onCancel?: () => void;
 }

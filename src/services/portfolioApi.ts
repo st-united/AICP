@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 import { API_URL } from '@app/constants';
-import { Portfolio } from '@app/interface/portfolio.interface';
+import { PortfolioResponse } from '@app/interface/portfolio.interface';
 
-export const updatePortfolioApi = async (data: Portfolio) => {
-  return await axios.patch(API_URL.PORTFOLIO, data);
+export const updatePortfolioApi = async (data: FormData): Promise<PortfolioResponse> => {
+  const response = await axios.patch(API_URL.PORTFOLIO, data);
+  return response.data.data;
 };
 
 export const getPortfolioApi = async () => {
