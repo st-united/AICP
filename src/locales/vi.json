@@ -191,7 +191,9 @@
     "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
     "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
-    "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại"
+    "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại",
+    "INVALID_DATE_RANGE": "Ngày bắt đầu không được lớn hơn ngày kết thúc",
+    "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
@@ -365,6 +367,49 @@
     "AVG_SCORE_LABEL": "Avg Score",
     "BUTTON_PAST": "Lúc khác",
     "BUTTON_SCHEDULE": "Chọn lịch phỏng vấn"
+  },
+  "EXAM": {
+    "TITLE": "Bài kiểm tra",
+    "QUIZ_LIST_TITLE": "Danh sách bài kiểm tra",
+    "DOWNLOAD_ALL": "Tải xuống tất cả",
+    "DOWNLOAD_QUIZ": "Tải xuống",
+    "SELECT_ALL": "Chọn tất cả",
+    "START_NEW_QUIZ": "Bắt đầu bài mới",
+    "START_FIRST_QUIZ": "Bắt đầu ngay",
+    "DATE_FILTER_PLACEHOLDER": "Chọn ngày bắt đầu - Chọn ngày kết thúc",
+    "NO_QUIZ_MESSAGE": "Chưa có bài kiểm tra nào",
+    "LOADING_MESSAGE": "Đang tải danh sách bài kiểm tra...",
+    "ERROR_TITLE": "Lỗi tải dữ liệu",
+    "ERROR_DESCRIPTION": "Không thể tải danh sách bài kiểm tra. Vui lòng thử lại.",
+    "RETRY_BUTTON": "Thử lại",
+    "QUIZ_ID_PREFIX": "Bài kiểm tra",
+    "CREATED_TIME": "Thời gian tạo:",
+    "COMPETENCY_LEVEL": "Mức năng lực:",
+    "COMPETENCY_DETAIL": "Chi tiết mức năng lực",
+    "DATE_FILTER_START": "Ngày bắt đầu",
+    "DATE_FILTER_END": "Ngày kết thúc",
+    "NO_QUIZ_TITLE": "Bắt đầu bài kiểm tra đầu tiên của bạn!",
+    "NO_QUIZ_DESC_1": "Bạn chỉ cần vài phút để hoàn thành bài kiểm tra này.",
+    "NO_QUIZ_DESC_2": "Hãy thử sức và khám phá xem bạn đang ở đâu trong hành trình phát triển của mình.",
+    "AI_MINDSET_SCORE": "Kiến thức AI: <bold>{{score}}/{{maxScore}}</bold>",
+    "AI_SKILLSET_SCORE": "Kỹ năng lập trình: <bold>{{score}}/{{maxScore}}</bold>",
+    "AI_TOOLSET_SCORE": "Áp dụng thực tế: <bold>{{score}}/{{maxScore}}</bold>",
+    "STATUS": {
+      "IN_PROGRESS": "Đang làm bài",
+      "SUBMITTED": "Đã nộp bài",
+      "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+      "GRADED": "Đã chấm điểm"
+    },
+    "LEVEL": {
+      "NONE_LEVEL": "Chưa có đánh giá năng lực",
+      "LEVEL_1_AWARENESS": "Mức nhận thức",
+      "LEVEL_2_FOUNDATION": "Mức nền tảng",
+      "LEVEL_3_APPLICATION": "Mức ứng dụng",
+      "LEVEL_4_INTEGRATION": "Mức tích hợp",
+      "LEVEL_5_INNOVATION": "Mức đổi mới",
+      "LEVEL_6_LEADERSHIP": "Mức lãnh đạo",
+      "LEVEL_7_MASTERY": "Mức thành thạo"
+    }
   },
   "FORGOT_PASSWORD": {
     "EMAIL_VALID": "Email bắt buộc phải hợp lệ!",

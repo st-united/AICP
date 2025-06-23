@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Radar,
   RadarChart,
@@ -6,25 +5,24 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   ResponsiveContainer,
+  Legend,
+  Tooltip,
 } from 'recharts';
 
 interface ChartDataItem {
   skill: string;
   value: number;
-  fullMark: number;
 }
 
 interface SkillRadarChartProps {
   data: ChartDataItem[];
-  averageScore: number;
 }
 
-const SkillRadarChart: React.FC<SkillRadarChartProps> = ({ data, averageScore }) => {
+const SkillRadarChart = ({ data }: SkillRadarChartProps) => {
   // Transform data for Recharts
   const chartData = data.map((item) => ({
-    subject: item.skill,
-    A: item.value,
-    fullMark: item.fullMark,
+    pilar: item.skill,
+    score: item.value,
   }));
 
   return (
@@ -34,33 +32,33 @@ const SkillRadarChart: React.FC<SkillRadarChartProps> = ({ data, averageScore })
           <RadarChart data={chartData}>
             <PolarGrid stroke='#e5e7eb' />
             <PolarAngleAxis
-              dataKey='subject'
-              tick={{ fontSize: 10, fill: '#374151' }}
-              className='text-xs sm:text-sm'
+              dataKey='pilar'
+              tick={{ fontSize: 12, fill: '#374151' }}
+              tickLine={false}
             />
             <PolarRadiusAxis
               angle={90}
-              domain={[0, 100]}
-              tick={{ fontSize: 8, fill: '#9ca3af' }}
-              tickCount={6}
+              domain={[0, 7]}
+              tick={{ fontSize: 10, fill: '#9ca3af' }}
+              tickCount={5}
+              axisLine={false}
+              tickLine={false}
             />
             <Radar
-              name='Skill Level'
-              dataKey='A'
+              name='Score'
+              dataKey='score'
               stroke='#f97316'
-              fill='rgba(249, 115, 22, 0.3)'
+              fill='#f9731666'
               strokeWidth={2}
-              dot={{ fill: '#f97316', strokeWidth: 2, r: 3 }}
+              dot={{ r: 3, fill: '#f97316' }}
             />
+            <Tooltip
+              wrapperStyle={{ fontSize: '12px' }}
+              formatter={(value: number) => [`${value}`, 'Score']}
+            />
+            <Legend wrapperStyle={{ fontSize: '12px' }} />
           </RadarChart>
         </ResponsiveContainer>
-
-        {/* Center score indicator */}
-        <div className='absolute inset-0 flex items-center justify-center pointer-events-none'>
-          <div className='w-8 h-8 sm:w-10 sm:h-10 bg-orange-100 rounded-full flex items-center justify-center'>
-            <span className='text-xs sm:text-sm font-bold text-orange-600'>{averageScore}</span>
-          </div>
-        </div>
       </div>
     </div>
   );

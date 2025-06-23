@@ -6,6 +6,7 @@ import { NAVIGATE_URL } from '@app/constants';
 import { AptitudeTest, Profile, Capacity } from '@app/pages';
 import Booking from '@app/pages/MentorBooking';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
+import ExamHistory from '@app/pages/Profile/ExamHistory';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
@@ -27,11 +28,11 @@ const routes = [
         element: <BaseLayout />,
         children: [
           {
-            path: 'scheduler',
+            path: NAVIGATE_URL.SCHEDULE,
             element: <Booking />,
           },
           {
-            path: 'aptitude-test',
+            path: NAVIGATE_URL.TEST,
             element: <AptitudeTest />,
           },
           {
@@ -44,12 +45,16 @@ const routes = [
         element: <ProfileLayout />,
         children: [
           {
-            path: 'profile',
+            path: NAVIGATE_URL.PROFILE,
             element: <Profile />,
           },
           {
-            path: 'change-password',
+            path: NAVIGATE_URL.CHANGE_PASSWORD,
             element: <PasswordChangeForm />,
+          },
+          {
+            path: NAVIGATE_URL.TEST_RESULT,
+            element: <ExamHistory />,
           },
         ],
       },

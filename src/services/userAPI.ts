@@ -1,12 +1,20 @@
 import axios from 'axios';
 
 import { API_URL } from '@app/constants';
-import { GetUsersParams, UserDetail, UpdateForgotPassword } from '@app/interface/user.interface';
+import {
+  GetUsersParams,
+  UserDetail,
+  UpdateForgotPassword,
+  GetHistoryParams,
+} from '@app/interface/user.interface';
 
 export const getUsersAPI = async (params: GetUsersParams) =>
   await axios.get(API_URL.USERS, { params });
 
 export const getUserByIdAPI = async (id: number) => await axios.get(`${API_URL.USERS}/${id}`);
+
+export const getHistoryTestingApi = (params?: GetHistoryParams) =>
+  axios.get(API_URL.HISTORY_TESTING, { params });
 
 export const checkHasTakenExam = async (examSetId: string) =>
   await axios.get(`${API_URL.CHECK_TAKEN_EXAM}/${examSetId}`);
@@ -32,3 +40,6 @@ export const forgotPasswordApi = async (email: string) =>
 
 export const updateForgotPasswordApi = async (payload: UpdateForgotPassword) =>
   await axios.post(API_URL.UPDATE_FORGOT_PASSWORD, payload);
+
+export const getDetailExam = async (examId: string) =>
+  await axios.get(`${API_URL.DETAIL_EXAM}/${examId}`);

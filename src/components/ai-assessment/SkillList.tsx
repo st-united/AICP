@@ -1,38 +1,54 @@
-import { Card } from 'antd';
 import { t } from 'i18next';
-import React from 'react';
+import { Trans } from 'react-i18next';
 
-interface Skill {
-  name: string;
-  score: number;
-  total: number;
+import { SFIALevel } from '@app/constants/enum';
+import { getLevelText } from '@app/pages/Profile/QuizManagement/QuizCard';
+
+interface Pilar {
+  toolSetScore: number;
+  mindSetScore: number;
+  skillSetScore: number;
+  sfiaLevel: SFIALevel | null;
 }
 
-interface SkillsListProps {
-  skills: Skill[];
-}
-
-const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
+const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, sfiaLevel }: Pilar) => {
   return (
     <div className=''>
-      <h2 className='font-semibold mb-6 text-sm sm:text-lg'>
-        {t<string>('DRAFT.LEVEL_LABEL')}:
-        <span className='text-orange-500 '> {t<string>('DRAFT.LEVEL_VALUE')}</span>
+      <h2 className='font-semibold mb-6 text-base sm:text-lg'>
+        <span className='text-gray-800'>
+          {t('EXAM.COMPETENCY_LEVEL')}{' '}
+          <span className='text-orange-500 font-bold'>
+            {sfiaLevel ? getLevelText(sfiaLevel) : t('EXAM.NONE_LEVEL')}
+          </span>
+        </span>
       </h2>
 
-      <div className='space-y-4 mb-6'>
-        {skills.map((skill, index) => (
-          <div key={index} className='flex items-center '>
-            <span className='text-[#000000 font-medium text-sm sm:text-lg'>• {skill.name}: </span>
-            <span className='font-bold text-lg'>
-              <span className='text-[#000000] font-bold text-sm sm:text-lg'>{skill.score}</span>
-              <span className='text-[#000000] font-bold text-sm sm:text-lg'>/{skill.total}</span>
-            </span>
-          </div>
-        ))}
+      <div className='space-y-3 mb-6'>
+        <div className='text-base text-gray-700'>
+          <span className='inline-block w-2 h-2 bg-black rounded-full mt-2 mr-3 flex-shrink-0'></span>
+          <Trans
+            i18nKey={'EXAM.AI_MINDSET_SCORE'}
+            values={{ score: mindSetScore, maxScore: 7 }}
+            components={{ bold: <span className='font-bold' /> }}
+          />
+        </div>
+        <div className='text-base text-gray-700'>
+          <span className='inline-block w-2 h-2 bg-black rounded-full mt-2 mr-3 flex-shrink-0'></span>
+          <Trans
+            i18nKey={'EXAM.AI_SKILLSET_SCORE'}
+            values={{ score: skillSetScore, maxScore: 7 }}
+            components={{ bold: <span className='font-bold' /> }}
+          />
+        </div>
+        <div className='text-base text-gray-700'>
+          <span className='inline-block w-2 h-2 bg-black rounded-full mt-2 mr-3 flex-shrink-0'></span>
+          <Trans
+            i18nKey={'EXAM.AI_TOOLSET_SCORE'}
+            values={{ score: toolSetScore, maxScore: 7 }}
+            components={{ bold: <span className='font-bold' /> }}
+          />
+        </div>
       </div>
-
-      <p className='text-[#808080] italic text-sm sm:text-lg'>{t<string>('DRAFT.NOTE')}</p>
     </div>
   );
 };
