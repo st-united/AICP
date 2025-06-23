@@ -111,12 +111,12 @@ export const useSubmitDraftQuestion = () => {
   return useMutation((params: SubmitExamSetPayload) => submitDraftQuestionApi(params));
 };
 
-export const useSubmitExamSet = () => {
+export const useSubmitExam = () => {
   const navigate = useNavigate();
 
   return useMutation(
-    async (examSetId: string) => {
-      const { data } = await submitExamSetApi(examSetId);
+    async (examId: string) => {
+      const { data } = await submitExamSetApi(examId);
       return data;
     },
     {
