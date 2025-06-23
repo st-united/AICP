@@ -1,12 +1,14 @@
 import {
   ProfileOutlined,
   LockOutlined,
-  ContainerOutlined,
   CheckSquareOutlined,
   ReadOutlined,
 } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useLocation, Link } from 'react-router-dom';
+
+import { RootState } from '@app/redux/store';
 
 const Sidebar = () => {
   const { t } = useTranslation();
@@ -14,28 +16,36 @@ const Sidebar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const menuItems = [
+  const role = useSelector((state: RootState) => state.auth.user?.roles?.[0]?.name || '');
+
+  const allMenuItems = [
     {
       icon: ProfileOutlined,
       label: t('SIDEBAR.PERSONAL_PROFILE'),
       path: '/profile',
+      roles: ['mentor', 'user'],
     },
     {
       icon: LockOutlined,
       label: t('SIDEBAR.CHANGE_PASSWORD'),
       path: '/change-password',
+      roles: ['mentor', 'user'],
     },
     {
       icon: CheckSquareOutlined,
       label: t('SIDEBAR.HISTORY'),
       path: '/profile/history',
+      roles: ['user'],
     },
     {
       icon: ReadOutlined,
       label: t('SIDEBAR.ONLINE_COURSES'),
       path: '/profile/courses',
+      roles: ['user'],
     },
   ];
+
+  const menuItems = allMenuItems.filter((item) => item.roles.includes(role));
 
   return (
     <div className='flex !rounded-2xl bg-white !p-6 h-full'>

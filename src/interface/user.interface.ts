@@ -25,6 +25,12 @@ export interface UserProfile {
   province?: string;
   job?: string;
   referralCode: string;
+  roles?: Role[];
+}
+
+export interface Role {
+  id: number;
+  name: string;
 }
 
 export interface UserDetail {
