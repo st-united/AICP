@@ -365,9 +365,10 @@
     "REQUIRE_PASSWORD": "Mật khẩu không được để trống!",
     "CONFIRM_PASSWORD": "Nhập lại mật khẩu mới *",
     "CREATE_PASSWORD": "Tạo mới mật khẩu",
-    "REGEX_PASSWORD": "Mật khẩu phải có ít nhất 8 ký tự, có số, chữ thường, chữ viết hoa và ký tự đặc biệt!",
+    "REGEX_PASSWORD": "Mật khẩu phải có ít nhất 8 ký tự, có số, chữ thường và chữ viết hoa!",
     "MATCH": "Mật khẩu không khớp!",
-    "EXPIRED": "Liên kết đã hết hạn"
+    "EXPIRED": "Liên kết đã hết hạn",
+    "RESET_SUCCESS": "Thay đổi mật khẩu thành công!"
   },
   "HOMEPAGE_LOGIN": {
     "TITLE": "Xin chào {{name}}, 👋",
@@ -420,8 +421,8 @@
     "QUESTION_INDEX": "Mục lục câu hỏi",
     "QUESTION": "Câu hỏi",
     "FLAG_QUESTION": "Đánh dấu câu hỏi",
-    "MULTIPLE_CHOICE": "Chọn 1 đáp án đúng:",
-    "SINGLE_CHOICE": "Chọn nhiều đáp án đúng:",
+    "MULTIPLE_CHOICE": "Chọn nhiều đáp án đúng:",
+    "SINGLE_CHOICE": "Chọn 1 đáp án đúng:",
     "TOTAL_QUESTION": "Tổng số câu hỏi",
     "ANSWERED_QUESTION": "Số câu hỏi đã trả lời",
     "UNANSWERED_QUESTION": "Số câu hỏi chưa trả lời",
@@ -446,5 +447,44 @@
     "NOTE": "Lưu ý",
     "NOTE_MESSAGE": "Nếu bạn thoát ngay bây giờ, hệ thống sẽ không lưu lại kết quả làm bài.",
     "SUBMIT_NOW": "Nộp bài ngay"
+  },
+  "MENTOR_BOOKING": {
+    "BACK_HOME": "Quay về trang chủ",
+    "TITLE": "Chọn cố vấn và lịch phỏng vấn",
+    "SEARCH_PLACEHOLDER": "Nhập tên cố vấn để tìm kiếm",
+    "LOAD_MORE": "Kéo xuống để tải thêm",
+    "VIEW_DETAIL": "Xem chi tiết",
+    "BOOK_MENTOR": "Đặt lịch cố vấn",
+    "SUCCESS_TITLE": "Đặt lịch phỏng vấn thành công!",
+    "SUCCESS_MESSAGE": "Chúc mừng! Bạn đã đặt lịch phỏng vấn với cố vấn thành công. Dưới đây là thông tin chi tiết:",
+    "MENTOR_LABEL": "Cố vấn: ",
+    "TIME_LABEL": "Thời gian: ",
+    "BOOKING_CODE_LABEL": "Mã đặt lịch: ",
+    "SUCCESS_NOTE": "Bạn cần chờ cố vấn phê duyệt lịch này. Chúng tôi sẽ thông báo khi lịch được xác nhận. Vui lòng kiểm tra email để cập nhật."
+  },
+  "INTERVIEW_SCHEDULER": {
+    "PAST_DATE_WARNING": "Không thể chọn ngày trong quá khứ.",
+    "SELECT_DATE_TIME_WARNING": "Vui lòng chọn ngày và khung giờ.",
+    "BOOK_SUCCESS": "Đặt lịch: {{date}} - {{time}}",
+    "MONTH_LABEL": "Tháng {{month}} {{year}}",
+    "INSTRUCTION": "Vui lòng chọn ngày và khung giờ phù hợp.",
+    "SELECT_DATE": "Chọn ngày",
+    "SELECT_TIME": "Chọn thời gian",
+    "CONFIRM": "Xác nhận lịch phỏng vấn",
+    "DURATION_LABEL": "Thời lượng:",
+    "DURATION": "60 phút",
+    "LANGUAGE_LABEL": "Ngôn ngữ:",
+    "LANGUAGE": "Tiếng Việt",
+    "CONTACT_NOTE": "Nếu bạn không tìm thấy khung thời gian phù hợp, đừng ngần ngại liên hệ với đội ngũ hỗ trợ qua:",
+    "TIME_SLOT": {
+      "AM_08_09": "08 - 09 SA",
+      "AM_09_10": "09 - 10 SA",
+      "AM_10_11": "10 - 11 SA",
+      "AM_11_12": "11 - 12 SA",
+      "PM_02_03": "02 - 03 CH",
+      "PM_03_04": "03 - 04 CH",
+      "PM_04_05": "04 - 05 CH",
+      "PM_05_06": "05 - 06 CH"
+    }
   }
 }

@@ -4,8 +4,8 @@ import {
   WarningOutlined,
   QuestionOutlined,
 } from '@ant-design/icons';
-import { Button, Divider, Modal, Progress } from 'antd';
-import { useCallback, useEffect, useState } from 'react';
+import { Button, Divider, Modal, Progress, Spin } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CountdownTimer from './CountdownTimer';
@@ -25,7 +25,7 @@ const Testing = () => {
   const [unansweredQuestions, setUnansweredQuestions] = useState<Question[]>([]);
   const { data: examSet } = useGetExamSet();
   const submitDraftQuestionMutation = useSubmitDraftQuestion();
-  const { mutate: submitExamSet } = useSubmitExamSet();
+  const { mutate: submitExamSet, isLoading: isSubmitting } = useSubmitExamSet();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -108,8 +108,13 @@ const Testing = () => {
   }, [examSet, answeredQuestions, setUnansweredQuestions]);
 
   const handleConfirmSubmit = useCallback(() => {
-    setIsSubmitModalOpen(false);
-  }, [selectedAnswers]);
+    if (!examSet) return;
+    submitExamSet(examSet.id, {
+      onSuccess: () => {
+        setIsSubmitModalOpen(false);
+      },
+    });
+  }, [examSet, submitExamSet]);
 
   const handleCloseModal = useCallback(() => {
     if (!examSet?.questions) return;
@@ -122,35 +127,49 @@ const Testing = () => {
     setIsModalOpen(true);
   }, [examSet, answeredQuestions, setUnansweredQuestions]);
 
+  const handleQuestionClick = useCallback((questionId: string) => {
+    setIsSubmitModalOpen(false);
+    setCurrentQuestion(questionId);
+    const questionElement = document.getElementById(`question-${questionId}`);
+    if (questionElement) {
+      questionElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   if (!examSet) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex justify-center items-center'>
+        <Spin />
+      </div>
+    );
   }
 
   return (
-    <div className='overflow-hidden'>
-      <div className='absolute top-10 right-10'>
-        <CloseOutlined
-          onClick={handleCloseModal}
-          className='text-lg p-1 rounded-full bg-white flex shadow-xl cursor-pointer'
-        />
-      </div>
-      <div className='flex flex-col justify-start items-center w-full py-8 px-6 gap-4'>
-        <div className='flex text-xl smM:text-2xl leading-[22px] font-extrabold gap-2 smM:flex-row flex-col text-center'>
-          <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
-          <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
+    <div className='overflow-hidden h-full'>
+      <div className='flex flex-col h-full gap-6'>
+        <div className='flex flex-col items-center justify-center'>
+          <div className='absolute top-28 right-10'>
+            <CloseOutlined
+              onClick={handleCloseModal}
+              className='text-lg p-1 rounded-full bg-white flex shadow-xl cursor-pointer'
+            />
+          </div>
+          <div className='flex text-xl smM:text-2xl leading-[22px] font-extrabold gap-2 smM:flex-row flex-col text-center'>
+            <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
+            <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
+          </div>
+          <span className='text-[#686868] max-w-[500px] smM:max-w-none smM:min-w-[600px] text-lg smM:text-xl font-semibold text-center'>
+            {t('TEST.SUB_TITLE')}
+          </span>
         </div>
-        <span className='text-[#686868] max-w-[500px] smM:max-w-none smM:min-w-[600px] text-lg smM:text-xl font-semibold text-center'>
-          {t('TEST.SUB_TITLE')}
-        </span>
-      </div>
-      <div className='flex h-full'>
-        <div className='hidden smM:block fixed left-0 top-[115px] w-[300px] smM:w-80 md:w-96 h-[calc(100vh-145px)] p-3 smM:p-6 pt-0 z-10'>
-          <div className='flex flex-col space-y-6 h-full'>
+        <div className='flex h-full md:gap-6 smM:gap-4 gap-0'>
+          <div className='hidden smM:flex flex-col h-full gap-6 w-[24rem]'>
             <CountdownTimer
               duration={examSet.duration * 60}
               onTimeUp={() => {
-                handleSubmit();
-                handleConfirmSubmit();
+                if (examSet) {
+                  submitExamSet(examSet.id);
+                }
               }}
             />
             <QuestionIndexPanel
@@ -162,55 +181,50 @@ const Testing = () => {
               onQuestionSelect={handleQuestionSelect}
             />
           </div>
-        </div>
-
-        <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
-          <MenuUnfoldOutlined
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className='flex text-2xl'
-          />
-        </div>
-
-        {isMenuOpen && (
-          <div className='smM:hidden'>
-            <button
+          <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
+            <MenuUnfoldOutlined
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  setIsMenuOpen(!isMenuOpen);
-                }
-              }}
-              className='fixed top-0 left-0 w-full h-full bg-black/50 z-10'
-              aria-label='Close menu overlay'
+              className='flex text-2xl'
             />
-            <div className='fixed bg-white z-10 left-2 top-24 rounded-3xl w-[300px]'>
-              <CountdownTimer
-                duration={examSet.duration * 60}
-                onTimeUp={() => {
-                  handleSubmit();
-                  handleConfirmSubmit();
-                  submitExamSet(examSet.id);
+          </div>
+          {isMenuOpen && (
+            <div className='smM:hidden'>
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setIsMenuOpen(!isMenuOpen);
+                  }
                 }}
+                className='fixed top-0 left-0 w-full h-full bg-black/50 z-10'
+                aria-label='Close menu overlay'
               />
-              <div className='fixed top-52 p-3 left-[280px] bg-white z-10 rounded-full shadow-lg'>
-                <MenuUnfoldOutlined
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className='flex text-2xl'
+              <div className='fixed bg-white z-10 left-2 top-24 rounded-3xl w-[300px]'>
+                <CountdownTimer
+                  duration={examSet.duration * 60}
+                  onTimeUp={() => {
+                    if (examSet) {
+                      submitExamSet(examSet.id);
+                    }
+                  }}
+                />
+                <div className='fixed top-52 p-3 left-[280px] bg-white z-10 rounded-full shadow-lg'>
+                  <MenuUnfoldOutlined
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className='flex text-2xl'
+                  />
+                </div>
+                <QuestionIndexPanel
+                  questions={examSet.questions}
+                  currentQuestion={currentQuestion}
+                  answeredQuestions={answeredQuestions}
+                  flaggedQuestions={flaggedQuestions}
+                  onFlagToggle={handleFlagToggle}
+                  onQuestionSelect={handleQuestionSelect}
                 />
               </div>
-              <QuestionIndexPanel
-                questions={examSet.questions}
-                currentQuestion={currentQuestion}
-                answeredQuestions={answeredQuestions}
-                flaggedQuestions={flaggedQuestions}
-                onFlagToggle={handleFlagToggle}
-                onQuestionSelect={handleQuestionSelect}
-              />
             </div>
-          </div>
-        )}
-
-        <div className='smM:ml-80 md:ml-96 flex-1 md:mr-6 mx-4'>
+          )}
           <div className='flex flex-col w-full bg-white p-6 mdM:p-10 rounded-xl mdM:pr-0 pr-0'>
             <Progress
               className='pr-6 mdM:pr-10'
@@ -221,7 +235,7 @@ const Testing = () => {
             <div className='pr-6 mdM:pr-10'>
               <Divider />
             </div>
-            <div className='overflow-y-auto mdM:h-[calc(100vh-320px)] smM:h-[calc(100vh-310px)] h-[calc(100vh-330px)]'>
+            <div className='overflow-y-auto smM:h-[calc(100vh-26rem)] xsL:h-[calc(100vh-28rem)] h-[calc(100vh-460px)]'>
               <QuestionDisplay
                 questions={examSet.questions}
                 currentQuestion={currentQuestion}
@@ -287,14 +301,38 @@ const Testing = () => {
               <div className='flex gap-2'>
                 <span>{t('TEST.UNANSWERED_QUESTION')}:</span>
                 <span className='font-bold text-[#FE7743]'>
-                  {unansweredQuestions
-                    .slice(0, 3)
-                    .map((question) => {
-                      const index = examSet.questions.findIndex((q) => q.id === question.id) + 1;
-                      return `Câu ${index}`;
-                    })
-                    .join(', ')}
-                  <span className='text-[#FE7743] cursor-pointer'>
+                  {unansweredQuestions.slice(0, 3).map((question, index) => {
+                    const questionIndex =
+                      examSet.questions.findIndex((q) => q.id === question.id) + 1;
+                    return (
+                      <React.Fragment key={question.id}>
+                        {index > 0 && ', '}
+                        <button
+                          type='button'
+                          onClick={() => handleQuestionClick(question.id)}
+                          className='text-[#FE7743] hover:underline focus:outline-none focus:underline'
+                          aria-label={`Go to question ${questionIndex}`}
+                        >
+                          {`Câu ${questionIndex}`}
+                        </button>
+                      </React.Fragment>
+                    );
+                  })}
+                  <span
+                    className='text-[#FE7743] cursor-pointer hover:underline'
+                    onClick={() => {
+                      if (unansweredQuestions.length > 3) {
+                        handleQuestionClick(unansweredQuestions[0].id);
+                      }
+                    }}
+                    role='button'
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && unansweredQuestions.length > 3) {
+                        handleQuestionClick(unansweredQuestions[0].id);
+                      }
+                    }}
+                  >
                     {unansweredQuestions.length > 3 && ` ( ${t('TEST.MORE')} )`}
                   </span>
                 </span>
@@ -304,12 +342,15 @@ const Testing = () => {
             <div className='flex items-center justify-center gap-4 mt-6 flex-col smM:flex-row'>
               <Button
                 onClick={() => submitExamSet(examSet.id)}
+                loading={isSubmitting}
+                disabled={isSubmitting}
                 className='border-2 border-[#FE7743] rounded-3xl text-[#FE7743] px-8 py-2 h-full text-lg font-bold hover:border-[#ff5029] hover:text-[#ff5029]'
               >
                 {t('BUTTON.SUBMMIT_NOW')}
               </Button>
               <Button
                 onClick={() => setIsSubmitModalOpen(false)}
+                disabled={isSubmitting}
                 className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
               >
                 {t('BUTTON.CONTINUE_NOW')}
@@ -336,12 +377,15 @@ const Testing = () => {
             <div className='flex items-center justify-center gap-4 mt-6'>
               <Button
                 onClick={() => setIsSubmitModalOpen(false)}
+                disabled={isSubmitting}
                 className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
               >
                 {t('BUTTON.CANCEL_TEST')}
               </Button>
               <Button
                 onClick={() => submitExamSet(examSet.id)}
+                loading={isSubmitting}
+                disabled={isSubmitting}
                 className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
               >
                 {t('BUTTON.SUBMIT')}
