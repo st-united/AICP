@@ -1,37 +1,14 @@
 #container-sign-in {
   .ant-input {
-    background-color: #1955a0 !important;
-    color: #ffffff !important;
-  }
-
-  .ant-input-password-icon.anticon {
-    color: #69c0ff !important;
+    background-color: #ffffff !important;
+    color: var(--primary-gray-color) !important;
   }
 
   .ant-input::placeholder {
-    color: #69c0ff !important;
+    color: var(--primary-gray-color) !important;
   }
 
   .ant-input-password input::placeholder {
-    color: #69c0ff !important;
-  }
-
-  .ant-input:-webkit-autofill,
-  .ant-input-password input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px #1955a0 inset !important;
-    box-shadow: 0 0 0 30px #1955a0 inset !important;
-    -webkit-text-fill-color: #fff !important;
-    transition: background-color 5000s ease-in-out 0s;
-  }
-
-  .ant-input:-webkit-autofill:hover,
-  .ant-input-password input:-webkit-autofill:hover,
-  .ant-input:-webkit-autofill:focus,
-  .ant-input-password input:-webkit-autofill:focus,
-  .ant-input:-webkit-autofill:active,
-  .ant-input-password input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #1955a0 inset !important;
-    box-shadow: 0 0 0 30px #1955a0 inset !important;
-    -webkit-text-fill-color: #fff !important;
+    color: var(--primary-gray-color) !important;
   }
 }

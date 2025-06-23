@@ -10,8 +10,8 @@ export const Modal: FC<ModalProps> = ({ children, ...props }) => {
     <ModalAntd
       className={`modal ${className}`}
       centered={true}
-      okText={t<string>('BUTTON.SAVE')}
-      cancelText={t<string>('BUTTON.CANCEL')}
+      okText={t('BUTTON.SAVE')}
+      cancelText={t('BUTTON.CANCEL')}
       okButtonProps={{ className: 'button', type: 'primary' }}
       cancelButtonProps={{ style: { display: 'none' } }}
       {...props}

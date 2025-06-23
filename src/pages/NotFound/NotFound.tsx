@@ -10,11 +10,11 @@ const NotFound: React.FC = () => {
   return (
     <Result
       status='404'
-      title={t<string>('NOT_FOUND.TITLE')}
-      subTitle={t<string>('NOT_FOUND.SUB_TITLE')}
+      title={t('NOT_FOUND.TITLE')}
+      subTitle={t('NOT_FOUND.SUB_TITLE')}
       extra={
         <Button type='primary' onClick={() => navigate('/')}>
-          {t<string>('NOT_FOUND.BACK_HOME')}
+          {t('NOT_FOUND.BACK_HOME')}
         </Button>
       }
     />

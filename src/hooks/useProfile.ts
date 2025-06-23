@@ -2,21 +2,20 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { useLogout } from './useAuth';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { ChangePassword, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
 import {
-  changePassword,
-  getProfileApi,
-  removeAvatarApi,
-  updateProfileApi,
-  uploadAvatarApi,
-} from '@app/services';
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
+import { changePassword, getProfileApi, updateProfileApi, uploadAvatarApi } from '@app/services';
 
 export const useGetProfile = () => {
   const dispatch = useDispatch();
 
-  return useQuery(
+  return useQuery<UserProfile>(
     [QUERY_KEY.PROFILE],
     async () => {
       const { data } = await getProfileApi();
@@ -32,18 +31,18 @@ export const useGetProfile = () => {
 
 export const useChangePassword = () => {
   const navigate = useNavigate();
-
   return useMutation(
     async (password: ChangePassword) => {
       const response = await changePassword(password);
       return response.data;
     },
     {
-      onSuccess({ message }) {
+      onSuccess: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
         navigate(NAVIGATE_URL.PROFILE);
       },
       onError({ response }) {
-        console.log(response);
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
       },
     },
   );
@@ -72,21 +71,6 @@ export const useUploadAvatar = () => {
   return useMutation(
     async (data: { identityId: string; formData: FormData }) => {
       const response = await uploadAvatarApi(data.identityId, data.formData);
-      return response.data;
-    },
-    {
-      onSuccess({ message }) {
-        queryClient.refetchQueries([QUERY_KEY.PROFILE]);
-      },
-    },
-  );
-};
-
-export const useRemoveAvatar = () => {
-  const queryClient = useQueryClient();
-  return useMutation(
-    async (data: { identityId: string }) => {
-      const response = await removeAvatarApi(data.identityId);
       return response.data;
     },
     {

@@ -15,15 +15,16 @@ export interface Credentials {
 }
 
 export interface UserProfile {
-  name: string;
+  id: string;
+  fullName: string;
   email: string;
-  phone: string;
-  dateOfBirth: string;
-  address: string;
-  gender: string;
-  identityId: string;
-  avatar: string;
-  permissions: string[];
+  phoneNumber?: string;
+  dob?: string;
+  avatar?: string;
+  permissions?: string[];
+  province?: string;
+  job?: string;
+  referralCode: string;
 }
 
 export interface UserDetail {
@@ -71,4 +72,13 @@ export interface RegisterUser {
   email: string;
   phoneNumber: string;
   password: string;
+}
+export interface UpdateForgotPassword {
+  token: string | null;
+  password: string;
+}
+export interface HasTakenExam {
+  hasTakenExam: boolean;
+  examSetDuration: number;
+  examId?: string;
 }

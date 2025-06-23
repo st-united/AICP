@@ -63,13 +63,21 @@
     "UPLOAD": "Tải ảnh",
     "EXPORT": "Export",
     "START": "Bắt đầu",
-    "CONFIRM": "Xác nhận"
+    "CONFIRM": "Xác nhận",
+    "SUBMIT": "Nộp bài",
+    "SUBMMIT_NOW": "Nộp bài ngay",
+    "CONTINUE": "Tiếp tục",
+    "CONTINUE_NOW": "Tiếp tục làm bài",
+    "CANCEL_TEST": "Hủy bỏ",
+    "EXIT_NOW": "Thoát ngay",
+    "CANCEL_NOW": "Hủy ngay"
   },
-
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
     "PROFILE": "Cá nhân",
-    "SIGN_OUT": "Đăng xuất"
+    "SIGN_OUT": "Đăng xuất",
+    "SIGN_UP": "Đăng ký",
+    "SIGN_IN": "Đăng nhập"
   },
   "NOT_FOUND": {
     "TITLE": "404",
@@ -131,33 +139,15 @@
     "ITEM": "mục"
   },
   "MODAL": {
-    "CONFIRM_DELETE_AVATAR": "Bạn muốn xoá ảnh đại diện?",
-    "NOTE_DELETE_AVATAR": "Nếu bạn xóa hình ảnh hồ sơ của mình, hình ảnh đó sẽ được thay thế bằng một hình ảnh mặc định.",
-    "CONFIRM_DELETE": "Bạn có chắc chắn muốn xóa {{name}} không?",
-    "CONFIRM_DELETE_SESSION": "Bạn có chắc chắn muốn xóa phiên học của {{name}} không?",
-    "CONFIRM_SYNC": "Bạn có chắc chắn muốn đồng bộ {{name}} này không?",
-    "CONFIRM_EXPORT": "Bạn có chắc chắn muốn xuất bản dữ liệu thành tệp trang tính không?",
-    "CONFIRM_EXPORT_TITLE": "Xuất dữ liệu",
-    "TITLE_DELETE": "Xóa {{name}}",
-    "TITLE_SYNC": "Đồng bộ {{name}}",
-    "TITLE_RESET_PASSWORD": "Đặt lại mật khẩu",
-    "CONFIRM_RESET_PASSWORD": "Bạn có chắc chắn muốn đặt lại mật khẩu cho {{name}} không?",
-    "SUGGESTION_COPY_PASSWORD": "Đặt lại mật khẩu thành công",
-    "COPY_PASSWORD": "Mật khẩu hiện tại là: {{name}}",
-    "COPY": "Sao chép",
-    "AVATAR": "Ảnh đại diện",
-    "EDIT_IMAGE": "Cắt ảnh",
-    "IMPORT_COURSE": "Nhập báo cáo 1",
-    "IMPORT_TEACHER": "Import giáo viên",
-    "EXPORT_TEACHER": "Export giáo viên",
-    "NOTE_AVATAR": "Ảnh hồ sơ giúp người khác nhận ra bạn và cũng giúp bạn nhận biết được rằng mình đã đăng nhập vào tài khoản",
-    "NOTE_AVATAR_STUDENT": "Ảnh hồ sơ giúp người khác nhận ra học viên",
-    "CONFIRM_REVERT": "Bạn có chắc muốn thu hồi thẻ {{name}} không?",
-    "TITLE_REVERT": "Thu hồi {{name}}",
-    "IMPORT_MODAL_SUB_CONTENT": "Chỉ hỗ trợ đăng tải một file. Định dạng file được chấp nhận là {{fileExtensions}}",
-    "IMPORT_ERROR_REPORT": "Lỗi nhập BC1 khóa {{course}}",
-    "IMPORT_WARNING_REPORT": "Lỗi tạo mới khóa sau khóa {{course}}",
-    "IMPORT_VEHICLE": "Import xe"
+    "TITLE_CONFIRM_TAKE_NEW_TEST": "Bạn đã sẵn sàng làm bài?",
+    "DURATION_CONFIRM_TAKE_NEW_TEST": "Bài kiểm tra kéo dài <bold>{{duration}} phút</bold>, phù hợp với mọi cấp độ, không yêu cầu chuẩn bị đặc biệt.",
+    "TITLE_CONFIRM_IMPROVE_TEST": "Bạn đã sẵn sàng cải thiện?",
+    "DURATION_CONFIRM_IMPROVE_TEST": "Bài kiểm tra kéo dài <bold>{{duration}} phút</bold>, được thiết kế ở mức độ cao hơn so với trình độ hiện tại của bạn, nhằm đánh giá khả năng phát triển tiềm năng.",
+    "RESULT_CONFIRM_TEST": "Sau khi hoàn thành, bạn sẽ nhận được bản đánh giá năng lực AI ở dạng dự thảo và chuyển sang bước tiếp theo: đặt lịch phỏng vấn với đội ngũ chuyên gia để hoàn thiện và xác nhận năng lực AI một cách chính xác nhất.",
+    "WARNING_CONFIRM_TEST": "Bạn chỉ được làm bài đánh giá một lần trước khi có kết quả chính thức. Ngay sau khi nhận được phản hồi từ đội ngũ cố vấn, bạn sẽ có thể tiếp tục với bài kiểm tra tiếp theo.",
+    "START_CONFIRM_TEST": "Bắt đầu ngay",
+    "REVIEW_RESULT": "Xem lại kết quả",
+    "NOTE_CONFIRM_TEST": "LƯU Ý"
   },
   "VALIDATE": {
     "MIN": " {{field}} phải lớn hơn hoặc bằng {{number}}",
@@ -188,6 +178,9 @@
     "IMAGE_VALIDATE_SIZE": "Kích thước ảnh phải nhỏ hơn hoặc bằng 400x600",
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
     "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
+    "DATE_NOT_FUTURE": "Ngày sinh không được lớn hơn ngày hiện tại",
+    "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối",
+    "NO_TWO_SPACE": "Không được có 2 khoảng trống liên tiếp",
     "FULL_NAME_REQUIRED": "Vui lòng nhập họ tên!",
     "PHONE_REQUIRED": "Vui lòng nhập số điện thoại!",
     "PHONE_INVALID": "Số điện thoại không đúng định dạng!",
@@ -197,18 +190,44 @@
     "PASSWORD_MIN": "Mật khẩu phải có ít nhất 8 ký tự",
     "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
-    "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!"
+    "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
+    "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại"
   },
   "PROFILE": {
+    "AVATAR": "Ảnh đại diện",
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "OLD_PASSWORD": "Mật khẩu cũ",
     "NEW_PASSWORD": "Mật khẩu mới",
-    "CONFIRM_PASSWORD": "Xác thực mật khẩu",
+    "CONFIRM_PASSWORD": "Xác nhận mật khẩu",
     "TITLE": "Thông tin người dùng",
     "ACCOUNT_TITLE": "Thông tin tài khoản",
-    "PERSONAL_PROFILE": "Thông tin cá nhân",
+    "PERSONAL_PROFILE": "Hồ sơ của tôi",
     "NULL_INFO": "Chưa có thông tin",
-    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
+    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới",
+    "LOGOUT": "Đăng xuất",
+    "FULLNAME_PLACEHOLDER": "Vui lòng nhập họ tên",
+    "FULLNAME": "Họ tên",
+    "PHONE": "Số điện thoại",
+    "PHONE_PLACEHOLDER": "Nhập số điện thoại",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "Nhập email",
+    "DOB": "Ngày sinh",
+    "DOB_PLACEHOLDER": "Chọn ngày sinh",
+    "COUNTRY": "Quốc gia",
+    "COUNTRY_PLACEHOLDER": "Chọn quốc gia",
+    "PROVINCE": "Tỉnh thành",
+    "PROVINCE_PLACEHOLDER": "Chọn tỉnh thành",
+    "OCCUPATION": "Nghề nghiệp",
+    "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
+    "REFERRAL": "Mã giới thiệu",
+    "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu",
+    "UPDATE_SUCCESS": "Cập nhật hồ sơ thành công!",
+    "UPDATE_FAILED": "Cập nhật hồ sơ thất bại. Vui lòng thử lại.",
+    "PLACEHOLDER_OLD_PASSWORD": "Nhập mật khẩu cũ",
+    "PLACEHOLDER_NEW_PASSWORD": "Nhập mật khẩu mới",
+    "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",
+    "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
+    "SAVE": "Lưu"
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -221,6 +240,95 @@
     "NOT_HAVE_ACCOUNT": "Bạn chưa có tài khoản?",
     "PASSWORD_INPUT": "Nhập mật khẩu",
     "EMAIL_INPUT": "Nhập email"
+  },
+  "HOMEPAGE": {
+    "PRIMARY_TITLE": "Khám phá",
+    "TITLE": "Năng lực ứng dụng AI",
+    "SUB_TITLE": "Tham gia bài kiểm tra đánh giá năng lực sử dụng AI để hiểu rõ khả năng của bạn và nhận lộ trình phát triển cá nhân hóa",
+    "BUTTON": "Khám phá ngay",
+    "FAQ": "FAQ",
+    "FAQ_TITLE1": "Bạn có thắc mắc?",
+    "FAQ_TITLE2": "Chúng tôi sẵn sàng giải đáp!",
+    "FAQ_CONTACT": "Liên hệ với chúng tôi – chúng tôi sẽ trả lời câu hỏi của bạn nhanh chóng.",
+    "TIKTOK": "TikTok",
+    "LINKEDIN": "LinkedIn",
+    "FACEBOOK": "Facebook",
+    "FAQ_QUESTIONS": [
+      {
+        "QUESTION": "Bài kiểm tra năng lực AI là gì và phù hợp với ai?",
+        "ANSWER": "Bài kiểm tra giúp bạn xác định mức độ hiểu biết và ứng dụng AI trong công việc hoặc học tập."
+      },
+      {
+        "QUESTION": "Kết quả bài kiểm tra sẽ được sử dụng như thế nào?",
+        "ANSWER": "Kết quả giúp bạn hiểu rõ điểm mạnh, điểm yếu trong việc ứng dụng AI. Bạn sẽ nhận được báo cáo chi tiết, lộ trình học tập cá nhân hoá, gợi ý khoá học, và hỗ trợ kết nối với doanh nghiệp trong mạng lưới của chúng tôi."
+      },
+      {
+        "QUESTION": "Làm thế nào để biết kết quả bài kiểm tra?",
+        "ANSWER": "Bạn sẽ nhận kết quả ngay sau khi hoàn thành bài kiểm tra qua email hoặc trong tài khoản."
+      },
+      {
+        "QUESTION": "Ai là những chuyên gia thực hiện phỏng vấn 1-1?",
+        "ANSWER": "Là các chuyên gia AI, mentor từ các công ty công nghệ hàng đầu."
+      },
+      {
+        "QUESTION": "Tôi có thể làm lại bài kiểm tra nếu không hài lòng với kết quả?",
+        "ANSWER": "Bạn có thể đăng ký làm lại sau một thời gian nhất định để theo dõi sự tiến bộ."
+      }
+    ],
+    "FEATURES_LABEL": "Lợi ích",
+    "FEATURES_TITLE": "Tại sao nên tham gia?",
+    "FEATURES_SUBTITLE": "Khám phá hành trình phát triển năng lực ứng dụng AI toàn diện, kết nối cơ hội nghề nghiệp và tăng tốc thành công trong kỷ nguyên AI",
+    "FEATURES_BENEFITS": [
+      { "TITLE": "Đánh giá chính xác" },
+      { "TITLE": "Kết nối chuyên gia" },
+      { "TITLE": "Lộ trình hóa cá nhân" }
+    ],
+    "STEP_LABEL": "Bước thực hiện",
+    "STEP_TITLE": "Khám phá năng lực AI của bạn",
+    "STEP_BUTTON": "Tham gia ngay",
+    "STEP_SUBTITLE": "DevPlus sẽ luôn đồng hành cùng bạn trên chặng đường nâng cao năng lực AI và phát triển cơ hội nghề nghiệp",
+    "STEP1_MONITOR_NOTE": "Khám phá tiềm năng AI của bạn ngay hôm nay – Chỉ 2 phút để bắt đầu!",
+    "STEP1": "Bước 1",
+    "STEP1_TITLE": "Tham gia bài kiểm tra trực tuyến",
+    "STEP1_DESC": "Đăng ký tài khoản và hoàn thành bài kiểm tra trực tuyến (30 - 45 phút) để đánh giá năng lực ứng dụng AI của bạn",
+    "STEP1_BUTTON": "Tham gia ngay",
+
+    "STEP2_MONITOR_NOTE": "Hơn 15,000 người đã nâng tầm sự nghiệp với AI - Bạn là người tiếp theo?",
+    "STEP2": "Bước 2",
+    "STEP2_TITLE": "Chọn thời gian và chuyên gia phỏng vấn",
+    "STEP2_DESC": "Sau khi hoàn thành bài kiểm tra, chọn thời gian phù hợp và kết nối với một chuyên gia AI hàng đầu để phỏng vấn 1-1. Cuộc phỏng vấn giúp bạn làm rõ điểm mạnh và định hướng phát triển của bạn",
+    "STEP3_MONITOR_NOTE": "Đừng để cơ hội vụt mất - Đăng ký ngay để nhận lộ trình AI cá nhân hóa!",
+    "STEP3": "Bước 3",
+    "STEP3_TITLE": "Nhận lộ trình học tập cá nhân hóa",
+    "STEP3_DESC": "Dựa trên kết quả kiểm tra và phỏng vấn, bạn sẽ nhận được báo cáo chi tiết cùng lộ trình học tập cá nhân hóa, bao gồm gợi ý các khóa phù hợp để nâng cao kỹ năng AI",
+    "STEP4_MONITOR_NOTE": "Bắt đầu hành trình AI của bạn - Kết nối doanh nghiệp hàng đầu ngay!",
+    "STEP4": "Bước 4",
+    "STEP4_TITLE": "Kết nối với doanh nghiệp",
+    "STEP4_DESC": "Tận dụng mạng lưới đối tác của chúng tôi để kết nối với các doanh nghiệp công nghệ, mở rộng cơ hội nghề nghiệp",
+    "FOOTER_ABOUT": "VỀ DEVPLUS",
+    "FOOTER_ABOUT_DESC": "DevPlus là chương trình Sandbox Bootcamp kết hợp học trực tuyến và trực tiếp, giúp sinh viên nâng cao kỹ năng thực hành theo mô hình #Ready-to-work, đáp ứng ngay yêu cầu doanh nghiệp và sẵn sàng bước vào sự nghiệp IT.",
+    "FOOTER_ACTIVITIES": "HOẠT ĐỘNG CỦA DEVPLUS",
+    "FOOTER_ACTIVITIES_LIST": ["Workshop", "Sự kiện", "Cộng đồng", "Hoạt động ngoại khóa"],
+    "FOOTER_ADDRESS": "116 - 118 Mai Thuc Lan, My An, Ngu Hanh Son, Da Nang",
+    "FOOTER_EMAIL": "hello@devplus.edu.vn",
+    "FOOTER_PHONE": "(+84) 368492885"
+  },
+  "HEADER": {
+    "START": "Bắt đầu",
+    "REGISTER": "Đăng ký",
+    "LOGIN": "Đăng nhập"
+  },
+  "SIDEBAR": {
+    "ONLINE_COURSES": "Khóa học trực tuyến",
+    "HISTORY": "Lịch sử kiểm tra",
+    "PERSONAL_PROFILE": "Thông tin cá nhân",
+    "CHANGE_PASSWORD": "Đổi mật khẩu"
+  },
+  "PLACEHOLDER": {
+    "SELECT_COUNTRY": "Chọn quốc gia",
+    "SELECT_CITY": "Chọn tỉnh thành",
+    "SELECT_JOB": "Chọn công việc",
+    "FIELD_REQUIRED": "{{field}} *"
   },
   "SIGN_UP": {
     "TITLE": "Đăng ký tài khoản",
@@ -257,5 +365,145 @@
     "AVG_SCORE_LABEL": "Avg Score",
     "BUTTON_PAST": "Lúc khác",
     "BUTTON_SCHEDULE": "Chọn lịch phỏng vấn"
+  },
+  "FORGOT_PASSWORD": {
+    "EMAIL_VALID": "Email bắt buộc phải hợp lệ!",
+    "TITLE": "Quên mật khẩu",
+    "RESET_PASSWORD": "Đặt lại mật khẩu",
+    "NO_ACCOUNT": "Bạn chưa có tài khoản?",
+    "NOT_FOUND": "Người dùng không tồn tại!",
+    "REGISTER": "Đăng ký",
+    "SEND_EMAIL_SUCCESS": "Đã gửi email thành công",
+    "SEND_LOADING": "Đang gửi...",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Gửi email thành công!"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Đặt lại mật khẩu!",
+    "NEW_PASSWORD": "Mật khẩu mới",
+    "REQUIRE_PASSWORD": "Mật khẩu không được để trống!",
+    "CONFIRM_PASSWORD": "Nhập lại mật khẩu mới *",
+    "CREATE_PASSWORD": "Tạo mới mật khẩu",
+    "REGEX_PASSWORD": "Mật khẩu phải có ít nhất 8 ký tự, có số, chữ thường và chữ viết hoa!",
+    "MATCH": "Mật khẩu không khớp!",
+    "EXPIRED": "Liên kết đã hết hạn",
+    "RESET_SUCCESS": "Thay đổi mật khẩu thành công!"
+  },
+  "HOMEPAGE_LOGIN": {
+    "TITLE": "Xin chào {{name}}, 👋",
+    "TEXT_READY": "Sẵn sàng nâng tầm năng lực ứng dụng AI của bạn chưa?",
+    "START": "Bắt đầu ngay",
+    "DESCRIPTION": "Hoàn thành bài kiểm tra, nhận lộ trình cá nhân hoá, và kết nối với cơ hội nghề nghiệp",
+    "TEXT_PEOPLE": "Hơn 15,000 người đã nâng tầm sự nghiệp với AI - Bạn là người tiếp theo?"
+  },
+  "DASHBOARD": {
+    "TITLE": "Bảng điều khiển của bạn",
+    "DESCRIPTION": "Theo dõi bài kiểm tra, lịch phỏng vấn và các cơ hội nghề nghiệp của bạn.",
+    "TEST_STATUS": {
+      "TITLE": "Trạng thái bài kiểm tra",
+      "DESCRIPTION": "Chưa bắt đầu",
+      "BUTTON": "Bắt đầu bài kiểm tra"
+    },
+    "INTERVIEW_SCHEDULE": {
+      "TITLE": "Lịch phỏng vấn",
+      "DESCRIPTION": "Chưa bắt đầu",
+      "BUTTON": "Đặt lịch phỏng vấn"
+    },
+    "LEARNING_PATH": {
+      "TITLE": "Lộ trình học tập",
+      "DESCRIPTION": "Hoàn thành bài kiểm tra để nhận lộ trình cá nhân hoá",
+      "BUTTON": "Bắt đầu bài kiểm tra"
+    },
+    "BUSINESS_CONTENT": {
+      "TITLE": "Kết nối doanh nghiệp",
+      "DESCRIPTION": "03 cơ hội đang chờ bạn",
+      "BUTTON": "Khám phá cơ hội"
+    }
+  },
+  "RECOMMEND": {
+    "TITLE": "Gợi ý dành cho bạn",
+    "DESCRIPTION": "Tham gia các khoá học trực tuyến để nâng tầm kỹ năng của bạn.",
+    "COURSE_1": {
+      "TITLE": "Khoá học: AI cơ bản",
+      "DESCRIPTION": "Nắm vững các khái niệm AI cơ bản để bắt đầu hành trình của bạn",
+      "LINK": "Xem chi tiết"
+    }
+  },
+  "TEST": {
+    "TEST_TITLE": "Bài kiểm tra năng lực",
+    "TEST_TITLE_AI": "ứng dụng AI",
+    "SUB_TITLE": "Hãy trả lời lần lượt các câu hỏi dưới đây để khám phá khả năng ứng dụng AI của bạn.",
+    "TIME_LEFT": "Thời gian còn lại",
+    "HOURS": "Giờ",
+    "MINUTES": "Phút",
+    "SECONDS": "Giây",
+    "QUESTION_INDEX": "Mục lục câu hỏi",
+    "QUESTION": "Câu hỏi",
+    "FLAG_QUESTION": "Đánh dấu câu hỏi",
+    "MULTIPLE_CHOICE": "Chọn nhiều đáp án đúng:",
+    "SINGLE_CHOICE": "Chọn 1 đáp án đúng:",
+    "TOTAL_QUESTION": "Tổng số câu hỏi",
+    "ANSWERED_QUESTION": "Số câu hỏi đã trả lời",
+    "UNANSWERED_QUESTION": "Số câu hỏi chưa trả lời",
+    "CHECK_ANSWER": "Bạn nên xem lại các câu hỏi trước khi nộp.",
+    "MORE": "Xem thêm",
+    "CONFIRM": "Xác nhận nộp bài",
+    "CHECK_CONFIRM": "Bạn có chắc chắn muốn gửi bài làm của mình ngay bây giờ không? Hãy đảm bảo rằng bạn đã hoàn tất mọi nội dung trước khi nộp.",
+    "WARNING": "Cảnh báo",
+    "CONFIRM_WARNING": "Sau khi nộp, bạn sẽ không thể thay đổi hoặc cập nhật nội dung đã nộp.",
+    "TIME_UP": "Hết thời gian làm bài",
+    "TIME_UP_MESSAGE": "Thời gian quy định để hoàn thành bài làm của bạn đã kết thúc.",
+    "AUTO_SUBMIT_MESSAGE": "Thời gian quy định để hoàn thành bài làm của bạn đã kết thúc.",
+    "AUTO_SUBMIT_MESSAGE_2": "Bài làm sẽ tự động nộp sau {{countdown}} giây.",
+    "CLOSE_WARNING_TITLE": "Cảnh báo: Bài làm chưa được lưu",
+    "CLOSE_WARNING_MESSAGE": "Nếu bạn rời khỏi trang này, bài làm của bạn sẽ không được lưu lại. Bạn có chắc chắn muốn rời khỏi không?"
+  },
+  "SUBMIT": {
+    "TITLE": "Cảnh báo: Bài làm chưa hoàn tất",
+    "UNANSWERED_MESSAGE": "Bạn vẫn còn {{count}} câu hỏi chưa trả lời. Vui lòng kiểm tra lại trước khi nộp bài.",
+    "UNANSWERED_NUMBERS": "Question numbers: {{numbers}}",
+    "UNANSWERED_NUMBERS_MESSAGE": "Bạn còn {{count}} câu hỏi nữa. Bạn có muốn tiếp tục.",
+    "NOTE": "Lưu ý",
+    "NOTE_MESSAGE": "Nếu bạn thoát ngay bây giờ, hệ thống sẽ không lưu lại kết quả làm bài.",
+    "SUBMIT_NOW": "Nộp bài ngay"
+  },
+  "MENTOR_BOOKING": {
+    "BACK_HOME": "Quay về trang chủ",
+    "TITLE": "Chọn cố vấn và lịch phỏng vấn",
+    "SEARCH_PLACEHOLDER": "Nhập tên cố vấn để tìm kiếm",
+    "LOAD_MORE": "Kéo xuống để tải thêm",
+    "VIEW_DETAIL": "Xem chi tiết",
+    "BOOK_MENTOR": "Đặt lịch cố vấn",
+    "SUCCESS_TITLE": "Đặt lịch phỏng vấn thành công!",
+    "SUCCESS_MESSAGE": "Chúc mừng! Bạn đã đặt lịch phỏng vấn với cố vấn thành công. Dưới đây là thông tin chi tiết:",
+    "MENTOR_LABEL": "Cố vấn: ",
+    "TIME_LABEL": "Thời gian: ",
+    "BOOKING_CODE_LABEL": "Mã đặt lịch: ",
+    "SUCCESS_NOTE": "Bạn cần chờ cố vấn phê duyệt lịch này. Chúng tôi sẽ thông báo khi lịch được xác nhận. Vui lòng kiểm tra email để cập nhật."
+  },
+  "INTERVIEW_SCHEDULER": {
+    "PAST_DATE_WARNING": "Không thể chọn ngày trong quá khứ.",
+    "SELECT_DATE_TIME_WARNING": "Vui lòng chọn ngày và khung giờ.",
+    "BOOK_SUCCESS": "Đặt lịch: {{date}} - {{time}}",
+    "MONTH_LABEL": "Tháng {{month}} {{year}}",
+    "INSTRUCTION": "Vui lòng chọn ngày và khung giờ phù hợp.",
+    "SELECT_DATE": "Chọn ngày",
+    "SELECT_TIME": "Chọn thời gian",
+    "CONFIRM": "Xác nhận lịch phỏng vấn",
+    "DURATION_LABEL": "Thời lượng:",
+    "DURATION": "60 phút",
+    "LANGUAGE_LABEL": "Ngôn ngữ:",
+    "LANGUAGE": "Tiếng Việt",
+    "CONTACT_NOTE": "Nếu bạn không tìm thấy khung thời gian phù hợp, đừng ngần ngại liên hệ với đội ngũ hỗ trợ qua:",
+    "TIME_SLOT": {
+      "AM_08_09": "08 - 09 SA",
+      "AM_09_10": "09 - 10 SA",
+      "AM_10_11": "10 - 11 SA",
+      "AM_11_12": "11 - 12 SA",
+      "PM_02_03": "02 - 03 CH",
+      "PM_03_04": "03 - 04 CH",
+      "PM_04_05": "04 - 05 CH",
+      "PM_05_06": "05 - 06 CH"
+    }
   }
 }
