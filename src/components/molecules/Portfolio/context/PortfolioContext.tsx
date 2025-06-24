@@ -38,18 +38,20 @@ const PortfolioContext = createContext<PortfolioContextType | undefined>(undefin
 
 interface PortfolioProviderProps {
   children: ReactNode;
-  portfolio?: any;
   onCancel?: () => void;
   onSave?: () => void;
   edit?: boolean;
+  saveLabel?: string;
+  cancelLabel?: string;
 }
 
 export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
   children,
-  portfolio,
   onCancel,
   onSave,
   edit = false,
+  saveLabel,
+  cancelLabel,
 }) => {
   const [form] = Form.useForm();
   const { t } = useTranslation();
@@ -58,7 +60,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
   const [isPreviewLoading, setIsPreviewLoading] = useState(true);
   const [docxError, setDocxError] = useState<string | null>(null);
 
-  const { data: getPortfolio, isLoading } = useGetPortfolio(portfolio);
+  const { data: getPortfolio, isLoading } = useGetPortfolio();
   const updatePortfolioMutation = useUpdatePortfolio();
   const downloadPortfolioFileMutation = useDownloadPortfolioFile();
 
@@ -205,7 +207,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
     const processedFileName = getProcessedFileName(url, selectedFile.name);
 
     downloadPortfolioFileMutation.mutate(
-      { url, filename: processedFileName },
+      { url: url, filename: processedFileName },
       {
         onSuccess: (response) => {
           const blob = new Blob([response.data], { type: response.headers['content-type'] });
@@ -264,6 +266,11 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
     handleCancel,
     handleEditToggle,
     resetFiles,
+
+    saveLabel,
+    cancelLabel,
+    onCancel,
+    onSave,
 
     getPortfolio,
     updatePortfolioMutation,

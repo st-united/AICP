@@ -35,7 +35,7 @@ const WelcomeSection = () => {
             onClick={() => {
               setIsOpen(true);
             }}
-            className='h-12 mdL:h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
+            className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
           >
             {t('HOMEPAGE_LOGIN.START')}
           </Button>
@@ -47,7 +47,9 @@ const WelcomeSection = () => {
           <img src={InnovationPana} alt='innovation' className='w-[25rem] h-[25rem]' />
         </div>
       </div>
-      {open && <StepModal current={0} open={open} onClose={() => setIsOpen(false)} />}
+      {open && (
+        <StepModal open={open} onClose={() => setIsOpen(false)} onFinish={() => setIsOpen(false)} />
+      )}
     </section>
   );
 };

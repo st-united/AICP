@@ -6,7 +6,7 @@ import { PortfolioHeader } from './PortfolioHeader';
 import { usePortfolioContext } from '../context/PortfolioContext';
 
 const PortfolioContentContainer: React.FC = () => {
-  const { isLoading, t } = usePortfolioContext();
+  const { isLoading } = usePortfolioContext();
 
   if (isLoading) {
     return (

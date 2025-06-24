@@ -65,6 +65,11 @@ export interface PortfolioContextType {
   handleEditToggle: () => void;
   resetFiles: () => void;
 
+  saveLabel?: string;
+  cancelLabel?: string;
+  onCancel?: () => void;
+  onSave?: () => void;
+
   getPortfolio: PortfolioResponse | undefined;
   updatePortfolioMutation: UseMutationResult<unknown, unknown, FormData>;
   downloadPortfolioFileMutation: UseMutationResult<

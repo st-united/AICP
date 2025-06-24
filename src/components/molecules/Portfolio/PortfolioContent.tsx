@@ -1,9 +1,8 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { FilePreview } from './components/FilePreview';
 import { PortfolioContentContainer } from './components/PortfolioContentContainer';
 import { PortfolioProvider } from './context/PortfolioContext';
-import { PortfolioResponse } from '@app/interface/portfolio.interface';
 
 import './PortfolioContent.scss';
 
@@ -13,17 +12,23 @@ interface PortfolioContentProps {
   onCancel?: () => void;
   onSave?: () => void;
   saveLabel?: string;
-  portfolio?: PortfolioResponse;
 }
 
 const PortfolioContent: React.FC<PortfolioContentProps> = ({
   edit = false,
   onCancel,
   onSave,
-  portfolio,
+  saveLabel,
+  cancelLabel,
 }: PortfolioContentProps) => {
   return (
-    <PortfolioProvider portfolio={portfolio} onCancel={onCancel} onSave={onSave} edit={edit}>
+    <PortfolioProvider
+      onCancel={onCancel}
+      onSave={onSave}
+      edit={edit}
+      saveLabel={saveLabel}
+      cancelLabel={cancelLabel}
+    >
       <PortfolioContentContainer />
       <FilePreview />
     </PortfolioProvider>

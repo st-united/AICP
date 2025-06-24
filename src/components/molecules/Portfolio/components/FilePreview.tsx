@@ -47,7 +47,7 @@ const FilePreview: React.FC = () => {
     <Modal open={!!selectedFile} onCancel={handleModalClose} footer={null}>
       <div className='w-[90vw] md:w-[80vw] lg:w-[70vw] xl:w-[60vw] h-[90vh] aspect-video !py-10'>
         <div className='mb-4 flex justify-end'>
-          {(isDocx || isDoc) && (
+          {isDocx && (
             <DownloadOutlined
               onClick={handleDownload}
               className='!text-[#ce6339] hover:!text-[#967569] !text-3xl mr-6'

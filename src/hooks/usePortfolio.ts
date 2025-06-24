@@ -30,16 +30,17 @@ export const useUpdatePortfolio = (): UseMutationResult<
   });
 };
 
-export const useGetPortfolio = (
-  portfolio?: PortfolioResponse,
-): UseQueryResult<PortfolioResponse> => {
+export const useGetPortfolio = (): UseQueryResult<PortfolioResponse> => {
   return useQuery({
     queryKey: [QUERY_KEY.PORTFOLIO],
     queryFn: getPortfolioApi,
     select: (data) => data.data.data,
+    refetchOnMount: false,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
     retry: false,
-    enabled: !portfolio,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 10 * 60 * 1000,
   });
 };
 
