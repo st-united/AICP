@@ -357,7 +357,7 @@
     "SEND_EMAIL_SUCCESS": "Đã gửi email thành công",
     "SEND_LOADING": "Đang gửi...",
     "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
-    "SUCCESS": "Gửi email thành công!"
+    "SUCCESS": "Email đặt lại mật khẩu đã được gửi. Nếu không thấy, vui lòng kiểm tra thư mục Spam hoặc Quảng cáo."
   },
   "RESET_PASSWORD": {
     "TITLE": "Đặt lại mật khẩu!",

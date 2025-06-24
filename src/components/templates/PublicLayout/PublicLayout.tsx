@@ -9,9 +9,9 @@ const PublicLayout: React.FC = () => {
         <Outlet />
       </div>
 
-      <div className='flex justify-end max-h-screen p-10'>
+      <div className='flex justify-center items-center p-10'>
         <div className='shadow-md rounded-3xl p-12 overflow-hidden lg:block hidden w-full bg-white sm:w-6/6 md:w-6/6 lg:w-6/6 xl:w-5/6 max-h-screen'>
-          <div className='flex flex-col justify-between h-full'>
+          <div className='flex flex-col justify-between'>
             <SlideImages />
           </div>
         </div>

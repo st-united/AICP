@@ -1,7 +1,10 @@
 .ant-notification-notice {
-  border-radius: 12px;
+  border-radius: 15px !important;
   width: fit-content;
-  padding: 10px;
+}
+
+.ant-notification-notice-wrapper {
+  box-shadow: none !important;
 }
 .notification-success {
   background-color: #00c07e;
@@ -20,8 +23,8 @@
 }
 
 .ant-notification-notice-message {
-  color: white;
-  font-size: 14px !important;
+  color: white !important;
+  font-size: 18px !important;
 }
 
 .anticon.ant-notification-notice-icon-error {
@@ -38,4 +41,9 @@
 
 .anticon.ant-notification-notice-icon-warning {
   color: white;
+}
+
+.ant-notification-notice-with-icon {
+  display: flex !important;
+  align-items: center !important;
 }
