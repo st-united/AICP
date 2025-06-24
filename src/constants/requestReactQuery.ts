@@ -8,6 +8,7 @@ export const QUERY_KEY = {
   EXAM_SETS: 'EXAM_SETS',
   PORTFOLIO: 'PORTFOLIO',
   EXAM_HISTORY: 'EXAM_HISTORY',
+  EXAM_DETAIL: 'EXAM_DETAIL',
 };
 
 export const REACT_QUERY = {

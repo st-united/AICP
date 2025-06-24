@@ -192,9 +192,9 @@
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
     "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
     "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại",
-    "URL_INVALID": "URL không hợp lệ",
-    "IMAGE_ONLY": "Chỉ chấp nhận ảnh",
-    "CERT_REQUIRED": "Vui lòng chọn ít nhất 1 ảnh cho chứng chỉ này"
+    "MIN_AGE": "Phải đủ {{age}} tuổi trở lên",
+    "INVALID_DATE_RANGE": "Ngày bắt đầu không được lớn hơn ngày kết thúc",
+    "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
@@ -353,6 +353,49 @@
     "PRIVACY": "Chính sách bảo mật",
     "COMPANY": "DevPlus"
   },
+  "EXAM": {
+    "TITLE": "Bài kiểm tra",
+    "QUIZ_LIST_TITLE": "Danh sách bài kiểm tra",
+    "DOWNLOAD_ALL": "Tải xuống tất cả",
+    "DOWNLOAD_QUIZ": "Tải xuống",
+    "SELECT_ALL": "Chọn tất cả",
+    "START_NEW_QUIZ": "Bắt đầu bài mới",
+    "START_FIRST_QUIZ": "Bắt đầu ngay",
+    "DATE_FILTER_PLACEHOLDER": "Chọn ngày bắt đầu - Chọn ngày kết thúc",
+    "NO_QUIZ_MESSAGE": "Chưa có bài kiểm tra nào",
+    "LOADING_MESSAGE": "Đang tải danh sách bài kiểm tra...",
+    "ERROR_TITLE": "Lỗi tải dữ liệu",
+    "ERROR_DESCRIPTION": "Không thể tải danh sách bài kiểm tra. Vui lòng thử lại.",
+    "RETRY_BUTTON": "Thử lại",
+    "QUIZ_ID_PREFIX": "Bài kiểm tra",
+    "CREATED_TIME": "Thời gian tạo:",
+    "COMPETENCY_LEVEL": "Mức năng lực:",
+    "COMPETENCY_DETAIL": "Chi tiết mức năng lực",
+    "DATE_FILTER_START": "Ngày bắt đầu",
+    "DATE_FILTER_END": "Ngày kết thúc",
+    "NO_QUIZ_TITLE": "Bắt đầu bài kiểm tra đầu tiên của bạn!",
+    "NO_QUIZ_DESC_1": "Bạn chỉ cần vài phút để hoàn thành bài kiểm tra này.",
+    "NO_QUIZ_DESC_2": "Hãy thử sức và khám phá xem bạn đang ở đâu trong hành trình phát triển của mình.",
+    "AI_MINDSET_SCORE": "Kiến thức AI: <bold>{{score}}/{{maxScore}}</bold>",
+    "AI_SKILLSET_SCORE": "Kỹ năng lập trình: <bold>{{score}}/{{maxScore}}</bold>",
+    "AI_TOOLSET_SCORE": "Áp dụng thực tế: <bold>{{score}}/{{maxScore}}</bold>",
+    "STATUS": {
+      "IN_PROGRESS": "Đang làm bài",
+      "SUBMITTED": "Đã nộp bài",
+      "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+      "GRADED": "Đã chấm điểm"
+    },
+    "LEVEL": {
+      "NONE_LEVEL": "Chưa có đánh giá năng lực",
+      "LEVEL_1_AWARENESS": "Mức nhận thức",
+      "LEVEL_2_FOUNDATION": "Mức nền tảng",
+      "LEVEL_3_APPLICATION": "Mức ứng dụng",
+      "LEVEL_4_INTEGRATION": "Mức tích hợp",
+      "LEVEL_5_INNOVATION": "Mức đổi mới",
+      "LEVEL_6_LEADERSHIP": "Mức lãnh đạo",
+      "LEVEL_7_MASTERY": "Mức thành thạo"
+    }
+  },
   "FORGOT_PASSWORD": {
     "EMAIL_VALID": "Email bắt buộc phải hợp lệ!",
     "TITLE": "Quên mật khẩu",
@@ -454,39 +497,6 @@
     "NOTE_MESSAGE": "Nếu bạn thoát ngay bây giờ, hệ thống sẽ không lưu lại kết quả làm bài.",
     "SUBMIT_NOW": "Nộp bài ngay"
   },
-  "EXAM": {
-    "TITLE": "Bài kiểm tra",
-    "QUIZ_LIST_TITLE": "Danh sách bài kiểm tra",
-    "DOWNLOAD_ALL": "Tải xuống tất cả",
-    "START_NEW_QUIZ": "Bắt đầu bài mới",
-    "START_FIRST_QUIZ": "Bắt đầu ngay",
-    "DATE_FILTER_PLACEHOLDER": "Chọn ngày bắt đầu - Chọn ngày kết thúc",
-    "NO_QUIZ_MESSAGE": "Chưa có bài kiểm tra nào",
-    "LOADING_MESSAGE": "Đang tải danh sách bài kiểm tra...",
-    "ERROR_TITLE": "Lỗi tải dữ liệu",
-    "ERROR_DESCRIPTION": "Không thể tải danh sách bài kiểm tra. Vui lòng thử lại.",
-    "RETRY_BUTTON": "Thử lại",
-    "QUIZ_ID_PREFIX": "Bài kiểm tra",
-    "CREATED_TIME": "Thời gian tạo:",
-    "COMPETENCY_LEVEL": "Mức năng lực:",
-    "DATE_FILTER_START": "Ngày bắt đầu",
-    "DATE_FILTER_END": "Ngày kết thúc",
-    "NO_QUIZ_TITLE": "Bắt đầu bài kiểm tra đầu tiên của bạn!",
-    "NO_QUIZ_DESC_1": "Bạn chỉ cần vài phút để hoàn thành bài kiểm tra này.",
-    "NO_QUIZ_DESC_2": "Hãy thử sức và khám phá xem bạn đang ở đâu trong hành trình phát triển của mình.",
-    "STATUS": {
-      "IN_PROGRESS": "Đang làm bài",
-      "SUBMITTED": "Đã nộp bài",
-      "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
-      "GRADED": "Đã chấm điểm"
-    },
-    "LEVEL": {
-      "FOUNDATION": "Mức nền tảng",
-      "INTERMEDIATE": "Mức trung cấp",
-      "ADVANCED": "Mức nâng cao",
-      "EXPERT": "Chuyên gia"
-    }
-  },
   "MENTOR_BOOKING": {
     "BACK_HOME": "Quay về trang chủ",
     "TITLE": "Chọn cố vấn và lịch phỏng vấn",
@@ -552,6 +562,9 @@
     "UPLOAD_FAILED": "Tải lên tệp thất bại",
     "DOWNLOAD_SUCCESS": "Tải xuống tệp thành công",
     "DOWNLOAD_FAILED": "Tải xuống tệp thất bại",
-    "NO_INFO": "Vui lòng cung cấp thông tin để cập nhật hồ sơ"
+    "NO_INFO": "Vui lòng cung cấp thông tin để cập nhật hồ sơ",
+    "NOT_SUPPORT_PREVIEW": "Chưa hỗ trợ xem trước định dạng này",
+    "UNSUPPORTED_FORMAT": "Định dạng file không hỗ trợ xem trước",
+    "DOWNLOAD": "Tải xuống"
   }
 }
