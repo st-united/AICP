@@ -1,8 +1,19 @@
 import AuthLayout from '@app/components/templates/AuthLayout';
 import PublicLayout from '@app/components/templates/PublicLayout';
+import PolicyLayout from '@app/components/templates/PolicyLayout';
 import { NAVIGATE_URL } from '@app/constants';
+
 import AccountActivation from '@app/pages/AccountActivation/AccountActivation';
-import { Homepage, SignIn, ForgotPassword, ResetPassword } from '@app/pages/index';
+
+import {
+  Homepage,
+  SignIn,
+  ForgotPassword,
+  ResetPassword,
+  Profile,
+  Terms,
+  Privacy,
+} from '@app/pages/index';
 import SignUp from '@app/pages/SignUp/SignUp';
 
 const routes = [
@@ -37,6 +48,20 @@ const routes = [
       {
         index: true,
         element: <Homepage />,
+      },
+    ],
+  },
+
+  {
+    element: <PolicyLayout />,
+    children: [
+      {
+        path: 'terms-and-conditions',
+        element: <Terms />,
+      },
+      {
+        path: 'privacy-policy',
+        element: <Privacy />,
       },
     ],
   },
