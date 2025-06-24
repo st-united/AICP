@@ -9,7 +9,7 @@ const { Content } = Layout;
 
 const PrivateLayout: FC = () => {
   return (
-    <Layout className='bg-[#efeff5]'>
+    <Layout>
       <Content className='flex justify-center items-center mb-4'>
         <Suspense fallback={<Spin />}>
           <ProtectedRoute>

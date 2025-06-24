@@ -36,7 +36,7 @@ export const useCountdown = (initialTime: number) => {
 
 export const useQuestionNavigation = (
   questions: Question[],
-  onQuestionChange: (id: string) => void,
+  onQuestionChange: (id: string, timestamp: number) => void,
 ) => {
   const questionRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -52,7 +52,7 @@ export const useQuestionNavigation = (
         const isInMiddleView = rect.top < viewportMiddle && rect.bottom > viewportMiddle;
 
         if (isInMiddleView) {
-          onQuestionChange(questions[i].id);
+          onQuestionChange(questions[i].id, Date.now());
           break;
         }
       }
@@ -111,12 +111,12 @@ export const useSubmitDraftQuestion = () => {
   return useMutation((params: SubmitExamSetPayload) => submitDraftQuestionApi(params));
 };
 
-export const useSubmitExamSet = () => {
+export const useSubmitExam = () => {
   const navigate = useNavigate();
 
   return useMutation(
-    async (examSetId: string) => {
-      const { data } = await submitExamSetApi(examSetId);
+    async (examId: string) => {
+      const { data } = await submitExamSetApi(examId);
       return data;
     },
     {

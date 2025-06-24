@@ -191,7 +191,10 @@
     "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
     "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
-    "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại"
+    "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại",
+    "MIN_AGE": "Phải đủ {{age}} tuổi trở lên",
+    "INVALID_DATE_RANGE": "Ngày bắt đầu không được lớn hơn ngày kết thúc",
+    "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
@@ -239,7 +242,9 @@
     "BACK_TO_HOME": "Quay về trang chủ",
     "NOT_HAVE_ACCOUNT": "Bạn chưa có tài khoản?",
     "PASSWORD_INPUT": "Nhập mật khẩu",
-    "EMAIL_INPUT": "Nhập email"
+    "EMAIL_INPUT": "Nhập email",
+    "OR": "Hoặc",
+    "LOGIN_WITH_GOOGLE": "Đăng nhập với Google"
   },
   "HOMEPAGE": {
     "PRIMARY_TITLE": "Khám phá",
@@ -347,6 +352,49 @@
     "PRIVACY": "Chính sách bảo mật",
     "COMPANY": "DevPlus"
   },
+  "EXAM": {
+    "TITLE": "Bài kiểm tra",
+    "QUIZ_LIST_TITLE": "Danh sách bài kiểm tra",
+    "DOWNLOAD_ALL": "Tải xuống tất cả",
+    "DOWNLOAD_QUIZ": "Tải xuống",
+    "SELECT_ALL": "Chọn tất cả",
+    "START_NEW_QUIZ": "Bắt đầu bài mới",
+    "START_FIRST_QUIZ": "Bắt đầu ngay",
+    "DATE_FILTER_PLACEHOLDER": "Chọn ngày bắt đầu - Chọn ngày kết thúc",
+    "NO_QUIZ_MESSAGE": "Chưa có bài kiểm tra nào",
+    "LOADING_MESSAGE": "Đang tải danh sách bài kiểm tra...",
+    "ERROR_TITLE": "Lỗi tải dữ liệu",
+    "ERROR_DESCRIPTION": "Không thể tải danh sách bài kiểm tra. Vui lòng thử lại.",
+    "RETRY_BUTTON": "Thử lại",
+    "QUIZ_ID_PREFIX": "Bài kiểm tra",
+    "CREATED_TIME": "Thời gian tạo:",
+    "COMPETENCY_LEVEL": "Mức năng lực:",
+    "COMPETENCY_DETAIL": "Chi tiết mức năng lực",
+    "DATE_FILTER_START": "Ngày bắt đầu",
+    "DATE_FILTER_END": "Ngày kết thúc",
+    "NO_QUIZ_TITLE": "Bắt đầu bài kiểm tra đầu tiên của bạn!",
+    "NO_QUIZ_DESC_1": "Bạn chỉ cần vài phút để hoàn thành bài kiểm tra này.",
+    "NO_QUIZ_DESC_2": "Hãy thử sức và khám phá xem bạn đang ở đâu trong hành trình phát triển của mình.",
+    "AI_MINDSET_SCORE": "Kiến thức AI: <bold>{{score}}/{{maxScore}}</bold>",
+    "AI_SKILLSET_SCORE": "Kỹ năng lập trình: <bold>{{score}}/{{maxScore}}</bold>",
+    "AI_TOOLSET_SCORE": "Áp dụng thực tế: <bold>{{score}}/{{maxScore}}</bold>",
+    "STATUS": {
+      "IN_PROGRESS": "Đang làm bài",
+      "SUBMITTED": "Đã nộp bài",
+      "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+      "GRADED": "Đã chấm điểm"
+    },
+    "LEVEL": {
+      "NONE_LEVEL": "Chưa có đánh giá năng lực",
+      "LEVEL_1_AWARENESS": "Mức nhận thức",
+      "LEVEL_2_FOUNDATION": "Mức nền tảng",
+      "LEVEL_3_APPLICATION": "Mức ứng dụng",
+      "LEVEL_4_INTEGRATION": "Mức tích hợp",
+      "LEVEL_5_INNOVATION": "Mức đổi mới",
+      "LEVEL_6_LEADERSHIP": "Mức lãnh đạo",
+      "LEVEL_7_MASTERY": "Mức thành thạo"
+    }
+  },
   "FORGOT_PASSWORD": {
     "EMAIL_VALID": "Email bắt buộc phải hợp lệ!",
     "TITLE": "Quên mật khẩu",
@@ -448,39 +496,6 @@
     "NOTE_MESSAGE": "Nếu bạn thoát ngay bây giờ, hệ thống sẽ không lưu lại kết quả làm bài.",
     "SUBMIT_NOW": "Nộp bài ngay"
   },
-  "EXAM": {
-    "TITLE": "Bài kiểm tra",
-    "QUIZ_LIST_TITLE": "Danh sách bài kiểm tra",
-    "DOWNLOAD_ALL": "Tải xuống tất cả",
-    "START_NEW_QUIZ": "Bắt đầu bài mới",
-    "START_FIRST_QUIZ": "Bắt đầu ngay",
-    "DATE_FILTER_PLACEHOLDER": "Chọn ngày bắt đầu - Chọn ngày kết thúc",
-    "NO_QUIZ_MESSAGE": "Chưa có bài kiểm tra nào",
-    "LOADING_MESSAGE": "Đang tải danh sách bài kiểm tra...",
-    "ERROR_TITLE": "Lỗi tải dữ liệu",
-    "ERROR_DESCRIPTION": "Không thể tải danh sách bài kiểm tra. Vui lòng thử lại.",
-    "RETRY_BUTTON": "Thử lại",
-    "QUIZ_ID_PREFIX": "Bài kiểm tra",
-    "CREATED_TIME": "Thời gian tạo:",
-    "COMPETENCY_LEVEL": "Mức năng lực:",
-    "DATE_FILTER_START": "Ngày bắt đầu",
-    "DATE_FILTER_END": "Ngày kết thúc",
-    "NO_QUIZ_TITLE": "Bắt đầu bài kiểm tra đầu tiên của bạn!",
-    "NO_QUIZ_DESC_1": "Bạn chỉ cần vài phút để hoàn thành bài kiểm tra này.",
-    "NO_QUIZ_DESC_2": "Hãy thử sức và khám phá xem bạn đang ở đâu trong hành trình phát triển của mình.",
-    "STATUS": {
-      "IN_PROGRESS": "Đang làm bài",
-      "SUBMITTED": "Đã nộp bài",
-      "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
-      "GRADED": "Đã chấm điểm"
-    },
-    "LEVEL": {
-      "FOUNDATION": "Mức nền tảng",
-      "INTERMEDIATE": "Mức trung cấp",
-      "ADVANCED": "Mức nâng cao",
-      "EXPERT": "Chuyên gia"
-    }
-  },
   "MENTOR_BOOKING": {
     "BACK_HOME": "Quay về trang chủ",
     "TITLE": "Chọn cố vấn và lịch phỏng vấn",
@@ -519,5 +534,68 @@
       "PM_04_05": "04 - 05 CH",
       "PM_05_06": "05 - 06 CH"
     }
+  },
+  "TERMS": {
+    "TITLE": "Điều khoản & Điều kiện",
+    "BACK": "Quay về trang đăng nhập",
+    "INTRO_TITLE": "Giới thiệu",
+    "INTRO_DESC": "Chào mừng bạn đến với hệ thống \"Đánh giá năng lực ứng dụng AI\" của DevPlus. Khi sử dụng hệ thống, bạn đồng ý tuân thủ các điều khoản sau đây.",
+    "USAGE_TITLE": "Quyền sử dụng",
+    "USAGE_1": "Người dùng được cấp quyền truy cập hệ thống để đánh giá năng lực sử dụng AI trong khuôn khổ cá nhân hoặc tổ chức, không để phân phối lại dưới hình thức thương mại nếu chưa có sự đồng ý bằng văn bản của DevPlus.",
+    "USAGE_2": "Mọi hành vi sao chép, tái sử dụng nội dung khóa học, bài kiểm tra, nội dung học thuật nếu không được phép đều bị nghiêm cấm.",
+    "ACCOUNT_TITLE": "Tài khoản người dùng",
+    "ACCOUNT_1": "Người dùng chịu trách nhiệm bảo mật thông tin đăng nhập (email/mật khẩu).",
+    "ACCOUNT_2": "DevPlus có quyền tạm ngưng/hủy tài khoản nếu phát hiện vi phạm Điều khoản hoặc có dấu hiệu sử dụng trái phép.",
+    "IP_TITLE": "Nội dung và quyền sở hữu trí tuệ",
+    "IP_1": "Mọi tư liệu, đề thi, video hướng dẫn, bài giảng đều thuộc sở hữu trí tuệ của DevPlus hoặc bên cấp phép. Người dùng chỉ được sử dụng vào mục đích cá nhân.",
+    "IP_2": "Mọi hành vi sao chép, phát tán, chia sẻ trái phép đều bị xử lý theo quy định pháp luật.",
+    "RESPONSIBILITY_TITLE": "Trách nhiệm người dùng",
+    "RESPONSIBILITY_1": "Người dùng cam kết cung cấp thông tin chính xác, cập nhật và không sử dụng hệ thống vào mục đích bất hợp pháp.",
+    "RESPONSIBILITY_2": "DevPlus không chịu trách nhiệm đối với các tổn thất trực tiếp hoặc gián tiếp phát sinh từ việc sử dụng (hoặc không sử dụng) hệ thống nếu những hành vi đó do người dùng gây ra.",
+    "TERMINATION_TITLE": "Điều kiện thay đổi và chấm dứt",
+    "TERMINATION_1": "DevPlus có quyền sửa đổi, bổ sung Điều khoản. Mọi thay đổi sẽ được thông báo trước ít nhất 7 ngày.",
+    "TERMINATION_2": "DevPlus có thể chấm dứt quyền truy cập nếu người dùng vi phạm điều khoản, đang xử lý gian lận, hoặc các hành vi gây nguy hiểm cho hệ thống.",
+    "CONTACT_TITLE": "Liên hệ",
+    "CONTACT_DESC": "Mọi thắc mắc về Điều khoản & Điều kiện, vui lòng liên hệ:",
+    "EMAIL": "Email: hello@devplus.edu.vn",
+    "HOTLINE": "Hotline: (+84) 93 190 1608"
+  },
+
+  "PRIVACY": {
+    "TITLE": "Chính sách Bảo mật",
+    "COLLECT_TITLE": "Thu thập thông tin",
+    "COLLECT_DESC": "DevPlus thu thập những thông tin sau:",
+    "COLLECT_1": "Thông tin cá nhân: họ tên, email, số điện thoại, tổ chức.",
+    "COLLECT_2": "Thông tin sử dụng: lịch sử truy cập, kết quả đánh giá, thời gian sử dụng, hành vi tương tác.",
+    "COLLECT_3": "Cookie và log hệ thống để tối ưu trải nghiệm người dùng.",
+    "PURPOSE_TITLE": "Mục đích sử dụng",
+    "PURPOSE_DESC": "Thông tin cá nhân được dùng để:",
+    "PURPOSE_1": "Xác thực tài khoản, hỗ trợ kỹ thuật, gửi thông báo, chứng nhận.",
+    "PURPOSE_2": "Phân tích dữ liệu nhằm cải thiện hệ thống và phát triển tính năng phù hợp.",
+    "PURPOSE_3": "Gửi các chương trình khuyến mãi, học bổng (nếu người dùng đồng ý).",
+    "SHARE_TITLE": "Chia sẻ và tiết lộ",
+    "SHARE_1": "DevPlus không chia sẻ thông tin cá nhân cho bên thứ ba nếu không có sự đồng ý.",
+    "SHARE_2": "Chỉ chia sẻ khi được pháp luật yêu cầu (ví dụ: cơ quan chức năng với trát tòa).",
+    "SHARE_3": "Nhân viên, cộng tác viên có thể tiếp cận thông tin cá nhân trong phạm vi nhiệm vụ, với cam kết bảo mật.",
+    "SECURITY_TITLE": "Bảo mật dữ liệu",
+    "SECURITY_1": "DevPlus áp dụng các biện pháp bảo mật như mã hóa SSL/TLS, tường lửa, sao lưu dữ liệu định kỳ.",
+    "SECURITY_2": "Người dùng nên chủ động bảo mật đăng nhập, tránh dùng chung mật khẩu với các ứng dụng khác.",
+    "STORAGE_TITLE": "Lưu trữ dữ liệu",
+    "STORAGE_1": "Thông tin sẽ được lưu trữ trong vòng tối đa 3–5 năm kể từ khi người dùng ngừng sử dụng hệ thống (hoặc theo quy định pháp luật).",
+    "STORAGE_2": "Người dùng có quyền yêu cầu xóa, điều chỉnh, truy cập dữ liệu theo quy định bảo vệ dữ liệu cá nhân Việt Nam.",
+    "USER_RIGHTS_TITLE": "Quyền của người dùng",
+    "USER_RIGHTS_DESC": "Người dùng có thể:",
+    "USER_RIGHTS_1": "Truy cập, chỉnh sửa, cập nhật thông tin cá nhân.",
+    "USER_RIGHTS_2": "Yêu cầu xóa hoặc khóa tài khoản.",
+    "USER_RIGHTS_3": "Rút lại sự đồng ý cho việc sử dụng thông tin để tiếp thị.",
+    "COOKIES_TITLE": "Cookie và công nghệ theo dõi",
+    "COOKIES_1": "Website sử dụng cookie để lưu phiên đăng nhập, cài đặt cá nhân, phân tích truy cập.",
+    "COOKIES_2": "Người dùng có thể tắt cookie qua cài đặt trình duyệt, tuy nhiên một số tính năng có thể không hoạt động bình thường nếu tắt cookie.",
+    "CHANGES_TITLE": "Thay đổi chính sách",
+    "CHANGES_1": "DevPlus có quyền điều chỉnh Chính sách Bảo mật. Mọi thay đổi sẽ được thông báo qua email và trên hệ thống ít nhất 7 ngày trước khi có hiệu lực.",
+    "CONTACT_TITLE": "Liên hệ",
+    "CONTACT_DESC": "Mọi thắc mắc về Điều khoản & Điều kiện, vui lòng liên hệ:",
+    "EMAIL": "Email: hello@devplus.edu.vn",
+    "HOTLINE": "Hotline: (+84) 93 190 1608"
   }
 }

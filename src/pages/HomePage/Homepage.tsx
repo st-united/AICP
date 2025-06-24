@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import UserPage from '../UserPage/UserPage';
 import LandingLayout from '@app/components/LandingPage/LandingLayout';
 import MainScreen from '@app/components/LandingPage/MainScreen';
-import Header from '@app/components/Layout/Header/Header';
 import { smoothScrollTo } from '@app/utils/scroll';
 
 const Homepage = () => {

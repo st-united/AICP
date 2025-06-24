@@ -1,6 +1,7 @@
 export const API_URL = {
   USERS: '/users',
   LOGIN: '/auth/login',
+  LOGIN_WITH_GOOGLE: '/auth/login-google',
   REFRESH_TOKEN: '/auth/refresh',
   GET_PROFILE: '/users/me',
   UPDATE_PROFILE: '/users/profile',
@@ -19,4 +20,6 @@ export const API_URL = {
   EXAM_SETS_INPUT_TEST: '/exam-sets/input-test',
   ANSWERS: '/answers',
   MENTORS_AVAILABLE: '/mentors/available',
+  GET_JOB: 'domain/names',
+  DETAIL_EXAM: '/exam',
 };
