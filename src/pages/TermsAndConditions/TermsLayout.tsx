@@ -28,10 +28,7 @@ const TermsLayout = () => {
           title={t('TERMS.ACCOUNT_TITLE')}
           listItems={[t('TERMS.ACCOUNT_1'), t('TERMS.ACCOUNT_2')]}
         />
-        <Section
-          title={t('TERMS.IP_TITLE')}
-          listItems={[t('TERMS.IP_1'), t('TERMS.IP_2'), t('TERMS.IP_3')]}
-        />
+        <Section title={t('TERMS.IP_TITLE')} listItems={[t('TERMS.IP_1'), t('TERMS.IP_2')]} />
         <Section
           title={t('TERMS.RESPONSIBILITY_TITLE')}
           listItems={[t('TERMS.RESPONSIBILITY_1'), t('TERMS.RESPONSIBILITY_2')]}
