@@ -12,7 +12,7 @@ import { PortfolioResponse } from '@app/interface/portfolio.interface';
 import {
   updatePortfolioApi,
   getPortfolioApi,
-  uploadPortfolioFilesApi,
+  // uploadPortfolioFilesApi,
   downloadPortfolioFileApi,
 } from '@app/services/portfolioApi';
 

@@ -1,21 +1,23 @@
 import { Select, SelectProps } from 'antd';
 import './CustomSelect.scss';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { useGetJob } from '@app/hooks';
 
 interface ProvinceSelectProps extends SelectProps {
   options?: { value: string; label: JSX.Element }[];
 }
 
-const jobOptions = [
-  { value: 'developer', label: 'Developer' },
-  { value: 'designer', label: 'Designer' },
-  { value: 'manager', label: 'Manager' },
-  { value: 'qa', label: 'QA' },
-  { value: 'hr', label: 'HR' },
-  { value: 'other', label: 'Other' },
-];
-
 const JobSelect: React.FC<ProvinceSelectProps> = (props) => {
+  const { data: domainData, isLoading } = useGetJob();
+
+  const jobOptions = useMemo(() => {
+    return (domainData || []).map((job) => ({
+      value: job.id,
+      label: job.name,
+    }));
+  }, [domainData]);
   const { t } = useTranslation();
   return (
     <div id='customSelect'>

@@ -12,20 +12,20 @@ export const getPortfolioApi = async () => {
   return await axios.get(API_URL.PORTFOLIO);
 };
 
-export const uploadPortfolioFilesApi = async (
-  formData: FormData,
-  onProgress: (percent: number) => void,
-  controller?: AbortController,
-) => {
-  return await axios.post(API_URL.PORTFOLIO_UPLOAD_FILE, formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-    onUploadProgress: (event) => {
-      const percent = Math.round((event.loaded * 100) / (event.total || 1));
-      onProgress(percent);
-    },
-    signal: controller?.signal,
-  });
-};
+// export const uploadPortfolioFilesApi = async (
+//   formData: FormData,
+//   onProgress: (percent: number) => void,
+//   controller?: AbortController,
+// ) => {
+//   return await axios.post(API_URL.PORTFOLIO_UPLOAD_FILE, formData, {
+//     headers: { 'Content-Type': 'multipart/form-data' },
+//     onUploadProgress: (event) => {
+//       const percent = Math.round((event.loaded * 100) / (event.total || 1));
+//       onProgress(percent);
+//     },
+//     signal: controller?.signal,
+//   });
+// };
 
 export const downloadPortfolioFileApi = async (url: string, filename: string) => {
   return await axios.get(API_URL.PORTFOLIO_DOWNLOAD, {
