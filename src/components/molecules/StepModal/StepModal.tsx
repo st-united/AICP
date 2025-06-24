@@ -3,6 +3,7 @@ import { Modal, Steps } from 'antd';
 import { FC, useState, useMemo, useEffect, useCallback } from 'react';
 
 import './StepModal.scss';
+import BeforeTestComponent from './StepComponent/BeforeTestComponent';
 import { DemoComponent } from './StepComponent/DemoComponent';
 import PortfolioComponent from './StepComponent/PortfolioComponent';
 import { useDemoCondition } from './StepCondition/DemoCondition';
@@ -29,14 +30,14 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
         loading: isLoading,
       },
       {
-        title: 'Portfolio',
+        title: 'Hồ sơ cá nhân',
         render: (props) => <PortfolioComponent {...props} />,
         shouldSkip: havePortfolio,
         loading: loadingPortfolio,
       },
       {
-        title: 'Review',
-        render: (props) => <DemoComponent {...props} />,
+        title: 'Bắt đầu ngay',
+        render: (props) => <BeforeTestComponent {...props} />,
         shouldSkip: false,
       },
     ],
@@ -96,7 +97,7 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
             }))}
           />
         </div>
-        <div className='flex flex-col gap-4 h-[calc(100vh-200px)] w-full md:min-w-[1000px] overflow-y-auto custom-scrollbar'>
+        <div className='flex flex-col gap-4 h-[calc(80vh-200px)] w-full md:min-w-[1000px] overflow-y-auto custom-scrollbar'>
           {steps[current] &&
             steps[current].shouldSkip === false &&
             steps[current]?.render({ goNext, goBack })}
