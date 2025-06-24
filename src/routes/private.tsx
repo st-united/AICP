@@ -4,7 +4,7 @@ import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioConte
 import BaseLayout from '@app/components/templates/BaseLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { NAVIGATE_URL } from '@app/constants';
-import { Profile, AptitudeTest } from '@app/pages/index';
+import { AptitudeTest, Profile, Capacity } from '@app/pages';
 import Booking from '@app/pages/MentorBooking';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
@@ -35,6 +35,10 @@ const routes = [
           {
             path: NAVIGATE_URL.TEST,
             element: <AptitudeTest />,
+          },
+          {
+            path: NAVIGATE_URL.CAPACITY,
+            element: <Capacity />,
           },
         ],
       },

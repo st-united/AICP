@@ -46,6 +46,8 @@
   "BUTTON": {
     "CLOSE": "Đóng",
     "CHANGE_PASSWORD": "Đổi mật khẩu",
+    "OTHER_TIMES": "Lúc khác",
+    "BUTTON_SCHEDULE": "Chọn lịch phỏng vấn",
     "SAVE": "Lưu",
     "BACK": "Quay lại",
     "UPDATE": "Cập nhật",
@@ -395,6 +397,22 @@
       "LEVEL_5_INNOVATION": "Mức đổi mới",
       "LEVEL_6_LEADERSHIP": "Mức lãnh đạo",
       "LEVEL_7_MASTERY": "Mức thành thạo"
+    },
+    "RESULT": {
+      "TITLE": "Kết quả đánh giá <span>năng lực AI</span> (Sơ bộ)",
+      "SUBTITLE": "Dưới đây là kết quả đánh giá sơ bộ của bạn.",
+      "CALL_TO_ACTION": "Để nhận kết quả chính xác, vui lòng chọn cố vấn và lịch phỏng vấn.",
+      "LEVEL_LABEL": "Mức năng lực",
+      "LEVEL_VALUE": "Beginner",
+      "AI_KNOWLEDGE": "Kiến thức AI",
+      "AI_KNOWLEDGE_SCORE": "75/100",
+      "PROGRAMMING_SKILL": "Kỹ năng lập trình",
+      "PROGRAMMING_SKILL_SCORE": "65/100",
+      "PRACTICAL_APPLICATION": "Áp dụng thực tế",
+      "PRACTICAL_APPLICATION_SCORE": "70/100",
+      "NOTE": "Kết quả này là bản nháp. Phỏng vấn với cố vấn sẽ xác định năng lực chính xác.",
+      "AVG_SCORE_LABEL": "Avg Score",
+      "BACK_TO_HOME": "Quay về trang chủ"
     }
   },
   "FORGOT_PASSWORD": {
@@ -407,7 +425,7 @@
     "SEND_EMAIL_SUCCESS": "Đã gửi email thành công",
     "SEND_LOADING": "Đang gửi...",
     "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
-    "SUCCESS": "Gửi email thành công!"
+    "SUCCESS": "Email đặt lại mật khẩu đã được gửi. Nếu không thấy, vui lòng kiểm tra thư mục Spam hoặc Quảng cáo."
   },
   "RESET_PASSWORD": {
     "TITLE": "Đặt lại mật khẩu!",

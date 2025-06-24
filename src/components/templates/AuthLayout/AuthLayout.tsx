@@ -7,13 +7,9 @@ import { useGetProfile } from '@app/hooks/useProfile';
 
 const AuthLayout = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
-  const { isLoading } = useGetProfile(isAuth);
+  const { isLoading } = useGetProfile();
   if (isAuth && isLoading) {
-    return (
-      <div className='flex items-center justify-center'>
-        <Spin />
-      </div>
-    );
+    return <Spin className='top-1/2 left-1/2 fixed -translate-x-1/2 -translate-y-1/2' />;
   }
 
   return (
