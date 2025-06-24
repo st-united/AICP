@@ -17,4 +17,6 @@ export const NAVIGATE_URL = {
   TEST_RESULT: '/history',
   MENTOR_ACTIVATION: 'mentor-activation/:token',
   SCHEDULE: '/scheduler',
+  CAPACITY: '/capacity/:examId',
+  CAPACITY_DYNAMIC: (examId: string) => `/capacity/${examId}`,
 };
