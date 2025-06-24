@@ -23,6 +23,7 @@ import {
   updateUser,
   forgotPasswordApi,
   updateForgotPasswordApi,
+  checkResetPasswordTokenApi,
   getDetailExam,
 } from '@app/services';
 
@@ -127,6 +128,17 @@ export const useUpdateForgotPassword = () => {
   });
 };
 
+export const useCheckResetPasswordToken = (token: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEY.CHECK_RESET_PASSWORD_TOKEN, token],
+    queryFn: async () => {
+      const response = await checkResetPasswordTokenApi(token);
+      return response.data;
+    },
+    enabled: !!token,
+    retry: false,
+  });
+};
 export const useExamDetail = (examId: string) => {
   return useQuery({
     queryKey: [QUERY_KEY.EXAM_DETAIL, examId],
