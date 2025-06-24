@@ -1,4 +1,5 @@
 import AptitudeTest from './AptitudeTest/AptitudeTest';
+import Capacity from './Capacity/Index';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
 import Homepage from './HomePage/Homepage';
 import NotFound from './NotFound/NotFound';
@@ -22,4 +23,5 @@ export {
   AptitudeTest,
   Terms,
   Privacy,
+  Capacity,
 };
