@@ -69,7 +69,8 @@ export const getStatusColor = (statusKey: string) => {
 export const formatDateTime = (dateString: string) => {
   try {
     dayjs.locale('vi');
-    return dayjs(dateString).format(DATE_TIME.WEEKDAY_DAY_MONTH_YEAR_TIME);
+    const formatted = dayjs(dateString).format(DATE_TIME.WEEKDAY_DAY_MONTH_YEAR_TIME);
+    return formatted.charAt(0).toUpperCase() + formatted.slice(1);
   } catch (error) {
     return dateString;
   }
@@ -135,7 +136,7 @@ const QuizCard = ({ quiz, onCheckboxChange, isChecked, onClick }: QuizCardProps)
             <span className='text-sm sm:text-base'>
               {t('EXAM.COMPETENCY_LEVEL')}{' '}
               <span className={`font-medium ${getLevelColor(quiz.sfiaLevel)}`}>
-                {getLevelText(quiz.sfiaLevel)}
+                {quiz.sfiaLevel ? getLevelText(quiz.sfiaLevel) : t('EXAM.LEVEL.NONE_LEVEL')}
               </span>
             </span>
           </div>
