@@ -648,5 +648,10 @@
     "CONTACT_DESC": "Mọi thắc mắc về Điều khoản & Điều kiện, vui lòng liên hệ:",
     "EMAIL": "Email: hello@devplus.edu.vn",
     "HOTLINE": "Hotline: (+84) 93 190 1608"
+  },
+  "STEP_MODAL": {
+    "START_CONFIRM_TEST": "Bắt đầu ngay",
+    "PERSONAL_INFO": "Hồ sơ cá nhân",
+    "PHONE_INFO": "Xác nhận qua điện thoại"
   }
 }
