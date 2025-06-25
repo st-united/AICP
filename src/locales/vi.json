@@ -567,5 +567,10 @@
     "NOT_SUPPORT_PREVIEW": "Chưa hỗ trợ xem trước định dạng này",
     "UNSUPPORTED_FORMAT": "Định dạng file không hỗ trợ xem trước",
     "DOWNLOAD": "Tải xuống"
+  },
+  "STEP_MODAL": {
+    "START_CONFIRM_TEST": "Bắt đầu ngay",
+    "PERSONAL_INFO": "Hồ sơ cá nhân",
+    "PHONE_INFO": "Xác nhận qua điện thoại"
   }
 }
