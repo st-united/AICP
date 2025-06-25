@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 
+import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
 import BaseLayout from '@app/components/templates/BaseLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { NAVIGATE_URL } from '@app/constants';
@@ -51,6 +52,10 @@ const routes = [
           {
             path: NAVIGATE_URL.CHANGE_PASSWORD,
             element: <PasswordChangeForm />,
+          },
+          {
+            path: NAVIGATE_URL.PORTFOLIO,
+            element: <PortfolioContent />,
           },
           {
             path: NAVIGATE_URL.TEST_RESULT,

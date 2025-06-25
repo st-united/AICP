@@ -3,8 +3,11 @@ import { Modal, Steps } from 'antd';
 import { FC, useState, useMemo, useEffect, useCallback } from 'react';
 
 import './StepModal.scss';
+import BeforeTestComponent from './StepComponent/BeforeTestComponent';
 import { DemoComponent } from './StepComponent/DemoComponent';
+import PortfolioComponent from './StepComponent/PortfolioComponent';
 import { useDemoCondition } from './StepCondition/DemoCondition';
+import { usePortfolioCondition } from './StepCondition/PortfolioCondition';
 import { StepItem, StepModalProps } from '@app/interface/stepSection.interface';
 
 enum NAVIGATION {
@@ -14,9 +17,10 @@ enum NAVIGATION {
 
 const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
   const { isPass, isLoading } = useDemoCondition();
+  const { isPass: havePortfolio, isLoading: loadingPortfolio } = usePortfolioCondition();
   const [nav, setNav] = useState<NAVIGATION>(NAVIGATION.NEXT);
   const [current, setCurrent] = useState(0);
-
+  console.log('loadingPortfolio', loadingPortfolio);
   const steps = useMemo<StepItem[]>(
     () => [
       {
@@ -26,18 +30,18 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
         loading: isLoading,
       },
       {
-        title: 'Portfolio',
-        render: (props) => <DemoComponent {...props} />,
-        shouldSkip: isPass,
-        loading: isLoading,
+        title: 'Hồ sơ cá nhân',
+        render: (props) => <PortfolioComponent {...props} />,
+        shouldSkip: havePortfolio,
+        loading: loadingPortfolio,
       },
       {
-        title: 'Review',
-        render: (props) => <DemoComponent {...props} />,
+        title: 'Bắt đầu ngay',
+        render: (props) => <BeforeTestComponent {...props} />,
         shouldSkip: false,
       },
     ],
-    [isPass, isLoading],
+    [isPass, isLoading, havePortfolio, loadingPortfolio],
   );
 
   const goNext = useCallback(async () => {
@@ -73,7 +77,7 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
 
       return () => clearTimeout(timer);
     }
-  }, [current, steps, nav, goNext, goBack]);
+  }, [current, isPass, isLoading, havePortfolio, loadingPortfolio, nav, goNext, goBack, steps]);
 
   return (
     <Modal open={open} onCancel={onClose} footer={null} centered className='step-modal'>
@@ -93,10 +97,9 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
             }))}
           />
         </div>
-        <div className='flex flex-col gap-4 h-[calc(100vh-200px)] w-full md:min-w-[1000px] overflow-y-auto custom-scrollbar'>
+        <div className='flex flex-col gap-4 h-[calc(80vh-200px)] w-full md:min-w-[1000px] overflow-y-auto custom-scrollbar'>
           {steps[current] &&
-            !steps[current].loading &&
-            !steps[current].shouldSkip &&
+            steps[current].shouldSkip === false &&
             steps[current]?.render({ goNext, goBack })}
         </div>
       </div>

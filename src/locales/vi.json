@@ -148,6 +148,7 @@
     "RESULT_CONFIRM_TEST": "Sau khi hoàn thành, bạn sẽ nhận được bản đánh giá năng lực AI ở dạng dự thảo và chuyển sang bước tiếp theo: đặt lịch phỏng vấn với đội ngũ chuyên gia để hoàn thiện và xác nhận năng lực AI một cách chính xác nhất.",
     "WARNING_CONFIRM_TEST": "Bạn chỉ được làm bài đánh giá một lần trước khi có kết quả chính thức. Ngay sau khi nhận được phản hồi từ đội ngũ cố vấn, bạn sẽ có thể tiếp tục với bài kiểm tra tiếp theo.",
     "START_CONFIRM_TEST": "Bắt đầu ngay",
+    "BACK": "Quay lại",
     "REVIEW_RESULT": "Xem lại kết quả",
     "NOTE_CONFIRM_TEST": "LƯU Ý"
   },
@@ -329,7 +330,8 @@
     "ONLINE_COURSES": "Khóa học trực tuyến",
     "HISTORY": "Lịch sử kiểm tra",
     "PERSONAL_PROFILE": "Thông tin cá nhân",
-    "CHANGE_PASSWORD": "Đổi mật khẩu"
+    "CHANGE_PASSWORD": "Đổi mật khẩu",
+    "PORTFOLIO": "Portfolio"
   },
   "PLACEHOLDER": {
     "SELECT_COUNTRY": "Chọn quốc gia",
@@ -552,6 +554,37 @@
       "PM_04_05": "04 - 05 CH",
       "PM_05_06": "05 - 06 CH"
     }
+  },
+  "PORTFOLIO": {
+    "TITLE": "Hoàn thiện hồ sơ",
+    "SUB_TITLE": "Hãy chia sẻ thêm một chút về bạn! Việc bổ sung thông tin sẽ giúp chúng tôi hiểu bạn rõ hơn và hỗ trợ bạn hiệu quả hơn!",
+    "SUB_TITLE_2": "Vui lòng cung cấp thông tin minh bạch để đội ngũ chúng tôi có thể xác minh chính xác",
+    "VALIDATION": "Chấp nhận định dạng PNG, JPG, JPEG, DOCX, DOC, PDF. Dung lượng tối đa: 5MB",
+    "CERTIFICATIONS": "Chứng chỉ chuyên môn",
+    "URL": "Hồ sơ trực tuyến",
+    "LINKEDIN_URL": "LinkedIn URL",
+    "EXPERIENCE": "Kinh nghiệm",
+    "GITHUB_URL": "GitHub URL",
+    "CHOOSE_FILE": "Kéo thả tệp của bạn vào đây",
+    "OR": "hoặc",
+    "PICK_FILE": "Chọn tệp",
+    "EDIT": "Chỉnh sửa",
+    "CANCEL": "Hủy bỏ",
+    "CANCEL_UPLOAD": "Đã hủy",
+    "SAVE": "Lưu",
+    "NO_DATA": "Không có dữ liệu",
+    "UPDATE_SUCCESS": "Cập nhật hồ sơ thành công",
+    "UPDATE_FAILED": "Cập nhật hồ sơ thất bại",
+    "CREATE_SUCCESS": "Tạo hồ sơ thành công",
+    "CREATE_FAILED": "Tạo hồ sơ thất bại",
+    "UPLOAD_SUCCESS": "Tải lên tệp thành công",
+    "UPLOAD_FAILED": "Tải lên tệp thất bại",
+    "DOWNLOAD_SUCCESS": "Tải xuống tệp thành công",
+    "DOWNLOAD_FAILED": "Tải xuống tệp thất bại",
+    "NO_INFO": "Vui lòng cung cấp thông tin để cập nhật hồ sơ",
+    "NOT_SUPPORT_PREVIEW": "Chưa hỗ trợ xem trước định dạng này",
+    "UNSUPPORTED_FORMAT": "Định dạng file không hỗ trợ xem trước",
+    "DOWNLOAD": "Tải xuống"
   },
   "TERMS": {
     "TITLE": "Điều khoản & Điều kiện",
