@@ -70,7 +70,7 @@ const Booking = () => {
         className='px-8 py-4 text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300'
         onClick={() => handleBooking()}
       >
-        {t('MENTOR_BOOKING.BOOK_MENTOR')}
+        {t('MENTOR_BOOKING.BOOKING_NOW')}
       </Button>
     </div>
   );
