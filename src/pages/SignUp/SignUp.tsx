@@ -5,7 +5,7 @@ import { Rule } from 'antd/lib/form';
 import parse from 'html-react-parser';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useSignUpSchema } from './signUpSchema';
 import {
@@ -37,6 +37,10 @@ const SignUp = () => {
     registerUser({ fullName, email, phoneNumber, password });
   };
 
+  const handleOnClickHomePage = () => {
+    navigate('/');
+  };
+
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setIsLengthValid(NUMBER_LENGTH_REGEX.test(value));
@@ -50,21 +54,28 @@ const SignUp = () => {
   return (
     <div className='flex justify-center' id='container-sign-up'>
       <div className='w-full md:w-4/5 h-full'>
-        <div
-          onClick={() => navigate('/')}
-          aria-hidden='true'
-          className='flex item-center justify-start text-[#B2B2B2] text-lg !mb-8 cursor-pointer gap-2 hover:text-[#A22D00]'
+        <button
+          onClick={handleOnClickHomePage}
+          className='bg-transparent cursor-pointer w-auto'
+          type='button'
         >
-          <LeftOutlined />
-          <div>{t<string>('SIGN_UP.BACK_TO_HOME')}</div>
-        </div>
+          <Link
+            className='flex items-center text-primary-gray justify-start text-lg !mb-14 hover:text-primary-light cursor-pointer'
+            to={'/'}
+          >
+            <div className='flex items-center justify-center'>
+              <LeftOutlined size={24} />
+            </div>
+            {t('LOGIN.BACK_TO_HOME')}
+          </Link>
+        </button>
 
         <div>
-          <h1 className='text-[40px] !text-[#FE7743] font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
+          <h1 className='text-[40px] !text-primary font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
           <div className='text-white text-lg !mb-4 flex gap-2'>
-            <div className='text-[#686868]'>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
+            <div className='text-primary-gray'>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
             <div
-              className='text-[#A22D00] cursor-pointer underline'
+              className='text-primary-bold cursor-pointer underline hover:text-primary-light'
               onClick={() => navigate('/login')}
               aria-hidden='true'
             >
@@ -131,11 +142,13 @@ const SignUp = () => {
           </Form.Item>
 
           <div className='col-span-2 text-lg text-[#686868]'>
-            <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-[#686868]'}`}>
+            <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-primary-gray'}`}>
               <CheckOutlined />
               <div>{t<string>('SIGN_UP.PASSWORD_REQUIREMENT')}</div>
             </div>
-            <div className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-[#686868]'}`}>
+            <div
+              className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-primary-gray'}`}
+            >
               <CheckOutlined />
               <div>{t<string>('SIGN_UP.PASSWORD_COMPLEXITY')}</div>
             </div>
@@ -144,10 +157,10 @@ const SignUp = () => {
               <div>
                 {parse(
                   t<string>('SIGN_UP.AGREE_TERMS', {
-                    terms: `<a href="/terms" style="text-decoration: underline; color: #A22D00;">${t<string>(
+                    terms: `<a href="/terms-and-conditions" style="text-decoration: underline; color: #A22D00;">${t<string>(
                       'SIGN_UP.TERMS',
                     )}</a>`,
-                    privacy: `<a href="/privacy" style="text-decoration: underline; color: #A22D00;">${t<string>(
+                    privacy: `<a href="/privacy-policy" style="text-decoration: underline; color: #A22D00;">${t<string>(
                       'SIGN_UP.PRIVACY',
                     )}</a>`,
                     company: t('SIGN_UP.COMPANY'),
@@ -160,7 +173,7 @@ const SignUp = () => {
           <Form.Item className='col-span-2 !mt-2'>
             <Button
               htmlType='submit'
-              className='w-full !bg-[#A22D00] !h-14 px-4 !text-[16px] !font-bold !rounded-lg !text-white'
+              className='w-full h-[3.75rem] !bg-primary-bold text-[1rem] text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:!text-black transition duration-300'
               loading={isLoading}
               disabled={!isChecked}
             >

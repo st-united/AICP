@@ -4,21 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import {
   GetUsersParams,
+  GetHistoryParams,
   UserDetail,
   UpdateForgotPassword,
   HasTakenExam,
+  HistoryTesting,
+  DetailExam,
 } from '@app/interface/user.interface';
 import {
   checkHasTakenExam,
   checkHasTakenExamDefault,
   createUser,
   deleteUserAPI,
+  getHistoryTestingApi,
   getUserByIdAPI,
   getUsersAPI,
   resetPasswordApi,
   updateUser,
   forgotPasswordApi,
   updateForgotPasswordApi,
+  checkResetPasswordTokenApi,
+  getDetailExam,
 } from '@app/services';
 
 export const useCreateUser = () => {
@@ -101,6 +107,13 @@ export const useResetPassword = () => {
   });
 };
 
+export const useGetHistory = (params?: GetHistoryParams) => {
+  return useQuery<HistoryTesting[]>([QUERY_KEY.EXAM_HISTORY, params], async () => {
+    const { data } = await getHistoryTestingApi(params);
+    return data.data;
+  });
+};
+
 export const useForgotPassword = () => {
   return useMutation(async (email: string) => {
     const response = await forgotPasswordApi(email);
@@ -112,5 +125,27 @@ export const useUpdateForgotPassword = () => {
   return useMutation(async (payload: UpdateForgotPassword) => {
     const response = await updateForgotPasswordApi(payload);
     return response.data;
+  });
+};
+
+export const useCheckResetPasswordToken = (token: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEY.CHECK_RESET_PASSWORD_TOKEN, token],
+    queryFn: async () => {
+      const response = await checkResetPasswordTokenApi(token);
+      return response.data;
+    },
+    enabled: !!token,
+    retry: false,
+  });
+};
+export const useExamDetail = (examId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEY.EXAM_DETAIL, examId],
+    queryFn: async (): Promise<DetailExam> => {
+      const { data } = await getDetailExam(examId);
+      return data.data;
+    },
+    enabled: !!examId,
   });
 };

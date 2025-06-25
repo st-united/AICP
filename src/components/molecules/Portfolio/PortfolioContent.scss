@@ -1,0 +1,120 @@
+$primary-color: #ff8c5f;
+$border-radius: 10px;
+$transition-duration: 0.3s;
+
+.custom-upload {
+  .ant-upload {
+    width: 100%;
+    border: 2px dashed #e0e0e0;
+    border-radius: $border-radius;
+    transition: all $transition-duration ease;
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    .ant-upload-text {
+      color: $primary-color;
+      font-weight: 600;
+    }
+  }
+}
+
+.custom-img {
+  width: 100px !important;
+  aspect-ratio: 1;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: $border-radius;
+  transition: all $transition-duration ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .ant-image {
+    width: 100px !important;
+    aspect-ratio: 1;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: $border-radius !important;
+    transition: all $transition-duration ease;
+  }
+
+  .ant-image-img {
+    width: 100px !important;
+    aspect-ratio: 1;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: $border-radius !important;
+    border: 1px solid #e0e0e0 !important;
+    transition: all $transition-duration ease;
+  }
+
+  .ant-image-mask {
+    border-radius: $border-radius !important;
+    background: rgba(0, 0, 0, 0.5);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+  }
+}
+
+.portfolio-content {
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      color: $primary-color;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #686868;
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__section {
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+  }
+
+  &__form {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  &__actions {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 4rem;
+    padding: 2rem 0;
+  }
+}
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientMove 5s linear infinite;
+}

@@ -1,9 +1,9 @@
 import {
   ProfileOutlined,
   LockOutlined,
-  ContainerOutlined,
   CheckSquareOutlined,
   ReadOutlined,
+  SolutionOutlined,
 } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useLocation, Link } from 'react-router-dom';
@@ -28,12 +28,17 @@ const Sidebar = () => {
     {
       icon: CheckSquareOutlined,
       label: t('SIDEBAR.HISTORY'),
-      path: '/profile/history',
+      path: '/history',
     },
     {
       icon: ReadOutlined,
       label: t('SIDEBAR.ONLINE_COURSES'),
       path: '/profile/courses',
+    },
+    {
+      icon: SolutionOutlined,
+      label: t('SIDEBAR.PORTFOLIO'),
+      path: '/portfolio',
     },
   ];
 

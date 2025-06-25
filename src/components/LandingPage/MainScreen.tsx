@@ -1,6 +1,7 @@
 import { DownCircleFilled } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { CyborgHand } from '@app/assets/images';
 import { TextTyping } from '@app/components/atoms/';
@@ -12,6 +13,8 @@ type Props = {
 
 const MainScreen = ({ onScrollToNext }: Props) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const handleLoginClick = () => navigate('/login');
 
   return (
     <div className='flex flex-col w-full h-screen'>
@@ -35,7 +38,10 @@ const MainScreen = ({ onScrollToNext }: Props) => {
             speed={10}
             className='!text-[#273F4F] font-normal !leading-10 text-center smS:mb-8 smM:text-start smM:w-[50%] mdL:w-[45%] mdL:!leading-relaxed text-lg xsM:text-xl mdM:text-2xl xl:text-3xl'
           />
-          <Button className='h-12 mdL:h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'>
+          <Button
+            className='h-12 mdL:h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
+            onClick={handleLoginClick}
+          >
             {t('HOMEPAGE.BUTTON')}
           </Button>
         </div>

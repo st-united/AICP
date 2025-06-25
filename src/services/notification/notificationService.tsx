@@ -3,6 +3,7 @@ import {
   ExclamationCircleFilled,
   WarningFilled,
   CheckCircleFilled,
+  CloseOutlined,
 } from '@ant-design/icons';
 import { notification } from 'antd';
 import './notification.scss';
@@ -35,7 +36,7 @@ export const openNotificationWithIcon = (type: NotificationTypeEnum, description
   notification[type]({
     message: description,
     className: `notification-${type}`,
-    closeIcon: <></>,
+    closeIcon: <CloseOutlined />,
     placement: 'topRight',
     icon: icon,
   });

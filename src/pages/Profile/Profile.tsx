@@ -1,6 +1,6 @@
 import { Form, Input, DatePicker, Button } from 'antd';
 import { Rule } from 'antd/lib/form';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -32,7 +32,7 @@ const Profile = () => {
         fullName: data.fullName || '',
         email: data.email || '',
         phoneNumber: data.phoneNumber || '',
-        dob: data.dob ? moment(data.dob) : null,
+        dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
         job: data.job || null,
         referralCode: data.referralCode || null,
@@ -74,7 +74,7 @@ const Profile = () => {
           fullName: data?.fullName ?? '',
           email: data?.email ?? '',
           phoneNumber: data?.phoneNumber ?? '',
-          dob: data?.dob ? moment(data?.dob) : null,
+          dob: data?.dob ? dayjs(data?.dob) : null,
           province: data?.province ?? null,
           job: data?.job ?? null,
           referralCode: data?.referralCode ?? null,
@@ -115,9 +115,6 @@ const Profile = () => {
           </Form.Item>
           <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
             <JobSelect disabled={!isEdit} />
-          </Form.Item>
-          <Form.Item name='referralCode' label={t('PROFILE.REFERRAL')} rules={validator}>
-            <Input disabled defaultValue='jKvs500' className='!px-6 !py-3 !rounded-lg' />
           </Form.Item>
           <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
             <div className='flex justify-end gap-2 !flex-row'>
