@@ -523,6 +523,7 @@
     "MENTOR_LABEL": "Cố vấn: ",
     "TIME_LABEL": "Thời gian: ",
     "BOOKING_CODE_LABEL": "Mã đặt lịch: ",
+    "BOOKING_NOW": "Đăng ký lịch phỏng vấn",
     "SUCCESS_NOTE": "Bạn cần chờ cố vấn phê duyệt lịch này. Chúng tôi sẽ thông báo khi lịch được xác nhận. Vui lòng kiểm tra email để cập nhật."
   },
   "INTERVIEW_SCHEDULER": {

@@ -89,10 +89,10 @@ const Capacity = () => {
 
           <div className='flex flex-col gap-4 md:gap-6'>
             <SkillRadarChart data={chartData} />
-            <ActionButtons
+            {/* <ActionButtons
               onInterviewClick={handleInterviewClick}
               onOtherClick={handleOtherClick}
-            />
+            /> */}
           </div>
         </div>
       </Card>
