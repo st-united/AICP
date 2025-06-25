@@ -7,10 +7,9 @@ import { PortfolioFileType } from '@app/constants/portfolioFileType';
 
 interface FileListProps {
   type: PortfolioFileType;
-  title: string;
 }
 
-const FileList: React.FC<FileListProps> = ({ type, title }) => {
+const FileList: React.FC<FileListProps> = ({ type }) => {
   const { isEdit, certificationFiles, experienceFiles, handleRemove, handleFilePreview, t } =
     usePortfolioContext();
 
@@ -18,7 +17,6 @@ const FileList: React.FC<FileListProps> = ({ type, title }) => {
 
   return (
     <div>
-      <h2 className='mb-4 text-xl font-semibold'>{title}</h2>
       <div
         className={`w-full mt-4 p-4 rounded-lg ${
           isEdit ? 'bg-white' : 'bg-gray-100'
