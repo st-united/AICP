@@ -81,7 +81,7 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
 
   return (
     <Modal open={open} onCancel={onClose} footer={null} centered className='step-modal'>
-      <div className='flex flex-col items-start justify-start gap-4 py-4 md:py-6 lg:py-8'>
+      <div className='flex flex-col items-start justify-start h-full'>
         <div className='w-full sticky top-0 z-10 bg-white custom-steps'>
           <Steps
             className='!cursor-pointer'
@@ -97,7 +97,8 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
             }))}
           />
         </div>
-        <div className='flex flex-col gap-4 h-[calc(80vh-200px)] w-full md:min-w-[1000px] overflow-y-auto custom-scrollbar'>
+
+        <div className='scroll-content custom-scrollbar w-full md:min-w-[1000px]'>
           {steps[current] &&
             steps[current].shouldSkip === false &&
             steps[current]?.render({ goNext, goBack })}
