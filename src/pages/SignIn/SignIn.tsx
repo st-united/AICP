@@ -54,15 +54,15 @@ const SignIn = () => {
   const validator = [yupSync(signInSchema)] as unknown as Rule[];
 
   return (
-    <div id='container-sign-in' className='flex justify-center'>
-      <div className='w-full md:w-5/5 h-full'>
+    <div id='container-sign-in' className='flex justify-center h-full'>
+      <div className='w-full md:w-4/5 h-full'>
         <button
           onClick={handleOnClickHomePage}
           className='bg-transparent cursor-pointer w-auto'
           type='button'
         >
           <Link
-            className='flex items-center justify-start text-lg !mb-14 hover:text-primary-light cursor-pointer'
+            className='flex text-primary-gray items-center justify-start text-lg !mb-14 hover:text-primary-light cursor-pointer'
             to={'/'}
           >
             <div className='flex items-center justify-center'>
@@ -129,13 +129,13 @@ const SignIn = () => {
           <Form.Item className='col-span-2'>
             <Button
               onClick={handleGoogleLogin}
-              className='w-full h-[3.75rem] font-semibold text-gray-700 rounded-md hover:bg-gray-100 transition duration-300'
+              className='w-full h-[3.75rem] font-semibold text-gray-700 rounded-md hover:bg-gray-100 transition duration-300 text-base'
             >
               <Image
                 src={GoogleIcon}
                 alt='Google Icon'
                 preview={false}
-                className='!w-5 !h-5 mr-2'
+                className='!w-7 !h-7 mr-3'
               />
               {t('LOGIN.LOGIN_WITH_GOOGLE')}
             </Button>

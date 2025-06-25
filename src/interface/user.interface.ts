@@ -99,7 +99,10 @@ export interface GetHistoryParams {
   startDate?: string;
   endDate?: string;
 }
-
+export interface Job {
+  id: number;
+  name: string;
+}
 export interface DetailExam {
   id: string;
   startedAt: string;

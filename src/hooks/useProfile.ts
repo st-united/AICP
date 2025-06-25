@@ -3,9 +3,15 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { ChangePassword, UserProfile } from '@app/interface/user.interface';
+import { ChangePassword, Job, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
-import { changePassword, getProfileApi, updateProfileApi, uploadAvatarApi } from '@app/services';
+import {
+  changePassword,
+  getjobApi,
+  getProfileApi,
+  updateProfileApi,
+  uploadAvatarApi,
+} from '@app/services';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -27,6 +33,13 @@ export const useGetProfile = (isAuth = true) => {
       enabled: isAuth,
     },
   );
+};
+
+export const useGetJob = () => {
+  return useQuery<Job[]>([QUERY_KEY.JOB], async () => {
+    const { data } = await getjobApi();
+    return data.data;
+  });
 };
 
 export const useChangePassword = () => {
