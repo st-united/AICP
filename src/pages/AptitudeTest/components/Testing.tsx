@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import CountdownTimer from './CountdownTimer';
 import QuestionDisplay from './QuestionDisplay';
 import QuestionIndexPanel from './QuestionIndexPanel';
-import { useGetExamSet, useSubmitDraftQuestion, useSubmitExam } from '@app/hooks';
+import { useDeleteExam, useGetExamSet, useSubmitDraftQuestion, useSubmitExam } from '@app/hooks';
 import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 
 const Testing = () => {
@@ -30,6 +30,7 @@ const Testing = () => {
   const { data: examSet } = useGetExamSet();
   const submitDraftQuestionMutation = useSubmitDraftQuestion();
   const { mutate: submitExam, isLoading: isSubmitting } = useSubmitExam();
+  const { mutate: deleteExam, isLoading: isDeleting } = useDeleteExam();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
 
@@ -100,7 +101,7 @@ const Testing = () => {
         };
       });
     },
-    [answeredQuestions, examSet?.questions],
+    [answeredQuestions, examSet?.examId, examSet?.questions, submitDraftQuestionMutation],
   );
 
   const handleSubmit = useCallback(() => {
@@ -339,27 +340,29 @@ const Testing = () => {
                       </React.Fragment>
                     );
                   })}
-                  <span className='text-[#FE7743]'>
-                    {' ('}
-                    <span
-                      className='cursor-pointer hover:underline'
-                      onClick={() => {
-                        if (unansweredQuestions.length > 3) {
-                          handleQuestionClick(unansweredQuestions[0].id);
-                        }
-                      }}
-                      role='button'
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && unansweredQuestions.length > 3) {
-                          handleQuestionClick(unansweredQuestions[0].id);
-                        }
-                      }}
-                    >
-                      {t('TEST.MORE')}
+                  {unansweredQuestions.length > 3 && (
+                    <span className='text-[#FE7743]'>
+                      {' ('}
+                      <span
+                        className='cursor-pointer hover:underline'
+                        onClick={() => {
+                          if (unansweredQuestions.length > 3) {
+                            handleQuestionClick(unansweredQuestions[0].id);
+                          }
+                        }}
+                        role='button'
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' && unansweredQuestions.length > 3) {
+                            handleQuestionClick(unansweredQuestions[0].id);
+                          }
+                        }}
+                      >
+                        {t('TEST.MORE')}
+                      </span>
+                      {')'}
                     </span>
-                    {')'}
-                  </span>
+                  )}
                 </span>
               </div>
             </div>
@@ -451,12 +454,13 @@ const Testing = () => {
           </div>
           <div className='flex items-center justify-center mt-4 gap-4'>
             <Button
-              onClick={() => setIsSubmitModalOpen(true)}
+              onClick={() => deleteExam(examSet.examId)}
+              loading={isDeleting}
+              disabled={isDeleting}
               className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
             >
               {t('BUTTON.EXIT_NOW')}
             </Button>
-
             <Button
               onClick={() => setIsModalOpen(false)}
               className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'

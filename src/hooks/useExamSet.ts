@@ -6,7 +6,12 @@ import { setStorageData } from '@app/config';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { EXAM_LATEST } from '@app/constants/testing';
 import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
-import { getExamSetsApi, submitDraftQuestionApi, submitExamSetApi } from '@app/services';
+import {
+  deleteExamByIdApi,
+  getExamSetsApi,
+  submitDraftQuestionApi,
+  submitExamSetApi,
+} from '@app/services';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -126,6 +131,25 @@ export const useSubmitExam = () => {
         setStorageData(EXAM_LATEST, examId);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
         navigate(NAVIGATE_URL.SCHEDULE);
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
+};
+export const useDeleteExam = () => {
+  const navigate = useNavigate();
+
+  return useMutation(
+    async (examId: string) => {
+      const { data } = await deleteExamByIdApi(examId);
+      return data;
+    },
+    {
+      onSuccess({ message }) {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+        navigate('/');
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
