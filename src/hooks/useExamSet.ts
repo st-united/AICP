@@ -147,8 +147,7 @@ export const useDeleteExam = () => {
       return data;
     },
     {
-      onSuccess({ message }) {
-        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+      onSuccess() {
         navigate('/');
       },
       onError({ response }) {
