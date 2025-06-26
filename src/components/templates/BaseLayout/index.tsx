@@ -1,8 +1,7 @@
+import { Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
 
 import HeaderComponent from '@app/components/Layout/Header/Header';
-
-import { Layout } from 'antd';
 
 const { Content } = Layout;
 

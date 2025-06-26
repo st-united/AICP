@@ -451,12 +451,16 @@ const Testing = () => {
           </div>
           <div className='flex items-center justify-center mt-4 gap-4'>
             <Button
-              onClick={() => setIsSubmitModalOpen(false)}
+              onClick={() => setIsSubmitModalOpen(true)}
               className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
             >
               {t('BUTTON.EXIT_NOW')}
             </Button>
-            <Button className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'>
+
+            <Button
+              onClick={() => setIsModalOpen(false)}
+              className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
+            >
               {t('BUTTON.CONTINUE_NOW')}
             </Button>
           </div>

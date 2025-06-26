@@ -148,6 +148,7 @@
     "RESULT_CONFIRM_TEST": "Sau khi hoàn thành, bạn sẽ nhận được bản đánh giá năng lực AI ở dạng dự thảo và chuyển sang bước tiếp theo: đặt lịch phỏng vấn với đội ngũ chuyên gia để hoàn thiện và xác nhận năng lực AI một cách chính xác nhất.",
     "WARNING_CONFIRM_TEST": "Bạn chỉ được làm bài đánh giá một lần trước khi có kết quả chính thức. Ngay sau khi nhận được phản hồi từ đội ngũ cố vấn, bạn sẽ có thể tiếp tục với bài kiểm tra tiếp theo.",
     "START_CONFIRM_TEST": "Bắt đầu ngay",
+    "START_CONFIRM_TEST_AGAIN": "Tiếp tục làm",
     "BACK": "Quay lại",
     "REVIEW_RESULT": "Xem lại kết quả",
     "NOTE_CONFIRM_TEST": "LƯU Ý"
