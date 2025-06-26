@@ -148,6 +148,7 @@
     "RESULT_CONFIRM_TEST": "Sau khi hoàn thành, bạn sẽ nhận được bản đánh giá năng lực AI ở dạng dự thảo và chuyển sang bước tiếp theo: đặt lịch phỏng vấn với đội ngũ chuyên gia để hoàn thiện và xác nhận năng lực AI một cách chính xác nhất.",
     "WARNING_CONFIRM_TEST": "Bạn chỉ được làm bài đánh giá một lần trước khi có kết quả chính thức. Ngay sau khi nhận được phản hồi từ đội ngũ cố vấn, bạn sẽ có thể tiếp tục với bài kiểm tra tiếp theo.",
     "START_CONFIRM_TEST": "Bắt đầu ngay",
+    "START_CONFIRM_TEST_AGAIN": "Tiếp tục làm",
     "BACK": "Quay lại",
     "REVIEW_RESULT": "Xem lại kết quả",
     "NOTE_CONFIRM_TEST": "LƯU Ý"
@@ -489,6 +490,7 @@
     "QUESTION_INDEX": "Mục lục câu hỏi",
     "QUESTION": "Câu hỏi",
     "FLAG_QUESTION": "Đánh dấu câu hỏi",
+    "UNFLAG_QUESTION": "Bỏ đánh dấu câu hỏi",
     "MULTIPLE_CHOICE": "Chọn nhiều đáp án đúng:",
     "SINGLE_CHOICE": "Chọn 1 đáp án đúng:",
     "TOTAL_QUESTION": "Tổng số câu hỏi",
@@ -505,7 +507,10 @@
     "AUTO_SUBMIT_MESSAGE": "Thời gian quy định để hoàn thành bài làm của bạn đã kết thúc.",
     "AUTO_SUBMIT_MESSAGE_2": "Bài làm sẽ tự động nộp sau {{countdown}} giây.",
     "CLOSE_WARNING_TITLE": "Cảnh báo: Bài làm chưa được lưu",
-    "CLOSE_WARNING_MESSAGE": "Nếu bạn rời khỏi trang này, bài làm của bạn sẽ không được lưu lại. Bạn có chắc chắn muốn rời khỏi không?"
+    "CLOSE_WARNING_MESSAGE": "Nếu bạn rời khỏi trang này, bài làm của bạn sẽ không được lưu lại. Bạn có chắc chắn muốn rời khỏi không?",
+    "UNANSWERED_QUESTIONS": "Chưa trả lời",
+    "ANSWERED_QUESTIONS": "Đã trả lời",
+    "FLAGGED_QUESTIONS": "Đã đánh dấu"
   },
   "SUBMIT": {
     "TITLE": "Cảnh báo: Bài làm chưa hoàn tất",
@@ -528,6 +533,7 @@
     "MENTOR_LABEL": "Cố vấn: ",
     "TIME_LABEL": "Thời gian: ",
     "BOOKING_CODE_LABEL": "Mã đặt lịch: ",
+    "BOOKING_NOW": "Đăng ký lịch phỏng vấn",
     "SUCCESS_NOTE": "Bạn cần chờ cố vấn phê duyệt lịch này. Chúng tôi sẽ thông báo khi lịch được xác nhận. Vui lòng kiểm tra email để cập nhật."
   },
   "INTERVIEW_SCHEDULER": {
