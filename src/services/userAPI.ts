@@ -41,5 +41,8 @@ export const forgotPasswordApi = async (email: string) =>
 export const updateForgotPasswordApi = async (payload: UpdateForgotPassword) =>
   await axios.post(API_URL.UPDATE_FORGOT_PASSWORD, payload);
 
+export const checkResetPasswordTokenApi = async (token: string) =>
+  await axios.post(API_URL.CHECK_RESET_TOKEN, { token });
+
 export const getDetailExam = async (examId: string) =>
   await axios.get(`${API_URL.DETAIL_EXAM}/${examId}`);

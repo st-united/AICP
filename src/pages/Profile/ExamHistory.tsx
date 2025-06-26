@@ -97,6 +97,7 @@ const ExamHistory = () => {
           hasQuizzes={hasQuizzes}
           startNewDisabled={hasInProgressQuiz}
           examId={selectedQuizId}
+          disableButtons={historyData?.length === 0 ? true : false}
         />
 
         {showDetailView ? (
