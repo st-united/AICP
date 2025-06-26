@@ -4,7 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { QUERY_KEY } from '@app/constants';
 import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
-import { getExamSetsApi, submitDraftQuestionApi, submitExamSetApi } from '@app/services';
+import {
+  deleteExamByIdApi,
+  getExamSetsApi,
+  submitDraftQuestionApi,
+  submitExamSetApi,
+} from '@app/services';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -117,6 +122,25 @@ export const useSubmitExam = () => {
   return useMutation(
     async (examId: string) => {
       const { data } = await submitExamSetApi(examId);
+      return data;
+    },
+    {
+      onSuccess({ message }) {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+        navigate('/');
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
+};
+export const useDeleteExam = () => {
+  const navigate = useNavigate();
+
+  return useMutation(
+    async (examId: string) => {
+      const { data } = await deleteExamByIdApi(examId);
       return data;
     },
     {

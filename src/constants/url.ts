@@ -69,6 +69,7 @@ export const API_URL = {
   REGISTER_USER: '/auth/register',
   EXAM_SETS_INPUT_TEST: '/exam-sets/input-test',
   ANSWERS: '/answers',
+  EXAM: '/exam',
 };
 
 export const VEHICLES_URL = '/vehicles';
