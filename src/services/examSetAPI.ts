@@ -10,3 +10,6 @@ export const submitDraftQuestionApi = (params: SubmitExamSetPayload) =>
 
 export const submitExamSetApi = (examSetId: string) =>
   axios.patch(`${API_URL.ANSWERS}/${examSetId}`);
+
+export const deleteExamByIdApi = (examSetId: string) =>
+  axios.delete(`${API_URL.DETAIL_EXAM}/${examSetId}`);

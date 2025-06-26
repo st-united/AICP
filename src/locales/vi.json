@@ -469,6 +469,7 @@
     "QUESTION_INDEX": "Mục lục câu hỏi",
     "QUESTION": "Câu hỏi",
     "FLAG_QUESTION": "Đánh dấu câu hỏi",
+    "UNFLAG_QUESTION": "Bỏ đánh dấu câu hỏi",
     "MULTIPLE_CHOICE": "Chọn nhiều đáp án đúng:",
     "SINGLE_CHOICE": "Chọn 1 đáp án đúng:",
     "TOTAL_QUESTION": "Tổng số câu hỏi",
@@ -485,7 +486,10 @@
     "AUTO_SUBMIT_MESSAGE": "Thời gian quy định để hoàn thành bài làm của bạn đã kết thúc.",
     "AUTO_SUBMIT_MESSAGE_2": "Bài làm sẽ tự động nộp sau {{countdown}} giây.",
     "CLOSE_WARNING_TITLE": "Cảnh báo: Bài làm chưa được lưu",
-    "CLOSE_WARNING_MESSAGE": "Nếu bạn rời khỏi trang này, bài làm của bạn sẽ không được lưu lại. Bạn có chắc chắn muốn rời khỏi không?"
+    "CLOSE_WARNING_MESSAGE": "Nếu bạn rời khỏi trang này, bài làm của bạn sẽ không được lưu lại. Bạn có chắc chắn muốn rời khỏi không?",
+    "UNANSWERED_QUESTIONS": "Chưa trả lời",
+    "ANSWERED_QUESTIONS": "Đã trả lời",
+    "FLAGGED_QUESTIONS": "Đã đánh dấu"
   },
   "SUBMIT": {
     "TITLE": "Cảnh báo: Bài làm chưa hoàn tất",
