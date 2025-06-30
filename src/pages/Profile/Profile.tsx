@@ -28,17 +28,27 @@ const Profile = () => {
 
   const restoreProfileValues = () => {
     if (data) {
+      const jobIds: string[] = Array.isArray(data.job)
+        ? data.job
+            .map((j: any) => {
+              if (typeof j === 'object' && j !== null && 'id' in j) {
+                return j.id;
+              } else if (typeof j === 'string') {
+                return j;
+              } else {
+                return '';
+              }
+            })
+            .filter(Boolean)
+        : [];
+
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
         phoneNumber: data.phoneNumber || '',
         dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
-        job: Array.isArray(data.job)
-          ? data.job.every((j) => typeof j === 'object' && j !== null && 'id' in j)
-            ? data.job.map((j) => (j as { id: string }).id)
-            : data.job
-          : [],
+        job: jobIds,
         referralCode: data.referralCode || null,
       });
     }
