@@ -26,7 +26,7 @@ const Profile = () => {
   const { t } = useTranslation();
   const validator = [yupSync(useProfileSchema())] as unknown as Rule[];
 
-  useEffect(() => {
+  const restoreProfileValues = () => {
     if (data) {
       form.setFieldsValue({
         fullName: data.fullName || '',
@@ -42,12 +42,17 @@ const Profile = () => {
         referralCode: data.referralCode || null,
       });
     }
+  };
+
+  useEffect(() => {
+    restoreProfileValues();
   }, [data, form]);
 
   const handleCancel = () => {
     setAvatar('');
     setIsEdit(false);
     form.resetFields();
+    restoreProfileValues();
   };
 
   const handleSubmit = async (values: UserProfile) => {
