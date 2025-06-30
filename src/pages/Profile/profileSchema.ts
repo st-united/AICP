@@ -54,7 +54,7 @@ export const useProfileSchema = () => {
 
     province: yup.string().nullable(),
 
-    job: yup.string().nullable(),
+    job: yup.array().of(yup.string()).nullable(),
 
     referralCode: yup.string().nullable(),
   });
