@@ -38,6 +38,7 @@ const JobSelect: React.FC<JobSelectProps> = (props) => {
         showSearch
         allowClear
         {...props}
+        value={props.value?.length ? props.value : undefined}
       />
     </div>
   );
