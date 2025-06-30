@@ -28,7 +28,7 @@ export interface UserProfile {
   avatar?: string;
   permissions?: string[];
   province?: string;
-  job?: string;
+  job?: string[];
   referralCode: string;
 }
 
