@@ -26,28 +26,51 @@ const Profile = () => {
   const { t } = useTranslation();
   const validator = [yupSync(useProfileSchema())] as unknown as Rule[];
 
-  useEffect(() => {
+  const restoreProfileValues = () => {
     if (data) {
+      const jobIds: string[] = Array.isArray(data.job)
+        ? data.job
+            .map((j: any) => {
+              if (typeof j === 'object' && j !== null && 'id' in j) {
+                return j.id;
+              } else if (typeof j === 'string') {
+                return j;
+              } else {
+                return '';
+              }
+            })
+            .filter(Boolean)
+        : [];
+
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
         phoneNumber: data.phoneNumber || '',
         dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
-        job: data.job || null,
+        job: jobIds,
         referralCode: data.referralCode || null,
       });
     }
+  };
+
+  useEffect(() => {
+    restoreProfileValues();
   }, [data, form]);
 
   const handleCancel = () => {
     setAvatar('');
     setIsEdit(false);
     form.resetFields();
+    restoreProfileValues();
   };
 
   const handleSubmit = async (values: UserProfile) => {
-    updateProfileMutation.mutate(values, {
+    const fixedValues = {
+      ...values,
+      job: Array.isArray(values.job) ? values.job : values.job ? [values.job] : [],
+    };
+    updateProfileMutation.mutate(fixedValues, {
       onSuccess: () => {
         setIsEdit(false);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PROFILE.UPDATE_SUCCESS'));

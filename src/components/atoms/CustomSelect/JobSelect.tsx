@@ -1,16 +1,18 @@
 import { Select, SelectProps } from 'antd';
 import './CustomSelect.scss';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useGetJob } from '@app/hooks';
 
-interface ProvinceSelectProps extends SelectProps {
-  options?: { value: string; label: JSX.Element }[];
+interface JobSelectProps extends SelectProps<string[]> {
+  options?: { value: string; label: JSX.Element | string }[];
 }
 
-const JobSelect: React.FC<ProvinceSelectProps> = (props) => {
-  const { data: domainData, isLoading } = useGetJob();
+const JobSelect: React.FC<JobSelectProps> = (props) => {
+  const { data: domainData } = useGetJob();
+  const { t } = useTranslation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const jobOptions = useMemo(() => {
     return (domainData || []).map((job) => ({
@@ -18,15 +20,25 @@ const JobSelect: React.FC<ProvinceSelectProps> = (props) => {
       label: job.name,
     }));
   }, [domainData]);
-  const { t } = useTranslation();
+
   return (
     <div id='customSelect'>
       <Select
-        className='h-10 flex items-center'
-        allowClear
-        options={jobOptions}
+        mode='multiple'
+        className='h-10 flex items-center w-full'
+        maxTagCount='responsive'
+        maxTagTextLength={10}
+        style={{ maxHeight: 'auto' }}
         placeholder={t('PLACEHOLDER.SELECT_JOB')}
+        options={jobOptions}
+        open={dropdownOpen}
+        onDropdownVisibleChange={(open) => setDropdownOpen(open)}
+        onSelect={() => setDropdownOpen(true)}
+        autoClearSearchValue={false}
+        showSearch
+        allowClear
         {...props}
+        value={props.value?.length ? props.value : undefined}
       />
     </div>
   );
