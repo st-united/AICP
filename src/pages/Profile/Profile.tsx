@@ -39,7 +39,6 @@ const Profile = () => {
             ? data.job.map((j) => (j as { id: string }).id)
             : data.job
           : [],
-
         referralCode: data.referralCode || null,
       });
     }
