@@ -234,7 +234,9 @@
     "PLACEHOLDER_NEW_PASSWORD": "Nhập mật khẩu mới",
     "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
-    "SAVE": "Lưu"
+    "SAVE": "Lưu",
+    "AVATAR_UPLOAD_SUCCESS": "Cập nhật ảnh đại diện thành công!",
+    "AVATAR_UPLOAD_FAILED": "Cập nhật ảnh đại diện thất bại. Vui lòng thử lại."
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
