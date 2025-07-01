@@ -2,9 +2,16 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { QUERY_KEY } from '@app/constants';
+import { setStorageData } from '@app/config';
+import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
+import { EXAM_LATEST } from '@app/constants/testing';
 import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
-import { getExamSetsApi, submitDraftQuestionApi, submitExamSetApi } from '@app/services';
+import {
+  deleteExamByIdApi,
+  getExamSetsApi,
+  submitDraftQuestionApi,
+  submitExamSetApi,
+} from '@app/services';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -111,18 +118,37 @@ export const useSubmitDraftQuestion = () => {
   return useMutation((params: SubmitExamSetPayload) => submitDraftQuestionApi(params));
 };
 
-export const useSubmitExamSet = () => {
+export const useSubmitExam = () => {
   const navigate = useNavigate();
 
   return useMutation(
-    async (examSetId: string) => {
-      const { data } = await submitExamSetApi(examSetId);
+    async (examId: string) => {
+      const { data } = await submitExamSetApi(examId);
       return data;
     },
     {
-      onSuccess({ message }) {
+      onSuccess({ message }, examId) {
+        setStorageData(EXAM_LATEST, examId);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        navigate('/scheduler');
+        navigate(NAVIGATE_URL.SCHEDULE);
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
+};
+export const useDeleteExam = () => {
+  const navigate = useNavigate();
+
+  return useMutation(
+    async (examId: string) => {
+      const { data } = await deleteExamByIdApi(examId);
+      return data;
+    },
+    {
+      onSuccess() {
+        navigate('/');
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);

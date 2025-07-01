@@ -9,22 +9,23 @@ interface Pilar {
   mindSetScore: number;
   skillSetScore: number;
   sfiaLevel: SFIALevel | null;
+  className?: string;
 }
 
-const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, sfiaLevel }: Pilar) => {
+const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, sfiaLevel, className }: Pilar) => {
   return (
-    <div className=''>
-      <h2 className='font-semibold mb-6 text-base sm:text-lg'>
+    <div className={className}>
+      <h2 className='font-semibold mb-6 text-lg sm:text-xl'>
         <span className='text-gray-800'>
           {t('EXAM.COMPETENCY_LEVEL')}{' '}
           <span className='text-orange-500 font-bold'>
-            {sfiaLevel ? getLevelText(sfiaLevel) : t('EXAM.NONE_LEVEL')}
+            {sfiaLevel ? getLevelText(sfiaLevel) : t('EXAM.LEVEL.NONE_LEVEL')}
           </span>
         </span>
       </h2>
 
       <div className='space-y-3 mb-6'>
-        <div className='text-base text-gray-700'>
+        <div className='text-lg text-gray-700'>
           <span className='inline-block w-2 h-2 bg-black rounded-full mt-2 mr-3 flex-shrink-0'></span>
           <Trans
             i18nKey={'EXAM.AI_MINDSET_SCORE'}
@@ -32,7 +33,7 @@ const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, sfiaLevel }: Pi
             components={{ bold: <span className='font-bold' /> }}
           />
         </div>
-        <div className='text-base text-gray-700'>
+        <div className='text-lg text-gray-700'>
           <span className='inline-block w-2 h-2 bg-black rounded-full mt-2 mr-3 flex-shrink-0'></span>
           <Trans
             i18nKey={'EXAM.AI_SKILLSET_SCORE'}
@@ -40,7 +41,7 @@ const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, sfiaLevel }: Pi
             components={{ bold: <span className='font-bold' /> }}
           />
         </div>
-        <div className='text-base text-gray-700'>
+        <div className='text-lg text-gray-700'>
           <span className='inline-block w-2 h-2 bg-black rounded-full mt-2 mr-3 flex-shrink-0'></span>
           <Trans
             i18nKey={'EXAM.AI_TOOLSET_SCORE'}

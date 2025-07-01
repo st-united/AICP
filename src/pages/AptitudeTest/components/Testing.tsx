@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import CountdownTimer from './CountdownTimer';
 import QuestionDisplay from './QuestionDisplay';
 import QuestionIndexPanel from './QuestionIndexPanel';
-import { useGetExamSet, useSubmitDraftQuestion, useSubmitExamSet } from '@app/hooks';
+import { useDeleteExam, useGetExamSet, useSubmitDraftQuestion, useSubmitExam } from '@app/hooks';
 import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 
 const Testing = () => {
@@ -29,7 +29,8 @@ const Testing = () => {
   const [unansweredQuestions, setUnansweredQuestions] = useState<Question[]>([]);
   const { data: examSet } = useGetExamSet();
   const submitDraftQuestionMutation = useSubmitDraftQuestion();
-  const { mutate: submitExamSet, isLoading: isSubmitting } = useSubmitExamSet();
+  const { mutate: submitExam, isLoading: isSubmitting } = useSubmitExam();
+  const { mutate: deleteExam, isLoading: isDeleting } = useDeleteExam();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
 
@@ -100,7 +101,7 @@ const Testing = () => {
         };
       });
     },
-    [answeredQuestions, examSet?.questions],
+    [answeredQuestions, examSet?.examId, examSet?.questions, submitDraftQuestionMutation],
   );
 
   const handleSubmit = useCallback(() => {
@@ -115,12 +116,12 @@ const Testing = () => {
 
   const handleConfirmSubmit = useCallback(() => {
     if (!examSet) return;
-    submitExamSet(examSet.id, {
+    submitExam(examSet.examId, {
       onSuccess: () => {
         setIsSubmitModalOpen(false);
       },
     });
-  }, [examSet, submitExamSet]);
+  }, [examSet, submitExam]);
 
   const handleCloseModal = useCallback(() => {
     if (!examSet?.questions) return;
@@ -154,7 +155,7 @@ const Testing = () => {
     setCurrentQuestion({ id, timestamp: timestamp ?? Date.now() });
   };
   return (
-    <div className='overflow-hidden'>
+    <div className='relative overflow-hidden'>
       <div className='absolute top-10 right-10'>
         <CloseOutlined
           onClick={handleCloseModal}
@@ -170,28 +171,29 @@ const Testing = () => {
           {t('TEST.SUB_TITLE')}
         </span>
       </div>
-      <div className='flex h-full'>
-        <div className='hidden smM:block fixed left-0 top-[115px] w-[300px] smM:w-80 md:w-96 h-[calc(100vh-145px)] p-3 smM:p-6 pt-0 z-10'>
-          <div className='flex flex-col space-y-6 h-full'>
-            <CountdownTimer
-              duration={examSet.timeLimitMinutes * 60}
-              onTimeUp={() => {
-                if (examSet) {
-                  submitExamSet(examSet.id);
-                }
-              }}
-            />
-            <QuestionIndexPanel
-              questions={examSet.questions}
-              currentQuestion={currentQuestion}
-              currentQuestionScroll={currentQuestionScroll}
-              answeredQuestions={answeredQuestions}
-              flaggedQuestions={flaggedQuestions}
-              onFlagToggle={handleFlagToggle}
-              onQuestionSelect={handleQuestionSelect}
-              isAutoScrolling={isAutoScrolling}
-            />
-          </div>
+
+      <div className='smM:flex h-[calc(100vh-145px)] p-3 smM:p-6'>
+        <div className='hidden smM:flex flex-col w-[300px] smM:w-80 md:w-96 space-y-6'>
+          {/* <div className='flex flex-col space-y-6 h-full'> */}
+          <CountdownTimer
+            duration={examSet.timeLimitMinutes * 60}
+            onTimeUp={() => {
+              if (examSet) {
+                submitExam(examSet.examId);
+              }
+            }}
+          />
+          <QuestionIndexPanel
+            questions={examSet.questions}
+            currentQuestion={currentQuestion}
+            currentQuestionScroll={currentQuestionScroll}
+            answeredQuestions={answeredQuestions}
+            flaggedQuestions={flaggedQuestions}
+            onFlagToggle={handleFlagToggle}
+            onQuestionSelect={handleQuestionSelect}
+            isAutoScrolling={isAutoScrolling}
+          />
+          {/* </div> */}
         </div>
 
         <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
@@ -218,7 +220,7 @@ const Testing = () => {
                 duration={examSet.timeLimitMinutes * 60}
                 onTimeUp={() => {
                   if (examSet) {
-                    submitExamSet(examSet.id);
+                    submitExam(examSet.examId);
                   }
                 }}
               />
@@ -242,7 +244,7 @@ const Testing = () => {
           </div>
         )}
 
-        <div className='smM:ml-80 md:ml-96 flex-1'>
+        <div className='flex-1 smM:ml-6'>
           <div className='flex flex-col w-full bg-white p-6 mdM:p-10 rounded-xl mdM:pr-0 pr-0'>
             <Progress
               className='pr-6 mdM:pr-10'
@@ -338,34 +340,36 @@ const Testing = () => {
                       </React.Fragment>
                     );
                   })}
-                  <span className='text-[#FE7743]'>
-                    {' ('}
-                    <span
-                      className='cursor-pointer hover:underline'
-                      onClick={() => {
-                        if (unansweredQuestions.length > 3) {
-                          handleQuestionClick(unansweredQuestions[0].id);
-                        }
-                      }}
-                      role='button'
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && unansweredQuestions.length > 3) {
-                          handleQuestionClick(unansweredQuestions[0].id);
-                        }
-                      }}
-                    >
-                      {t('TEST.MORE')}
+                  {unansweredQuestions.length > 3 && (
+                    <span className='text-[#FE7743]'>
+                      {' ('}
+                      <span
+                        className='cursor-pointer hover:underline'
+                        onClick={() => {
+                          if (unansweredQuestions.length > 3) {
+                            handleQuestionClick(unansweredQuestions[0].id);
+                          }
+                        }}
+                        role='button'
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' && unansweredQuestions.length > 3) {
+                            handleQuestionClick(unansweredQuestions[0].id);
+                          }
+                        }}
+                      >
+                        {t('TEST.MORE')}
+                      </span>
+                      {')'}
                     </span>
-                    {')'}
-                  </span>
+                  )}
                 </span>
               </div>
             </div>
             <span className='text-lg font-medium'>{t('TEST.CHECK_ANSWER')}</span>
             <div className='flex items-center justify-center gap-4 mt-6 flex-col smM:flex-row'>
               <Button
-                onClick={() => submitExamSet(examSet.id)}
+                onClick={() => submitExam(examSet.examId)}
                 loading={isSubmitting}
                 disabled={isSubmitting}
                 className='border-2 border-[#FE7743] rounded-3xl text-[#FE7743] px-8 py-2 h-full text-lg font-bold hover:border-[#ff5029] hover:text-[#ff5029]'
@@ -407,7 +411,7 @@ const Testing = () => {
                 {t('BUTTON.CANCEL_TEST')}
               </Button>
               <Button
-                onClick={() => submitExamSet(examSet.id)}
+                onClick={() => submitExam(examSet.examId)}
                 loading={isSubmitting}
                 disabled={isSubmitting}
                 className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
@@ -450,12 +454,17 @@ const Testing = () => {
           </div>
           <div className='flex items-center justify-center mt-4 gap-4'>
             <Button
-              onClick={() => setIsSubmitModalOpen(false)}
+              onClick={() => deleteExam(examSet.examId)}
+              loading={isDeleting}
+              disabled={isDeleting}
               className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
             >
               {t('BUTTON.EXIT_NOW')}
             </Button>
-            <Button className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'>
+            <Button
+              onClick={() => setIsModalOpen(false)}
+              className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
+            >
               {t('BUTTON.CONTINUE_NOW')}
             </Button>
           </div>
