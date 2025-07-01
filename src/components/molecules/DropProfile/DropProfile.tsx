@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { DefaultAvatar } from '@app/assets/images';
 import { removeStorageData } from '@app/config';
 import { ACCESS_TOKEN, NAVIGATE_URL } from '@app/constants';
 import { logout } from '@app/redux/features/auth/authSlice';
 import { RootState } from '@app/redux/store';
 
 import './DropProfile.scss';
-import { DefaultAvatar } from '@app/assets/images';
 
 export const DropProfile: FC = () => {
   const { t } = useTranslation();
