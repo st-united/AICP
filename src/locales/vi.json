@@ -224,7 +224,7 @@
     "COUNTRY_PLACEHOLDER": "Chọn quốc gia",
     "PROVINCE": "Tỉnh thành",
     "PROVINCE_PLACEHOLDER": "Chọn tỉnh thành",
-    "OCCUPATION": "Nghề nghiệp",
+    "OCCUPATION": "Lĩnh vực",
     "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
     "REFERRAL": "Mã giới thiệu",
     "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu",
@@ -337,7 +337,7 @@
   "PLACEHOLDER": {
     "SELECT_COUNTRY": "Chọn quốc gia",
     "SELECT_CITY": "Chọn tỉnh thành",
-    "SELECT_JOB": "Chọn công việc",
+    "SELECT_JOB": "Chọn lĩnh vực",
     "FIELD_REQUIRED": "{{field}} *"
   },
   "SIGN_UP": {
