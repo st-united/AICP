@@ -16,13 +16,14 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
   const { isPass, isLoading } = useDemoCondition();
   const [nav, setNav] = useState<NAVIGATION>(NAVIGATION.NEXT);
   const [current, setCurrent] = useState(0);
+  const [autoSkipping, setAutoSkipping] = useState(true);
 
   const steps = useMemo<StepItem[]>(
     () => [
       {
         title: 'Personal Info',
         render: (props) => <DemoComponent {...props} />,
-        shouldSkip: false,
+        shouldSkip: true,
         loading: isLoading,
       },
       {
@@ -61,19 +62,16 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
 
   useEffect(() => {
     const currentStep = steps[current];
-    if (!currentStep) return;
+    if (!currentStep || !autoSkipping) return;
     if (!currentStep.loading && currentStep.shouldSkip) {
       const timer = setTimeout(() => {
-        if (nav === NAVIGATION.NEXT) {
-          goNext();
-        } else {
-          goBack();
-        }
+        goNext();
       }, 0);
-
       return () => clearTimeout(timer);
+    } else if (currentStep.shouldSkip === false && !currentStep.loading) {
+      setAutoSkipping(false);
     }
-  }, [current, steps, nav, goNext, goBack]);
+  }, [current, steps, goNext, autoSkipping]);
 
   return (
     <Modal open={open} onCancel={onClose} footer={null} centered className='step-modal'>
@@ -94,10 +92,8 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
           />
         </div>
 
-        <div className='scroll-content custom-scrollbar w-full md:min-w-[1000px]'>
-          {steps[current] &&
-            steps[current].shouldSkip === false &&
-            steps[current]?.render({ goNext, goBack })}
+        <div className='scroll-content custom-scrollbar w-full smL:min-w-[700px] lg:min-w-[1000px]'>
+          {!autoSkipping && steps[current]?.render({ goNext, goBack })}
         </div>
       </div>
     </Modal>
