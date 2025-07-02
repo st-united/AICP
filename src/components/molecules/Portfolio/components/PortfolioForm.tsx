@@ -1,10 +1,10 @@
 import { Form, Input, Button } from 'antd';
 import React, { useMemo } from 'react';
 
-import { usePortfolioContext } from '../context/PortfolioContext';
-import { usePortfolioSchema } from '../PortfolioSchema';
 import { FileList } from './FileList';
 import { FileUpload } from './FileUpload';
+import { usePortfolioContext } from '../context/PortfolioContext';
+import { usePortfolioSchema } from '../PortfolioSchema';
 import { PortfolioFileType } from '@app/constants/portfolioFileType';
 import { yupSync } from '@app/helpers';
 
@@ -56,13 +56,13 @@ const PortfolioForm: React.FC = () => {
           </Form.Item>
         </section>
       </div>
-
       <div>
+        <h2 className='mb-4 text-xl font-semibold'>{t('PORTFOLIO.CERTIFICATIONS')}</h2>
         <FileUpload type={PortfolioFileType.CERTIFICATION} />
-        <FileList type={PortfolioFileType.CERTIFICATION} title={t('PORTFOLIO.CERTIFICATIONS')} />
-
+        <FileList type={PortfolioFileType.CERTIFICATION} />
+        <h2 className='mb-4 text-xl font-semibold'>{t('PORTFOLIO.EXPERIENCE')}</h2>
         <FileUpload type={PortfolioFileType.EXPERIENCE} />
-        <FileList type={PortfolioFileType.EXPERIENCE} title={t('PORTFOLIO.EXPERIENCE')} />
+        <FileList type={PortfolioFileType.EXPERIENCE} />
       </div>
 
       <Form.Item className='portfolio-content__actions'>

@@ -48,7 +48,7 @@ const FileItem: React.FC<FileItemProps> = memo(
                 icon={<DeleteFilled className='!text-xl text-red-700' />}
                 className={`${
                   isEdit ? 'cursor-pointer' : 'cursor-not-allowed'
-                } absolute left-0 top-1`}
+                } absolute left-0 top-1/2 transform -translate-y-1/2`}
                 onClick={handleRemove}
                 disabled={!isEdit}
               />

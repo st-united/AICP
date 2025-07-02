@@ -1,15 +1,16 @@
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL } from '@app/constants';
+import { ExamStatusEnum } from '@app/constants/enum';
 import { useHasTakenExamDefault } from '@app/hooks';
 import { StepItemComponent } from '@app/interface/stepSection.interface';
 
 export default function BeforeTestComponent({ goBack }: StepItemComponent) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { data: hasTakenExam } = useHasTakenExamDefault();
+  const { data: hasTakenExam, isLoading } = useHasTakenExamDefault();
 
   const handleStartTest = () => {
     navigate(NAVIGATE_URL.TEST);
@@ -22,7 +23,7 @@ export default function BeforeTestComponent({ goBack }: StepItemComponent) {
     <>
       <div className='bg-blue-100 rounded-full p-3 md:p-4'>
         <div className='bg-blue-300 rounded-full p-3 md:p-6'>
-          <span className='text-2xl font-medium text-blue-500 m-2 md:text-4xl'>?</span>
+          <span className='text-2xl font-medium text-blue-500 m-3 md:text-4xl'>?</span>
         </div>
       </div>
 
@@ -77,7 +78,7 @@ export default function BeforeTestComponent({ goBack }: StepItemComponent) {
       <ModalContent durationKey='MODAL.DURATION_CONFIRM_IMPROVE_TEST' />
 
       <div className='px-3 w-full md:my-6'>
-        <div className='flex flex-col gap-2 md:flex-row md:justify-center md:gap-4'>
+        <div className='flex flex-col gap-2 md:flex-row md:justify-center md:gap-4 items-center'>
           <Button
             onClick={handleReviewResult}
             className='w-full h-full text-base font-semibold px-3 py-2 rounded-full bg-white border-2 !border-orange-500 !text-orange-500 hover:border-orange-600 hover:text-orange-600 active:border-orange-700 active:text-orange-700 transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
@@ -86,20 +87,24 @@ export default function BeforeTestComponent({ goBack }: StepItemComponent) {
           </Button>
           <Button
             onClick={goBack}
-            className='w-full h-full border-none text-lg font-semibold px-4 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-8 md:py-3 md:text-xl'
+            className='w-full h-full border-none text-base font-semibold px-3 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-6 md:py-3 md:text-xl'
           >
             {t('MODAL.BACK')}
           </Button>
-          <Button
-            onClick={handleStartTest}
-            className='w-full h-full text-base font-semibold border-none px-3 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
-          >
-            {t('MODAL.START_CONFIRM_TEST')}
-          </Button>
+          {hasTakenExam?.examStatus === ExamStatusEnum.IN_PROGRESS && (
+            <Button
+              onClick={handleStartTest}
+              className='w-full h-full text-lg font-semibold border-none px-4 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
+            >
+              {t('MODAL.START_CONFIRM_TEST_AGAIN')}
+            </Button>
+          )}
         </div>
       </div>
     </div>
   );
-
+  if (isLoading) {
+    return <Spin className='text-center items-center' />;
+  }
   return hasTakenExam?.hasTakenExam ? <ImproveTestModal /> : <NewTestModal />;
 }

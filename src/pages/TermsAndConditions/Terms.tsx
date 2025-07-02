@@ -1,12 +1,12 @@
-import React from 'react';
-import { Layout, Typography, Button, Image } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
+import { Layout, Typography, Button, Image } from 'antd';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import termBg from '../../assets/images/term-background.png';
-import logo from '../../assets/images/devplus.png';
 import TermsLayout from './TermsLayout';
+import logo from '../../assets/images/devplus.png';
+import termBg from '../../assets/images/term-background.png';
 
 const { Content } = Layout;
 const { Title, Paragraph } = Typography;

@@ -1,6 +1,7 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { Modal, Steps } from 'antd';
 import { FC, useState, useMemo, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import './StepModal.scss';
 import BeforeTestComponent from './StepComponent/BeforeTestComponent';
@@ -16,6 +17,7 @@ enum NAVIGATION {
 }
 
 const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
+  const { t } = useTranslation();
   const { isPass, isLoading } = useDemoCondition();
   const { isPass: havePortfolio, isLoading: loadingPortfolio } = usePortfolioCondition();
   const [nav, setNav] = useState<NAVIGATION>(NAVIGATION.NEXT);
@@ -25,24 +27,24 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
   const steps = useMemo<StepItem[]>(
     () => [
       {
-        title: 'Personal Info',
+        title: t('STEP_MODAL.PHONE_INFO'),
         render: (props) => <DemoComponent {...props} />,
-        shouldSkip: isPass,
+        shouldSkip: true,
         loading: isLoading,
       },
       {
-        title: 'Hồ sơ cá nhân',
+        title: t('STEP_MODAL.PERSONAL_INFO'),
         render: (props) => <PortfolioComponent {...props} />,
         shouldSkip: havePortfolio,
         loading: loadingPortfolio,
       },
       {
-        title: 'Bắt đầu ngay',
+        title: t('STEP_MODAL.START_CONFIRM_TEST'),
         render: (props) => <BeforeTestComponent {...props} />,
         shouldSkip: false,
       },
     ],
-    [isPass, isLoading, havePortfolio, loadingPortfolio],
+    [t, isLoading, havePortfolio, loadingPortfolio],
   );
 
   const goNext = useCallback(async () => {
