@@ -46,7 +46,6 @@ const Profile = () => {
   }, [data, form]);
 
   const handleCancel = () => {
-    setAvatar('');
     setIsEdit(false);
     form.resetFields();
   };
