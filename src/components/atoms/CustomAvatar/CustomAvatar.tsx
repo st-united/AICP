@@ -64,7 +64,7 @@ const CustomAvatar = ({ avatar, isEdit, onAvatarChange }: Props) => {
 
   return (
     <div className='relative'>
-      {avatar && !isPending ? (
+      {!isPending ? (
         <Avatar
           className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px]'
           src={avatar}
