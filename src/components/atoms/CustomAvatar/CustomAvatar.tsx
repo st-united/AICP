@@ -42,7 +42,7 @@ const CustomAvatar = ({ avatar, isEdit, onAvatarChange }: Props) => {
       setFileList([]);
       return;
     }
-    setFileList(info.fileList);
+    setFileList(info.file.originFileObj ? [info.file as UploadFile] : []);
 
     const formData = new FormData();
     formData.append('avatar', file);
@@ -75,7 +75,7 @@ const CustomAvatar = ({ avatar, isEdit, onAvatarChange }: Props) => {
           <LoadingOutlined className='md:!text-[150px] !text-[100px]' />
         </div>
       )}
-      {isEdit && (
+      {isEdit && !isPending && (
         <Upload
           key={avatar}
           showUploadList={false}
