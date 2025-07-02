@@ -66,7 +66,7 @@ const PasswordChangeForm = () => {
           layout='vertical'
           onFinish={onFinish}
           validateTrigger={['onChange', 'onBlur']}
-          className='w-full md:w-full xl:w-1/2'
+          className='w-full md:w-3/4 lg:w-1/2'
         >
           {/* Old Password */}
           <Form.Item
