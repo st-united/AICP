@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 
 import { useProfileSchema } from './profileSchema';
 import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
-import CountrySelect from '@app/components/atoms/CustomSelect/CountrySelect';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/atoms/CustomSelect/ProvinceSelect';
 import { yupSync } from '@app/helpers';
@@ -42,6 +41,7 @@ const Profile = () => {
 
         referralCode: data.referralCode || null,
       });
+      setAvatar(data.avatarUrl);
     }
   }, [data, form]);
 
