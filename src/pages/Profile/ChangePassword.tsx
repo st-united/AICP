@@ -29,10 +29,7 @@ const PasswordChangeForm = () => {
   const values = Form.useWatch([], form); // Watch all form values
 
   const isLengthValid = useMemo(() => {
-    return (
-      NUMBER_LENGTH_REGEX.test(values?.newPassword || '') &&
-      NUMBER_LENGTH_REGEX.test(values?.confirmPassword || '')
-    );
+    return NUMBER_LENGTH_REGEX.test(values?.newPassword || '');
   }, [values]);
 
   const isComplexValid = useMemo(() => {
@@ -69,7 +66,7 @@ const PasswordChangeForm = () => {
           layout='vertical'
           onFinish={onFinish}
           validateTrigger={['onChange', 'onBlur']}
-          className='w-full md:w-full xl:w-1/2'
+          className='w-full md:w-3/4 lg:w-1/2'
         >
           {/* Old Password */}
           <Form.Item
