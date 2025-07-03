@@ -2,9 +2,6 @@ import { CameraFilled, LoadingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Spin, Upload } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB } from '@app/constants/file';
-import { validateFile } from '@app/helpers/fileValidation';
 import { useUploadAvatar } from '@app/hooks/useProfile';
 import {
   NotificationTypeEnum,
@@ -30,18 +27,6 @@ const CustomAvatar = ({ avatar, isEdit, onAvatarChange }: Props) => {
       return;
     }
 
-    // const validation = validateFile(file, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB);
-    // if (!validation.isValid) {
-    //   openNotificationWithIcon(
-    //     NotificationTypeEnum.WARNING,
-    //     t(validation.errorMessageKey!, {
-    //       field: t('PROFILE.AVATAR'),
-    //       ...validation.errorMessageParams,
-    //     }),
-    //   );
-    //   setFileList([]);
-    //   return;
-    // }
     setFileList(info.file.originFileObj ? [info.file as UploadFile] : []);
 
     const formData = new FormData();
