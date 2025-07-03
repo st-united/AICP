@@ -72,9 +72,7 @@ const SignIn = () => {
           </Link>
         </button>
         <div>
-          <h1 className='text-primary text-3xl sm:text-3xl md:text-3xl lg:text-4xl font-bold mb-4'>
-            {t<string>('LOGIN.TEXT')}
-          </h1>
+          <h1 className='text-[40px] !text-primary font-bold'>{t<string>('LOGIN.TEXT')}</h1>
           <div className='text-primary-gray text-lg !mb-8 flex gap-2'>
             <div>{t<string>('LOGIN.NOT_HAVE_ACCOUNT')}</div>
             <Link
