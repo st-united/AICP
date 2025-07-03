@@ -29,10 +29,7 @@ const PasswordChangeForm = () => {
   const values = Form.useWatch([], form); // Watch all form values
 
   const isLengthValid = useMemo(() => {
-    return (
-      NUMBER_LENGTH_REGEX.test(values?.newPassword || '') &&
-      NUMBER_LENGTH_REGEX.test(values?.confirmPassword || '')
-    );
+    return NUMBER_LENGTH_REGEX.test(values?.newPassword || '');
   }, [values]);
 
   const isComplexValid = useMemo(() => {
@@ -49,8 +46,8 @@ const PasswordChangeForm = () => {
   const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
 
   return (
-    <div className='flex justify-center w-full h-full' id='change-password-form'>
-      <div className='w-full max-w-full bg-white rounded-2xl p-6 shadow flex flex-col items-center'>
+    <div className='flex justify-center w-full h-full ' id='change-password-form'>
+      <div className='w-full bg-white rounded-2xl p-6 shadow flex flex-col items-center overflow-y-auto'>
         {/* Lock image */}
         <div className='flex justify-center'>
           <div className='bg-blue-100 rounded-full p-4 sm:p-6'>
@@ -69,7 +66,7 @@ const PasswordChangeForm = () => {
           layout='vertical'
           onFinish={onFinish}
           validateTrigger={['onChange', 'onBlur']}
-          className='w-full md:w-full xl:w-1/2'
+          className='w-full md:w-3/4 lg:w-1/2'
         >
           {/* Old Password */}
           <Form.Item

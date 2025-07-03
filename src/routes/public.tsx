@@ -1,6 +1,6 @@
 import AuthLayout from '@app/components/templates/AuthLayout';
-import PublicLayout from '@app/components/templates/PublicLayout';
 import PolicyLayout from '@app/components/templates/PolicyLayout';
+import PublicLayout from '@app/components/templates/PublicLayout';
 import { NAVIGATE_URL } from '@app/constants';
 import {
   Homepage,

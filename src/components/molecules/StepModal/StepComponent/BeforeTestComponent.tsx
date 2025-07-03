@@ -1,15 +1,16 @@
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL } from '@app/constants';
+import { ExamStatusEnum } from '@app/constants/enum';
 import { useHasTakenExamDefault } from '@app/hooks';
 import { StepItemComponent } from '@app/interface/stepSection.interface';
 
 export default function BeforeTestComponent({ goBack }: StepItemComponent) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { data: hasTakenExam } = useHasTakenExamDefault();
+  const { data: hasTakenExam, isLoading } = useHasTakenExamDefault();
 
   const handleStartTest = () => {
     navigate(NAVIGATE_URL.TEST);
@@ -22,7 +23,7 @@ export default function BeforeTestComponent({ goBack }: StepItemComponent) {
     <>
       <div className='bg-blue-100 rounded-full p-3 md:p-4 aspect-square'>
         <div className='bg-blue-300 rounded-full p-3 md:p-6'>
-          <span className='text-2xl font-medium text-blue-500 m-2 md:text-4xl'>?</span>
+          <span className='text-2xl font-medium text-blue-500 m-3 md:text-4xl'>?</span>
         </div>
       </div>
 
@@ -91,6 +92,8 @@ export default function BeforeTestComponent({ goBack }: StepItemComponent) {
       </div>
     </div>
   );
-
+  if (isLoading) {
+    return <Spin className='text-center items-center' />;
+  }
   return hasTakenExam?.hasTakenExam ? <ImproveTestModal /> : <NewTestModal />;
 }

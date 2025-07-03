@@ -183,7 +183,15 @@ const QuestionDisplay = ({
               <h3 className='text-2xl font-bold text-black'>
                 {t('TEST.QUESTION')} {index + 1}:
               </h3>
-              <Tooltip title={t('TEST.FLAG_QUESTION')} placement='top' trigger={'hover'}>
+              <Tooltip
+                title={
+                  flaggedQuestions.includes(question.id)
+                    ? t('TEST.UNFLAG_QUESTION')
+                    : t('TEST.FLAG_QUESTION')
+                }
+                placement='top'
+                trigger={'hover'}
+              >
                 <FlagOutlined
                   className={`flex text-xl border p-2 rounded-lg cursor-pointer ${
                     flaggedQuestions.includes(question.id)

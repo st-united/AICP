@@ -1,6 +1,8 @@
 .ant-notification-notice {
   border-radius: 15px !important;
   width: fit-content;
+  align-items: center !important;
+  display: flex !important;
 }
 
 .ant-notification-notice-wrapper {
@@ -25,6 +27,9 @@
 .ant-notification-notice-message {
   color: white !important;
   font-size: 18px !important;
+  align-items: center !important;
+  display: flex !important;
+  margin-top: 10px !important;
 }
 
 .anticon.ant-notification-notice-icon-error {
@@ -46,4 +51,5 @@
 .ant-notification-notice-with-icon {
   display: flex !important;
   align-items: center !important;
+  color: white !important;
 }

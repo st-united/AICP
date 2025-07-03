@@ -23,7 +23,7 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
       {
         title: t('STEP_MODAL.PHONE_INFO'),
         render: (props) => <DemoComponent {...props} />,
-        shouldSkip: isPass,
+        shouldSkip: true,
         loading: isLoading,
       },
       {
@@ -38,7 +38,7 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
         shouldSkip: false,
       },
     ],
-    [t, isPass, isLoading, havePortfolio, loadingPortfolio],
+    [t, isLoading, havePortfolio, loadingPortfolio],
   );
 
   const goNext = useCallback(async () => {

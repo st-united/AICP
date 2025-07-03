@@ -1,10 +1,10 @@
 import { Form, Input, Button } from 'antd';
 import React, { useMemo } from 'react';
 
-import { usePortfolioContext } from '../context/PortfolioContext';
-import { usePortfolioSchema } from '../PortfolioSchema';
 import { FileList } from './FileList';
 import { FileUpload } from './FileUpload';
+import { usePortfolioContext } from '../context/PortfolioContext';
+import { usePortfolioSchema } from '../PortfolioSchema';
 import { PortfolioFileType } from '@app/constants/portfolioFileType';
 import { yupSync } from '@app/helpers';
 
