@@ -96,7 +96,7 @@ const Profile = () => {
         initialValues={{
           fullName: data?.fullName ?? '',
           email: data?.email ?? '',
-          phoneNumber: data?.phoneNumber ?? '',
+          phoneNumber: data?.phoneNumber ?? null,
           dob: data?.dob ? dayjs(data?.dob) : null,
           province: data?.province ?? null,
           job: data?.job ?? null,
