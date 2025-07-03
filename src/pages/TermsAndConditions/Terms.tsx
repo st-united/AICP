@@ -1,4 +1,8 @@
+
 import { Layout, Image } from 'antd';
+import { LeftOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import TermsLayout from './TermsLayout';
 import logo from '../../assets/images/devplus.png';
