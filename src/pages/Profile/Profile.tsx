@@ -37,8 +37,8 @@ const Profile = () => {
         province: data.province || null,
         job: Array.isArray(data.job)
           ? data.job.every((j) => typeof j === 'object' && j !== null && 'id' in j)
-            ? data.job.map((j) => (j as { id: string }).id)
-            : data.job
+            ? data.job.map((j) => (j as unknown as { id: string }).id)
+            : (data.job as string[])
           : [],
         referralCode: data.referralCode || null,
       });
@@ -136,13 +136,8 @@ const Profile = () => {
           <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
             <ProvinceSelect className='custom-orange-select' disabled={!isEdit} />
           </Form.Item>
-          <Form.Item
-            name='job'
-            label={t('PROFILE.OCCUPATION')}
-            rules={validator}
-            style={{ marginBottom: 16 }} // hoặc paddingTop nếu muốn
-          >
-            <JobSelect disabled={!isEdit} />
+          <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
+            <JobSelect className='custom-orange-select' disabled={!isEdit} />
           </Form.Item>
           <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
             <div className='flex justify-end gap-2 !flex-row'>
