@@ -1,4 +1,4 @@
-import { ArrowLeftOutlined } from '@ant-design/icons';
+import { LeftOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,8 @@ import {
   NotificationTypeEnum,
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
+
+import './ForgotPassword.scss';
 
 export default function ForgotPassword() {
   const { t } = useTranslation();
@@ -39,21 +41,19 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className='flex justify-start h-full w-full'>
-      <div className='w-full'>
+    <div className='flex justify-center' id='container-forgot-password'>
+      <div className='w-full md:w-4/5 h-full'>
         <Link
           to={'/login'}
           className='mb-14 font-medium flex align-items gap-x-1 text-primary-gray text-lg hover:text-primary'
         >
-          <span>
-            <ArrowLeftOutlined className='-translate-y-[2px]' />
-          </span>
+          <div className='flex items-center justify-center'>
+            <LeftOutlined size={24} />
+          </div>
           <span>{t('FORGOT_PASSWORD.TURN_BACK_SIGN_IN')}</span>
         </Link>
         <div>
-          <h1 className='text-3xl sm:text-3xl md:text-4xl lg:text-4xl text-primary font-bold'>
-            {t('FORGOT_PASSWORD.TITLE')}
-          </h1>
+          <h1 className='text-[40px] !text-primary font-bold'>{t('FORGOT_PASSWORD.TITLE')}</h1>
           <p className='text-primary-gray mt-4 mb-6 sm:my-4 md:my-6 lg:my-8 text-lg'>
             <span className='font-medium'>{t('FORGOT_PASSWORD.NO_ACCOUNT')}</span>{' '}
             <Link

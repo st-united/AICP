@@ -13,14 +13,14 @@ const DashboardSection = () => {
 
   return (
     <div className='h-full bg-[#fffbf9] w-full mdM::h-screen'>
-      <div className='container w-full h-full gap-6 mx-auto py-10 xsM:w-[90%] smM:pl-2 smM:items-start mdM:py-28 xl:w-[90%]'>
+      <div className='container w-full h-full gap-6 mx-auto py-10 xsM:w-[89%] smM:items-start mdM:py-28 xl:w-[89%]'>
         <h2 className='font-bold text-center text-2xl mb-8 smM:text-start smM:text-3xl mdM:text-4xl'>
           {t('DASHBOARD.TITLE')}
         </h2>
-        <p className='font-semibold text-base xl:text-xl text-center sm:text-start !text-primary-gray mb-8'>
+        <p className='font-semibold text-base sm:text-xl xl:text-2xl md:text-2xl lg:text-2xl text-center sm:text-start !text-primary-gray mb-8'>
           {t('DASHBOARD.DESCRIPTION')}
         </p>
-        <div className='grid grid-cols-1 smM:grid-cols-2 mt-10 sm:mt-20 gap-10 justify-items-center'>
+        <div className='grid grid-cols-1 smM:grid-cols-2 mt-10 sm:mt-20 gap-10 w-full'>
           <DashboardCard
             title={t('DASHBOARD.TEST_STATUS.TITLE')}
             description={t('DASHBOARD.TEST_STATUS.DESCRIPTION')}
