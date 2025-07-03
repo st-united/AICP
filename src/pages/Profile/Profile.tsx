@@ -16,6 +16,8 @@ import {
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
 
+import './Profile.scss';
+
 const Profile = () => {
   const [avatar, setAvatar] = useState<string>();
   const [isEdit, setIsEdit] = useState(false);
@@ -38,12 +40,25 @@ const Profile = () => {
             ? data.job.map((j) => (j as { id: string }).id)
             : data.job
           : [],
-
         referralCode: data.referralCode || null,
       });
+    }
+  }, [
+    data?.fullName,
+    data?.email,
+    data?.phoneNumber,
+    data?.dob,
+    data?.province,
+    data?.job,
+    data?.referralCode,
+    form,
+  ]);
+
+  useEffect(() => {
+    if (data?.avatarUrl) {
       setAvatar(data.avatarUrl);
     }
-  }, [data, form]);
+  }, [data?.avatarUrl]);
 
   const handleCancel = () => {
     setIsEdit(false);
@@ -119,10 +134,10 @@ const Profile = () => {
             />
           </Form.Item>
           <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
-            <ProvinceSelect disabled={!isEdit} />
+            <ProvinceSelect className='custom-orange-select' disabled={!isEdit} />
           </Form.Item>
           <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
-            <JobSelect disabled={!isEdit} />
+            <JobSelect className='custom-orange-select' disabled={!isEdit} />
           </Form.Item>
           <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
             <div className='flex justify-end gap-2 !flex-row'>

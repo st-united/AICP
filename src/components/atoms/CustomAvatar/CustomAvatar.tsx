@@ -30,18 +30,18 @@ const CustomAvatar = ({ avatar, isEdit, onAvatarChange }: Props) => {
       return;
     }
 
-    const validation = validateFile(file, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB);
-    if (!validation.isValid) {
-      openNotificationWithIcon(
-        NotificationTypeEnum.WARNING,
-        t(validation.errorMessageKey!, {
-          field: t('PROFILE.AVATAR'),
-          ...validation.errorMessageParams,
-        }),
-      );
-      setFileList([]);
-      return;
-    }
+    // const validation = validateFile(file, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB);
+    // if (!validation.isValid) {
+    //   openNotificationWithIcon(
+    //     NotificationTypeEnum.WARNING,
+    //     t(validation.errorMessageKey!, {
+    //       field: t('PROFILE.AVATAR'),
+    //       ...validation.errorMessageParams,
+    //     }),
+    //   );
+    //   setFileList([]);
+    //   return;
+    // }
     setFileList(info.file.originFileObj ? [info.file as UploadFile] : []);
 
     const formData = new FormData();
