@@ -1,4 +1,4 @@
-import { Card, Button } from 'antd';
+import { Card, Button, Spin } from 'antd';
 import React from 'react';
 import './DashboardCard.scss';
 
@@ -8,6 +8,7 @@ interface DashboardCardProps {
   buttonText: string;
   icon: React.ReactNode;
   onClick?: () => void;
+  isLoading?: boolean;
 }
 
 const DashboardCard: React.FC<DashboardCardProps> = ({
@@ -16,7 +17,15 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   buttonText,
   icon,
   onClick,
+  isLoading,
 }) => {
+  if (isLoading) {
+    return (
+      <div className='flex justify-center items-center'>
+        <Spin />
+      </div>
+    );
+  }
   return (
     <Card className='custom-card w-full rounded-3xl p-8 shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-transform duration-300 hover:scale-105 bg-white'>
       <div className='flex flex-col justify-between h-full'>
@@ -32,7 +41,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           <Button
             type='primary'
             onClick={onClick}
-            className='h-12 mdL:h-14 px-8 !text-white border !border-primary !rounded-full outline-none !bg-primary text-lg md:text-xl font-bold hover:!bg-white hover:!text-primary transition-all duration-300'
+            className='h-12 mdL:h-14 px-8 w-1/3 !text-white border !border-primary !rounded-full outline-none !bg-primary text-lg md:text-xl font-bold hover:!bg-white hover:!text-primary transition-all duration-300'
           >
             {buttonText}
           </Button>

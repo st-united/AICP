@@ -451,8 +451,18 @@
     "DESCRIPTION": "Theo dõi bài kiểm tra, lịch phỏng vấn và các cơ hội nghề nghiệp của bạn.",
     "TEST_STATUS": {
       "TITLE": "Trạng thái bài kiểm tra",
-      "DESCRIPTION": "Chưa bắt đầu",
-      "BUTTON": "Bắt đầu bài kiểm tra"
+      "DESCRIPTION": {
+        "IN_PROGRESS": "Bạn đang làm bài kiểm tra",
+        "SUBMITTED": "Bạn đã nộp bài kiểm tra",
+        "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+        "GRADED": "Đã chấm điểm",
+        "DEFAULT": "Chưa bắt đầu"
+      },
+      "BUTTON": {
+        "START": "Bắt đầu bài kiểm tra",
+        "RESUME": "Tiếp tục làm bài",
+        "VIEW": "Xem kết quả"
+      }
     },
     "INTERVIEW_SCHEDULE": {
       "TITLE": "Lịch phỏng vấn",
