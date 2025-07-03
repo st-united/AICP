@@ -16,6 +16,8 @@ import {
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
 
+import './Profile.scss';
+
 const Profile = () => {
   const [avatar, setAvatar] = useState<string>();
   const [isEdit, setIsEdit] = useState(false);
@@ -25,43 +27,42 @@ const Profile = () => {
   const { t } = useTranslation();
   const validator = [yupSync(useProfileSchema())] as unknown as Rule[];
 
-  const restoreProfileValues = () => {
+  useEffect(() => {
     if (data) {
-      const jobIds: string[] = Array.isArray(data.job)
-        ? data.job
-            .map((j: any) => {
-              if (typeof j === 'object' && j !== null && 'id' in j) {
-                return j.id;
-              } else if (typeof j === 'string') {
-                return j;
-              } else {
-                return '';
-              }
-            })
-            .filter(Boolean)
-        : [];
-
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
         phoneNumber: data.phoneNumber || '',
         dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
-        job: jobIds,
+        job: Array.isArray(data.job)
+          ? data.job.every((j) => typeof j === 'object' && j !== null && 'id' in j)
+            ? data.job.map((j) => (j as unknown as { id: string }).id)
+            : (data.job as string[])
+          : [],
         referralCode: data.referralCode || null,
       });
-      setAvatar(data.avatarUrl);
     }
-  };
+  }, [
+    data?.fullName,
+    data?.email,
+    data?.phoneNumber,
+    data?.dob,
+    data?.province,
+    data?.job,
+    data?.referralCode,
+    form,
+  ]);
 
   useEffect(() => {
-    restoreProfileValues();
-  }, [data, form]);
+    if (data?.avatarUrl) {
+      setAvatar(data.avatarUrl);
+    }
+  }, [data?.avatarUrl]);
 
   const handleCancel = () => {
     setIsEdit(false);
     form.resetFields();
-    restoreProfileValues();
   };
 
   const handleSubmit = async (values: UserProfile) => {
@@ -95,7 +96,7 @@ const Profile = () => {
         initialValues={{
           fullName: data?.fullName ?? '',
           email: data?.email ?? '',
-          phoneNumber: data?.phoneNumber ?? '',
+          phoneNumber: data?.phoneNumber ?? null,
           dob: data?.dob ? dayjs(data?.dob) : null,
           province: data?.province ?? null,
           job: data?.job ?? null,
@@ -133,10 +134,10 @@ const Profile = () => {
             />
           </Form.Item>
           <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
-            <ProvinceSelect disabled={!isEdit} />
+            <ProvinceSelect className='custom-orange-select h-full' disabled={!isEdit} />
           </Form.Item>
           <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
-            <JobSelect disabled={!isEdit} />
+            <JobSelect className='custom-orange-select' disabled={!isEdit} />
           </Form.Item>
           <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
             <div className='flex justify-end gap-2 !flex-row'>
