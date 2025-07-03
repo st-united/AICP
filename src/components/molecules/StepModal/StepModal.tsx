@@ -11,16 +11,10 @@ import { useDemoCondition } from './StepCondition/DemoCondition';
 import { usePortfolioCondition } from './StepCondition/PortfolioCondition';
 import { StepItem, StepModalProps } from '@app/interface/stepSection.interface';
 
-enum NAVIGATION {
-  NEXT = 'NEXT',
-  BACK = 'BACK',
-}
-
 const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
   const { t } = useTranslation();
   const { isPass, isLoading } = useDemoCondition();
   const { isPass: havePortfolio, isLoading: loadingPortfolio } = usePortfolioCondition();
-  const [nav, setNav] = useState<NAVIGATION>(NAVIGATION.NEXT);
   const [current, setCurrent] = useState(0);
   const [autoSkipping, setAutoSkipping] = useState(true);
 
@@ -48,7 +42,6 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
   );
 
   const goNext = useCallback(async () => {
-    setNav(NAVIGATION.NEXT);
     if (current < steps.length - 1) {
       setCurrent(current + 1);
     } else {
@@ -58,7 +51,6 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
   }, [current, onFinish, steps.length]);
 
   const goBack = useCallback(async () => {
-    setNav(NAVIGATION.BACK);
     if (current > 0) {
       setCurrent(current - 1);
     } else {
@@ -87,12 +79,14 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
             className='!cursor-pointer'
             size='default'
             current={current}
+            onChange={setCurrent}
             items={steps.map((step) => ({
               title: step.title,
-              disabled: true,
               icon:
                 steps[current] === step && step.loading ? (
-                  <LoadingOutlined className='!text-[#42160b] font-[900] !text-center' />
+                  <div className='w-full h-full flex items-center justify-center'>
+                    <LoadingOutlined className='!text-[#42160b] font-[900] !text-center' />
+                  </div>
                 ) : undefined,
             }))}
           />
