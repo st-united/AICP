@@ -134,7 +134,7 @@ const Profile = () => {
             />
           </Form.Item>
           <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
-            <ProvinceSelect className='custom-orange-select' disabled={!isEdit} />
+            <ProvinceSelect className='custom-orange-select h-full' disabled={!isEdit} />
           </Form.Item>
           <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
             <JobSelect className='custom-orange-select' disabled={!isEdit} />
