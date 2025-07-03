@@ -19,6 +19,7 @@ const PortfolioForm: React.FC = () => {
     t,
     saveLabel,
     cancelLabel,
+    isUpdating,
   } = usePortfolioContext();
 
   const portfolioSchema = usePortfolioSchema();
@@ -69,8 +70,9 @@ const PortfolioForm: React.FC = () => {
         <div className='flex justify-end gap-2 !flex-row'>
           {!isEdit ? (
             <Button
+              type='primary'
               onClick={handleEditToggle}
-              className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white'
+              className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md'
             >
               {t('PORTFOLIO.EDIT')}
             </Button>
@@ -78,14 +80,15 @@ const PortfolioForm: React.FC = () => {
             <>
               <Button
                 onClick={handleCancel}
-                className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
+                className='!flex !justify-center !items-center !rounded-2xl !px-9 !py-5 !border-primary !text-primary !text-md hover:!bg-primary hover:!text-white'
               >
                 {cancelLabel || t('PORTFOLIO.CANCEL')}
               </Button>
               <Button
                 type='primary'
                 htmlType='submit'
-                className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white'
+                className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-5 !text-md'
+                loading={isUpdating}
               >
                 {saveLabel || t('PORTFOLIO.SAVE')}
               </Button>
