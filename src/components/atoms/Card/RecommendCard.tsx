@@ -19,7 +19,7 @@ const RecommendCard: React.FC<RecommendCardProps> = ({
     <Card className='h-full w-full relative bg-[#02185B] text-white rounded-3xl'>
       <div className='absolute top-9 smM:top-7 left-0 h-3/5 mdM:h-4/5 w-1 bg-primary rounded-r-full'></div>
       <div className='flex flex-col h-full smM:justify-between mdM:gap-6 mdM:py-6'>
-        <h3 className='text-white text-xl text-center smM:text-start smM::text-2xl font-semibold mb-3'>
+        <h3 className='text-white text-xl text-center smM:text-start smM::text-2xl font-bold mb-3'>
           {title}
         </h3>
         <p className='!text-white text-base text-center smM:text-start smM:text-lg mdM:text-xl mb-4'>

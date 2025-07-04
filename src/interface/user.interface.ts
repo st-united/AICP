@@ -86,7 +86,7 @@ export interface HasTakenExam {
   hasTakenExam: boolean;
   examSetDuration: number;
   examId?: string;
-  examStatus?: string;
+  examStatus?: ExamStatusEnum;
 }
 
 export interface HistoryTesting {
