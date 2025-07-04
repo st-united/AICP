@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getStorageData } from '@app/config';
-import { ACCESS_TOKEN, USER_PROFILE } from '@app/constants';
+import { getStorageData, removeStorageData } from '@app/config';
+import { ACCESS_TOKEN, REFRESH_TOKEN, USER_PROFILE } from '@app/constants';
 import { UserProfile } from '@app/interface/user.interface';
 
 interface AuthState {
@@ -37,6 +37,9 @@ const authSlice = createSlice({
     logout(state) {
       state.isAuth = false;
       state.user = null;
+      removeStorageData(ACCESS_TOKEN);
+      removeStorageData(USER_PROFILE);
+      removeStorageData(REFRESH_TOKEN);
     },
   },
 });
