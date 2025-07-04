@@ -28,7 +28,7 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
       {
         title: t('STEP_MODAL.PHONE_INFO'),
         render: (props) => <DemoComponent {...props} />,
-        shouldSkip: true,
+        shouldSkip: false,
         loading: isLoading,
       },
       {
