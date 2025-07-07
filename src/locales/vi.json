@@ -322,7 +322,7 @@
     "FOOTER_ACTIVITIES_LIST": ["Workshop", "Sự kiện", "Cộng đồng", "Hoạt động ngoại khóa"],
     "FOOTER_ADDRESS": "116 - 118 Mai Thuc Lan, My An, Ngu Hanh Son, Da Nang",
     "FOOTER_EMAIL": "hello@devplus.edu.vn",
-    "FOOTER_PHONE": "(+84) 368492885"
+    "FOOTER_PHONE": "(+84) 93 190 1608"
   },
   "HEADER": {
     "START": "Bắt đầu",
@@ -453,8 +453,18 @@
     "DESCRIPTION": "Theo dõi bài kiểm tra, lịch phỏng vấn và các cơ hội nghề nghiệp của bạn.",
     "TEST_STATUS": {
       "TITLE": "Trạng thái bài kiểm tra",
-      "DESCRIPTION": "Chưa bắt đầu",
-      "BUTTON": "Bắt đầu bài kiểm tra"
+      "DESCRIPTION": {
+        "IN_PROGRESS": "Bạn đang làm bài kiểm tra",
+        "SUBMITTED": "Bạn đã nộp bài kiểm tra",
+        "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+        "GRADED": "Đã chấm điểm",
+        "DEFAULT": "Chưa bắt đầu"
+      },
+      "BUTTON": {
+        "START": "Bắt đầu bài kiểm tra",
+        "RESUME": "Tiếp tục làm bài",
+        "VIEW": "Xem kết quả"
+      }
     },
     "INTERVIEW_SCHEDULE": {
       "TITLE": "Lịch phỏng vấn",

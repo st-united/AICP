@@ -31,28 +31,28 @@ const FileItem: React.FC<FileItemProps> = memo(
     return (
       <div
         key={file.uid}
-        className={`${
+        className={`relative ${
           file.originFileObj &&
-          'relative rounded-xl p-[2px] my-2 bg-gradient-to-br from-[#ff9946] via-[#f3f3f3] to-[#fd7200] animate-gradient'
+          'rounded-xl p-[2px] my-2 bg-gradient-to-br from-[#ff9946] via-[#f3f3f3] to-[#fd7200] animate-gradient'
         }`}
       >
+        {isEdit && (
+          <Button
+            type='text'
+            icon={<DeleteFilled className='!text-xl text-red-700' />}
+            className={`${
+              isEdit ? 'cursor-pointer' : 'cursor-not-allowed'
+            } absolute left-4 top-1/2 -translate-y-1/2 z-10`}
+            onClick={handleRemove}
+            disabled={!isEdit}
+          />
+        )}
         <div
-          className={`flex flex-col md:flex-row justify-between w-full items-center gap-0 px-12 py-2 ${
+          className={`flex flex-col md:flex-row justify-between w-full items-center gap-0 px-6 py-2 ${
             file.originFileObj && 'bg-white'
-          } rounded-xl p-6`}
+          } rounded-xl`}
         >
           <div className='relative w-1/2'>
-            {isEdit && (
-              <Button
-                type='text'
-                icon={<DeleteFilled className='!text-xl text-red-700' />}
-                className={`${
-                  isEdit ? 'cursor-pointer' : 'cursor-not-allowed'
-                } absolute left-0 top-1/2 transform -translate-y-1/2`}
-                onClick={handleRemove}
-                disabled={!isEdit}
-              />
-            )}
             <div
               className={`ml-0 ${
                 isEdit ? 'md:ml-10' : 'md:ml-0'
