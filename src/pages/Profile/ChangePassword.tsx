@@ -33,13 +33,8 @@ const PasswordChangeForm = () => {
   }, [values]);
 
   const isComplexValid = useMemo(() => {
-    return (
-      PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(
-        values?.newPassword || '',
-      ) &&
-      PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(
-        values?.confirmPassword || '',
-      )
+    return PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(
+      values?.newPassword || '',
     );
   }, [values]);
 
