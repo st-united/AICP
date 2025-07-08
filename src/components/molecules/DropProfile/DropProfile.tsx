@@ -1,4 +1,4 @@
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown, MenuProps, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +11,7 @@ import { logout } from '@app/redux/features/auth/authSlice';
 import { RootState } from '@app/redux/store';
 
 import './DropProfile.scss';
+import { DefaultAvatar } from '@app/assets/images';
 
 export const DropProfile: FC = () => {
   const { t } = useTranslation();
@@ -34,22 +35,28 @@ export const DropProfile: FC = () => {
   const items: MenuProps['items'] = [
     {
       label: (
-        <Typography style={{ color: '#121212', fontWeight: 600 }}>
-          {t<string>('DROPDOWN_PROFILE.PROFILE')}
-        </Typography>
+        <div className='flex gap-2 items-center hover:border-[#ff7a45] hover:rounded-2xl'>
+          <UserOutlined className='text-[1rem] border border-[#121212] rounded-full p-1' />
+          <Typography className='text-[#121212] font-semibold text-base'>
+            {t('PROFILE.PERSONAL_PROFILE')}
+          </Typography>
+        </div>
       ),
       key: 'profile',
-      className: 'item-profile',
+      className: 'hover:bg-[#fff2e8]',
     },
     {
       label: (
-        <Typography style={{ color: '#FB303E', fontWeight: 600 }}>
-          {t<string>('DROPDOWN_PROFILE.SIGN_OUT')}
-        </Typography>
+        <div className='flex gap-2 items-center'>
+          <LogoutOutlined className='text-[1.5rem] text-[#FB303E] p-[2px]' />
+          <Typography className='text-base text-[#FB303E] font-semibol'>
+            {t('PROFILE.LOGOUT')}
+          </Typography>
+        </div>
       ),
       key: NAVIGATE_URL.SIGN_OUT,
       danger: true,
-      className: 'item-signout',
+      className: 'hover:bg-[#fff2e8] text-[#fb303e]',
     },
   ];
 
@@ -62,19 +69,13 @@ export const DropProfile: FC = () => {
         },
       }}
       trigger={['click']}
-      className='profile-dropdown'
-      overlayClassName='profile-menu'
-      placement='bottom'
+      className='cursor-pointer'
+      overlayClassName='w-[12rem] profile-dropdown-menu'
+      placement='bottomRight'
       onOpenChange={() => setActiveItem(!activeItem)}
     >
       <div>
-        <Avatar size={40} className='drop-avatar' src={user?.avatar ? user?.avatar : null} />
-        <span className='drop-name'>{user?.name}</span>
-        {activeItem === true ? (
-          <CaretUpOutlined className='drop-name' />
-        ) : (
-          <CaretDownOutlined className='drop-name' />
-        )}
+        <Avatar className='w-[3rem] h-[3rem]' src={user?.avatar ? user?.avatar : DefaultAvatar} />
       </div>
     </Dropdown>
   );

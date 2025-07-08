@@ -1,6 +1,13 @@
 import { lazy } from 'react';
 
-import { AptitudeTest } from '@app/pages';
+import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
+import BaseLayout from '@app/components/templates/BaseLayout';
+import ProfileLayout from '@app/components/templates/ProfileLayout';
+import { NAVIGATE_URL } from '@app/constants';
+import { AptitudeTest, Profile, Capacity } from '@app/pages';
+import Booking from '@app/pages/MentorBooking';
+import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
+import ExamHistory from '@app/pages/Profile/ExamHistory';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
@@ -11,16 +18,50 @@ const routes = [
     element: <PrivateLayout />,
     children: [
       {
-        path: '404',
+        path: NAVIGATE_URL.NOTFOUND,
         element: <NotFound />,
       },
       {
-        path: '403',
+        path: NAVIGATE_URL.FORBIDDEN,
         element: <Forbidden />,
       },
       {
-        path: 'aptitude-test',
-        element: <AptitudeTest />,
+        element: <BaseLayout />,
+        children: [
+          {
+            path: NAVIGATE_URL.SCHEDULE,
+            element: <Booking />,
+          },
+          {
+            path: NAVIGATE_URL.TEST,
+            element: <AptitudeTest />,
+          },
+          {
+            path: NAVIGATE_URL.CAPACITY,
+            element: <Capacity />,
+          },
+        ],
+      },
+      {
+        element: <ProfileLayout />,
+        children: [
+          {
+            path: NAVIGATE_URL.PROFILE,
+            element: <Profile />,
+          },
+          {
+            path: NAVIGATE_URL.CHANGE_PASSWORD,
+            element: <PasswordChangeForm />,
+          },
+          {
+            path: NAVIGATE_URL.PORTFOLIO,
+            element: <PortfolioContent />,
+          },
+          {
+            path: NAVIGATE_URL.TEST_RESULT,
+            element: <ExamHistory />,
+          },
+        ],
       },
     ],
   },

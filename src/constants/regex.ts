@@ -5,8 +5,7 @@ export const PHONE_REGEX_PATTERN =
 export const EMAIL_REGEX_PATTERN =
   /^(([^<>()[\]\\.,;:\s@\"]{1,64}(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export const PASSWORD_REGEX_PATTERN =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.{8,})(?=.*[0-9])(?=.*[(?=.*[`~!@#%&_=+;:'",<>/\$\^\*\(\)\-\[\]\{\}\\\|\.\?])\S*$/;
+export const PASSWORD_REGEX_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})\S*$/;
 
 export const INTEGER_REGEX = /^[0-9]*$/;
 

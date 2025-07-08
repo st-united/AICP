@@ -4,9 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 import { removeStorageData, setStorageData } from '@app/config';
 import { ACCESS_TOKEN, NAVIGATE_URL, REFRESH_TOKEN, USER_PROFILE } from '@app/constants';
-import { Credentials, RegisterUser } from '@app/interface/user.interface';
-import { logout, login } from '@app/redux/features/auth/authSlice';
-import { loginApi, getLogout, registerApi } from '@app/services';
+import { Credentials, GoogleCredentials, RegisterUser } from '@app/interface/user.interface';
+import { logout, login, setAuth } from '@app/redux/features/auth/authSlice';
+import {
+  loginApi,
+  getLogout,
+  registerApi,
+  getActivateAccount,
+  useLoginWithGoogleApi,
+} from '@app/services';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -22,11 +28,50 @@ export const useLogin = () => {
       return data;
     },
     {
-      onSuccess: ({ data }) => {
+      onSuccess: ({ data, message }) => {
         dispatchAuth(login());
-
+        dispatchAuth(
+          setAuth({
+            user: { name: data.name },
+            permissions: [],
+          }),
+        );
         setStorageData(ACCESS_TOKEN, data.accessToken);
         setStorageData(REFRESH_TOKEN, data.refreshToken);
+        setStorageData(USER_PROFILE, { name: data.name });
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+
+        navigate('/');
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
+};
+
+export const useLoginWithGoogle = () => {
+  const navigate = useNavigate();
+  const dispatchAuth = useDispatch();
+
+  return useMutation(
+    async (GoogleCredentials: GoogleCredentials) => {
+      const { data } = await useLoginWithGoogleApi(GoogleCredentials);
+      return data;
+    },
+    {
+      onSuccess: ({ data, message }) => {
+        dispatchAuth(login());
+        dispatchAuth(
+          setAuth({
+            user: { name: data.name },
+            permissions: [],
+          }),
+        );
+        setStorageData(ACCESS_TOKEN, data.accessToken);
+        setStorageData(REFRESH_TOKEN, data.refreshToken);
+        setStorageData(USER_PROFILE, { name: data.name });
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
 
         navigate('/');
       },
@@ -71,7 +116,24 @@ export const useRegister = () => {
     {
       onSuccess: ({ message }) => {
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        navigate('/');
+        navigate('/login');
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
+};
+
+export const useActivateAccount = () => {
+  return useMutation(
+    async (token: string) => {
+      const { data } = await getActivateAccount(token);
+      return data;
+    },
+    {
+      onSuccess: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);

@@ -103,9 +103,10 @@ export const useGetExamSet = () =>
       return data.data;
     },
     {
-      keepPreviousData: true,
+      cacheTime: 0,
+      staleTime: 0,
       refetchOnWindowFocus: false,
-      refetchOnMount: false,
+      refetchOnMount: true,
       refetchOnReconnect: false,
       refetchInterval: false,
       refetchIntervalInBackground: false,

@@ -61,7 +61,7 @@ const QuestionIndexPanel = ({
   );
 
   return (
-    <div className='flex flex-col items-center justify-center bg-white rounded-xl p-6 shadow-lg border border-gray-100'>
+    <div className='flex flex-col items-center justify-center bg-white rounded-xl p-6 shadow-lg border border-gray-100 h-full'>
       <div className='text-2xl font-bold text-center text-blue-900'>{t('TEST.QUESTION_INDEX')}</div>
       <Divider className='!my-5' />
       <div className='flex-1'>

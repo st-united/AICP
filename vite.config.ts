@@ -4,7 +4,7 @@ import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 
 export default async ({ mode }: any) => {
-  const { default: pluginRewriteAll } = await import('vite-plugin-rewrite-all');
+  const pluginRewriteAll = (await import('vite-plugin-rewrite-all')).default;
 
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 

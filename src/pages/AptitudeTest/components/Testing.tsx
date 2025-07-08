@@ -184,7 +184,7 @@ const Testing = () => {
             duration={timeLeftSeconds}
             onTimeUp={() => {
               if (examSet) {
-                submitExam(examSet.id);
+                submitExam(examSet.examId);
               }
             }}
           />

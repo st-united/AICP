@@ -1,4 +1,5 @@
 import { GetListParams } from './common.interface';
+import { ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 
 export interface UserColumns {
   id: number;
@@ -14,16 +15,21 @@ export interface Credentials {
   password: string;
 }
 
+export interface GoogleCredentials {
+  idToken: string;
+}
+
 export interface UserProfile {
-  name: string;
+  id: string;
+  fullName: string;
   email: string;
-  phone: string;
-  dateOfBirth: string;
-  address: string;
-  gender: string;
-  identityId: string;
-  avatar: string;
-  permissions: string[];
+  phoneNumber?: string;
+  dob?: string;
+  avatar?: string;
+  permissions?: string[];
+  province?: string;
+  job?: string;
+  referralCode: string;
 }
 
 export interface UserDetail {
@@ -71,4 +77,45 @@ export interface RegisterUser {
   email: string;
   phoneNumber: string;
   password: string;
+}
+export interface UpdateForgotPassword {
+  token: string | null;
+  password: string;
+}
+export interface HasTakenExam {
+  hasTakenExam: boolean;
+  examSetDuration: number;
+  examId?: string;
+  examStatus?: string;
+}
+
+export interface HistoryTesting {
+  id: string;
+  examStatus: ExamStatusEnum;
+  sfiaLevel: SFIALevel;
+  createdAt: Date;
+}
+
+export interface GetHistoryParams {
+  startDate?: string;
+  endDate?: string;
+}
+export interface Job {
+  id: number;
+  name: string;
+}
+export interface DetailExam {
+  id: string;
+  startedAt: string;
+  sfiaLevel: SFIALevel | null;
+  mindsetScore: number;
+  skillsetScore: number;
+  toolsetScore: number;
+  overallScore: number;
+  examStatus: ExamStatusEnum;
+  createdAt: string;
+  examSet: {
+    id: string;
+    name: string;
+  };
 }

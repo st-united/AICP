@@ -3,6 +3,10 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      paragraph: {
+        DEFAULT: 'var(--paragraph-color)',
+        light: 'var(--paragraph-light-color)',
+      },
       boxShadow: {
         sm: '0px 0px 8px #00000026',
         light: '0px 0px 20px #fe774380',
@@ -10,7 +14,13 @@ module.exports = {
         'bottom-none': '0px -2px 8px #00000026',
       },
       colors: {
-        primary: '#fe7743',
+        primary: {
+          DEFAULT: 'var(--primary-color)',
+          light: 'var(--primary-color-light)',
+          bold: 'var(--primary-color-bold)',
+          gray: 'var(--primary-gray-color)',
+        },
+        // base: '#fe7743',
         secondary: '#686868',
         error: '#F23030',
         disabled: '#F5F5F7',
