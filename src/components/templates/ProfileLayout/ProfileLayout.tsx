@@ -53,7 +53,7 @@ const ProfileLayout = () => {
           </Sider>
         )}
 
-        <Content className='ml-0 sm:ml-4 w-full'>
+        <Content className='ml-0 smML:ml-4 w-full'>
           <div className='h-full'>
             <Outlet />
           </div>

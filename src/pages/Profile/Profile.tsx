@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 
 import { useProfileSchema } from './profileSchema';
 import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
-import CountrySelect from '@app/components/atoms/CustomSelect/CountrySelect';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/atoms/CustomSelect/ProvinceSelect';
 import { yupSync } from '@app/helpers';
@@ -16,6 +15,8 @@ import {
   NotificationTypeEnum,
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
+
+import './Profile.scss';
 
 const Profile = () => {
   const [avatar, setAvatar] = useState<string>();
@@ -34,20 +35,42 @@ const Profile = () => {
         phoneNumber: data.phoneNumber || '',
         dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
-        job: data.job || null,
+        job: Array.isArray(data.job)
+          ? data.job.every((j) => typeof j === 'object' && j !== null && 'id' in j)
+            ? data.job.map((j) => (j as unknown as { id: string }).id)
+            : (data.job as string[])
+          : [],
         referralCode: data.referralCode || null,
       });
     }
-  }, [data, form]);
+  }, [
+    data?.fullName,
+    data?.email,
+    data?.phoneNumber,
+    data?.dob,
+    data?.province,
+    data?.job,
+    data?.referralCode,
+    form,
+  ]);
+
+  useEffect(() => {
+    if (data?.avatarUrl) {
+      setAvatar(data.avatarUrl);
+    }
+  }, [data?.avatarUrl]);
 
   const handleCancel = () => {
-    setAvatar('');
     setIsEdit(false);
     form.resetFields();
   };
 
   const handleSubmit = async (values: UserProfile) => {
-    updateProfileMutation.mutate(values, {
+    const fixedValues = {
+      ...values,
+      job: Array.isArray(values.job) ? values.job : values.job ? [values.job] : [],
+    };
+    updateProfileMutation.mutate(fixedValues, {
       onSuccess: () => {
         setIsEdit(false);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PROFILE.UPDATE_SUCCESS'));
@@ -73,7 +96,7 @@ const Profile = () => {
         initialValues={{
           fullName: data?.fullName ?? '',
           email: data?.email ?? '',
-          phoneNumber: data?.phoneNumber ?? '',
+          phoneNumber: data?.phoneNumber ?? null,
           dob: data?.dob ? dayjs(data?.dob) : null,
           province: data?.province ?? null,
           job: data?.job ?? null,
@@ -111,10 +134,10 @@ const Profile = () => {
             />
           </Form.Item>
           <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
-            <ProvinceSelect disabled={!isEdit} />
+            <ProvinceSelect className='custom-orange-select h-full' disabled={!isEdit} />
           </Form.Item>
           <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
-            <JobSelect disabled={!isEdit} />
+            <JobSelect className='custom-orange-select' disabled={!isEdit} />
           </Form.Item>
           <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
             <div className='flex justify-end gap-2 !flex-row'>

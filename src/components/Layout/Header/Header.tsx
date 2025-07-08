@@ -1,4 +1,5 @@
 import { Image, Layout } from 'antd';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -12,15 +13,26 @@ const Header = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const isAuth = useSelector((state: any) => state.auth.isAuth);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const isHomePage = pathname === '/';
   const handleLoginClick = () => navigate('/login');
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <Layout.Header
       className={`${
-        isHomePage ? 'absolute bg-transparent' : 'bg-white'
-      } flex justify-between w-full items-center h-[6rem]`}
+        isHomePage && !isScrolled ? 'fixed top-0 bg-transparent' : 'sticky top-0 bg-white shadow-md'
+      } flex justify-between w-full items-center h-[5rem] z-50 transition-all duration-300 ease-in-out xl:px-24`}
     >
       <div className='cursor-pointer flex items-center justify-center'>
         <Image

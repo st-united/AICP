@@ -41,6 +41,7 @@ module.exports = {
       smXS: '642px',
       smS: '681px',
       smM: '746px',
+      smML: '768px',
       smL: '780px',
       md: '960px', // > iPad gen 9 vertical (810x1080)
       mdS: '1045px',
