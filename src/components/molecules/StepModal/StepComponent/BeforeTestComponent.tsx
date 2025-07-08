@@ -95,5 +95,5 @@ export default function BeforeTestComponent({ goBack }: StepItemComponent) {
   if (isLoading) {
     return <Spin className='text-center items-center' />;
   }
-  return <NewTestModal />;
+  return hasTakenExam?.hasTakenExam ? <ImproveTestModal /> : <NewTestModal />;
 }
