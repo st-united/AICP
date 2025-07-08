@@ -1,4 +1,3 @@
-
 import { Layout, Image } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';

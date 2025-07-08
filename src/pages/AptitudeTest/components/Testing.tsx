@@ -5,6 +5,7 @@ import {
   QuestionOutlined,
 } from '@ant-design/icons';
 import { Button, Divider, Modal, Progress, Spin } from 'antd';
+import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -154,6 +155,11 @@ const Testing = () => {
   const handleQuestionInViewChange = (id: string, timestamp?: number) => {
     setCurrentQuestion({ id, timestamp: timestamp ?? Date.now() });
   };
+
+  const timeStart = dayjs(examSet.timeStart);
+  const timeEnd = timeStart.add(examSet.timeLimitMinutes, 'minute');
+  const now = dayjs();
+  const timeLeftSeconds = Math.max(timeEnd.diff(now, 'second'), 0);
   return (
     <div className='relative overflow-hidden'>
       <div className='absolute top-10 right-10'>
@@ -174,9 +180,8 @@ const Testing = () => {
 
       <div className='smM:flex h-[calc(100vh-145px)] p-3 smM:p-6'>
         <div className='hidden smM:flex flex-col w-[300px] smM:w-80 md:w-96 space-y-6'>
-          {/* <div className='flex flex-col space-y-6 h-full'> */}
           <CountdownTimer
-            duration={examSet.timeLimitMinutes * 60}
+            duration={timeLeftSeconds}
             onTimeUp={() => {
               if (examSet) {
                 submitExam(examSet.examId);
@@ -193,7 +198,6 @@ const Testing = () => {
             onQuestionSelect={handleQuestionSelect}
             isAutoScrolling={isAutoScrolling}
           />
-          {/* </div> */}
         </div>
 
         <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
