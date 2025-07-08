@@ -2,7 +2,9 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { QUERY_KEY } from '@app/constants';
+import { setStorageData } from '@app/config';
+import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
+import { EXAM_LATEST } from '@app/constants/testing';
 import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
 import {
   deleteExamByIdApi,
@@ -126,9 +128,10 @@ export const useSubmitExam = () => {
       return data;
     },
     {
-      onSuccess({ message }) {
+      onSuccess({ message }, examId) {
+        setStorageData(EXAM_LATEST, examId);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        navigate('/');
+        navigate(NAVIGATE_URL.SCHEDULE);
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
@@ -145,8 +148,7 @@ export const useDeleteExam = () => {
       return data;
     },
     {
-      onSuccess({ message }) {
-        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+      onSuccess() {
         navigate('/');
       },
       onError({ response }) {
