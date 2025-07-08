@@ -22,7 +22,7 @@ const RecommendCard: React.FC<RecommendCardProps> = ({
         <h3 className='text-white text-xl text-center smM:text-start smM::text-2xl font-bold mb-3'>
           {title}
         </h3>
-        <p className='!text-white text-base text-center smM:text-start smM:text-lg mdM:text-xl mb-4'>
+        <p className='!text-white text-base sm:text-[20px] xl:text-[22px] md:text-[22px] lg:text-[22px] mb-4'>
           {description}
         </p>
         <Link

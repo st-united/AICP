@@ -32,7 +32,7 @@ const Header = () => {
     <Layout.Header
       className={`${
         isHomePage && !isScrolled ? 'fixed top-0 bg-transparent' : 'sticky top-0 bg-white shadow-md'
-      } flex justify-between w-full items-center h-[5rem] z-50 transition-all duration-300 ease-in-out xl:px-24`}
+      } flex justify-between w-full items-center h-[5rem] z-50 transition-all duration-300 ease-in-out mdL:px-16 xl:px-24`}
     >
       <div className='cursor-pointer flex items-center justify-center'>
         <Image

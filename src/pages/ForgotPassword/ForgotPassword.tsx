@@ -45,7 +45,7 @@ export default function ForgotPassword() {
       <div className='w-full md:w-4/5 h-full'>
         <Link
           to={'/login'}
-          className='mb-14 font-medium flex align-items gap-x-1 text-primary-gray text-lg hover:text-primary'
+          className='mb-5 font-medium flex align-items gap-x-1 text-primary-gray text-lg hover:text-primary'
         >
           <div className='flex items-center justify-center'>
             <LeftOutlined size={24} />
@@ -57,9 +57,7 @@ export default function ForgotPassword() {
           <p className='text-primary-gray mt-4 mb-6 sm:my-4 md:my-6 lg:my-8 text-lg'>
             <span className='font-medium'>{t('FORGOT_PASSWORD.NO_ACCOUNT')}</span>{' '}
             <Link
-              className={
-                'text-primary-bold font-medium underline hover:underline hover:text-primary'
-              }
+              className={'text-primary-bold font-bold underline hover:underline hover:text-primary'}
               to={'/register'}
             >
               {t('FORGOT_PASSWORD.REGISTER')}
