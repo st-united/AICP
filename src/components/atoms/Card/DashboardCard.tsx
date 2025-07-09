@@ -49,7 +49,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
             className='!bg-primary border !border-primary !rounded-full outline-none !text-white text-base font-bold hover:!bg-white hover:!text-primary transition-all duration-300 
             xs:w-full xs:h-11 
             sm:w-2/3 sm:h-12
-            md:w-2/3 md:h-13 md:text-lg
+            md:h-13 md:text-lg
             lg:w-2/5 lg:h-14 lg-text-xl'
           >
             {buttonText}
