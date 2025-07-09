@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:dev": "tsc && vite build --mode dev",
+    "build:uat": "tsc && vite build --mode uat",
+    "build:prod": "tsc && vite build --mode production",
     "preview": "vite preview",
     "test": "vitest watch",
     "test:no-watch": "vitest run",
