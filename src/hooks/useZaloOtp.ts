@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { QUERY_KEY } from '@app/constants/requestReactQuery';
-import { sendOtp, verifyOtp, checkOtpStatus } from '@app/services';
+import { CallingCode } from '@app/interface/callingCode.interface';
+import { sendOtp, verifyOtp, checkOtpStatus, callingCode } from '@app/services';
 
 export const useSendOtp = () =>
   useMutation({
@@ -15,13 +16,20 @@ export const useVerifyOtp = () =>
     mutationFn: (data: { phone: string; otp: string }) => verifyOtp(data),
   });
 
-export const useCheckOtpStatus = (phone: string) =>
+export const useCheckOtpStatus = () =>
   useQuery({
-    queryKey: [QUERY_KEY.ZALO_OTP_CHECK_STATUS, phone],
+    queryKey: [QUERY_KEY.ZALO_OTP_CHECK_STATUS],
     queryFn: async () => {
-      const { data } = await checkOtpStatus(phone);
+      const { data } = await checkOtpStatus();
       return data;
     },
-    enabled: !!phone,
     retry: false,
+  });
+export const useCallingCode = () =>
+  useQuery<CallingCode[]>({
+    queryKey: [QUERY_KEY.ZALO_OTP_COUNTRY_CODE],
+    queryFn: async () => {
+      const { data } = await callingCode();
+      return data;
+    },
   });

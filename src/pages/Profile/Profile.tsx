@@ -3,12 +3,13 @@ import { Rule } from 'antd/lib/form';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { useProfileSchema } from './profileSchema';
 import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
-import CountrySelect from '@app/components/atoms/CustomSelect/CountrySelect';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/atoms/CustomSelect/ProvinceSelect';
+import { NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers';
 import { useGetProfile, useUpdateProfile } from '@app/hooks';
 import { UserProfile } from '@app/interface/user.interface';
@@ -25,6 +26,7 @@ const Profile = () => {
   const updateProfileMutation = useUpdateProfile();
   const { t } = useTranslation();
   const validator = [yupSync(useProfileSchema())] as unknown as Rule[];
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data) {
@@ -51,6 +53,7 @@ const Profile = () => {
       onSuccess: () => {
         setIsEdit(false);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PROFILE.UPDATE_SUCCESS'));
+        navigate(NAVIGATE_URL.PROFILE);
       },
       onError: (error) => {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PROFILE.UPDATE_FAILED'));

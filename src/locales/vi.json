@@ -681,6 +681,7 @@
     "OTP_INVALID": "Mã OTP không đúng",
     "COUNTDOWN": "Gửi lại sau {{time}}s",
     "PHONE_ALREADY_VERIFIED": "Số điện thoại này đã được xác thực",
-    "PHONE_ALREADY_VERIFIED_DESC": "Bạn có thể tiếp tục với bước tiếp theo"
+    "PHONE_ALREADY_VERIFIED_DESC": "Bạn có thể tiếp tục với bước tiếp theo",
+    "UPDATE_PHONE_TITLE": "Cập nhật số điện thoại"
   }
 }
