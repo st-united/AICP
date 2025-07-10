@@ -7,7 +7,7 @@ import { useGetProfile } from '@app/hooks/useProfile';
 
 const AuthLayout = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
-  const { isLoading } = useGetProfile();
+  const { isLoading } = useGetProfile(isAuth);
   if (isAuth && isLoading) {
     return <Spin className='top-1/2 left-1/2 fixed -translate-x-1/2 -translate-y-1/2' />;
   }
