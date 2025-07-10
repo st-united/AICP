@@ -285,9 +285,9 @@ const Testing = () => {
 
         <div className='flex-1 smM:ml-6'>
           <div className='flex flex-col w-full bg-white p-6 mdM:p-10 rounded-xl mdM:pr-0 pr-0'>
-            <div style={{ width: '100%' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                <span style={{ fontSize: 14, color: '#333' }}>{formatSeconds(remainingTime)}</span>
+            <div className='w-full'>
+              <div className='flex justify-between mb-1'>
+                <span className='text-[14px] text-[#333]'>{formatSeconds(remainingTime)}</span>
               </div>
 
               <Progress
