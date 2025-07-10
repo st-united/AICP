@@ -70,7 +70,7 @@ const DashboardSection = () => {
         <h2 className='font-bold text-center text-2xl mb-8 smM:text-start smM:text-3xl mdM:text-4xl'>
           {t('DASHBOARD.TITLE')}
         </h2>
-        <p className='font-semibold text-base sm:text-xl xl:text-2xl md:text-2xl lg:text-2xl text-center sm:text-start !text-primary-gray mb-8'>
+        <p className='font-semibold text-base sm:text-[20px] md:text-[22px] text-center sm:text-start !text-primary-gray mb-8'>
           {t('DASHBOARD.DESCRIPTION')}
         </p>
         <div className='grid grid-cols-1 smM:grid-cols-2 mt-10 sm:mt-20 gap-10 w-full'>

@@ -62,7 +62,7 @@ const SignIn = () => {
           type='button'
         >
           <Link
-            className='flex text-primary-gray items-center justify-start text-lg !mb-14 hover:text-primary-light cursor-pointer'
+            className='flex text-primary-gray items-center justify-start text-lg !mb-5 hover:text-primary-light cursor-pointer'
             to={'/'}
           >
             <div className='flex items-center justify-center'>
@@ -83,7 +83,12 @@ const SignIn = () => {
             </Link>
           </div>
         </div>
-        <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
+        <Form
+          form={form}
+          layout='vertical'
+          onFinish={onFinish}
+          className='grid grid-cols-2 gap-4 w-full'
+        >
           <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !rounded-md !text-lg'

@@ -27,7 +27,12 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
     );
   }
   return (
-    <Card className='custom-card w-full rounded-3xl p-8 shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-transform duration-300 hover:scale-105 bg-white'>
+    <Card
+      className='custom-card w-full rounded-3xl p-4 md:p-8 shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-transform duration-300 hover:scale-105 bg-white'
+      classNames={{
+        body: '!p-3',
+      }}
+    >
       <div className='flex flex-col justify-between h-full'>
         <div className='flex justify-between'>
           <div className='flex flex-col md:justify-between mdM:mb-12'>
@@ -41,7 +46,11 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           <Button
             type='primary'
             onClick={onClick}
-            className='h-12 mdL:h-14 px-8 w-1/3 !text-white border !border-primary !rounded-full outline-none !bg-primary text-lg md:text-xl font-bold hover:!bg-white hover:!text-primary transition-all duration-300'
+            className='!bg-primary border !border-primary !rounded-full outline-none !text-white text-base font-bold hover:!bg-white hover:!text-primary transition-all duration-300 
+            xs:w-full xs:h-11 
+            sm:w-2/3 sm:h-12
+            md:h-13 md:text-lg
+            lg:w-2/5 lg:h-14 lg-text-xl'
           >
             {buttonText}
           </Button>

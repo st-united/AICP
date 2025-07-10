@@ -11,7 +11,7 @@ const RecommendSection = () => {
         <h2 className='font-bold text-center text-2xl mb-8 smM:text-start smM:text-3xl mdM:text-4xl'>
           {t('RECOMMEND.TITLE')}
         </h2>
-        <p className='font-semibold text-xl xl:text-2xl text-center sm:text-start !text-primary-gray mb-8'>
+        <p className='font-semibold text-base sm:text-xl md:text-2xl text-center sm:text-start !text-primary-gray mb-8'>
           {t('RECOMMEND.DESCRIPTION')}
         </p>
 
