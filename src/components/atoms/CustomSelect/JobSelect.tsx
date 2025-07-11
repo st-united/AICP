@@ -57,7 +57,7 @@ const JobSelect: React.FC<JobSelectProps> = (props) => {
         placeholder={t('PLACEHOLDER.SELECT_JOB')}
         options={jobOptions}
         open={dropdownOpen}
-        onDropdownVisibleChange={setDropdownOpen}
+        onOpenChange={setDropdownOpen}
         onSelect={() => setDropdownOpen(true)}
         autoClearSearchValue={false}
         showSearch
