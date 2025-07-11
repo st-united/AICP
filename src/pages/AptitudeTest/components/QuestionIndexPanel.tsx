@@ -65,7 +65,21 @@ const QuestionIndexPanel = ({
       <div className='text-2xl font-bold text-center text-blue-900'>{t('TEST.QUESTION_INDEX')}</div>
       <Divider className='!my-5' />
       <div className='flex-1'>
-        <div className='grid grid-cols-4 gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 p-2 w-full h-[calc(100vh-590px)]'>
+        <div className='flex items-start flex-col justify-around w-full pb-3 pl-2'>
+          <div className='flex items-center flex-row gap-2'>
+            <div className='rounded-full bg-gray-100 aspect-square w-3 h-3'></div>
+            <div className='text-sm text-gray-500'>{t('TEST.UNANSWERED_QUESTIONS')}</div>
+          </div>
+          <div className='flex items-center flex-row gap-2'>
+            <div className='rounded-full bg-[#FFE9E1] aspect-square w-3 h-3'></div>
+            <div className='text-sm text-gray-500'>{t('TEST.ANSWERED_QUESTIONS')}</div>
+          </div>
+          <div className='flex items-center flex-row gap-2'>
+            <div className='rounded-full bg-[#FE7743] aspect-square w-3 h-3'></div>
+            <div className='text-sm text-gray-500'>{t('TEST.FLAGGED_QUESTIONS')}</div>
+          </div>
+        </div>
+        <div className='grid grid-cols-4 gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 p-2 w-full h-[calc(100vh-390px)]'>
           {questions.map((question, index) => (
             <button
               key={question.id}
@@ -81,21 +95,6 @@ const QuestionIndexPanel = ({
               {index + 1}
             </button>
           ))}
-        </div>
-        <Divider className='!my-5' />
-        <div className='flex items-start flex-col justify-around w-full px-6'>
-          <div className='flex items-center flex-row gap-2'>
-            <div className='rounded-full bg-gray-100 aspect-square w-3 h-3'></div>
-            <div className='text-sm text-gray-500'>{t('TEST.UNANSWERED_QUESTIONS')}</div>
-          </div>
-          <div className='flex items-center flex-row gap-2'>
-            <div className='rounded-full bg-[#FFE9E1] aspect-square w-3 h-3'></div>
-            <div className='text-sm text-gray-500'>{t('TEST.ANSWERED_QUESTIONS')}</div>
-          </div>
-          <div className='flex items-center flex-row gap-2'>
-            <div className='rounded-full bg-[#FE7743] aspect-square w-3 h-3'></div>
-            <div className='text-sm text-gray-500'>{t('TEST.FLAGGED_QUESTIONS')}</div>
-          </div>
         </div>
       </div>
     </div>
