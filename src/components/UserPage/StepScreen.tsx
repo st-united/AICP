@@ -120,11 +120,10 @@ export default function StepScreen({ steps, activeStep }: Props) {
         <div className='flex items-center justify-center h-full'>
           <div className='flex flex-col gap-4'>
             <span className='text-black text-4xl xl:text-6xl font-[1000]'>
-              Lộ trình đánh giá năng lực AI
+              {t('HOMEPAGE.STEP_SCREEN_HEADER.TITLE')}
             </span>
             <span className='text-[#64607D] text-base xl:text-xl font-bold'>
-              Lộ trình để đánh giá chính xác và trực quan nhất về khả năng sử dụng AI của mỗi cá
-              nhân.
+              {t('HOMEPAGE.STEP_SCREEN_HEADER.SUBTITLE')}
             </span>
             <div className='flex items-center justify-start'>
               <Button

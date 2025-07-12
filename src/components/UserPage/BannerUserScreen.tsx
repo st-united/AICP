@@ -12,7 +12,9 @@ const BannerUserScreen = () => {
     <div className='w-full h-screen bg-[#FFFBF9] flex flex-col '>
       <div className='w-full flex flex-row items-center gap-4 sm:gap-20 pt-8 mt-14 px-2 sm:px-10'>
         <div className='flex md:flex-row flex-col items-center gap-2 w-3/5 sm:w-2/5 justify-end'>
-          <span className='text-lg md:text-2xl font-bold'>Đơn vị tổ chức</span>
+          <span className='text-lg md:text-2xl font-bold'>
+            {t('HOMEPAGE.BANNER_USER.ORGANIZER')}
+          </span>
           <div className='flex flex-row items-center gap-2'>
             <Image
               preview={false}
@@ -25,7 +27,7 @@ const BannerUserScreen = () => {
           </div>
         </div>
         <div className='flex md:flex-row flex-col md:items-center gap-2'>
-          <span className='text-lg md:text-2xl font-bold'>Đơn vị đồng hành</span>
+          <span className='text-lg md:text-2xl font-bold'>{t('HOMEPAGE.BANNER_USER.PARTNER')}</span>
           <div className='flex flex-row items-center gap-2'>
             <Image
               preview={false}
@@ -57,15 +59,16 @@ const BannerUserScreen = () => {
         </div>
         <div className='flex-1 flex flex-col text-center md:text-start mdL:align-middle justify-start sm:justify-center pt-20 sm:pt-0 sm:pb-32 mdL:pb-48 px-6 mdL:px-0 mdL:pr-20'>
           <span className='text-[48px] mdL:text-[72px] font-[1000] tracking-wide mb-6 bg-gradient-to-r from-[#FE7743] via-[#cc7935] to-[#862e0b] bg-clip-text text-transparent'>
-            READY FOR AI
+            {t('HOMEPAGE.BANNER_USER.TITLE')}
           </span>
           <span className='text-base md:text-xl font-[700] mb-2 block'>
-            Chương trình xác định và phát triển bộ khung năng lực thời đại AI do Sở Khoa Học Công
-            Nghệ Đà Nẵng chỉ đạo triển khai
+            {t('HOMEPAGE.BANNER_USER.SUBTITLE')}
           </span>
           <span className='text-xl font-semibold mt-4'>
-            <span className='text-3xl font-[900] text-[#FF8242]'>10.000</span> sinh viên sẵn sàng
-            bước vào thời đại AI
+            <span className='text-3xl font-[900] text-[#FF8242]'>
+              {t('HOMEPAGE.BANNER_USER.STUDENT_COUNT')}
+            </span>{' '}
+            {t('HOMEPAGE.BANNER_USER.STUDENT_TEXT')}
           </span>
         </div>
       </div>
