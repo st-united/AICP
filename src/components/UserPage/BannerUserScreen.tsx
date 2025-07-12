@@ -1,7 +1,7 @@
 import { Image } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { CyborgHand, RobotHand } from '@app/assets/images';
+import { RobotHand } from '@app/assets/images';
 import { PartnerUnit1, PartnerUnit2, CelebUnit, DevPlus } from '@app/assets/images/Logos';
 import '../LandingPage/homepage.scss';
 

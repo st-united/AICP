@@ -1,7 +1,5 @@
-import { DownCircleFilled } from '@ant-design/icons';
-import { Button, Image } from 'antd';
+import { Image } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
 import { BannerRobot } from '@app/assets/images';
 import { PartnerUnit1, PartnerUnit2, CelebUnit, DevPlus } from '@app/assets/images/Logos';
