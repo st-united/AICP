@@ -20,7 +20,7 @@ const Header = () => {
     <Layout.Header
       className={`${
         isHomePage ? 'absolute bg-transparent' : 'bg-white'
-      } flex justify-between w-full items-center h-[6rem]`}
+      } flex justify-between w-full items-center h-[6rem] z-20`}
     >
       <div className='cursor-pointer flex items-center justify-center'>
         <Image
