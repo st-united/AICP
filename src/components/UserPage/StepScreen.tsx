@@ -34,7 +34,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
     const isMobile = width < 768;
 
     if (isMobile) {
-      const startY = height * 0.35;
+      const startY = height * 0.4;
       const endY = height * 0.8;
       const gapY = (endY - startY) / (steps.length - 1);
 
@@ -120,11 +120,10 @@ export default function StepScreen({ steps, activeStep }: Props) {
         <div className='flex items-center justify-center h-full'>
           <div className='flex flex-col gap-4'>
             <span className='text-black text-4xl xl:text-6xl font-[1000]'>
-              Lộ trình đánh giá năng lực AI
+              {t('HOMEPAGE.STEP_SCREEN_HEADER.TITLE')}
             </span>
             <span className='text-[#64607D] text-base xl:text-xl font-bold'>
-              Lộ trình để đánh giá chính xác và trực quan nhất về khả năng sử dụng AI của mỗi cá
-              nhân.
+              {t('HOMEPAGE.STEP_SCREEN_HEADER.SUBTITLE')}
             </span>
             <div className='flex items-center justify-start'>
               <Button
@@ -139,7 +138,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
           </div>
         </div>
       </div>
-      <div className='w-full h-screen overflow-visible' ref={containerRef}>
+      <div className='w-full flex-1 overflow-visible' ref={containerRef}>
         <svg
           viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
           className='w-full h-screen'
@@ -216,11 +215,11 @@ export default function StepScreen({ steps, activeStep }: Props) {
               </text>
 
               <foreignObject
-                x={dimensions.width < 768 ? p.x + 100 : p.x - 30}
-                y={dimensions.width < 768 ? p.y - 100 : p.y - 100}
+                x={dimensions.width < 768 ? p.x + 30 : p.x - 30}
+                y={dimensions.width < 768 ? p.y - 70 : p.y - 100}
                 width={
                   dimensions.width < 768
-                    ? dimensions.width * 0.6
+                    ? dimensions.width * 0.7
                     : dimensions.width / (steps.length + 2)
                 }
                 height={dimensions.width < 768 ? '200' : '500'}

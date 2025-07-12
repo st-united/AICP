@@ -1,4 +1,5 @@
 import { useCallback, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import UserPage from '../UserPage/UserPage';
@@ -16,6 +17,7 @@ import { smoothScrollTo } from '@app/utils/scroll';
 
 const Homepage = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
+  const { t } = useTranslation();
   const section2Ref = useRef<HTMLDivElement>(null);
   const handleNext = useCallback(() => {
     const target = section2Ref.current;
@@ -44,16 +46,16 @@ const Homepage = () => {
           <StepScreen
             steps={[
               {
-                label: 'Bài test năng lực AI',
-                desc: 'Bộ câu hỏi về khả năng ứng dụng AI được đội ngũ Devplus nghiên cứu và biên soạn',
+                label: t('HOMEPAGE.STEP_SCREEN.STEP_1.LABEL'),
+                desc: t('HOMEPAGE.STEP_SCREEN.STEP_1.DESC'),
               },
               {
-                label: 'Hoàn thiện hồ Sơ',
-                desc: 'Hoàn thiện hồ sơ cá nhân, cung cấp thông tin về quá trình làm việc để hệ thống có đánh giá trực quan hơn.',
+                label: t('HOMEPAGE.STEP_SCREEN.STEP_2.LABEL'),
+                desc: t('HOMEPAGE.STEP_SCREEN.STEP_2.DESC'),
               },
               {
-                label: 'Phỏng vấn cùng chuyên gia',
-                desc: 'Đặt lịch phỏng vấn với Interviewer chuyên nghiệp và kinh nghiệm, bước cuối cùng để đánh giá chính xác nhất về năng lực AI',
+                label: t('HOMEPAGE.STEP_SCREEN.STEP_3.LABEL'),
+                desc: t('HOMEPAGE.STEP_SCREEN.STEP_3.DESC'),
               },
             ]}
             activeStep={1}
