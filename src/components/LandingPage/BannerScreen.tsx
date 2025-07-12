@@ -30,7 +30,10 @@ const BannerScreen = () => {
         <div className='flex flex-col justify-center items-start flex-1 text-center sm:text-left'>
           <div className='flex flex-row gap-8 md:gap-32 w-full'>
             <div className='flex h-full flex-col w-[40%] md:w-[24%] lgS:w-[24%] xl:w-[19%]'>
-              <div className='w-full text-xl sm:text-2xl font-bold'> Đơn vị tổ chức</div>
+              <div className='w-full text-xl sm:text-2xl font-bold'>
+                {' '}
+                {t('HOMEPAGE.BANNER_SCREEN.ORGANIZER')}
+              </div>
               <div className='flex h-full w-full flex-row gap-4 items-end mt-1'>
                 <Image
                   preview={false}
@@ -47,7 +50,9 @@ const BannerScreen = () => {
               </div>
             </div>
             <div className='flex h-full flex-col w-[55%]'>
-              <div className='w-full text-xl sm:text-2xl font-bold'>Đơn vị đồng hành</div>
+              <div className='w-full text-xl sm:text-2xl font-bold'>
+                {t('HOMEPAGE.BANNER_SCREEN.PARTNER')}
+              </div>
               <div className='flex h-full w-full flex-row gap-8 align-bottom items-end justify-start custom-banner pb-2 mt-3'>
                 <Image preview={false} className='!object-contain ' src={PartnerUnit1} alt='haha' />
                 <Image preview={false} className='!object-contain ' src={PartnerUnit2} alt='haha' />
@@ -56,18 +61,17 @@ const BannerScreen = () => {
           </div>
           <div className='rounded-xl py-8 w-full'>
             <span className='w-full text-center sm:text-left text-[48px] md:text-[72px] font-[1000] tracking-wide mb-6 bg-gradient-to-r from-[#FE7743] via-[#cc7935] to-[#862e0b] bg-clip-text text-transparent'>
-              READY FOR AI
+              {t('HOMEPAGE.BANNER_SCREEN.TITLE')}
             </span>
           </div>
-          <span className='text-xl font-[700]'>
-            Chương trình xác định và phát triển bộ khung năng lực thời đại AI do Sở Khoa Học Công
-            Nghệ Đà Nẵng chỉ đạo triển khai
-          </span>
+          <span className='text-xl font-[700]'>{t('HOMEPAGE.BANNER_SCREEN.SUBTITLE')}</span>
 
           <div className='flex flex-row gap-2 mt-8'>
             <span className='text-xl font-semibold'>
-              <span className='text-3xl font-[900] text-[#FF8242]'>10.000</span> sinh viên sẵn sàng
-              bước vào thời đại AI
+              <span className='text-3xl font-[900] text-[#FF8242]'>
+                {t('HOMEPAGE.BANNER_SCREEN.STUDENT_COUNT')}
+              </span>{' '}
+              {t('HOMEPAGE.BANNER_SCREEN.STUDENT_TEXT')}
             </span>
           </div>
         </div>

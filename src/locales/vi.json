@@ -331,6 +331,14 @@
       "STUDENT_COUNT": "10.000",
       "STUDENT_TEXT": "sinh viên sẵn sàng bước vào thời đại AI"
     },
+    "BANNER_SCREEN": {
+      "ORGANIZER": "Đơn vị tổ chức",
+      "PARTNER": "Đơn vị đồng hành",
+      "TITLE": "READY FOR AI",
+      "SUBTITLE": "Chương trình xác định và phát triển bộ khung năng lực thời đại AI do Sở Khoa Học Công Nghệ Đà Nẵng chỉ đạo triển khai",
+      "STUDENT_COUNT": "10.000",
+      "STUDENT_TEXT": "sinh viên sẵn sàng bước vào thời đại AI"
+    },
     "STEP_SCREEN": {
       "STEP_1": {
         "LABEL": "Bài test năng lực AI",
