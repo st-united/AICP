@@ -1,14 +1,13 @@
-import { CameraFilled, UserOutlined } from '@ant-design/icons';
-import { Avatar, Upload, message } from 'antd';
+import { CameraFilled, LoadingOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Spin, Upload } from 'antd';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB } from '@app/constants/file';
-import { validateFile } from '@app/helpers/fileValidation';
+import { useUploadAvatar } from '@app/hooks/useProfile';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
-import type { UploadChangeParam } from 'antd/es/upload';
+import type { UploadChangeParam, UploadFile } from 'antd/es/upload';
 
 interface Props {
   avatar?: string;
@@ -18,46 +17,54 @@ interface Props {
 
 const CustomAvatar = ({ avatar, isEdit, onAvatarChange }: Props) => {
   const { t } = useTranslation();
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const { mutate: uploadAvatar, isPending } = useUploadAvatar();
+
   const handleChange = (info: UploadChangeParam) => {
     const file = info.fileList[0]?.originFileObj;
-    if (!file) return;
-    const validation = validateFile(file, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB);
-    if (!validation.isValid) {
-      openNotificationWithIcon(
-        NotificationTypeEnum.WARNING,
-        t(validation.errorMessageKey!, {
-          field: t('PROFILE.AVATAR'),
-          ...validation.errorMessageParams,
-        }),
-      );
+    if (!file) {
+      setFileList([]);
       return;
     }
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const base64 = e.target?.result as string;
-      onAvatarChange?.(base64);
-    };
-    reader.onerror = (e) => {
-      openNotificationWithIcon(
-        NotificationTypeEnum.ERROR,
-        t('VALIDATE.FILE_READ_ERROR', { field: t('PROFILE.AVATAR') }),
-      );
-    };
-    reader.readAsDataURL(file);
+
+    setFileList(info.file.originFileObj ? [info.file as UploadFile] : []);
+
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    uploadAvatar(formData, {
+      onSuccess: (response) => {
+        onAvatarChange?.(response.data.avatarUrl || response.data.avatar);
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PROFILE.AVATAR_UPLOAD_SUCCESS'));
+      },
+      onError: (error: any) => {
+        openNotificationWithIcon(
+          NotificationTypeEnum.ERROR,
+          error.response?.data?.message || t('PROFILE.AVATAR_UPLOAD_FAILED'),
+        );
+        setFileList([]);
+      },
+    });
   };
 
   return (
     <div className='relative'>
-      <Avatar
-        className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px]'
-        src={avatar}
-        icon={<UserOutlined className='md:!text-[180px] !text-[150px]' />}
-      />
-
-      {isEdit && (
+      {!isPending ? (
+        <Avatar
+          className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px]'
+          src={avatar}
+          icon={<UserOutlined className='md:!text-[180px] !text-[150px]' />}
+        />
+      ) : (
+        <div className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px] !text-black flex items-center justify-center'>
+          <LoadingOutlined className='md:!text-[150px] !text-[100px]' />
+        </div>
+      )}
+      {isEdit && !isPending && (
         <Upload
           key={avatar}
           showUploadList={false}
+          fileList={fileList}
           beforeUpload={() => false}
           onChange={handleChange}
           accept='image/*'

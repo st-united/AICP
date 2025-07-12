@@ -82,8 +82,8 @@ export const useUpdateProfile = () => {
 export const useUploadAvatar = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (data: { identityId: string; formData: FormData }) => {
-      const response = await uploadAvatarApi(data.identityId, data.formData);
+    async (formData: FormData) => {
+      const response = await uploadAvatarApi(formData);
       return response.data;
     },
     {

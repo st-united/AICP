@@ -60,7 +60,7 @@ const SignUp = () => {
           type='button'
         >
           <Link
-            className='flex items-center text-primary-gray justify-start text-lg !mb-14 hover:text-primary-light cursor-pointer'
+            className='flex items-center text-primary-gray justify-start text-lg !mb-5 hover:text-primary-light cursor-pointer'
             to={'/'}
           >
             <div className='flex items-center justify-center'>
@@ -75,7 +75,7 @@ const SignUp = () => {
           <div className='text-white text-lg !mb-4 flex gap-2'>
             <div className='text-primary-gray'>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
             <div
-              className='text-primary-bold cursor-pointer underline hover:text-primary-light'
+              className='text-primary-bold cursor-pointer underline hover:text-primary-light font-bold'
               onClick={() => navigate('/login')}
               aria-hidden='true'
             >
@@ -87,7 +87,7 @@ const SignUp = () => {
           form={form}
           layout='vertical'
           onFinish={onFinish}
-          className='grid grid-cols-2 md:gap-4 gap-1'
+          className='grid grid-cols-2 gap-0 xs:gap-1.5 sm:gap-2 md:gap-0.5'
           validateTrigger={['onChange', 'onBlur']}
         >
           <Form.Item className='md:col-span-1 col-span-2' name='fullName' rules={validator}>
@@ -141,7 +141,7 @@ const SignUp = () => {
             />
           </Form.Item>
 
-          <div className='col-span-2 text-lg text-[#686868]'>
+          <div className='col-span-2 text-lg md:text-base text-[#686868]'>
             <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-primary-gray'}`}>
               <CheckOutlined />
               <div>{t<string>('SIGN_UP.PASSWORD_REQUIREMENT')}</div>
@@ -157,10 +157,10 @@ const SignUp = () => {
               <div>
                 {parse(
                   t<string>('SIGN_UP.AGREE_TERMS', {
-                    terms: `<a href="/terms-and-conditions" style="text-decoration: underline; color: #A22D00;">${t<string>(
+                    terms: `<a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #A22D00;">${t<string>(
                       'SIGN_UP.TERMS',
                     )}</a>`,
-                    privacy: `<a href="/privacy-policy" style="text-decoration: underline; color: #A22D00;">${t<string>(
+                    privacy: `<a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #A22D00;">${t<string>(
                       'SIGN_UP.PRIVACY',
                     )}</a>`,
                     company: t('SIGN_UP.COMPANY'),

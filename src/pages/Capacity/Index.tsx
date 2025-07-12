@@ -18,9 +18,9 @@ const Capacity = () => {
 
   const { data: examDetail, isLoading, error } = useExamDetail(examId || '');
   const chartData = [
-    { skill: 'Mindset', value: examDetail?.mindsetScore || 0 },
-    { skill: 'Skillset', value: examDetail?.skillsetScore || 0 },
-    { skill: 'Toolset', value: examDetail?.toolsetScore || 0 },
+    { skill: 'Mindset', value: examDetail?.mindsetScore.score || 0 },
+    { skill: 'Skillset', value: examDetail?.skillsetScore.score || 0 },
+    { skill: 'Toolset', value: examDetail?.toolsetScore.score || 0 },
   ];
 
   const handleInterviewClick = () => {
@@ -75,9 +75,9 @@ const Capacity = () => {
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start relative px-2 md:px-5'>
           <div>
             <SkillsList
-              mindSetScore={examDetail?.mindsetScore || 0}
-              skillSetScore={examDetail?.skillsetScore || 0}
-              toolSetScore={examDetail?.toolsetScore || 0}
+              mindSetScore={examDetail?.mindsetScore.score || 0}
+              skillSetScore={examDetail?.skillsetScore.score || 0}
+              toolSetScore={examDetail?.toolsetScore.score || 0}
               sfiaLevel={examDetail?.sfiaLevel || null}
               className='ps-3 sm:ps-7'
             />
