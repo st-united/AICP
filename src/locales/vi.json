@@ -322,7 +322,33 @@
     "FOOTER_ACTIVITIES_LIST": ["Workshop", "Sự kiện", "Cộng đồng", "Hoạt động ngoại khóa"],
     "FOOTER_ADDRESS": "116 - 118 Mai Thuc Lan, My An, Ngu Hanh Son, Da Nang",
     "FOOTER_EMAIL": "hello@devplus.edu.vn",
-    "FOOTER_PHONE": "(+84) 93 190 1608"
+    "FOOTER_PHONE": "(+84) 368492885",
+    "BANNER_USER": {
+      "ORGANIZER": "Đơn vị tổ chức",
+      "PARTNER": "Đơn vị đồng hành",
+      "TITLE": "READY FOR AI",
+      "SUBTITLE": "Chương trình xác định và phát triển bộ khung năng lực thời đại AI do Sở Khoa Học Công Nghệ Đà Nẵng chỉ đạo triển khai",
+      "STUDENT_COUNT": "10.000",
+      "STUDENT_TEXT": "sinh viên sẵn sàng bước vào thời đại AI"
+    },
+    "STEP_SCREEN": {
+      "STEP_1": {
+        "LABEL": "Bài test năng lực AI",
+        "DESC": "Bộ câu hỏi về khả năng ứng dụng AI được đội ngũ Devplus nghiên cứu và biên soạn"
+      },
+      "STEP_2": {
+        "LABEL": "Hoàn thiện hồ Sơ",
+        "DESC": "Hoàn thiện hồ sơ cá nhân, cung cấp thông tin về quá trình làm việc để hệ thống có đánh giá trực quan hơn."
+      },
+      "STEP_3": {
+        "LABEL": "Phỏng vấn cùng chuyên gia",
+        "DESC": "Đặt lịch phỏng vấn với Interviewer chuyên nghiệp và kinh nghiệm, bước cuối cùng để đánh giá chính xác nhất về năng lực AI"
+      }
+    },
+    "STEP_SCREEN_HEADER": {
+      "TITLE": "Lộ trình đánh giá năng lực AI",
+      "SUBTITLE": "Lộ trình để đánh giá chính xác và trực quan nhất về khả năng sử dụng AI của mỗi cá nhân."
+    }
   },
   "HEADER": {
     "START": "Bắt đầu",
