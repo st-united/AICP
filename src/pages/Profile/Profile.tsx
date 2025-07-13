@@ -9,6 +9,7 @@ import { useProfileSchema } from './profileSchema';
 import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/atoms/CustomSelect/ProvinceSelect';
+import PhoneInput from '@app/components/atoms/PhoneInput/PhoneInput';
 import { NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers';
 import { useGetProfile, useUpdateProfile } from '@app/hooks';
@@ -98,12 +99,8 @@ const Profile = () => {
               disabled
             />
           </Form.Item>
-          <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator}>
-            <Input
-              className='!px-6 !py-3 !rounded-lg'
-              placeholder={t('PROFILE.PHONE_PLACEHOLDER') as string}
-              disabled={!isEdit}
-            />
+          <Form.Item name='phoneNumber' className='!w-full' label={t('PROFILE.PHONE')}>
+            <PhoneInput disabled={!isEdit} className='h-[48px]' />
           </Form.Item>
           <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
             <DatePicker

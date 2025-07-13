@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 
 import './StepModal.scss';
 import BeforeTestComponent from './StepComponent/BeforeTestComponent';
-import { DemoComponent } from './StepComponent/DemoComponent';
 import PortfolioComponent from './StepComponent/PortfolioComponent';
-import { useDemoCondition } from './StepCondition/DemoCondition';
+import { ZaloVerifyComponent } from './StepComponent/ZaloVerifyComponent';
 import { usePortfolioCondition } from './StepCondition/PortfolioCondition';
+import { useZaloVerifyCondition } from './StepCondition/ZaloVerifyCondition';
 import { StepItem, StepModalProps } from '@app/interface/stepSection.interface';
 
 enum NAVIGATION {
@@ -18,7 +18,7 @@ enum NAVIGATION {
 
 const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
   const { t } = useTranslation();
-  const { isPass, isLoading } = useDemoCondition();
+  const { isPass: isZaloVerified, isLoading: isLoadingZaloVerify } = useZaloVerifyCondition();
   const { isPass: havePortfolio, isLoading: loadingPortfolio } = usePortfolioCondition();
   const [nav, setNav] = useState<NAVIGATION>(NAVIGATION.NEXT);
   const [current, setCurrent] = useState(0);
@@ -27,9 +27,9 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
     () => [
       {
         title: t('STEP_MODAL.PHONE_INFO'),
-        render: (props) => <DemoComponent {...props} />,
-        shouldSkip: false,
-        loading: isLoading,
+        render: (props) => <ZaloVerifyComponent {...props} />,
+        shouldSkip: isZaloVerified,
+        loading: isLoadingZaloVerify,
       },
       {
         title: t('STEP_MODAL.PERSONAL_INFO'),
@@ -43,7 +43,7 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
         shouldSkip: false,
       },
     ],
-    [t, isLoading, havePortfolio, loadingPortfolio],
+    [t, isZaloVerified, isLoadingZaloVerify, havePortfolio, loadingPortfolio],
   );
 
   const goNext = useCallback(async () => {
@@ -79,7 +79,17 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
 
       return () => clearTimeout(timer);
     }
-  }, [current, isPass, isLoading, havePortfolio, loadingPortfolio, nav, goNext, goBack, steps]);
+  }, [
+    current,
+    isZaloVerified,
+    isLoadingZaloVerify,
+    havePortfolio,
+    loadingPortfolio,
+    nav,
+    goNext,
+    goBack,
+    steps,
+  ]);
 
   return (
     <Modal open={open} onCancel={onClose} footer={null} centered className='step-modal'>

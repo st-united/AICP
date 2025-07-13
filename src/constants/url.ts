@@ -29,4 +29,5 @@ export const API_URL = {
   ZALO_OTP_VERIFY: '/zalo-otp/verify',
   ZALO_OTP_CHECK_STATUS: '/zalo-otp/status',
   ZALO_OTP_COUNTRY_CODE: '/zalo-otp/country-codes',
+  ZALO_OTP_CAN_SEND: '/zalo-otp/can-send-otp',
 };
