@@ -662,7 +662,7 @@
   },
   "OTP": {
     "TITLE": "Xác thực số điện thoại",
-    "DESCRIPTION": "Vui lòng nhập số điện thoại để nhận mã OTP xác thực",
+    "DESCRIPTION": "Vui lòng kiểm tra số điện thoại để nhận mã OTP xác thực",
     "PHONE_PLACEHOLDER": "Nhập số điện thoại",
     "OTP_PLACEHOLDER": "Nhập mã OTP",
     "SEND_OTP": "Gửi mã OTP",
@@ -680,8 +680,12 @@
     "PHONE_INVALID": "Số điện thoại không đúng định dạng",
     "OTP_INVALID": "Mã OTP không đúng",
     "COUNTDOWN": "Gửi lại sau {{time}}s",
+    "WAIT_TIME": "Chờ {{time}}s",
+    "CANNOT_SEND_OTP": "Vui lòng chờ {{time}} giây trước khi gửi lại OTP",
     "PHONE_ALREADY_VERIFIED": "Số điện thoại này đã được xác thực",
     "PHONE_ALREADY_VERIFIED_DESC": "Bạn có thể tiếp tục với bước tiếp theo",
-    "UPDATE_PHONE_TITLE": "Cập nhật số điện thoại"
+    "UPDATE_PHONE_TITLE": "Cập nhật số điện thoại",
+    "CONFIRM_PHONE": "Gửi OTP",
+    "PHONE_NULL": "Bạn chưa có số điện thoại"
   }
 }

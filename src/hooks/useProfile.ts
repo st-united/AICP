@@ -72,6 +72,10 @@ export const useUpdateProfile = () => {
     {
       onSuccess({ message }) {
         queryClient.refetchQueries([QUERY_KEY.PROFILE]);
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
       },
     },
   );

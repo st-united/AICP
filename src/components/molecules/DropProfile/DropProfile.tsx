@@ -1,22 +1,24 @@
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { useQueryClient } from '@tanstack/react-query';
 import { Avatar, Dropdown, MenuProps, Typography } from 'antd';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { DefaultAvatar } from '@app/assets/images';
 import { removeStorageData } from '@app/config';
 import { ACCESS_TOKEN, NAVIGATE_URL } from '@app/constants';
 import { logout } from '@app/redux/features/auth/authSlice';
 import { RootState } from '@app/redux/store';
 
 import './DropProfile.scss';
-import { DefaultAvatar } from '@app/assets/images';
 
 export const DropProfile: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatchAuth = useDispatch();
+  const queryClient = useQueryClient();
 
   const { user } = useSelector((state: RootState) => state.auth);
   const [activeItem, setActiveItem] = useState<boolean>(false);
@@ -26,8 +28,11 @@ export const DropProfile: FC = () => {
       navigate(NAVIGATE_URL.PROFILE);
     }
     if (key == NAVIGATE_URL.SIGN_OUT) {
+      queryClient.clear();
+
       removeStorageData(ACCESS_TOKEN);
       dispatchAuth(logout());
+
       navigate(NAVIGATE_URL.SIGN_IN);
     }
   };
