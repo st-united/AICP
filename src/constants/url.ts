@@ -15,6 +15,7 @@ export const API_URL = {
   REGISTER_USER: '/auth/register',
   HISTORY_TESTING: '/exam/history-exam/',
   ACTIVATE_ACCOUNT: '/auth/activate',
+  RESEND_ACTIVATION_EMAIL: '/auth/resend-activation-email',
   CHECK_TAKEN_EXAM: '/exam/has-taken-exam',
   CHECK_TAKEN_EXAM_DEFAULT: '/exam/taken-input-test',
   EXAM_SETS_INPUT_TEST: '/exam-sets/input-test',

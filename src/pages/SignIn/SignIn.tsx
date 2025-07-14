@@ -35,7 +35,7 @@ const SignIn = () => {
       activateAccount(activateToken);
       navigate('/login', { replace: true });
     }
-  }, []);
+  }, [activateAccount, navigate]);
 
   const onFinish = (values: Credentials) => {
     loginUser(values);
