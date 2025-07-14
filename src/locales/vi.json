@@ -224,7 +224,7 @@
     "COUNTRY_PLACEHOLDER": "Chọn quốc gia",
     "PROVINCE": "Tỉnh thành",
     "PROVINCE_PLACEHOLDER": "Chọn tỉnh thành",
-    "OCCUPATION": "Nghề nghiệp",
+    "OCCUPATION": "Lĩnh vực",
     "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
     "REFERRAL": "Mã giới thiệu",
     "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu",
@@ -234,7 +234,9 @@
     "PLACEHOLDER_NEW_PASSWORD": "Nhập mật khẩu mới",
     "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
-    "SAVE": "Lưu"
+    "SAVE": "Lưu",
+    "AVATAR_UPLOAD_SUCCESS": "Cập nhật ảnh đại diện thành công!",
+    "AVATAR_UPLOAD_FAILED": "Cập nhật ảnh đại diện thất bại. Vui lòng thử lại."
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -320,7 +322,7 @@
     "FOOTER_ACTIVITIES_LIST": ["Workshop", "Sự kiện", "Cộng đồng", "Hoạt động ngoại khóa"],
     "FOOTER_ADDRESS": "116 - 118 Mai Thuc Lan, My An, Ngu Hanh Son, Da Nang",
     "FOOTER_EMAIL": "hello@devplus.edu.vn",
-    "FOOTER_PHONE": "(+84) 368492885"
+    "FOOTER_PHONE": "(+84) 93 190 1608"
   },
   "HEADER": {
     "START": "Bắt đầu",
@@ -337,7 +339,7 @@
   "PLACEHOLDER": {
     "SELECT_COUNTRY": "Chọn quốc gia",
     "SELECT_CITY": "Chọn tỉnh thành",
-    "SELECT_JOB": "Chọn công việc",
+    "SELECT_JOB": "Chọn lĩnh vực",
     "FIELD_REQUIRED": "{{field}} *"
   },
   "SIGN_UP": {
@@ -451,8 +453,18 @@
     "DESCRIPTION": "Theo dõi bài kiểm tra, lịch phỏng vấn và các cơ hội nghề nghiệp của bạn.",
     "TEST_STATUS": {
       "TITLE": "Trạng thái bài kiểm tra",
-      "DESCRIPTION": "Chưa bắt đầu",
-      "BUTTON": "Bắt đầu bài kiểm tra"
+      "DESCRIPTION": {
+        "IN_PROGRESS": "Bạn đang làm bài kiểm tra",
+        "SUBMITTED": "Bạn đã nộp bài kiểm tra",
+        "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+        "GRADED": "Đã chấm điểm",
+        "DEFAULT": "Chưa bắt đầu"
+      },
+      "BUTTON": {
+        "START": "Bắt đầu bài kiểm tra",
+        "RESUME": "Tiếp tục làm bài",
+        "VIEW": "Xem kết quả"
+      }
     },
     "INTERVIEW_SCHEDULE": {
       "TITLE": "Lịch phỏng vấn",

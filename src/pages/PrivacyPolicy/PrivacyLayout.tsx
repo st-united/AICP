@@ -1,6 +1,7 @@
-import React from 'react';
 import { Typography } from 'antd';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import Section from '@app/components/atoms/Section/Section';
 
 const { Title } = Typography;
