@@ -12,6 +12,7 @@ import {
   registerApi,
   getActivateAccount,
   useLoginWithGoogleApi,
+  resendActivationEmailApi,
 } from '@app/services';
 import {
   NotificationTypeEnum,
@@ -126,9 +127,36 @@ export const useRegister = () => {
 };
 
 export const useActivateAccount = () => {
+  const navigate = useNavigate();
+
   return useMutation(
     async (token: string) => {
       const { data } = await getActivateAccount(token);
+      return data;
+    },
+    {
+      onSuccess: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+      },
+      onError({ response }) {
+        const errorMessage = response.data.message;
+
+        if (errorMessage.includes('|')) {
+          const [message, email] = errorMessage.split('|');
+          openNotificationWithIcon(NotificationTypeEnum.ERROR, message);
+          navigate(`/activation-expired?email=${encodeURIComponent(email)}`);
+        } else {
+          openNotificationWithIcon(NotificationTypeEnum.ERROR, errorMessage);
+        }
+      },
+    },
+  );
+};
+
+export const useResendActivationEmail = () => {
+  return useMutation(
+    async (email: string) => {
+      const { data } = await resendActivationEmailApi(email);
       return data;
     },
     {

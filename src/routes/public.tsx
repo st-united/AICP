@@ -1,8 +1,10 @@
 import AuthLayout from '@app/components/templates/AuthLayout';
 import PolicyLayout from '@app/components/templates/PolicyLayout';
 import PublicLayout from '@app/components/templates/PublicLayout';
+import SimpleAuthLayout from '@app/components/templates/SimpleAuthLayout/SimpleAuthLayout';
 import { NAVIGATE_URL } from '@app/constants';
 import {
+  ActivationExpired,
   Homepage,
   SignIn,
   ForgotPassword,
@@ -32,6 +34,15 @@ const routes = [
       {
         path: NAVIGATE_URL.RESET_PASSWORD,
         element: <ResetPassword />,
+      },
+    ],
+  },
+  {
+    element: <SimpleAuthLayout />,
+    children: [
+      {
+        path: NAVIGATE_URL.ACTIVATION_EXPIRED,
+        element: <ActivationExpired />,
       },
     ],
   },
