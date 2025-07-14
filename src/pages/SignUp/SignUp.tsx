@@ -97,12 +97,11 @@ const SignUp = () => {
               placeholder={t('SIGN_UP.FULL_NAME') as string}
             />
           </Form.Item>
-          <Form.Item
-            className='md:col-span-1 col-span-2 ml-0 md:ml-4'
-            name='phoneNumber'
-            rules={validator}
-          >
-            <PhoneInput className='w-full h-[62px]' placeholder={t('SIGN_UP.PHONE') as string} />
+          <Form.Item className='md:col-span-1 col-span-2' name='phoneNumber' rules={validator}>
+            <PhoneInput
+              className='w-full h-[62px] ml-2'
+              placeholder={t('SIGN_UP.PHONE') as string}
+            />
           </Form.Item>
           <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
