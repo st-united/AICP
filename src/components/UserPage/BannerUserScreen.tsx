@@ -21,9 +21,15 @@ const BannerUserScreen = () => {
               height={58}
               className='object-contain mt-1'
               src={CelebUnit}
-              alt='...'
+              alt='celeb unit'
             />
-            <Image preview={false} height={66} className='object-contain' src={DevPlus} alt='...' />
+            <Image
+              preview={false}
+              height={66}
+              className='object-contain'
+              src={DevPlus}
+              alt='dev plus'
+            />
           </div>
         </div>
         <div className='flex md:flex-row flex-col md:items-center gap-2'>
@@ -34,14 +40,14 @@ const BannerUserScreen = () => {
               height={66}
               className='object-contain py-1'
               src={PartnerUnit1}
-              alt='...'
+              alt='partner unit 1'
             />
             <Image
               preview={false}
               height={66}
               className='object-contain py-1'
               src={PartnerUnit2}
-              alt='...'
+              alt='partner unit 2'
             />
           </div>
         </div>
