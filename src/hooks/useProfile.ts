@@ -62,7 +62,6 @@ export const useChangePassword = () => {
 };
 
 export const useUpdateProfile = () => {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   return useMutation(
@@ -73,7 +72,10 @@ export const useUpdateProfile = () => {
     {
       onSuccess({ message }) {
         queryClient.refetchQueries([QUERY_KEY.PROFILE]);
-        navigate(NAVIGATE_URL.PROFILE);
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
       },
     },
   );
