@@ -123,7 +123,12 @@ const Profile = () => {
               disabled
             />
           </Form.Item>
-          <Form.Item name='phoneNumber' className='!w-full' label={t('PROFILE.PHONE')}>
+          <Form.Item
+            name='phoneNumber'
+            className='!w-full'
+            label={t('PROFILE.PHONE')}
+            rules={validator}
+          >
             <PhoneInput disabled={!isEdit} className='h-[48px]' />
           </Form.Item>
           <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
