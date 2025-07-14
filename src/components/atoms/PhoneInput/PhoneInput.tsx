@@ -86,7 +86,7 @@ const PhoneInput = ({
         className={`w-full items-center gap-2 flex justify-center h-[50px] ${className || ''}`}
         style={style}
       >
-        <Skeleton.Button active className='!w-2/5 !h-full' size='large' />
+        <Skeleton.Button active className='!w-[80px] !h-full' size='large' />
         <Skeleton.Input active className='!w-3/5 !h-full' size='large' />
       </div>
     );
@@ -94,12 +94,12 @@ const PhoneInput = ({
 
   return (
     <div
-      className={`w-full items-center gap-2 flex justify-center ${className || ''}`}
+      className={`w-full items-center gap-2 flex justify-between ${className || ''}`}
       style={style}
     >
       <Select
         disabled={disabled}
-        className='!w-2/5 !h-full !rounded-[8px]'
+        className='!w-[80px] !h-full !rounded-[8px]'
         showSearch
         value={selectedCallingCode}
         onChange={handleChangeCallingCode}
@@ -109,6 +109,7 @@ const PhoneInput = ({
         }}
         optionLabelProp='label'
         size={size}
+        classNames={{ popup: { root: 'min-w-[300px] sm:min-w-[400px]' } }}
       >
         {(
           CallingCode || [
@@ -124,20 +125,19 @@ const PhoneInput = ({
             key={item.dialCode + item.name + item.code}
             value={item.dialCode}
             disabled={disabled}
-            label={
-              <div className='flex items-center flex-row w-full'>
-                <img className='mr-2 w-4' src={item.flag} alt={item.name} />
-                <span className='truncate'>{item.code}</span>
-                <span className='text-gray-600'>({item.dialCode})</span>
-              </div>
-            }
+            label={<img className=' w-full rounded-xl' src={item.flag} alt={item.name} />}
           >
-            {item.name}
+            <div className='flex items-center flex-row w-[400px]'>
+              <img className='mr-2 w-4' src={item.flag} alt={item.name} />
+              <span className=''>{item.name}</span>
+              <span className='ml-1 font-bold'>{item.code}</span>
+              <span className='text-gray-600 ml-1'>({item.dialCode})</span>
+            </div>
           </Select.Option>
         ))}
       </Select>
       <Input
-        className='!w-3/5 !rounded-[8px] !h-full'
+        className='flex-1 !rounded-[8px] !h-full'
         placeholder={placeholder || (t('OTP.PHONE_PLACEHOLDER') as string)}
         value={phoneNumber}
         type='tel'
