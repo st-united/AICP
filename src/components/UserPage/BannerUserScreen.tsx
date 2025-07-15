@@ -49,16 +49,16 @@ const BannerUserScreen = () => {
 
       <div className='flex flex-row w-full flex-1 mt-8 gap-20 justify-center'>
         <div className='relative w-2/5 h-full items-center justify-center  hidden mdL:flex'>
-          <div className='absolute left-0 bottom-0 w-full items-end justify-center flex'>
+          <div className='absolute left-0 bottom-0 w-full h-full items-end justify-center flex'>
             <img
-              className='!object-cover scale-x-[-1] max-h-[450px] md:max-h-[550px] xl:max-h-[650px]'
+              className='!object-cover scale-x-[-1] max-h-full'
               src={RobotHand}
               alt='Robot hand'
             />
           </div>
         </div>
         <div className='flex-1 flex flex-col text-center md:text-start mdL:align-middle justify-start sm:justify-center pt-20 sm:pt-0 sm:pb-32 mdL:pb-48 px-6 mdL:px-0 mdL:pr-20'>
-          <span className='text-[48px] mdL:text-[72px] font-[1000] tracking-wide mb-6 bg-gradient-to-r from-[#FE7743] via-[#cc7935] to-[#862e0b] bg-clip-text text-transparent'>
+          <span className='text-[48px] mdL:text-[72px] font-[1000] tracking-wide mb-6 text-[#FE7743]'>
             {t('HOMEPAGE.BANNER_USER.TITLE')}
           </span>
           <span className='text-base md:text-xl font-[700] mb-2 block'>

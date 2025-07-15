@@ -2,6 +2,8 @@ import { Button } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
+
 type Point = {
   label: string;
   desc: string;
@@ -122,7 +124,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
             <span className='text-black text-4xl xl:text-6xl font-[1000]'>
               {t('HOMEPAGE.STEP_SCREEN_HEADER.TITLE')}
             </span>
-            <span className='text-[#64607D] text-base xl:text-xl font-bold'>
+            <span className='text-[#64607D] text-base xl:text-xl'>
               {t('HOMEPAGE.STEP_SCREEN_HEADER.SUBTITLE')}
             </span>
             <div className='flex items-center justify-start'>
@@ -205,10 +207,10 @@ export default function StepScreen({ steps, activeStep }: Props) {
 
               <text
                 x={p.x}
-                y={p.y + 4}
+                y={p.y + 8}
                 textAnchor='middle'
                 fill='white'
-                fontSize='12'
+                fontSize='22'
                 fontWeight='bold'
               >
                 {idx + 1}
@@ -266,6 +268,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
           ))}
         </svg>
       </div>
+      <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }
