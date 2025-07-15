@@ -91,15 +91,7 @@ export const OTPVerification = ({
     }
     updateProfileMutation(
       {
-        fullName: user?.fullName || '',
-        email: user?.email || '',
-        referralCode: user?.referralCode || '',
         phoneNumber: phone,
-        dob: user?.dob,
-        avatar: user?.avatar,
-        permissions: user?.permissions,
-        province: user?.province,
-        job: user?.job,
       },
       {
         onSuccess: () => {
