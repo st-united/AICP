@@ -2,6 +2,7 @@ import { CameraFilled, LoadingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Spin, Upload } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { useUploadAvatar } from '@app/hooks/useProfile';
 import {
   NotificationTypeEnum,

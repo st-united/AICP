@@ -1,10 +1,11 @@
-import React from 'react';
-import { Modal, Button, Typography, List } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons';
+import { Modal, Button, Typography, List } from 'antd';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import MentorBooking from '@app/interface/mentor.interface';
-import { convertTimeBooking } from '@app/helpers/convertDateTime';
 import { useNavigate } from 'react-router-dom';
+
+import { convertTimeBooking } from '@app/helpers/convertDateTime';
+import MentorBooking from '@app/interface/mentor.interface';
 
 const { Title, Paragraph } = Typography;
 
@@ -40,14 +41,14 @@ const SuccessBookingModal: React.FC<SuccessBookingModalProps> = ({ open, onClose
           size='small'
           className='w-full text-sm text-gray-800 mb-4'
           dataSource={[
-            <span>
+            <span key='mentor'>
               <strong>{t('MENTOR_BOOKING.MENTOR_LABEL')}</strong> {data?.mentor.fullName}
             </span>,
-            <span>
+            <span key='time'>
               <strong>{t('MENTOR_BOOKING.TIME_LABEL')}</strong>
               {data && convertTimeBooking(data?.timeSlot, data?.scheduledAt)}
             </span>,
-            <span>
+            <span key='booking-code'>
               <strong>{t('MENTOR_BOOKING.BOOKING_CODE_LABEL')}</strong> {data?.codeOrder}
             </span>,
           ]}

@@ -1,5 +1,5 @@
-import { Layout, Image } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
+import { Layout, Image } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
