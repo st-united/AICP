@@ -21,7 +21,7 @@ const BannerScreen = () => {
             preview={false}
             className='flex !w-full aspect-square object-cover object-center'
             src={BannerRobot}
-            alt='haha'
+            alt='robot banner'
           />
         </div>
 
@@ -37,13 +37,13 @@ const BannerScreen = () => {
                   preview={false}
                   className='!h-full !aspect-square object-contain object-bottom'
                   src={CelebUnit}
-                  alt='haha'
+                  alt='celeb unit'
                 />
                 <Image
                   preview={false}
                   className='!h-full !aspect-square object-contain object-bottom'
                   src={DevPlus}
-                  alt='haha'
+                  alt='dev plus'
                 />
               </div>
             </div>
@@ -52,13 +52,23 @@ const BannerScreen = () => {
                 {t('HOMEPAGE.BANNER_SCREEN.PARTNER')}
               </div>
               <div className='flex h-full w-full flex-row gap-8 align-bottom items-end justify-start custom-banner pb-2 mt-3'>
-                <Image preview={false} className='!object-contain ' src={PartnerUnit1} alt='haha' />
-                <Image preview={false} className='!object-contain ' src={PartnerUnit2} alt='haha' />
+                <Image
+                  preview={false}
+                  className='!object-contain '
+                  src={PartnerUnit1}
+                  alt='partner unit 1'
+                />
+                <Image
+                  preview={false}
+                  className='!object-contain '
+                  src={PartnerUnit2}
+                  alt='partner unit 2'
+                />
               </div>
             </div>
           </div>
           <div className='rounded-xl py-8 w-full'>
-            <span className='w-full text-center sm:text-left text-[48px] md:text-[72px] font-[1000] tracking-wide mb-6 bg-gradient-to-r from-[#FE7743] via-[#cc7935] to-[#862e0b] bg-clip-text text-transparent'>
+            <span className='w-full text-center sm:text-left text-[48px] md:text-[72px] font-[1000] tracking-wide mb-6 text-[#FE7743] bg-clip-text'>
               {t('HOMEPAGE.BANNER_SCREEN.TITLE')}
             </span>
           </div>
