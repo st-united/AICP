@@ -65,7 +65,7 @@ export const useUpdateProfile = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async (user: UserProfile) => {
+    async (user: Partial<UserProfile>) => {
       const response = await updateProfileApi(user);
       return response.data;
     },
