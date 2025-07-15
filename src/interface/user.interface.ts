@@ -20,7 +20,7 @@ export interface GoogleCredentials {
 }
 
 export interface UserProfile {
-  id?: string;
+  id: string;
   fullName: string;
   email: string;
   phoneNumber?: string;

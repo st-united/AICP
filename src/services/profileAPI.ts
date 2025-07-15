@@ -10,7 +10,7 @@ export const getProfileApi = () => axios.get<{ data: UserProfile }>(API_URL.GET_
 
 export const getjobApi = () => axios.get<{ data: Job[] }>(API_URL.GET_JOB);
 
-export const updateProfileApi = async (user: UserProfile) =>
+export const updateProfileApi = async (user: Partial<UserProfile>) =>
   await axios.patch(`${API_URL.UPDATE_PROFILE}`, user);
 
 export const uploadAvatarApi = async (identityId: string, formData: FormData) => {
