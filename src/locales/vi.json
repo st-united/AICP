@@ -705,5 +705,33 @@
     "START_CONFIRM_TEST": "Bắt đầu ngay",
     "PERSONAL_INFO": "Hồ sơ cá nhân",
     "PHONE_INFO": "Xác nhận qua điện thoại"
+  },
+  "OTP": {
+    "TITLE": "Xác thực số điện thoại",
+    "DESCRIPTION": "Vui lòng kiểm tra số điện thoại để nhận mã OTP xác thực",
+    "PHONE_PLACEHOLDER": "Nhập số điện thoại",
+    "OTP_PLACEHOLDER": "Nhập mã OTP",
+    "SEND_OTP": "Gửi mã OTP",
+    "RESEND_OTP": "Gửi lại mã OTP",
+    "VERIFY_OTP": "Xác nhận",
+    "BACK_TO_PHONE": "Quay lại nhập số điện thoại",
+    "PHONE_VERIFIED": "Vui lòng kiểm tra Zalo của bạn để nhận mã OTP",
+    "PHONE_VERIFIED_DESC": "Đã gửi OTP đến số điện thoại {{phone}}",
+    "SEND_OTP_SUCCESS": "Đã gửi mã OTP!",
+    "SEND_OTP_ERROR": "Gửi OTP thất bại",
+    "VERIFY_OTP_SUCCESS": "Xác thực OTP thành công!",
+    "VERIFY_OTP_ERROR": "Xác thực OTP thất bại",
+    "PHONE_REQUIRED": "Vui lòng nhập số điện thoại",
+    "OTP_REQUIRED": "Vui lòng nhập mã OTP",
+    "PHONE_INVALID": "Số điện thoại không đúng định dạng",
+    "OTP_INVALID": "Mã OTP không đúng",
+    "COUNTDOWN": "Gửi lại sau {{time}}s",
+    "WAIT_TIME": "Chờ {{time}}s",
+    "CANNOT_SEND_OTP": "Vui lòng chờ {{time}} giây trước khi gửi lại OTP",
+    "PHONE_ALREADY_VERIFIED": "Số điện thoại này đã được xác thực",
+    "PHONE_ALREADY_VERIFIED_DESC": "Bạn có thể tiếp tục với bước tiếp theo",
+    "UPDATE_PHONE_TITLE": "Cập nhật số điện thoại",
+    "CONFIRM_PHONE": "Gửi OTP",
+    "PHONE_NULL": "Bạn chưa có số điện thoại"
   }
 }

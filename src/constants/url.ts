@@ -24,4 +24,10 @@ export const API_URL = {
   PORTFOLIO_DOWNLOAD: '/users/portfolio/download',
   GET_JOB: 'domain/names',
   DETAIL_EXAM: '/exam',
+  ZALO_OTP: '/zalo-otp',
+  ZALO_OTP_SEND_OTP: '/zalo-otp/send-otp',
+  ZALO_OTP_VERIFY: '/zalo-otp/verify',
+  ZALO_OTP_CHECK_STATUS: '/zalo-otp/status',
+  ZALO_OTP_COUNTRY_CODE: '/zalo-otp/country-codes',
+  ZALO_OTP_CAN_SEND: '/zalo-otp/can-send-otp',
 };

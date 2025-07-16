@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useSignUpSchema } from './signUpSchema';
+import PhoneInput from '@app/components/atoms/PhoneInput/PhoneInput';
 import {
   NUMBER_LENGTH_REGEX,
   PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER,
@@ -97,8 +98,8 @@ const SignUp = () => {
             />
           </Form.Item>
           <Form.Item className='md:col-span-1 col-span-2' name='phoneNumber' rules={validator}>
-            <Input
-              className='w-full !px-6 !py-4 !rounded-md !text-lg'
+            <PhoneInput
+              className='w-full h-[62px] ml-2'
               placeholder={t('SIGN_UP.PHONE') as string}
             />
           </Form.Item>
