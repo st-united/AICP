@@ -1,3 +1,4 @@
+import BannerRobot from './banner-robot.png';
 import FooterBackground from './bg-footer.png';
 import CyborgHand from './cyborg-hand.png';
 import DefaultAvatar from './defaultAvatar.png';
@@ -10,6 +11,7 @@ import Lock from './lock_change_password.png';
 import LoginBackground from './login-background.png';
 import Logo from './logo.svg';
 import noExamHistory from './noExamImage.png';
+import RobotHand from './robot-hand.png';
 
 export {
   Logo,
@@ -24,4 +26,6 @@ export {
   HalfCircle,
   noExamHistory,
   DefaultAvatar,
+  BannerRobot,
+  RobotHand,
 };

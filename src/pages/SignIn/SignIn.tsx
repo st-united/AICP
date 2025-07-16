@@ -1,19 +1,18 @@
 import { LeftOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Image } from 'antd';
 import { Rule } from 'antd/lib/form';
+import { signInWithPopup } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useSignInSchema } from './signInSchema';
+import { auth, provider } from '../../config/firebase';
+import { GoogleIcon } from '@app/assets/svgs';
 import { NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers/yupSync';
 import { useActivateAccount, useLogin, useLoginWithGoogle } from '@app/hooks';
 import { Credentials, GoogleCredentials } from '@app/interface/user.interface';
-
-import { auth, provider } from '../../config/firebase';
-import { signInWithPopup } from 'firebase/auth';
-import { GoogleIcon } from '@app/assets/svgs';
 
 import './SignIn.scss';
 
