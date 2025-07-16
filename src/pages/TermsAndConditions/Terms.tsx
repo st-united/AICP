@@ -2,6 +2,7 @@ import { LeftOutlined } from '@ant-design/icons';
 import { Layout, Image, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+
 import TermsLayout from './TermsLayout';
 import logo from '../../assets/images/devplus.png';
 import termBg from '../../assets/images/term-background.png';
