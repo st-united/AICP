@@ -11,7 +11,7 @@ import {
   getLogout,
   registerApi,
   getActivateAccount,
-  useLoginWithGoogleApi,
+  loginWithGoogleApi,
 } from '@app/services';
 import {
   NotificationTypeEnum,
@@ -56,7 +56,7 @@ export const useLoginWithGoogle = () => {
 
   return useMutation(
     async (GoogleCredentials: GoogleCredentials) => {
-      const { data } = await useLoginWithGoogleApi(GoogleCredentials);
+      const { data } = await loginWithGoogleApi(GoogleCredentials);
       return data;
     },
     {
