@@ -192,7 +192,7 @@
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
     "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
     "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại",
-    "INVALID_DATE_RANGE": "Ngày bắt đầu không được lớn hơn ngày kết thúc",
+    "INVALID_DATE_RANGE": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu",
     "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai"
   },
   "PROFILE": {
