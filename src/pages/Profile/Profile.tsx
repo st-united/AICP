@@ -36,7 +36,7 @@ const Profile = () => {
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
-        phoneNumber: data.phoneNumber || '',
+        phoneNumber: data.phoneNumber || null,
         dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
         job: Array.isArray(data.job)
@@ -77,11 +77,7 @@ const Profile = () => {
     updateProfileMutation.mutate(fixedValues, {
       onSuccess: () => {
         setIsEdit(false);
-        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PROFILE.UPDATE_SUCCESS'));
         navigate(NAVIGATE_URL.PROFILE);
-      },
-      onError: (error) => {
-        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PROFILE.UPDATE_FAILED'));
       },
     });
   };
