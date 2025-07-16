@@ -14,10 +14,6 @@ import { NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers';
 import { useGetProfile, useUpdateProfile } from '@app/hooks';
 import { UserProfile } from '@app/interface/user.interface';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
 
 import './Profile.scss';
 
@@ -133,6 +129,7 @@ const Profile = () => {
               format='DD/MM/YYYY'
               placeholder={t('PROFILE.DOB_PLACEHOLDER') as string}
               disabled={!isEdit}
+              showNow={false}
             />
           </Form.Item>
           <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
