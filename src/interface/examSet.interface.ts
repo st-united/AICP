@@ -1,9 +1,10 @@
 export interface ExamSetDetail {
   id: string;
+  examId: string;
   name: string;
   description: string;
   questions: Question[];
-  duration: number;
+  timeLimitMinutes: number;
 }
 
 export interface Question {
@@ -28,7 +29,7 @@ export enum AnswerChoice {
 }
 
 export interface SubmitExamSetPayload {
-  examSetId: string;
+  examId: string;
   questionId: string;
   answers: string[];
   type: AnswerChoice;

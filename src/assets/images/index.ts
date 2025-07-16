@@ -22,6 +22,6 @@ export {
   FooterBackground,
   CyborgHand,
   HalfCircle,
-  DefaultAvatar,
   noExamHistory,
+  DefaultAvatar,
 };

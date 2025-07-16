@@ -9,36 +9,132 @@ import { AnswerChoice, AnswerOption, Question } from '@app/interface/examSet.int
 
 interface QuestionProps {
   questions: Question[];
-  currentQuestion: string;
-  onQuestionInViewChange: (id: string) => void;
+  currentQuestion: { id: string; timestamp: number };
+  currentQuestionScroll: string;
+  onQuestionInViewChange: (id: string, timestamp?: number) => void;
   flaggedQuestions: string[];
   onFlagToggle: (id: string) => void;
   onAnswerSelect: (questionId: string, answerId: string) => void;
   selectedAnswers: Record<string, string[]>;
+  setIsAutoScrolling: (val: boolean) => void;
 }
 
 const QuestionDisplay = ({
   questions,
   currentQuestion,
+  currentQuestionScroll,
   onQuestionInViewChange,
   flaggedQuestions,
   onFlagToggle,
   onAnswerSelect,
   selectedAnswers,
+  setIsAutoScrolling,
 }: QuestionProps) => {
   const { setQuestionRef, scrollToQuestion } = useQuestionNavigation(
     questions,
     onQuestionInViewChange,
   );
+
   const { t } = useTranslation();
   const prevQuestionRef = useRef(currentQuestion);
+  const isAutoScrollingRef = useRef(true);
+  const isAutoScrollingRefs = useRef(true);
+  const autoScrollResetTimeout = useRef<NodeJS.Timeout | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const hasMounted = useRef(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('data-question-id');
+
+          if (entry.isIntersecting && id) {
+            if (!hasMounted.current) {
+              console.log('[observer] Initial trigger - accepting:', id);
+              hasMounted.current = true;
+              onQuestionInViewChange(id);
+              return;
+            }
+            if (!isAutoScrollingRefs.current) {
+              console.log('[observer] Ignored due to auto scroll:', id);
+              return;
+            }
+
+            console.log('[observer] Manual scroll - accepting:', id);
+            isAutoScrollingRef.current = false;
+            onQuestionInViewChange(id);
+
+            if (autoScrollResetTimeout.current) {
+              clearTimeout(autoScrollResetTimeout.current);
+            }
+
+            autoScrollResetTimeout.current = setTimeout(() => {
+              isAutoScrollingRef.current = true;
+              isAutoScrollingRefs.current = true;
+              setIsAutoScrolling(false);
+              console.log('[observer] Auto scroll re-enabled');
+            }, 1000);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.5,
+      },
+    );
+
+    const elements = document.querySelectorAll('[data-question-id]');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+      if (autoScrollResetTimeout.current) {
+        clearTimeout(autoScrollResetTimeout.current);
+      }
+    };
+  }, [currentQuestionScroll]);
+
+  useEffect(() => {
+    if (!observerRef.current) return;
+
+    const elements = document.querySelectorAll('[data-question-id]');
+    elements.forEach((el) => observerRef.current!.observe(el));
+
+    return () => {
+      elements.forEach((el) => observerRef.current!.unobserve(el));
+    };
+  }, [currentQuestionScroll]);
 
   useEffect(() => {
     if (prevQuestionRef.current !== currentQuestion) {
-      scrollToQuestion(currentQuestion);
+      if (!isAutoScrollingRef.current) return;
+
+      isAutoScrollingRef.current = false;
+      isAutoScrollingRefs.current = false;
+
+      const el = document.querySelector(`[data-question-id="${currentQuestion.id}"]`);
+
+      if (observerRef.current && el) {
+        observerRef.current.unobserve(el);
+      }
+      setIsAutoScrolling(true);
+      scrollToQuestion(currentQuestion.id);
       prevQuestionRef.current = currentQuestion;
+
+      setTimeout(() => {
+        if (el && observerRef.current) {
+          observerRef.current.observe(el);
+        }
+        isAutoScrollingRef.current = true;
+        isAutoScrollingRefs.current = true;
+        setIsAutoScrolling(false);
+        console.log('[scroll effect] Re-enabled observer & flags');
+      }, 800);
     }
-  }, [currentQuestion, scrollToQuestion]);
+  }, [currentQuestion.timestamp, scrollToQuestion]);
+
+  console.log(prevQuestionRef.current);
 
   const handleAnswerSelect = (questionId: string, answerId: string) => {
     onAnswerSelect(questionId, answerId);
@@ -87,7 +183,15 @@ const QuestionDisplay = ({
               <h3 className='text-2xl font-bold text-black'>
                 {t('TEST.QUESTION')} {index + 1}:
               </h3>
-              <Tooltip title={t('TEST.FLAG_QUESTION')} placement='top' trigger={'hover'}>
+              <Tooltip
+                title={
+                  flaggedQuestions.includes(question.id)
+                    ? t('TEST.UNFLAG_QUESTION')
+                    : t('TEST.FLAG_QUESTION')
+                }
+                placement='top'
+                trigger={'hover'}
+              >
                 <FlagOutlined
                   className={`flex text-xl border p-2 rounded-lg cursor-pointer ${
                     flaggedQuestions.includes(question.id)
