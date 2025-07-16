@@ -11,7 +11,10 @@ const TermsLayout = () => {
 
   return (
     <div className='bg-white rounded-2xl shadow-2xl p-6 md:p-10 lg:p-16'>
-      <Title level={1} className='text-center text-2xl md:text-4xl !text-[#FE7743] mb-6'>
+      <Title
+        level={1}
+        className='text-center !text-[30px] md:!text-5xl !text-[#FE7743] mb-[30px] md:mb-6'
+      >
         {t('TERMS.TITLE')}
       </Title>
 
