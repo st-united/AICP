@@ -3,12 +3,14 @@ import { Rule } from 'antd/lib/form';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { useProfileSchema } from './profileSchema';
 import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
-import CountrySelect from '@app/components/atoms/CustomSelect/CountrySelect';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/atoms/CustomSelect/ProvinceSelect';
+import PhoneInput from '@app/components/atoms/PhoneInput/PhoneInput';
+import { NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers';
 import { useGetProfile, useUpdateProfile } from '@app/hooks';
 import { UserProfile } from '@app/interface/user.interface';
@@ -16,6 +18,8 @@ import {
   NotificationTypeEnum,
   openNotificationWithIcon,
 } from '@app/services/notification/notificationService';
+
+import './Profile.scss';
 
 const Profile = () => {
   const [avatar, setAvatar] = useState<string>();
@@ -25,44 +29,44 @@ const Profile = () => {
   const updateProfileMutation = useUpdateProfile();
   const { t } = useTranslation();
   const validator = [yupSync(useProfileSchema())] as unknown as Rule[];
+  const navigate = useNavigate();
 
-  const restoreProfileValues = () => {
+  useEffect(() => {
     if (data) {
-      const jobIds: string[] = Array.isArray(data.job)
-        ? data.job
-            .map((j: any) => {
-              if (typeof j === 'object' && j !== null && 'id' in j) {
-                return j.id;
-              } else if (typeof j === 'string') {
-                return j;
-              } else {
-                return '';
-              }
-            })
-            .filter(Boolean)
-        : [];
-
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
         phoneNumber: data.phoneNumber || '',
         dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
-        job: jobIds,
+        job: Array.isArray(data.job)
+          ? data.job.every((j) => typeof j === 'object' && j !== null && 'id' in j)
+            ? data.job.map((j) => (j as unknown as { id: string }).id)
+            : (data.job as string[])
+          : [],
         referralCode: data.referralCode || null,
       });
     }
-  };
+  }, [
+    data?.fullName,
+    data?.email,
+    data?.phoneNumber,
+    data?.dob,
+    data?.province,
+    data?.job,
+    data?.referralCode,
+    form,
+  ]);
 
   useEffect(() => {
-    restoreProfileValues();
-  }, [data, form]);
+    if (data?.avatarUrl) {
+      setAvatar(data.avatarUrl);
+    }
+  }, [data?.avatarUrl]);
 
   const handleCancel = () => {
-    setAvatar('');
     setIsEdit(false);
     form.resetFields();
-    restoreProfileValues();
   };
 
   const handleSubmit = async (values: UserProfile) => {
@@ -74,6 +78,7 @@ const Profile = () => {
       onSuccess: () => {
         setIsEdit(false);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PROFILE.UPDATE_SUCCESS'));
+        navigate(NAVIGATE_URL.PROFILE);
       },
       onError: (error) => {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PROFILE.UPDATE_FAILED'));
@@ -96,7 +101,7 @@ const Profile = () => {
         initialValues={{
           fullName: data?.fullName ?? '',
           email: data?.email ?? '',
-          phoneNumber: data?.phoneNumber ?? '',
+          phoneNumber: data?.phoneNumber ?? null,
           dob: data?.dob ? dayjs(data?.dob) : null,
           province: data?.province ?? null,
           job: data?.job ?? null,
@@ -118,12 +123,13 @@ const Profile = () => {
               disabled
             />
           </Form.Item>
-          <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator}>
-            <Input
-              className='!px-6 !py-3 !rounded-lg'
-              placeholder={t('PROFILE.PHONE_PLACEHOLDER') as string}
-              disabled={!isEdit}
-            />
+          <Form.Item
+            name='phoneNumber'
+            className='!w-full'
+            label={t('PROFILE.PHONE')}
+            rules={validator}
+          >
+            <PhoneInput disabled={!isEdit} className='h-[48px]' />
           </Form.Item>
           <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
             <DatePicker
@@ -134,10 +140,10 @@ const Profile = () => {
             />
           </Form.Item>
           <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
-            <ProvinceSelect disabled={!isEdit} />
+            <ProvinceSelect className='custom-orange-select h-full' disabled={!isEdit} />
           </Form.Item>
           <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
-            <JobSelect disabled={!isEdit} />
+            <JobSelect className='custom-orange-select' disabled={!isEdit} />
           </Form.Item>
           <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
             <div className='flex justify-end gap-2 !flex-row'>

@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import LazyComponent from './LazyComponent';
 import { CyborgHand } from '@app/assets/images';
 import { TextTyping } from '@app/components/atoms/';
 import './homepage.scss';
@@ -18,13 +19,8 @@ const MainScreen = ({ onScrollToNext }: Props) => {
 
   return (
     <div className='flex flex-col w-full h-screen'>
-      <div className='h-screen w-full bg-cover bg-no-repeat bg-center bg-[url(./assets/images/homepage-bg.png)]'>
-        <img
-          className='hidden absolute bottom-0 right-0 lg:right-20 lgL:right-40 smM:block'
-          src={CyborgHand}
-          alt='CyborgHand'
-        />
-        <div className='flex flex-col items-center justify-center container w-full h-full gap-6 mx-auto xsM:w-[90%] smM:pl-2 smM:py-4 smM:items-start xl:w-[90%]'>
+      <div className='h-screen w-full bg-cover bg-no-repeat bg-center bg-[url(./assets/images/homepage-bg.png)] relative'>
+        <LazyComponent className='flex flex-col items-center justify-center container w-full h-full gap-6 mx-auto xsM:w-[90%] smM:pl-2 smM:py-4 smM:items-start xl:w-[90%]'>
           <div className='text-center text-[#273F4F] font-bold mb-4 text-2xl smM:text-3xl smM:text-start xl:text-4xl'>
             {t('HOMEPAGE.PRIMARY_TITLE')}
           </div>
@@ -44,12 +40,17 @@ const MainScreen = ({ onScrollToNext }: Props) => {
           >
             {t('HOMEPAGE.BUTTON')}
           </Button>
-        </div>
+          <DownCircleFilled
+            className='!text-primary text-5xl hover:scale-110 absolute bottom-10 right-10 md:right-20 md:boborder-none !p-0 !m-0 rounded-full z-10'
+            onClick={onScrollToNext}
+          />
+          <img
+            className='hidden absolute bottom-0 right-0 lg:right-20 lgL:right-40 smM:block '
+            src={CyborgHand}
+            alt='CyborgHand'
+          />
+        </LazyComponent>
       </div>
-      <DownCircleFilled
-        className='!text-primary text-5xl hover:scale-110 absolute bottom-10 right-10 md:right-20 md:boborder-none !p-0 !m-0 rounded-full'
-        onClick={onScrollToNext}
-      />
     </div>
   );
 };

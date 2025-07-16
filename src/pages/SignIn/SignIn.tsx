@@ -1,19 +1,18 @@
 import { LeftOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Image } from 'antd';
 import { Rule } from 'antd/lib/form';
+import { signInWithPopup } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useSignInSchema } from './signInSchema';
+import { auth, provider } from '../../config/firebase';
+import { GoogleIcon } from '@app/assets/svgs';
 import { NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers/yupSync';
 import { useActivateAccount, useLogin, useLoginWithGoogle } from '@app/hooks';
 import { Credentials, GoogleCredentials } from '@app/interface/user.interface';
-
-import { auth, provider } from '../../config/firebase';
-import { signInWithPopup } from 'firebase/auth';
-import { GoogleIcon } from '@app/assets/svgs';
 
 import './SignIn.scss';
 
@@ -62,7 +61,7 @@ const SignIn = () => {
           type='button'
         >
           <Link
-            className='flex text-primary-gray items-center justify-start text-lg !mb-14 hover:text-primary-light cursor-pointer'
+            className='flex text-primary-gray items-center justify-start text-lg !mb-5 hover:text-primary-light cursor-pointer'
             to={'/'}
           >
             <div className='flex items-center justify-center'>
@@ -72,9 +71,7 @@ const SignIn = () => {
           </Link>
         </button>
         <div>
-          <h1 className='text-primary text-3xl sm:text-3xl md:text-3xl lg:text-4xl font-bold mb-4'>
-            {t<string>('LOGIN.TEXT')}
-          </h1>
+          <h1 className='text-[40px] !text-primary font-bold'>{t<string>('LOGIN.TEXT')}</h1>
           <div className='text-primary-gray text-lg !mb-8 flex gap-2'>
             <div>{t<string>('LOGIN.NOT_HAVE_ACCOUNT')}</div>
             <Link
@@ -85,7 +82,12 @@ const SignIn = () => {
             </Link>
           </div>
         </div>
-        <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
+        <Form
+          form={form}
+          layout='vertical'
+          onFinish={onFinish}
+          className='grid grid-cols-2 gap-4 w-full'
+        >
           <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='w-full !px-6 !py-4 !rounded-md !text-lg'

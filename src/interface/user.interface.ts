@@ -25,7 +25,7 @@ export interface UserProfile {
   email: string;
   phoneNumber?: string;
   dob?: string;
-  avatar?: string;
+  avatarUrl?: string;
   permissions?: string[];
   province?: string;
   job?: string[];
@@ -86,7 +86,7 @@ export interface HasTakenExam {
   hasTakenExam: boolean;
   examSetDuration: number;
   examId?: string;
-  examStatus?: string;
+  examStatus?: ExamStatusEnum;
 }
 
 export interface HistoryTesting {

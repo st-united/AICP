@@ -61,7 +61,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
   const [docxError, setDocxError] = useState<string | null>(null);
 
   const { data: getPortfolio, isLoading } = useGetPortfolio();
-  const updatePortfolioMutation = useUpdatePortfolio();
+  const { mutate: updatePortfolioMutation, isPending: isUpdating } = useUpdatePortfolio();
   const downloadPortfolioFileMutation = useDownloadPortfolioFile();
 
   const [certificationFiles, setCertificationFiles] = useState<ExtendedUploadFile[]>([]);
@@ -156,7 +156,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
         data.append('deleted_experiences', JSON.stringify(removedExperienceFiles));
       }
 
-      updatePortfolioMutation.mutate(data, {
+      updatePortfolioMutation(data, {
         onSuccess: () => {
           setIsEdit(false);
           openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PORTFOLIO.UPDATE_SUCCESS'));
@@ -274,6 +274,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
 
     getPortfolio,
     updatePortfolioMutation,
+    isUpdating,
     downloadPortfolioFileMutation,
     t,
     form,
