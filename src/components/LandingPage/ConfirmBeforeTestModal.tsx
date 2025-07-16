@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
-import { useHasTakenExamDefault } from '@app/hooks';
+import { useHasTakenExamDefault, useSubmitExam } from '@app/hooks';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
@@ -16,6 +16,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { data: hasTakenExam } = useHasTakenExamDefault();
+  const { mutate: submitExam, isPending } = useSubmitExam();
 
   const handleStartTest = () => {
     navigate(NAVIGATE_URL.TEST);
@@ -83,17 +84,28 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
 
       <div className='px-3 w-full md:my-6'>
         <div className='flex flex-col gap-2 md:flex-row md:justify-center md:gap-4'>
-          <Button
-            onClick={handleReviewResult}
-            className='w-full h-full text-base font-semibold px-3 py-2 rounded-full bg-white border-2 !border-orange-500 !text-orange-500 hover:border-orange-600 hover:text-orange-600 active:border-orange-700 active:text-orange-700 transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
-          >
-            {t('MODAL.REVIEW_RESULT')}
-          </Button>
+          {hasTakenExam?.examStatus !== 'IN_PROGRESS' ? (
+            <Button
+              onClick={handleReviewResult}
+              className='w-full h-full text-base font-semibold px-3 py-2 rounded-full bg-white border-2 !border-orange-500 !text-orange-500 hover:border-orange-600 hover:text-orange-600 active:border-orange-700 active:text-orange-700 transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
+            >
+              {t('MODAL.REVIEW_RESULT')}
+            </Button>
+          ) : (
+            <Button
+              onClick={() => submitExam(hasTakenExam?.examId || '')}
+              className='w-full h-full text-base font-semibold px-3 py-2 rounded-full bg-white border-2 !border-orange-500 !text-orange-500 hover:border-orange-600 hover:text-orange-600 active:border-orange-700 active:text-orange-700 transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
+            >
+              {t('BUTTON.EXIT_TEST')}
+            </Button>
+          )}
           <Button
             onClick={handleStartTest}
             className='w-full h-full text-base font-semibold border-none px-3 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
           >
-            {t('MODAL.START_CONFIRM_TEST')}
+            {hasTakenExam?.examStatus === 'IN_PROGRESS'
+              ? t('BUTTON.CONTINUE_NOW')
+              : t('MODAL.START_CONFIRM_TEST')}
           </Button>
         </div>
       </div>
