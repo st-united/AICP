@@ -130,23 +130,21 @@ export const useActivateAccount = () => {
   const navigate = useNavigate();
 
   return useMutation(
-    async (token: string) => {
-      const { data } = await getActivateAccount(token);
-      return data;
+    async ({ activateToken, email }: { activateToken: string; email: string }) => {
+      const { data } = await getActivateAccount(activateToken);
+      return { data, email };
     },
     {
-      onSuccess: ({ message }) => {
-        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+      onSuccess: ({ data }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, data.message);
+        navigate('/login', { replace: true });
       },
-      onError({ response }) {
-        const errorMessage = response.data.message;
+      onError: (error: any, { email }) => {
+        const message = error.response?.data?.message;
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, message);
 
-        if (errorMessage.includes('|')) {
-          const [message, email] = errorMessage.split('|');
-          openNotificationWithIcon(NotificationTypeEnum.ERROR, message);
-          navigate(`/activation-expired?email=${encodeURIComponent(email)}`);
-        } else {
-          openNotificationWithIcon(NotificationTypeEnum.ERROR, errorMessage);
+        if (message === 'Mã kích hoạt đã hết hạn') {
+          navigate(`/activation-expired?email=${email}`, { replace: true });
         }
       },
     },
