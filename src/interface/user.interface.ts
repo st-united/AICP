@@ -30,6 +30,9 @@ export interface UserProfile {
   province?: string;
   job?: string;
   referralCode: string;
+  isStudent: boolean;
+  university?: string;
+  studentCode?: string;
 }
 
 export interface UserDetail {
@@ -118,4 +121,10 @@ export interface DetailExam {
     id: string;
     name: string;
   };
+}
+
+export interface UpdateUserStudentInfo {
+  isStudent: boolean;
+  university?: string;
+  studentCode?: string;
 }

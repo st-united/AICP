@@ -10,6 +10,7 @@ import {
   HasTakenExam,
   HistoryTesting,
   DetailExam,
+  UpdateUserStudentInfo,
 } from '@app/interface/user.interface';
 import {
   checkHasTakenExam,
@@ -25,6 +26,7 @@ import {
   updateForgotPasswordApi,
   checkResetPasswordTokenApi,
   getDetailExam,
+  UpdateUserStudentInfoApi,
 } from '@app/services';
 
 export const useCreateUser = () => {
@@ -148,4 +150,21 @@ export const useExamDetail = (examId: string) => {
     },
     enabled: !!examId,
   });
+};
+export const useUpdateUserStudentInfo = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (payload: UpdateUserStudentInfo) => {
+      const response = await UpdateUserStudentInfoApi(payload);
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [QUERY_KEY.PROFILE] });
+      },
+      onError: (error) => {
+        message.error(error.response.data.message);
+      },
+    },
+  );
 };

@@ -694,5 +694,10 @@
     "START_CONFIRM_TEST": "Bắt đầu ngay",
     "PERSONAL_INFO": "Hồ sơ cá nhân",
     "PHONE_INFO": "Xác nhận qua điện thoại"
+  },
+  "CONFIRM_BEFORE_TEST_MODAL": {
+    "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",
+    "INFO_TEXT": "Bạn là:",
+    "UPDATE_INFO": "Thông tin chi tiết"
   }
 }
