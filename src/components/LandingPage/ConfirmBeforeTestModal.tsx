@@ -78,7 +78,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
                 <span className='w-3 h-3 bg-orange-500 rounded-full block'></span>
               )}
             </span>
-            <span className='text-lg font-medium whitespace-nowrap'>Sinh viên</span>
+            <span className='text-lg font-medium whitespace-nowrap'>{t('USER.STUDENT')}</span>
           </div>
           <div
             className={`flex-1 border rounded-xl px-8 py-4 flex items-center justify-center cursor-pointer transition-all duration-150 whitespace-nowrap ${
@@ -102,7 +102,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
                 <span className='w-3 h-3 bg-orange-500 rounded-full block'></span>
               )}
             </span>
-            <span className='text-lg font-medium whitespace-nowrap'>Người đi làm</span>
+            <span className='text-lg font-medium whitespace-nowrap'>{t('USER.WORKER')}</span>
           </div>
         </div>
         {isStudentSelected && (
