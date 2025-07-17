@@ -29,14 +29,6 @@ const PrivacyPolicy = () => {
               className='w-[180px] h-auto mb-4'
               preview={false}
             />
-            <Button
-              type='text'
-              icon={<LeftOutlined />}
-              className='flex items-center text-[14px] md:text-[18px] !text-[#686868] hover:text-orange-600 p-0 mb-6'
-              onClick={() => navigate(NAVIGATE_URL.SIGN_IN)}
-            >
-              {t('TERMS.BACK')}
-            </Button>
             <PrivacyLayout />
           </div>
         </Content>
