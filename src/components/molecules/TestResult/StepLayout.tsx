@@ -40,20 +40,20 @@ const StepLayout = () => {
     <div className='bg-white rounded-2xl shadow px-8 py-4'>
       <div className='custom-steps flex flex-col items-center justify-center relative'>
         {currentStep === 1 && !isPortfolioExpanded && (
-          <div className='flex items-center mt-2 justify-center text-orange-500 text-xl md:text-2xl font-bold text-center'>
+          <div className='flex items-center mt-2 justify-center text-orange-500 text-xl md:text-4xl font-bold text-center'>
             {t('TEST_RESULT.EVALUATION_PATH')}
           </div>
         )}
         <Steps
           labelPlacement='vertical'
-          className='!cursor-pointer w-[90%] absolute top-6 left-1/2 -translate-x-1/2'
+          className='!cursor-pointer w-[90%] absolute top-10 left-1/2 -translate-x-1/2'
           onChange={(current) => setCurrentStep(current)}
           size='default'
           current={currentStep}
           items={steps}
         />
-        <div className='mt-40 md:mt-28'>{steps[currentStep || 1].content}</div>
       </div>
+      <div className='mt-40 md:mt-28'>{steps[currentStep || 1].content}</div>
     </div>
   );
 };

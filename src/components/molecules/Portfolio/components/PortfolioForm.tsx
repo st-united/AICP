@@ -78,14 +78,14 @@ const PortfolioForm: React.FC = () => {
             <>
               <Button
                 onClick={handleCancel}
-                className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
+                className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:shadow-md'
               >
                 {cancelLabel || t('PORTFOLIO.CANCEL')}
               </Button>
               <Button
                 type='primary'
                 htmlType='submit'
-                className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white'
+                className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white hover:shadow-md'
               >
                 {saveLabel || t('PORTFOLIO.SAVE')}
               </Button>

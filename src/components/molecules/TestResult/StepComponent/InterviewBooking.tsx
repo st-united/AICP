@@ -36,9 +36,9 @@ const InterviewBooking: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-8 pb-12 bg-white min-h-screen'>
-      <div className='flex flex-col items-center justify-center max-w-xl mx-auto mt-6'>
-        <div className='text-center mb-4'>
-          <h2 className='text-xl font-semibold mb-2 text-[#5B5B5B]'>
+      <div className='flex flex-col items-center justify-center max-w-xl mx-auto mt-10'>
+        <div className='text-center'>
+          <h2 className='text-xl font-semibold text-[#5B5B5B] mb-10'>
             {t('TEST_RESULT.BOOKING_TITLE')}
           </h2>
         </div>

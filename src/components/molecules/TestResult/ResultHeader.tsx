@@ -79,69 +79,69 @@ const ResultHeader = () => {
         >
           <Descriptions.Item
             label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold'>
-                <UserOutlined className='text-[#686868] font-extrabold mb-[5px]' />
+              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
+                <UserOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
                 {t('TEST_RESULT.FULLNAME')}
               </div>
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold'>Ngọc Nhi</span>
+            <span className='text-[#686868] font-semibold text-lg'>Ngọc Nhi</span>
           </Descriptions.Item>
           <Descriptions.Item
             label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold'>
-                <MailOutlined className='text-[#686868] font-extrabold mb-[5px]' />
+              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
+                <MailOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
                 {t('TEST_RESULT.EMAIL')}
               </div>
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold'>ngocnhi.nguyen@gmail.com</span>
+            <span className='text-[#686868] font-semibold text-lg'>ngocnhi.nguyen@gmail.com</span>
           </Descriptions.Item>
           <Descriptions.Item
             label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold'>
-                <PhoneOutlined className='text-[#686868] font-extrabold mb-[5px]' />
+              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
+                <PhoneOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
                 {t('TEST_RESULT.PHONE')}
               </div>
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold'>0386125801</span>
+            <span className='text-[#686868] font-semibold text-lg'>0386125801</span>
           </Descriptions.Item>
           <Descriptions.Item
             label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold'>
-                <SolutionOutlined className='text-[#686868] font-extrabold mb-[5px]' />
+              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
+                <SolutionOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
                 {t('TEST_RESULT.ROLE')}
               </div>
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold'>Học sinh</span>
+            <span className='text-[#686868] font-semibold text-lg'>Học sinh</span>
           </Descriptions.Item>
           <Descriptions.Item
             label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold'>
-                <BankOutlined className='text-[#686868] font-extrabold mb-[5px]' />
+              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
+                <BankOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
                 {t('TEST_RESULT.SCHOOL')}
               </div>
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold'>example</span>
+            <span className='text-[#686868] font-semibold text-lg'>example</span>
           </Descriptions.Item>
           <Descriptions.Item
             label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold'>
-                <IdcardOutlined className='text-[#686868] font-extrabold mb-[5px]' />
+              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
+                <IdcardOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
                 {t('TEST_RESULT.STUDENT_ID')}
               </div>
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold'>221121521222</span>
+            <span className='text-[#686868] font-semibold text-lg'>221121521222</span>
           </Descriptions.Item>
         </Descriptions>
       </div>

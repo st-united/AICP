@@ -57,7 +57,7 @@ const SkillLevel: React.FC<SkillLevelProps> = ({ level, levelText, comment, sugg
           <div className='text-gray-700 mb-2'>{comment}</div>
           <div className='text-xl font-bold text-black relative inline-block align-bottom'>
             {t('TEST_RESULT.SUGGEST')}:
-            <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[15%] ml-1' />
+            <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[29%] ml-1' />
           </div>
           <div className='text-gray-700'>{suggestion}</div>
         </div>

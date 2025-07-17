@@ -72,7 +72,7 @@ const SummaryBox = () => {
           </div>
         ))}
       </div>
-      <div className='flex justify-end w-full'>
+      <div className='flex justify-end w-full mt-10'>
         <Button
           type='primary'
           className='rounded-full text-lg font-bold px-6 py-5'
