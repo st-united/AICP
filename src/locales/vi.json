@@ -72,7 +72,8 @@
     "CONTINUE_NOW": "Tiếp tục làm bài",
     "CANCEL_TEST": "Hủy bỏ",
     "EXIT_NOW": "Thoát ngay",
-    "CANCEL_NOW": "Hủy ngay"
+    "CANCEL_NOW": "Hủy ngay",
+    "EXIT_TEST": "Kết thúc ngay"
   },
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
