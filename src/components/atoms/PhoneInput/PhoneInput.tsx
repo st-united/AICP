@@ -58,8 +58,8 @@ const PhoneInput = ({
 
   const handleChangeCallingCode = (callingCode: string) => {
     setSelectedCallingCode(callingCode);
-    const newPhoneValue = callingCode + phoneNumber;
-
+    const newPhoneValue = `(${callingCode}) ${phoneNumber}`;
+    setPhoneNumber(newPhoneValue);
     if (formOnChange) {
       formOnChange(newPhoneValue);
     }
@@ -97,53 +97,55 @@ const PhoneInput = ({
       className={`w-full items-center gap-2 flex justify-between ${className || ''}`}
       style={style}
     >
-      <Select
-        disabled={disabled}
-        className='!w-[80px] !h-full !rounded-[8px]'
-        showSearch
-        value={selectedCallingCode}
-        onChange={handleChangeCallingCode}
-        filterOption={(input, option) => {
-          const value = String(option?.key ?? '').toLowerCase();
-          return value.includes(input.toLowerCase());
-        }}
-        optionLabelProp='label'
-        size={size}
-        classNames={{ popup: { root: 'min-w-[300px] sm:min-w-[400px]' } }}
-      >
-        {(
-          CallingCode || [
-            {
-              dialCode: '+84',
-              name: 'Vietnam',
-              flag: 'https://flagcdn.com/w320/vn.png',
-              code: 'VN',
-            },
-          ]
-        ).map((item) => (
-          <Select.Option
-            key={item.dialCode + item.name + item.code}
-            value={item.dialCode}
-            disabled={disabled}
-            label={<img className=' w-full rounded-xl' src={item.flag} alt={item.name} />}
-          >
-            <div className='flex items-center flex-row w-[400px]'>
-              <img className='mr-2 w-4' src={item.flag} alt={item.name} />
-              <span className=''>{item.name}</span>
-              <span className='ml-1 font-bold'>{item.code}</span>
-              <span className='text-gray-600 ml-1'>({item.dialCode})</span>
-            </div>
-          </Select.Option>
-        ))}
-      </Select>
       <Input
         className='flex-1 !rounded-[8px] !h-full'
         placeholder={placeholder || (t('OTP.PHONE_PLACEHOLDER') as string)}
         value={phoneNumber}
         type='tel'
-        onChange={(e) => handleChangePhoneNumber(e.target.value)}
+        onChange={(e) => handleChangePhoneNumber(e.target.value.replace(/[^0-9]/g, ''))}
         size={size}
         disabled={disabled}
+        addonBefore={
+          <Select
+            disabled={disabled}
+            className='!w-[80px] !h-full !rounded-[8px]'
+            showSearch
+            value={selectedCallingCode}
+            onChange={handleChangeCallingCode}
+            filterOption={(input, option) => {
+              const value = String(option?.key ?? '').toLowerCase();
+              return value.includes(input.toLowerCase());
+            }}
+            optionLabelProp='label'
+            size={size}
+            classNames={{ popup: { root: 'min-w-[300px] sm:min-w-[400px]' } }}
+          >
+            {(
+              CallingCode || [
+                {
+                  dialCode: '+84',
+                  name: 'Vietnam',
+                  flag: 'https://flagcdn.com/w320/vn.png',
+                  code: 'VN',
+                },
+              ]
+            ).map((item) => (
+              <Select.Option
+                key={item.dialCode + item.name + item.code}
+                value={item.dialCode}
+                disabled={disabled}
+                label={<img className=' w-full rounded-xl' src={item.flag} alt={item.name} />}
+              >
+                <div className='flex items-center flex-row w-[400px]'>
+                  <img className='mr-2 w-4' src={item.flag} alt={item.name} />
+                  <span className=''>{item.name}</span>
+                  <span className='ml-1 font-bold'>{item.code}</span>
+                  <span className='text-gray-600 ml-1'>({item.dialCode})</span>
+                </div>
+              </Select.Option>
+            ))}
+          </Select>
+        }
       />
     </div>
   );
