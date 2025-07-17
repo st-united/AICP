@@ -1,3 +1,4 @@
+import ActivationExpired from './ActivationExpired/ActivationExpired';
 import AptitudeTest from './AptitudeTest/AptitudeTest';
 import Capacity from './Capacity/Index';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
@@ -12,6 +13,7 @@ import Terms from './TermsAndConditions/Terms';
 import UserPage from './UserPage/UserPage';
 
 export {
+  ActivationExpired,
   SignIn,
   NotFound,
   Homepage,
