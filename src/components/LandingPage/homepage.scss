@@ -97,3 +97,19 @@
 .slide-up-then-left {
   animation: slideUpThenLeft 1.5s ease-in-out forwards;
 }
+.custom-banner {
+  .ant-image {
+    height: 70%;
+  }
+  .ant-image-img {
+    height: 100%;
+  }
+}
+.custom-banner-user {
+  .ant-image {
+    height: 80% !important;
+  }
+  .ant-image-img {
+    height: 80% !important;
+  }
+}
