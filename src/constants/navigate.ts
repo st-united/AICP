@@ -9,6 +9,7 @@ export const NAVIGATE_URL = {
   CHANGE_PASSWORD: '/change-password',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
+  ACTIVATION_EXPIRED: '/activation-expired',
   SIGN_IN: '/login',
   SIGN_UP: '/register',
   SIGN_OUT: '/sign-out',

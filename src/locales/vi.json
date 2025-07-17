@@ -464,6 +464,17 @@
     "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
     "SUCCESS": "Email đặt lại mật khẩu đã được gửi. Nếu không thấy, vui lòng kiểm tra thư mục Spam hoặc Quảng cáo."
   },
+  "ACTIVATION_EXPIRED": {
+    "TITLE": "Gửi lại email kích hoạt tài khoản",
+    "DESCRIPTION_1": "Liên kết kích hoạt tài khoản của bạn đã hết hạn!",
+    "DESCRIPTION_2": "Vui lòng nhấn nút <strong>\"Gửi lại email\"</strong> bên dưới để nhận liên kết kích hoạt mới được gửi đến email đã đăng ký",
+    "RESEND_EMAIL": "Gửi lại email",
+    "SEND_LOADING": "Đang gửi...",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Email kích hoạt đã được gửi lại thành công. Vui lòng kiểm tra hộp thư của bạn.",
+    "ERROR": "Có lỗi xảy ra khi gửi email kích hoạt. Vui lòng thử lại.",
+    "NO_EMAIL": "Không tìm thấy email trong URL. Vui lòng kiểm tra lại liên kết."
+  },
   "RESET_PASSWORD": {
     "TITLE": "Đặt lại mật khẩu!",
     "NEW_PASSWORD": "Mật khẩu mới",

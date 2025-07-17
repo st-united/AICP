@@ -12,6 +12,7 @@ import {
   registerApi,
   getActivateAccount,
   loginWithGoogleApi,
+  resendActivationEmailApi,
 } from '@app/services';
 import {
   NotificationTypeEnum,
@@ -126,9 +127,34 @@ export const useRegister = () => {
 };
 
 export const useActivateAccount = () => {
+  const navigate = useNavigate();
+
   return useMutation(
-    async (token: string) => {
-      const { data } = await getActivateAccount(token);
+    async ({ activateToken, email }: { activateToken: string; email: string }) => {
+      const { data } = await getActivateAccount(activateToken);
+      return { data, email };
+    },
+    {
+      onSuccess: ({ data }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, data.message);
+        navigate('/login', { replace: true });
+      },
+      onError: (error: any, { email }) => {
+        const message = error.response?.data?.message;
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, message);
+
+        if (message === 'Mã kích hoạt đã hết hạn') {
+          navigate(`/activation-expired?email=${email}`, { replace: true });
+        }
+      },
+    },
+  );
+};
+
+export const useResendActivationEmail = () => {
+  return useMutation(
+    async (email: string) => {
+      const { data } = await resendActivationEmailApi(email);
       return data;
     },
     {
