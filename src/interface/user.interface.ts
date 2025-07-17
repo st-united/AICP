@@ -30,6 +30,8 @@ export interface UserProfile {
   province?: string;
   job?: string;
   referralCode: string;
+  university?: string;
+  studentCode?: string;
 }
 
 export interface UserDetail {

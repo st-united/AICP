@@ -47,14 +47,8 @@ const InterviewBooking: React.FC = () => {
         </Button>
       </div>
       <SummaryBox />
-      <SkillLevel
-        level='Level 1'
-        levelText='Beginner'
-        comment={t('TEST_RESULT.SKILL_COMMENT')}
-        suggestion={t('TEST_RESULT.SKILL_SUGGEST')}
-        radarData={radarData}
-      />
-      <SuggestionList suggestions={suggestions} />
+      <SkillLevel />
+      <SuggestionList />
     </div>
   );
 };

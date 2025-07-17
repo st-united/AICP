@@ -12,27 +12,16 @@ import {
   Tooltip,
 } from 'recharts';
 
+import { useTestResultContext } from '../../TestResultContext';
 import { getStorageData } from '@app/config';
 import { EXAM_LATEST } from '@app/constants/testing';
 import { useExamDetail } from '@app/hooks';
 
-interface RadarDataItem {
-  subject: string;
-  value: number;
-}
-
-interface SkillLevelProps {
-  level: string;
-  levelText: string;
-  comment: string;
-  suggestion: string;
-  radarData: RadarDataItem[];
-}
-
-const SkillLevel: React.FC<SkillLevelProps> = ({ level, levelText, comment, suggestion }) => {
+const SkillLevel: React.FC = () => {
   const { t } = useTranslation();
   const examId = getStorageData(EXAM_LATEST);
   const { data: examDetail } = useExamDetail(examId || '');
+  const { data } = useTestResultContext();
   const chartData = [
     { skill: 'Mindset', value: examDetail?.mindsetScore },
     { skill: 'Skillset', value: examDetail?.skillsetScore },
@@ -50,16 +39,14 @@ const SkillLevel: React.FC<SkillLevelProps> = ({ level, levelText, comment, sugg
               {t('TEST_RESULT.LEVEL')}:
               <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[90%] ml-1' />
             </span>
-            <span className='text-xl font-bold text-[#fe7743] ml-3 align-bottom'>
-              {level} - {levelText}
-            </span>
+            <span className='text-xl font-bold text-[#fe7743] ml-3 align-bottom'>{data.level}</span>
           </div>
-          <div className='text-gray-700 mb-2'>{comment}</div>
+          <div className='text-gray-700 mb-2'>{data.description}</div>
           <div className='text-xl font-bold text-black relative inline-block align-bottom'>
             {t('TEST_RESULT.SUGGEST')}:
             <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[29%] ml-1' />
           </div>
-          <div className='text-gray-700'>{suggestion}</div>
+          <div className='text-gray-700'>{data.learningPath}</div>
         </div>
         <div className='w-0.5 h-[200px] bg-gray-50' />
         <div className='flex-1 flex items-center justify-center min-w-[220px]'>

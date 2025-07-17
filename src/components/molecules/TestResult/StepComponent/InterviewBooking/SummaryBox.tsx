@@ -5,10 +5,10 @@ import {
   MinusCircleOutlined,
 } from '@ant-design/icons';
 import { Button } from 'antd';
-import React, { useState } from 'react';
 
 import './SummaryBox.scss';
 
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ResultDetail from './ResultDetail';
@@ -18,18 +18,6 @@ const SummaryBox = () => {
   const { data } = useTestResultContext();
   const [visible, setVisible] = useState(false);
   const { t } = useTranslation();
-  const checkAnswer = () => {
-    let correct = 0;
-    let wrong = 0;
-    data.questions.forEach((item) => {
-      if (item.answers.every((answer) => answer.isCorrect)) {
-        correct++;
-      } else {
-        wrong++;
-      }
-    });
-    return { correct, wrong };
-  };
   const items = [
     {
       label: t('TEST_RESULT.TIME'),
@@ -39,19 +27,19 @@ const SummaryBox = () => {
     },
     {
       label: t('TEST_RESULT.CORRECT'),
-      value: checkAnswer().correct,
+      value: data.correctCount,
       icon: <CheckOutlined className='text-3xl text-[#52c41a] thick-icon' />,
       color: 'text-[#52c41a]',
     },
     {
       label: t('TEST_RESULT.WRONG'),
-      value: checkAnswer().wrong,
+      value: data.wrongCount,
       icon: <CloseOutlined className='text-3xl text-[#ff4d4f] !font-bold thick-icon' />,
       color: 'text-[#ff4d4f]',
     },
     {
       label: t('TEST_RESULT.SKIPPED'),
-      value: data.questions.length - checkAnswer().correct - checkAnswer().wrong,
+      value: data.skippedCount,
       icon: <MinusCircleOutlined className='text-3xl text-[#bfbfbf] thick-icon' />,
       color: 'text-[#bfbfbf]',
     },

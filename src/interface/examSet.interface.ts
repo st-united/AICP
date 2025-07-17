@@ -37,6 +37,13 @@ export interface SubmitExamSetPayload {
 export interface ExamSetResult {
   elapsedTime: number;
   questions: QuestionResult[];
+  correctCount: number;
+  wrongCount: number;
+  skippedCount: number;
+  level: string;
+  description: string;
+  learningPath: string;
+  recommendedCourses: Course[];
 }
 export interface QuestionResult {
   questionId: string;
@@ -44,9 +51,32 @@ export interface QuestionResult {
   answers: Answer[];
   sequence: number;
   userAnswers: string[];
+  status: QuestionStatus;
+}
+export enum QuestionStatus {
+  CORRECT = 'correct',
+  WRONG = 'wrong',
+  SKIPPED = 'skipped',
 }
 export interface Answer {
   id: string;
   content: string;
   isCorrect: boolean;
+}
+export interface Course {
+  id: string;
+  title: string;
+  description: string;
+  provider: string;
+  url: string;
+  linkImage: string;
+  courseType: string;
+  durationHours: string;
+  difficultyLevel: null;
+  aspectId: string;
+  domainId: string;
+  sfiaLevels: string[];
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
