@@ -8,10 +8,12 @@ import {
 } from '@ant-design/icons';
 import { Button, Descriptions } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import { getStorageData } from '@app/config';
 import { EXAM_LATEST } from '@app/constants/testing';
 import { useDownloadCertificate } from '@app/hooks/useExamSet';
+import { RootState } from '@app/redux/store';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -21,6 +23,7 @@ const ResultHeader = () => {
   const { t } = useTranslation();
   const examId = getStorageData(EXAM_LATEST);
   const { mutate: downloadCertificate } = useDownloadCertificate();
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const handleDownloadCertificate = () => {
     downloadCertificate(examId, {
@@ -32,7 +35,6 @@ const ResultHeader = () => {
           if (match) filename = match[1];
         }
 
-        // Tạo URL và trigger download
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
         link.href = url;
@@ -86,7 +88,7 @@ const ResultHeader = () => {
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold text-lg'>Ngọc Nhi</span>
+            <span className='text-[#686868] font-semibold text-lg'>{user?.fullName}</span>
           </Descriptions.Item>
           <Descriptions.Item
             label={
@@ -97,7 +99,7 @@ const ResultHeader = () => {
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold text-lg'>ngocnhi.nguyen@gmail.com</span>
+            <span className='text-[#686868] font-semibold text-lg'>{user?.email}</span>
           </Descriptions.Item>
           <Descriptions.Item
             label={
@@ -108,7 +110,7 @@ const ResultHeader = () => {
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold text-lg'>0386125801</span>
+            <span className='text-[#686868] font-semibold text-lg'>{user?.phoneNumber}</span>
           </Descriptions.Item>
           <Descriptions.Item
             label={
@@ -119,7 +121,9 @@ const ResultHeader = () => {
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold text-lg'>Học sinh</span>
+            <span className='text-[#686868] font-semibold text-lg'>
+              {user?.isStudent ? t('USER.STUDENT') : t('USER.WORKER')}
+            </span>
           </Descriptions.Item>
           <Descriptions.Item
             label={
@@ -130,7 +134,7 @@ const ResultHeader = () => {
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold text-lg'>example</span>
+            <span className='text-[#686868] font-semibold text-lg'>{user?.university}</span>
           </Descriptions.Item>
           <Descriptions.Item
             label={
@@ -141,7 +145,7 @@ const ResultHeader = () => {
             }
             span={1}
           >
-            <span className='text-[#686868] font-semibold text-lg'>221121521222</span>
+            <span className='text-[#686868] font-semibold text-lg'>{user?.studentCode}</span>
           </Descriptions.Item>
         </Descriptions>
       </div>

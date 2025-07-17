@@ -26,4 +26,5 @@ export const API_URL = {
   DETAIL_EXAM: '/exam',
   EXAM_RESULT: '/exam/:id/result',
   EXAM_CERTIFICATE: '/exam/:id/download-certificate',
+  UPDATE_USER_STUDENT_INFO: '/users/student-info',
 };

@@ -123,7 +123,9 @@
     "GENDER": "Giới tính",
     "STATUS": "Trạng thái",
     "PASSWORD": "Mật khẩu",
-    "CHOOSE_ROLE": "vai trò"
+    "CHOOSE_ROLE": "vai trò",
+    "STUDENT": "Học sinh",
+    "WORKER": "Người đi làm"
   },
   "TABLE": {
     "MANIPULATION": "Thao tác",
@@ -730,5 +732,10 @@
     "PORTFOLIO_STEP_BUTTON": "Hoàn thiện hồ sơ",
     "PORTFOLIO_STEP_SAVE": "Hoàn tất",
     "PORTFOLIO_STEP_CANCEL": "Để sau"
+  },
+  "CONFIRM_BEFORE_TEST_MODAL": {
+    "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",
+    "INFO_TEXT": "Bạn là:",
+    "UPDATE_INFO": "Thông tin chi tiết"
   }
 }
