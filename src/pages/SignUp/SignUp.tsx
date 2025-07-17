@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useSignUpSchema } from './signUpSchema';
+import PhoneInput from '@app/components/atoms/PhoneInput/PhoneInput';
 import {
   NUMBER_LENGTH_REGEX,
   PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER,
@@ -60,7 +61,7 @@ const SignUp = () => {
           type='button'
         >
           <Link
-            className='flex items-center text-primary-gray justify-start text-lg !mb-14 hover:text-primary-light cursor-pointer'
+            className='flex items-center text-primary-gray justify-start text-lg !mb-5 hover:text-primary-light cursor-pointer'
             to={'/'}
           >
             <div className='flex items-center justify-center'>
@@ -75,7 +76,7 @@ const SignUp = () => {
           <div className='text-white text-lg !mb-4 flex gap-2'>
             <div className='text-primary-gray'>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
             <div
-              className='text-primary-bold cursor-pointer underline hover:text-primary-light'
+              className='text-primary-bold cursor-pointer underline hover:text-primary-light font-bold'
               onClick={() => navigate('/login')}
               aria-hidden='true'
             >
@@ -87,31 +88,31 @@ const SignUp = () => {
           form={form}
           layout='vertical'
           onFinish={onFinish}
-          className='grid grid-cols-2 md:gap-4 gap-1'
+          className='grid grid-cols-2 gap-0 xs:gap-1.5 sm:gap-2 md:gap-0.5 lg:gap-0'
           validateTrigger={['onChange', 'onBlur']}
         >
           <Form.Item className='md:col-span-1 col-span-2' name='fullName' rules={validator}>
             <Input
-              className='w-full !px-6 !py-4 !rounded-md !text-lg'
+              className='w-full !px-6 !py-3 lg:!py-3 !rounded-md !text-lg'
               placeholder={t('SIGN_UP.FULL_NAME') as string}
             />
           </Form.Item>
           <Form.Item className='md:col-span-1 col-span-2' name='phoneNumber' rules={validator}>
-            <Input
-              className='w-full !px-6 !py-4 !rounded-md !text-lg'
+            <PhoneInput
+              className='w-full h-[62px] lg:h-[52px] ml-2'
               placeholder={t('SIGN_UP.PHONE') as string}
             />
           </Form.Item>
           <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
-              className='w-full !px-6 !py-4 !rounded-md !text-lg'
+              className='w-full !px-6 !py-3 lg:!py-3 !rounded-md !text-lg'
               placeholder={t('SIGN_UP.EMAIL') as string}
             />
           </Form.Item>
           <Form.Item className='col-span-2' name='password' rules={validator}>
             <Input.Password
               onChange={handlePasswordChange}
-              className='col-span-2 w-full !px-6 !py-4 !rounded-md !text-lg'
+              className='col-span-2 w-full !px-6 !py-3 lg:!py-3 !rounded-md !text-lg'
               placeholder={t<string>('SIGN_UP.PASSWORD')}
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
             />
@@ -135,13 +136,13 @@ const SignUp = () => {
             ]}
           >
             <Input.Password
-              className='col-span-2 w-full !px-6 !py-4 !rounded-md !text-lg'
+              className='col-span-2 w-full !px-6 !py-3 !rounded-md !text-lg'
               placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
 
-          <div className='col-span-2 text-lg text-[#686868]'>
+          <div className='col-span-2 text-lg md:text-base text-[#686868]'>
             <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-primary-gray'}`}>
               <CheckOutlined />
               <div>{t<string>('SIGN_UP.PASSWORD_REQUIREMENT')}</div>
@@ -157,10 +158,10 @@ const SignUp = () => {
               <div>
                 {parse(
                   t<string>('SIGN_UP.AGREE_TERMS', {
-                    terms: `<a href="/terms-and-conditions" style="text-decoration: underline; color: #A22D00;">${t<string>(
+                    terms: `<a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #A22D00;">${t<string>(
                       'SIGN_UP.TERMS',
                     )}</a>`,
-                    privacy: `<a href="/privacy-policy" style="text-decoration: underline; color: #A22D00;">${t<string>(
+                    privacy: `<a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #A22D00;">${t<string>(
                       'SIGN_UP.PRIVACY',
                     )}</a>`,
                     company: t('SIGN_UP.COMPANY'),
@@ -173,7 +174,7 @@ const SignUp = () => {
           <Form.Item className='col-span-2 !mt-2'>
             <Button
               htmlType='submit'
-              className='w-full h-[3.75rem] !bg-primary-bold text-[1rem] text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:!text-black transition duration-300'
+              className='w-full h-[3.75rem] lg:h-[3rem] !bg-primary-bold text-[1rem] text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:!text-black transition duration-300'
               loading={isLoading}
               disabled={!isChecked}
             >
