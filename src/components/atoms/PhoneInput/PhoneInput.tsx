@@ -48,6 +48,7 @@ const PhoneInput = ({
           const remainingNumber = currentValue.substring(matchedCallingCode.dialCode.length);
           setSelectedCallingCode(matchedCallingCode.dialCode);
           setPhoneNumber(remainingNumber);
+          formOnChange?.(`(${matchedCallingCode.dialCode})${remainingNumber}`);
         } else {
           setSelectedCallingCode('+84');
           setPhoneNumber(currentValue);
