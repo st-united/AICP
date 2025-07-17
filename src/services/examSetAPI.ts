@@ -15,3 +15,7 @@ export const deleteExamByIdApi = (examSetId: string) =>
   axios.delete(`${API_URL.DETAIL_EXAM}/${examSetId}`);
 export const getExamResultApi = (examId: string) =>
   axios.get(API_URL.EXAM_RESULT.replace(':id', examId));
+export const downloadCertificateApi = (examId: string) =>
+  axios.get(API_URL.EXAM_CERTIFICATE.replace(':id', examId), {
+    responseType: 'blob',
+  });

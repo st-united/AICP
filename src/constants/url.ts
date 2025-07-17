@@ -25,4 +25,5 @@ export const API_URL = {
   GET_JOB: 'domain/names',
   DETAIL_EXAM: '/exam',
   EXAM_RESULT: '/exam/:id/result',
+  EXAM_CERTIFICATE: '/exam/:id/download-certificate',
 };

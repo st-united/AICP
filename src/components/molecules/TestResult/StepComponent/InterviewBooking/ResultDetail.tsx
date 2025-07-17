@@ -1,9 +1,4 @@
-import {
-  CheckCircleOutlined,
-  CheckOutlined,
-  CloseCircleOutlined,
-  CloseOutlined,
-} from '@ant-design/icons';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Modal, Radio, Checkbox } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';

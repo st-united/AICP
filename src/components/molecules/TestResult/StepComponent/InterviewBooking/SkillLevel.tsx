@@ -8,7 +8,13 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   ResponsiveContainer,
+  Legend,
+  Tooltip,
 } from 'recharts';
+
+import { getStorageData } from '@app/config';
+import { EXAM_LATEST } from '@app/constants/testing';
+import { useExamDetail } from '@app/hooks';
 
 interface RadarDataItem {
   subject: string;
@@ -23,14 +29,15 @@ interface SkillLevelProps {
   radarData: RadarDataItem[];
 }
 
-const SkillLevel: React.FC<SkillLevelProps> = ({
-  level,
-  levelText,
-  comment,
-  suggestion,
-  radarData,
-}) => {
+const SkillLevel: React.FC<SkillLevelProps> = ({ level, levelText, comment, suggestion }) => {
   const { t } = useTranslation();
+  const examId = getStorageData(EXAM_LATEST);
+  const { data: examDetail } = useExamDetail(examId || '');
+  const chartData = [
+    { skill: 'Mindset', value: examDetail?.mindsetScore },
+    { skill: 'Skillset', value: examDetail?.skillsetScore },
+    { skill: 'Toolset', value: examDetail?.toolsetScore },
+  ];
   return (
     <div className='text-lg'>
       <Divider className='!p-1 !m-0 !mb-4 italic text-[#5B5B5B] text-xl'>
@@ -56,18 +63,35 @@ const SkillLevel: React.FC<SkillLevelProps> = ({
         </div>
         <div className='w-0.5 h-[200px] bg-gray-50' />
         <div className='flex-1 flex items-center justify-center min-w-[220px]'>
-          <ResponsiveContainer width={250} height={220}>
-            <RadarChart cx='50%' cy='50%' outerRadius={90} data={radarData}>
-              <PolarGrid />
-              <PolarAngleAxis dataKey='subject' />
-              <PolarRadiusAxis angle={30} domain={[0, 100]} />
-              <Radar
-                name='Kỹ năng'
-                dataKey='value'
-                stroke='#fe7743'
-                fill='#fe7743'
-                fillOpacity={0.4}
+          <ResponsiveContainer width='100%' height='100%'>
+            <RadarChart data={chartData}>
+              <PolarGrid stroke='#e5e7eb' />
+              <PolarAngleAxis
+                dataKey='pilar'
+                tick={{ fontSize: 12, fill: '#374151' }}
+                tickLine={false}
               />
+              <PolarRadiusAxis
+                angle={90}
+                domain={[0, 7]}
+                tick={{ fontSize: 10, fill: '#9ca3af' }}
+                tickCount={5}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Radar
+                name='Score'
+                dataKey='score'
+                stroke='#fe7743'
+                fill='#fe774366'
+                strokeWidth={2}
+                dot={{ r: 3, fill: '#fe7743' }}
+              />
+              <Tooltip
+                wrapperStyle={{ fontSize: '12px' }}
+                formatter={(value: number) => [`${value}`, 'Score']}
+              />
+              <Legend wrapperStyle={{ fontSize: '12px' }} />
             </RadarChart>
           </ResponsiveContainer>
         </div>

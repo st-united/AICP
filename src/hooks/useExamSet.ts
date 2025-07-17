@@ -8,6 +8,7 @@ import { EXAM_LATEST } from '@app/constants/testing';
 import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
 import {
   deleteExamByIdApi,
+  downloadCertificateApi,
   getExamResultApi,
   getExamSetsApi,
   submitDraftQuestionApi,
@@ -169,4 +170,7 @@ export const useGetExamResult = (examId: string) => {
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
   });
+};
+export const useDownloadCertificate = () => {
+  return useMutation((examId: string) => downloadCertificateApi(examId));
 };

@@ -17,6 +17,7 @@ const StepLayout = () => {
           {t('TEST_RESULT.STEP_TEST')}
         </div>
       ),
+      disabled: true,
     },
     {
       title: (
@@ -51,7 +52,7 @@ const StepLayout = () => {
           current={currentStep}
           items={steps}
         />
-        <div className='mt-40 md:mt-28'>{steps[currentStep || 0].content}</div>
+        <div className='mt-40 md:mt-28'>{steps[currentStep || 1].content}</div>
       </div>
     </div>
   );
