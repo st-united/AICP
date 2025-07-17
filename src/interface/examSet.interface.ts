@@ -34,3 +34,19 @@ export interface SubmitExamSetPayload {
   answers: string[];
   type: AnswerChoice;
 }
+export interface ExamSetResult {
+  elapsedTime: number;
+  questions: QuestionResult[];
+}
+export interface QuestionResult {
+  questionId: string;
+  question: string;
+  answers: Answer[];
+  sequence: number;
+  userAnswers: string[];
+}
+export interface Answer {
+  id: string;
+  content: string;
+  isCorrect: boolean;
+}

@@ -8,6 +8,7 @@ import { EXAM_LATEST } from '@app/constants/testing';
 import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
 import {
   deleteExamByIdApi,
+  getExamResultApi,
   getExamSetsApi,
   submitDraftQuestionApi,
   submitExamSetApi,
@@ -130,7 +131,7 @@ export const useSubmitExam = () => {
       onSuccess({ message }, examId) {
         setStorageData(EXAM_LATEST, examId);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        navigate(NAVIGATE_URL.SCHEDULE);
+        navigate(NAVIGATE_URL.TEST_RESULT_DETAIL);
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
@@ -155,4 +156,17 @@ export const useDeleteExam = () => {
       },
     },
   );
+};
+export const useGetExamResult = (examId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEY.EXAM_RESULT, examId],
+    queryFn: () => getExamResultApi(examId),
+    select: (data) => data.data.data,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 10 * 60 * 1000,
+  });
 };
