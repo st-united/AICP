@@ -10,7 +10,7 @@ import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/atoms/CustomSelect/ProvinceSelect';
 import PhoneInput from '@app/components/atoms/PhoneInput/PhoneInput';
-import { NAVIGATE_URL } from '@app/constants';
+import { DATE_TIME, NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers';
 import { useGetProfile, useUpdateProfile } from '@app/hooks';
 import { UserProfile } from '@app/interface/user.interface';
@@ -110,7 +110,7 @@ const Profile = () => {
           <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
             <DatePicker
               className='!px-6 !py-3 !rounded-lg w-full'
-              format='DD/MM/YYYY'
+              format={DATE_TIME.DAY_MONTH_YEAR}
               placeholder={t('PROFILE.DOB_PLACEHOLDER') as string}
               disabled={!isEdit}
             />
