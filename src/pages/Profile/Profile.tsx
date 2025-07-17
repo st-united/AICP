@@ -50,6 +50,8 @@ const Profile = () => {
   };
 
   const handleSubmit = async (values: UserProfile) => {
+    const phoneNumber = values.phoneNumber?.replace('(', '').replace(')', '');
+    values.phoneNumber = phoneNumber;
     updateProfileMutation.mutate(values, {
       onSuccess: () => {
         setIsEdit(false);
