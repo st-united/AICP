@@ -17,3 +17,6 @@ export const registerApi = (registerUserDto: RegisterUser) =>
 
 export const getActivateAccount = (token: string) =>
   axios.get(`${API_URL.ACTIVATE_ACCOUNT}?token=${token}`);
+
+export const resendActivationEmailApi = (email: string) =>
+  axios.post(API_URL.RESEND_ACTIVATION_EMAIL, { email });

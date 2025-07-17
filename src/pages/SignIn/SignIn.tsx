@@ -2,7 +2,7 @@ import { LeftOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/ico
 import { Button, Form, Input, Image } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { signInWithPopup } from 'firebase/auth';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -25,14 +25,18 @@ const SignIn = () => {
   const signInSchema = useSignInSchema();
 
   const { mutate: activateAccount } = useActivateAccount();
+  const hasActivated = useRef(false);
 
   useEffect(() => {
+    if (hasActivated.current) return;
+
     const searchParams = new URLSearchParams(window.location.search);
     const activateToken = searchParams.get('activateToken');
+    const email = searchParams.get('email');
 
-    if (activateToken) {
-      activateAccount(activateToken);
-      navigate('/login', { replace: true });
+    if (activateToken && email) {
+      activateAccount({ activateToken, email });
+      hasActivated.current = true;
     }
   }, []);
 
