@@ -440,6 +440,16 @@
       "LEVEL_6_LEADERSHIP": "Mức lãnh đạo",
       "LEVEL_7_MASTERY": "Mức thành thạo"
     },
+    "EXAM_LEVEL": {
+      "NONE_LEVEL": "Chưa có đánh giá năng lực",
+      "LEVEL_1_STARTER": "Mức Khởi đầu",
+      "LEVEL_2_EXPLORER": "Mức Khám Phá",
+      "LEVEL_3_PRACTITIONER": "Mức Thực Hành",
+      "LEVEL_4_INTEGRATOR": "Mức Tích Hợp",
+      "LEVEL_5_STRATEGIST": "Mức Chiến Lược",
+      "LEVEL_6_LEADER": "Mức Dẫn dắt",
+      "LEVEL_7_EXPERT": "Mức Chuyên Gia"
+    },
     "RESULT": {
       "TITLE": "Kết quả đánh giá <span>năng lực AI</span> (Sơ bộ)",
       "SUBTITLE": "Dưới đây là kết quả đánh giá sơ bộ của bạn.",
