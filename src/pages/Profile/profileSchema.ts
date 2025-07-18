@@ -40,7 +40,7 @@ export const useProfileSchema = () => {
         'is-valid-phone',
         t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
         (value) => {
-          if (!value) return true; // cho phép null hoặc rỗng
+          if (!value || value.trim().length === 0 || value.trim() === '') return true;
           return PHONE_REGEX_PATTERN.test(value);
         },
       ),
@@ -49,7 +49,7 @@ export const useProfileSchema = () => {
       .mixed()
       .nullable()
       .test('is-valid-date', t('VALIDATE.DATE_NOT_FUTURE') as string, (value) => {
-        if (!value) return true; // cho phép null
+        if (!value) return true;
         const date = dayjs(value).startOf('day');
         return date.isValid() && date.isSameOrBefore(dayjs().startOf('day'));
       })

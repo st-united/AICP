@@ -124,7 +124,7 @@ const PasswordChangeForm = () => {
           </Form.Item>
 
           {/* Password Requirements */}
-          <div className='text-lg sm:text-base text-gray-600 mb-4'>
+          <div className='text-lg sm:text-base text-[#8B8B8B] mb-4'>
             <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-grey'}`}>
               <div>
                 <CheckOutlined style={{ fontSize: '24px' }} />
@@ -143,7 +143,7 @@ const PasswordChangeForm = () => {
           <Form.Item className='flex justify-center'>
             <Button
               htmlType='submit'
-              className='w-full px-8 sm:px-12 md:px-14 bg-blue-600 hover:bg-blue-700 h-12 text-base sm:text-lg rounded-full text-white font-bold'
+              className='w-full px-8 sm:px-12 md:px-14 bg-[#60a5fa] hover:!bg-[#2563eb] hover:!border-[#2563eb] h-12 text-base sm:text-lg rounded-full text-white hover:!text-white font-bold'
               loading={isLoading}
             >
               {t('PROFILE.SAVE')}

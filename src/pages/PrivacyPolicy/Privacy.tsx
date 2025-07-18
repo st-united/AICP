@@ -1,12 +1,18 @@
-import { Layout, Image } from 'antd';
+import { Layout, Image, Button } from 'antd';
 
 import PrivacyLayout from './PrivacyLayout';
 import logo from '../../assets/images/devplus.png';
 import termBg from '../../assets/images/term-background.png';
+import { LeftOutlined } from '@ant-design/icons';
+import { NAVIGATE_URL } from '@app/constants';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const { Content } = Layout;
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   return (
     <div
       className='min-h-screen flex items-center justify-center bg-cover bg-center'

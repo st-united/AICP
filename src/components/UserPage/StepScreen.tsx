@@ -1,6 +1,10 @@
 import { Button } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 
 type Point = {
   label: string;
@@ -18,7 +22,8 @@ export default function StepScreen({ steps, activeStep }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
-
+  const isAuth = useSelector((state: any) => state.auth.isAuth);
+  const navigate = useNavigate();
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -116,23 +121,23 @@ export default function StepScreen({ steps, activeStep }: Props) {
 
   return (
     <div className='relative bg-white h-screen'>
-      <div className='absolute top-5 left-5 md:top-28 md:left-28 z-10 md:w-[380px] xl:w-[480px]'>
+      <div className='absolute top-10 left-0 px-5 md:top-28 md:left-28 z-10 md:w-[380px] xl:w-[480px]'>
         <div className='flex items-center justify-center h-full'>
           <div className='flex flex-col gap-4'>
-            <span className='text-black text-4xl xl:text-6xl font-[1000]'>
+            <span className='text-black text-2xl md:text-4xl xl:text-6xl font-[1000]'>
               {t('HOMEPAGE.STEP_SCREEN_HEADER.TITLE')}
             </span>
-            <span className='text-[#64607D] text-base xl:text-xl font-bold'>
+            <span className='text-[#64607D] text-base xl:text-xl'>
               {t('HOMEPAGE.STEP_SCREEN_HEADER.SUBTITLE')}
             </span>
             <div className='flex items-center justify-start'>
               <Button
                 onClick={() => {
-                  setIsOpen(true);
+                  isAuth ? setIsOpen(true) : navigate('/login');
                 }}
                 className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
               >
-                {t('HOMEPAGE_LOGIN.START')}
+                {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
               </Button>
             </div>
           </div>
@@ -205,10 +210,10 @@ export default function StepScreen({ steps, activeStep }: Props) {
 
               <text
                 x={p.x}
-                y={p.y + 4}
+                y={p.y + 8}
                 textAnchor='middle'
                 fill='white'
-                fontSize='12'
+                fontSize='22'
                 fontWeight='bold'
               >
                 {idx + 1}
@@ -266,6 +271,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
           ))}
         </svg>
       </div>
+      <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }

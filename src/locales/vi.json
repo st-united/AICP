@@ -72,7 +72,8 @@
     "CONTINUE_NOW": "Tiếp tục làm bài",
     "CANCEL_TEST": "Hủy bỏ",
     "EXIT_NOW": "Thoát ngay",
-    "CANCEL_NOW": "Hủy ngay"
+    "CANCEL_NOW": "Hủy ngay",
+    "EXIT_TEST": "Kết thúc ngay"
   },
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
@@ -199,14 +200,16 @@
     "INVALID_DATE_RANGE": "Ngày bắt đầu không thể lớn hơn ngày kết thúc",
     "MIN_AGE": "Phải đủ {{age}} tuổi trở lên",
     "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai",
-    "END_BEFORE_START": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu"
+    "END_BEFORE_START": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu",
+    "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai",
+    "URL_INVALID": "URL không hợp lệ"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "OLD_PASSWORD": "Mật khẩu cũ",
     "NEW_PASSWORD": "Mật khẩu mới",
-    "CONFIRM_PASSWORD": "Xác nhận mật khẩu",
+    "CONFIRM_PASSWORD": "Xác nhận mật khẩu mới",
     "TITLE": "Thông tin người dùng",
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Hồ sơ của tôi",
@@ -346,7 +349,7 @@
         "DESC": "Bộ câu hỏi về khả năng ứng dụng AI được đội ngũ Devplus nghiên cứu và biên soạn"
       },
       "STEP_2": {
-        "LABEL": "Hoàn thiện hồ Sơ",
+        "LABEL": "Hoàn thiện hồ sơ",
         "DESC": "Hoàn thiện hồ sơ cá nhân, cung cấp thông tin về quá trình làm việc để hệ thống có đánh giá trực quan hơn."
       },
       "STEP_3": {
@@ -464,6 +467,17 @@
     "SEND_LOADING": "Đang gửi...",
     "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
     "SUCCESS": "Email đặt lại mật khẩu đã được gửi. Nếu không thấy, vui lòng kiểm tra thư mục Spam hoặc Quảng cáo."
+  },
+  "ACTIVATION_EXPIRED": {
+    "TITLE": "Gửi lại email kích hoạt tài khoản",
+    "DESCRIPTION_1": "Liên kết kích hoạt tài khoản của bạn đã hết hạn!",
+    "DESCRIPTION_2": "Vui lòng nhấn nút <strong>\"Gửi lại email\"</strong> bên dưới để nhận liên kết kích hoạt mới được gửi đến email đã đăng ký",
+    "RESEND_EMAIL": "Gửi lại email",
+    "SEND_LOADING": "Đang gửi...",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Email kích hoạt đã được gửi lại thành công. Vui lòng kiểm tra hộp thư của bạn.",
+    "ERROR": "Có lỗi xảy ra khi gửi email kích hoạt. Vui lòng thử lại.",
+    "NO_EMAIL": "Không tìm thấy email trong URL. Vui lòng kiểm tra lại liên kết."
   },
   "RESET_PASSWORD": {
     "TITLE": "Đặt lại mật khẩu!",

@@ -10,14 +10,10 @@ import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/atoms/CustomSelect/ProvinceSelect';
 import PhoneInput from '@app/components/atoms/PhoneInput/PhoneInput';
-import { NAVIGATE_URL } from '@app/constants';
+import { DATE_TIME, NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers';
 import { useGetProfile, useUpdateProfile } from '@app/hooks';
 import { UserProfile } from '@app/interface/user.interface';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
 
 import './Profile.scss';
 
@@ -36,7 +32,7 @@ const Profile = () => {
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
-        phoneNumber: data.phoneNumber || '',
+        phoneNumber: data.phoneNumber || null,
         dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
         job: Array.isArray(data.job)
@@ -77,11 +73,7 @@ const Profile = () => {
     updateProfileMutation.mutate(fixedValues, {
       onSuccess: () => {
         setIsEdit(false);
-        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PROFILE.UPDATE_SUCCESS'));
         navigate(NAVIGATE_URL.PROFILE);
-      },
-      onError: (error) => {
-        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PROFILE.UPDATE_FAILED'));
       },
     });
   };
@@ -134,9 +126,10 @@ const Profile = () => {
           <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
             <DatePicker
               className='!px-6 !py-3 !rounded-lg w-full'
-              format='DD/MM/YYYY'
+              format={DATE_TIME.DAY_MONTH_YEAR}
               placeholder={t('PROFILE.DOB_PLACEHOLDER') as string}
               disabled={!isEdit}
+              showNow={false}
             />
           </Form.Item>
           <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
@@ -151,25 +144,25 @@ const Profile = () => {
                 <>
                   <Button
                     onClick={() => setIsEdit(true)}
-                    className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white'
+                    className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white font-bold'
                   >
-                    Chỉnh sửa
+                    {t('PORTFOLIO.EDIT')}
                   </Button>
                 </>
               ) : (
                 <>
                   <Button
                     onClick={handleCancel}
-                    className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
+                    className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white font-bold'
                   >
-                    Hủy bỏ
+                    {t('PORTFOLIO.CANCEL')}
                   </Button>
                   <Button
                     type='primary'
                     htmlType='submit'
-                    className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white'
+                    className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white font-bold'
                   >
-                    Lưu
+                    {t('PORTFOLIO.SAVE')}
                   </Button>
                 </>
               )}
