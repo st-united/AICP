@@ -23,10 +23,11 @@ const SkillLevel: React.FC = () => {
   const { data: examDetail } = useExamDetail(examId || '');
   const { data } = useTestResultContext();
   const chartData = [
-    { skill: 'Mindset', value: examDetail?.mindsetScore },
-    { skill: 'Skillset', value: examDetail?.skillsetScore },
-    { skill: 'Toolset', value: examDetail?.toolsetScore },
+    { skill: 'Mindset', value: examDetail?.mindsetScore.score },
+    { skill: 'Skillset', value: examDetail?.skillsetScore.score },
+    { skill: 'Toolset', value: examDetail?.toolsetScore.score },
   ];
+  console.log('examDetail', chartData);
   return (
     <div className='text-lg'>
       <Divider className='!p-1 !m-0 !mb-4 italic text-[#5B5B5B] text-xl'>
@@ -54,7 +55,7 @@ const SkillLevel: React.FC = () => {
             <RadarChart data={chartData}>
               <PolarGrid stroke='#e5e7eb' />
               <PolarAngleAxis
-                dataKey='pilar'
+                dataKey='skill'
                 tick={{ fontSize: 12, fill: '#374151' }}
                 tickLine={false}
               />
@@ -62,21 +63,21 @@ const SkillLevel: React.FC = () => {
                 angle={90}
                 domain={[0, 7]}
                 tick={{ fontSize: 10, fill: '#9ca3af' }}
-                tickCount={5}
+                tickCount={8}
                 axisLine={false}
                 tickLine={false}
               />
               <Radar
                 name='Score'
-                dataKey='score'
+                dataKey='value'
                 stroke='#fe7743'
                 fill='#fe774366'
                 strokeWidth={2}
-                dot={{ r: 3, fill: '#fe7743' }}
+                dot={{ r: 2, fill: '#fe7743' }}
               />
               <Tooltip
                 wrapperStyle={{ fontSize: '12px' }}
-                formatter={(value: number) => [`${value}`, 'Score']}
+                formatter={(value: number) => [`${value}/7`, 'Score']}
               />
               <Legend wrapperStyle={{ fontSize: '12px' }} />
             </RadarChart>

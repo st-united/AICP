@@ -111,9 +111,9 @@ export interface DetailExam {
   id: string;
   startedAt: string;
   sfiaLevel: SFIALevel | null;
-  mindsetScore: number;
-  skillsetScore: number;
-  toolsetScore: number;
+  mindsetScore: PillarScore;
+  skillsetScore: PillarScore;
+  toolsetScore: PillarScore;
   overallScore: number;
   examStatus: ExamStatusEnum;
   createdAt: string;
@@ -121,6 +121,20 @@ export interface DetailExam {
     id: string;
     name: string;
   };
+}
+
+export interface PillarScore {
+  id: string;
+  name: string;
+  score: number;
+  aspect: Aspect[];
+  level: string;
+}
+export interface Aspect {
+  id: string;
+  name: string;
+  represent: string;
+  scores: number;
 }
 
 export interface UpdateUserStudentInfo {

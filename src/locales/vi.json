@@ -731,7 +731,8 @@
     "PORTFOLIO_STEP_DESC": "Bạn đã hoàn thành bước đầu đánh giá năng lực ứng dụng AI! Vui lòng bổ sung thông tin để chúng tôi có thể đánh giá toàn diện. Sau khi hoàn thiện hồ sơ, bạn có thể xem được kết quả bài đánh giá của mình.",
     "PORTFOLIO_STEP_BUTTON": "Hoàn thiện hồ sơ",
     "PORTFOLIO_STEP_SAVE": "Hoàn tất",
-    "PORTFOLIO_STEP_CANCEL": "Để sau"
+    "PORTFOLIO_STEP_CANCEL": "Để sau",
+    "NO_DATA": "Không có dữ liệu"
   },
   "CONFIRM_BEFORE_TEST_MODAL": {
     "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",
