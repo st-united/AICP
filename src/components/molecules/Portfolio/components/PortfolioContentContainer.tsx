@@ -17,7 +17,7 @@ const PortfolioContentContainer: React.FC = () => {
   }
 
   return (
-    <div className='portfolio-content h-full px-6 py-2 overflow-auto bg-white shadow rounded-2xl'>
+    <div className='portfolio-content h-full p-6 overflow-auto'>
       <PortfolioHeader />
       <PortfolioForm />
     </div>

@@ -19,5 +19,6 @@ export const NAVIGATE_URL = {
   SCHEDULE: '/scheduler',
   PORTFOLIO: '/portfolio',
   CAPACITY: '/capacity/:examId',
+  TEST_RESULT_DETAIL: '/result',
   CAPACITY_DYNAMIC: (examId: string) => `/capacity/${examId}`,
 };
