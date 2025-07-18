@@ -153,11 +153,13 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
         className='absolute right-0 top-0 text-2xl cursor-pointer text-gray-500 hover:text-gray-700 md:text-3xl'
       />
 
-      <div className='bg-blue-100 rounded-full w-1/5 aspect-square flex items-center justify-center'>
+      <div className='cursor-pointer bg-blue-100 rounded-full w-1/5 aspect-square flex items-center justify-center'>
         <div className='bg-blue-300 rounded-full w-[85%] aspect-square flex items-center justify-center'>
           <div className='bg-[#0069E2] rounded-full w-[70%] md:w-[50%] aspect-square flex items-center justify-center'>
             <div className='bg-blue-300 rounded-full w-[95%] md:w-[90%] aspect-square flex items-center justify-center'>
-              <span className='text-xl text-blue-500 md:text-3xl font-extrabold'>!</span>
+              <span className='text-xl text-[#0069E2] md:text-3xl font-extrabold'>
+                {user?.isStudent === null ? '!' : '?'}
+              </span>
             </div>
           </div>
         </div>
