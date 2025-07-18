@@ -5,15 +5,17 @@
 .close-icon {
   filter: drop-shadow(0 0 2px #ff0000);
 }
-.ant-radio-checked .ant-radio-inner {
-  border-color: #fe7743 !important;
-}
-.ant-radio-checked .ant-radio-inner::after {
-  background-color: #fe7743 !important;
-}
-.ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #fe7743 !important;
-}
-.ant-checkbox-checked .ant-checkbox-inner::after {
-  background-color: #fe7743 !important;
+.result-check {
+  .ant-radio-checked .ant-radio-inner {
+    border-color: #fe7743 !important;
+  }
+  .ant-radio-checked .ant-radio-inner::after {
+    background-color: #fe7743 !important;
+  }
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #fe7743 !important;
+  }
+  .ant-checkbox-checked .ant-checkbox-inner::after {
+    background-color: #fe7743 !important;
+  }
 }

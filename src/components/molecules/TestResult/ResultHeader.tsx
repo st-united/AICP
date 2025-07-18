@@ -43,10 +43,13 @@ const ResultHeader = () => {
         link.click();
         link.remove();
         window.URL.revokeObjectURL(url);
-        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, 'Tải chứng chỉ thành công');
+        openNotificationWithIcon(
+          NotificationTypeEnum.SUCCESS,
+          t('TEST_RESULT.DOWNLOAD_CERT_SUCCESS'),
+        );
       },
       onError: () => {
-        openNotificationWithIcon(NotificationTypeEnum.ERROR, 'Tải chứng chỉ thất bại');
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('TEST_RESULT.DOWNLOAD_CERT_ERROR'));
       },
     });
   };

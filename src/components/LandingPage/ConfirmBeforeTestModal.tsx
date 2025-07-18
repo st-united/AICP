@@ -132,7 +132,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
             loading={isPending}
             className='w-full max-w-xs h-full border-none text-lg font-semibold px-4 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200'
           >
-            Tiếp tục
+            {t('BUTTON.CONTINUE')}
           </Button>
         </div>
       </div>

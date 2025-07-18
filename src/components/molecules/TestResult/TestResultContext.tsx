@@ -34,8 +34,6 @@ export const TestResultProvider = ({ children }: { children: ReactNode }) => {
   const onNext = () => {
     setCurrentStep(currentStep + 1);
   };
-  if (!data)
-    return <div className='text-center mt-6 text-2xl font-bold'>{t('TEST_RESULT.NO_DATA')}</div>;
   return (
     <TestResultContext.Provider
       value={{
