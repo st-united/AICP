@@ -3,6 +3,16 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      backgroundImage: {
+        'short-underline':
+          'linear-gradient(to right, transparent 5%, currentColor 5%, currentColor 95%, transparent 95%)',
+      },
+      backgroundSize: {
+        '90%': '90% 2px',
+      },
+      backgroundPosition: {
+        'bottom-center': 'bottom center',
+      },
       paragraph: {
         DEFAULT: 'var(--paragraph-color)',
         light: 'var(--paragraph-light-color)',
@@ -41,6 +51,7 @@ module.exports = {
       smXS: '642px',
       smS: '681px',
       smM: '746px',
+      smML: '768px',
       smL: '780px',
       md: '960px', // > iPad gen 9 vertical (810x1080)
       mdS: '1045px',

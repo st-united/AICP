@@ -32,3 +32,18 @@
     object-fit: cover;
   }
 }
+
+#customSelect .ant-select-selection-wrap {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+#customSelect .ant-select-selection-placeholder {
+  inset-inline-start: 0 !important;
+  inset-inline-end: 0 !important;
+}
+
+#customSelect .ant-select-selection-search {
+  margin-inline-start: 0 !important;
+}
