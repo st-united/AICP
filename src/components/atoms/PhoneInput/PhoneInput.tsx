@@ -69,7 +69,6 @@ const PhoneInput = ({
 
   const handleChangePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
-    console.log(value.length, selectedCallingCode.length + 2);
     if (value.length < selectedCallingCode.length + 2 || value === `(${selectedCallingCode}`)
       return;
 
