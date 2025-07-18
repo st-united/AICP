@@ -10,6 +10,7 @@ import {
   NO_SPECIAL_CHARACTER_IN_NAME,
   NO_SPACE_START_END,
   NO_TWO_SPACE,
+  DIAL_CODE_REGEX_PATTERN,
 } from '@app/constants/regex';
 const MIN_AGE = 15;
 export const useProfileSchema = () => {
@@ -41,6 +42,9 @@ export const useProfileSchema = () => {
         t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
         (value) => {
           if (!value || value.trim().length === 0 || value.trim() === '') return true;
+          if (DIAL_CODE_REGEX_PATTERN.test(value)) {
+            return true;
+          }
           return PHONE_REGEX_PATTERN.test(value);
         },
       ),
