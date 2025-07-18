@@ -7,16 +7,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
+import { UserType } from '@app/constants/resultEnum';
 import { useHasTakenExamDefault, useSubmitExam, useUpdateUserStudentInfo } from '@app/hooks';
 import { RootState } from '@app/redux/store';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
   onClose: () => void;
-}
-enum UserType {
-  STUDENT = 'student',
-  WORKER = 'worker',
 }
 export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestModalProps) {
   const { t } = useTranslation();
