@@ -164,10 +164,6 @@ export const useGetExamResult = (examId: string) => {
     queryKey: [QUERY_KEY.EXAM_RESULT, examId],
     queryFn: () => getExamResultApi(examId),
     select: (data) => data.data.data,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    retry: false,
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
   });
