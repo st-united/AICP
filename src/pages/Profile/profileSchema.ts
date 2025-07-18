@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 
+dayjs.extend(isSameOrBefore);
 import {
   PHONE_REGEX_PATTERN,
   EMAIL_REGEX_PATTERN,
@@ -32,29 +34,37 @@ export const useProfileSchema = () => {
 
     phoneNumber: yup
       .string()
-      .required(t('VALIDATE.PHONE_REQUIRED') as string)
-      .matches(PHONE_REGEX_PATTERN, t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string),
+      .nullable()
+      .trim()
+      .test(
+        'is-valid-phone',
+        t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
+        (value) => {
+          if (!value || value.trim().length === 0 || value.trim() === '') return true;
+          return PHONE_REGEX_PATTERN.test(value);
+        },
+      ),
 
     dob: yup
       .mixed()
       .nullable()
       .test('is-valid-date', t('VALIDATE.DATE_NOT_FUTURE') as string, (value) => {
-        if (!value) return true; // cho phép null
-        const date = dayjs(value);
-        return date.isValid() && date.isBefore(dayjs().add(1, 'day'));
+        if (!value) return true;
+        const date = dayjs(value).startOf('day');
+        return date.isValid() && date.isSameOrBefore(dayjs().startOf('day'));
       })
       .test('is-min-age', t('VALIDATE.MIN_AGE', { age: MIN_AGE }) as string, (value) => {
         if (!value) return true;
-        const date = dayjs(value);
-        const minDate = dayjs().subtract(MIN_AGE, 'year');
-        return date.isBefore(minDate) || date.isSame(minDate, 'day');
+        const date = dayjs(value).startOf('day');
+        const minDate = dayjs().subtract(MIN_AGE, 'year').startOf('day');
+        return date.isSameOrBefore(minDate);
       }),
 
     country: yup.string().nullable(),
 
     province: yup.string().nullable(),
 
-    job: yup.string().nullable(),
+    job: yup.array().of(yup.string()).nullable(),
 
     referralCode: yup.string().nullable(),
   });

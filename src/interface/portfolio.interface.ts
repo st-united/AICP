@@ -1,5 +1,6 @@
-import { UseMutationResult } from '@tanstack/react-query';
+import { UseMutateFunction, UseMutationResult } from '@tanstack/react-query';
 import { FormInstance, UploadFile } from 'antd';
+import { AxiosError } from 'axios';
 
 import { PortfolioFileType } from '@app/constants/portfolioFileType';
 
@@ -71,7 +72,13 @@ export interface PortfolioContextType {
   onSave?: () => void;
 
   getPortfolio: PortfolioResponse | undefined;
-  updatePortfolioMutation: UseMutationResult<unknown, unknown, FormData>;
+  updatePortfolioMutation: UseMutateFunction<
+    PortfolioResponse,
+    AxiosError<unknown, any>,
+    FormData,
+    unknown
+  >;
+  isUpdating: boolean;
   downloadPortfolioFileMutation: UseMutationResult<
     unknown,
     unknown,
