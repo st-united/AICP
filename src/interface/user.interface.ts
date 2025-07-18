@@ -30,6 +30,9 @@ export interface UserProfile {
   province?: string;
   job?: string[];
   referralCode: string;
+  isStudent: boolean;
+  university?: string;
+  studentCode?: string;
 }
 
 export interface UserDetail {
@@ -112,13 +115,6 @@ export interface Aspect {
   score: number;
 }
 
-export interface PillarScore {
-  id: string;
-  name: CompetencyDimension;
-  score: number;
-  aspects: Aspect[];
-}
-
 export interface DetailExam {
   id: string;
   startedAt: string;
@@ -133,4 +129,18 @@ export interface DetailExam {
     id: string;
     name: string;
   };
+}
+
+export interface PillarScore {
+  id: string;
+  name: string;
+  score: number;
+  aspect: Aspect[];
+  level: string;
+}
+
+export interface UpdateUserStudentInfo {
+  isStudent: boolean;
+  university?: string;
+  studentCode?: string;
 }
