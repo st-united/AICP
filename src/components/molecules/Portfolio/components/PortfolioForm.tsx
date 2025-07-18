@@ -39,7 +39,7 @@ const PortfolioForm: React.FC = () => {
       initialValues={initialValues}
     >
       <div className='flex flex-col justify-around gap-4'>
-        <section className='portfolio-content__section'>
+        <section className='portfolio-content__section mb-[16px]'>
           <h2>{t('PORTFOLIO.URL')}</h2>
           <Form.Item name='linkedInUrl' rules={validator}>
             <Input
@@ -72,7 +72,7 @@ const PortfolioForm: React.FC = () => {
             <Button
               type='primary'
               onClick={handleEditToggle}
-              className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md'
+              className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !text-white font-bold'
             >
               {t('PORTFOLIO.EDIT')}
             </Button>
@@ -80,15 +80,14 @@ const PortfolioForm: React.FC = () => {
             <>
               <Button
                 onClick={handleCancel}
-                className='!flex !justify-center !items-center !rounded-2xl !px-9 !py-5 !border-primary !text-primary !text-md hover:!bg-primary hover:!text-white'
+                className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:shadow-md'
               >
                 {cancelLabel || t('PORTFOLIO.CANCEL')}
               </Button>
               <Button
                 type='primary'
                 htmlType='submit'
-                className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-5 !text-md'
-                loading={isUpdating}
+                className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white hover:shadow-md'
               >
                 {saveLabel || t('PORTFOLIO.SAVE')}
               </Button>

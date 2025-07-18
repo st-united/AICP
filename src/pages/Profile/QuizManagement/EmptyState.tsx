@@ -30,7 +30,7 @@ const EmptyState = ({ onStartFirst }: EmptyStateProps) => {
         <Button
           type='primary'
           size='large'
-          className='w-full sm:w-auto !bg-orange-500 hover:bg-orange-600 !border-orange-500 !hover:border-orange-600 rounded-full px-6 sm:px-8 py-2 h-auto text-sm sm:text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200'
+          className='w-full sm:w-auto !bg-orange-500 hover:bg-orange-600 !border-orange-500 !hover:border-orange-600 rounded-full px-6 sm:px-8 py-2 h-auto text-sm sm:text-base font-bold shadow-lg hover:shadow-xl transition-all duration-200'
           onClick={onStartFirst}
         >
           {t('EXAM.START_FIRST_QUIZ')}

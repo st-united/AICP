@@ -1,15 +1,17 @@
 import { Button, Spin } from 'antd';
 import { Trans, useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL } from '@app/constants';
-import { ExamStatusEnum } from '@app/constants/enum';
 import { useHasTakenExamDefault } from '@app/hooks';
 import { StepItemComponent } from '@app/interface/stepSection.interface';
+import { RootState } from '@app/redux/store';
 
 export default function BeforeTestComponent({ goBack }: StepItemComponent) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user } = useSelector((state: RootState) => state.auth);
   const { data: hasTakenExam, isLoading } = useHasTakenExamDefault();
 
   const handleStartTest = () => {
@@ -95,5 +97,14 @@ export default function BeforeTestComponent({ goBack }: StepItemComponent) {
   if (isLoading) {
     return <Spin className='text-center items-center' />;
   }
-  return hasTakenExam?.hasTakenExam ? <ImproveTestModal /> : <NewTestModal />;
+
+  return user?.isStudent !== null ? (
+    hasTakenExam?.hasTakenExam ? (
+      <ImproveTestModal />
+    ) : (
+      <NewTestModal />
+    )
+  ) : (
+    <NewTestModal />
+  );
 }

@@ -123,7 +123,9 @@
     "GENDER": "Giới tính",
     "STATUS": "Trạng thái",
     "PASSWORD": "Mật khẩu",
-    "CHOOSE_ROLE": "vai trò"
+    "CHOOSE_ROLE": "vai trò",
+    "STUDENT": "Học sinh",
+    "WORKER": "Người đi làm"
   },
   "TABLE": {
     "MANIPULATION": "Thao tác",
@@ -195,11 +197,13 @@
     "PASSWORD_MIN": "Mật khẩu phải có ít nhất 8 ký tự",
     "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
+    "NEW_PASSWORD_DIFFERENT": "Mật khẩu mới phải khác mật khẩu cũ",
     "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
     "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại",
     "INVALID_DATE_RANGE": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu",
     "MIN_AGE": "Phải đủ {{age}} tuổi trở lên",
-    "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai"
+    "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai",
+    "URL_INVALID": "URL không hợp lệ"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
@@ -717,6 +721,51 @@
     "START_CONFIRM_TEST": "Bắt đầu ngay",
     "PERSONAL_INFO": "Hồ sơ cá nhân",
     "PHONE_INFO": "Xác nhận qua điện thoại"
+  },
+  "TEST_RESULT": {
+    "CONGRATS": "Chúc mừng bạn đã hoàn thành bài đánh giá !",
+    "SUBTITLE": "AI Application Competency Assessment - Bài đánh giá năng lực ứng dụng AI",
+    "DOWNLOAD_CERT": "Tải chứng chỉ",
+    "FULLNAME": "Họ tên",
+    "EMAIL": "Email",
+    "PHONE": "Số điện thoại",
+    "ROLE": "Đối tượng tham gia",
+    "SCHOOL": "Tên trường",
+    "STUDENT_ID": "Mã số sinh viên",
+    "STEP_TEST": "Bài kiểm tra năng lực",
+    "STEP_PORTFOLIO": "Hoàn thiện hồ sơ",
+    "STEP_BOOKING": "Đặt lịch phỏng vấn",
+    "EVALUATION_PATH": "Lộ trình đánh giá năng lực",
+    "SUMMARY": "Tổng kết",
+    "SUMMARY_DESC": "Bạn đã hoàn thành bài đánh giá với kết quả bên dưới:",
+    "TIME": "Thời gian hoàn thành",
+    "CORRECT": "Trả lời đúng",
+    "WRONG": "Trả lời sai",
+    "SKIPPED": "Bỏ qua",
+    "DETAIL": "Xem chi tiết bài làm",
+    "RESULT_DETAIL_TITLE": "Chi tiết bài làm",
+    "QUESTION_NUMBER": "Câu hỏi {{number}}:",
+    "REVIEW": "Nhận xét",
+    "LEVEL": "Mức năng lực",
+    "SUGGEST": "Lộ trình phát triển",
+    "BOOKING_TITLE": "Tham gia ngay buổi phỏng vấn để nhận được những đánh giá toàn diện hơn về năng lực của bạn!",
+    "BOOKING_BUTTON": "Đặt lịch phỏng vấn",
+    "SKILL_SUGGEST": "Bạn nên tham khảo các khoá học về ứng dụng AI trong công việc lập trình để phát triển kỹ năng nền tảng và cập nhật xu hướng mới.",
+    "SUGGESTION_TITLE": "Gợi ý dành cho bạn",
+    "SUGGESTION_BUTTON": "Truy cập",
+    "PORTFOLIO_STEP_DESC": "Bạn đã hoàn thành bước đầu đánh giá năng lực ứng dụng AI! Vui lòng bổ sung thông tin để chúng tôi có thể đánh giá toàn diện. Sau khi hoàn thiện hồ sơ, bạn có thể xem được kết quả bài đánh giá của mình.",
+    "PORTFOLIO_STEP_BUTTON": "Hoàn thiện hồ sơ",
+    "PORTFOLIO_STEP_SAVE": "Hoàn tất",
+    "PORTFOLIO_STEP_CANCEL": "Để sau",
+    "NO_DATA": "Không có dữ liệu",
+    "DOWNLOAD_CERT_SUCCESS": "Tải chứng chỉ thành công",
+    "DOWNLOAD_CERT_ERROR": "Tải chứng chỉ thất bại",
+    "SCORE_LABEL": "Điểm"
+  },
+  "CONFIRM_BEFORE_TEST_MODAL": {
+    "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",
+    "INFO_TEXT": "Bạn là:",
+    "UPDATE_INFO": "Thông tin chi tiết"
   },
   "OTP": {
     "TITLE": "Xác thực số điện thoại",

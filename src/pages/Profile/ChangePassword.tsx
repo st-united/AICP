@@ -38,6 +38,17 @@ const PasswordChangeForm = () => {
     );
   }, [values]);
 
+  const isFormValid = useMemo(() => {
+    if (!values) return false;
+
+    const { oldPassword, newPassword, confirmPassword } = values;
+    const hasErrors = form.getFieldsError().some(({ errors }) => errors.length > 0);
+    const isNewPasswordDifferent = newPassword && oldPassword && newPassword !== oldPassword;
+    const isPasswordMatch = newPassword === confirmPassword;
+
+    return !hasErrors && isPasswordMatch && isNewPasswordDifferent;
+  }, [form, values]);
+
   const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
 
   return (
@@ -81,7 +92,18 @@ const PasswordChangeForm = () => {
           <Form.Item
             label={<span className='text-base sm:text-lg'>{t('PROFILE.NEW_PASSWORD')}</span>}
             name='newPassword'
-            rules={validator}
+            rules={[
+              ...validator,
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  const oldPassword = getFieldValue('oldPassword');
+                  if (!value || value !== oldPassword) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error(t<string>('VALIDATE.NEW_PASSWORD_DIFFERENT')));
+                },
+              }),
+            ]}
             required
           >
             <Input.Password
@@ -143,7 +165,13 @@ const PasswordChangeForm = () => {
           <Form.Item className='flex justify-center'>
             <Button
               htmlType='submit'
-              className='w-full px-8 sm:px-12 md:px-14 bg-[#60a5fa] hover:!bg-[#2563eb] hover:!border-[#2563eb] h-12 text-base sm:text-lg rounded-full text-white hover:!text-white font-bold'
+              className={`w-full px-8 sm:px-12 md:px-14 h-12 text-base sm:text-lg rounded-full text-white font-bold transition-colors duration-200
+                ${
+                  isFormValid
+                    ? 'bg-[#2563eb] hover:!bg-[#2563eb] !border-[#2563eb] hover:!text-white'
+                    : 'bg-[#60a5fa] hover:!bg-[#60a5fa] !border-[#60a5fa] hover:!text-white'
+                }
+              `}
               loading={isLoading}
             >
               {t('PROFILE.SAVE')}

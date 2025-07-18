@@ -229,7 +229,7 @@ const Testing = () => {
         </span>
       </div>
 
-      <div className='smM:flex h-[calc(100vh-145px)] p-3 smM:p-6'>
+      <div className='smM:flex p-3 smM:p-6'>
         <div className='hidden smM:flex flex-col w-[300px] smM:w-80 md:w-96 space-y-6'>
           <QuestionIndexPanel
             questions={examSet.questions}
