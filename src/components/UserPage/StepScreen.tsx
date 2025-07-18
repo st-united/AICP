@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
+import { RootState } from '@app/redux/store';
 
 type Point = {
   label: string;
@@ -22,7 +23,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
-  const isAuth = useSelector((state: any) => state.auth.isAuth);
+  const { isAuth } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -271,7 +272,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
           ))}
         </svg>
       </div>
-      <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />
+      {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
     </div>
   );
 }
