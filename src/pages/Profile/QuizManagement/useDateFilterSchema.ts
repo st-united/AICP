@@ -1,6 +1,6 @@
-import dayjs, { Dayjs } from 'dayjs';
-import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
+import dayjs, { Dayjs } from 'dayjs';
 
 export const useDateFilterSchema = () => {
   const { t } = useTranslation();
@@ -13,7 +13,7 @@ export const useDateFilterSchema = () => {
       .test('valid-range', t('VALIDATE.INVALID_DATE_RANGE') as string, (value) => {
         const [start, end] = value || [];
         if (!start || !end) return true;
-        return start.isBefore(end, 'day') || start.isSame(end, 'day');
+        return !start.isAfter(end);
       })
       .test('no-future-date', t('VALIDATE.NO_FUTURE_DATE') as string, (value) => {
         const [start, end] = value || [];

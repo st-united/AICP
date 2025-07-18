@@ -25,7 +25,7 @@ const DateFilter = ({ onDateChange, value }: DateFilterProps) => {
   const [errorStart, setErrorStart] = useState<string | null>(null);
   const [errorEnd, setErrorEnd] = useState<string | null>(null);
 
-  const validate = (dateRange: [Dayjs | null, Dayjs | null]) => {
+  const validate = (dateRange: [Dayjs | null, Dayjs | null], changedField: 'start' | 'end') => {
     try {
       schema.validateSync({ dateRange });
       setErrorStart(null);
@@ -34,30 +34,42 @@ const DateFilter = ({ onDateChange, value }: DateFilterProps) => {
     } catch (err) {
       if (err instanceof ValidationError) {
         const [start, end] = dateRange;
-        if (!start || (start && end && start.isAfter(end))) {
-          setErrorStart(err.message);
+
+        const now = dayjs().endOf('day');
+
+        if (start && start.isAfter(now)) {
+          setErrorStart(t('VALIDATE.NO_FUTURE_DATE'));
           setErrorEnd(null);
-        } else if (!end || (end && end.isAfter(dayjs()))) {
+        } else if (end && end.isAfter(now)) {
           setErrorStart(null);
-          setErrorEnd(err.message);
+          setErrorEnd(t('VALIDATE.NO_FUTURE_DATE'));
+        } else if (start && end && start.isAfter(end)) {
+          if (changedField === 'start') {
+            setErrorStart(t('VALIDATE.INVALID_DATE_RANGE'));
+            setErrorEnd(null);
+          } else {
+            setErrorStart(null);
+            setErrorEnd(t('VALIDATE.END_BEFORE_START'));
+          }
         } else {
           setErrorStart(err.message);
           setErrorEnd(null);
         }
       }
+
       return false;
     }
   };
 
   const handleStartChange = (date: Dayjs | null) => {
-    const isValid = validate([date, endDate]);
+    const isValid = validate([date, endDate], 'start');
     if (isValid) {
       onDateChange([date, endDate]);
     }
   };
 
   const handleEndChange = (date: Dayjs | null) => {
-    const isValid = validate([startDate, date]);
+    const isValid = validate([startDate, date], 'end');
     if (isValid) {
       onDateChange([startDate, date]);
     }
@@ -79,6 +91,7 @@ const DateFilter = ({ onDateChange, value }: DateFilterProps) => {
             value={startDate}
             format={DATE_TIME.DAY_MONTH_YEAR}
             disabledDate={disabledFutureDate}
+            showNow={false}
           />
         </Form.Item>
         <Form.Item validateStatus={errorEnd ? 'error' : ''} help={errorEnd} className='w-full m-0'>
@@ -90,6 +103,7 @@ const DateFilter = ({ onDateChange, value }: DateFilterProps) => {
             value={endDate}
             format={DATE_TIME.DAY_MONTH_YEAR}
             disabledDate={disabledFutureDate}
+            showNow={false}
           />
         </Form.Item>
       </div>
