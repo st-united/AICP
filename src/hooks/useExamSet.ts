@@ -107,9 +107,10 @@ export const useGetExamSet = () =>
       return data.data;
     },
     {
-      keepPreviousData: true,
+      cacheTime: 0,
+      staleTime: 0,
       refetchOnWindowFocus: false,
-      refetchOnMount: false,
+      refetchOnMount: true,
       refetchOnReconnect: false,
       refetchInterval: false,
       refetchIntervalInBackground: false,
@@ -163,10 +164,6 @@ export const useGetExamResult = (examId: string) => {
     queryKey: [QUERY_KEY.EXAM_RESULT, examId],
     queryFn: () => getExamResultApi(examId),
     select: (data) => data.data.data,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    retry: false,
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
   });

@@ -2,11 +2,8 @@ import { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import UserPage from '../UserPage/UserPage';
 import BannerScreen from '@app/components/LandingPage/BannerScreen';
 import FeatureSection from '@app/components/LandingPage/FeatureSection';
-import LandingLayout from '@app/components/LandingPage/LandingLayout';
-import LazyComponent from '@app/components/LandingPage/LazyComponent';
 import MainScreen from '@app/components/LandingPage/MainScreen';
 import StepSection from '@app/components/LandingPage/StepSection';
 import FaqSection from '@app/components/Layout/FaqSection/FaqSection';
@@ -19,8 +16,6 @@ const Homepage = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
   const { t } = useTranslation();
   const section2Ref = useRef<HTMLDivElement>(null);
-
-  // if (isAuth) return <UserPage />;
 
   return (
     <div className='w-full min-h-screen scroll-smooth'>

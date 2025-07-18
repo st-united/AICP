@@ -5,7 +5,8 @@ import {
   QuestionOutlined,
 } from '@ant-design/icons';
 import { Button, Divider, Modal, Progress, Spin } from 'antd';
-import React, { useCallback, useEffect, useState } from 'react';
+import dayjs from 'dayjs';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CountdownTimer from './CountdownTimer';
@@ -13,6 +14,7 @@ import QuestionDisplay from './QuestionDisplay';
 import QuestionIndexPanel from './QuestionIndexPanel';
 import { useDeleteExam, useGetExamSet, useSubmitDraftQuestion, useSubmitExam } from '@app/hooks';
 import { AnswerChoice, Question } from '@app/interface/examSet.interface';
+import './QuestionIndexPanel.scss';
 
 const Testing = () => {
   const { t } = useTranslation();
@@ -33,6 +35,9 @@ const Testing = () => {
   const { mutate: deleteExam, isLoading: isDeleting } = useDeleteExam();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
+  const totalTime = useRef(0);
+  const [remainingTime, setRemainingTime] = useState(0);
+  const hasSubmittedRef = useRef(false);
 
   useEffect(() => {
     if (examSet?.questions) {
@@ -115,7 +120,8 @@ const Testing = () => {
   }, [examSet, answeredQuestions, setUnansweredQuestions]);
 
   const handleConfirmSubmit = useCallback(() => {
-    if (!examSet) return;
+    if (!examSet || hasSubmittedRef.current) return;
+    hasSubmittedRef.current = true;
     submitExam(examSet.examId, {
       onSuccess: () => {
         setIsSubmitModalOpen(false);
@@ -143,6 +149,47 @@ const Testing = () => {
     }
   }, []);
 
+  const handleQuestionInViewChange = (id: string, timestamp?: number) => {
+    setCurrentQuestion({ id, timestamp: timestamp ?? Date.now() });
+  };
+
+  useEffect(() => {
+    if (!examSet) return;
+
+    const timeStart = dayjs(examSet.timeStart);
+    const timeEnd = timeStart.add(examSet.timeLimitMinutes, 'minute');
+    const now = dayjs();
+
+    const total = timeEnd.diff(timeStart, 'second');
+    const remaining = Math.max(timeEnd.diff(now, 'second'), 0);
+
+    totalTime.current = total;
+    setRemainingTime(remaining);
+  }, [examSet]);
+
+  useEffect(() => {
+    if (!examSet || totalTime.current === 0) return;
+
+    const interval = setInterval(() => {
+      setRemainingTime((prev) => {
+        const next = prev - 1;
+
+        if (next <= 0) {
+          clearInterval(interval);
+          if (!hasSubmittedRef.current) {
+            hasSubmittedRef.current = true;
+            submitExam?.(examSet.examId);
+          }
+          return 0;
+        }
+
+        return next;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [examSet, submitExam]);
+
   if (!examSet) {
     return (
       <div className='text-center p-10'>
@@ -151,17 +198,27 @@ const Testing = () => {
     );
   }
 
-  const handleQuestionInViewChange = (id: string, timestamp?: number) => {
-    setCurrentQuestion({ id, timestamp: timestamp ?? Date.now() });
+  const formatSeconds = (seconds: number): string => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60)
+      .toString()
+      .padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+
+    return h > 0 ? `${h}:${m}:${s}` : `${m}:${s}`;
   };
+
+  const getStrokeColor = (percent: number) => {
+    if (percent <= 33.33) return '#001342';
+    if (percent <= 66.6) return '#F5A623';
+    return '#FF4D4F';
+  };
+
+  const percent = Math.min(((totalTime.current - remainingTime) / totalTime.current) * 100, 100);
+  const isShaking = remainingTime <= 60;
+
   return (
     <div className='relative overflow-hidden'>
-      <div className='absolute top-10 right-10'>
-        <CloseOutlined
-          onClick={handleCloseModal}
-          className='text-lg p-1 rounded-full bg-white flex shadow-xl cursor-pointer'
-        />
-      </div>
       <div className='flex flex-col justify-start items-center w-full py-8 px-6 gap-4'>
         <div className='flex text-xl smM:text-2xl leading-[22px] font-extrabold gap-2 smM:flex-row flex-col text-center'>
           <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
@@ -172,17 +229,8 @@ const Testing = () => {
         </span>
       </div>
 
-      <div className='smM:flex h-[calc(100vh-145px)] p-3 smM:p-6'>
+      <div className='smM:flex p-3 smM:p-6'>
         <div className='hidden smM:flex flex-col w-[300px] smM:w-80 md:w-96 space-y-6'>
-          {/* <div className='flex flex-col space-y-6 h-full'> */}
-          <CountdownTimer
-            duration={examSet.timeLimitMinutes * 60}
-            onTimeUp={() => {
-              if (examSet) {
-                submitExam(examSet.examId);
-              }
-            }}
-          />
           <QuestionIndexPanel
             questions={examSet.questions}
             currentQuestion={currentQuestion}
@@ -193,7 +241,6 @@ const Testing = () => {
             onQuestionSelect={handleQuestionSelect}
             isAutoScrolling={isAutoScrolling}
           />
-          {/* </div> */}
         </div>
 
         <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
@@ -216,14 +263,6 @@ const Testing = () => {
               aria-label='Close menu overlay'
             />
             <div className='fixed bg-white z-10 left-2 top-24 rounded-3xl w-[300px]'>
-              <CountdownTimer
-                duration={examSet.timeLimitMinutes * 60}
-                onTimeUp={() => {
-                  if (examSet) {
-                    submitExam(examSet.examId);
-                  }
-                }}
-              />
               <div className='fixed top-52 p-3 left-[280px] bg-white z-10 rounded-full shadow-lg'>
                 <MenuUnfoldOutlined
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -246,12 +285,19 @@ const Testing = () => {
 
         <div className='flex-1 smM:ml-6'>
           <div className='flex flex-col w-full bg-white p-6 mdM:p-10 rounded-xl mdM:pr-0 pr-0'>
-            <Progress
-              className='pr-6 mdM:pr-10'
-              percent={Math.round((answeredQuestions.length / examSet.questions.length) * 100)}
-              strokeColor='#001342'
-              size={['100%', 16]}
-            />
+            <div className='w-full'>
+              <div className='flex justify-between mb-1'>
+                <span className='text-[14px] text-[#333]'>{formatSeconds(remainingTime)}</span>
+              </div>
+
+              <Progress
+                className={`pr-6 mdM:pr-10 ${isShaking ? 'shake' : ''}`}
+                percent={percent}
+                strokeColor={getStrokeColor(percent)}
+                size={['100%', 16]}
+                showInfo={false}
+              />
+            </div>
             <div className='pr-6 mdM:pr-10'>
               <Divider />
             </div>

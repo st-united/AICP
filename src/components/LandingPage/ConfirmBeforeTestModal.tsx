@@ -7,16 +7,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
+import { UserType } from '@app/constants/resultEnum';
 import { useHasTakenExamDefault, useSubmitExam, useUpdateUserStudentInfo } from '@app/hooks';
 import { RootState } from '@app/redux/store';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
   onClose: () => void;
-}
-enum UserType {
-  STUDENT = 'student',
-  WORKER = 'worker',
 }
 export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestModalProps) {
   const { t } = useTranslation();
@@ -132,7 +129,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
             loading={isPending}
             className='w-full max-w-xs h-full border-none text-lg font-semibold px-4 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200'
           >
-            Tiếp tục
+            {t('BUTTON.CONTINUE')}
           </Button>
         </div>
       </div>

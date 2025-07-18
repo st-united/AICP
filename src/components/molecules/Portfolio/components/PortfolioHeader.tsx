@@ -11,7 +11,7 @@ const PortfolioHeader: React.FC = () => {
       <h1>{t('PORTFOLIO.TITLE')}</h1>
       <p>{t('PORTFOLIO.SUB_TITLE')}</p>
       <div className='w-1/2 mx-auto'>
-        <Divider className='bg-[#FF8C5F]' />
+        <Divider className='bg-[#fe7743] border-0 h-[1px]' />
       </div>
       <p className='mx-auto mb-4 text-sm'>{t('PORTFOLIO.SUB_TITLE_2')}</p>
     </header>

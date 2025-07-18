@@ -29,28 +29,31 @@ const PasswordChangeForm = () => {
   const values = Form.useWatch([], form); // Watch all form values
 
   const isLengthValid = useMemo(() => {
-    return (
-      NUMBER_LENGTH_REGEX.test(values?.newPassword || '') &&
-      NUMBER_LENGTH_REGEX.test(values?.confirmPassword || '')
-    );
+    return NUMBER_LENGTH_REGEX.test(values?.newPassword || '');
   }, [values]);
 
   const isComplexValid = useMemo(() => {
-    return (
-      PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(
-        values?.newPassword || '',
-      ) &&
-      PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(
-        values?.confirmPassword || '',
-      )
+    return PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(
+      values?.newPassword || '',
     );
   }, [values]);
+
+  const isFormValid = useMemo(() => {
+    if (!values) return false;
+
+    const { oldPassword, newPassword, confirmPassword } = values;
+    const hasErrors = form.getFieldsError().some(({ errors }) => errors.length > 0);
+    const isNewPasswordDifferent = newPassword && oldPassword && newPassword !== oldPassword;
+    const isPasswordMatch = newPassword === confirmPassword;
+
+    return !hasErrors && isPasswordMatch && isNewPasswordDifferent;
+  }, [form, values]);
 
   const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
 
   return (
-    <div className='flex justify-center w-full h-full' id='change-password-form'>
-      <div className='w-full max-w-full bg-white rounded-2xl p-6 shadow flex flex-col items-center'>
+    <div className='flex justify-center w-full h-full ' id='change-password-form'>
+      <div className='w-full bg-white rounded-2xl p-6 shadow flex flex-col items-center overflow-y-auto'>
         {/* Lock image */}
         <div className='flex justify-center'>
           <div className='bg-blue-100 rounded-full p-4 sm:p-6'>
@@ -69,7 +72,7 @@ const PasswordChangeForm = () => {
           layout='vertical'
           onFinish={onFinish}
           validateTrigger={['onChange', 'onBlur']}
-          className='w-full md:w-full xl:w-1/2'
+          className='w-full md:w-3/4 lg:w-1/2'
         >
           {/* Old Password */}
           <Form.Item
@@ -89,7 +92,18 @@ const PasswordChangeForm = () => {
           <Form.Item
             label={<span className='text-base sm:text-lg'>{t('PROFILE.NEW_PASSWORD')}</span>}
             name='newPassword'
-            rules={validator}
+            rules={[
+              ...validator,
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  const oldPassword = getFieldValue('oldPassword');
+                  if (!value || value !== oldPassword) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error(t<string>('VALIDATE.NEW_PASSWORD_DIFFERENT')));
+                },
+              }),
+            ]}
             required
           >
             <Input.Password
@@ -132,7 +146,7 @@ const PasswordChangeForm = () => {
           </Form.Item>
 
           {/* Password Requirements */}
-          <div className='text-lg sm:text-base text-gray-600 mb-4'>
+          <div className='text-lg sm:text-base text-[#8B8B8B] mb-4'>
             <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-grey'}`}>
               <div>
                 <CheckOutlined style={{ fontSize: '24px' }} />
@@ -151,7 +165,13 @@ const PasswordChangeForm = () => {
           <Form.Item className='flex justify-center'>
             <Button
               htmlType='submit'
-              className='w-full px-8 sm:px-12 md:px-14 bg-blue-600 hover:bg-blue-700 h-12 text-base sm:text-lg rounded-full text-white font-bold'
+              className={`w-full px-8 sm:px-12 md:px-14 h-12 text-base sm:text-lg rounded-full text-white font-bold transition-colors duration-200
+                ${
+                  isFormValid
+                    ? 'bg-[#2563eb] hover:!bg-[#2563eb] !border-[#2563eb] hover:!text-white'
+                    : 'bg-[#60a5fa] hover:!bg-[#60a5fa] !border-[#60a5fa] hover:!text-white'
+                }
+              `}
               loading={isLoading}
             >
               {t('PROFILE.SAVE')}
