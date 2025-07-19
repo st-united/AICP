@@ -1,25 +1,25 @@
 import { t } from 'i18next';
 import { Trans } from 'react-i18next';
 
-import { SFIALevel } from '@app/constants/enum';
-import { getLevelText } from '@app/pages/Profile/QuizManagement/QuizCard';
+import { ExamLevelEnum } from '@app/constants/enum';
+import { getExamLevelText, getLevelText } from '@app/pages/Profile/QuizManagement/QuizCard';
 
 interface Pilar {
   toolSetScore: number;
   mindSetScore: number;
   skillSetScore: number;
-  sfiaLevel: SFIALevel | null;
+  examLevel: ExamLevelEnum | null;
   className?: string;
 }
 
-const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, sfiaLevel, className }: Pilar) => {
+const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, examLevel, className }: Pilar) => {
   return (
     <div className={className}>
       <h2 className='font-semibold mb-6 text-lg sm:text-xl'>
         <span className='text-gray-800'>
           {t('EXAM.COMPETENCY_LEVEL')}{' '}
-          <span className='text-orange-500 font-bold'>
-            {sfiaLevel ? getLevelText(sfiaLevel) : t('EXAM.LEVEL.NONE_LEVEL')}
+          <span className='text-[#FE7743] font-bold'>
+            {examLevel ? getExamLevelText(examLevel) : t('EXAM.LEVEL.NONE_LEVEL')}
           </span>
         </span>
       </h2>

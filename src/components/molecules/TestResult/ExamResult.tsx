@@ -13,8 +13,8 @@ const ExamResult = () => {
     return <div className='text-center mt-6 text-2xl font-bold'>{t('TEST_RESULT.NO_DATA')}</div>;
   return (
     <div className='flex flex-col gap-4 max-w-[1200px] mx-auto'>
-      <ResultHeader />
       <TestResultProvider>
+        <ResultHeader />
         <StepLayout />
       </TestResultProvider>
     </div>

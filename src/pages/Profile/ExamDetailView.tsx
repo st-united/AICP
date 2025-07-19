@@ -22,9 +22,9 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
 
   const transformApiData = (apiData: DetailExam) => {
     const allAspects = [
-      ...apiData.mindsetScore.aspect,
-      ...apiData.skillsetScore.aspect,
-      ...apiData.toolsetScore.aspect,
+      ...apiData.mindsetScore.aspects,
+      ...apiData.skillsetScore.aspects,
+      ...apiData.toolsetScore.aspects,
     ];
 
     return allAspects
@@ -70,7 +70,7 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
               mindSetScore={exam.mindsetScore.score}
               skillSetScore={exam.skillsetScore.score}
               toolSetScore={exam.toolsetScore.score}
-              sfiaLevel={exam.sfiaLevel}
+              examLevel={exam.examLevel?.examLevel ?? null}
             />
           </div>
 

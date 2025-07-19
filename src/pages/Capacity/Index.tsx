@@ -78,7 +78,7 @@ const Capacity = () => {
               mindSetScore={examDetail?.mindsetScore.score || 0}
               skillSetScore={examDetail?.skillsetScore.score || 0}
               toolSetScore={examDetail?.toolsetScore.score || 0}
-              sfiaLevel={examDetail?.sfiaLevel || null}
+              examLevel={examDetail?.examLevel?.examLevel || null}
               className='ps-3 sm:ps-7'
             />
             <Paragraph className='text-gray-600 text-sm md:text-base ps-3 sm:ps-7 italic'>
