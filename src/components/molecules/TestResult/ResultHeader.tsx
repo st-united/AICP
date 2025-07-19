@@ -7,6 +7,7 @@ import {
   SolutionOutlined,
 } from '@ant-design/icons';
 import { Button, Descriptions } from 'antd';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -24,6 +25,16 @@ const ResultHeader = () => {
   const examId = getStorageData(EXAM_LATEST);
   const { mutate: downloadCertificate } = useDownloadCertificate();
   const { user } = useSelector((state: RootState) => state.auth);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 450);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleDownloadCertificate = () => {
     downloadCertificate(examId, {
@@ -34,7 +45,6 @@ const ResultHeader = () => {
           const match = disposition.match(/filename="?([^"]+)"?/);
           if (match) filename = match[1];
         }
-
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
         link.href = url;
@@ -72,7 +82,7 @@ const ResultHeader = () => {
       </div>
       <div className='border border-[#FE7743] rounded-xl p-4'>
         <Descriptions
-          layout='horizontal'
+          layout={isMobile ? 'vertical' : 'horizontal'}
           className='w-full text-lg font-semibold'
           column={{
             xs: 1,
