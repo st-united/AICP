@@ -758,7 +758,10 @@
     "PORTFOLIO_STEP_BUTTON": "Hoàn thiện hồ sơ",
     "PORTFOLIO_STEP_SAVE": "Hoàn tất",
     "PORTFOLIO_STEP_CANCEL": "Để sau",
-    "NO_DATA": "Không có dữ liệu"
+    "NO_DATA": "Không có dữ liệu",
+    "DOWNLOAD_CERT_SUCCESS": "Tải chứng chỉ thành công",
+    "DOWNLOAD_CERT_ERROR": "Tải chứng chỉ thất bại",
+    "SCORE_LABEL": "Điểm"
   },
   "CONFIRM_BEFORE_TEST_MODAL": {
     "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",

@@ -4,23 +4,16 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL } from '@app/constants';
-import { ExamStatusEnum } from '@app/constants/enum';
-import { useHasTakenExamDefault, useUpdateUserStudentInfo } from '@app/hooks';
+import { useHasTakenExamDefault } from '@app/hooks';
 import { StepItemComponent } from '@app/interface/stepSection.interface';
 import { RootState } from '@app/redux/store';
-
-export enum ModalState {
-  INFO = 'info',
-  CONFIRM = 'confirm_test',
-}
 
 export default function BeforeTestComponent({ goBack }: StepItemComponent) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { mutate: updateUserStudentInfo } = useUpdateUserStudentInfo();
   const { user } = useSelector((state: RootState) => state.auth);
   const { data: hasTakenExam, isLoading } = useHasTakenExamDefault();
-  console.log(user);
+
   const handleStartTest = () => {
     navigate(NAVIGATE_URL.TEST);
   };
@@ -28,21 +21,6 @@ export default function BeforeTestComponent({ goBack }: StepItemComponent) {
     navigate(NAVIGATE_URL.TEST_RESULT);
   };
 
-  const handleUpdateUserStudentInfo = () => {
-    updateUserStudentInfo({
-      isStudent: true,
-      university: user?.university,
-      studentCode: user?.studentCode,
-    });
-  };
-  const InfoModal = () => {
-    return (
-      <div>
-        <ModalHeader title={t('MODAL.TITLE_INFO')} />
-        <div></div>
-      </div>
-    );
-  };
   const ModalHeader = ({ title }: { title: string }) => (
     <>
       <div className='bg-blue-100 rounded-full p-3 md:p-4 aspect-square'>
@@ -127,6 +105,6 @@ export default function BeforeTestComponent({ goBack }: StepItemComponent) {
       <NewTestModal />
     )
   ) : (
-    <InfoModal />
+    <NewTestModal />
   );
 }
