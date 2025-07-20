@@ -200,9 +200,10 @@
     "NEW_PASSWORD_DIFFERENT": "Mật khẩu mới phải khác mật khẩu cũ",
     "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
     "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại",
-    "INVALID_DATE_RANGE": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu",
+    "INVALID_DATE_RANGE": "Ngày bắt đầu không thể lớn hơn ngày kết thúc",
     "MIN_AGE": "Phải đủ {{age}} tuổi trở lên",
     "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai",
+    "END_BEFORE_START": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu",
     "URL_INVALID": "URL không hợp lệ"
   },
   "PROFILE": {
