@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useGetJob } from '@app/hooks';
+import type { DefaultOptionType } from 'antd/es/select';
 import './CustomSelect.scss';
 import type { DefaultOptionType } from 'antd/es/select';
 
@@ -59,7 +60,7 @@ const JobSelect: React.FC<JobSelectProps> = (props) => {
         placeholder={t('PLACEHOLDER.SELECT_JOB')}
         options={jobOptions}
         open={dropdownOpen}
-        onDropdownVisibleChange={setDropdownOpen}
+        onOpenChange={setDropdownOpen}
         onSelect={() => setDropdownOpen(true)}
         autoClearSearchValue={false}
         showSearch

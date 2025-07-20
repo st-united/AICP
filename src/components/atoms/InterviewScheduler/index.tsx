@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons';
 import { Calendar, message, Button, Typography, Space, Divider, Card } from 'antd';
-import type { Dayjs } from 'dayjs';
-import dayjs from 'dayjs';
 import viVN from 'antd/es/calendar/locale/vi_VN';
+import dayjs from 'dayjs';
+import React, { useEffect, useState } from 'react';
 import 'dayjs/locale/vi';
 import { useTranslation } from 'react-i18next';
-import { useCreateSchedule } from '@app/hooks/useMentor';
 import { useSelector } from 'react-redux';
-import { RootState } from '@app/redux/store';
-import SuccessBookingModal from '@app/pages/MentorBooking/components/SuccessBookingModal';
+
+import { useCreateSchedule } from '@app/hooks/useMentor';
 import MentorBooking from '@app/interface/mentor.interface';
+import SuccessBookingModal from '@app/pages/MentorBooking/components/SuccessBookingModal';
+import { RootState } from '@app/redux/store';
+import type { Dayjs } from 'dayjs';
 
 dayjs.locale('vi');
 

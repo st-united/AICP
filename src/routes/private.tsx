@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 
 import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
+import ExamResult from '@app/components/molecules/TestResult/ExamResult';
 import BaseLayout from '@app/components/templates/BaseLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { NAVIGATE_URL } from '@app/constants';
@@ -39,6 +40,10 @@ const routes = [
           {
             path: NAVIGATE_URL.CAPACITY,
             element: <Capacity />,
+          },
+          {
+            path: NAVIGATE_URL.TEST_RESULT_DETAIL,
+            element: <ExamResult />,
           },
         ],
       },

@@ -20,10 +20,10 @@ const ExamHistory = () => {
   const [selectedQuizId, setSelectedQuizId] = useState<string | null>(null);
 
   const apiParams = useMemo(() => {
-    if (!dateRange?.[0] || !dateRange?.[1]) return undefined;
+    if (!dateRange?.[0] && !dateRange?.[1]) return undefined;
     return {
-      startDate: dateRange[0].format(DATE_TIME.YEAR_MONTH_DATE),
-      endDate: dateRange[1].format(DATE_TIME.YEAR_MONTH_DATE),
+      startDate: dateRange?.[0]?.format(DATE_TIME.YEAR_MONTH_DATE),
+      endDate: dateRange?.[1]?.format(DATE_TIME.YEAR_MONTH_DATE),
     };
   }, [dateRange]);
 

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import LazyComponent from './LazyComponent';
-import { LandingMonitor } from '@app/assets/svgs';
+import { CircleOrange, LandingMonitor } from '@app/assets/svgs';
 
 const StepSection = () => {
   const { t } = useTranslation();
@@ -42,7 +42,10 @@ const StepSection = () => {
   ];
 
   return (
-    <div className='w-full h-full xl:min-h-screen bg-cover bg-center bg-no-repeat bg-[url(./assets/images/landingpage_step_bg.png)]'>
+    <div className='w-full h-full xl:min-h-screen bg-white relative'>
+      <div className='absolute top-0 -translate-y-1/2 left-0 w-[8%]'>
+        <img src={CircleOrange} alt='Circle Orange' className='w-full h-full object-cover' />
+      </div>
       <div className='text-center py-10'>
         <p className='text-primary font-bold text-base sm:text-2xl mdM::text-3xl my-8'>
           {t('HOMEPAGE.STEP_LABEL')}

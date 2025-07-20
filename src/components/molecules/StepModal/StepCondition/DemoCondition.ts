@@ -1,8 +1,10 @@
-import { useGetCountry } from '@app/hooks/useLocation';
+import { useEffect, useState } from 'react';
+
+import { useCheckOtpStatus } from '@app/hooks';
 import { StepConditionProps } from '@app/interface/stepSection.interface';
 
 export const useDemoCondition = (): StepConditionProps => {
-  const { data: data, isLoading: isLoadingCountry } = useGetCountry();
+  const { data: data, isLoading: isCheckOtpStatus } = useCheckOtpStatus();
 
-  return { isPass: !!data?.data?.length, isLoading: isLoadingCountry };
+  return { isPass: !!data?.zaloVerified, isLoading: isCheckOtpStatus };
 };

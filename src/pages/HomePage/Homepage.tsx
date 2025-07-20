@@ -1,31 +1,51 @@
 import { useCallback, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import UserPage from '../UserPage/UserPage';
-import LandingLayout from '@app/components/LandingPage/LandingLayout';
+import BannerScreen from '@app/components/LandingPage/BannerScreen';
+import FeatureSection from '@app/components/LandingPage/FeatureSection';
 import MainScreen from '@app/components/LandingPage/MainScreen';
+import StepSection from '@app/components/LandingPage/StepSection';
+import FaqSection from '@app/components/Layout/FaqSection/FaqSection';
+import FooterSection from '@app/components/Layout/Footer/FooterSection';
+import BannerUserScreen from '@app/components/UserPage/BannerUserScreen';
+import StepScreen from '@app/components/UserPage/StepScreen';
 import { smoothScrollTo } from '@app/utils/scroll';
 
 const Homepage = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
+  const { t } = useTranslation();
   const section2Ref = useRef<HTMLDivElement>(null);
-  const handleNext = useCallback(() => {
-    const target = section2Ref.current;
-    if (target) {
-      const y = target.offsetTop;
-      smoothScrollTo(y, 1200);
-    }
-  }, []);
-
-  if (isAuth) return <UserPage />;
 
   return (
     <div className='w-full min-h-screen scroll-smooth'>
-      <div className='h-screen'>
-        <MainScreen onScrollToNext={handleNext} />
-      </div>
+      <BannerUserScreen />
+      <StepScreen
+        steps={[
+          {
+            label: t('HOMEPAGE.STEP_SCREEN.STEP_1.LABEL'),
+            desc: t('HOMEPAGE.STEP_SCREEN.STEP_1.DESC'),
+          },
+          {
+            label: t('HOMEPAGE.STEP_SCREEN.STEP_2.LABEL'),
+            desc: t('HOMEPAGE.STEP_SCREEN.STEP_2.DESC'),
+          },
+          {
+            label: t('HOMEPAGE.STEP_SCREEN.STEP_3.LABEL'),
+            desc: t('HOMEPAGE.STEP_SCREEN.STEP_3.DESC'),
+          },
+        ]}
+        activeStep={1}
+      />
       <div ref={section2Ref}>
-        <LandingLayout />
+        <div className='w-full min-h-screen overflow-hidden bg-white'>
+          <div className='flex flex-col justify-center items-center mx-auto'>
+            <FeatureSection />
+            {!isAuth && <StepSection />}
+            <FaqSection />
+          </div>
+          <FooterSection />
+        </div>
       </div>
     </div>
   );
