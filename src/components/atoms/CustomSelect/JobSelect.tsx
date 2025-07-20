@@ -1,9 +1,11 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Select, SelectProps } from 'antd';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { DefaultOptionType } from 'antd/es/select';
+
 import { useGetJob } from '@app/hooks';
 import './CustomSelect.scss';
+import type { DefaultOptionType } from 'antd/es/select';
+
 interface JobSelectProps extends SelectProps<string[]> {
   options?: { value: string; label: JSX.Element | string }[]; // không dùng nếu đã dùng useGetJob
 }
