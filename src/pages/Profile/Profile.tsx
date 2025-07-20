@@ -99,9 +99,9 @@ const Profile = () => {
           dob: data?.dob ? dayjs(data?.dob) : null,
           province: data?.province ?? null,
           job: Array.isArray(data?.job)
-            ? data.job.every((j) => typeof j === 'object' && j !== null && 'id' in j)
-              ? data.job.map((j) => (j as { id: string }).id)
-              : data.job
+            ? data?.job.every((j) => typeof j === 'object' && j !== null && 'id' in j)
+              ? data?.job.map((j) => (j as unknown as { id: string }).id)
+              : data?.job
             : [],
           referralCode: data?.referralCode ?? null,
         }}
