@@ -1,10 +1,11 @@
-import { Card } from 'antd';
 import { EyeOutlined, CheckOutlined } from '@ant-design/icons';
+import { Card } from 'antd';
 import clsx from 'clsx';
-import { DefaultAvatar } from '@app/assets/images';
-import { useTranslation } from 'react-i18next';
-import MentorDetailModal from '@app/pages/MentorBooking/components/MentorDetailModal';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { DefaultAvatar } from '@app/assets/images';
+import MentorDetailModal from '@app/pages/MentorBooking/components/MentorDetailModal';
 
 interface UserData {
   id: string;
@@ -21,7 +22,7 @@ interface UserCardProps {
   setSelected: (key: string) => void;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ dataUser, isSelected, setSelected }) => {
+const UserCard = ({ dataUser, isSelected, setSelected }: UserCardProps) => {
   const { fullName, role, image } = dataUser.user;
 
   const [open, setOpen] = useState(false);
@@ -79,14 +80,24 @@ const UserCard: React.FC<UserCardProps> = ({ dataUser, isSelected, setSelected }
       >
         <div
           className='flex items-center gap-2 mb-3 hover:text-blue-400 cursor-pointer text-sm sm:text-base'
+          role='button'
+          tabIndex={0}
           onClick={() => !isSelected && setOpen(true)}
+          onKeyDown={(e) => {
+            if (!isSelected && (e.key === 'Enter' || e.key === ' ')) setOpen(true);
+          }}
         >
           <EyeOutlined />
           <span>{t('MENTOR_BOOKING.VIEW_DETAIL')}</span>
         </div>
         <div
           className='flex items-center gap-2 hover:text-green-400 cursor-pointer text-sm sm:text-base'
+          role='button'
+          tabIndex={0}
           onClick={() => !isSelected && handleBookMentor()}
+          onKeyDown={(e) => {
+            if (!isSelected && (e.key === 'Enter' || e.key === ' ')) handleBookMentor();
+          }}
         >
           <CheckOutlined />
           <span>{t('MENTOR_BOOKING.BOOK_MENTOR')}</span>

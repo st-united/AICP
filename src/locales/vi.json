@@ -72,7 +72,8 @@
     "CONTINUE_NOW": "Tiếp tục làm bài",
     "CANCEL_TEST": "Hủy bỏ",
     "EXIT_NOW": "Thoát ngay",
-    "CANCEL_NOW": "Hủy ngay"
+    "CANCEL_NOW": "Hủy ngay",
+    "EXIT_TEST": "Kết thúc ngay"
   },
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
@@ -122,7 +123,9 @@
     "GENDER": "Giới tính",
     "STATUS": "Trạng thái",
     "PASSWORD": "Mật khẩu",
-    "CHOOSE_ROLE": "vai trò"
+    "CHOOSE_ROLE": "vai trò",
+    "STUDENT": "Học sinh",
+    "WORKER": "Người đi làm"
   },
   "TABLE": {
     "MANIPULATION": "Thao tác",
@@ -194,18 +197,20 @@
     "PASSWORD_MIN": "Mật khẩu phải có ít nhất 8 ký tự",
     "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
+    "NEW_PASSWORD_DIFFERENT": "Mật khẩu mới phải khác mật khẩu cũ",
     "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
     "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại",
+    "INVALID_DATE_RANGE": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu",
     "MIN_AGE": "Phải đủ {{age}} tuổi trở lên",
-    "INVALID_DATE_RANGE": "Ngày bắt đầu không được lớn hơn ngày kết thúc",
-    "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai"
+    "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai",
+    "URL_INVALID": "URL không hợp lệ"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "OLD_PASSWORD": "Mật khẩu cũ",
     "NEW_PASSWORD": "Mật khẩu mới",
-    "CONFIRM_PASSWORD": "Xác nhận mật khẩu",
+    "CONFIRM_PASSWORD": "Xác nhận mật khẩu mới",
     "TITLE": "Thông tin người dùng",
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Hồ sơ của tôi",
@@ -224,7 +229,7 @@
     "COUNTRY_PLACEHOLDER": "Chọn quốc gia",
     "PROVINCE": "Tỉnh thành",
     "PROVINCE_PLACEHOLDER": "Chọn tỉnh thành",
-    "OCCUPATION": "Nghề nghiệp",
+    "OCCUPATION": "Lĩnh vực",
     "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
     "REFERRAL": "Mã giới thiệu",
     "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu",
@@ -234,7 +239,9 @@
     "PLACEHOLDER_NEW_PASSWORD": "Nhập mật khẩu mới",
     "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
-    "SAVE": "Lưu"
+    "SAVE": "Lưu",
+    "AVATAR_UPLOAD_SUCCESS": "Cập nhật ảnh đại diện thành công!",
+    "AVATAR_UPLOAD_FAILED": "Cập nhật ảnh đại diện thất bại. Vui lòng thử lại."
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -320,7 +327,41 @@
     "FOOTER_ACTIVITIES_LIST": ["Workshop", "Sự kiện", "Cộng đồng", "Hoạt động ngoại khóa"],
     "FOOTER_ADDRESS": "116 - 118 Mai Thuc Lan, My An, Ngu Hanh Son, Da Nang",
     "FOOTER_EMAIL": "hello@devplus.edu.vn",
-    "FOOTER_PHONE": "(+84) 368492885"
+    "FOOTER_PHONE": "(+84) 368492885",
+    "BANNER_USER": {
+      "ORGANIZER": "Đơn vị tổ chức",
+      "PARTNER": "Đơn vị đồng hành",
+      "TITLE": "READY FOR AI",
+      "SUBTITLE": "Chương trình xác định và phát triển bộ khung năng lực thời đại AI do Sở Khoa Học Công Nghệ Đà Nẵng chỉ đạo triển khai",
+      "STUDENT_COUNT": "10.000",
+      "STUDENT_TEXT": "sinh viên sẵn sàng bước vào thời đại AI"
+    },
+    "BANNER_SCREEN": {
+      "ORGANIZER": "Đơn vị tổ chức",
+      "PARTNER": "Đơn vị đồng hành",
+      "TITLE": "READY FOR AI",
+      "SUBTITLE": "Chương trình xác định và phát triển bộ khung năng lực thời đại AI do Sở Khoa Học Công Nghệ Đà Nẵng chỉ đạo triển khai",
+      "STUDENT_COUNT": "10.000",
+      "STUDENT_TEXT": "sinh viên sẵn sàng bước vào thời đại AI"
+    },
+    "STEP_SCREEN": {
+      "STEP_1": {
+        "LABEL": "Bài test năng lực AI",
+        "DESC": "Bộ câu hỏi về khả năng ứng dụng AI được đội ngũ Devplus nghiên cứu và biên soạn"
+      },
+      "STEP_2": {
+        "LABEL": "Hoàn thiện hồ sơ",
+        "DESC": "Hoàn thiện hồ sơ cá nhân, cung cấp thông tin về quá trình làm việc để hệ thống có đánh giá trực quan hơn."
+      },
+      "STEP_3": {
+        "LABEL": "Phỏng vấn cùng chuyên gia",
+        "DESC": "Đặt lịch phỏng vấn với Interviewer chuyên nghiệp và kinh nghiệm, bước cuối cùng để đánh giá chính xác nhất về năng lực AI"
+      }
+    },
+    "STEP_SCREEN_HEADER": {
+      "TITLE": "Lộ trình đánh giá năng lực AI",
+      "SUBTITLE": "Lộ trình để đánh giá chính xác và trực quan nhất về khả năng sử dụng AI của mỗi cá nhân."
+    }
   },
   "HEADER": {
     "START": "Bắt đầu",
@@ -337,7 +378,7 @@
   "PLACEHOLDER": {
     "SELECT_COUNTRY": "Chọn quốc gia",
     "SELECT_CITY": "Chọn tỉnh thành",
-    "SELECT_JOB": "Chọn công việc",
+    "SELECT_JOB": "Chọn lĩnh vực",
     "FIELD_REQUIRED": "{{field}} *"
   },
   "SIGN_UP": {
@@ -428,6 +469,17 @@
     "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
     "SUCCESS": "Email đặt lại mật khẩu đã được gửi. Nếu không thấy, vui lòng kiểm tra thư mục Spam hoặc Quảng cáo."
   },
+  "ACTIVATION_EXPIRED": {
+    "TITLE": "Gửi lại email kích hoạt tài khoản",
+    "DESCRIPTION_1": "Liên kết kích hoạt tài khoản của bạn đã hết hạn!",
+    "DESCRIPTION_2": "Vui lòng nhấn nút <strong>\"Gửi lại email\"</strong> bên dưới để nhận liên kết kích hoạt mới được gửi đến email đã đăng ký",
+    "RESEND_EMAIL": "Gửi lại email",
+    "SEND_LOADING": "Đang gửi...",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Email kích hoạt đã được gửi lại thành công. Vui lòng kiểm tra hộp thư của bạn.",
+    "ERROR": "Có lỗi xảy ra khi gửi email kích hoạt. Vui lòng thử lại.",
+    "NO_EMAIL": "Không tìm thấy email trong URL. Vui lòng kiểm tra lại liên kết."
+  },
   "RESET_PASSWORD": {
     "TITLE": "Đặt lại mật khẩu!",
     "NEW_PASSWORD": "Mật khẩu mới",
@@ -451,8 +503,18 @@
     "DESCRIPTION": "Theo dõi bài kiểm tra, lịch phỏng vấn và các cơ hội nghề nghiệp của bạn.",
     "TEST_STATUS": {
       "TITLE": "Trạng thái bài kiểm tra",
-      "DESCRIPTION": "Chưa bắt đầu",
-      "BUTTON": "Bắt đầu bài kiểm tra"
+      "DESCRIPTION": {
+        "IN_PROGRESS": "Bạn đang làm bài kiểm tra",
+        "SUBMITTED": "Bạn đã nộp bài kiểm tra",
+        "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+        "GRADED": "Đã chấm điểm",
+        "DEFAULT": "Chưa bắt đầu"
+      },
+      "BUTTON": {
+        "START": "Bắt đầu bài kiểm tra",
+        "RESUME": "Tiếp tục làm bài",
+        "VIEW": "Xem kết quả"
+      }
     },
     "INTERVIEW_SCHEDULE": {
       "TITLE": "Lịch phỏng vấn",
@@ -659,6 +721,51 @@
     "START_CONFIRM_TEST": "Bắt đầu ngay",
     "PERSONAL_INFO": "Hồ sơ cá nhân",
     "PHONE_INFO": "Xác nhận qua điện thoại"
+  },
+  "TEST_RESULT": {
+    "CONGRATS": "Chúc mừng bạn đã hoàn thành bài đánh giá !",
+    "SUBTITLE": "AI Application Competency Assessment - Bài đánh giá năng lực ứng dụng AI",
+    "DOWNLOAD_CERT": "Tải chứng chỉ",
+    "FULLNAME": "Họ tên",
+    "EMAIL": "Email",
+    "PHONE": "Số điện thoại",
+    "ROLE": "Đối tượng tham gia",
+    "SCHOOL": "Tên trường",
+    "STUDENT_ID": "Mã số sinh viên",
+    "STEP_TEST": "Bài kiểm tra năng lực",
+    "STEP_PORTFOLIO": "Hoàn thiện hồ sơ",
+    "STEP_BOOKING": "Đặt lịch phỏng vấn",
+    "EVALUATION_PATH": "Lộ trình đánh giá năng lực",
+    "SUMMARY": "Tổng kết",
+    "SUMMARY_DESC": "Bạn đã hoàn thành bài đánh giá với kết quả bên dưới:",
+    "TIME": "Thời gian hoàn thành",
+    "CORRECT": "Trả lời đúng",
+    "WRONG": "Trả lời sai",
+    "SKIPPED": "Bỏ qua",
+    "DETAIL": "Xem chi tiết bài làm",
+    "RESULT_DETAIL_TITLE": "Chi tiết bài làm",
+    "QUESTION_NUMBER": "Câu hỏi {{number}}:",
+    "REVIEW": "Nhận xét",
+    "LEVEL": "Mức năng lực",
+    "SUGGEST": "Lộ trình phát triển",
+    "BOOKING_TITLE": "Tham gia ngay buổi phỏng vấn để nhận được những đánh giá toàn diện hơn về năng lực của bạn!",
+    "BOOKING_BUTTON": "Đặt lịch phỏng vấn",
+    "SKILL_SUGGEST": "Bạn nên tham khảo các khoá học về ứng dụng AI trong công việc lập trình để phát triển kỹ năng nền tảng và cập nhật xu hướng mới.",
+    "SUGGESTION_TITLE": "Gợi ý dành cho bạn",
+    "SUGGESTION_BUTTON": "Truy cập",
+    "PORTFOLIO_STEP_DESC": "Bạn đã hoàn thành bước đầu đánh giá năng lực ứng dụng AI! Vui lòng bổ sung thông tin để chúng tôi có thể đánh giá toàn diện. Sau khi hoàn thiện hồ sơ, bạn có thể xem được kết quả bài đánh giá của mình.",
+    "PORTFOLIO_STEP_BUTTON": "Hoàn thiện hồ sơ",
+    "PORTFOLIO_STEP_SAVE": "Hoàn tất",
+    "PORTFOLIO_STEP_CANCEL": "Để sau",
+    "NO_DATA": "Không có dữ liệu",
+    "DOWNLOAD_CERT_SUCCESS": "Tải chứng chỉ thành công",
+    "DOWNLOAD_CERT_ERROR": "Tải chứng chỉ thất bại",
+    "SCORE_LABEL": "Điểm"
+  },
+  "CONFIRM_BEFORE_TEST_MODAL": {
+    "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",
+    "INFO_TEXT": "Bạn là:",
+    "UPDATE_INFO": "Thông tin chi tiết"
   },
   "OTP": {
     "TITLE": "Xác thực số điện thoại",

@@ -14,10 +14,8 @@ import { DATE_TIME, NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers';
 import { useGetProfile, useUpdateProfile } from '@app/hooks';
 import { UserProfile } from '@app/interface/user.interface';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
+
+import './Profile.scss';
 
 const Profile = () => {
   const [avatar, setAvatar] = useState<string>();
@@ -34,32 +32,50 @@ const Profile = () => {
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
-        phoneNumber: data.phoneNumber || '',
+        phoneNumber: data.phoneNumber || null,
         dob: data.dob ? dayjs(data.dob) : null,
         province: data.province || null,
-        job: data.job || null,
+        job: Array.isArray(data.job)
+          ? data.job.every((j) => typeof j === 'object' && j !== null && 'id' in j)
+            ? data.job.map((j) => (j as unknown as { id: string }).id)
+            : (data.job as string[])
+          : [],
         referralCode: data.referralCode || null,
       });
     }
-  }, [data, form]);
+  }, [
+    data?.fullName,
+    data?.email,
+    data?.phoneNumber,
+    data?.dob,
+    data?.province,
+    data?.job,
+    data?.referralCode,
+    form,
+  ]);
+
+  useEffect(() => {
+    if (data?.avatarUrl) {
+      setAvatar(data.avatarUrl);
+    }
+  }, [data?.avatarUrl]);
 
   const handleCancel = () => {
-    setAvatar('');
     setIsEdit(false);
     form.resetFields();
   };
 
   const handleSubmit = async (values: UserProfile) => {
     const phoneNumber = values.phoneNumber?.replace('(', '').replace(')', '');
-    values.phoneNumber = phoneNumber;
-    updateProfileMutation.mutate(values, {
+    const fixedValues = {
+      ...values,
+      job: Array.isArray(values.job) ? values.job : values.job ? [values.job] : [],
+      phoneNumber: phoneNumber,
+    };
+    updateProfileMutation.mutate(fixedValues, {
       onSuccess: () => {
         setIsEdit(false);
-        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PROFILE.UPDATE_SUCCESS'));
         navigate(NAVIGATE_URL.PROFILE);
-      },
-      onError: (error) => {
-        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PROFILE.UPDATE_FAILED'));
       },
     });
   };
@@ -79,7 +95,7 @@ const Profile = () => {
         initialValues={{
           fullName: data?.fullName ?? '',
           email: data?.email ?? '',
-          phoneNumber: data?.phoneNumber ?? '',
+          phoneNumber: data?.phoneNumber ?? null,
           dob: data?.dob ? dayjs(data?.dob) : null,
           province: data?.province ?? null,
           job: data?.job ?? null,
@@ -115,13 +131,14 @@ const Profile = () => {
               format={DATE_TIME.DAY_MONTH_YEAR}
               placeholder={t('PROFILE.DOB_PLACEHOLDER') as string}
               disabled={!isEdit}
+              showNow={false}
             />
           </Form.Item>
           <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>
-            <ProvinceSelect disabled={!isEdit} />
+            <ProvinceSelect className='custom-orange-select h-full' disabled={!isEdit} />
           </Form.Item>
           <Form.Item name='job' label={t('PROFILE.OCCUPATION')} rules={validator}>
-            <JobSelect disabled={!isEdit} />
+            <JobSelect className='custom-orange-select' disabled={!isEdit} />
           </Form.Item>
           <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
             <div className='flex justify-end gap-2 !flex-row'>
@@ -129,25 +146,25 @@ const Profile = () => {
                 <>
                   <Button
                     onClick={() => setIsEdit(true)}
-                    className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white'
+                    className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white font-bold'
                   >
-                    Chỉnh sửa
+                    {t('PORTFOLIO.EDIT')}
                   </Button>
                 </>
               ) : (
                 <>
                   <Button
                     onClick={handleCancel}
-                    className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
+                    className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white font-bold'
                   >
-                    Hủy bỏ
+                    {t('PORTFOLIO.CANCEL')}
                   </Button>
                   <Button
                     type='primary'
                     htmlType='submit'
-                    className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white'
+                    className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white font-bold'
                   >
-                    Lưu
+                    {t('PORTFOLIO.SAVE')}
                   </Button>
                 </>
               )}

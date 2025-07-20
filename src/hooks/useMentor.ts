@@ -1,10 +1,11 @@
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+
 import { CreateScheduleParams, UseMentorInfiniteParams } from '@app/interface/mentor.interface';
 import {
   createBookedSlots,
   fetchBookedSlots,
   getMentorsAvailableAPI,
 } from '@app/services/mentorAPI';
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useMentorInfinite = ({
   search,

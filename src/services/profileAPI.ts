@@ -13,8 +13,8 @@ export const getjobApi = () => axios.get<{ data: Job[] }>(API_URL.GET_JOB);
 export const updateProfileApi = async (user: Partial<UserProfile>) =>
   await axios.patch(`${API_URL.UPDATE_PROFILE}`, user);
 
-export const uploadAvatarApi = async (identityId: string, formData: FormData) => {
-  return await axios.post(`${API_URL.UPLOAD_AVATAR}/${identityId}`, formData, {
+export const uploadAvatarApi = async (formData: FormData) => {
+  return await axios.post(API_URL.UPLOAD_AVATAR, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };

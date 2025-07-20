@@ -80,7 +80,10 @@ export const DropProfile: FC = () => {
       onOpenChange={() => setActiveItem(!activeItem)}
     >
       <div>
-        <Avatar className='w-[3rem] h-[3rem]' src={user?.avatar ? user?.avatar : DefaultAvatar} />
+        <Avatar
+          className='w-[3rem] h-[3rem]'
+          src={user?.avatarUrl ? user?.avatarUrl : DefaultAvatar}
+        />
       </div>
     </Dropdown>
   );
