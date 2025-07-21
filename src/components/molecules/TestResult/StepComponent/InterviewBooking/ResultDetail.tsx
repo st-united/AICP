@@ -93,7 +93,7 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
                     const isCorrect = answer.isCorrect;
 
                     return (
-                      <div className='flex justify-between h-full' key={answer.id}>
+                      <div className='flex justify-between h-full result-check' key={answer.id}>
                         <div
                           className={`w-[95%] h-full flex items-center p-3 rounded-lg border-2 ${getBackgroundColor(
                             answer.id,

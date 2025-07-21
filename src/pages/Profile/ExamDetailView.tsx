@@ -3,6 +3,7 @@ import { Button, Card, Tag } from 'antd';
 import { t } from 'i18next';
 
 import { formatDateTime, getStatusColor, getStatusText } from './QuizManagement/QuizCard';
+import CompetencyChart from '@app/components/ai-assessment/CompetencyChart';
 import SkillsList from '@app/components/ai-assessment/SkillList';
 import SkillRadarChart from '@app/components/ai-assessment/SkillRadarChart';
 import { DetailExam } from '@app/interface/user.interface';
@@ -14,10 +15,28 @@ interface ExamDetailViewProps {
 
 const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
   const chartData = [
-    { skill: 'Mindset', value: exam.mindsetScore },
-    { skill: 'Skillset', value: exam.skillsetScore },
-    { skill: 'Toolset', value: exam.toolsetScore },
+    { skill: 'Mindset', value: exam.mindsetScore.score },
+    { skill: 'Skillset', value: exam.skillsetScore.score },
+    { skill: 'Toolset', value: exam.toolsetScore.score },
   ];
+
+  const transformApiData = (apiData: DetailExam) => {
+    const allAspects = [
+      ...apiData.mindsetScore.aspect,
+      ...apiData.skillsetScore.aspect,
+      ...apiData.toolsetScore.aspect,
+    ];
+
+    return allAspects
+      .map((aspect) => ({
+        code: aspect.represent,
+        score: Math.round(aspect.score * 10) / 10,
+        name: aspect.name,
+      }))
+      .sort((a, b) => a.code.localeCompare(b.code));
+  };
+
+  const dataChart = transformApiData(exam);
 
   return (
     <>
@@ -48,9 +67,9 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
         <div className='flex flex-col lg:grid lg:grid-cols-2 lg:gap-12 px-5'>
           <div>
             <SkillsList
-              mindSetScore={exam.mindsetScore}
-              skillSetScore={exam.skillsetScore}
-              toolSetScore={exam.toolsetScore}
+              mindSetScore={exam.mindsetScore.score}
+              skillSetScore={exam.skillsetScore.score}
+              toolSetScore={exam.toolsetScore.score}
               sfiaLevel={exam.sfiaLevel}
             />
           </div>
@@ -59,6 +78,7 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
             <SkillRadarChart data={chartData} />
           </div>
         </div>
+        <CompetencyChart data={dataChart} />
 
         <div className='h-px bg-gray-200'></div>
 

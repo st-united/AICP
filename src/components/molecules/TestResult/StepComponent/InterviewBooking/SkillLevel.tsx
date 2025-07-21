@@ -27,7 +27,7 @@ const SkillLevel: React.FC = () => {
     { skill: 'Skillset', value: examDetail?.skillsetScore.score },
     { skill: 'Toolset', value: examDetail?.toolsetScore.score },
   ];
-  console.log('examDetail', chartData);
+  const level = data.level.replace('_', ' ');
   return (
     <div className='text-lg'>
       <Divider className='!p-1 !m-0 !mb-4 italic text-[#5B5B5B] text-xl'>
@@ -40,7 +40,7 @@ const SkillLevel: React.FC = () => {
               {t('TEST_RESULT.LEVEL')}:
               <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[90%] ml-1' />
             </span>
-            <span className='text-xl font-bold text-[#fe7743] ml-3 align-bottom'>{data.level}</span>
+            <span className='text-xl font-bold text-[#fe7743] ml-3 align-bottom'>{level}</span>
           </div>
           <div className='text-gray-700 mb-2'>{data.description}</div>
           <div className='text-xl font-bold text-black relative inline-block align-bottom'>
@@ -49,14 +49,14 @@ const SkillLevel: React.FC = () => {
           </div>
           <div className='text-gray-700'>{data.learningPath}</div>
         </div>
-        <div className='w-0.5 h-[200px] bg-gray-50' />
+        <div className='md:w-[0.5px] md:h-[200px] w-full h-[0.5px] bg-gray-100' />
         <div className='flex-1 flex items-center justify-center min-w-[220px]'>
           <ResponsiveContainer width='100%' height='100%'>
             <RadarChart data={chartData}>
               <PolarGrid stroke='#e5e7eb' />
               <PolarAngleAxis
                 dataKey='skill'
-                tick={{ fontSize: 12, fill: '#374151' }}
+                tick={{ fontSize: 16, fill: '#374151' }}
                 tickLine={false}
               />
               <PolarRadiusAxis
@@ -68,7 +68,7 @@ const SkillLevel: React.FC = () => {
                 tickLine={false}
               />
               <Radar
-                name='Score'
+                name={t('TEST_RESULT.SCORE_LABEL') || ''}
                 dataKey='value'
                 stroke='#fe7743'
                 fill='#fe774366'
@@ -77,7 +77,7 @@ const SkillLevel: React.FC = () => {
               />
               <Tooltip
                 wrapperStyle={{ fontSize: '12px' }}
-                formatter={(value: number) => [`${value}/7`, 'Score']}
+                formatter={(value: number) => [`${value}/7`, t('TEST_RESULT.SCORE_LABEL')]}
               />
               <Legend wrapperStyle={{ fontSize: '12px' }} />
             </RadarChart>

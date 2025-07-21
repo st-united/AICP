@@ -1,6 +1,7 @@
 export interface ExamSetDetail {
   id: string;
   examId: string;
+  timeStart: Date;
   name: string;
   description: string;
   questions: Question[];
