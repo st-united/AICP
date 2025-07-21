@@ -35,7 +35,11 @@ export const TestResultProvider = ({ children }: { children: ReactNode }) => {
     setCurrentStep(currentStep + 1);
   };
   if (isLoading) {
-    return <Spin />;
+    return (
+      <div className='flex justify-center items-center h-screen'>
+        <Spin />
+      </div>
+    );
   }
   return (
     <TestResultContext.Provider
