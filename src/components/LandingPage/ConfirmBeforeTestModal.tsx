@@ -18,6 +18,7 @@ enum UserType {
   STUDENT = 'student',
   WORKER = 'worker',
 }
+
 export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestModalProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
   const { user } = useSelector((state: RootState) => state.auth);
   const { data: hasTakenExam } = useHasTakenExamDefault();
   const { mutate: updateUserStudentInfo } = useUpdateUserStudentInfo();
+  const [showInfoModal, setShowInfoModal] = React.useState(false);
 
   const InfoModal = () => {
     const [selectedType, setSelectedType] = React.useState<UserType | null>(null);
@@ -38,10 +40,14 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
           university,
           studentCode,
         });
+        setShowInfoModal(false);
       } else if (selectedType === UserType.WORKER) {
         updateUserStudentInfo({
           isStudent: false,
+          university: '',
+          studentCode: '',
         });
+        setShowInfoModal(false);
       }
     };
 
@@ -145,6 +151,9 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
   const handleReviewResult = () => {
     navigate(NAVIGATE_URL.TEST_RESULT);
   };
+  const handleBackInfo = () => {
+    setShowInfoModal(true);
+  };
 
   const ModalHeader = ({ title }: { title: string }) => (
     <>
@@ -186,15 +195,22 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
       </p>
     </div>
   );
+
   const NewTestModal = () => (
     <div className='relative flex flex-col items-center justify-center'>
       <ModalHeader title={t('MODAL.TITLE_CONFIRM_TAKE_NEW_TEST')} />
       <ModalContent durationKey='MODAL.DURATION_CONFIRM_TAKE_NEW_TEST' />
 
-      <div className='mt-4 px-3 w-full flex justify-center md:my-6'>
+      <div className='mt-4 px-3 w-full flex justify-center items-center md:my-6'>
+        <Button
+          onClick={handleBackInfo}
+          className='w-[150px] h-full text-lg font-semibold px-4 py-2 rounded-full me-4 shadow-md border-none !bg-gray hover:!bg-gray-300 hover:!text-white active:bg-orange-700 !text-black transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-8 md:py-3 md:text-xl'
+        >
+          {t('BUTTON.BACK')}
+        </Button>
         <Button
           onClick={handleStartTest}
-          className='w-full h-full text-lg font-semibold px-4 py-2 rounded-full border !border-primary !bg-orange-500 hover:!bg-white hover:!text-primary active:bg-orange-700 !text-white transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-8 md:py-3 md:text-xl'
+          className='w-[150px] h-full text-lg font-semibold px-4 py-2 rounded-full border !border-primary !bg-orange-500 hover:!bg-white hover:!text-primary active:bg-orange-700 !text-white transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-8 md:py-3 md:text-xl'
         >
           {t('MODAL.START_CONFIRM_TEST')}
         </Button>
@@ -255,7 +271,9 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
         xxl: '40%',
       }}
     >
-      {user?.isStudent !== null ? (
+      {showInfoModal ? (
+        <InfoModal />
+      ) : user?.isStudent !== null ? (
         hasTakenExam?.hasTakenExam ? (
           <ImproveTestModal />
         ) : (
