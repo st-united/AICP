@@ -8,17 +8,10 @@ interface OTPInputProps {
   setValue: (value: string) => void;
 }
 const OTPInput = ({ value, setValue }: OTPInputProps) => {
-  console.log('value', value);
-  const onChange: OTPProps['onChange'] = (text) => {
-    console.log('onChange:', text);
-  };
-
   const onInput: OTPProps['onInput'] = (value) => {
     setValue(value.join(''));
-    console.log('onInput:', value);
   };
   const sharedProps: OTPProps = {
-    onChange,
     onInput,
   };
   return (

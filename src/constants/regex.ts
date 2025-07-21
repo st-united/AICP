@@ -1,4 +1,4 @@
-export const PHONE_REGEX_PATTERN = /^\+?[0-9]{7,15}$/;
+export const PHONE_REGEX_PATTERN = /^\(\+[1-9]\d{1,3}\)\d{6,10}$/;
 
 export const EMAIL_REGEX_PATTERN =
   /^(([^<>()[\]\\.,;:\s@"]{1,64}(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
