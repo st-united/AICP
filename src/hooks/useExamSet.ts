@@ -121,6 +121,8 @@ export const useSubmitDraftQuestion = () => {
   return useMutation((params: SubmitExamSetPayload) => submitDraftQuestionApi(params));
 };
 
+const TEST_RESULT_CURRENT_STEP = 'TEST_RESULT_CURRENT_STEP';
+
 export const useSubmitExam = () => {
   const navigate = useNavigate();
 
@@ -132,6 +134,7 @@ export const useSubmitExam = () => {
     {
       onSuccess({ message }, examId) {
         setStorageData(EXAM_LATEST, examId);
+        setStorageData(TEST_RESULT_CURRENT_STEP, 1);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
         navigate(NAVIGATE_URL.TEST_RESULT_DETAIL);
       },
