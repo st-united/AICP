@@ -30,34 +30,29 @@ const PhoneInput = ({
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const { t } = useTranslation();
   const { data: CallingCode } = useCallingCode();
-  const [loading, setLoading] = useState<boolean>(true);
   const currentValue = formValue !== undefined ? formValue : '';
   useEffect(() => {
-    try {
-      if (
-        currentValue &&
-        currentValue.length > selectedCallingCode.length + 2 &&
-        !phoneNumber &&
-        CallingCode
-      ) {
-        const matchedCallingCode = CallingCode.find((item) =>
-          currentValue.startsWith(item.dialCode),
-        );
+    if (currentValue && CallingCode) {
+      const matchedCallingCode = CallingCode.find(
+        (item) =>
+          currentValue.startsWith(item.dialCode) || currentValue.startsWith(`(${item.dialCode}`),
+      );
 
-        if (matchedCallingCode) {
-          const remainingNumber = currentValue.substring(matchedCallingCode.dialCode.length);
-          setSelectedCallingCode(matchedCallingCode.dialCode);
-          setPhoneNumber(remainingNumber);
-          formOnChange?.(`(${matchedCallingCode.dialCode})${remainingNumber}`);
-        } else {
-          setSelectedCallingCode('+84');
-          setPhoneNumber(currentValue);
-        }
+      if (matchedCallingCode) {
+        const remainingNumber = currentValue.substring(
+          currentValue.startsWith('(')
+            ? matchedCallingCode.dialCode.length + 2
+            : matchedCallingCode.dialCode.length,
+        );
+        setSelectedCallingCode(matchedCallingCode.dialCode);
+        setPhoneNumber(remainingNumber);
+        formOnChange?.(`(${matchedCallingCode.dialCode})${remainingNumber}`);
+      } else {
+        setSelectedCallingCode('+84');
+        setPhoneNumber(currentValue);
       }
-    } finally {
-      setLoading(false);
     }
-  }, [currentValue, phoneNumber, CallingCode]);
+  }, [currentValue, CallingCode, formOnChange]);
 
   const handleChangeCallingCode = (callingCode: string) => {
     setSelectedCallingCode(callingCode);
@@ -82,17 +77,6 @@ const PhoneInput = ({
     }
   };
 
-  if (loading) {
-    return (
-      <div
-        className={`w-full items-center gap-2 flex justify-center h-[50px] ${className || ''}`}
-        style={style}
-      >
-        <Skeleton.Button active className='!w-[80px] !h-full' size='large' />
-        <Skeleton.Input active className='!w-3/5 !h-full' size='large' />
-      </div>
-    );
-  }
   return (
     <Input
       className={`${className || ''} custom-phone-input`}
