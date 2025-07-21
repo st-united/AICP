@@ -218,7 +218,7 @@ const Testing = () => {
   const isShaking = remainingTime <= 60;
 
   return (
-    <div className='relative overflow-hidden'>
+    <div className='exam-container relative overflow-hidden'>
       <div className='flex flex-col justify-start items-center w-full py-8 px-6 gap-4'>
         <div className='flex text-xl smM:text-2xl leading-[22px] font-extrabold gap-2 smM:flex-row flex-col text-center'>
           <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
