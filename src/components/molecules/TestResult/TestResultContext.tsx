@@ -26,11 +26,21 @@ export const useTestResultContext = () => {
   return context;
 };
 
+const TEST_RESULT_CURRENT_STEP = 'TEST_RESULT_CURRENT_STEP';
+
 export const TestResultProvider = ({ children }: { children: ReactNode }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const getInitialStep = () => {
+    const savedStep = localStorage.getItem(TEST_RESULT_CURRENT_STEP);
+    return savedStep ? Number(savedStep) : 1;
+  };
+  const [currentStep, setCurrentStepState] = useState<number>(getInitialStep());
   const [isPortfolioExpanded, setIsPortfolioExpanded] = useState(false);
   const examId = getStorageData(EXAM_LATEST);
   const { data, isLoading } = useGetExamResult(examId);
+  const setCurrentStep = (step: number) => {
+    setCurrentStepState(step);
+    localStorage.setItem(TEST_RESULT_CURRENT_STEP, String(step));
+  };
   const onNext = () => {
     setCurrentStep(currentStep + 1);
   };

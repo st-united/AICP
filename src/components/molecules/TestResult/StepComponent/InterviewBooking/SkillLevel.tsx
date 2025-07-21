@@ -16,6 +16,10 @@ import { useTestResultContext } from '../../TestResultContext';
 import { getStorageData } from '@app/config';
 import { EXAM_LATEST } from '@app/constants/testing';
 import { useExamDetail } from '@app/hooks';
+import { f } from 'vitest/dist/index-220c1d70';
+
+const capitalizeWords = (str: string) =>
+  str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
 
 const SkillLevel: React.FC = () => {
   const { t } = useTranslation();
@@ -27,10 +31,10 @@ const SkillLevel: React.FC = () => {
     { skill: 'Skillset', value: examDetail?.skillsetScore.score },
     { skill: 'Toolset', value: examDetail?.toolsetScore.score },
   ];
-  const level = data.level.replace('_', ' ');
+  const level = data.level ? capitalizeWords(data.level.replace('_', ' ')) : '-';
   return (
     <div className='text-lg'>
-      <Divider className='!p-1 !m-0 !mb-4 italic text-[#5B5B5B] text-xl'>
+      <Divider className='!p-1 !m-0 !mb-4 italic text-[#5B5B5B] !text-[20px] !font-bold'>
         {t('TEST_RESULT.REVIEW')}
       </Divider>
       <div className=' flex flex-col md:flex-row gap-6 w-full mx-auto '>
@@ -49,7 +53,7 @@ const SkillLevel: React.FC = () => {
           </div>
           <div className='text-gray-700'>{data.learningPath}</div>
         </div>
-        <div className='md:w-[0.5px] md:h-[200px] w-full h-[0.5px] bg-gray-100' />
+        <div className='w-0.5 h-[200px] bg-gray-50' />
         <div className='flex-1 flex items-center justify-center min-w-[220px]'>
           <ResponsiveContainer width='100%' height='100%'>
             <RadarChart data={chartData}>

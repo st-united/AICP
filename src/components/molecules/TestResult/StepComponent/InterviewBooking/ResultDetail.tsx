@@ -53,7 +53,7 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
   return (
     <Modal
       title={
-        <div className='flex justify-between items-center font-bold text-5xl'>
+        <div className='flex justify-between items-center font-bold text-4xl'>
           <span className=' text-[#fe7743] text-center w-full'>
             {t('TEST_RESULT.RESULT_DETAIL_TITLE')}
           </span>
@@ -78,7 +78,7 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
                 )} bg-white rounded-lg p-4 shadow-sm`}
               >
                 <div className='flex justify-between items-start mb-4'>
-                  <h3 className='text-lg font-semibold text-gray-800'>
+                  <h3 className='text-[22px] font-bold text-black'>
                     {t('TEST_RESULT.QUESTION_NUMBER', {
                       number: question.sequence || questionIndex + 1,
                     })}
@@ -95,6 +95,7 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
                     return (
                       <div className='flex justify-between h-full result-check' key={answer.id}>
                         <div
+                          style={{ minWidth: '95%' }}
                           className={`w-[95%] h-full flex items-center p-3 rounded-lg border-2 ${getBackgroundColor(
                             answer.id,
                             question,
@@ -129,7 +130,7 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
                           <span className='ml-3 text-gray-700 text-[16px]'>{answer.content}</span>
                         </div>
                         {isSelected && (
-                          <div className='flex flex-1 justify-center items-center align-middle self-center'>
+                          <div className='flex flex-1 justify-center items-center align-middle self-center xs:pl-[4px]'>
                             {isCorrect ? (
                               <CheckOutlined className='text-green-500 check-icon text-2xl' />
                             ) : (
