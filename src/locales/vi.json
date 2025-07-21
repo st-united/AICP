@@ -442,13 +442,13 @@
     },
     "EXAM_LEVEL": {
       "NONE_LEVEL": "Chưa có đánh giá năng lực",
-      "LEVEL_1_STARTER": "Mức Khởi đầu",
-      "LEVEL_2_EXPLORER": "Mức Khám Phá",
-      "LEVEL_3_PRACTITIONER": "Mức Thực Hành",
-      "LEVEL_4_INTEGRATOR": "Mức Tích Hợp",
-      "LEVEL_5_STRATEGIST": "Mức Chiến Lược",
-      "LEVEL_6_LEADER": "Mức Dẫn dắt",
-      "LEVEL_7_EXPERT": "Mức Chuyên Gia"
+      "LEVEL_1_STARTER": "Khởi đầu",
+      "LEVEL_2_EXPLORER": "Khám Phá",
+      "LEVEL_3_PRACTITIONER": "Thực Hành",
+      "LEVEL_4_INTEGRATOR": "Tích Hợp",
+      "LEVEL_5_STRATEGIST": "Chiến Lược",
+      "LEVEL_6_LEADER": "Dẫn dắt",
+      "LEVEL_7_EXPERT": "Chuyên Gia"
     },
     "RESULT": {
       "TITLE": "Kết quả đánh giá <span>năng lực AI</span> (Sơ bộ)",
