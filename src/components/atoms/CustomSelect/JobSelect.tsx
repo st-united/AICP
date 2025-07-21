@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useGetJob } from '@app/hooks';
 import type { DefaultOptionType } from 'antd/es/select';
 import './CustomSelect.scss';
+
 interface JobSelectProps extends SelectProps<string[]> {
   options?: { value: string; label: JSX.Element | string }[]; // không dùng nếu đã dùng useGetJob
 }
