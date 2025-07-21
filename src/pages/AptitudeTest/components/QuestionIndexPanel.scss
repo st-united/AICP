@@ -13,6 +13,14 @@
   }
 }
 
+main.ant-layout-content {
+  padding-bottom: 0 !important;
+}
+
+.custom-no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
 .shake {
   animation: shake 0.5s infinite;
 }
