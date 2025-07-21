@@ -49,7 +49,7 @@ const SkillLevel: React.FC = () => {
           </div>
           <div className='text-gray-700'>{data.learningPath}</div>
         </div>
-        <div className='w-0.5 h-[200px] bg-gray-50' />
+        <div className='md:w-[0.5px] md:h-[200px] w-full h-[0.5px] bg-gray-100' />
         <div className='flex-1 flex items-center justify-center min-w-[220px]'>
           <ResponsiveContainer width='100%' height='100%'>
             <RadarChart data={chartData}>
