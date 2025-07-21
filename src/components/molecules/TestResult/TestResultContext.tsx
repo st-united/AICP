@@ -4,6 +4,7 @@ import { getStorageData } from '@app/config';
 import { EXAM_LATEST } from '@app/constants/testing';
 import { useGetExamResult } from '@app/hooks';
 import { ExamSetResult } from '@app/interface/examSet.interface';
+import { Spin } from 'antd';
 
 interface TestResultContextProps {
   currentStep: number;
@@ -34,7 +35,11 @@ export const TestResultProvider = ({ children }: { children: ReactNode }) => {
     setCurrentStep(currentStep + 1);
   };
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex justify-center items-center h-screen'>
+        <Spin />
+      </div>
+    );
   }
   return (
     <TestResultContext.Provider
