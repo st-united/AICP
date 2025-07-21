@@ -432,13 +432,13 @@
     },
     "LEVEL": {
       "NONE_LEVEL": "Chưa có đánh giá năng lực",
-      "LEVEL_1_AWARENESS": "Mức nhận thức",
-      "LEVEL_2_FOUNDATION": "Mức nền tảng",
-      "LEVEL_3_APPLICATION": "Mức ứng dụng",
-      "LEVEL_4_INTEGRATION": "Mức tích hợp",
-      "LEVEL_5_INNOVATION": "Mức đổi mới",
-      "LEVEL_6_LEADERSHIP": "Mức lãnh đạo",
-      "LEVEL_7_MASTERY": "Mức thành thạo"
+      "LEVEL_1_AWARENESS": "Nhận thức",
+      "LEVEL_2_FOUNDATION": "Nền tảng",
+      "LEVEL_3_APPLICATION": "Ứng dụng",
+      "LEVEL_4_INTEGRATION": "Tích hợp",
+      "LEVEL_5_INNOVATION": "Đổi mới",
+      "LEVEL_6_LEADERSHIP": "Lãnh đạo",
+      "LEVEL_7_MASTERY": "Thành thạo"
     },
     "EXAM_LEVEL": {
       "NONE_LEVEL": "Chưa có đánh giá năng lực",
