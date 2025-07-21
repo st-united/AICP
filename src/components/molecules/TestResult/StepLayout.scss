@@ -29,14 +29,25 @@
           width: 32px;
           height: 32px;
           padding: 0;
+          .ant-steps-icon {
+            color: #00000073;
+          }
         }
       }
       &-finish {
         .ant-steps-item-icon {
-          background-color: #f8d9cb;
+          background-color: #fe7743;
           width: 32px;
           height: 32px;
           padding: 0;
+          .ant-steps-icon {
+            color: #ffffff;
+          }
+        }
+        &:hover {
+          .ant-steps-icon {
+            color: #ffffff !important;
+          }
         }
       }
     }
