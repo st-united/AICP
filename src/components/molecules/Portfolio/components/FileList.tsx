@@ -16,7 +16,7 @@ const FileList: React.FC<FileListProps> = ({ type }) => {
   const files = type === PortfolioFileType.CERTIFICATION ? certificationFiles : experienceFiles;
 
   return (
-    <div>
+    <div className='mb-[40px]'>
       <div
         className={`w-full mt-4 p-4 rounded-lg ${
           isEdit ? 'bg-white' : 'bg-gray-100'

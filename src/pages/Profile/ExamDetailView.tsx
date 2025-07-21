@@ -70,7 +70,7 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
               mindSetScore={exam.mindsetScore.score}
               skillSetScore={exam.skillsetScore.score}
               toolSetScore={exam.toolsetScore.score}
-              sfiaLevel={exam.sfiaLevel}
+              examLevel={exam.examLevel?.examLevel ?? null}
             />
           </div>
 

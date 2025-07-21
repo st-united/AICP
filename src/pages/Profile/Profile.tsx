@@ -66,9 +66,11 @@ const Profile = () => {
   };
 
   const handleSubmit = async (values: UserProfile) => {
+    const phoneNumber = values.phoneNumber?.replace('(', '').replace(')', '');
     const fixedValues = {
       ...values,
       job: Array.isArray(values.job) ? values.job : values.job ? [values.job] : [],
+      phoneNumber: phoneNumber,
     };
     updateProfileMutation.mutate(fixedValues, {
       onSuccess: () => {
@@ -96,7 +98,11 @@ const Profile = () => {
           phoneNumber: data?.phoneNumber ?? null,
           dob: data?.dob ? dayjs(data?.dob) : null,
           province: data?.province ?? null,
-          job: data?.job ?? null,
+          job: Array.isArray(data?.job)
+            ? data?.job.every((j) => typeof j === 'object' && j !== null && 'id' in j)
+              ? data?.job.map((j) => (j as unknown as { id: string }).id)
+              : data?.job
+            : [],
           referralCode: data?.referralCode ?? null,
         }}
       >
@@ -144,25 +150,25 @@ const Profile = () => {
                 <>
                   <Button
                     onClick={() => setIsEdit(true)}
-                    className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white'
+                    className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white font-bold'
                   >
-                    Chỉnh sửa
+                    {t('PORTFOLIO.EDIT')}
                   </Button>
                 </>
               ) : (
                 <>
                   <Button
                     onClick={handleCancel}
-                    className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
+                    className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white font-bold'
                   >
-                    Hủy bỏ
+                    {t('PORTFOLIO.CANCEL')}
                   </Button>
                   <Button
                     type='primary'
                     htmlType='submit'
-                    className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white'
+                    className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white font-bold'
                   >
-                    Lưu
+                    {t('PORTFOLIO.SAVE')}
                   </Button>
                 </>
               )}

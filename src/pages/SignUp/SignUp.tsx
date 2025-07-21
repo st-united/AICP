@@ -35,7 +35,8 @@ const SignUp = () => {
 
   const onFinish = (values: RegisterUser) => {
     const { fullName, email, phoneNumber, password } = values;
-    registerUser({ fullName, email, phoneNumber, password });
+    const phoneNumberWithoutBracket = phoneNumber?.replace('(', '').replace(')', '');
+    registerUser({ fullName, email, phoneNumber: phoneNumberWithoutBracket, password });
   };
 
   const handleOnClickHomePage = () => {
@@ -99,7 +100,7 @@ const SignUp = () => {
           </Form.Item>
           <Form.Item className='md:col-span-1 col-span-2' name='phoneNumber' rules={validator}>
             <PhoneInput
-              className='w-full h-[62px] lg:h-[52px] ml-2'
+              className='w-full h-[62px] lg:h-[52px] pl-2'
               placeholder={t('SIGN_UP.PHONE') as string}
             />
           </Form.Item>

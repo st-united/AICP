@@ -25,6 +25,8 @@ export const API_URL = {
   PORTFOLIO_DOWNLOAD: '/users/portfolio/download',
   GET_JOB: 'domain/names',
   DETAIL_EXAM: '/exam',
+  EXAM_RESULT: '/exam/:id/result',
+  EXAM_CERTIFICATE: '/exam/:id/download-certificate',
   UPDATE_USER_STUDENT_INFO: '/users/student-info',
   ZALO_OTP: '/zalo-otp',
   ZALO_OTP_SEND_OTP: '/zalo-otp/send-otp',

@@ -1,5 +1,6 @@
+import { E } from 'vitest/dist/global-58e8e951';
 import { GetListParams } from './common.interface';
-import { CompetencyDimension, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
+import { CompetencyDimension, ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 
 export interface UserColumns {
   id: number;
@@ -96,6 +97,9 @@ export interface HistoryTesting {
   id: string;
   examStatus: ExamStatusEnum;
   sfiaLevel: SFIALevel;
+  examLevel?: {
+    examLevel: ExamLevelEnum | null;
+  };
   createdAt: Date;
 }
 
@@ -115,17 +119,13 @@ export interface Aspect {
   score: number;
 }
 
-export interface PillarScore {
-  id: string;
-  name: CompetencyDimension;
-  score: number;
-  aspects: Aspect[];
-}
-
 export interface DetailExam {
   id: string;
   startedAt: string;
   sfiaLevel: SFIALevel | null;
+  examLevel?: {
+    examLevel: ExamLevelEnum | null;
+  };
   mindsetScore: PillarScore;
   skillsetScore: PillarScore;
   toolsetScore: PillarScore;
@@ -136,6 +136,14 @@ export interface DetailExam {
     id: string;
     name: string;
   };
+}
+
+export interface PillarScore {
+  id: string;
+  name: string;
+  score: number;
+  aspects: Aspect[];
+  level: string;
 }
 
 export interface UpdateUserStudentInfo {
