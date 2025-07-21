@@ -15,6 +15,7 @@ interface ConfirmBeforeTestModalProps {
   open: boolean;
   onClose: () => void;
 }
+
 export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestModalProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
   const { user } = useSelector((state: RootState) => state.auth);
   const { data: hasTakenExam } = useHasTakenExamDefault();
   const { mutate: updateUserStudentInfo } = useUpdateUserStudentInfo();
+  const [showInfoModal, setShowInfoModal] = React.useState(false);
 
   const InfoModal = () => {
     const [selectedType, setSelectedType] = React.useState<UserType | null>(null);
@@ -35,10 +37,14 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
           university,
           studentCode,
         });
+        setShowInfoModal(false);
       } else if (selectedType === UserType.WORKER) {
         updateUserStudentInfo({
           isStudent: false,
+          university: '',
+          studentCode: '',
         });
+        setShowInfoModal(false);
       }
     };
 
@@ -127,7 +133,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
             onClick={handleContinue}
             disabled={isContinueDisabled}
             loading={isPending}
-            className='w-full max-w-xs h-full border-none text-lg font-semibold px-4 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200'
+            className='w-full max-w-xs h-full px-4 py-2 text-lg font-semibold rounded-full border !border-primary !bg-orange-500 !text-white hover:!bg-white hover:!text-primary active:bg-orange-700 transition-all duration-300'
           >
             {t('BUTTON.CONTINUE')}
           </Button>
@@ -141,6 +147,9 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
   };
   const handleReviewResult = () => {
     navigate(NAVIGATE_URL.TEST_RESULT);
+  };
+  const handleBackInfo = () => {
+    setShowInfoModal(true);
   };
 
   const ModalHeader = ({ title }: { title: string }) => (
@@ -185,15 +194,22 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
       </p>
     </div>
   );
+
   const NewTestModal = () => (
     <div className='relative flex flex-col items-center justify-center'>
       <ModalHeader title={t('MODAL.TITLE_CONFIRM_TAKE_NEW_TEST')} />
       <ModalContent durationKey='MODAL.DURATION_CONFIRM_TAKE_NEW_TEST' />
 
-      <div className='mt-4 px-3 w-full flex justify-center md:my-6'>
+      <div className='mt-4 px-3 w-full flex justify-center items-center md:my-6'>
+        <Button
+          onClick={handleBackInfo}
+          className='w-[150px] h-full text-lg font-semibold px-4 py-2 rounded-full me-4 shadow-sm !bg-gray hover:shadow-md hover:shadow-[#c4c2c2] active:bg-orange-700 border-none !text-black transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-8 md:py-3 md:text-xl'
+        >
+          {t('BUTTON.BACK')}
+        </Button>
         <Button
           onClick={handleStartTest}
-          className='w-full h-full border-none text-lg font-semibold px-4 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-8 md:py-3 md:text-xl'
+          className='w-[150px] h-full text-lg font-semibold px-4 py-2 rounded-full border !border-primary !bg-orange-500 hover:!bg-white hover:!text-primary active:bg-orange-700 !text-white transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-8 md:py-3 md:text-xl'
         >
           {t('MODAL.START_CONFIRM_TEST')}
         </Button>
@@ -211,7 +227,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
           {hasTakenExam?.examStatus !== 'IN_PROGRESS' ? (
             <Button
               onClick={handleReviewResult}
-              className='w-full h-full text-base font-semibold px-3 py-2 rounded-full bg-white border-2 !border-orange-500 !text-orange-500 hover:border-orange-600 hover:text-orange-600 active:border-orange-700 active:text-orange-700 transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
+              className='w-full h-full text-base font-semibold px-3 py-2 rounded-full bg-white border !border-primary !text-orange-500 hover:border-none hover:!text-white hover:!bg-primary active:border-orange-700 active:text-orange-700 transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
             >
               {t('MODAL.REVIEW_RESULT')}
             </Button>
@@ -225,7 +241,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
           )}
           <Button
             onClick={handleStartTest}
-            className='w-full h-full text-base font-semibold border-none px-3 py-2 rounded-full !bg-orange-500 hover:bg-orange-600 active:bg-orange-700 !text-white transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
+            className='w-full h-full text-base font-semibold border !border-primary px-3 py-2 rounded-full !bg-orange-500 hover:!bg-white hover:!text-primary !text-white transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
           >
             {hasTakenExam?.examStatus === 'IN_PROGRESS'
               ? t('BUTTON.CONTINUE_NOW')
@@ -254,7 +270,9 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
         xxl: '40%',
       }}
     >
-      {user?.isStudent !== null ? (
+      {showInfoModal ? (
+        <InfoModal />
+      ) : user?.isStudent !== null ? (
         hasTakenExam?.hasTakenExam ? (
           <ImproveTestModal />
         ) : (
