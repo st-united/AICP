@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { setStorageData } from '@app/config';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { EXAM_LATEST } from '@app/constants/testing';
+import { EXAM_LATEST, TEST_RESULT_CURRENT_STEP } from '@app/constants/testing';
 import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
 import {
   deleteExamByIdApi,
@@ -120,8 +120,6 @@ export const useGetExamSet = () =>
 export const useSubmitDraftQuestion = () => {
   return useMutation((params: SubmitExamSetPayload) => submitDraftQuestionApi(params));
 };
-
-const TEST_RESULT_CURRENT_STEP = 'TEST_RESULT_CURRENT_STEP';
 
 export const useSubmitExam = () => {
   const navigate = useNavigate();

@@ -95,8 +95,7 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
                     return (
                       <div className='flex justify-between h-full result-check' key={answer.id}>
                         <div
-                          style={{ minWidth: '95%' }}
-                          className={`w-[95%] h-full flex items-center p-3 rounded-lg border-2 ${getBackgroundColor(
+                          className={`min-w-[95%] w-[95%] h-full flex items-center p-3 rounded-lg border-2 ${getBackgroundColor(
                             answer.id,
                             question,
                           )}`}

@@ -34,7 +34,7 @@ const SkillLevel: React.FC = () => {
   const level = data.level ? capitalizeWords(data.level.replace('_', ' ')) : '-';
   return (
     <div className='text-lg'>
-      <Divider className='!p-1 !m-0 !mb-4 italic text-[#5B5B5B] !text-[20px] !font-bold'>
+      <Divider className='!p-1 !m-0 !mb-4 italic !text-[#5B5B5B] !text-[20px] !font-bold'>
         {t('TEST_RESULT.REVIEW')}
       </Divider>
       <div className=' flex flex-col md:flex-row gap-6 w-full mx-auto '>
@@ -53,7 +53,7 @@ const SkillLevel: React.FC = () => {
           </div>
           <div className='text-gray-700'>{data.learningPath}</div>
         </div>
-        <div className='w-0.5 h-[200px] bg-gray-50' />
+        <div className='md:w-[0.5px] md:h-[200px] w-full h-[0.5px] bg-gray-50' />
         <div className='flex-1 flex items-center justify-center min-w-[220px]'>
           <ResponsiveContainer width='100%' height='100%'>
             <RadarChart data={chartData}>

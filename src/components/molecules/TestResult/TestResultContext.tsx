@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 import { getStorageData } from '@app/config';
-import { EXAM_LATEST } from '@app/constants/testing';
+import { EXAM_LATEST, TEST_RESULT_CURRENT_STEP } from '@app/constants/testing';
 import { useGetExamResult } from '@app/hooks';
 import { ExamSetResult } from '@app/interface/examSet.interface';
 
@@ -24,8 +24,6 @@ export const useTestResultContext = () => {
   }
   return context;
 };
-
-const TEST_RESULT_CURRENT_STEP = 'TEST_RESULT_CURRENT_STEP';
 
 export const TestResultProvider = ({ children }: { children: ReactNode }) => {
   const getInitialStep = () => {

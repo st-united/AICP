@@ -43,7 +43,7 @@ const StepLayout = () => {
     <div>
       <div className='bg-white rounded-2xl shadow px-8 py-4'>
         <div className='custom-steps flex flex-col items-center justify-center relative'>
-          {(currentStep === 1 || currentStep === 2) && !isPortfolioExpanded && (
+          {currentStep === 1 && !isPortfolioExpanded && (
             <div className='flex items-center mt-2 justify-center text-orange-500 text-xl md:text-4xl font-bold text-center'>
               {t('TEST_RESULT.EVALUATION_PATH')}
             </div>
