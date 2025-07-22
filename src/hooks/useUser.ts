@@ -166,8 +166,8 @@ export const useUpdateUserStudentInfo = () => {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: [QUERY_KEY.PROFILE] });
       },
-      onError: ({ response }) => {
-        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      onError: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
       },
     },
   );
