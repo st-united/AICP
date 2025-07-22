@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 import { getStorageData } from '@app/config';
-import { EXAM_LATEST } from '@app/constants/testing';
+import { EXAM_LATEST, TEST_RESULT_CURRENT_STEP } from '@app/constants/testing';
 import { useGetExamResult } from '@app/hooks';
 import { ExamSetResult } from '@app/interface/examSet.interface';
 import { Spin } from 'antd';
@@ -27,10 +27,18 @@ export const useTestResultContext = () => {
 };
 
 export const TestResultProvider = ({ children }: { children: ReactNode }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const getInitialStep = () => {
+    const savedStep = localStorage.getItem(TEST_RESULT_CURRENT_STEP);
+    return savedStep ? Number(savedStep) : 1;
+  };
+  const [currentStep, setCurrentStepState] = useState<number>(getInitialStep());
   const [isPortfolioExpanded, setIsPortfolioExpanded] = useState(false);
   const examId = getStorageData(EXAM_LATEST);
   const { data, isLoading } = useGetExamResult(examId);
+  const setCurrentStep = (step: number) => {
+    setCurrentStepState(step);
+    localStorage.setItem(TEST_RESULT_CURRENT_STEP, String(step));
+  };
   const onNext = () => {
     setCurrentStep(currentStep + 1);
   };

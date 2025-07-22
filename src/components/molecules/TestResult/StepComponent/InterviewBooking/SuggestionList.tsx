@@ -35,7 +35,7 @@ const SuggestionList: React.FC = () => {
                   <div className='flex justify-end'>
                     <Button
                       type='primary'
-                      className='bg-[#fe7743] border-[#fe7743] hover:bg-[#d16236] hover:border-[#d16236] rounded-full font-semibold text-lg px-6 py-2'
+                      className='bg-[#fe7743] hover:bg-[#d16236] rounded-full font-semibold text-lg px-6 py-2'
                       onClick={() => window.open(item.url, '_blank')}
                     >
                       {t('TEST_RESULT.SUGGESTION_BUTTON')}
