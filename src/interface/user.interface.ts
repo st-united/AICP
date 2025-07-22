@@ -1,5 +1,6 @@
+import { E } from 'vitest/dist/global-58e8e951';
 import { GetListParams } from './common.interface';
-import { ExamStatusEnum, SFIALevel } from '@app/constants/enum';
+import { CompetencyDimension, ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 
 export interface UserColumns {
   id: number;
@@ -25,11 +26,14 @@ export interface UserProfile {
   email: string;
   phoneNumber?: string;
   dob?: string;
-  avatar?: string;
+  avatarUrl?: string;
   permissions?: string[];
   province?: string;
-  job?: string;
+  job?: string[];
   referralCode: string;
+  isStudent: boolean;
+  university?: string;
+  studentCode?: string;
 }
 
 export interface UserDetail {
@@ -86,13 +90,16 @@ export interface HasTakenExam {
   hasTakenExam: boolean;
   examSetDuration: number;
   examId?: string;
-  examStatus?: string;
+  examStatus?: ExamStatusEnum;
 }
 
 export interface HistoryTesting {
   id: string;
   examStatus: ExamStatusEnum;
   sfiaLevel: SFIALevel;
+  examLevel?: {
+    examLevel: ExamLevelEnum | null;
+  };
   createdAt: Date;
 }
 
@@ -104,13 +111,24 @@ export interface Job {
   id: number;
   name: string;
 }
+
+export interface Aspect {
+  id: string;
+  name: string;
+  represent: string;
+  score: number;
+}
+
 export interface DetailExam {
   id: string;
   startedAt: string;
   sfiaLevel: SFIALevel | null;
-  mindsetScore: number;
-  skillsetScore: number;
-  toolsetScore: number;
+  examLevel?: {
+    examLevel: ExamLevelEnum | null;
+  };
+  mindsetScore: PillarScore;
+  skillsetScore: PillarScore;
+  toolsetScore: PillarScore;
   overallScore: number;
   examStatus: ExamStatusEnum;
   createdAt: string;
@@ -118,4 +136,18 @@ export interface DetailExam {
     id: string;
     name: string;
   };
+}
+
+export interface PillarScore {
+  id: string;
+  name: string;
+  score: number;
+  aspects: Aspect[];
+  level: string;
+}
+
+export interface UpdateUserStudentInfo {
+  isStudent: boolean;
+  university?: string;
+  studentCode?: string;
 }

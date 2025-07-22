@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { setStorageData } from '@app/config';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { EXAM_LATEST } from '@app/constants/testing';
+import { EXAM_LATEST, TEST_RESULT_CURRENT_STEP } from '@app/constants/testing';
 import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
 import {
   deleteExamByIdApi,
+  downloadCertificateApi,
+  getExamResultApi,
   getExamSetsApi,
   submitDraftQuestionApi,
   submitExamSetApi,
@@ -105,9 +107,10 @@ export const useGetExamSet = () =>
       return data.data;
     },
     {
-      keepPreviousData: true,
+      cacheTime: 0,
+      staleTime: 0,
       refetchOnWindowFocus: false,
-      refetchOnMount: false,
+      refetchOnMount: true,
       refetchOnReconnect: false,
       refetchInterval: false,
       refetchIntervalInBackground: false,
@@ -129,8 +132,9 @@ export const useSubmitExam = () => {
     {
       onSuccess({ message }, examId) {
         setStorageData(EXAM_LATEST, examId);
+        setStorageData(TEST_RESULT_CURRENT_STEP, 1);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        navigate(NAVIGATE_URL.SCHEDULE);
+        navigate(NAVIGATE_URL.TEST_RESULT_DETAIL);
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
@@ -155,4 +159,16 @@ export const useDeleteExam = () => {
       },
     },
   );
+};
+export const useGetExamResult = (examId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEY.EXAM_RESULT, examId],
+    queryFn: () => getExamResultApi(examId),
+    select: (data) => data.data.data,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 10 * 60 * 1000,
+  });
+};
+export const useDownloadCertificate = () => {
+  return useMutation((examId: string) => downloadCertificateApi(examId));
 };

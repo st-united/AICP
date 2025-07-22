@@ -28,4 +28,8 @@
     width: 0%;
     height: 0%;
   }
+
+  .ant-carousel .slick-dots li::after {
+    background: none;
+  }
 }
