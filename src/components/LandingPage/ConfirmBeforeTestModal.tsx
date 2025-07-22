@@ -9,7 +9,7 @@ import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
 import { UserType } from '@app/constants/enum';
 import {
-  useGetUserProfile,
+  useGetProfile,
   useHasTakenExamDefault,
   useSubmitExam,
   useUpdateUserStudentInfo,
@@ -34,7 +34,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
   const { mutate: submitExam, isPending } = useSubmitExam();
   const { user } = useSelector((state: RootState) => state.auth);
   const { data: hasTakenExam } = useHasTakenExamDefault();
-  const { data: userProfile } = useGetUserProfile();
+  const { data: userProfile } = useGetProfile();
   const { mutate: updateUserStudentInfo } = useUpdateUserStudentInfo();
   const [showInfoModal, setShowInfoModal] = React.useState(false);
 
