@@ -8,12 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
 import { UserType } from '@app/constants/enum';
-import {
-  useGetProfile,
-  useHasTakenExamDefault,
-  useSubmitExam,
-  useUpdateUserStudentInfo,
-} from '@app/hooks';
+import { useHasTakenExamDefault, useSubmitExam, useUpdateUserStudentInfo } from '@app/hooks';
 import { RootState } from '@app/redux/store';
 
 interface ConfirmBeforeTestModalProps {
@@ -34,7 +29,6 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
   const { mutate: submitExam, isPending } = useSubmitExam();
   const { user } = useSelector((state: RootState) => state.auth);
   const { data: hasTakenExam } = useHasTakenExamDefault();
-  const { data: userProfile } = useGetProfile();
   const { mutate: updateUserStudentInfo } = useUpdateUserStudentInfo();
   const [showInfoModal, setShowInfoModal] = React.useState(false);
 
@@ -153,7 +147,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
     >
       {showInfoModal ? (
         <InfoModal
-          userProfile={userProfile}
+          userProfile={user}
           onSubmit={handleSubmitUserInfo}
           onClose={confirmProps.onClose}
           isPending={isPending}
@@ -166,7 +160,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
         )
       ) : (
         <InfoModal
-          userProfile={userProfile}
+          userProfile={user}
           onSubmit={handleSubmitUserInfo}
           onClose={confirmProps.onClose}
           isPending={isPending}
