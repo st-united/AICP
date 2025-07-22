@@ -28,7 +28,6 @@ import {
   checkResetPasswordTokenApi,
   getDetailExam,
   UpdateUserStudentInfoApi,
-  getUserProfileAPI,
 } from '@app/services';
 
 export const useCreateUser = () => {

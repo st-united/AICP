@@ -235,9 +235,8 @@ const InfoModal: React.FC<InfoModalProps> = ({ userProfile, onSubmit, onClose, i
       <div className='w-full mb-2 text-base font-semibold text-start'>
         {t('CONFIRM_BEFORE_TEST_MODAL.INFO_TEXT')}
       </div>
-      {/* ... chọn student/worker ... */}
+      ={' '}
       <div className='flex flex-row gap-4 w-full mb-4 pb-2'>
-        {/* STUDENT Option */}
         <div
           className={`flex-1 border rounded-xl px-8 py-4 flex items-center justify-center cursor-pointer transition-all duration-150 whitespace-nowrap ${
             selectedType === UserType.STUDENT
@@ -262,8 +261,6 @@ const InfoModal: React.FC<InfoModalProps> = ({ userProfile, onSubmit, onClose, i
           </span>
           <span className='text-lg font-medium whitespace-nowrap'>{t('USER.STUDENT')}</span>
         </div>
-
-        {/* WORKER Option */}
         <div
           className={`flex-1 border rounded-xl px-8 py-4 flex items-center justify-center cursor-pointer transition-all duration-150 whitespace-nowrap ${
             selectedType === UserType.WORKER
@@ -289,8 +286,6 @@ const InfoModal: React.FC<InfoModalProps> = ({ userProfile, onSubmit, onClose, i
           <span className='text-lg font-medium whitespace-nowrap'>{t('USER.WORKER')}</span>
         </div>
       </div>
-
-      {/* Inputs if student */}
       {isStudentSelected && (
         <div className='w-full'>
           <div className='mb-3'>
@@ -311,7 +306,6 @@ const InfoModal: React.FC<InfoModalProps> = ({ userProfile, onSubmit, onClose, i
           </div>
         </div>
       )}
-
       <div className='mt-4 w-full flex justify-center'>
         <Button
           onClick={handleContinue}
