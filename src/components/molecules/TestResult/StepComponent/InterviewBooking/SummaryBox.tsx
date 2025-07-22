@@ -52,7 +52,7 @@ const SummaryBox = () => {
         {items.map((item, idx) => (
           <div
             key={item.label as string}
-            className='flex flex-col items-center bg-[#FF8C5F0F] rounded-xl p-4 shadow-lg shadow-black/40 h-full'
+            className='flex flex-col items-center bg-[#FF8C5F0F] rounded-xl border-[#DADADA] border-[1px] p-4 shadow-lg shadow-black/40 h-full'
           >
             <div className='text-2xl mb-2'>{item.icon}</div>
             <div className='text-2xl font-bold mb-1'>{item.value}</div>
@@ -60,7 +60,7 @@ const SummaryBox = () => {
           </div>
         ))}
       </div>
-      <div className='flex justify-end w-full mt-10'>
+      <div className='flex justify-end w-full py-4'>
         <Button
           type='primary'
           className='rounded-full text-lg font-bold px-6 py-5'

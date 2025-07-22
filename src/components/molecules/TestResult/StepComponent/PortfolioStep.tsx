@@ -11,7 +11,7 @@ const PortfolioStep = () => {
     <>
       {!isPortfolioExpanded ? (
         <div className='flex items-center justify-center'>
-          <div className='md:w-3/5 flex flex-col items-center justify-center gap-4 px-4 md:px-16 text-center text-base md:test-[20px]'>
+          <div className='md:w-4/5 flex flex-col items-center justify-center gap-4 px-4 md:px-16 text-center text-xl font-semibold text-[#5B5B5B] '>
             {t('TEST_RESULT.PORTFOLIO_STEP_DESC')}
             <Button
               type='primary'

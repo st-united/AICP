@@ -1,8 +1,7 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 import { getStorageData } from '@app/config';
-import { EXAM_LATEST } from '@app/constants/testing';
+import { EXAM_LATEST, TEST_RESULT_CURRENT_STEP } from '@app/constants/testing';
 import { useGetExamResult } from '@app/hooks';
 import { ExamSetResult } from '@app/interface/examSet.interface';
 
@@ -13,6 +12,7 @@ interface TestResultContextProps {
   isPortfolioExpanded: boolean;
   setIsPortfolioExpanded: (expanded: boolean) => void;
   data: ExamSetResult;
+  isLoading: boolean;
 }
 
 const TestResultContext = createContext<TestResultContextProps | undefined>(undefined);
@@ -26,14 +26,24 @@ export const useTestResultContext = () => {
 };
 
 export const TestResultProvider = ({ children }: { children: ReactNode }) => {
-  const { t } = useTranslation();
-  const [currentStep, setCurrentStep] = useState(1);
+  const getInitialStep = () => {
+    const savedStep = localStorage.getItem(TEST_RESULT_CURRENT_STEP);
+    return savedStep ? Number(savedStep) : 1;
+  };
+  const [currentStep, setCurrentStepState] = useState<number>(getInitialStep());
   const [isPortfolioExpanded, setIsPortfolioExpanded] = useState(false);
   const examId = getStorageData(EXAM_LATEST);
-  const { data } = useGetExamResult(examId);
+  const { data, isLoading } = useGetExamResult(examId);
+  const setCurrentStep = (step: number) => {
+    setCurrentStepState(step);
+    localStorage.setItem(TEST_RESULT_CURRENT_STEP, String(step));
+  };
   const onNext = () => {
     setCurrentStep(currentStep + 1);
   };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <TestResultContext.Provider
       value={{
@@ -43,6 +53,7 @@ export const TestResultProvider = ({ children }: { children: ReactNode }) => {
         isPortfolioExpanded,
         setIsPortfolioExpanded,
         data,
+        isLoading,
       }}
     >
       {children}

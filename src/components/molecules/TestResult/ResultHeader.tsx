@@ -7,6 +7,7 @@ import {
   SolutionOutlined,
 } from '@ant-design/icons';
 import { Button, Descriptions } from 'antd';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -24,6 +25,16 @@ const ResultHeader = () => {
   const examId = getStorageData(EXAM_LATEST);
   const { mutate: downloadCertificate } = useDownloadCertificate();
   const { user } = useSelector((state: RootState) => state.auth);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 450);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleDownloadCertificate = () => {
     downloadCertificate(examId, {
@@ -72,6 +83,7 @@ const ResultHeader = () => {
       </div>
       <div className='border border-[#FE7743] rounded-xl p-4'>
         <Descriptions
+          colon={false}
           layout='horizontal'
           className='w-full text-lg font-semibold'
           column={{
@@ -85,8 +97,8 @@ const ResultHeader = () => {
           <Descriptions.Item
             label={
               <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <UserOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
-                {t('TEST_RESULT.FULLNAME')}
+                <UserOutlined className='text-[#686868] font-extrabold text-lg' />
+                {t('TEST_RESULT.FULLNAME')}:
               </div>
             }
             span={1}
@@ -96,8 +108,8 @@ const ResultHeader = () => {
           <Descriptions.Item
             label={
               <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <MailOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
-                {t('TEST_RESULT.EMAIL')}
+                <MailOutlined className='text-[#686868] font-extrabold text-lg' />
+                {t('TEST_RESULT.EMAIL')}:
               </div>
             }
             span={1}
@@ -107,8 +119,8 @@ const ResultHeader = () => {
           <Descriptions.Item
             label={
               <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <PhoneOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
-                {t('TEST_RESULT.PHONE')}
+                <PhoneOutlined className='text-[#686868] font-extrabold text-lg' />
+                {t('TEST_RESULT.PHONE')}:
               </div>
             }
             span={1}
@@ -118,8 +130,8 @@ const ResultHeader = () => {
           <Descriptions.Item
             label={
               <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <SolutionOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
-                {t('TEST_RESULT.ROLE')}
+                <SolutionOutlined className='text-[#686868] font-extrabold text-lg' />
+                {t('TEST_RESULT.ROLE')}:
               </div>
             }
             span={1}
@@ -131,8 +143,8 @@ const ResultHeader = () => {
           <Descriptions.Item
             label={
               <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <BankOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
-                {t('TEST_RESULT.SCHOOL')}
+                <BankOutlined className='text-[#686868] font-extrabold text-lg' />
+                {t('TEST_RESULT.SCHOOL')}:
               </div>
             }
             span={1}
@@ -142,8 +154,8 @@ const ResultHeader = () => {
           <Descriptions.Item
             label={
               <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <IdcardOutlined className='text-[#686868] font-extrabold mb-[5px] text-lg' />
-                {t('TEST_RESULT.STUDENT_ID')}
+                <IdcardOutlined className='text-[#686868] font-extrabold text-lg' />
+                {t('TEST_RESULT.STUDENT_ID')}:
               </div>
             }
             span={1}

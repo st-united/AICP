@@ -9,14 +9,14 @@ const SuggestionList: React.FC = () => {
   const { data } = useTestResultContext();
   if (!data) return <div>{t('TEST_RESULT.NO_DATA')}</div>;
   return (
-    <div className='w-full mx-auto mt-10'>
-      <h3 className='text-2xl md:text-3xl lg:text-4xl font-bold text-[#fe7743] mb-6 md:mb-8 text-center'>
+    <div className='w-full mx-auto mt-6 bg-white rounded-2xl shadow'>
+      <h3 className='text-2xl md:text-3xl lg:text-4xl font-bold text-[#fe7743] py-8 text-center'>
         {t('TEST_RESULT.SUGGESTION_TITLE')}
       </h3>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-0 justify-around'>
+      <div className='grid grid-cols-1 md:grid-cols-2 md:gap-0 justify-around px-2 md:px-8 pb-8 gap-6'>
         {data.recommendedCourses &&
           data.recommendedCourses.map((item, idx) => (
-            <div key={item.title} className='p-16'>
+            <div key={item.title} className='px-4 md:px-16'>
               <div className='bg-white border-2 border-[#fe7743] rounded-2xl shadow-lg overflow-hidden flex flex-col'>
                 <div className='relative w-full aspect-video'>
                   <img
@@ -35,7 +35,7 @@ const SuggestionList: React.FC = () => {
                   <div className='flex justify-end'>
                     <Button
                       type='primary'
-                      className='bg-[#fe7743] border-[#fe7743] hover:bg-[#d16236] hover:border-[#d16236] rounded-full font-semibold text-lg px-6 py-2'
+                      className='bg-[#fe7743] hover:bg-[#d16236] rounded-full font-semibold text-lg px-6 py-2'
                       onClick={() => window.open(item.url, '_blank')}
                     >
                       {t('TEST_RESULT.SUGGESTION_BUTTON')}
