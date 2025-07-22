@@ -29,6 +29,10 @@ import {
   getDetailExam,
   UpdateUserStudentInfoApi,
 } from '@app/services';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 export const useCreateUser = () => {
   const navigate = useNavigate();
@@ -164,7 +168,7 @@ export const useUpdateUserStudentInfo = () => {
         queryClient.invalidateQueries({ queryKey: [QUERY_KEY.PROFILE] });
       },
       onError: ({ message }) => {
-        message.error('Failed to update student info');
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
       },
     },
   );
