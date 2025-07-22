@@ -89,9 +89,10 @@ export const OTPVerification = ({
       openNotificationWithIcon(NotificationTypeEnum.ERROR, t('OTP.PHONE_INVALID'));
       return;
     }
+    const updatedPhone = phone.replace('(', '').replace(')', '');
     updateProfileMutation(
       {
-        phoneNumber: phone,
+        phoneNumber: updatedPhone,
       },
       {
         onSuccess: () => {

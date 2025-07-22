@@ -30,7 +30,6 @@ const PhoneInput = ({
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const { t } = useTranslation();
   const { data: CallingCode } = useCallingCode();
-  const [loading, setLoading] = useState<boolean>(true);
   const currentValue = formValue !== undefined ? formValue : '';
   useEffect(() => {
     if (currentValue && CallingCode) {
@@ -52,7 +51,6 @@ const PhoneInput = ({
         setSelectedCallingCode('+84');
         setPhoneNumber(currentValue);
       }
-      setLoading(false);
     }
   }, [currentValue, CallingCode, formOnChange]);
 
@@ -79,19 +77,6 @@ const PhoneInput = ({
     }
   };
 
-  if (loading) {
-    return (
-      <div
-        className={`w-full items-center gap-2 flex justify-center h-[50px] custom-phone-input ${
-          className || ''
-        }`}
-        style={style}
-      >
-        <Skeleton.Button active className='!w-[80px] !h-full' size='large' />
-        <Skeleton.Input active className='!w-full !h-full' size='large' />
-      </div>
-    );
-  }
   return (
     <Input
       className={`${className || ''} custom-phone-input`}

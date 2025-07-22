@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 import { getStorageData } from '@app/config';
 import { EXAM_LATEST } from '@app/constants/testing';
 import { useGetExamResult } from '@app/hooks';
 import { ExamSetResult } from '@app/interface/examSet.interface';
+import { Spin } from 'antd';
 
 interface TestResultContextProps {
   currentStep: number;
@@ -13,6 +13,7 @@ interface TestResultContextProps {
   isPortfolioExpanded: boolean;
   setIsPortfolioExpanded: (expanded: boolean) => void;
   data: ExamSetResult;
+  isLoading: boolean;
 }
 
 const TestResultContext = createContext<TestResultContextProps | undefined>(undefined);
@@ -26,14 +27,20 @@ export const useTestResultContext = () => {
 };
 
 export const TestResultProvider = ({ children }: { children: ReactNode }) => {
-  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const [isPortfolioExpanded, setIsPortfolioExpanded] = useState(false);
   const examId = getStorageData(EXAM_LATEST);
-  const { data } = useGetExamResult(examId);
+  const { data, isLoading } = useGetExamResult(examId);
   const onNext = () => {
     setCurrentStep(currentStep + 1);
   };
+  if (isLoading) {
+    return (
+      <div className='flex justify-center items-center h-screen'>
+        <Spin />
+      </div>
+    );
+  }
   return (
     <TestResultContext.Provider
       value={{
@@ -43,6 +50,7 @@ export const TestResultProvider = ({ children }: { children: ReactNode }) => {
         isPortfolioExpanded,
         setIsPortfolioExpanded,
         data,
+        isLoading,
       }}
     >
       {children}
