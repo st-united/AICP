@@ -34,8 +34,8 @@ const SignUp = () => {
   };
 
   const onFinish = (values: RegisterUser) => {
-    const { fullName, email, phoneNumber, password } = values;
-    const phoneNumberWithoutBracket = phoneNumber?.replace('(', '').replace(')', '');
+    const { fullName, email, password } = values;
+    const phoneNumberWithoutBracket = values.phoneNumber?.replace('(', '').replace(')', '');
     registerUser({ fullName, email, phoneNumber: phoneNumberWithoutBracket, password });
   };
 

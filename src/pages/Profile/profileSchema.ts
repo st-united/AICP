@@ -34,13 +34,19 @@ export const useProfileSchema = () => {
 
     phoneNumber: yup
       .string()
-      .nullable()
+      .required(t('VALIDATE.PHONE_REQUIRED') as string)
       .trim()
+      .test('is-have-phone', t('VALIDATE.PHONE_REQUIRED') as string, (value) => {
+        if (!value || value.trim().length === 0 || value.trim() === '') return true;
+        const dialCodeMatch = value.match(/^\(\+\d{1,4}\)$/);
+        if (dialCodeMatch && value === dialCodeMatch[0]) return false;
+        return true;
+      })
       .test(
         'is-valid-phone',
         t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
         (value) => {
-          if (!value || value.trim().length === 0 || value.trim() === '') return true;
+          if (!value) return true;
           return PHONE_REGEX_PATTERN.test(value);
         },
       ),
