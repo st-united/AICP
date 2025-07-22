@@ -100,7 +100,7 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
 
   const ImproveTestModal = () => (
     <div className='relative flex flex-col items-center'>
-      <ModalHeader title={t('MODAL.TITLE_CONFIRM_IMPROVE_TEST')} />
+      <ModalHeader title={t('MODAL.TITLE_CONFIRM_IMPROVE_TEST')} onClose={confirmProps.onClose} />
       <ModalContent durationKey='MODAL.DURATION_CONFIRM_IMPROVE_TEST' />
 
       <div className='px-3 w-full md:my-6'>
