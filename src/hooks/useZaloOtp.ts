@@ -60,7 +60,7 @@ export const useCallingCode = () =>
     queryKey: [QUERY_KEY.ZALO_OTP_COUNTRY_CODE],
     queryFn: async () => {
       const { data } = await callingCode();
-      return data.data;
+      return data.data.sort((a: CallingCode, b: CallingCode) => a.name.localeCompare(b.name));
     },
   });
 

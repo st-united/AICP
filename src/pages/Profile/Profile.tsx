@@ -67,6 +67,7 @@ const Profile = () => {
 
   const handleSubmit = async (values: UserProfile) => {
     const phoneNumber = values.phoneNumber?.replace('(', '').replace(')', '');
+
     const fixedValues = {
       ...values,
       job: Array.isArray(values.job) ? values.job : values.job ? [values.job] : [],
