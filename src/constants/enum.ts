@@ -14,3 +14,8 @@ export enum SFIALevel {
   LEVEL_6_LEADERSHIP = 'LEVEL_6_LEADERSHIP',
   LEVEL_7_MASTERY = 'LEVEL_7_MASTERY',
 }
+
+export enum UserType {
+  STUDENT = 'student',
+  WORKER = 'worker',
+}
