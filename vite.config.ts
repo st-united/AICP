@@ -13,6 +13,9 @@ export default async ({ mode }: any) => {
     resolve: {
       alias: { '@app': path.resolve('./src') },
     },
+    build: {
+      chunkSizeWarningLimit: 1600,
+    },
     css: {
       preprocessorOptions: {
         scss: {
