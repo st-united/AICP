@@ -10,6 +10,7 @@ import {
   HasTakenExam,
   HistoryTesting,
   DetailExam,
+  UpdateUserStudentInfo,
 } from '@app/interface/user.interface';
 import {
   checkHasTakenExam,
@@ -25,7 +26,12 @@ import {
   updateForgotPasswordApi,
   checkResetPasswordTokenApi,
   getDetailExam,
+  UpdateUserStudentInfoApi,
 } from '@app/services';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 export const useCreateUser = () => {
   const navigate = useNavigate();
@@ -148,4 +154,21 @@ export const useExamDetail = (examId: string) => {
     },
     enabled: !!examId,
   });
+};
+export const useUpdateUserStudentInfo = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (payload: UpdateUserStudentInfo) => {
+      const response = await UpdateUserStudentInfoApi(payload);
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [QUERY_KEY.PROFILE] });
+      },
+      onError: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+      },
+    },
+  );
 };
