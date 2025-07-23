@@ -9,6 +9,7 @@ export const NAVIGATE_URL = {
   CHANGE_PASSWORD: '/change-password',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
+  ACTIVATION_EXPIRED: '/activation-expired',
   SIGN_IN: '/login',
   SIGN_UP: '/register',
   SIGN_OUT: '/sign-out',
@@ -18,5 +19,6 @@ export const NAVIGATE_URL = {
   SCHEDULE: '/scheduler',
   PORTFOLIO: '/portfolio',
   CAPACITY: '/capacity/:examId',
+  TEST_RESULT_DETAIL: '/result',
   CAPACITY_DYNAMIC: (examId: string) => `/capacity/${examId}`,
 };

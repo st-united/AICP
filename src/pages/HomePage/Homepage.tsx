@@ -11,8 +11,6 @@ const Homepage = () => {
   const { t } = useTranslation();
   const section2Ref = useRef<HTMLDivElement>(null);
 
-  // if (isAuth) return <UserPage />;
-
   return (
     <div className='w-full min-h-screen scroll-smooth'>
       <BannerUserScreen />

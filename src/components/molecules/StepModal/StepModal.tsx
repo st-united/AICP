@@ -5,31 +5,26 @@ import { useTranslation } from 'react-i18next';
 
 import './StepModal.scss';
 import BeforeTestComponent from './StepComponent/BeforeTestComponent';
-import { DemoComponent } from './StepComponent/DemoComponent';
 import PortfolioComponent from './StepComponent/PortfolioComponent';
-import { useDemoCondition } from './StepCondition/DemoCondition';
+import { ZaloVerifyComponent } from './StepComponent/ZaloVerifyComponent';
 import { usePortfolioCondition } from './StepCondition/PortfolioCondition';
+import { useZaloVerifyCondition } from './StepCondition/ZaloVerifyCondition';
 import { StepItem, StepModalProps } from '@app/interface/stepSection.interface';
-
-enum NAVIGATION {
-  NEXT = 'NEXT',
-  BACK = 'BACK',
-}
 
 const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
   const { t } = useTranslation();
-  const { isPass, isLoading } = useDemoCondition();
+  const { isPass: isZaloVerified, isLoading: isLoadingZaloVerify } = useZaloVerifyCondition();
   const { isPass: havePortfolio, isLoading: loadingPortfolio } = usePortfolioCondition();
-  const [nav, setNav] = useState<NAVIGATION>(NAVIGATION.NEXT);
   const [current, setCurrent] = useState(0);
+  const [autoSkipping, setAutoSkipping] = useState(true);
 
   const steps = useMemo<StepItem[]>(
     () => [
       {
         title: t('STEP_MODAL.PHONE_INFO'),
-        render: (props) => <DemoComponent {...props} />,
-        shouldSkip: true,
-        loading: isLoading,
+        render: (props) => <ZaloVerifyComponent {...props} />,
+        shouldSkip: isZaloVerified,
+        loading: isLoadingZaloVerify,
       },
       {
         title: t('STEP_MODAL.PERSONAL_INFO'),
@@ -43,11 +38,10 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
         shouldSkip: false,
       },
     ],
-    [t, isLoading, havePortfolio, loadingPortfolio],
+    [t, isZaloVerified, isLoadingZaloVerify, havePortfolio, loadingPortfolio],
   );
 
   const goNext = useCallback(async () => {
-    setNav(NAVIGATION.NEXT);
     if (current < steps.length - 1) {
       setCurrent(current + 1);
     } else {
@@ -57,7 +51,6 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
   }, [current, onFinish, steps.length]);
 
   const goBack = useCallback(async () => {
-    setNav(NAVIGATION.BACK);
     if (current > 0) {
       setCurrent(current - 1);
     } else {
@@ -67,19 +60,25 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
 
   useEffect(() => {
     const currentStep = steps[current];
-    if (!currentStep) return;
+    if (!currentStep || !autoSkipping) return;
     if (!currentStep.loading && currentStep.shouldSkip) {
       const timer = setTimeout(() => {
-        if (nav === NAVIGATION.NEXT) {
-          goNext();
-        } else {
-          goBack();
-        }
+        goNext();
       }, 0);
-
       return () => clearTimeout(timer);
+    } else if (currentStep.shouldSkip === false && !currentStep.loading) {
+      setAutoSkipping(false);
     }
-  }, [current, isPass, isLoading, havePortfolio, loadingPortfolio, nav, goNext, goBack, steps]);
+  }, [
+    current,
+    isZaloVerified,
+    isLoadingZaloVerify,
+    havePortfolio,
+    loadingPortfolio,
+    goNext,
+    goBack,
+    steps,
+  ]);
 
   return (
     <Modal open={open} onCancel={onClose} footer={null} centered className='step-modal'>
@@ -89,21 +88,21 @@ const StepModal: FC<StepModalProps> = ({ onClose, open, onFinish }) => {
             className='!cursor-pointer'
             size='default'
             current={current}
+            onChange={setCurrent}
             items={steps.map((step) => ({
               title: step.title,
-              disabled: true,
               icon:
                 steps[current] === step && step.loading ? (
-                  <LoadingOutlined className='!text-[#42160b] font-[900] !text-center' />
+                  <div className='w-full h-full flex items-center justify-center'>
+                    <LoadingOutlined className='!text-[#42160b] font-[900] !text-center' />
+                  </div>
                 ) : undefined,
             }))}
           />
         </div>
 
-        <div className='scroll-content custom-scrollbar w-full md:min-w-[1000px]'>
-          {steps[current] &&
-            steps[current].shouldSkip === false &&
-            steps[current]?.render({ goNext, goBack })}
+        <div className='scroll-content custom-scrollbar w-full smL:min-w-[700px] lg:min-w-[1000px]'>
+          {!autoSkipping && steps[current]?.render({ goNext, goBack })}
         </div>
       </div>
     </Modal>
