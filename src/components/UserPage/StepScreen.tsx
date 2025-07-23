@@ -23,8 +23,6 @@ export default function StepScreen({ steps, activeStep }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
-  const { isAuth } = useSelector((state: RootState) => state.auth);
-  const navigate = useNavigate();
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -40,8 +38,8 @@ export default function StepScreen({ steps, activeStep }: Props) {
     const isMobile = width < 768;
 
     if (isMobile) {
-      const startY = height * 0.4;
-      const endY = height * 0.8;
+      const startY = height * 0.15;
+      const endY = height < 600 ? height * 0.8 : height * 0.6;
       const gapY = (endY - startY) / (steps.length - 1);
 
       return steps.map((_, i) => ({
@@ -49,14 +47,14 @@ export default function StepScreen({ steps, activeStep }: Props) {
         y: startY + i * gapY,
       }));
     } else {
-      const x = (6 / 9) * width;
-      const y = (7 / 10) * height;
+      const x = (7 / 9) * width;
+      const y = (8 / 10) * height;
       const gapX = x / (steps.length - 1);
       const gapY = y / steps.length;
       return steps.map((_, i) => ({
         x:
           i === 0
-            ? (1 / 9) * width
+            ? (2 / 9) * width
             : i === steps.length - 1
             ? (7 / 9) * width
             : gapX * i + (1 / 9) * width,
@@ -82,6 +80,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
   const points = getPoints(dimensions.width, dimensions.height);
 
   const generateSmoothPath = (pts: { x: number; y: number }[]): string => {
+    const isMobile = dimensions.width < 768;
     if (pts.length < 2) return '';
 
     const extendedPts = [...pts];
@@ -91,8 +90,8 @@ export default function StepScreen({ steps, activeStep }: Props) {
       const dx = secondPoint.x - firstPoint.x;
       const dy = secondPoint.y - firstPoint.y;
       extendedPts.unshift({
-        x: firstPoint.x - dx * 0.2,
-        y: firstPoint.y - dy * 0.1,
+        x: isMobile ? firstPoint.x - dx * 0.2 : firstPoint.x - dx * 0.5,
+        y: isMobile ? firstPoint.y - dy * 0.1 : firstPoint.y + dy * 0.5,
       });
     }
 
@@ -102,8 +101,8 @@ export default function StepScreen({ steps, activeStep }: Props) {
       const dx = lastPoint.x - secondLastPoint.x;
       const dy = lastPoint.y - secondLastPoint.y;
       extendedPts.push({
-        x: lastPoint.x + dx * 0.2,
-        y: lastPoint.y + dy * 0.1,
+        x: isMobile ? lastPoint.x + dx * 0.2 : lastPoint.x + dx * 0.1,
+        y: isMobile ? lastPoint.y - dy * 0.1 : lastPoint.y - dy * 0.05,
       });
     }
 
@@ -111,18 +110,36 @@ export default function StepScreen({ steps, activeStep }: Props) {
     for (let i = 0; i < extendedPts.length - 1; i++) {
       const p0 = extendedPts[i];
       const p1 = extendedPts[i + 1];
-      const dx = (p1.x - p0.x) / (dimensions.width < 768 ? 0.2 : 2);
+      const dx = (p1.x - p0.x) / (isMobile ? 0.2 : 2);
       const dy = (p1.y - p0.y) / 4;
-      path.push(`C ${p0.x + dx} ${p0.y - dy}, ${p1.x - dx} ${p1.y + dy}, ${p1.x} ${p1.y}`);
+      if (isMobile) {
+        path.push(`C ${p0.x + dx} ${p0.y - dy}, ${p1.x - dx} ${p1.y + dy}, ${p1.x} ${p1.y}`);
+      } else {
+        if (i === 0) {
+          path.push(`C ${p0.x} ${p0.y}, ${p1.x - dx} ${p1.y - dy}, ${p1.x} ${p1.y}`);
+        } else if (i === extendedPts.length - 2) {
+          path.push(
+            `C ${p0.x} ${p0.y}, ${(p1.x + p0.x) / 2 + dx} ${p1.y + dy}, ${p1.x + dx} ${
+              p1.y + 4 * dy
+            }`,
+          );
+        } else {
+          path.push(`C ${p0.x + dx} ${p0.y - dy}, ${p1.x - dx} ${p1.y + dy}, ${p1.x} ${p1.y}`);
+        }
+      }
     }
     return path.join(' ');
   };
 
   const pathD = generateSmoothPath(points);
+  const viewH =
+    dimensions.width < 768
+      ? points[points.length - 1].y + 100
+      : 1.2 * points[0].y + points[points.length - 1].y;
 
   return (
-    <div className='relative bg-white h-screen'>
-      <div className='absolute top-10 left-0 px-5 md:top-28 md:left-28 z-10 md:w-[380px] xl:w-[480px]'>
+    <div className='smL:relative flex flex-col bg-white min-h-screen'>
+      <div className='smL:absolute flex px-5 mt-10 smL:top-28 smL:left-28 z-10 smL:w-[380px] xl:w-[480px]'>
         <div className='flex items-center justify-center h-full'>
           <div className='flex flex-col gap-4'>
             <span className='text-black text-2xl md:text-4xl xl:text-6xl font-[1000]'>
@@ -131,25 +148,11 @@ export default function StepScreen({ steps, activeStep }: Props) {
             <span className='text-[#64607D] text-base xl:text-xl'>
               {t('HOMEPAGE.STEP_SCREEN_HEADER.SUBTITLE')}
             </span>
-            <div className='flex items-center justify-start'>
-              <Button
-                onClick={() => {
-                  isAuth ? setIsOpen(true) : navigate('/login');
-                }}
-                className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
-              >
-                {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
-              </Button>
-            </div>
           </div>
         </div>
       </div>
-      <div className='w-full flex-1 overflow-visible' ref={containerRef}>
-        <svg
-          viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
-          className='w-full h-screen'
-          preserveAspectRatio='none'
-        >
+      <div className='w-full overflow-visible' ref={containerRef}>
+        <svg viewBox={`0 0 ${dimensions.width} ${viewH}`} preserveAspectRatio='none'>
           <defs>
             <style>
               {`
@@ -222,7 +225,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
 
               <foreignObject
                 x={dimensions.width < 768 ? p.x + 30 : p.x - 30}
-                y={dimensions.width < 768 ? p.y - 70 : p.y - 100}
+                y={dimensions.width < 768 ? p.y - 70 : p.y - 130}
                 width={
                   dimensions.width < 768
                     ? dimensions.width * 0.7
@@ -255,7 +258,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
                   </div>
                   <div
                     className={`absolute ${
-                      dimensions.width < 768 ? 'top-2 right-0' : 'top-12 xl:top-24 right-0'
+                      dimensions.width < 768 ? 'top-2 right-0' : 'top-16 xl:top-24 right-0'
                     } !z-2`}
                   >
                     <span
