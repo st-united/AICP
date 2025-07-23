@@ -15,8 +15,7 @@ import {
 import { useTestResultContext } from '../../TestResultContext';
 import { getStorageData } from '@app/config';
 import { EXAM_LATEST } from '@app/constants/testing';
-import { useExamDetail } from '@app/hooks';
-import { f } from 'vitest/dist/index-220c1d70';
+import { useExamDetail, useGetExamResult } from '@app/hooks';
 
 const capitalizeWords = (str: string) =>
   str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
@@ -25,16 +24,18 @@ const SkillLevel: React.FC = () => {
   const { t } = useTranslation();
   const examId = getStorageData(EXAM_LATEST);
   const { data: examDetail } = useExamDetail(examId || '');
-  const { data } = useTestResultContext();
+  const { data, isLoading } = useGetExamResult(examId);
   const chartData = [
     { skill: 'Mindset', value: examDetail?.mindsetScore.score },
     { skill: 'Skillset', value: examDetail?.skillsetScore.score },
     { skill: 'Toolset', value: examDetail?.toolsetScore.score },
   ];
-  const level = data.level ? capitalizeWords(data.level.replace('_', ' ')) : '-';
+  if (isLoading) return <div>Loading...</div>;
+  const level = data?.level ? capitalizeWords(data.level.replace('_', ' ')) : '-';
+
   return (
     <div className='text-lg'>
-      <Divider className='!p-1 !m-0 !mb-4 italic !text-[#5B5B5B] !text-[20px] !font-bold'>
+      <Divider className='!p-1 !m-0 !mb-4 italic !text-[#5B5B5B] !text-[12px] xsL:!text-[20px] !font-bold'>
         {t('TEST_RESULT.REVIEW')}
       </Divider>
       <div className=' flex flex-col md:flex-row gap-6 w-full mx-auto '>
@@ -46,12 +47,12 @@ const SkillLevel: React.FC = () => {
             </span>
             <span className='text-xl font-bold text-[#fe7743] ml-3 align-bottom'>{level}</span>
           </div>
-          <div className='text-gray-700 mb-2'>{data.description}</div>
+          <div className='text-gray-700 mb-2'>{data?.description}</div>
           <div className='text-xl font-bold text-black relative inline-block align-bottom'>
             {t('TEST_RESULT.SUGGEST')}:
             <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[29%] ml-1' />
           </div>
-          <div className='text-gray-700'>{data.learningPath}</div>
+          <div className='text-gray-700'>{data?.learningPath}</div>
         </div>
         <div className='md:w-[0.5px] md:h-[200px] w-full h-[0.5px] bg-gray-50' />
         <div className='flex-1 flex items-center justify-center min-w-[220px]'>

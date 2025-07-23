@@ -23,7 +23,7 @@ import {
 const ResultHeader = () => {
   const { t } = useTranslation();
   const examId = getStorageData(EXAM_LATEST);
-  const { mutate: downloadCertificate } = useDownloadCertificate();
+  // const { mutate: downloadCertificate } = useDownloadCertificate();
   const { user } = useSelector((state: RootState) => state.auth);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
 
@@ -36,34 +36,34 @@ const ResultHeader = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleDownloadCertificate = () => {
-    downloadCertificate(examId, {
-      onSuccess: (response) => {
-        const disposition = response.headers['content-disposition'];
-        let filename = 'certificate.pdf';
-        if (disposition) {
-          const match = disposition.match(/filename="?([^"]+)"?/);
-          if (match) filename = match[1];
-        }
+  // const handleDownloadCertificate = () => {
+  //   downloadCertificate(examId, {
+  //     onSuccess: (response) => {
+  //       const disposition = response.headers['content-disposition'];
+  //       let filename = 'certificate.pdf';
+  //       if (disposition) {
+  //         const match = disposition.match(/filename="?([^"]+)"?/);
+  //         if (match) filename = match[1];
+  //       }
 
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', filename);
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        window.URL.revokeObjectURL(url);
-        openNotificationWithIcon(
-          NotificationTypeEnum.SUCCESS,
-          t('TEST_RESULT.DOWNLOAD_CERT_SUCCESS'),
-        );
-      },
-      onError: () => {
-        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('TEST_RESULT.DOWNLOAD_CERT_ERROR'));
-      },
-    });
-  };
+  //       const url = window.URL.createObjectURL(new Blob([response.data]));
+  //       const link = document.createElement('a');
+  //       link.href = url;
+  //       link.setAttribute('download', filename);
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       link.remove();
+  //       window.URL.revokeObjectURL(url);
+  //       openNotificationWithIcon(
+  //         NotificationTypeEnum.SUCCESS,
+  //         t('TEST_RESULT.DOWNLOAD_CERT_SUCCESS'),
+  //       );
+  //     },
+  //     onError: () => {
+  //       openNotificationWithIcon(NotificationTypeEnum.ERROR, t('TEST_RESULT.DOWNLOAD_CERT_ERROR'));
+  //     },
+  //   });
+  // };
   return (
     <div className='bg-white rounded-2xl shadow p-8'>
       <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-2 bg-gradient-to-r from-[#FF872BCF] to-[#FF4D08] bg-clip-text text-transparent'>
@@ -72,7 +72,7 @@ const ResultHeader = () => {
       <p className='text-center text-[#5B5B5B] text-xl font-bold italic mb-6'>
         {t('TEST_RESULT.SUBTITLE')}
       </p>
-      <div className='flex justify-end mb-4'>
+      {/* <div className='flex justify-end mb-4'>
         <Button
           type='primary'
           className='rounded-full text-lg font-bold px-6 py-5'
@@ -80,7 +80,7 @@ const ResultHeader = () => {
         >
           {t('TEST_RESULT.DOWNLOAD_CERT')}
         </Button>
-      </div>
+      </div> */}
       <div className='border border-[#FE7743] rounded-xl p-4'>
         <Descriptions
           colon={false}
@@ -126,41 +126,6 @@ const ResultHeader = () => {
             span={1}
           >
             <span className='text-[#686868] font-semibold text-lg'>{user?.phoneNumber}</span>
-          </Descriptions.Item>
-          <Descriptions.Item
-            label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <SolutionOutlined className='text-[#686868] font-extrabold text-lg' />
-                {t('TEST_RESULT.ROLE')}:
-              </div>
-            }
-            span={1}
-          >
-            <span className='text-[#686868] font-semibold text-lg'>
-              {user?.isStudent ? t('USER.STUDENT') : t('USER.WORKER')}
-            </span>
-          </Descriptions.Item>
-          <Descriptions.Item
-            label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <BankOutlined className='text-[#686868] font-extrabold text-lg' />
-                {t('TEST_RESULT.SCHOOL')}:
-              </div>
-            }
-            span={1}
-          >
-            <span className='text-[#686868] font-semibold text-lg'>{user?.university}</span>
-          </Descriptions.Item>
-          <Descriptions.Item
-            label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <IdcardOutlined className='text-[#686868] font-extrabold text-lg' />
-                {t('TEST_RESULT.STUDENT_ID')}:
-              </div>
-            }
-            span={1}
-          >
-            <span className='text-[#686868] font-semibold text-lg'>{user?.studentCode}</span>
           </Descriptions.Item>
         </Descriptions>
       </div>

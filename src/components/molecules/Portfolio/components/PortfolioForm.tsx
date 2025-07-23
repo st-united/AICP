@@ -40,6 +40,23 @@ const PortfolioForm: React.FC = () => {
     >
       <div className='flex flex-col justify-around gap-4'>
         <section className='portfolio-content__section mb-[16px]'>
+          <h2>{t('PORTFOLIO.USER_INFO')}</h2>
+          <Form.Item name='name' rules={validator}>
+            <Input
+              className='!px-6 !py-3 !rounded-lg'
+              placeholder={t('PORTFOLIO.LINKEDIN_URL') as string}
+              disabled={!isEdit}
+            />
+          </Form.Item>
+          <Form.Item name='githubUrl' rules={validator}>
+            <Input
+              className='!px-6 !py-3 !rounded-lg'
+              placeholder={t('PORTFOLIO.GITHUB_URL') as string}
+              disabled={!isEdit}
+            />
+          </Form.Item>
+        </section>
+        <section className='portfolio-content__section mb-[16px]'>
           <h2>{t('PORTFOLIO.URL')}</h2>
           <Form.Item name='linkedInUrl' rules={validator}>
             <Input

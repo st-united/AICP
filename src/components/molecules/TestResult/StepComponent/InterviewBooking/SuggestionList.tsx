@@ -2,19 +2,22 @@ import { Button } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useTestResultContext } from '../../TestResultContext';
+import { getStorageData } from '@app/config';
+import { EXAM_LATEST } from '@app/constants/testing';
+import { useGetExamResult } from '@app/hooks';
 
 const SuggestionList: React.FC = () => {
   const { t } = useTranslation();
-  const { data } = useTestResultContext();
+  const examId = getStorageData(EXAM_LATEST);
+  const { data, isLoading } = useGetExamResult(examId);
   if (!data) return <div>{t('TEST_RESULT.NO_DATA')}</div>;
   return (
-    <div className='w-full mx-auto mt-6 bg-white rounded-2xl shadow'>
+    <div className='w-full mx-auto'>
       <h3 className='text-2xl md:text-3xl lg:text-4xl font-bold text-[#fe7743] py-8 text-center'>
         {t('TEST_RESULT.SUGGESTION_TITLE')}
       </h3>
       <div className='grid grid-cols-1 md:grid-cols-2 md:gap-0 justify-around px-2 md:px-8 pb-8 gap-6'>
-        {data.recommendedCourses &&
+        {data?.recommendedCourses &&
           data.recommendedCourses.map((item, idx) => (
             <div key={item.title} className='px-4 md:px-16'>
               <div className='bg-white border-2 border-[#fe7743] rounded-2xl shadow-lg overflow-hidden flex flex-col'>
