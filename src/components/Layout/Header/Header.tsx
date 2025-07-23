@@ -28,6 +28,13 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSmoothScroll = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <Layout.Header
       className={`${
@@ -47,6 +54,20 @@ const Header = () => {
           className='block md:hidden !h-20'
           preview={false}
         />
+      </div>
+      <div className='hidden md:flex gap-8 items-center'>
+        <button
+          onClick={() => handleSmoothScroll('partner-network')}
+          className='font-semibold text-md text-[#444] hover:text-[#FE7743] transition-colors duration-200 cursor-pointer'
+        >
+          {t('HOMEPAGE.PARTNER_TITLE')}
+        </button>
+        <button
+          onClick={() => handleSmoothScroll('experts')}
+          className='font-semibold text-md text-[#444] hover:text-[#FE7743] transition-colors duration-200 cursor-pointer'
+        >
+          {t('HOMEPAGE.EXPERTS_TITLE')}
+        </button>
       </div>
       {isAuth ? (
         <div className='flex items-center gap-4 md:gap-6 smM:pr-2'>
