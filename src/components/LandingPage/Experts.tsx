@@ -5,10 +5,10 @@ import { ExpertIcons } from '@app/assets/images/ExpertIcon';
 const Experts = () => {
   const { t } = useTranslation();
   return (
-    <div className='w-full h-full bg-white py-20'>
+    <div id='experts' className='w-full h-full bg-white pt-20'>
       <div className='w-full md:w-[80%] mx-auto'>
         <div className='text-center'>
-          <div className='text-2xl font-extrabold md:text-4xl text-[#FE7743]'>
+          <div className='text-2xl font-extrabold md:text-5xl text-[#FE7743]'>
             {t('HOMEPAGE.EXPERTS_TITLE')}
           </div>
           <div className='text-base text-[#444444] py-8'>{t('HOMEPAGE.EXPERTS_DESC')}</div>

@@ -5,7 +5,7 @@ import { PartnerIcons } from '@app/assets/images/PartnerIcon';
 const PartnerNetwork = () => {
   const { t } = useTranslation();
   return (
-    <div className='w-full h-full bg-[#FFFBF9]'>
+    <div id='partner-network' className='w-full h-full bg-[#FFFBF9] pt-20'>
       <div className='w-[90%] mx-auto'>
         <div className='text-center text-5xl font-extrabold text-[#FE7743] mb-4'>
           {t('HOMEPAGE.PARTNER_TITLE')}

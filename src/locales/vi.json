@@ -259,7 +259,16 @@
     "LOGIN_WITH_GOOGLE": "Đăng nhập với Google"
   },
   "HOMEPAGE": {
+    "PARTNER_TITLE": "Đối Tác",
+    "PARTNER_DESC": "DevPlus kết nối với nhiều đối tác doanh nghiệp uy tín để đảm bảo cơ hội thực tập và đầu ra việc làm cho sinh viên.",
+    "PARTNER_ORG1": "Devplus",
+    "PARTNER_ORG2": "Sở GDĐT Đà Nẵng",
+    "PARTNER_PARTNER1": "Google developer groups",
+    "PARTNER_PARTNER2": "AI Leaders",
     "PRIMARY_TITLE": "Khám phá",
+    "EXPERTS_TITLE": "Chuyên Gia Đồng Hành",
+    "EXPERTS_DESC": "DevPlus kết nối với nhiều đối tác doanh nghiệp uy tín để đảm bảo cơ hội thực tập và đầu ra việc làm cho sinh viên.",
+    "PARTNER_NETWORK_TITLE": "Mạng lưới doanh nghiệp",
     "TITLE": "Năng lực ứng dụng AI",
     "SUB_TITLE": "Tham gia bài kiểm tra đánh giá năng lực sử dụng AI để hiểu rõ khả năng của bạn và nhận lộ trình phát triển cá nhân hóa",
     "BUTTON": "Khám phá ngay",
