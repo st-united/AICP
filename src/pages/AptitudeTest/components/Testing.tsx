@@ -4,17 +4,17 @@ import {
   WarningOutlined,
   QuestionOutlined,
 } from '@ant-design/icons';
-import { Button, Divider, Modal, Progress, Spin } from 'antd';
+import { Button, Divider, Modal, Progress, Spin, Typography } from 'antd';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
-import CountdownTimer from './CountdownTimer';
 import QuestionDisplay from './QuestionDisplay';
 import QuestionIndexPanel from './QuestionIndexPanel';
 import { useDeleteExam, useGetExamSet, useSubmitDraftQuestion, useSubmitExam } from '@app/hooks';
 import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 import './QuestionIndexPanel.scss';
+const { Title } = Typography;
 
 const Testing = () => {
   const { t } = useTranslation();
@@ -24,7 +24,7 @@ const Testing = () => {
   });
   const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
   const [currentQuestionScroll, setCurrentQuestionScroll] = useState<string>('');
-  const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
+  // const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
@@ -64,11 +64,11 @@ const Testing = () => {
     setCurrentQuestionScroll(questionId);
   }, []);
 
-  const handleFlagToggle = useCallback((questionId: string) => {
-    setFlaggedQuestions((prev) =>
-      prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
-    );
-  }, []);
+  // const handleFlagToggle = useCallback((questionId: string) => {
+  //   setFlaggedQuestions((prev) =>
+  //     prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
+  //   );
+  // }, []);
 
   const handleAnswerSelect = useCallback(
     (questionId: string, answerId: string) => {
@@ -218,15 +218,14 @@ const Testing = () => {
   const isShaking = remainingTime <= 60;
 
   return (
-    <div className='exam-container relative overflow-hidden'>
-      <div className='flex flex-col justify-start items-center w-full py-8 px-6 gap-4'>
-        <div className='flex text-xl smM:text-2xl leading-[22px] font-extrabold gap-2 smM:flex-row flex-col text-center'>
-          <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
-          <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
-        </div>
-        <span className='text-[#686868] max-w-[500px] smM:max-w-none smM:min-w-[600px] text-lg smM:text-xl font-semibold text-center'>
-          {t('TEST.SUB_TITLE')}
-        </span>
+    <div className='exam-container relative overflow-hidden h-full'>
+      <div className='flex flex-col items-center w-full'>
+        <Title level={1} className='!text-[#FE7743] !font-bold' style={{ marginBottom: 0 }}>
+          <Trans
+            i18nKey={'TEST.TEST_TITLE'}
+            components={{ span: <span className='text-[#02185B]' /> }}
+          />
+        </Title>
       </div>
 
       <div className='smM:flex p-3 smM:p-6 custom-no-padding-bottom'>
@@ -236,8 +235,8 @@ const Testing = () => {
             currentQuestion={currentQuestion}
             currentQuestionScroll={currentQuestionScroll}
             answeredQuestions={answeredQuestions}
-            flaggedQuestions={flaggedQuestions}
-            onFlagToggle={handleFlagToggle}
+            // flaggedQuestions={flaggedQuestions}
+            // onFlagToggle={handleFlagToggle}
             onQuestionSelect={handleQuestionSelect}
             isAutoScrolling={isAutoScrolling}
           />
@@ -274,8 +273,8 @@ const Testing = () => {
                 currentQuestion={currentQuestion}
                 currentQuestionScroll={currentQuestionScroll}
                 answeredQuestions={answeredQuestions}
-                flaggedQuestions={flaggedQuestions}
-                onFlagToggle={handleFlagToggle}
+                // flaggedQuestions={flaggedQuestions}
+                // onFlagToggle={handleFlagToggle}
                 onQuestionSelect={handleQuestionSelect}
                 isAutoScrolling={isAutoScrolling}
               />
@@ -283,8 +282,8 @@ const Testing = () => {
           </div>
         )}
 
-        <div className='flex-1 smM:ml-6'>
-          <div className='flex flex-col w-full bg-white p-6 mdM:p-10 rounded-xl mdM:pr-0 pr-0'>
+        <div className='flex-1 smM:ml-6 shadow-xl h-full rounded-xl'>
+          <div className='flex flex-col w-full h-full bg-white p-6 rounded-xl mdM:pr-0 pr-0'>
             <div className='w-full'>
               <div className='flex justify-between mb-1'>
                 <span className='text-[14px] text-[#333]'>{formatSeconds(remainingTime)}</span>
@@ -301,14 +300,21 @@ const Testing = () => {
             <div className='pr-6 mdM:pr-10'>
               <Divider />
             </div>
-            <div className='overflow-y-auto mdM:h-[calc(100vh-320px)] smM:h-[calc(100vh-310px)] h-[calc(100vh-330px)]'>
+            <div
+              className='overflow-y-auto 
+              h-[calc(100vh-380px)]
+              h-sm:h-[calc(100vh-355px)]
+              h-md:h-[calc(100vh-350px)]
+              h-xl:h-[calc(100vh-355px)]
+              pb-6'
+            >
               <QuestionDisplay
                 questions={examSet.questions}
                 currentQuestion={currentQuestion}
                 currentQuestionScroll={currentQuestionScroll}
                 onQuestionInViewChange={handleQuestionInViewChange}
-                flaggedQuestions={flaggedQuestions}
-                onFlagToggle={handleFlagToggle}
+                // flaggedQuestions={flaggedQuestions}
+                // onFlagToggle={handleFlagToggle}
                 onAnswerSelect={(questionId, answerId) => {
                   const question = examSet.questions.find((q: Question) => q.id === questionId);
                   if (question) {
