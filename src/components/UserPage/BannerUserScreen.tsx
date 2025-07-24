@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 import { RobotHand } from '@app/assets/images';
-import { PartnerUnit1, PartnerUnit2, CelebUnit, DevPlus } from '@app/assets/images/Logos';
+import { PartnerUnit1, PartnerUnit2, CelebUnit2, DevPlus } from '@app/assets/images/Logos';
 import { RootState } from '@app/redux/store';
 
 import '../LandingPage/homepage.scss';
@@ -60,7 +60,7 @@ const BannerUserScreen = () => {
                     preview={false}
                     height={44}
                     className='object-contain transition-transform hover:scale-110'
-                    src={CelebUnit}
+                    src={CelebUnit2}
                     alt='celeb unit'
                   />
                   <Image
@@ -157,7 +157,7 @@ const BannerUserScreen = () => {
                   preview={false}
                   height={36}
                   className='object-contain transition-transform hover:scale-110'
-                  src={CelebUnit}
+                  src={CelebUnit2}
                   alt='celeb unit'
                 />
                 <Image

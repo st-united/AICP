@@ -25,7 +25,7 @@ const PartnerNetwork = () => {
                 idx={1}
                 img={CelebUnit2}
                 name={t('HOMEPAGE.PARTNER_ORG2')}
-                hScale='100%'
+                hScale='h-[100%]'
               />
             </div>
           </div>
