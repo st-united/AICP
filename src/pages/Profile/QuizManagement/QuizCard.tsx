@@ -122,14 +122,6 @@ const QuizCard = ({ quiz, onCheckboxChange, isChecked, onClick }: QuizCardProps)
       onClick={() => onClick(quiz.id)}
     >
       <div className='flex flex-col sm:flex-row items-start sm:items-center space-y-0 sm:space-x-4'>
-        <div className='flex-shrink-0'>
-          <Checkbox
-            checked={isChecked}
-            onChange={(e) => onCheckboxChange(quiz.id, e.target.checked)}
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-
         <div className='flex-1 text-base sm:text-lg space-y-2 w-full cursor-pointer'>
           <div className='flex flex-col items-center sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3'>
             <div className='text-gray-600 font-medium'>

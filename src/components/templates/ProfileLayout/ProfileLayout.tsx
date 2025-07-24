@@ -2,9 +2,11 @@ import { MenuOutlined } from '@ant-design/icons';
 import { Button, Drawer, Layout, Grid } from 'antd';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { LeftOutlined } from '@ant-design/icons';
 
 import HeaderComponent from '@app/components/Layout/Header/Header';
 import SidebarContent from '@app/components/Layout/Sidebar/Sidebar';
+import Breadcrumbs from '@app/components/common/Breadcrumbs';
 
 const { Sider, Content } = Layout;
 const { useBreakpoint } = Grid;
@@ -20,8 +22,11 @@ const ProfileLayout = () => {
   return (
     <Layout className='min-h-screen'>
       <HeaderComponent />
+      <div className='pt-6 pb-2 flex justify-center sm:justify-start sm:ml-4'>
+        <Breadcrumbs />
+      </div>
 
-      <Layout className='p-4'>
+      <Layout className=' p-4'>
         {/* Mobile Sidebar with Drawer */}
         {isMobile ? (
           <>
