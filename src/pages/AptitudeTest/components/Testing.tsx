@@ -23,7 +23,6 @@ const Testing = () => {
   });
   const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
   const [currentQuestionScroll, setCurrentQuestionScroll] = useState<string>('');
-  // const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
@@ -62,12 +61,6 @@ const Testing = () => {
     setCurrentQuestion({ id: questionId, timestamp: Date.now() });
     setCurrentQuestionScroll(questionId);
   }, []);
-
-  // const handleFlagToggle = useCallback((questionId: string) => {
-  //   setFlaggedQuestions((prev) =>
-  //     prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
-  //   );
-  // }, []);
 
   const handleAnswerSelect = useCallback(
     (questionId: string, answerId: string) => {
@@ -127,17 +120,6 @@ const Testing = () => {
       },
     });
   }, [examSet, submitExam]);
-
-  const handleCloseModal = useCallback(() => {
-    if (!examSet?.questions) return;
-    const unanswered = examSet.questions.filter(
-      (question) => !answeredQuestions.includes(question.id),
-    );
-    if (unanswered.length > 0) {
-      setUnansweredQuestions(unanswered);
-    }
-    setIsModalOpen(true);
-  }, [examSet, answeredQuestions, setUnansweredQuestions]);
 
   const handleQuestionClick = useCallback((questionId: string) => {
     setIsSubmitModalOpen(false);
@@ -232,8 +214,6 @@ const Testing = () => {
             currentQuestion={currentQuestion}
             currentQuestionScroll={currentQuestionScroll}
             answeredQuestions={answeredQuestions}
-            // flaggedQuestions={flaggedQuestions}
-            // onFlagToggle={handleFlagToggle}
             onQuestionSelect={handleQuestionSelect}
             isAutoScrolling={isAutoScrolling}
           />
@@ -270,8 +250,6 @@ const Testing = () => {
                 currentQuestion={currentQuestion}
                 currentQuestionScroll={currentQuestionScroll}
                 answeredQuestions={answeredQuestions}
-                // flaggedQuestions={flaggedQuestions}
-                // onFlagToggle={handleFlagToggle}
                 onQuestionSelect={handleQuestionSelect}
                 isAutoScrolling={isAutoScrolling}
               />
@@ -308,8 +286,6 @@ const Testing = () => {
                 currentQuestion={currentQuestion}
                 currentQuestionScroll={currentQuestionScroll}
                 onQuestionInViewChange={handleQuestionInViewChange}
-                // flaggedQuestions={flaggedQuestions}
-                // onFlagToggle={handleFlagToggle}
                 onAnswerSelect={(questionId, answerId) => {
                   const question = examSet.questions.find((q: Question) => q.id === questionId);
                   if (question) {
