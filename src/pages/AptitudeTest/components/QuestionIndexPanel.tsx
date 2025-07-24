@@ -82,7 +82,7 @@ const QuestionIndexPanel = ({
             <div className='text-sm text-gray-500'>{t('TEST.FLAGGED_QUESTIONS')}</div>
           </div> */}
         </div>
-        <div className='grid grid-cols-5 gap-3 md:gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 p-2 w-full h-full md:h-[calc(100vh-390px)]'>
+        <div className='grid grid-cols-4 gap-3 md:gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 p-2 w-full h-full md:h-[calc(100vh-390px)]'>
           {questions.map((question, index) => (
             <button
               key={question.id}

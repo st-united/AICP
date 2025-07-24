@@ -553,7 +553,8 @@
     }
   },
   "TEST": {
-    "TEST_TITLE": "Bài kiểm tra năng lực <span>ứng dụng AI</span>",
+    "TEST_TITLE": "Bài kiểm tra năng lực",
+    "TEST_TITLE_AI": "ứng dụng AI",
     "TIME_LEFT": "Thời gian còn lại",
     "HOURS": "Giờ",
     "MINUTES": "Phút",

@@ -4,17 +4,16 @@ import {
   WarningOutlined,
   QuestionOutlined,
 } from '@ant-design/icons';
-import { Button, Divider, Modal, Progress, Spin, Typography } from 'antd';
+import { Button, Divider, Modal, Progress, Spin } from 'antd';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import QuestionDisplay from './QuestionDisplay';
 import QuestionIndexPanel from './QuestionIndexPanel';
 import { useDeleteExam, useGetExamSet, useSubmitDraftQuestion, useSubmitExam } from '@app/hooks';
 import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 import './QuestionIndexPanel.scss';
-const { Title } = Typography;
 
 const Testing = () => {
   const { t } = useTranslation();
@@ -220,12 +219,10 @@ const Testing = () => {
   return (
     <div className='exam-container relative overflow-hidden h-full'>
       <div className='flex flex-col items-center w-full'>
-        <Title level={1} className='!text-[#FE7743] !font-bold' style={{ marginBottom: 0 }}>
-          <Trans
-            i18nKey={'TEST.TEST_TITLE'}
-            components={{ span: <span className='text-[#02185B]' /> }}
-          />
-        </Title>
+        <div className='flex text-lg sm:text-xl md:text-2xl leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
+          <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
+          <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
+        </div>
       </div>
 
       <div className='smM:flex p-3 smM:p-6 custom-no-padding-bottom'>
@@ -360,6 +357,7 @@ const Testing = () => {
                 </div>
               </div>
             </div>
+            <h2 className='text-2xl font-bold text-black mb-1 text-center'>{t('SUBMIT.TITLE')}</h2>
             <p className='text-lg font-medium text-center py-4'>
               {t('SUBMIT.UNANSWERED_MESSAGE', { count: unansweredQuestions.length })}
             </p>
