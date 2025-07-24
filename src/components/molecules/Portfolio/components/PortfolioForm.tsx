@@ -66,7 +66,7 @@ const PortfolioForm: React.FC = () => {
         <FileList type={PortfolioFileType.EXPERIENCE} />
       </div>
 
-      <Form.Item className='portfolio-content__actions'>
+      {/* <Form.Item className='portfolio-content__actions'>
         <div className='flex justify-end gap-2 !flex-row'>
           {!isEdit ? (
             <Button
@@ -94,7 +94,7 @@ const PortfolioForm: React.FC = () => {
             </>
           )}
         </div>
-      </Form.Item>
+      </Form.Item> */}
     </Form>
   );
 };

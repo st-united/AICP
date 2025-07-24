@@ -30,16 +30,6 @@ const Sidebar = () => {
       label: t('SIDEBAR.HISTORY'),
       path: '/history',
     },
-    {
-      icon: ReadOutlined,
-      label: t('SIDEBAR.ONLINE_COURSES'),
-      path: '/profile/courses',
-    },
-    {
-      icon: SolutionOutlined,
-      label: t('SIDEBAR.PORTFOLIO'),
-      path: '/portfolio',
-    },
   ];
 
   return (

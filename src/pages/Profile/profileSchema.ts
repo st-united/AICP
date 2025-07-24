@@ -74,5 +74,13 @@ export const useProfileSchema = () => {
     job: yup.array().of(yup.string()).nullable(),
 
     referralCode: yup.string().nullable(),
+
+    isStudent: yup.boolean().required(),
+
+    university: yup.string().required(),
+
+    studentCode: yup.string().required(),
+    github: yup.string().nullable(),
+    linked: yup.string().nullable(),
   });
 };

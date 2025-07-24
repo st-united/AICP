@@ -15,7 +15,7 @@ interface PortfolioContentProps {
 }
 
 const PortfolioContent: React.FC<PortfolioContentProps> = ({
-  edit = false,
+  edit,
   onCancel,
   onSave,
   saveLabel,
