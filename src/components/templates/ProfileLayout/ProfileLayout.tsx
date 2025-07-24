@@ -15,6 +15,7 @@ const ProfileLayout = () => {
   const screens = useBreakpoint();
 
   const isMobile = !screens.md;
+  const isTablet = screens.md && !screens.lg; // Detect tablet
 
   return (
     <Layout className='min-h-screen'>
@@ -37,12 +38,12 @@ const ProfileLayout = () => {
               open={drawerVisible}
               className='p-0'
             >
-              <SidebarContent />
+              <SidebarContent onClose={() => setDrawerVisible(false)} />
             </Drawer>
           </>
         ) : (
           <Sider
-            width={300}
+            width={isTablet ? 200 : 300} // Giảm width cho tablet
             collapsible={false}
             collapsed={collapsed}
             onCollapse={setCollapsed}
