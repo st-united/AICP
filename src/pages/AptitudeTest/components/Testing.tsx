@@ -23,7 +23,7 @@ const Testing = () => {
   });
   const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
   const [currentQuestionScroll, setCurrentQuestionScroll] = useState<string>('');
-  const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
+  // const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
@@ -63,11 +63,11 @@ const Testing = () => {
     setCurrentQuestionScroll(questionId);
   }, []);
 
-  const handleFlagToggle = useCallback((questionId: string) => {
-    setFlaggedQuestions((prev) =>
-      prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
-    );
-  }, []);
+  // const handleFlagToggle = useCallback((questionId: string) => {
+  //   setFlaggedQuestions((prev) =>
+  //     prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
+  //   );
+  // }, []);
 
   const handleAnswerSelect = useCallback(
     (questionId: string, answerId: string) => {
@@ -217,16 +217,12 @@ const Testing = () => {
   const isShaking = remainingTime <= 60;
 
   return (
-    <div className='exam-container relative overflow-hidden'>
+    <div className='exam-container relative overflow-hidden h-full'>
       {/* Header - Improved mobile spacing */}
-      <div className='flex flex-col justify-start items-center w-full py-4 px-4 gap-2 sm:py-8 sm:px-6 sm:gap-4'>
-        <div className='flex text-lg sm:text-xl md:text-2xl leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
-          <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
-          <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
-        </div>
-        <span className='text-[#686868] text-base sm:text-lg md:text-xl font-semibold text-center px-2'>
-          {t('TEST.SUB_TITLE')}
-        </span>
+
+      <div className='justify-start items-center w-full text-lg sm:text-xl md:text-2xl leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
+        <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>{' '}
+        <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
       </div>
 
       <div className='flex flex-col sm:flex-row p-2 sm:p-3 md:p-6 custom-no-padding-bottom'>
@@ -237,8 +233,8 @@ const Testing = () => {
             currentQuestion={currentQuestion}
             currentQuestionScroll={currentQuestionScroll}
             answeredQuestions={answeredQuestions}
-            flaggedQuestions={flaggedQuestions}
-            onFlagToggle={handleFlagToggle}
+            // flaggedQuestions={flaggedQuestions}
+            // onFlagToggle={handleFlagToggle}
             onQuestionSelect={handleQuestionSelect}
             isAutoScrolling={isAutoScrolling}
           />
@@ -276,8 +272,8 @@ const Testing = () => {
                   currentQuestion={currentQuestion}
                   currentQuestionScroll={currentQuestionScroll}
                   answeredQuestions={answeredQuestions}
-                  flaggedQuestions={flaggedQuestions}
-                  onFlagToggle={handleFlagToggle}
+                  // flaggedQuestions={flaggedQuestions}
+                  // onFlagToggle={handleFlagToggle}
                   onQuestionSelect={(questionId) => {
                     handleQuestionSelect(questionId);
                     setIsMenuOpen(false); // Close menu when question is selected
@@ -290,7 +286,7 @@ const Testing = () => {
         )}
 
         {/* Main content area - Improved mobile spacing */}
-        <div className='flex-1 sm:ml-6'>
+        <div className='flex-1 sm:ml-6 shadow-xl rounded-xl'>
           <div className='flex flex-col w-full bg-white p-3 sm:p-6 md:p-10 rounded-xl'>
             <div className='w-full'>
               <div className='flex justify-between mb-2'>
@@ -314,14 +310,21 @@ const Testing = () => {
             <Divider className='my-3 sm:my-4' />
 
             {/* Improved mobile height calculation */}
-            <div className='overflow-y-auto h-[calc(100vh-240px)] sm:h-[calc(100vh-310px)] md:h-[calc(100vh-320px)]'>
+            <div
+              className='overflow-y-auto 
+              h-[calc(100vh-380px)]
+              h-sm:h-[calc(100vh-355px)]
+              h-md:h-[calc(100vh-350px)]
+              h-xl:h-[calc(100vh-355px)]
+              pb-6'
+            >
               <QuestionDisplay
                 questions={examSet.questions}
                 currentQuestion={currentQuestion}
                 currentQuestionScroll={currentQuestionScroll}
                 onQuestionInViewChange={handleQuestionInViewChange}
-                flaggedQuestions={flaggedQuestions}
-                onFlagToggle={handleFlagToggle}
+                // flaggedQuestions={flaggedQuestions}
+                // onFlagToggle={handleFlagToggle}
                 onAnswerSelect={(questionId, answerId) => {
                   const question = examSet.questions.find((q: Question) => q.id === questionId);
                   if (question) {
@@ -371,6 +374,7 @@ const Testing = () => {
               </div>
             </div>
 
+            <h2 className='text-2xl font-bold text-black mb-1 text-center'>{t('SUBMIT.TITLE')}</h2>
             <p className='text-base sm:text-lg font-medium text-center py-2 sm:py-4 px-2'>
               {t('SUBMIT.UNANSWERED_MESSAGE', { count: unansweredQuestions.length })}
             </p>

@@ -1,6 +1,6 @@
 import { FlagOutlined } from '@ant-design/icons';
 import { Checkbox, Divider, Radio, Tooltip } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useQuestionNavigation } from '@app/hooks';
@@ -12,8 +12,8 @@ interface QuestionProps {
   currentQuestion: { id: string; timestamp: number };
   currentQuestionScroll: string;
   onQuestionInViewChange: (id: string, timestamp?: number) => void;
-  flaggedQuestions: string[];
-  onFlagToggle: (id: string) => void;
+  flaggedQuestions?: string[];
+  onFlagToggle?: (id: string) => void;
   onAnswerSelect: (questionId: string, answerId: string) => void;
   selectedAnswers: Record<string, string[]>;
   setIsAutoScrolling: (val: boolean) => void;
@@ -181,7 +181,7 @@ const QuestionDisplay = ({
               <h3 className='text-2xl font-bold text-black'>
                 {t('TEST.QUESTION')} {index + 1}:
               </h3>
-              <Tooltip
+              {/* <Tooltip
                 title={
                   flaggedQuestions.includes(question.id)
                     ? t('TEST.UNFLAG_QUESTION')
@@ -198,7 +198,7 @@ const QuestionDisplay = ({
                   }`}
                   onClick={() => onFlagToggle(question.id)}
                 />
-              </Tooltip>
+              </Tooltip> */}
             </div>
             <p className='text-black leading-relaxed font-semibold text-lg'>{question.content}</p>
             <p className='text-[#686868] font-medium text-sm'>
