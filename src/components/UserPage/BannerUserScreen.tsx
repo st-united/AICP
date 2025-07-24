@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { RobotHand } from '@app/assets/images';
-import { PartnerUnit1, PartnerUnit2, CelebUnit, DevPlus } from '@app/assets/images/Logos';
+import { PartnerUnit1, PartnerUnit2, CelebUnit2, DevPlus } from '@app/assets/images/Logos';
 import { RootState } from '@app/redux/store';
 
 import '../LandingPage/homepage.scss';
@@ -25,15 +25,15 @@ const BannerUserScreen = () => {
           <div className='flex flex-row items-center gap-2'>
             <Image
               preview={false}
-              height={58}
-              className='object-contain mt-1'
-              src={CelebUnit}
+              height={66}
+              className='object-contain mt-2'
+              src={CelebUnit2}
               alt='celeb unit'
             />
             <Image
               preview={false}
-              height={66}
-              className='object-contain'
+              height={60}
+              className='object-contain !mb-1'
               src={DevPlus}
               alt='dev plus'
             />
