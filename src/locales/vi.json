@@ -425,7 +425,7 @@
     "QUIZ_ID_PREFIX": "Bài kiểm tra",
     "CREATED_TIME": "Thời gian tạo:",
     "COMPETENCY_LEVEL": "Mức năng lực:",
-    "COMPETENCY_DETAIL": "Chi tiết mức năng lực",
+    "COMPETENCY_DETAIL": "Chi tiết năng lực",
     "DATE_FILTER_START": "Ngày bắt đầu",
     "DATE_FILTER_END": "Ngày kết thúc",
     "NO_QUIZ_TITLE": "Bắt đầu bài kiểm tra đầu tiên của bạn!",
@@ -452,13 +452,13 @@
     },
     "EXAM_LEVEL": {
       "NONE_LEVEL": "Chưa có đánh giá năng lực",
-      "LEVEL_1_STARTER": "Khởi đầu",
-      "LEVEL_2_EXPLORER": "Khám Phá",
-      "LEVEL_3_PRACTITIONER": "Thực Hành",
-      "LEVEL_4_INTEGRATOR": "Tích Hợp",
-      "LEVEL_5_STRATEGIST": "Chiến Lược",
-      "LEVEL_6_LEADER": "Dẫn dắt",
-      "LEVEL_7_EXPERT": "Chuyên Gia"
+      "LEVEL_1_STARTER": "Level 1 - Khởi đầu",
+      "LEVEL_2_EXPLORER": "Level 2 - Khám Phá",
+      "LEVEL_3_PRACTITIONER": "Level 3 - Thực Hành",
+      "LEVEL_4_INTEGRATOR": "Level 4 - Tích Hợp",
+      "LEVEL_5_STRATEGIST": "Level 5 Chiến Lược",
+      "LEVEL_6_LEADER": "Level 6 - Dẫn dắt",
+      "LEVEL_7_EXPERT": "Level 7 - Chuyên Gia"
     },
     "RESULT": {
       "TITLE": "Kết quả đánh giá <span>năng lực AI</span> (Sơ bộ)",
