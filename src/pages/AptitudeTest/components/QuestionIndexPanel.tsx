@@ -9,8 +9,6 @@ interface QuestionIndexPanelProps {
   currentQuestion: { id: string; timestamp: number };
   currentQuestionScroll: string;
   answeredQuestions: string[];
-  flaggedQuestions?: string[];
-  onFlagToggle?: (id: string) => void;
   onQuestionSelect: (id: string) => void;
   isAutoScrolling: boolean;
 }
