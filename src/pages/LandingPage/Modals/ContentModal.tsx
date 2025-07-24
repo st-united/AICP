@@ -7,7 +7,7 @@ interface ModalContentProps {
   };
 }
 
-export const ModalContent = ({ durationKey, hasTakenExam }: ModalContentProps) => {
+export const ContentModal = ({ durationKey, hasTakenExam }: ModalContentProps) => {
   const { t } = useTranslation();
 
   return (

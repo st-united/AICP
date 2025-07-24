@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ModalHeader } from './ModalHeader';
+import { HeaderModal } from './HeaderModal';
 import { UserType } from '@app/constants/enum';
 
 interface InfoModalProps {
@@ -43,7 +43,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
 
   return (
     <div className='relative flex flex-col items-center w-full px-2 sm:px-6 max-w-xl mx-auto'>
-      <ModalHeader
+      <HeaderModal
         title={t('CONFIRM_BEFORE_TEST_MODAL.TITLE_INFO')}
         onClose={onClose}
         symbol={userProfile?.isStudent == null ? '!' : '?'}

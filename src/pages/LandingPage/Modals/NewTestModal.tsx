@@ -1,8 +1,8 @@
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { ModalContent } from './ModalContent';
-import { ModalHeader } from './ModalHeader';
+import { ContentModal } from './ContentModal';
+import { HeaderModal } from './HeaderModal';
 
 interface NewTestModalProps {
   confirmProps: {
@@ -21,13 +21,13 @@ export const NewTestModal = ({
 
   return (
     <div className='relative flex flex-col items-center justify-center'>
-      <ModalHeader
+      <HeaderModal
         title={t('MODAL.TITLE_CONFIRM_TAKE_NEW_TEST')}
         onClose={confirmProps.onClose}
         symbol='!'
       />
 
-      <ModalContent durationKey='MODAL.DURATION_CONFIRM_TAKE_NEW_TEST' />
+      <ContentModal durationKey='MODAL.DURATION_CONFIRM_TAKE_NEW_TEST' />
 
       <div className='mt-4 px-3 w-full flex justify-center items-center md:my-6'>
         <Button

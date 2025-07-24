@@ -6,7 +6,7 @@ interface ModalHeaderProps {
   symbol?: string;
 }
 
-export const ModalHeader = ({ title, onClose, symbol }: ModalHeaderProps) => {
+export const HeaderModal = ({ title, onClose, symbol }: ModalHeaderProps) => {
   return (
     <div className='w-full relative flex flex-col items-center'>
       <div className='w-full flex justify-end'>

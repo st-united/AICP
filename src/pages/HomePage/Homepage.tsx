@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Experts from '@app/components/LandingPage/Experts';
-import FeatureSection from '@app/components/LandingPage/FeatureSection';
-import PartnerNetwork from '@app/components/LandingPage/PartnerNetwork';
+import Experts from '@app/pages/LandingPage/Experts';
+import FeatureSection from '@app/pages/LandingPage/FeatureSection';
+import PartnerNetwork from '@app/pages/LandingPage/PartnerNetwork';
 import FaqSection from '@app/components/Layout/FaqSection/FaqSection';
 import FooterSection from '@app/components/Layout/Footer/FooterSection';
 import BannerUserScreen from '@app/components/UserPage/BannerUserScreen';

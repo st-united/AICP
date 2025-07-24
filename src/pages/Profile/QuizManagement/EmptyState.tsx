@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { RootState } from '@app/redux/store';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ConfirmBeforeTestModal from '@app/components/LandingPage/ConfirmBeforeTestModal';
+import ConfirmBeforeTestModal from '@app/pages/LandingPage/ConfirmBeforeTestModal';
 
 interface EmptyStateProps {
   onStartFirst: () => void;

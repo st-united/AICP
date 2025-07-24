@@ -1,8 +1,8 @@
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { ModalContent } from './ModalContent';
-import { ModalHeader } from './ModalHeader';
+import { ContentModal } from './ContentModal';
+import { HeaderModal } from './HeaderModal';
 
 interface ImproveTestModalProps {
   confirmProps: { onClose: () => void };
@@ -27,13 +27,13 @@ export const ImproveTestModal = ({
 
   return (
     <div className='relative flex flex-col items-center'>
-      <ModalHeader
+      <HeaderModal
         title={t('MODAL.TITLE_CONFIRM_IMPROVE_TEST')}
         onClose={confirmProps.onClose}
         symbol='!'
       />
 
-      <ModalContent durationKey='MODAL.DURATION_CONFIRM_IMPROVE_TEST' hasTakenExam={hasTakenExam} />
+      <ContentModal durationKey='MODAL.DURATION_CONFIRM_IMPROVE_TEST' hasTakenExam={hasTakenExam} />
 
       <div className='px-3 w-full md:my-6'>
         <div className='flex flex-col gap-2 md:flex-row md:justify-center md:gap-4'>
