@@ -27,24 +27,7 @@ const QuizHeader = ({
         {examId && <span className='font-bold text-black'> #{examId.slice(0, 8)}</span>}
       </h1>
       {!disableButtons && (
-        <Space className='flex flex-col sm:flex-row w-full sm:w-auto gap-3 sm:gap-2'>
-          <Button
-            type='default'
-            className='!border-orange-400 !text-orange-500 !hover:border-orange-500 !hover:text-orange-600 rounded-full px-4 sm:px-6 py-2 sm:py-3 w-full h-full text-base sm:text-lg font-bold'
-            disabled={!hasQuizzes}
-            onClick={onDownloadAll}
-          >
-            {!examId ? t('EXAM.DOWNLOAD_ALL') : t('EXAM.DOWNLOAD_QUIZ')}
-          </Button>
-          <Button
-            disabled={startNewDisabled}
-            type='primary'
-            className='!bg-orange-500 !hover:bg-orange-600 !border-orange-500 !hover:border-orange-600 rounded-full px-4 sm:px-6 py-2 sm:py-3 w-full h-full text-base sm:text-lg font-bold'
-            onClick={onStartNew}
-          >
-            {t('EXAM.START_NEW_QUIZ')}
-          </Button>
-        </Space>
+        <Space className='flex flex-col sm:flex-row w-full sm:w-auto gap-3 sm:gap-2'></Space>
       )}
     </div>
   );
