@@ -38,13 +38,13 @@ const PartnerNetwork = () => {
                 idx={2}
                 img={PartnerUnit1}
                 name={t('HOMEPAGE.PARTNER_PARTNER1')}
-                hScale='60%'
+                hScale='h-[60%]'
               />
               <PartnerCard
                 idx={3}
                 img={PartnerUnit2}
                 name={t('HOMEPAGE.PARTNER_PARTNER2')}
-                hScale='60%'
+                hScale='h-[60%]'
               />
             </div>
           </div>

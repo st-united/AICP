@@ -17,8 +17,8 @@ const BannerUserScreen = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <section className='min-h-screen bg-gradient-to-br from-[#FFFBF9] to-[#FFF5F0] flex items-center justify-center px-6 md:px-8  lg:px-12'>
-      <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center w-full my-0 md:my-20 '>
+    <section className='min-h-screen bg-gradient-to-br from-[#FFFBF9] to-[#FFF5F0] flex items-center justify-center px-6 md:px-8 lg:px-12'>
+      <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center w-full my-0 sm:my-20 '>
         {/* Left Side - Robot Image */}
         <div className='relative order-2 md:order-1 px-4 md:px-6 lg:px-8'>
           <div className='relative'>
@@ -31,7 +31,7 @@ const BannerUserScreen = () => {
               />
             </div>
 
-            {/* Glowing Circles */}
+            {/* Glowing Circles
             <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-96 md:h-96 opacity-20'>
               <div className='absolute inset-0 rounded-full border-2 border-[#FE7743] animate-pulse'></div>
               <div
@@ -42,7 +42,7 @@ const BannerUserScreen = () => {
                 className='absolute inset-8 rounded-full border border-[#FE7743]/30 animate-pulse'
                 style={{ animationDelay: '1s' }}
               ></div>
-            </div>
+            </div> */}
           </div>
         </div>
 
