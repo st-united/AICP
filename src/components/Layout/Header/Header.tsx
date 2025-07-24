@@ -1,4 +1,4 @@
-import { Image, Layout } from 'antd';
+import { Button, Image, Layout } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -42,6 +42,12 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSmoothScroll = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
   useEffect(() => {
     if (isHomePage && !isScrolled && isMobile) {
       document.body.style.paddingTop = '4rem';
@@ -73,6 +79,22 @@ const Header = () => {
           className='block md:hidden !h-20'
           preview={false}
         />
+      </div>
+      <div className='hidden smM:flex gap-8 items-center'>
+        <Button
+          onClick={() => handleSmoothScroll('partner-network')}
+          type='text'
+          className='!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200'
+        >
+          {t('HOMEPAGE.PARTNER_TITLE')}
+        </Button>
+        <Button
+          onClick={() => handleSmoothScroll('experts')}
+          type='text'
+          className='!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200'
+        >
+          {t('HOMEPAGE.EXPERTS_TITLE')}
+        </Button>
       </div>
       {isAuth ? (
         <div className='flex items-center gap-4 md:gap-6 smM:pr-2'>

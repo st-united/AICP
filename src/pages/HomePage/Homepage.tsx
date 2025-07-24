@@ -1,16 +1,15 @@
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 
+import Experts from '@app/components/LandingPage/Experts';
 import FeatureSection from '@app/components/LandingPage/FeatureSection';
-import StepSection from '@app/components/LandingPage/StepSection';
+import PartnerNetwork from '@app/components/LandingPage/PartnerNetwork';
 import FaqSection from '@app/components/Layout/FaqSection/FaqSection';
 import FooterSection from '@app/components/Layout/Footer/FooterSection';
 import BannerUserScreen from '@app/components/UserPage/BannerUserScreen';
 import StepScreen from '@app/components/UserPage/StepScreen';
 
 const Homepage = () => {
-  const isAuth = useSelector((state: any) => state.auth.isAuth);
   const { t } = useTranslation();
   const section2Ref = useRef<HTMLDivElement>(null);
 
@@ -38,7 +37,8 @@ const Homepage = () => {
         <div className='w-full min-h-screen overflow-hidden bg-white'>
           <div className='flex flex-col justify-center items-center mx-auto'>
             <FeatureSection />
-            {!isAuth && <StepSection />}
+            <PartnerNetwork />
+            <Experts />
             <FaqSection />
           </div>
           <FooterSection />
