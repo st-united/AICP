@@ -80,7 +80,7 @@ const Header = () => {
           preview={false}
         />
       </div>
-      <div className='hidden md:flex gap-8 items-center'>
+      <div className='hidden smM:flex gap-8 items-center'>
         <Button
           onClick={() => handleSmoothScroll('partner-network')}
           type='text'

@@ -1,9 +1,10 @@
-import { Image, Card } from 'antd';
+import { Image, Card, Button } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 import { RobotHand } from '@app/assets/images';
 import { PartnerUnit1, PartnerUnit2, CelebUnit, DevPlus } from '@app/assets/images/Logos';
 import { RootState } from '@app/redux/store';
@@ -131,7 +132,17 @@ const BannerUserScreen = () => {
               </div>
             </div>
           </Card>
-
+          <div>
+            <Button
+              onClick={() => {
+                isAuth ? setIsOpen(true) : navigate('/login');
+              }}
+              className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
+            >
+              {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
+            </Button>
+          </div>
+          {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
           {/* Mobile Sponsors */}
           <div
             className='sm:hidden space-y-4 animate-slide-in px-2'

@@ -21,7 +21,6 @@ export default function StepScreen({ steps, activeStep }: Props) {
   const pathRef = useRef<SVGPathElement>(null);
   const [animate, setAnimate] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -275,7 +274,6 @@ export default function StepScreen({ steps, activeStep }: Props) {
           ))}
         </svg>
       </div>
-      {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
     </div>
   );
 }
