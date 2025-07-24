@@ -1,4 +1,4 @@
-import { Image, Layout } from 'antd';
+import { Button, Image, Layout } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -56,18 +56,20 @@ const Header = () => {
         />
       </div>
       <div className='hidden md:flex gap-8 items-center'>
-        <button
+        <Button
           onClick={() => handleSmoothScroll('partner-network')}
-          className='font-semibold text-md text-[#444] hover:text-[#FE7743] transition-colors duration-200 cursor-pointer'
+          type='text'
+          className='!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200'
         >
           {t('HOMEPAGE.PARTNER_TITLE')}
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => handleSmoothScroll('experts')}
-          className='font-semibold text-md text-[#444] hover:text-[#FE7743] transition-colors duration-200 cursor-pointer'
+          type='text'
+          className='!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200'
         >
           {t('HOMEPAGE.EXPERTS_TITLE')}
-        </button>
+        </Button>
       </div>
       {isAuth ? (
         <div className='flex items-center gap-4 md:gap-6 smM:pr-2'>
