@@ -312,10 +312,8 @@ const Testing = () => {
             {/* Improved mobile height calculation */}
             <div
               className='overflow-y-auto 
-              h-[calc(100vh-380px)]
-              h-sm:h-[calc(100vh-355px)]
-              h-md:h-[calc(100vh-350px)]
-              h-xl:h-[calc(100vh-355px)]
+              h-[calc(100vh-270px)]
+              h-2xl:h-[calc(100vh-355px)]
               pb-6'
             >
               <QuestionDisplay
