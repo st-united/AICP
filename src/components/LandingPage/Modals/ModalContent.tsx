@@ -1,0 +1,31 @@
+import { Trans, useTranslation } from 'react-i18next';
+
+interface ModalContentProps {
+  durationKey: string;
+  hasTakenExam?: {
+    examSetDuration: number;
+  };
+}
+
+export const ModalContent = ({ durationKey, hasTakenExam }: ModalContentProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <div className='px-2 space-y-2 md:px-6 md:space-y-3'>
+      <p className='text-base text-gray-900 md:text-xl'>
+        <Trans
+          i18nKey={durationKey}
+          values={{ duration: hasTakenExam?.examSetDuration }}
+          components={{ bold: <span className='font-bold' /> }}
+        />
+      </p>
+
+      <p className='text-base text-gray-900 md:text-xl'>{t('MODAL.RESULT_CONFIRM_TEST')}</p>
+
+      <p className='text-base text-gray-900 md:text-xl'>
+        <span className='text-orange-500 font-semibold'>{t('MODAL.NOTE_CONFIRM_TEST')}:</span>{' '}
+        {t('MODAL.WARNING_CONFIRM_TEST')}
+      </p>
+    </div>
+  );
+};
