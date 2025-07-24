@@ -14,9 +14,23 @@ const Header = () => {
   const { pathname } = useLocation();
   const isAuth = useSelector((state: any) => state.auth.isAuth);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const isHomePage = pathname === '/';
   const handleLoginClick = () => navigate('/login');
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+
+    setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleMediaChange);
+
+    return () => mediaQuery.removeEventListener('change', handleMediaChange);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,11 +42,23 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isHomePage && !isScrolled && isMobile) {
+      document.body.style.paddingTop = '4rem';
+    } else {
+      document.body.style.paddingTop = '0';
+    }
+
+    return () => {
+      document.body.style.paddingTop = '0';
+    };
+  }, [isHomePage, isScrolled, isMobile]);
+
   return (
     <Layout.Header
       className={`${
-        isHomePage && !isScrolled ? 'fixed top-0 bg-transparent' : 'sticky top-0 bg-white shadow-md'
-      } flex justify-between w-full items-center h-[5rem] z-50 transition-all duration-300 ease-in-out mdL:px-16 xl:px-24`}
+        isHomePage && !isScrolled ? 'fixed top-0 bg-[#FFFBF9]' : 'sticky top-0 bg-white shadow-md'
+      } flex justify-between w-full items-center h-[5rem] z-50  transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24`}
     >
       <div className='cursor-pointer flex items-center justify-center'>
         <Image
