@@ -220,7 +220,7 @@ const Testing = () => {
     <div className='exam-container relative overflow-hidden h-full'>
       <div className='flex flex-col items-center w-full'>
         <div className='flex text-lg sm:text-xl md:text-2xl leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
-          <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
+          <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>{' '}
           <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
         </div>
       </div>
@@ -299,10 +299,8 @@ const Testing = () => {
             </div>
             <div
               className='overflow-y-auto 
-              h-[calc(100vh-380px)]
-              h-sm:h-[calc(100vh-355px)]
-              h-md:h-[calc(100vh-350px)]
-              h-xl:h-[calc(100vh-355px)]
+              h-[calc(100vh-270px)]
+              h-2xl:h-[calc(100vh-355px)]
               pb-6'
             >
               <QuestionDisplay
