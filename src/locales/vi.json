@@ -626,7 +626,7 @@
   "PORTFOLIO": {
     "TITLE": "Hoàn thiện hồ sơ",
     "SUB_TITLE": "Hãy chia sẻ thêm một chút về bạn! Việc bổ sung thông tin sẽ giúp chúng tôi hiểu bạn rõ hơn và hỗ trợ bạn hiệu quả hơn!",
-    "SUB_TITLE_2": "Vui lòng cung cấp thông tin minh bạch để đội ngũ chúng tôi có thể xác minh chính xác",
+    "SUB_TITLE_2": "Thông tin minh bạch sẽ giúp đội ngũ chúng tôi xác minh nhanh chóng và chính xác",
     "VALIDATION": "Chấp nhận định dạng PNG, JPG, JPEG, DOCX, DOC, PDF. Dung lượng tối đa: 5MB",
     "CERTIFICATIONS": "Chứng chỉ chuyên môn",
     "URL": "Hồ sơ trực tuyến",
@@ -654,7 +654,11 @@
     "NO_INFO": "Vui lòng cung cấp thông tin để cập nhật hồ sơ",
     "NOT_SUPPORT_PREVIEW": "Chưa hỗ trợ xem trước định dạng này",
     "UNSUPPORTED_FORMAT": "Định dạng file không hỗ trợ xem trước",
-    "DOWNLOAD": "Tải xuống"
+    "DOWNLOAD": "Tải xuống",
+    "USER_INFO": "Bạn là",
+    "INFO_DETAIL": "Thông tin chi tiết",
+    "UNIVERSITY": "Tên trường",
+    "STUDENT_CODE": "Mã số sinh viên"
   },
   "TERMS": {
     "TITLE": "Điều khoản & Điều kiện",

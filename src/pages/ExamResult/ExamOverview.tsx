@@ -7,7 +7,6 @@ import SummaryBox from '@app/components/molecules/TestResult/StepComponent/Inter
 const ExamOverview = () => {
   return (
     <div className='flex flex-col gap-8'>
-      <ResultHeader />
       <div className='bg-white rounded-2xl shadow p-8'>
         <InterviewBooking />
       </div>
