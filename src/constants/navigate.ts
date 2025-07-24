@@ -16,6 +16,7 @@ export const NAVIGATE_URL = {
   PROFILE: '/profile',
   TEST: '/aptitude-test',
   TEST_RESULT: '/history',
+  TEST_RESULT_DETAIL_EXAM: '/history/:examId',
   SCHEDULE: '/scheduler',
   PORTFOLIO: '/portfolio',
   CAPACITY: '/capacity/:examId',
