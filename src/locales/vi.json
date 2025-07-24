@@ -259,7 +259,16 @@
     "LOGIN_WITH_GOOGLE": "Đăng nhập với Google"
   },
   "HOMEPAGE": {
+    "PARTNER_TITLE": "Đối Tác",
+    "PARTNER_DESC": "DevPlus kết nối với nhiều đối tác doanh nghiệp uy tín để đảm bảo cơ hội thực tập và đầu ra việc làm cho sinh viên.",
+    "PARTNER_ORG1": "Devplus",
+    "PARTNER_ORG2": "Sở GDĐT Đà Nẵng",
+    "PARTNER_PARTNER1": "Google developer groups",
+    "PARTNER_PARTNER2": "AI Leaders",
     "PRIMARY_TITLE": "Khám phá",
+    "EXPERTS_TITLE": "Chuyên Gia Đồng Hành",
+    "EXPERTS_DESC": "DevPlus kết nối với nhiều đối tác doanh nghiệp uy tín để đảm bảo cơ hội thực tập và đầu ra việc làm cho sinh viên.",
+    "PARTNER_NETWORK_TITLE": "Mạng lưới doanh nghiệp",
     "TITLE": "Năng lực ứng dụng AI",
     "SUB_TITLE": "Tham gia bài kiểm tra đánh giá năng lực sử dụng AI để hiểu rõ khả năng của bạn và nhận lộ trình phát triển cá nhân hóa",
     "BUTTON": "Khám phá ngay",
@@ -416,7 +425,7 @@
     "QUIZ_ID_PREFIX": "Bài kiểm tra",
     "CREATED_TIME": "Thời gian tạo:",
     "COMPETENCY_LEVEL": "Mức năng lực:",
-    "COMPETENCY_DETAIL": "Chi tiết mức năng lực",
+    "COMPETENCY_DETAIL": "Chi tiết năng lực",
     "DATE_FILTER_START": "Ngày bắt đầu",
     "DATE_FILTER_END": "Ngày kết thúc",
     "NO_QUIZ_TITLE": "Bắt đầu bài kiểm tra đầu tiên của bạn!",
@@ -443,13 +452,13 @@
     },
     "EXAM_LEVEL": {
       "NONE_LEVEL": "Chưa có đánh giá năng lực",
-      "LEVEL_1_STARTER": "Khởi đầu",
-      "LEVEL_2_EXPLORER": "Khám Phá",
-      "LEVEL_3_PRACTITIONER": "Thực Hành",
-      "LEVEL_4_INTEGRATOR": "Tích Hợp",
-      "LEVEL_5_STRATEGIST": "Chiến Lược",
-      "LEVEL_6_LEADER": "Dẫn dắt",
-      "LEVEL_7_EXPERT": "Chuyên Gia"
+      "LEVEL_1_STARTER": "Level 1 - Khởi đầu",
+      "LEVEL_2_EXPLORER": "Level 2 - Khám Phá",
+      "LEVEL_3_PRACTITIONER": "Level 3 - Thực Hành",
+      "LEVEL_4_INTEGRATOR": "Level 4 - Tích Hợp",
+      "LEVEL_5_STRATEGIST": "Level 5 Chiến Lược",
+      "LEVEL_6_LEADER": "Level 6 - Dẫn dắt",
+      "LEVEL_7_EXPERT": "Level 7 - Chuyên Gia"
     },
     "RESULT": {
       "TITLE": "Kết quả đánh giá <span>năng lực AI</span> (Sơ bộ)",

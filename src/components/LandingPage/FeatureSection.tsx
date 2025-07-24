@@ -12,7 +12,7 @@ const FeatureSection = () => {
   }>;
 
   return (
-    <div className='bg-[#FFFBF9] w-full h-full pb-32'>
+    <div className='bg-[#FFFBF9] w-full h-full'>
       <div className='container w-full h-full mx-auto xsM:w-[90%] smM:px-2 text-center py-10'>
         <p className='text-primary font-bold text-base sm:text-3xl mdM::text-3xl mb-8'>
           {t('HOMEPAGE.FEATURES_LABEL')}

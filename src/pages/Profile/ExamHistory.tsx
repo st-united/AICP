@@ -13,11 +13,13 @@ import QuizHeader from './QuizManagement/QuizHeader';
 import { DATE_TIME } from '@app/constants';
 import { ExamStatusEnum } from '@app/constants/enum';
 import { useExamDetail, useGetHistory } from '@app/hooks';
+import { useNavigate } from 'react-router-dom';
 
 const ExamHistory = () => {
   const [selectedQuizzes, setSelectedQuizzes] = useState<Set<string>>(new Set());
   const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
   const [selectedQuizId, setSelectedQuizId] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const apiParams = useMemo(() => {
     if (!dateRange?.[0] && !dateRange?.[1]) return undefined;
@@ -109,28 +111,13 @@ const ExamHistory = () => {
               <EmptyState onStartFirst={handleStartFirst} />
             ) : (
               <div className='overflow-y-auto flex-1 space-y-4 px-1'>
-                <div className='flex items-center space-x-2 mb-2 z-0'>
-                  <Checkbox
-                    checked={allChecked}
-                    indeterminate={someChecked}
-                    onChange={(e) => handleCheckAll(e.target.checked)}
-                  />
-                  <p className='font-medium'>{t('EXAM.SELECT_ALL')}</p>
-
-                  <button
-                    onClick={handleDownloadAll}
-                    className='w-[25px] h-[25px] flex items-center justify-center rounded-md border border-orange-500 text-orange-500 hover:bg-orange-50 transition'
-                  >
-                    <DownloadOutlined className='text-base' />
-                  </button>
-                </div>
                 {historyData.map((quiz) => (
                   <QuizCard
                     key={quiz.id}
                     quiz={quiz}
                     onCheckboxChange={handleCheckboxChange}
                     isChecked={selectedQuizzes.has(quiz.id)}
-                    onClick={() => setSelectedQuizId(quiz.id)}
+                    onClick={() => navigate(`/history/${quiz.id}`)}
                   />
                 ))}
               </div>
