@@ -18,10 +18,7 @@ interface QuestionIndexPanelProps {
 const QuestionIndexPanel = ({
   questions,
   currentQuestion,
-  currentQuestionScroll,
   answeredQuestions,
-  flaggedQuestions,
-  onFlagToggle,
   onQuestionSelect,
   isAutoScrolling,
 }: QuestionIndexPanelProps) => {
@@ -29,14 +26,10 @@ const QuestionIndexPanel = ({
 
   const getQuestionStatus = useCallback(
     (id: string) => {
-      // if (flaggedQuestions.includes(id)) return 'flagged';
       if (answeredQuestions.includes(id)) return 'answered';
       return 'default';
     },
-    [
-      answeredQuestions,
-      //  flaggedQuestions
-    ],
+    [answeredQuestions],
   );
 
   const getQuestionClasses = useCallback(
@@ -77,10 +70,6 @@ const QuestionIndexPanel = ({
             <div className='rounded-full bg-[#FFE9E1] aspect-square w-3 h-3'></div>
             <div className='text-sm text-gray-500'>{t('TEST.ANSWERED_QUESTIONS')}</div>
           </div>
-          {/* <div className='flex items-center flex-row gap-2'>
-            <div className='rounded-full bg-[#FE7743] aspect-square w-3 h-3'></div>
-            <div className='text-sm text-gray-500'>{t('TEST.FLAGGED_QUESTIONS')}</div>
-          </div> */}
         </div>
         <div className='grid grid-cols-4 gap-3 md:gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 p-2 w-full h-full md:h-[calc(100vh-390px)]'>
           {questions.map((question, index) => (
@@ -91,7 +80,6 @@ const QuestionIndexPanel = ({
               onClick={() => onQuestionSelect(question.id)}
               onContextMenu={(e) => {
                 e.preventDefault();
-                // onFlagToggle(question.id);
               }}
               title={`Question ${question.id} - ${getQuestionStatus(question.id)}`}
             >
