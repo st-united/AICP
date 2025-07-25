@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
 import { RobotHand } from '@app/assets/images';
 import { PartnerUnit1, PartnerUnit2, CelebUnit, DevPlus } from '@app/assets/images/Logos';
+import ConfirmBeforeTestModal from '@app/pages/LandingPage/ConfirmBeforeTestModal';
 import { RootState } from '@app/redux/store';
 
-import '../LandingPage/homepage.scss';
+import '@app/pages/LandingPage/homepage.scss';
 
 const BannerUserScreen = () => {
   const { t } = useTranslation();
