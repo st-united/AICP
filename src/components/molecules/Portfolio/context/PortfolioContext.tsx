@@ -43,6 +43,7 @@ interface PortfolioProviderProps {
   edit?: boolean;
   saveLabel?: string;
   cancelLabel?: string;
+  isWithUserInfo?: boolean;
 }
 
 export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
@@ -52,6 +53,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
   edit = false,
   saveLabel,
   cancelLabel,
+  isWithUserInfo = true,
 }) => {
   const [form] = Form.useForm();
   const { t } = useTranslation();
@@ -127,18 +129,15 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
 
   const handleSubmit = useCallback(
     async (values: PortfolioRequest) => {
-      const isAllEmpty =
-        !values.linkedInUrl?.trim() &&
-        !values.githubUrl?.trim() &&
-        certificationFiles.length === 0 &&
-        experienceFiles.length === 0;
-
-      if (isAllEmpty) {
-        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PORTFOLIO.NO_INFO'));
-        return;
+      if (values.isStudent) {
+        await form.validateFields(['university', 'studentCode']);
       }
-
       const data = new FormData();
+      if (values.isStudent) {
+        data.append('isStudent', values.isStudent.toString());
+        values.university && data.append('university', values.university);
+        values.studentCode && data.append('studentCode', values.studentCode);
+      }
       values.linkedInUrl && data.append('linkedInUrl', values.linkedInUrl);
       values.githubUrl && data.append('githubUrl', values.githubUrl);
 
@@ -278,6 +277,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
     downloadPortfolioFileMutation,
     t,
     form,
+    isWithUserInfo,
   };
 
   return <PortfolioContext.Provider value={value}>{children}</PortfolioContext.Provider>;

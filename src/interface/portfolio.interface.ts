@@ -5,6 +5,9 @@ import { AxiosError } from 'axios';
 import { PortfolioFileType } from '@app/constants/portfolioFileType';
 
 export interface PortfolioRequest {
+  isStudent?: boolean;
+  university?: string;
+  studentCode?: string;
   linkedInUrl?: string;
   githubUrl?: string;
   certificateFiles?: File[];
@@ -38,6 +41,7 @@ export interface FileItemProps {
 
 export interface PortfolioContextType {
   isEdit: boolean;
+  isWithUserInfo: boolean;
   selectedFile: ExtendedUploadFile | null;
   certificationFiles: ExtendedUploadFile[];
   experienceFiles: ExtendedUploadFile[];

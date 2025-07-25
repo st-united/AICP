@@ -124,7 +124,7 @@
     "STATUS": "Trạng thái",
     "PASSWORD": "Mật khẩu",
     "CHOOSE_ROLE": "vai trò",
-    "STUDENT": "Học sinh",
+    "STUDENT": "Sinh viên",
     "WORKER": "Người đi làm"
   },
   "TABLE": {
@@ -203,7 +203,12 @@
     "INVALID_DATE_RANGE": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu",
     "MIN_AGE": "Phải đủ {{age}} tuổi trở lên",
     "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai",
-    "URL_INVALID": "URL không hợp lệ"
+    "URL_INVALID": "URL không hợp lệ",
+    "UNIVERSITY_REQUIRED": "Vui lòng chọn trường học",
+    "STUDENT_CODE_REQUIRED": "Vui lòng nhập mã sinh viên",
+    "USER_INFO_REQUIRED": "Vui lòng chọn trạng thái của bạn",
+    "USER_UNIVERSITY_REQUIRED": "Vui lòng nhập tên trường",
+    "USER_STUDENT_CODE_REQUIRED": "Vui lòng nhập mã số sinh viên"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
@@ -625,7 +630,7 @@
   },
   "PORTFOLIO": {
     "TITLE": "Hoàn thiện hồ sơ",
-    "SUB_TITLE": "Hãy chia sẻ thêm một chút về bạn! Việc bổ sung thông tin sẽ giúp chúng tôi hiểu bạn rõ hơn và hỗ trợ bạn hiệu quả hơn!",
+    "SUB_TITLE": "Để hỗ trợ cho buổi phỏng vấn, vui lòng bổ sung các thông tin bên dưới để đội ngũ chúng tôi có thể đánh giá năng lực của bạn một cách chính xác và toàn diện!",
     "SUB_TITLE_2": "Thông tin minh bạch sẽ giúp đội ngũ chúng tôi xác minh nhanh chóng và chính xác",
     "VALIDATION": "Chấp nhận định dạng PNG, JPG, JPEG, DOCX, DOC, PDF. Dung lượng tối đa: 5MB",
     "CERTIFICATIONS": "Chứng chỉ chuyên môn",
@@ -658,7 +663,8 @@
     "USER_INFO": "Bạn là",
     "INFO_DETAIL": "Thông tin chi tiết",
     "UNIVERSITY": "Tên trường",
-    "STUDENT_CODE": "Mã số sinh viên"
+    "STUDENT_CODE": "Mã số sinh viên",
+    "TITLE_2": "Hồ sơ chuyên môn"
   },
   "TERMS": {
     "TITLE": "Điều khoản & Điều kiện",

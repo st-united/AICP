@@ -16,7 +16,9 @@ const ResultLayout = () => {
         <Suspense fallback={<Spin />}>
           <Col className='outlet-content-layout'>
             <ResultHeader />
-            <Outlet />
+            <div className='flex flex-col gap-4'>
+              <Outlet />
+            </div>
           </Col>
         </Suspense>
       </Content>

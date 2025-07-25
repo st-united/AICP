@@ -1,13 +1,16 @@
 import { Button, Divider } from 'antd';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import InterviewBookingModal from '@app/components/atoms/InterviewBookingModal/InterviewBookingModal';
 import { NAVIGATE_URL } from '@app/constants';
 import { useGetPortfolio } from '@app/hooks/usePortfolio';
 
 const InterviewBooking: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [openInterviewBookingModal, setOpenInterviewBookingModal] = useState(false);
   const { isLoading: isLoadingPortfolio, isSuccess: isSuccessPortfolio } = useGetPortfolio();
   return (
     <div>
@@ -28,12 +31,18 @@ const InterviewBooking: React.FC = () => {
             if (!isSuccessPortfolio) {
               navigate(NAVIGATE_URL.RESULT_PORTFOLIO);
             } else {
-              navigate(NAVIGATE_URL.PORTFOLIO);
+              setOpenInterviewBookingModal(true);
             }
           }}
         >
           {t('TEST_RESULT.BOOKING_BUTTON')}
         </Button>
+        <InterviewBookingModal
+          open={openInterviewBookingModal}
+          onCancel={() => {
+            setOpenInterviewBookingModal(false);
+          }}
+        />
       </div>
     </div>
   );

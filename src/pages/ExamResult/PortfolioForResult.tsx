@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
+import InterviewBookingModal from '@app/components/atoms/InterviewBookingModal/InterviewBookingModal';
 import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
-import { NAVIGATE_URL } from '@app/constants/navigate';
 
 const PortfolioForResult: React.FC = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const [openInterviewBookingModal, setOpenInterviewBookingModal] = useState(false);
   return (
-    <PortfolioContent
-      onSave={() => {
-        navigate(NAVIGATE_URL.RESULT);
-      }}
-      onCancel={() => {
-        navigate(NAVIGATE_URL.RESULT);
-      }}
-      edit={true}
-      saveLabel={t('PORTFOLIO.RESULT_PORTFOLIO_SAVE_BUTTON') as string}
-      cancelLabel={t('PORTFOLIO.RESULT_PORTFOLIO_BACK_BUTTON') as string}
-    />
+    <div className='bg-white rounded-2xl shadow p-8 mt-8'>
+      <PortfolioContent
+        onSave={() => {
+          setOpenInterviewBookingModal(true);
+        }}
+        onCancel={() => {
+          setOpenInterviewBookingModal(true);
+        }}
+        edit={true}
+        saveLabel={t('PORTFOLIO.RESULT_PORTFOLIO_SAVE_BUTTON') as string}
+        cancelLabel={t('PORTFOLIO.RESULT_PORTFOLIO_BACK_BUTTON') as string}
+        isWithUserInfo={true}
+      />
+      <InterviewBookingModal
+        open={openInterviewBookingModal}
+        onCancel={() => {
+          setOpenInterviewBookingModal(false);
+        }}
+      />
+    </div>
   );
 };
 

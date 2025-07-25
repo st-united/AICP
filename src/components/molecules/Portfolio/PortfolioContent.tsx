@@ -12,6 +12,7 @@ interface PortfolioContentProps {
   onCancel?: () => void;
   onSave?: () => void;
   saveLabel?: string;
+  isWithUserInfo?: boolean;
 }
 
 const PortfolioContent: React.FC<PortfolioContentProps> = ({
@@ -20,6 +21,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = ({
   onSave,
   saveLabel,
   cancelLabel,
+  isWithUserInfo = false,
 }: PortfolioContentProps) => {
   return (
     <PortfolioProvider
@@ -28,6 +30,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = ({
       edit={edit}
       saveLabel={saveLabel}
       cancelLabel={cancelLabel}
+      isWithUserInfo={isWithUserInfo}
     >
       <PortfolioContentContainer />
       <FilePreview />

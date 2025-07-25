@@ -1,4 +1,4 @@
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Select, Radio } from 'antd';
 import React, { useMemo } from 'react';
 
 import { FileList } from './FileList';
@@ -20,6 +20,7 @@ const PortfolioForm: React.FC = () => {
     saveLabel,
     cancelLabel,
     isUpdating,
+    isWithUserInfo,
   } = usePortfolioContext();
 
   const portfolioSchema = usePortfolioSchema();
@@ -29,68 +30,91 @@ const PortfolioForm: React.FC = () => {
   );
 
   const initialValues = useMemo(() => getPortfolio || {}, [getPortfolio]);
+  const isStudent = Form.useWatch('isStudent', form);
+
+  // Custom onFinish to ensure validateFields for conditional fields
+  const handleFinish = async (values: any) => {
+    console.log('bladvldldslfdslfdlsfldsfldslfdlfd', values);
+    if (values.isStudent) {
+      try {
+        await form.validateFields(['university', 'studentCode']);
+      } catch (e) {
+        // Nếu validate lỗi thì không submit tiếp
+        return;
+      }
+    }
+    handleSubmit(values);
+  };
 
   return (
     <Form
       form={form}
       layout='vertical'
       className='portfolio-content__form'
-      onFinish={handleSubmit}
+      onFinish={handleFinish}
       initialValues={initialValues}
     >
-      <div className='flex flex-col justify-around gap-4'>
-        <section className='portfolio-content__section mb-[16px]'>
-          <h2>{t('PORTFOLIO.USER_INFO')}</h2>
-          <Form.Item name='name' rules={validator}>
-            <Input
-              className='!px-6 !py-3 !rounded-lg'
-              placeholder={t('USER.STUDENT') as string}
-              disabled={!isEdit}
-            />
-          </Form.Item>
-          <Form.Item name='githubUrl' rules={validator}>
-            <Input
-              className='!px-6 !py-3 !rounded-lg'
-              placeholder={t('USER.WORKER') as string}
-              disabled={!isEdit}
-            />
-          </Form.Item>
-        </section>
-        <section className='portfolio-content__section mb-[16px]'>
-          <h2>{t('PORTFOLIO.USER_INFO')}</h2>
-          <Form.Item name='name' rules={validator}>
-            <Input
-              className='!px-6 !py-3 !rounded-lg'
-              placeholder={t('USER.STUDENT') as string}
-              disabled={!isEdit}
-            />
-          </Form.Item>
-          <Form.Item name='githubUrl' rules={validator}>
-            <Input
-              className='!px-6 !py-3 !rounded-lg'
-              placeholder={t('USER.WORKER') as string}
-              disabled={!isEdit}
-            />
-          </Form.Item>
-        </section>
-        <section className='portfolio-content__section mb-[16px]'>
-          <h2>{t('PORTFOLIO.URL')}</h2>
-          <Form.Item name='linkedInUrl' rules={validator}>
-            <Input
-              className='!px-6 !py-3 !rounded-lg'
-              placeholder={t('PORTFOLIO.LINKEDIN_URL') as string}
-              disabled={!isEdit}
-            />
-          </Form.Item>
-          <Form.Item name='githubUrl' rules={validator}>
-            <Input
-              className='!px-6 !py-3 !rounded-lg'
-              placeholder={t('PORTFOLIO.GITHUB_URL') as string}
-              disabled={!isEdit}
-            />
-          </Form.Item>
-        </section>
-      </div>
+      {isWithUserInfo && (
+        <div className='flex flex-col justify-around gap-4'>
+          <section className='portfolio-content__section mb-[16px]'>
+            <h2>
+              {t('PORTFOLIO.USER_INFO')} <span className='text-red-500'>*</span>
+            </h2>
+            <Form.Item name='isStudent' rules={validator}>
+              <Radio.Group className='flex xsL:flex-row flex-col gap-4 w-full'>
+                <div className='rounded-lg p-3 bg-white border border-gray-300 w-full'>
+                  <Radio value={true} disabled={!isEdit}>
+                    {t('USER.STUDENT')}
+                  </Radio>
+                </div>
+                <div className='rounded-lg p-3 bg-white border border-gray-300 w-full'>
+                  <Radio value={false} disabled={!isEdit}>
+                    {t('USER.WORKER')}
+                  </Radio>
+                </div>
+              </Radio.Group>
+            </Form.Item>
+          </section>
+          {isStudent === true && (
+            <section className='portfolio-content__section mb-[16px]'>
+              <h2>
+                {t('PORTFOLIO.INFO_DETAIL')} <span className='text-red-500'>*</span>
+              </h2>
+              <Form.Item name='university' rules={validator} preserve={false}>
+                <Input
+                  className='!px-6 !py-3 !rounded-lg'
+                  placeholder={t('PORTFOLIO.UNIVERSITY') as string}
+                  disabled={!isEdit}
+                />
+              </Form.Item>
+              <Form.Item name='studentCode' rules={validator} preserve={false}>
+                <Input
+                  className='!px-6 !py-3 !rounded-lg'
+                  placeholder={t('PORTFOLIO.STUDENT_CODE') as string}
+                  disabled={!isEdit}
+                />
+              </Form.Item>
+            </section>
+          )}
+        </div>
+      )}
+      <section className='portfolio-content__section mb-[16px]'>
+        <h2>{t('PORTFOLIO.URL')}</h2>
+        <Form.Item name='linkedInUrl' rules={validator}>
+          <Input
+            className='!px-6 !py-3 !rounded-lg'
+            placeholder={t('PORTFOLIO.LINKEDIN_URL') as string}
+            disabled={!isEdit}
+          />
+        </Form.Item>
+        <Form.Item name='githubUrl' rules={validator}>
+          <Input
+            className='!px-6 !py-3 !rounded-lg'
+            placeholder={t('PORTFOLIO.GITHUB_URL') as string}
+            disabled={!isEdit}
+          />
+        </Form.Item>
+      </section>
       <div>
         <h2 className='mb-4 text-xl font-semibold'>{t('PORTFOLIO.CERTIFICATIONS')}</h2>
         <FileUpload type={PortfolioFileType.CERTIFICATION} />
