@@ -117,7 +117,11 @@ const ExamHistory = () => {
                     quiz={quiz}
                     onCheckboxChange={handleCheckboxChange}
                     isChecked={selectedQuizzes.has(quiz.id)}
-                    onClick={() => navigate(`/history/${quiz.id}`)}
+                    onClick={() =>
+                      quiz.examStatus !== ExamStatusEnum.IN_PROGRESS &&
+                      navigate(`/history/${quiz.id}`)
+                    }
+                    disabled={quiz.examStatus === ExamStatusEnum.IN_PROGRESS}
                   />
                 ))}
               </div>
