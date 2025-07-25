@@ -15,13 +15,18 @@ const PartnerNetwork = () => {
         <div className='text-center text-base font-medium text-[#444444] '>
           {t('HOMEPAGE.PARTNER_DESC')}
         </div>
-        <div className='w-full h-full grid grid-cols-1 smXS:grid-cols-2 gap-6 sm:gap-14 px-2 sm:px-32 md:px-6 lg:px-28 mt-10 '>
+        <div className='h-full grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-44 md:gap-14 w-[90%] md:w-[95%] lg:w-[80%] mx-auto  mt-10 '>
           <div className='flex flex-col items-center justify-between gap-6 w-full h-full'>
             <span className='text-2xl mdL:text-3xl font-extrabold text-[#02185B] text-nowrap'>
               {t('HOMEPAGE.BANNER_USER.ORGANIZER')}
             </span>
-            <div className='grid grid-cols-2 smXS:grid-cols-1 md:grid-cols-2 w-full h-full gap-3 flex-1'>
-              <PartnerCard idx={0} img={DevPlus} name={t('HOMEPAGE.PARTNER_ORG1')} hScale='90%' />
+            <div className='grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 w-full h-full gap-3 flex-1'>
+              <PartnerCard
+                idx={0}
+                img={DevPlus}
+                name={t('HOMEPAGE.PARTNER_ORG1')}
+                hScale='h-[90%]'
+              />
               <PartnerCard
                 idx={1}
                 img={CelebUnit2}
@@ -34,7 +39,7 @@ const PartnerNetwork = () => {
             <span className='text-2xl mdL:text-3xl font-extrabold text-[#02185B] text-nowrap'>
               {t('HOMEPAGE.BANNER_USER.PARTNER')}
             </span>
-            <div className='grid grid-cols-2 smXS:grid-cols-1 md:grid-cols-2 w-full h-full gap-3 flex-1'>
+            <div className='grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 w-full h-full gap-3 flex-1'>
               <PartnerCard
                 idx={2}
                 img={PartnerUnit1}
