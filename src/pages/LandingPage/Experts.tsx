@@ -8,7 +8,7 @@ const Experts = () => {
     <div id='experts' className='w-full h-full bg-white pt-20'>
       <div className='w-full md:w-[80%] mx-auto'>
         <div className='text-center'>
-          <div className='text-2xl font-extrabold md:text-5xl text-[#FE7743]'>
+          <div className='font-extrabold text-2xl xsM:text-3xl smM:text-4xl md:text-5xl text-[#FE7743]'>
             {t('HOMEPAGE.EXPERTS_TITLE')}
           </div>
           <div className='text-base text-[#444444] py-8'>{t('HOMEPAGE.EXPERTS_DESC')}</div>
