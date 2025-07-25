@@ -42,6 +42,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
     if (inProgressExam) {
       return (
         <ContinueTestModal
+          confirmProps={{ onClose }}
           examId={inProgressExam.id}
           handleStartTest={handleStartTest}
           submitExam={submitExam}

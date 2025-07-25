@@ -3,7 +3,7 @@ import { Trans, useTranslation } from 'react-i18next';
 interface ModalContentProps {
   durationKey: string;
   hasTakenExam?: {
-    examSetDuration: number;
+    examSetDuration?: number;
     examStatus?: string;
   };
 }
