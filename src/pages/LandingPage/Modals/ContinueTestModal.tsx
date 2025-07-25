@@ -1,34 +1,35 @@
 import { Button } from 'antd';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
+
+import { ContentModal } from './ContentModal';
+import { HeaderModal } from './HeaderModal';
 
 interface ContinueTestModalProps {
+  confirmProps: { onClose: () => void };
   examId: string;
   handleStartTest: () => void;
   submitExam: (examId: string) => void;
 }
 
 export const ContinueTestModal = ({
+  confirmProps,
   examId,
   handleStartTest,
   submitExam,
 }: ContinueTestModalProps) => {
   const { t } = useTranslation();
 
+  const hasTakenExam = {
+    examStatus: 'IN_PROGRESS',
+  };
+
   return (
     <div className='relative flex flex-col items-center justify-center'>
-      <div className='cursor-pointer bg-blue-100 rounded-full w-1/5 aspect-square flex items-center justify-center'>
-        <div className='bg-blue-300 rounded-full w-[85%] aspect-square flex items-center justify-center'>
-          <div className='bg-[#0069E2] rounded-full w-[70%] md:w-[50%] aspect-square flex items-center justify-center'>
-            <div className='bg-blue-300 rounded-full w-[95%] md:w-[90%] aspect-square flex items-center justify-center'>
-              <span className='text-xl text-[#0069E2] md:text-3xl font-extrabold'>?</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <span className='text-xl font-bold my-2 text-center px-2 md:text-2xl md:px-4 md:my-6'>
-        {t('MODAL.TITLE_CONFIRM_CONTINUE_TEST')}
-      </span>
+      <HeaderModal
+        title={t('MODAL.TITLE_CONFIRM_CONTINUE_TEST')}
+        onClose={confirmProps.onClose}
+        symbol='!'
+      />
 
       <div className='px-6 w-full flex flex-col items-start md:my-6 !mt-0 !mb-6 gap-2.5'>
         <p className='text-base text-gray-900 md:text-xl'>
@@ -47,12 +48,7 @@ export const ContinueTestModal = ({
         </ul>
       </div>
 
-      <div className='px-2 space-y-2 md:px-6 md:space-y-3'>
-        <p className='text-base text-gray-900 md:text-xl'>
-          <span className='text-orange-500 font-semibold'>{t('MODAL.NOTE_CONFIRM_TEST')}:</span>{' '}
-          {t('MODAL.WARNING_CONFIRM_TEST')}
-        </p>
-      </div>
+      <ContentModal durationKey='MODAL.TEST_DURATION_MESSAGE' hasTakenExam={hasTakenExam} />
 
       <div className='mt-4 px-3 w-full md:my-6'>
         <div className='flex flex-col gap-2 md:flex-row md:justify-center md:gap-4'>
