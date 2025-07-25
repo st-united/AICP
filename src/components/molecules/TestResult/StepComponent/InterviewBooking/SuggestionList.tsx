@@ -3,10 +3,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useTestResultContext } from '../../TestResultContext';
+import { NAVIGATE_URL } from '@app/constants';
+import { useRegisterCourse } from '@app/hooks/useCourse';
 
 const SuggestionList: React.FC = () => {
   const { t } = useTranslation();
   const { data } = useTestResultContext();
+  const { mutate: registerCourse, isPending } = useRegisterCourse();
+
   if (!data) return <div>{t('TEST_RESULT.NO_DATA')}</div>;
   return (
     <div className='w-full mx-auto mt-6 bg-white rounded-2xl shadow'>
@@ -29,16 +33,27 @@ const SuggestionList: React.FC = () => {
                   <h4 className='text-lg md:text-xl lg:text-2xl font-bold text-gray-800 mb-3 line-clamp-1'>
                     {item.title}
                   </h4>
-                  <p className='text-sm md:text-base text-gray-600 mb-4 flex-1 line-clamp-3'>
-                    {item.description}
-                  </p>
-                  <div className='flex justify-end'>
+                  <div
+                    className='text-sm md:text-base text-gray-600 mb-4 flex-1 line-clamp-3'
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  />
+
+                  <div className='flex justify-end gap-3'>
+                    <Button
+                      className='rounded-full font-semibold text-base px-5 py-1.5 border-[#fe7743] text-[#fe7743]'
+                      onClick={() =>
+                        window.open(NAVIGATE_URL.DETAIL_COURSE_DYNAMIC(item.id), '_blank')
+                      }
+                    >
+                      {t('RECOMMEND.VIEW_DETAIL')}
+                    </Button>
+
                     <Button
                       type='primary'
-                      className='bg-[#fe7743] hover:bg-[#d16236] rounded-full font-semibold text-lg px-6 py-2'
-                      onClick={() => window.open(item.url, '_blank')}
+                      className='bg-[#fe7743] hover:bg-[#d16236] rounded-full font-semibold text-base px-5 py-1.5'
+                      onClick={() => registerCourse(item.id)}
                     >
-                      {t('TEST_RESULT.SUGGESTION_BUTTON')}
+                      {t('RECOMMEND.SUGGESTION_REGISTER')}
                     </Button>
                   </div>
                 </div>

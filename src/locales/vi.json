@@ -550,7 +550,9 @@
       "TITLE": "Khoá học: AI cơ bản",
       "DESCRIPTION": "Nắm vững các khái niệm AI cơ bản để bắt đầu hành trình của bạn",
       "LINK": "Xem chi tiết"
-    }
+    },
+    "VIEW_DETAIL": "Xem chi tiết",
+    "SUGGESTION_REGISTER": "Đăng ký ngay"
   },
   "TEST": {
     "TEST_TITLE": "Bài kiểm tra năng lực",
