@@ -135,7 +135,7 @@ export interface PillarScore {
   id: string;
   name: string;
   score: number;
-  aspect: Aspect[];
+  aspects: Aspect[];
   level: string;
 }
 

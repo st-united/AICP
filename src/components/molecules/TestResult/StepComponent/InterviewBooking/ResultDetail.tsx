@@ -50,10 +50,6 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
     return isCorrect ? 'bg-green-100' : 'bg-red-100';
   };
   const isMultipleChoice = (question: QuestionResult) => {
-    console.log(
-      question.sequence,
-      question.answers.filter((answer: Answer) => answer.isCorrect).length,
-    );
     return question.answers.filter((answer: Answer) => answer.isCorrect).length > 1;
   };
 

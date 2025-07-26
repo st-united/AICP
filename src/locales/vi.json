@@ -664,7 +664,17 @@
     "INFO_DETAIL": "Thông tin chi tiết",
     "UNIVERSITY": "Tên trường",
     "STUDENT_CODE": "Mã số sinh viên",
-    "TITLE_2": "Hồ sơ chuyên môn"
+    "TITLE_2": "Hồ sơ chuyên môn",
+    "CONFIRM_SUBMIT_TITLE": "Bạn có chắc muốn gửi hồ sơ ngay bây giờ?",
+    "INCOMPLETE_INFO_WARNING": "Vẫn còn thông tin chưa được bổ sung. Việc này có thể ảnh hưởng đến độ chính xác khi đánh giá năng lực.",
+    "MISSING_ITEMS": "Thông tin chưa đầy đủ",
+    "COMPLETE_INFO_BENEFITS": "Việc bổ sung đầy đủ giúp hệ thống:",
+    "BENEFIT_ACCURATE_LEVEL": "Xác định đúng level trong khung năng lực",
+    "BENEFIT_BETTER_ROADMAP": "Gợi ý lộ trình học và phát triển phù hợp hơn",
+    "SUBMIT_NOW": "Gửi hồ sơ ngay",
+    "CONTINUE_SUPPLEMENT": "Tiếp tục bổ sung",
+    "DELETED_CERTIFICATIONS": "Chứng chỉ đã xóa",
+    "DELETED_EXPERIENCES": "Kinh nghiệm đã xóa"
   },
   "TERMS": {
     "TITLE": "Điều khoản & Điều kiện",
@@ -806,5 +816,9 @@
     "UPDATE_PHONE_TITLE": "Cập nhật số điện thoại",
     "CONFIRM_PHONE": "Gửi OTP",
     "PHONE_NULL": "Bạn chưa có số điện thoại"
+  },
+  "NOTIFICATION_MODAL": {
+    "INTERVIEW_BOOKING_SUCCESS_TITLE": "Đăng ký lịch phỏng vấn thành công!",
+    "INTERVIEW_BOOKING_SUCCESS_DESCRIPTION": "Đội ngũ DevPlus sẽ sớm liên hệ với bạn để xác nhận thời gian và thông tin chi tiết của buổi phỏng vấn qua địa chỉ email"
   }
 }

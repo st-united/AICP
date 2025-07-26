@@ -10,9 +10,15 @@ import {
   ResponsiveContainer,
   Legend,
   Tooltip,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
 } from 'recharts';
 
-import { useTestResultContext } from '../../TestResultContext';
+import ColumnChart from '@app/components/atoms/Chart/ColumnChart/ColumnChart';
+import SkillChart from '@app/components/atoms/Chart/SkillChart/SkillChart';
 import { getStorageData } from '@app/config';
 import { EXAM_LATEST } from '@app/constants/testing';
 import { useExamDetail, useGetExamResult } from '@app/hooks';
@@ -30,7 +36,31 @@ const SkillLevel: React.FC = () => {
     { skill: 'Skillset', value: examDetail?.skillsetScore.score },
     { skill: 'Toolset', value: examDetail?.toolsetScore.score },
   ];
-  if (isLoading) return <div>Loading...</div>;
+
+  const allAspects = [
+    ...(examDetail?.mindsetScore?.aspects || []),
+    ...(examDetail?.skillsetScore?.aspects || []),
+    ...(examDetail?.toolsetScore?.aspects || []),
+  ];
+  console.log(allAspects);
+  const barChartData = allAspects
+    .map((aspect) => ({
+      label: aspect.represent,
+      value: aspect.score,
+      name: aspect.name,
+    }))
+    .sort((a, b) => {
+      const levelOrder: Record<string, number> = { A: 1, B: 2, C: 3 };
+      const aLevel = a.label.charAt(0);
+      const bLevel = b.label.charAt(0);
+      const aNumber = parseInt(a.label.slice(1));
+      const bNumber = parseInt(b.label.slice(1));
+      if (levelOrder[aLevel] !== levelOrder[bLevel]) {
+        return levelOrder[aLevel] - levelOrder[bLevel];
+      }
+      return aNumber - bNumber;
+    });
+
   const level = data?.level ? capitalizeWords(data.level.replace('_', ' ')) : '-';
 
   return (
@@ -38,7 +68,7 @@ const SkillLevel: React.FC = () => {
       <Divider className='!p-1 !m-0 !mb-4 italic !text-[#5B5B5B] !text-[12px] xsL:!text-[20px] !font-bold'>
         {t('TEST_RESULT.REVIEW')}
       </Divider>
-      <div className=' flex flex-col md:flex-row gap-6 w-full mx-auto '>
+      <div className=' flex flex-col md:flex-row gap-6 w-full mx-auto items-center'>
         <div className='flex-1 flex flex-col gap-2'>
           <div className='mb-2'>
             <span className='text-xl font-bold text-black relative inline-block align-bottom'>
@@ -55,38 +85,13 @@ const SkillLevel: React.FC = () => {
           <div className='text-gray-700'>{data?.learningPath}</div>
         </div>
         <div className='md:w-[0.5px] md:h-[200px] w-full h-[0.5px] bg-gray-50' />
-        <div className='flex-1 flex items-center justify-center min-w-[220px]'>
-          <ResponsiveContainer width='100%' height='100%'>
-            <RadarChart data={chartData}>
-              <PolarGrid stroke='#e5e7eb' />
-              <PolarAngleAxis
-                dataKey='skill'
-                tick={{ fontSize: 16, fill: '#374151' }}
-                tickLine={false}
-              />
-              <PolarRadiusAxis
-                angle={90}
-                domain={[0, 7]}
-                tick={{ fontSize: 10, fill: '#9ca3af' }}
-                tickCount={8}
-                axisLine={false}
-                tickLine={false}
-              />
-              <Radar
-                name={t('TEST_RESULT.SCORE_LABEL') || ''}
-                dataKey='value'
-                stroke='#fe7743'
-                fill='#fe774366'
-                strokeWidth={2}
-                dot={{ r: 2, fill: '#fe7743' }}
-              />
-              <Tooltip
-                wrapperStyle={{ fontSize: '12px' }}
-                formatter={(value: number) => [`${value}/7`, t('TEST_RESULT.SCORE_LABEL')]}
-              />
-              <Legend wrapperStyle={{ fontSize: '12px' }} />
-            </RadarChart>
-          </ResponsiveContainer>
+        <div className='flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-8'>
+          <div className='h-full flex items-center justify-center w-full'>
+            <SkillChart chartData={chartData} />
+          </div>
+          <div className='w-full h-full flex items-center justify-center'>
+            <ColumnChart barChartData={barChartData} />
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { Form, Input, Button, Select, Radio } from 'antd';
 import React, { useMemo } from 'react';
+import * as yup from 'yup';
 
 import { FileList } from './FileList';
 import { FileUpload } from './FileUpload';
@@ -7,6 +8,7 @@ import { usePortfolioContext } from '../context/PortfolioContext';
 import { usePortfolioSchema } from '../PortfolioSchema';
 import { PortfolioFileType } from '@app/constants/portfolioFileType';
 import { yupSync } from '@app/helpers';
+import { PortfolioRequest } from '@app/interface/portfolio.interface';
 
 const PortfolioForm: React.FC = () => {
   const {
@@ -20,38 +22,50 @@ const PortfolioForm: React.FC = () => {
     saveLabel,
     cancelLabel,
     isUpdating,
-    isWithUserInfo,
+    isWithUserInfo = false,
   } = usePortfolioContext();
 
   const portfolioSchema = usePortfolioSchema();
+  const isStudent = Form.useWatch('isStudent', form);
   const validator = useMemo(
     () => [yupSync(portfolioSchema)] as unknown as any[],
     [portfolioSchema],
   );
 
   const initialValues = useMemo(() => getPortfolio || {}, [getPortfolio]);
-  const isStudent = Form.useWatch('isStudent', form);
 
-  // Custom onFinish to ensure validateFields for conditional fields
-  const handleFinish = async (values: any) => {
-    console.log('bladvldldslfdslfdlsfldsfldslfdlfd', values);
-    if (values.isStudent) {
-      try {
-        await form.validateFields(['university', 'studentCode']);
-      } catch (e) {
-        // Nếu validate lỗi thì không submit tiếp
-        return;
+  const onSubmit = async (values: PortfolioRequest) => {
+    try {
+      if (isWithUserInfo) {
+        await portfolioSchema.validate(values, { abortEarly: false });
+      }
+      handleSubmit(values);
+    } catch (validationError) {
+      if (validationError instanceof yup.ValidationError) {
+        const errors = validationError.inner.reduce<Record<string, { errors: string[] }>>(
+          (acc, err) => {
+            if (err.path) {
+              acc[err.path] = { errors: [err.message] };
+            }
+            return acc;
+          },
+          {},
+        );
+        form.setFields(
+          Object.entries(errors).map(([name, config]) => ({
+            name: name as keyof PortfolioRequest,
+            ...config,
+          })),
+        );
       }
     }
-    handleSubmit(values);
   };
-
   return (
     <Form
       form={form}
       layout='vertical'
       className='portfolio-content__form'
-      onFinish={handleFinish}
+      onFinish={onSubmit}
       initialValues={initialValues}
     >
       {isWithUserInfo && (
@@ -75,27 +89,33 @@ const PortfolioForm: React.FC = () => {
               </Radio.Group>
             </Form.Item>
           </section>
-          {isStudent === true && (
-            <section className='portfolio-content__section mb-[16px]'>
-              <h2>
-                {t('PORTFOLIO.INFO_DETAIL')} <span className='text-red-500'>*</span>
-              </h2>
-              <Form.Item name='university' rules={validator} preserve={false}>
-                <Input
-                  className='!px-6 !py-3 !rounded-lg'
-                  placeholder={t('PORTFOLIO.UNIVERSITY') as string}
-                  disabled={!isEdit}
-                />
-              </Form.Item>
-              <Form.Item name='studentCode' rules={validator} preserve={false}>
-                <Input
-                  className='!px-6 !py-3 !rounded-lg'
-                  placeholder={t('PORTFOLIO.STUDENT_CODE') as string}
-                  disabled={!isEdit}
-                />
-              </Form.Item>
-            </section>
-          )}
+
+          <section
+            className={`portfolio-content__section mb-[16px] transition-all duration-300 ease-in-out ${
+              isStudent
+                ? 'opacity-100 max-h-[500px] overflow-hidden'
+                : 'opacity-0 max-h-0 overflow-hidden'
+            }`}
+          >
+            <h2>
+              {t('PORTFOLIO.INFO_DETAIL')}
+              <span className='text-red-500'> *</span>
+            </h2>
+            <Form.Item name='university' rules={validator}>
+              <Input
+                className='!px-6 !py-3 !rounded-lg'
+                placeholder={t('PORTFOLIO.UNIVERSITY') as string}
+                disabled={!isEdit}
+              />
+            </Form.Item>
+            <Form.Item name='studentCode' rules={validator}>
+              <Input
+                className='!px-6 !py-3 !rounded-lg'
+                placeholder={t('PORTFOLIO.STUDENT_CODE') as string}
+                disabled={!isEdit}
+              />
+            </Form.Item>
+          </section>
         </div>
       )}
       <section className='portfolio-content__section mb-[16px]'>
@@ -116,10 +136,14 @@ const PortfolioForm: React.FC = () => {
         </Form.Item>
       </section>
       <div>
-        <h2 className='mb-4 text-xl font-semibold'>{t('PORTFOLIO.CERTIFICATIONS')}</h2>
+        <h2 className='mb-4 text-xl font-semibold' id='certificateFiles'>
+          {t('PORTFOLIO.CERTIFICATIONS')}
+        </h2>
         <FileUpload type={PortfolioFileType.CERTIFICATION} />
         <FileList type={PortfolioFileType.CERTIFICATION} />
-        <h2 className='mb-4 text-xl font-semibold'>{t('PORTFOLIO.EXPERIENCE')}</h2>
+        <h2 className='mb-4 text-xl font-semibold' id='experienceFiles'>
+          {t('PORTFOLIO.EXPERIENCE')}
+        </h2>
         <FileUpload type={PortfolioFileType.EXPERIENCE} />
         <FileList type={PortfolioFileType.EXPERIENCE} />
       </div>

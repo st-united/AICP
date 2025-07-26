@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import InterviewBookingModal from '@app/components/atoms/InterviewBookingModal/InterviewBookingModal';
+import InterviewSuccessModal from './InterviewBooking/InterviewSuccessModal';
 import { NAVIGATE_URL } from '@app/constants';
 import { useGetPortfolio } from '@app/hooks/usePortfolio';
 
@@ -37,7 +37,7 @@ const InterviewBooking: React.FC = () => {
         >
           {t('TEST_RESULT.BOOKING_BUTTON')}
         </Button>
-        <InterviewBookingModal
+        <InterviewSuccessModal
           open={openInterviewBookingModal}
           onCancel={() => {
             setOpenInterviewBookingModal(false);

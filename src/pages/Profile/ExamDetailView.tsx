@@ -22,9 +22,9 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
 
   const transformApiData = (apiData: DetailExam) => {
     const allAspects = [
-      ...apiData.mindsetScore.aspect,
-      ...apiData.skillsetScore.aspect,
-      ...apiData.toolsetScore.aspect,
+      ...apiData.mindsetScore.aspects,
+      ...apiData.skillsetScore.aspects,
+      ...apiData.toolsetScore.aspects,
     ];
 
     return allAspects

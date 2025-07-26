@@ -44,6 +44,7 @@ interface PortfolioProviderProps {
   saveLabel?: string;
   cancelLabel?: string;
   isWithUserInfo?: boolean;
+  triggerConfirmationModal?: (values: PortfolioRequest, onSave: () => void) => void;
 }
 
 export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
@@ -54,6 +55,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
   saveLabel,
   cancelLabel,
   isWithUserInfo = true,
+  triggerConfirmationModal,
 }) => {
   const [form] = Form.useForm();
   const { t } = useTranslation();
@@ -127,13 +129,9 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
     resetFiles();
   }, [form, onCancel, resetFiles]);
 
-  const handleSubmit = useCallback(
-    async (values: PortfolioRequest) => {
-      if (values.isStudent) {
-        await form.validateFields(['university', 'studentCode']);
-      }
-      const data = new FormData();
-      if (values.isStudent) {
+  const executePortfolioSubmission = useCallback(
+    (values: PortfolioRequest, data: FormData) => {
+      if (values.isStudent !== undefined) {
         data.append('isStudent', values.isStudent.toString());
         values.university && data.append('university', values.university);
         values.studentCode && data.append('studentCode', values.studentCode);
@@ -183,6 +181,34 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
       getPortfolio?.certificateFiles,
       getPortfolio?.experienceFiles,
       onSave,
+    ],
+  );
+
+  const handleSubmit = useCallback(
+    async (values: PortfolioRequest) => {
+      if (values.isStudent) {
+        await form.validateFields(['university', 'studentCode']);
+      }
+      const data = new FormData();
+      if (triggerConfirmationModal) {
+        const fullValues = {
+          ...values,
+          certificateFiles: certificationFiles,
+          experienceFiles: experienceFiles,
+        };
+        triggerConfirmationModal(fullValues, () => {
+          executePortfolioSubmission(fullValues, data);
+        });
+        return;
+      }
+      executePortfolioSubmission(values, data);
+    },
+    [
+      triggerConfirmationModal,
+      executePortfolioSubmission,
+      form,
+      certificationFiles,
+      experienceFiles,
     ],
   );
 
