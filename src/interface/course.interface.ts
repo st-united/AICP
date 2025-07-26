@@ -9,4 +9,5 @@ export interface Course {
   provider: string;
   url: string | null;
   linkImage: string;
+  isRegistered: boolean;
 }

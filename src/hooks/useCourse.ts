@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { QUERY_KEY } from '@app/constants';
 import { Course } from '@app/interface/course.interface';
@@ -26,8 +26,20 @@ export const useCourse = () => {
 };
 
 export const useRegisterCourse = () => {
-  return useMutation(async (courseId: string) => {
-    const response = await registerCourseAPI(courseId);
-    return response.data;
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (courseId: string) => {
+      const response = await registerCourseAPI(courseId);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.COURSES],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.COURSE_DETAIL],
+      });
+    },
   });
 };
