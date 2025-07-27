@@ -1,27 +1,13 @@
 import { Divider } from 'antd';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Radar,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  ResponsiveContainer,
-  Legend,
-  Tooltip,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from 'recharts';
 
-import ColumnChart from '@app/components/atoms/Chart/ColumnChart/ColumnChart';
+import CompetencyChart from '@app/components/ai-assessment/CompetencyChart';
 import SkillChart from '@app/components/atoms/Chart/SkillChart/SkillChart';
 import { getStorageData } from '@app/config';
 import { EXAM_LATEST } from '@app/constants/testing';
 import { useExamDetail, useGetExamResult } from '@app/hooks';
+import { DetailExam } from '@app/interface/user.interface';
 
 const capitalizeWords = (str: string) =>
   str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
@@ -30,41 +16,30 @@ const SkillLevel: React.FC = () => {
   const { t } = useTranslation();
   const examId = getStorageData(EXAM_LATEST);
   const { data: examDetail } = useExamDetail(examId || '');
-  const { data, isLoading } = useGetExamResult(examId);
+  const { data } = useGetExamResult(examId);
   const chartData = [
     { skill: 'Mindset', value: examDetail?.mindsetScore.score },
     { skill: 'Skillset', value: examDetail?.skillsetScore.score },
     { skill: 'Toolset', value: examDetail?.toolsetScore.score },
   ];
 
-  const allAspects = [
-    ...(examDetail?.mindsetScore?.aspects || []),
-    ...(examDetail?.skillsetScore?.aspects || []),
-    ...(examDetail?.toolsetScore?.aspects || []),
-  ];
-  console.log(allAspects);
-  // Memoized level order for better performance
-  const levelOrder = useMemo(() => ({ A: 1, B: 2, C: 3 } as Record<string, number>), []);
+  const transformApiData = (apiData: DetailExam) => {
+    const allAspects = [
+      ...apiData.mindsetScore.aspects,
+      ...apiData.skillsetScore.aspects,
+      ...apiData.toolsetScore.aspects,
+    ];
 
-  const barChartData = useMemo(() => {
     return allAspects
       .map((aspect) => ({
-        label: aspect.represent,
-        value: aspect.score,
+        code: aspect.represent,
+        score: Math.round(aspect.score * 10) / 10,
         name: aspect.name,
       }))
-      .sort((a, b) => {
-        const aLevel = a.label.charAt(0);
-        const bLevel = b.label.charAt(0);
-        const aNumber = parseInt(a.label.slice(1));
-        const bNumber = parseInt(b.label.slice(1));
-
-        if (levelOrder[aLevel] !== levelOrder[bLevel]) {
-          return levelOrder[aLevel] - levelOrder[bLevel];
-        }
-        return aNumber - bNumber;
-      });
-  }, [allAspects, levelOrder]);
+      .sort((a, b) => a.code.localeCompare(b.code));
+  };
+  if (!examDetail) return null;
+  const dataChart = transformApiData(examDetail);
 
   const level = data?.level ? capitalizeWords(data.level.replace('_', ' ')) : '-';
 
@@ -73,7 +48,7 @@ const SkillLevel: React.FC = () => {
       <Divider className='!p-1 !m-0 !mb-4 italic !text-[#5B5B5B] !text-[12px] xsL:!text-[20px] !font-bold'>
         {t('TEST_RESULT.REVIEW')}
       </Divider>
-      <div className=' flex flex-col md:flex-row gap-6 w-full mx-auto items-center'>
+      <div className='flex flex-col md:flex-row gap-6 w-full'>
         <div className='flex-1 flex flex-col gap-2'>
           <div className='mb-2'>
             <span className='text-xl font-bold text-black relative inline-block align-bottom'>
@@ -90,13 +65,9 @@ const SkillLevel: React.FC = () => {
           <div className='text-gray-700'>{data?.learningPath}</div>
         </div>
         <div className='md:w-[0.5px] md:h-[200px] w-full h-[0.5px] bg-gray-50' />
-        <div className='flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-8'>
-          <div className='h-full flex items-center justify-center w-full'>
-            <SkillChart chartData={chartData} />
-          </div>
-          <div className='w-full h-full flex items-center justify-center'>
-            <ColumnChart barChartData={barChartData} />
-          </div>
+        <div className='grid grid-cols-1 smL:grid-cols-2 md:grid-cols-1 gap-2 smL:gap-0 md:gap-8 flex-1'>
+          <SkillChart chartData={chartData} />
+          <CompetencyChart data={dataChart} />
         </div>
       </div>
     </div>
