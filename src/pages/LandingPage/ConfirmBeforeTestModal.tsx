@@ -7,9 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import { ImproveTestModal } from './Modals/ImproveTestModal';
 import { InfoModal } from './Modals/InfoModal';
 import { NewTestModal } from './Modals/NewTestModal';
+import { ContinueTestModal } from './Modals/ContinueTestModal';
+
 import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
-import { useHasTakenExamDefault, useSubmitExam, useUpdateUserStudentInfo } from '@app/hooks';
+import {
+  useHasTakenExamDefault,
+  useSubmitExam,
+  useUpdateUserStudentInfo,
+  useGetHistory,
+} from '@app/hooks';
 import { RootState } from '@app/redux/store';
 
 interface ConfirmBeforeTestModalProps {
@@ -17,43 +24,28 @@ interface ConfirmBeforeTestModalProps {
   onClose: () => void;
 }
 
-export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestModalProps) {
+export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeTestModalProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
   const { mutate: submitExam, isPending } = useSubmitExam();
+  const { mutate: updateUserStudentInfo } = useUpdateUserStudentInfo();
   const { user } = useSelector((state: RootState) => state.auth);
   const { data: hasTakenExam } = useHasTakenExamDefault();
-  const { mutate: updateUserStudentInfo } = useUpdateUserStudentInfo();
-  const [showInfoModal, setShowInfoModal] = React.useState(false);
+  const { data: historyData } = useGetHistory();
 
-  const handleStartTest = () => {
-    navigate(NAVIGATE_URL.TEST);
-  };
-  const handleReviewResult = () => {
-    navigate(NAVIGATE_URL.TEST_RESULT);
-  };
-  const handleBackInfo = () => {
-    setShowInfoModal(true);
-  };
-
-  const handleSubmitUserInfo = (data: {
-    isStudent: boolean;
-    university: string;
-    studentCode: string;
-  }) => {
-    updateUserStudentInfo(data, {
-      onSuccess: () => setShowInfoModal(false),
-    });
-  };
+  const handleStartTest = () => navigate(NAVIGATE_URL.TEST);
+  const handleReviewResult = () => navigate(NAVIGATE_URL.TEST_RESULT);
 
   const renderModalContent = () => {
-    if (showInfoModal || user?.isStudent === null) {
+    const inProgressExam = historyData?.find((item) => item.examStatus === 'IN_PROGRESS');
+    if (inProgressExam) {
       return (
-        <InfoModal
-          userProfile={user}
-          onSubmit={handleSubmitUserInfo}
-          onClose={confirmProps.onClose}
-          isPending={isPending}
+        <ContinueTestModal
+          confirmProps={{ onClose }}
+          examId={inProgressExam.id}
+          handleStartTest={handleStartTest}
+          submitExam={submitExam}
         />
       );
     }
@@ -61,7 +53,8 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
     if (hasTakenExam?.hasTakenExam) {
       return (
         <ImproveTestModal
-          confirmProps={confirmProps}
+          confirmProps={{ onClose }}
+          hasTakenExam={hasTakenExam}
           handleReviewResult={handleReviewResult}
           handleStartTest={handleStartTest}
           submitExam={submitExam}
@@ -71,17 +64,18 @@ export default function ConfirmBeforeTestModal(confirmProps: ConfirmBeforeTestMo
 
     return (
       <NewTestModal
-        confirmProps={confirmProps}
-        handleBackInfo={handleBackInfo}
+        confirmProps={{ onClose }}
+        handleBackInfo={() => {}}
         handleStartTest={handleStartTest}
+        hasTakenExam={hasTakenExam}
       />
     );
   };
 
   return (
     <Modal
-      open={confirmProps.open}
-      onCancel={confirmProps.onClose}
+      open={open}
+      onCancel={onClose}
       footer={null}
       destroyOnHidden
       closable={false}

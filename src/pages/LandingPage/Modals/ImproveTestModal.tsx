@@ -7,9 +7,9 @@ import { HeaderModal } from './HeaderModal';
 interface ImproveTestModalProps {
   confirmProps: { onClose: () => void };
   hasTakenExam?: {
-    examId: string;
-    examStatus: string;
-    examSetDuration: number;
+    examId?: string;
+    examStatus?: string;
+    examSetDuration?: number;
   };
   handleReviewResult: () => void;
   handleStartTest: () => void;
@@ -33,7 +33,15 @@ export const ImproveTestModal = ({
         symbol='!'
       />
 
-      <ContentModal durationKey='MODAL.DURATION_CONFIRM_IMPROVE_TEST' hasTakenExam={hasTakenExam} />
+      {hasTakenExam?.examSetDuration !== undefined && (
+        <ContentModal
+          durationKey='MODAL.DURATION_CONFIRM_IMPROVE_TEST'
+          hasTakenExam={{
+            examSetDuration: hasTakenExam.examSetDuration,
+            examStatus: hasTakenExam.examStatus,
+          }}
+        />
+      )}
 
       <div className='px-3 w-full md:my-6'>
         <div className='flex flex-col gap-2 md:flex-row md:justify-center md:gap-4'>
