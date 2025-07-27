@@ -85,26 +85,28 @@ const Header = () => {
           preview={false}
         />
       </div>
-      <div className='hidden smM:flex gap-8 items-center'>
-        <Button
-          onClick={() => handleSmoothScroll('partner-network', HomePageEnum.PARTNER_NETWORK)}
-          type='text'
-          className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
-            currentSection === HomePageEnum.PARTNER_NETWORK ? '!text-[#FE7743]' : ''
-          }`}
-        >
-          {t('HOMEPAGE.PARTNER_TITLE')}
-        </Button>
-        <Button
-          onClick={() => handleSmoothScroll('experts', HomePageEnum.EXPERTS)}
-          type='text'
-          className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
-            currentSection === HomePageEnum.EXPERTS ? '!text-[#FE7743]' : ''
-          }`}
-        >
-          {t('HOMEPAGE.EXPERTS_TITLE')}
-        </Button>
-      </div>
+      {isHomePage && (
+        <div className='hidden md:flex gap-8 items-center'>
+          <Button
+            onClick={() => handleSmoothScroll('partner-network', HomePageEnum.PARTNER_NETWORK)}
+            type='text'
+            className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
+              currentSection === HomePageEnum.PARTNER_NETWORK ? '!text-[#FE7743]' : ''
+            }`}
+          >
+            {t('HOMEPAGE.PARTNER_TITLE')}
+          </Button>
+          <Button
+            onClick={() => handleSmoothScroll('experts', HomePageEnum.EXPERTS)}
+            type='text'
+            className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
+              currentSection === HomePageEnum.EXPERTS ? '!text-[#FE7743]' : ''
+            }`}
+          >
+            {t('HOMEPAGE.EXPERTS_TITLE')}
+          </Button>
+        </div>
+      )}
       {isAuth ? (
         <div className='flex items-center gap-4 md:gap-6 smM:pr-2'>
           <DropProfile />
