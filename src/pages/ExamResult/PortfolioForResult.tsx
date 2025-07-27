@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,34 +23,38 @@ const PortfolioForResult: React.FC = () => {
     | undefined
   >();
   const missingItems = useMemo(() => {
-    return confirmationModalState
-      ? Object.keys(confirmationModalState.values)
-          .filter((key) => {
-            const value = confirmationModalState.values[key as keyof PortfolioRequest];
-            return (
-              (value === undefined ||
-                value === null ||
-                value === '' ||
-                (Array.isArray(value) && value.length === 0)) &&
-              key !== 'university' &&
-              key !== 'studentCode'
-            );
-          })
-          .map((key) => ({
-            name: t(PORTFOLIO_FIELD_DISPLAY_NAMES[key as keyof PortfolioRequest]),
-            onClick: () => {
-              setConfirmationModalState(undefined);
-              const element = document.getElementById(key);
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-              }
-            },
-          }))
-      : [];
+    if (!confirmationModalState) return [];
+
+    const excludedFields = new Set(['university', 'studentCode']);
+
+    return Object.entries(confirmationModalState.values)
+      .filter(([key, value]) => {
+        if (excludedFields.has(key)) return false;
+
+        return (
+          value === undefined ||
+          value === null ||
+          value === '' ||
+          (Array.isArray(value) && value.length === 0)
+        );
+      })
+      .map(([key]) => ({
+        name: t(PORTFOLIO_FIELD_DISPLAY_NAMES[key as keyof PortfolioRequest]),
+        onClick: () => {
+          setConfirmationModalState(undefined);
+          const element = document.getElementById(key);
+          element?.scrollIntoView({ behavior: 'smooth' });
+        },
+      }));
   }, [confirmationModalState, t]);
 
+  const handleCancel = useCallback(() => {
+    setConfirmationModalState(undefined);
+    navigate(NAVIGATE_URL.RESULT);
+  }, [navigate]);
+
   return (
-    <div className='bg-white rounded-2xl shadow p-8 mt-8'>
+    <div className='bg-white rounded-2xl shadow p-8'>
       <PortfolioContent
         onCancel={() => {
           navigate(NAVIGATE_URL.RESULT);
@@ -69,7 +73,7 @@ const PortfolioForResult: React.FC = () => {
       <InterviewSuccessModal
         open={openInterviewBookingModal}
         onCancel={() => {
-          setOpenInterviewBookingModal(false);
+          handleCancel();
         }}
       />
       <PortfolioConfirmationModal

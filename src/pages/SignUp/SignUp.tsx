@@ -34,8 +34,8 @@ const SignUp = () => {
   };
 
   const onFinish = (values: RegisterUser) => {
-    const { fullName, email, phoneNumber, password } = values;
-    const phoneNumberWithoutBracket = phoneNumber?.replace('(', '').replace(')', '');
+    const { fullName, email, password } = values;
+    const phoneNumberWithoutBracket = values.phoneNumber?.replace('(', '').replace(')', '');
     registerUser({ fullName, email, phoneNumber: phoneNumberWithoutBracket, password });
   };
 
@@ -54,27 +54,29 @@ const SignUp = () => {
   const validator = [yupSync(signUpSchema)] as unknown as Rule[];
 
   return (
-    <div className='flex justify-center' id='container-sign-up'>
-      <div className='w-full md:w-4/5 h-full'>
+    <div className='flex justify-center min-h-screen px-4 py-6 md:py-0' id='container-sign-up'>
+      <div className='w-full max-w-md md:max-w-2xl lg:w-4/5 h-full'>
         <button
           onClick={handleOnClickHomePage}
-          className='bg-transparent cursor-pointer w-auto'
+          className='bg-transparent cursor-pointer w-auto mb-4 md:mb-0'
           type='button'
         >
           <Link
-            className='flex items-center text-primary-gray justify-start text-lg !mb-5 hover:text-primary-light cursor-pointer'
+            className='flex items-center text-primary-gray justify-start text-base md:text-lg !mb-3 md:!mb-5 hover:text-primary-light cursor-pointer'
             to={'/'}
           >
-            <div className='flex items-center justify-center'>
-              <LeftOutlined size={24} />
+            <div className='flex items-center justify-center mr-2'>
+              <LeftOutlined className='text-sm md:text-base' />
             </div>
             {t('LOGIN.BACK_TO_HOME')}
           </Link>
         </button>
 
-        <div>
-          <h1 className='text-[40px] !text-primary font-bold'>{t<string>('SIGN_UP.TITLE')}</h1>
-          <div className='text-white text-lg !mb-4 flex gap-2'>
+        <div className='mb-6 mt-4 md:mb-8 md:mt-32'>
+          <h1 className='text-2xl md:text-[40px] !text-primary font-bold mb-3 md:mb-4'>
+            {t<string>('SIGN_UP.TITLE')}
+          </h1>
+          <div className='text-base md:text-lg !mb-6 md:!mb-8 flex flex-col sm:flex-row gap-1 sm:gap-2'>
             <div className='text-primary-gray'>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
             <div
               className='text-primary-bold cursor-pointer underline hover:text-primary-light font-bold'
@@ -89,37 +91,46 @@ const SignUp = () => {
           form={form}
           layout='vertical'
           onFinish={onFinish}
-          className='grid grid-cols-2 gap-0 xs:gap-1.5 sm:gap-2 md:gap-0.5 lg:gap-0'
+          className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2'
           validateTrigger={['onChange', 'onBlur']}
         >
-          <Form.Item className='md:col-span-1 col-span-2' name='fullName' rules={validator}>
+          <Form.Item name='fullName' rules={validator}>
             <Input
-              className='w-full !px-6 !py-3 lg:!py-3 !rounded-md !text-lg'
+              className='w-full !px-4 md:!px-6 !py-3 md:!py-4 !rounded-md !text-base md:!text-lg'
               placeholder={t('SIGN_UP.FULL_NAME') as string}
             />
           </Form.Item>
-          <Form.Item className='md:col-span-1 col-span-2' name='phoneNumber' rules={validator}>
+          <Form.Item name='phoneNumber' rules={validator}>
             <PhoneInput
-              className='w-full h-[62px] lg:h-[52px] pl-2'
+              className='w-full h-[50px] md:h-[62px]'
               placeholder={t('SIGN_UP.PHONE') as string}
             />
           </Form.Item>
-          <Form.Item className='col-span-2' name='email' rules={validator}>
+          <Form.Item className='md:col-span-2' name='email' rules={validator}>
             <Input
-              className='w-full !px-6 !py-3 lg:!py-3 !rounded-md !text-lg'
+              className='w-full !px-4 md:!px-6 !py-3 md:!py-4 !rounded-md !text-base md:!text-lg'
               placeholder={t('SIGN_UP.EMAIL') as string}
             />
           </Form.Item>
-          <Form.Item className='col-span-2' name='password' rules={validator}>
+          <Form.Item className='md:col-span-2' name='password' rules={validator}>
             <Input.Password
               onChange={handlePasswordChange}
-              className='col-span-2 w-full !px-6 !py-3 lg:!py-3 !rounded-md !text-lg'
+              className='w-full !px-4 md:!px-6 !py-3 md:!py-4 !rounded-md !text-base md:!text-lg'
               placeholder={t<string>('SIGN_UP.PASSWORD')}
-              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
+              iconRender={(visible) =>
+                visible ? (
+                  <EyeOutlined className='text-base md:text-lg' style={{ color: '#69c0ff' }} />
+                ) : (
+                  <EyeInvisibleOutlined
+                    className='text-base md:text-lg'
+                    style={{ color: '#69c0ff' }}
+                  />
+                )
+              }
             />
           </Form.Item>
           <Form.Item
-            className='col-span-2'
+            className='md:col-span-2'
             name='confirm_password'
             dependencies={['password']}
             rules={[
@@ -137,26 +148,41 @@ const SignUp = () => {
             ]}
           >
             <Input.Password
-              className='col-span-2 w-full !px-6 !py-3 !rounded-md !text-lg'
+              className='w-full !px-4 md:!px-6 !py-3 md:!py-4 !rounded-md !text-base md:!text-lg'
               placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
-              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
+              iconRender={(visible) =>
+                visible ? (
+                  <EyeOutlined className='text-base md:text-lg' style={{ color: '#69c0ff' }} />
+                ) : (
+                  <EyeInvisibleOutlined
+                    className='text-base md:text-lg'
+                    style={{ color: '#69c0ff' }}
+                  />
+                )
+              }
             />
           </Form.Item>
 
-          <div className='col-span-2 text-lg md:text-base text-[#686868]'>
-            <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-primary-gray'}`}>
-              <CheckOutlined />
+          <div className='md:col-span-2 text-sm md:text-base text-[#686868] space-y-2'>
+            <div
+              className={`flex gap-2 items-start ${
+                isLengthValid ? 'text-green-500' : 'text-primary-gray'
+              }`}
+            >
+              <CheckOutlined className='mt-0.5 flex-shrink-0' />
               <div>{t<string>('SIGN_UP.PASSWORD_REQUIREMENT')}</div>
             </div>
             <div
-              className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-primary-gray'}`}
+              className={`flex gap-2 items-start ${
+                isComplexValid ? 'text-green-500' : 'text-primary-gray'
+              }`}
             >
-              <CheckOutlined />
+              <CheckOutlined className='mt-0.5 flex-shrink-0' />
               <div>{t<string>('SIGN_UP.PASSWORD_COMPLEXITY')}</div>
             </div>
-            <div className='flex gap-2 !mt-6 !text-[16px]'>
-              <Checkbox onChange={handleCheckboxChange} />
-              <div>
+            <div className='flex gap-2 items-start !mt-4 md:!mt-6 !text-sm md:!text-base'>
+              <Checkbox onChange={handleCheckboxChange} className='mt-0.5 flex-shrink-0' />
+              <div className='leading-relaxed'>
                 {parse(
                   t<string>('SIGN_UP.AGREE_TERMS', {
                     terms: `<a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #A22D00;">${t<string>(
@@ -172,10 +198,10 @@ const SignUp = () => {
             </div>
           </div>
 
-          <Form.Item className='col-span-2 !mt-2'>
+          <Form.Item className='md:col-span-2 !mt-6'>
             <Button
               htmlType='submit'
-              className='w-full h-[3.75rem] lg:h-[3rem] !bg-primary-bold text-[1rem] text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:!text-black transition duration-300'
+              className='w-full h-12 md:h-[3.75rem] !bg-primary-bold text-sm md:text-[1rem] !text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:!text-black transition duration-300'
               loading={isLoading}
               disabled={!isChecked}
             >

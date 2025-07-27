@@ -65,7 +65,7 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
       open={visible}
       onCancel={onClose}
       footer={null}
-      width={800}
+      width={1000}
       className='!h-full'
     >
       <div className='space-y-6 h-[80vh] overflow-auto pt-16'>

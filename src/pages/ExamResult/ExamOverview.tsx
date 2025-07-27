@@ -1,4 +1,5 @@
-import ResultHeader from '@app/components/molecules/TestResult/ResultHeader';
+import { useTranslation } from 'react-i18next';
+
 import InterviewBooking from '@app/components/molecules/TestResult/StepComponent/InterviewBooking';
 import SkillLevel from '@app/components/molecules/TestResult/StepComponent/InterviewBooking/SkillLevel';
 import SuggestionList from '@app/components/molecules/TestResult/StepComponent/InterviewBooking/SuggestionList';

@@ -1,5 +1,5 @@
 import { GetListParams } from './common.interface';
-import { CompetencyDimension, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
+import { ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 
 export interface UserColumns {
   id: number;
@@ -96,6 +96,9 @@ export interface HistoryTesting {
   id: string;
   examStatus: ExamStatusEnum;
   sfiaLevel: SFIALevel;
+  examLevel?: {
+    examLevel: ExamLevelEnum | null;
+  };
   createdAt: Date;
 }
 
@@ -119,6 +122,9 @@ export interface DetailExam {
   id: string;
   startedAt: string;
   sfiaLevel: SFIALevel | null;
+  examLevel?: {
+    examLevel: ExamLevelEnum | null;
+  };
   mindsetScore: PillarScore;
   skillsetScore: PillarScore;
   toolsetScore: PillarScore;

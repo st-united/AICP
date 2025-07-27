@@ -1,5 +1,5 @@
 import { Divider } from 'antd';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Radar,
@@ -43,23 +43,28 @@ const SkillLevel: React.FC = () => {
     ...(examDetail?.toolsetScore?.aspects || []),
   ];
   console.log(allAspects);
-  const barChartData = allAspects
-    .map((aspect) => ({
-      label: aspect.represent,
-      value: aspect.score,
-      name: aspect.name,
-    }))
-    .sort((a, b) => {
-      const levelOrder: Record<string, number> = { A: 1, B: 2, C: 3 };
-      const aLevel = a.label.charAt(0);
-      const bLevel = b.label.charAt(0);
-      const aNumber = parseInt(a.label.slice(1));
-      const bNumber = parseInt(b.label.slice(1));
-      if (levelOrder[aLevel] !== levelOrder[bLevel]) {
-        return levelOrder[aLevel] - levelOrder[bLevel];
-      }
-      return aNumber - bNumber;
-    });
+  // Memoized level order for better performance
+  const levelOrder = useMemo(() => ({ A: 1, B: 2, C: 3 } as Record<string, number>), []);
+
+  const barChartData = useMemo(() => {
+    return allAspects
+      .map((aspect) => ({
+        label: aspect.represent,
+        value: aspect.score,
+        name: aspect.name,
+      }))
+      .sort((a, b) => {
+        const aLevel = a.label.charAt(0);
+        const bLevel = b.label.charAt(0);
+        const aNumber = parseInt(a.label.slice(1));
+        const bNumber = parseInt(b.label.slice(1));
+
+        if (levelOrder[aLevel] !== levelOrder[bLevel]) {
+          return levelOrder[aLevel] - levelOrder[bLevel];
+        }
+        return aNumber - bNumber;
+      });
+  }, [allAspects, levelOrder]);
 
   const level = data?.level ? capitalizeWords(data.level.replace('_', ' ')) : '-';
 

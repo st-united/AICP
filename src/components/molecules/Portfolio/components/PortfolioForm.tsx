@@ -169,6 +169,8 @@ const PortfolioForm: React.FC = () => {
               <Button
                 type='primary'
                 htmlType='submit'
+                disabled={isUpdating}
+                loading={isUpdating}
                 className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white hover:shadow-md'
               >
                 {saveLabel || t('PORTFOLIO.SAVE')}

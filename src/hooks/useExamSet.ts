@@ -173,6 +173,12 @@ export const useGetExamResult = (examId: string) => {
       const response = await getExamResultApi(examId);
       return response.data.data;
     },
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: true,
+    refetchOnReconnect: false,
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
   });

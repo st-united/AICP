@@ -200,7 +200,7 @@
     "NEW_PASSWORD_DIFFERENT": "Mật khẩu mới phải khác mật khẩu cũ",
     "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
     "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại",
-    "INVALID_DATE_RANGE": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu",
+    "INVALID_DATE_RANGE": "Ngày bắt đầu không thể lớn hơn ngày kết thúc",
     "MIN_AGE": "Phải đủ {{age}} tuổi trở lên",
     "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai",
     "URL_INVALID": "URL không hợp lệ",
@@ -208,7 +208,8 @@
     "STUDENT_CODE_REQUIRED": "Vui lòng nhập mã sinh viên",
     "USER_INFO_REQUIRED": "Vui lòng chọn trạng thái của bạn",
     "USER_UNIVERSITY_REQUIRED": "Vui lòng nhập tên trường",
-    "USER_STUDENT_CODE_REQUIRED": "Vui lòng nhập mã số sinh viên"
+    "USER_STUDENT_CODE_REQUIRED": "Vui lòng nhập mã số sinh viên",
+    "END_BEFORE_START": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
@@ -332,7 +333,7 @@
     "FOOTER_ACTIVITIES_LIST": ["Workshop", "Sự kiện", "Cộng đồng", "Hoạt động ngoại khóa"],
     "FOOTER_ADDRESS": "116 - 118 Mai Thuc Lan, My An, Ngu Hanh Son, Da Nang",
     "FOOTER_EMAIL": "hello@devplus.edu.vn",
-    "FOOTER_PHONE": "(+84) 368492885",
+    "FOOTER_PHONE": "(+84)931901608",
     "BANNER_USER": {
       "ORGANIZER": "Đơn vị tổ chức",
       "PARTNER": "Đơn vị đồng hành",
@@ -445,6 +446,16 @@
       "LEVEL_6_LEADERSHIP": "Lãnh đạo",
       "LEVEL_7_MASTERY": "Thành thạo"
     },
+    "EXAM_LEVEL": {
+      "NONE_LEVEL": "Chưa có đánh giá năng lực",
+      "LEVEL_1_STARTER": "Khởi đầu",
+      "LEVEL_2_EXPLORER": "Khám Phá",
+      "LEVEL_3_PRACTITIONER": "Thực Hành",
+      "LEVEL_4_INTEGRATOR": "Tích Hợp",
+      "LEVEL_5_STRATEGIST": "Chiến Lược",
+      "LEVEL_6_LEADER": "Dẫn dắt",
+      "LEVEL_7_EXPERT": "Chuyên Gia"
+    },
     "RESULT": {
       "TITLE": "Kết quả đánh giá <span>năng lực AI</span> (Sơ bộ)",
       "SUBTITLE": "Dưới đây là kết quả đánh giá sơ bộ của bạn.",
@@ -544,7 +555,9 @@
       "TITLE": "Khoá học: AI cơ bản",
       "DESCRIPTION": "Nắm vững các khái niệm AI cơ bản để bắt đầu hành trình của bạn",
       "LINK": "Xem chi tiết"
-    }
+    },
+    "VIEW_DETAIL": "Xem chi tiết",
+    "SUGGESTION_REGISTER": "Đăng ký ngay"
   },
   "TEST": {
     "TEST_TITLE": "Bài kiểm tra năng lực",
@@ -782,7 +795,8 @@
     "NO_DATA": "Không có dữ liệu",
     "DOWNLOAD_CERT_SUCCESS": "Tải chứng chỉ thành công",
     "DOWNLOAD_CERT_ERROR": "Tải chứng chỉ thất bại",
-    "SCORE_LABEL": "Điểm"
+    "SCORE_LABEL": "Điểm",
+    "NOT_FOUND": "Không tìm thấy kết quả đánh giá"
   },
   "CONFIRM_BEFORE_TEST_MODAL": {
     "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",
@@ -820,5 +834,19 @@
   "NOTIFICATION_MODAL": {
     "INTERVIEW_BOOKING_SUCCESS_TITLE": "Đăng ký lịch phỏng vấn thành công!",
     "INTERVIEW_BOOKING_SUCCESS_DESCRIPTION": "Đội ngũ DevPlus sẽ sớm liên hệ với bạn để xác nhận thời gian và thông tin chi tiết của buổi phỏng vấn qua địa chỉ email"
+  },
+  "COURSES": {
+    "ERROR_OCCURRED": "Đã xảy ra lỗi",
+    "COURSE_LOAD_ERROR": "Không thể tải thông tin khóa học. Vui lòng thử lại sau.",
+    "COURSE_DESCRIPTION": "Mô tả khóa học",
+    "COURSE_INFORMATION": "Thông tin khóa học",
+    "CONTACT_INFORMATION": "Thông tin liên hệ",
+    "COURSE_OVERVIEW": "Thông tin tổng quan:",
+    "TARGET_AUDIENCE": "Đối tượng",
+    "REGISTER_NOW": "Đăng ký ngay",
+    "REGISTERED": "Đã đăng ký",
+    "RELATED_COURSES": "Các khóa học liên quan",
+    "COURSE_REGISTRATION_SUCCESS": "Đăng ký khóa học thành công!",
+    "COURSE_REGISTRATION_SUCCESS_MESSAGE": "Đội ngũ DevPlus sẽ sớm liên hệ với bạn để trao đổi về thông tin khóa học!"
   }
 }
