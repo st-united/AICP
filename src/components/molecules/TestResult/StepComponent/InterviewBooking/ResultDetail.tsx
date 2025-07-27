@@ -9,7 +9,7 @@ import { ExamSetResult, QuestionResult, Answer } from '@app/interface/examSet.in
 interface ResultDetailProps {
   visible: boolean;
   onClose: () => void;
-  examResult: ExamSetResult;
+  examResult: ExamSetResult | undefined;
 }
 
 const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResult }) => {
@@ -49,6 +49,9 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
     if (!isSelected) return '';
     return isCorrect ? 'bg-green-100' : 'bg-red-100';
   };
+  const isMultipleChoice = (question: QuestionResult) => {
+    return question.answers.filter((answer: Answer) => answer.isCorrect).length > 1;
+  };
 
   return (
     <Modal
@@ -62,12 +65,12 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
       open={visible}
       onCancel={onClose}
       footer={null}
-      width={800}
+      width={1000}
       className='!h-full'
     >
       <div className='space-y-6 h-[80vh] overflow-auto pt-16'>
         <div className='space-y-6'>
-          {examResult.questions.map((question: QuestionResult, questionIndex: number) => {
+          {examResult?.questions.map((question: QuestionResult, questionIndex: number) => {
             const status = getQuestionStatus(question);
 
             return (
@@ -100,7 +103,7 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResul
                             question,
                           )}`}
                         >
-                          {question.userAnswers && question.userAnswers.length > 1 ? (
+                          {isMultipleChoice(question) ? (
                             <Checkbox
                               checked={isSelected}
                               disabled

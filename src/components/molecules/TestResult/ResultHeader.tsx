@@ -24,7 +24,7 @@ import {
 const ResultHeader = () => {
   const { t } = useTranslation();
   const examId = getStorageData(EXAM_LATEST);
-  const { mutate: downloadCertificate } = useDownloadCertificate();
+  // const { mutate: downloadCertificate } = useDownloadCertificate();
   const { user } = useSelector((state: RootState) => state.auth);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -37,34 +37,34 @@ const ResultHeader = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleDownloadCertificate = () => {
-    downloadCertificate(examId, {
-      onSuccess: (response) => {
-        const disposition = response.headers['content-disposition'];
-        let filename = 'certificate.pdf';
-        if (disposition) {
-          const match = disposition.match(/filename="?([^"]+)"?/);
-          if (match) filename = match[1];
-        }
+  // const handleDownloadCertificate = () => {
+  //   downloadCertificate(examId, {
+  //     onSuccess: (response) => {
+  //       const disposition = response.headers['content-disposition'];
+  //       let filename = 'certificate.pdf';
+  //       if (disposition) {
+  //         const match = disposition.match(/filename="?([^"]+)"?/);
+  //         if (match) filename = match[1];
+  //       }
 
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', filename);
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        window.URL.revokeObjectURL(url);
-        openNotificationWithIcon(
-          NotificationTypeEnum.SUCCESS,
-          t('TEST_RESULT.DOWNLOAD_CERT_SUCCESS'),
-        );
-      },
-      onError: () => {
-        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('TEST_RESULT.DOWNLOAD_CERT_ERROR'));
-      },
-    });
-  };
+  //       const url = window.URL.createObjectURL(new Blob([response.data]));
+  //       const link = document.createElement('a');
+  //       link.href = url;
+  //       link.setAttribute('download', filename);
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       link.remove();
+  //       window.URL.revokeObjectURL(url);
+  //       openNotificationWithIcon(
+  //         NotificationTypeEnum.SUCCESS,
+  //         t('TEST_RESULT.DOWNLOAD_CERT_SUCCESS'),
+  //       );
+  //     },
+  //     onError: () => {
+  //       openNotificationWithIcon(NotificationTypeEnum.ERROR, t('TEST_RESULT.DOWNLOAD_CERT_ERROR'));
+  //     },
+  //   });
+  // };
 
   const InfoItem = ({
     icon,
@@ -98,7 +98,7 @@ const ResultHeader = () => {
         </p>
       </div>
 
-      {/* Download Button */}
+      {/* Download Button
       <div className='flex justify-center'>
         <Button
           type='primary'
@@ -108,7 +108,7 @@ const ResultHeader = () => {
         >
           {t('TEST_RESULT.DOWNLOAD_CERT')}
         </Button>
-      </div>
+      </div> */}
 
       {/* User Information */}
       <div className='border-2 border-[#FE7743] rounded-xl lg:rounded-2xl p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-orange-50/70 to-white shadow-inner'>
@@ -130,28 +130,6 @@ const ResultHeader = () => {
             label={t('TEST_RESULT.PHONE')}
             value={user?.phoneNumber || ''}
           />
-
-          <InfoItem
-            icon={<SolutionOutlined className='text-lg lg:text-xl text-[#FF872B]' />}
-            label={t('TEST_RESULT.ROLE')}
-            value={user?.isStudent ? t('USER.STUDENT') : t('USER.WORKER')}
-          />
-
-          {user?.isStudent && (
-            <>
-              <InfoItem
-                icon={<BankOutlined className='text-lg lg:text-xl text-[#FF872B]' />}
-                label={t('TEST_RESULT.SCHOOL')}
-                value={user?.university || ''}
-              />
-
-              <InfoItem
-                icon={<IdcardOutlined className='text-lg lg:text-xl text-[#FF872B]' />}
-                label={t('TEST_RESULT.STUDENT_ID')}
-                value={user?.studentCode || ''}
-              />
-            </>
-          )}
         </div>
       </div>
     </div>
