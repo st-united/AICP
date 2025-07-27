@@ -5,7 +5,7 @@ import {
   MinusCircleOutlined,
 } from '@ant-design/icons';
 import './SummaryBox.scss';
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -22,7 +22,7 @@ interface Item {
 }
 const SummaryBox = () => {
   const examId = getStorageData(EXAM_LATEST);
-  const { data, isLoading } = useGetExamResult(examId);
+  const { data } = useGetExamResult(examId);
   const [visible, setVisible] = useState(false);
   const { t } = useTranslation();
   const items: Item[] = data
@@ -53,7 +53,6 @@ const SummaryBox = () => {
         },
       ]
     : [];
-  if (isLoading) return <div>Loading...</div>;
   return (
     <div className='flex flex-col items-center w-full mx-auto text-xl'>
       <h3 className='text-4xl font-[700] mb-4 text-[#fe7743]'>{t('TEST_RESULT.SUMMARY')}</h3>

@@ -13,9 +13,9 @@ const ExamOverview = () => {
       </div>
       <div className='bg-white rounded-2xl shadow p-8'>
         <SummaryBox />
-        <div className='mt-6'>
-          <SkillLevel />
-        </div>
+      </div>
+      <div className='bg-white rounded-2xl shadow mt-6 p-2 sm:p-8'>
+        <SkillLevel />
       </div>
       <div className='bg-white rounded-2xl shadow p-0 sm:p-8'>
         <SuggestionList />
