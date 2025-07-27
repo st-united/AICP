@@ -1,16 +1,24 @@
-import { Image, Card } from 'antd';
+import { Image, Card, Button } from 'antd';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { RobotHand } from '@app/assets/images';
-import { PartnerUnit1, PartnerUnit2, CelebUnit, DevPlus } from '@app/assets/images/Logos';
-import '../LandingPage/homepage.scss';
+import { PartnerUnit1, PartnerUnit2, CelebUnit2, DevPlus } from '@app/assets/images/Logos';
+import ConfirmBeforeTestModal from '@app/pages/LandingPage/ConfirmBeforeTestModal';
+import { RootState } from '@app/redux/store';
+
+import '@app/pages/LandingPage/homepage.scss';
 
 const BannerUserScreen = () => {
   const { t } = useTranslation();
-
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <section className='min-h-screen bg-gradient-to-br from-[#FFFBF9] to-[#FFF5F0] flex items-center justify-center px-6 py-8 md:px-8 md:py-12 lg:px-12 lg:py-16'>
-      <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center w-full'>
+    <section className='min-h-screen bg-gradient-to-br from-[#FFFBF9] to-[#FFF5F0] flex items-center justify-center px-6 md:px-8 lg:px-12'>
+      <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center w-full my-0 sm:my-20 '>
         {/* Left Side - Robot Image */}
         <div className='relative order-2 md:order-1 px-4 md:px-6 lg:px-8'>
           <div className='relative'>
@@ -23,7 +31,7 @@ const BannerUserScreen = () => {
               />
             </div>
 
-            {/* Glowing Circles */}
+            {/* Glowing Circles
             <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-96 md:h-96 opacity-20'>
               <div className='absolute inset-0 rounded-full border-2 border-[#FE7743] animate-pulse'></div>
               <div
@@ -34,7 +42,7 @@ const BannerUserScreen = () => {
                 className='absolute inset-8 rounded-full border border-[#FE7743]/30 animate-pulse'
                 style={{ animationDelay: '1s' }}
               ></div>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -52,7 +60,7 @@ const BannerUserScreen = () => {
                     preview={false}
                     height={44}
                     className='object-contain transition-transform hover:scale-110'
-                    src={CelebUnit}
+                    src={CelebUnit2}
                     alt='celeb unit'
                   />
                   <Image
@@ -124,7 +132,17 @@ const BannerUserScreen = () => {
               </div>
             </div>
           </Card>
-
+          <div>
+            <Button
+              onClick={() => {
+                isAuth ? setIsOpen(true) : navigate('/login');
+              }}
+              className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
+            >
+              {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
+            </Button>
+          </div>
+          {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
           {/* Mobile Sponsors */}
           <div
             className='sm:hidden space-y-4 animate-slide-in px-2'
@@ -139,7 +157,7 @@ const BannerUserScreen = () => {
                   preview={false}
                   height={36}
                   className='object-contain transition-transform hover:scale-110'
-                  src={CelebUnit}
+                  src={CelebUnit2}
                   alt='celeb unit'
                 />
                 <Image
