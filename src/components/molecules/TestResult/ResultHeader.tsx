@@ -37,35 +37,6 @@ const ResultHeader = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // const handleDownloadCertificate = () => {
-  //   downloadCertificate(examId, {
-  //     onSuccess: (response) => {
-  //       const disposition = response.headers['content-disposition'];
-  //       let filename = 'certificate.pdf';
-  //       if (disposition) {
-  //         const match = disposition.match(/filename="?([^"]+)"?/);
-  //         if (match) filename = match[1];
-  //       }
-
-  //       const url = window.URL.createObjectURL(new Blob([response.data]));
-  //       const link = document.createElement('a');
-  //       link.href = url;
-  //       link.setAttribute('download', filename);
-  //       document.body.appendChild(link);
-  //       link.click();
-  //       link.remove();
-  //       window.URL.revokeObjectURL(url);
-  //       openNotificationWithIcon(
-  //         NotificationTypeEnum.SUCCESS,
-  //         t('TEST_RESULT.DOWNLOAD_CERT_SUCCESS'),
-  //       );
-  //     },
-  //     onError: () => {
-  //       openNotificationWithIcon(NotificationTypeEnum.ERROR, t('TEST_RESULT.DOWNLOAD_CERT_ERROR'));
-  //     },
-  //   });
-  // };
-
   const InfoItem = ({
     icon,
     label,
@@ -98,19 +69,6 @@ const ResultHeader = () => {
         </p>
       </div>
 
-      {/* Download Button
-      <div className='flex justify-center'>
-        <Button
-          type='primary'
-          icon={<DownloadOutlined className='text-base lg:text-lg' />}
-          className='w-full sm:w-auto h-12 lg:h-14 rounded-full text-sm sm:text-base lg:text-lg font-bold px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 flex items-center justify-center gap-2 lg:gap-3 !bg-gradient-to-r !from-[#FF872B] !to-[#FF4D08] !border-none hover:!opacity-90 hover:!scale-105 transition-all duration-300 shadow-lg hover:shadow-xl'
-          onClick={handleDownloadCertificate}
-        >
-          {t('TEST_RESULT.DOWNLOAD_CERT')}
-        </Button>
-      </div> */}
-
-      {/* User Information */}
       <div className='border-2 border-[#FE7743] rounded-xl lg:rounded-2xl p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-orange-50/70 to-white shadow-inner'>
         <div className='space-y-3 sm:space-y-4 lg:space-y-5'>
           <InfoItem
