@@ -23,7 +23,7 @@ const ResultLayout = () => {
     );
 
   return (
-    <Layout className='layout-result'>
+    <Layout className='layout-result result-layout'>
       <HeaderComponent />
       <Content className='result-content'>
         <Suspense fallback={<Spin />}>
