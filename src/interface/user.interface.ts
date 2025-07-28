@@ -101,6 +101,8 @@ export interface HistoryTesting {
     examLevel: ExamLevelEnum | null;
   };
   createdAt: Date;
+  attempt?: number;
+  isLatest?: boolean;
 }
 
 export interface GetHistoryParams {
