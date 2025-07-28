@@ -216,7 +216,7 @@ const Profile = () => {
         </Form.Item>
       </Form>
 
-      <div className='py-6'>
+      <div className='py-6 px-4'>
         <h1 className='text-[18px] font-bold text-center my-2'>{t('PROFILE.PORTFOLIO_HEADER')}</h1>
         <PortfolioContent edit={isEdit} onCancel={handleCancel} onSave={portfolioForm.submit} />
       </div>

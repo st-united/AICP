@@ -76,8 +76,8 @@ export const useProfileSchema = () => {
 
     isStudent: yup.boolean().required(),
 
-    university: yup.string().required(t('VALIDATE.USER_UNIVERSITY_REQUIRED') as string),
+    university: yup.string().required(t<string>('VALIDATE.USER_UNIVERSITY_REQUIRED')),
 
-    studentCode: yup.string().required(t('VALIDATE.USER_STUDENT_CODE_REQUIRED') as string),
+    studentCode: yup.string().required(t<string>('VALIDATE.USER_STUDENT_CODE_REQUIRED')),
   });
 };
