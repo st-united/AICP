@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { UploadSection } from './FileUpload/UploadSection';
 import { useProfileSchema } from './profileSchema';
 import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
@@ -179,37 +178,37 @@ const Profile = () => {
               </Form.Item>
             </>
           )}
-          <Form.Item className='w-full max-w-[900px] flex justify-end !py-8'>
-            <div className='flex justify-end gap-2 !flex-row'>
-              {!isEdit ? (
-                <>
-                  <Button
-                    onClick={() => setIsEdit(true)}
-                    className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white font-bold'
-                  >
-                    {t('PORTFOLIO.EDIT')}
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button
-                    onClick={handleCancel}
-                    className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white font-bold'
-                  >
-                    {t('PORTFOLIO.CANCEL')}
-                  </Button>
-                  <Button
-                    type='primary'
-                    htmlType='submit'
-                    className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white font-bold'
-                  >
-                    {t('PORTFOLIO.SAVE')}
-                  </Button>
-                </>
-              )}
-            </div>
-          </Form.Item>
         </div>
+        <Form.Item className='w-full max-w-[900px] flex justify-end !py-8'>
+          <div className='flex justify-end gap-2 !flex-row'>
+            {!isEdit ? (
+              <>
+                <Button
+                  onClick={() => setIsEdit(true)}
+                  className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white font-bold'
+                >
+                  {t('PORTFOLIO.EDIT')}
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={handleCancel}
+                  className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white font-bold'
+                >
+                  {t('PORTFOLIO.CANCEL')}
+                </Button>
+                <Button
+                  type='primary'
+                  htmlType='submit'
+                  className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white font-bold'
+                >
+                  {t('PORTFOLIO.SAVE')}
+                </Button>
+              </>
+            )}
+          </div>
+        </Form.Item>
       </Form>
       <div className='py-6'>
         <h1 className='text-[18px] font-bold text-center my-2'>{t('PROFILE.PORTFOLIO_HEADER')}</h1>
