@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import InterviewSuccessModal from './InterviewBooking/InterviewSuccessModal';
 import { NAVIGATE_URL } from '@app/constants';
+import { useCheckBooking, useUserBooking } from '@app/hooks/useBooking';
 import { useGetPortfolio } from '@app/hooks/usePortfolio';
 
 const InterviewBooking: React.FC = () => {
@@ -12,6 +13,21 @@ const InterviewBooking: React.FC = () => {
   const navigate = useNavigate();
   const [openInterviewBookingModal, setOpenInterviewBookingModal] = useState(false);
   const { isLoading: isLoadingPortfolio, isSuccess: isSuccessPortfolio } = useGetPortfolio();
+  const { mutate: userBooking, isPending: isPendingUserBooking } = useUserBooking();
+  const { data: bookingStatus, isLoading: isLoadingCheckBooking } = useCheckBooking();
+  const handleBooking = () => {
+    if (!isSuccessPortfolio) {
+      navigate(NAVIGATE_URL.RESULT_PORTFOLIO);
+    } else {
+      if (!bookingStatus?.isBooked) {
+        userBooking(undefined, {
+          onSuccess: () => {
+            setOpenInterviewBookingModal(true);
+          },
+        });
+      }
+    }
+  };
   return (
     <div>
       <div className='flex flex-col items-center justify-center max-w-3xl mx-auto gap-8 text-center'>
@@ -25,17 +41,18 @@ const InterviewBooking: React.FC = () => {
 
         <Button
           type='primary'
-          disabled={isLoadingPortfolio}
+          disabled={
+            isLoadingPortfolio ||
+            isPendingUserBooking ||
+            isLoadingCheckBooking ||
+            bookingStatus?.hasBooking
+          }
           className='rounded-full text-lg font-bold px-6 py-5'
-          onClick={() => {
-            if (!isSuccessPortfolio) {
-              navigate(NAVIGATE_URL.RESULT_PORTFOLIO);
-            } else {
-              setOpenInterviewBookingModal(true);
-            }
-          }}
+          onClick={handleBooking}
         >
-          {t('TEST_RESULT.BOOKING_BUTTON')}
+          {bookingStatus?.hasBooking
+            ? t('TEST_RESULT.BOOKING_BUTTON_BOOKED')
+            : t('TEST_RESULT.BOOKING_BUTTON')}
         </Button>
         <InterviewSuccessModal
           open={openInterviewBookingModal}
