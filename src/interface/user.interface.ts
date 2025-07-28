@@ -1,3 +1,4 @@
+import dayjs, { Dayjs } from 'dayjs';
 import { GetListParams } from './common.interface';
 import { ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 
@@ -24,7 +25,7 @@ export interface UserProfile {
   fullName: string;
   email: string;
   phoneNumber?: string;
-  dob?: string;
+  dob?: string | Dayjs;
   avatarUrl?: string;
   permissions?: string[];
   province?: string;
@@ -149,4 +150,9 @@ export interface UpdateUserStudentInfo {
   isStudent: boolean;
   university?: string;
   studentCode?: string;
+}
+
+export interface ProfileJob {
+  id: string;
+  name: string;
 }

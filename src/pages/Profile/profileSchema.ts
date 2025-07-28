@@ -6,7 +6,6 @@ import * as yup from 'yup';
 dayjs.extend(isSameOrBefore);
 import {
   PHONE_REGEX_PATTERN,
-  EMAIL_REGEX_PATTERN,
   NO_SPECIAL_CHARACTER_IN_NAME,
   NO_SPACE_START_END,
   NO_TWO_SPACE,
@@ -77,10 +76,8 @@ export const useProfileSchema = () => {
 
     isStudent: yup.boolean().required(),
 
-    university: yup.string().required(),
+    university: yup.string().required(t('VALIDATE.USER_UNIVERSITY_REQUIRED') as string),
 
-    studentCode: yup.string().required(),
-    github: yup.string().nullable(),
-    linked: yup.string().nullable(),
+    studentCode: yup.string().required(t('VALIDATE.USER_STUDENT_CODE_REQUIRED') as string),
   });
 };
