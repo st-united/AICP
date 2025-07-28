@@ -1,41 +1,12 @@
-import {
-  UserOutlined,
-  MailOutlined,
-  PhoneOutlined,
-  BankOutlined,
-  IdcardOutlined,
-  SolutionOutlined,
-  DownloadOutlined,
-} from '@ant-design/icons';
-import { Button } from 'antd';
-import { useEffect, useState } from 'react';
+import { UserOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { getStorageData } from '@app/config';
-import { EXAM_LATEST } from '@app/constants/testing';
-import { useDownloadCertificate } from '@app/hooks/useExamSet';
 import { RootState } from '@app/redux/store';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
 
 const ResultHeader = () => {
   const { t } = useTranslation();
-  const examId = getStorageData(EXAM_LATEST);
-  // const { mutate: downloadCertificate } = useDownloadCertificate();
   const { user } = useSelector((state: RootState) => state.auth);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const InfoItem = ({
     icon,
