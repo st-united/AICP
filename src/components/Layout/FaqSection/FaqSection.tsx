@@ -39,7 +39,7 @@ const FaqSection = () => {
   });
 
   return (
-    <div className='w-full h-full pt-8 mdM:pt-20 pb-40 bg-[#FFFBF9]'>
+    <div className='w-full h-full pt-8 mdM:pt-20 pb-20 bg-[#FFFBF9]'>
       <div className='container w-full h-full mx-auto xsM:w-[90%] smM:px-2 py-10'>
         <div className='text-primary font-bold text-center text-base sm:text-2xl mdM::text-3xl mdM:text-start mb-10 md:mb-20'>
           {t('HOMEPAGE.FAQ')}
