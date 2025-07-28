@@ -48,9 +48,10 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
         <div className='w-[95%] mx-auto'>
           <Button
             onClick={() => navigate(-1)}
-            className='flex items-center gap-1 text-sm sm:text-base text-black hover:text-[#000000] font-medium py-4'
+            type='text'
+            className='!border-0 !shadow-none px-0 ml-0 text-[15px] text-black text-sm flex items-center gap-1 hover:!text-black hover:!bg-transparent py-6'
           >
-            <LeftOutlined className='text-lg sm:text-lg' />
+            <LeftOutlined />
             {t('BUTTON.BACK')}
           </Button>
           <div className='flex flex-col sm:flex-row items-center justify-center sm:justify-between w-full gap-3 sm:gap-0'>
