@@ -15,9 +15,9 @@ const Header = () => {
   const { pathname } = useLocation();
   const isAuth = useSelector((state: any) => state.auth.isAuth);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [currentSection, setCurrentSection] = useState<HomePageEnum | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
+  const [currentSection, setCurrentSection] = useState<HomePageEnum | null>(null);
   const isHomePage = pathname === '/';
   const handleLoginClick = () => navigate('/login');
 
@@ -68,7 +68,7 @@ const Header = () => {
   return (
     <Layout.Header
       className={`${
-        isHomePage && !isScrolled ? 'fixed top-0 bg-[#FFFBF9]' : 'sticky top-0 bg-white shadow-md'
+        isHomePage && !isScrolled ? 'sticky top-0 bg-[#FFFBF9]' : 'sticky top-0 bg-white shadow-md'
       } flex justify-between w-full items-center h-[5rem] z-50  transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24`}
     >
       <div className='cursor-pointer flex items-center justify-center'>
