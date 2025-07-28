@@ -6,6 +6,7 @@ import PortfolioConfirmationModal from '@app/components/molecules/Portfolio/comp
 import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
 import InterviewSuccessModal from '@app/components/molecules/TestResult/StepComponent/InterviewBooking/InterviewSuccessModal';
 import { NAVIGATE_URL } from '@app/constants';
+import { useCheckBooking, useUserBooking } from '@app/hooks/useBooking';
 import {
   PORTFOLIO_FIELD_DISPLAY_NAMES,
   PortfolioRequest,
@@ -22,6 +23,17 @@ const PortfolioForResult: React.FC = () => {
       }
     | undefined
   >();
+  const { data: bookingStatus } = useCheckBooking();
+  const { mutate: userBooking } = useUserBooking();
+  const handleBooking = () => {
+    if (!bookingStatus?.hasBooking) {
+      userBooking(undefined, {
+        onSuccess: () => {
+          setOpenInterviewBookingModal(true);
+        },
+      });
+    }
+  };
   const missingItems = useMemo(() => {
     if (!confirmationModalState) return [];
 
@@ -67,7 +79,7 @@ const PortfolioForResult: React.FC = () => {
           setConfirmationModalState({ values, onConfirm });
         }}
         onSave={() => {
-          setOpenInterviewBookingModal(true);
+          handleBooking();
         }}
       />
       <InterviewSuccessModal
