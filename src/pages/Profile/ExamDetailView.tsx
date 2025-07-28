@@ -46,16 +46,29 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
     <>
       <div className='rounded-xl shadow-lg bg-white w-full auto h-full overflow-y-auto'>
         <div className='w-[95%] mx-auto'>
-          <button
+          <Button
             onClick={() => navigate(-1)}
-            className='flex items-center gap-1 text-sm sm:text-base text-black hover:text-[#000000] font-medium py-4'
+            type='text'
+            className='!border-0 !shadow-none px-0 ml-0 text-[15px] text-black text-sm flex items-center gap-1 hover:!text-black hover:!bg-transparent py-6'
           >
-            <LeftOutlined className='text-lg sm:text-lg' />
+            <LeftOutlined />
             {t('BUTTON.BACK')}
-          </button>
-          <div className='flex items-center justify-center sm:justify-start w-full sm:w-auto text-xl font-bold text-gray-800'>
-            {t('EXAM.QUIZ_ID_PREFIX')}
-            <span className='text-[#000000] ml-1'>#{exam.id.slice(0, 8)}</span>
+          </Button>
+          <div className='flex flex-col sm:flex-row items-center justify-center sm:justify-between w-full gap-3 sm:gap-0'>
+            <div className='text-xl font-bold text-gray-800 text-center sm:text-left'>
+              {t('EXAM.QUIZ_ID_PREFIX')}
+              <span className='text-black ml-1'>#{exam.id.slice(0, 8)}</span>
+            </div>
+
+            <Button
+              onClick={() => {
+                localStorage.setItem('examLatest', exam.id);
+                navigate('/result');
+              }}
+              className='text-sm text-[#FE7743] border border-[#FE7743] rounded-full px-4 py-1 hover:bg-orange-50 transition'
+            >
+              {t('EXAM.VIEW_DETAIL')}
+            </Button>
           </div>
 
           <div className='flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mb-4 px-1 pt-4'>
