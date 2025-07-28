@@ -16,9 +16,17 @@ interface ColumnChartProps {
 
 const CompetencyChart = ({ data }: ColumnChartProps) => {
   return (
-    <div className='h-96'>
-      <ResponsiveContainer width='95%' height='100%'>
-        <BarChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+    <div className='h-80 sm:h-96 mt-6'>
+      <ResponsiveContainer width='100%' height='100%'>
+        <BarChart
+          data={data}
+          margin={{
+            top: 20,
+            right: 10,
+            left: 10,
+            bottom: 60,
+          }}
+        >
           <defs>
             <linearGradient id='colorScore' x1='0' y1='0' x2='0' y2='1'>
               <stop offset='5%' stopColor='#3b82f6' stopOpacity={0.8} />

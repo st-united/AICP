@@ -7,7 +7,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { DropProfile } from '../../molecules';
 import { DevPlus, DevPlusS } from '@app/assets/images';
 import { ButtonHeader } from '@app/components/atoms';
-
+import { HomePageEnum } from '@app/constants/homePageEnum';
+import { smoothScrollTo } from '@app/utils/scroll';
 const Header = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+  const [currentSection, setCurrentSection] = useState<HomePageEnum | null>(null);
   const isHomePage = pathname === '/';
   const handleLoginClick = () => navigate('/login');
 
@@ -42,10 +44,13 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleSmoothScroll = (id: string) => {
+  const handleSmoothScroll = (id: string, section: HomePageEnum) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const yOffset = -10;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      smoothScrollTo(y);
+      setCurrentSection(section);
     }
   };
   useEffect(() => {
@@ -80,22 +85,28 @@ const Header = () => {
           preview={false}
         />
       </div>
-      <div className='hidden smM:flex gap-8 items-center'>
-        <Button
-          onClick={() => handleSmoothScroll('partner-network')}
-          type='text'
-          className='!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200'
-        >
-          {t('HOMEPAGE.PARTNER_TITLE')}
-        </Button>
-        <Button
-          onClick={() => handleSmoothScroll('experts')}
-          type='text'
-          className='!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200'
-        >
-          {t('HOMEPAGE.EXPERTS_TITLE')}
-        </Button>
-      </div>
+      {isHomePage && (
+        <div className='hidden md:flex gap-8 items-center'>
+          <Button
+            onClick={() => handleSmoothScroll('partner-network', HomePageEnum.PARTNER_NETWORK)}
+            type='text'
+            className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
+              currentSection === HomePageEnum.PARTNER_NETWORK ? '!text-[#FE7743]' : ''
+            }`}
+          >
+            {t('HOMEPAGE.PARTNER_TITLE')}
+          </Button>
+          <Button
+            onClick={() => handleSmoothScroll('experts', HomePageEnum.EXPERTS)}
+            type='text'
+            className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
+              currentSection === HomePageEnum.EXPERTS ? '!text-[#FE7743]' : ''
+            }`}
+          >
+            {t('HOMEPAGE.EXPERTS_TITLE')}
+          </Button>
+        </div>
+      )}
       {isAuth ? (
         <div className='flex items-center gap-4 md:gap-6 smM:pr-2'>
           <DropProfile />

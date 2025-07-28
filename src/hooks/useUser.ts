@@ -11,6 +11,7 @@ import {
   HistoryTesting,
   DetailExam,
   UpdateUserStudentInfo,
+  UserProfile,
 } from '@app/interface/user.interface';
 import {
   checkHasTakenExam,
