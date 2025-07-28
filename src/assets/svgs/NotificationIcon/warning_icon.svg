@@ -1,0 +1,14 @@
+<svg
+              width='98'
+              height='98'
+              viewBox='0 0 98 98'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <circle cx='49' cy='49' r='49' fill='#FEEEEE' />
+              <circle cx='49' cy='49' r='40' fill='#FFDEDE' />
+              <path
+                d='M49.0007 28.166L26.084 67.7493H71.9173M49.0007 36.4993L64.6882 63.5827H33.3132M46.9173 44.8327V53.166H51.084V44.8327M46.9173 57.3327V61.4993H51.084V57.3327'
+                fill='#FF0000'
+              />
+            </svg>
