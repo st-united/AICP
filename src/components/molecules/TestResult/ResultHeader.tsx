@@ -5,8 +5,9 @@ import {
   BankOutlined,
   IdcardOutlined,
   SolutionOutlined,
+  DownloadOutlined,
 } from '@ant-design/icons';
-import { Button, Descriptions } from 'antd';
+import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -25,11 +26,11 @@ const ResultHeader = () => {
   const examId = getStorageData(EXAM_LATEST);
   const { mutate: downloadCertificate } = useDownloadCertificate();
   const { user } = useSelector((state: RootState) => state.auth);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 450);
+      setIsMobile(window.innerWidth < 768);
     };
 
     window.addEventListener('resize', handleResize);
@@ -64,105 +65,94 @@ const ResultHeader = () => {
       },
     });
   };
+
+  const InfoItem = ({
+    icon,
+    label,
+    value,
+  }: {
+    icon: React.ReactNode;
+    label: string;
+    value: string;
+  }) => (
+    <div className='flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 p-4 sm:p-5 bg-gray-50/80 rounded-lg border border-gray-200/50 hover:bg-gray-100/50 transition-colors duration-200'>
+      <div className='flex items-center gap-2 text-[#686868] font-semibold text-sm sm:text-base lg:text-lg min-w-0 sm:min-w-[160px] lg:min-w-[180px]'>
+        {icon}
+        <span className='truncate'>{label}:</span>
+      </div>
+      <div className='text-[#4a4a4a] font-medium text-sm sm:text-base lg:text-lg break-words flex-1'>
+        {value}
+      </div>
+    </div>
+  );
+
   return (
-    <div className='bg-white rounded-2xl shadow p-8'>
-      <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-2 bg-gradient-to-r from-[#FF872BCF] to-[#FF4D08] bg-clip-text text-transparent'>
-        {t('TEST_RESULT.CONGRATS')}
-      </h2>
-      <p className='text-center text-[#5B5B5B] text-xl font-bold italic mb-6'>
-        {t('TEST_RESULT.SUBTITLE')}
-      </p>
-      <div className='flex justify-end mb-4'>
+    <div className='bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 lg:p-8 xl:p-10 space-y-6 lg:space-y-8'>
+      {/* Header Section */}
+      <div className='text-center space-y-3 lg:space-y-4'>
+        <h2 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-[#FF872BCF] to-[#FF4D08] bg-clip-text text-transparent leading-tight px-2'>
+          {t('TEST_RESULT.CONGRATS')}
+        </h2>
+        <p className='text-[#5B5B5B] text-sm sm:text-base md:text-lg lg:text-xl font-semibold italic px-2 max-w-4xl mx-auto'>
+          {t('TEST_RESULT.SUBTITLE')}
+        </p>
+      </div>
+
+      {/* Download Button */}
+      <div className='flex justify-center'>
         <Button
           type='primary'
-          className='rounded-full text-lg font-bold px-6 py-5'
+          icon={<DownloadOutlined className='text-base lg:text-lg' />}
+          className='w-full sm:w-auto h-12 lg:h-14 rounded-full text-sm sm:text-base lg:text-lg font-bold px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 flex items-center justify-center gap-2 lg:gap-3 !bg-gradient-to-r !from-[#FF872B] !to-[#FF4D08] !border-none hover:!opacity-90 hover:!scale-105 transition-all duration-300 shadow-lg hover:shadow-xl'
           onClick={handleDownloadCertificate}
         >
           {t('TEST_RESULT.DOWNLOAD_CERT')}
         </Button>
       </div>
-      <div className='border border-[#FE7743] rounded-xl p-4'>
-        <Descriptions
-          colon={false}
-          layout='horizontal'
-          className='w-full text-lg font-semibold'
-          column={{
-            xs: 1,
-            sm: 1,
-            md: 2,
-            lg: 3,
-            xl: 3,
-          }}
-        >
-          <Descriptions.Item
-            label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <UserOutlined className='text-[#686868] font-extrabold text-lg' />
-                {t('TEST_RESULT.FULLNAME')}:
-              </div>
-            }
-            span={1}
-          >
-            <span className='text-[#686868] font-semibold text-lg'>{user?.fullName}</span>
-          </Descriptions.Item>
-          <Descriptions.Item
-            label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <MailOutlined className='text-[#686868] font-extrabold text-lg' />
-                {t('TEST_RESULT.EMAIL')}:
-              </div>
-            }
-            span={1}
-          >
-            <span className='text-[#686868] font-semibold text-lg'>{user?.email}</span>
-          </Descriptions.Item>
-          <Descriptions.Item
-            label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <PhoneOutlined className='text-[#686868] font-extrabold text-lg' />
-                {t('TEST_RESULT.PHONE')}:
-              </div>
-            }
-            span={1}
-          >
-            <span className='text-[#686868] font-semibold text-lg'>{user?.phoneNumber}</span>
-          </Descriptions.Item>
-          <Descriptions.Item
-            label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <SolutionOutlined className='text-[#686868] font-extrabold text-lg' />
-                {t('TEST_RESULT.ROLE')}:
-              </div>
-            }
-            span={1}
-          >
-            <span className='text-[#686868] font-semibold text-lg'>
-              {user?.isStudent ? t('USER.STUDENT') : t('USER.WORKER')}
-            </span>
-          </Descriptions.Item>
-          <Descriptions.Item
-            label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <BankOutlined className='text-[#686868] font-extrabold text-lg' />
-                {t('TEST_RESULT.SCHOOL')}:
-              </div>
-            }
-            span={1}
-          >
-            <span className='text-[#686868] font-semibold text-lg'>{user?.university}</span>
-          </Descriptions.Item>
-          <Descriptions.Item
-            label={
-              <div className='flex items-center gap-1 text-[#686868] font-extrabold text-lg'>
-                <IdcardOutlined className='text-[#686868] font-extrabold text-lg' />
-                {t('TEST_RESULT.STUDENT_ID')}:
-              </div>
-            }
-            span={1}
-          >
-            <span className='text-[#686868] font-semibold text-lg'>{user?.studentCode}</span>
-          </Descriptions.Item>
-        </Descriptions>
+
+      {/* User Information */}
+      <div className='border-2 border-[#FE7743] rounded-xl lg:rounded-2xl p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-orange-50/70 to-white shadow-inner'>
+        <div className='space-y-3 sm:space-y-4 lg:space-y-5'>
+          <InfoItem
+            icon={<UserOutlined className='text-lg lg:text-xl text-[#FF872B]' />}
+            label={t('TEST_RESULT.FULLNAME')}
+            value={user?.fullName || ''}
+          />
+
+          <InfoItem
+            icon={<MailOutlined className='text-lg lg:text-xl text-[#FF872B]' />}
+            label={t('TEST_RESULT.EMAIL')}
+            value={user?.email || ''}
+          />
+
+          <InfoItem
+            icon={<PhoneOutlined className='text-lg lg:text-xl text-[#FF872B]' />}
+            label={t('TEST_RESULT.PHONE')}
+            value={user?.phoneNumber || ''}
+          />
+
+          <InfoItem
+            icon={<SolutionOutlined className='text-lg lg:text-xl text-[#FF872B]' />}
+            label={t('TEST_RESULT.ROLE')}
+            value={user?.isStudent ? t('USER.STUDENT') : t('USER.WORKER')}
+          />
+
+          {user?.isStudent && (
+            <>
+              <InfoItem
+                icon={<BankOutlined className='text-lg lg:text-xl text-[#FF872B]' />}
+                label={t('TEST_RESULT.SCHOOL')}
+                value={user?.university || ''}
+              />
+
+              <InfoItem
+                icon={<IdcardOutlined className='text-lg lg:text-xl text-[#FF872B]' />}
+                label={t('TEST_RESULT.STUDENT_ID')}
+                value={user?.studentCode || ''}
+              />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
