@@ -824,7 +824,8 @@
     "DOWNLOAD_CERT_ERROR": "Tải chứng chỉ thất bại",
     "SCORE_LABEL": "Điểm",
     "NOT_FOUND": "Không tìm thấy kết quả đánh giá",
-    "CORRECT_RATIO": "câu trả lời đúng"
+    "CORRECT_RATIO": "câu trả lời đúng",
+    "BOOKING_BUTTON_BOOKED": "Đã đặt lịch phỏng vấn"
   },
   "CONFIRM_BEFORE_TEST_MODAL": {
     "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",
