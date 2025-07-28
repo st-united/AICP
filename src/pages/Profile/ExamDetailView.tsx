@@ -46,20 +46,20 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
     <>
       <div className='rounded-xl shadow-lg bg-white w-full auto h-full overflow-y-auto'>
         <div className='w-[95%] mx-auto'>
-          <button
+          <Button
             onClick={() => navigate(-1)}
             className='flex items-center gap-1 text-sm sm:text-base text-black hover:text-[#000000] font-medium py-4'
           >
             <LeftOutlined className='text-lg sm:text-lg' />
             {t('BUTTON.BACK')}
-          </button>
+          </Button>
           <div className='flex flex-col sm:flex-row items-center justify-center sm:justify-between w-full gap-3 sm:gap-0'>
             <div className='text-xl font-bold text-gray-800 text-center sm:text-left'>
               {t('EXAM.QUIZ_ID_PREFIX')}
               <span className='text-black ml-1'>#{exam.id.slice(0, 8)}</span>
             </div>
 
-            <button
+            <Button
               onClick={() => {
                 localStorage.setItem('examLatest', exam.id);
                 navigate('/result');
@@ -67,7 +67,7 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
               className='text-sm text-[#FE7743] border border-[#FE7743] rounded-full px-4 py-1 hover:bg-orange-50 transition'
             >
               {t('EXAM.VIEW_DETAIL')}
-            </button>
+            </Button>
           </div>
 
           <div className='flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mb-4 px-1 pt-4'>
