@@ -42,7 +42,7 @@ const Profile = () => {
       fullName: data.fullName || '',
       email: data.email || '',
       phoneNumber: data.phoneNumber || '',
-      dob: data.dob ? dayjs(data.dob).format('DD/MM/YYYY') : '',
+      dob: data.dob ? dayjs(data.dob) : '',
       province: data.province || '',
       job: parseJob(data.job),
       referralCode: data.referralCode || '',
