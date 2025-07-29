@@ -7,7 +7,7 @@ import {
 import { Button, Divider, Modal, Progress, Spin } from 'antd';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import QuestionDisplay from './QuestionDisplay';
 import QuestionIndexPanel from './QuestionIndexPanel';
@@ -202,7 +202,7 @@ const Testing = () => {
     <div className='exam-container relative overflow-hidden h-full'>
       {/* Header - Improved mobile spacing */}
 
-      <div className='justify-start items-center w-full text-lg sm:text-xl md:text-2xl leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
+      <div className='justify-start items-center w-full text-lg sm:text-xl md:text-3xl leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
         <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>{' '}
         <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
       </div>
@@ -236,17 +236,8 @@ const Testing = () => {
               className='absolute inset-0 bg-black/50'
               aria-label='Close menu overlay'
             />
-            <div className='absolute right-2 top-2 bottom-2 w-[280px] bg-white rounded-2xl shadow-xl overflow-hidden'>
-              <div className='flex justify-between items-center p-4 border-b'>
-                <h3 className='font-semibold text-lg'>{t('TEST.QUESTIONS')}</h3>
-                <button
-                  onClick={() => setIsMenuOpen(false)}
-                  className='p-2 rounded-full hover:bg-gray-100'
-                >
-                  <CloseOutlined className='text-xl' />
-                </button>
-              </div>
-              <div className='h-full overflow-y-auto pb-20'>
+            <div className='absolute right-2 top-20 bottom-2 w-[280px] bg-white rounded-2xl shadow-xl overflow-hidden'>
+              <div className='h-full'>
                 <QuestionIndexPanel
                   questions={examSet.questions}
                   currentQuestion={currentQuestion}
@@ -291,7 +282,9 @@ const Testing = () => {
             <div
               className='overflow-y-auto 
               h-[calc(100vh-270px)]
-              h-2xl:h-[calc(100vh-355px)]
+              sm:h-[calc(100vh-310px)]
+              md:h-[calc(100vh-360px)]
+              h-2xl:h-[calc(100vh-310px)]
               pb-6'
             >
               <QuestionDisplay
@@ -349,23 +342,27 @@ const Testing = () => {
             </div>
 
             <h2 className='text-2xl font-bold text-black mb-1 text-center'>{t('SUBMIT.TITLE')}</h2>
-            <p className='text-base sm:text-lg font-medium text-center py-2 sm:py-4 px-2'>
-              {t('SUBMIT.UNANSWERED_MESSAGE', { count: unansweredQuestions.length })}
+            <p className='text-base sm:text-lg font-medium text-center py-2 sm:p-2'>
+              <Trans
+                i18nKey={'SUBMIT.UNANSWERED_MESSAGE'}
+                values={{ count: unansweredQuestions.length }}
+                components={{ bold: <span className='font-bold text-red-600' /> }}
+              />
             </p>
 
             {/* Stats section - Better mobile layout */}
             <div className='text-sm sm:text-lg flex flex-col gap-2 font-medium px-2'>
-              <div className='flex justify-between'>
+              <div className='flex gap-2'>
                 <span>{t('TEST.TOTAL_QUESTION')}:</span>
                 <span className='font-bold'>{examSet.questions.length}</span>
               </div>
-              <div className='flex justify-between'>
+              <div className='flex gap-2'>
                 <span>{t('TEST.ANSWERED_QUESTION')}:</span>
                 <span className='font-bold'>{answeredQuestions.length}</span>
               </div>
-              <div className='flex flex-col gap-1'>
+              <div className='flex flex-col sm:flex-row gap-2 sm:items-center'>
                 <span>{t('TEST.UNANSWERED_QUESTION')}:</span>
-                <div className='font-bold text-[#FE7743] text-xs sm:text-sm'>
+                <span className='font-bold text-[#FE7743]'>
                   {unansweredQuestions.slice(0, 3).map((question, index) => {
                     const questionIndex =
                       examSet.questions.findIndex((q) => q.id === question.id) + 1;
@@ -406,7 +403,7 @@ const Testing = () => {
                       {')'}
                     </span>
                   )}
-                </div>
+                </span>
               </div>
             </div>
 

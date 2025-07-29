@@ -602,7 +602,7 @@
   },
   "SUBMIT": {
     "TITLE": "Cảnh báo: Bài làm chưa hoàn tất",
-    "UNANSWERED_MESSAGE": "Bạn vẫn còn {{count}} câu hỏi chưa trả lời. Vui lòng kiểm tra lại trước khi nộp bài.",
+    "UNANSWERED_MESSAGE": "Bạn vẫn còn <bold>{{count}}</bold> câu hỏi chưa trả lời. Vui lòng kiểm tra lại trước khi nộp bài.",
     "UNANSWERED_NUMBERS": "Question numbers: {{numbers}}",
     "UNANSWERED_NUMBERS_MESSAGE": "Bạn còn {{count}} câu hỏi nữa. Bạn có muốn tiếp tục.",
     "NOTE": "Lưu ý",
