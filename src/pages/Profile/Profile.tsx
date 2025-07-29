@@ -26,7 +26,7 @@ const Profile = () => {
   const [initialValues, setInitialValues] = useState<UserProfile | null>(null);
 
   const { data } = useGetProfile();
-  const updateProfile = useUpdateProfile();
+  const { mutate: updateProfile, isPending: isLoading } = useUpdateProfile();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -80,7 +80,7 @@ const Profile = () => {
       studentCode: values.isStudent ? values.studentCode || '' : '',
     };
 
-    updateProfile.mutate(updatedValues, {
+    updateProfile(updatedValues, {
       onSuccess: () => {
         setIsEdit(false);
         navigate(NAVIGATE_URL.PROFILE);
@@ -207,6 +207,8 @@ const Profile = () => {
                   type='primary'
                   htmlType='submit'
                   className='!rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white font-bold'
+                  loading={isLoading}
+                  disabled={isLoading}
                 >
                   {t('PORTFOLIO.SAVE')}
                 </Button>
