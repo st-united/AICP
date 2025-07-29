@@ -3,7 +3,7 @@ import { Trans } from 'react-i18next';
 
 import { ExamLevelEnum } from '@app/constants/enum';
 import { getExamLevelText, getLevelText } from '@app/pages/Profile/QuizManagement/QuizCard';
-
+import './SkillList.scss';
 interface Pilar {
   toolSetScore: number;
   mindSetScore: number;
@@ -15,17 +15,14 @@ interface Pilar {
 const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, examLevel, className }: Pilar) => {
   return (
     <div className={className}>
-      <h2 className='font-semibold mb-6 text-lg sm:text-xl'>
-        <span className='text-gray-800'>
-          {t('EXAM.COMPETENCY_LEVEL')}{' '}
-          <span className='text-[#FE7743] font-bold'>
-            {examLevel ? getExamLevelText(examLevel) : t('EXAM.LEVEL.NONE_LEVEL')}
-          </span>
+      <h2 className='font-semibold mb-6 text-lg sm:text-xl text-gray-800 flex-wrap custom-level-text'>
+        <span className='mr-2'>{t('EXAM.COMPETENCY_LEVEL')}</span>
+        <span className='text-[#FE7743] font-bold'>
+          {examLevel ? getExamLevelText(examLevel) : t('EXAM.LEVEL.NONE_LEVEL')}
         </span>
       </h2>
-
       <div className='space-y-3 mb-6'>
-        <div className='text-lg text-gray-700'>
+        <div className='text-base sm:text-lg text-gray-700'>
           <span className='inline-block w-2 h-2 bg-black rounded-full mt-2 mr-3 flex-shrink-0'></span>
           <Trans
             i18nKey={'EXAM.AI_MINDSET_SCORE'}
@@ -33,7 +30,7 @@ const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, examLevel, clas
             components={{ bold: <span className='font-bold' /> }}
           />
         </div>
-        <div className='text-lg text-gray-700'>
+        <div className='text-base sm:text-lg text-gray-700'>
           <span className='inline-block w-2 h-2 bg-black rounded-full mt-2 mr-3 flex-shrink-0'></span>
           <Trans
             i18nKey={'EXAM.AI_SKILLSET_SCORE'}
@@ -41,7 +38,7 @@ const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, examLevel, clas
             components={{ bold: <span className='font-bold' /> }}
           />
         </div>
-        <div className='text-lg text-gray-700'>
+        <div className='text-base sm:text-lg text-gray-700'>
           <span className='inline-block w-2 h-2 bg-black rounded-full mt-2 mr-3 flex-shrink-0'></span>
           <Trans
             i18nKey={'EXAM.AI_TOOLSET_SCORE'}

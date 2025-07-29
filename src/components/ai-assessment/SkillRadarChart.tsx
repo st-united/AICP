@@ -19,11 +19,31 @@ interface SkillRadarChartProps {
 }
 
 const SkillRadarChart = ({ data }: SkillRadarChartProps) => {
-  // Transform data for Recharts
   const chartData = data.map((item) => ({
     pilar: item.skill,
     score: item.value,
   }));
+  const CustomTick = (props: any) => {
+    const { payload, x, y, textAnchor } = props;
+    let adjustedY = y;
+    let adjustedX = x;
+
+    if (window.innerWidth < 420 && ['Skillset', 'Toolset'].includes(payload.value)) {
+      adjustedY = y + 20;
+      if (payload.value === 'Toolset') {
+        adjustedX = x + 15;
+      }
+      if (payload.value === 'Skillset') {
+        adjustedX = x - 15;
+      }
+    }
+
+    return (
+      <text x={adjustedX} y={adjustedY} textAnchor={textAnchor} fill='#374151' fontSize={12}>
+        {payload.value}
+      </text>
+    );
+  };
 
   return (
     <div className='flex justify-center'>
@@ -31,11 +51,7 @@ const SkillRadarChart = ({ data }: SkillRadarChartProps) => {
         <ResponsiveContainer width='100%' height='100%'>
           <RadarChart data={chartData}>
             <PolarGrid stroke='#e5e7eb' />
-            <PolarAngleAxis
-              dataKey='pilar'
-              tick={{ fontSize: 12, fill: '#374151' }}
-              tickLine={false}
-            />
+            <PolarAngleAxis dataKey='pilar' tick={<CustomTick />} tickLine={false} />
             <PolarRadiusAxis
               angle={90}
               domain={[0, 7]}
