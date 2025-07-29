@@ -1,8 +1,8 @@
-import { CheckCircleFilled } from '@ant-design/icons';
+import { CheckCircleFilled, LeftOutlined } from '@ant-design/icons';
 import { Alert, Button, Card, Spin } from 'antd';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import RelationCourseList from './RelationCourseList';
 import SuccessModal from '@app/components/molecules/Modal/SuccessModal';
@@ -10,7 +10,7 @@ import { useCourseDetail, useCourse, useRegisterCourse } from '@app/hooks/useCou
 
 import './ViewCourseDetail.scss';
 
-const AIReadinessCoursePage = () => {
+const ViewCourseDetail = () => {
   const { t } = useTranslation();
 
   const HTMLContent: React.FC<{ content: string; className?: string }> = ({
@@ -43,21 +43,36 @@ const AIReadinessCoursePage = () => {
 
   if (error || listCourseError || !courseData || !courseList) {
     return (
-      <div className='flex justify-center items-center h-screen px-2 xs:px-3 sm:px-4'>
-        <Alert
-          message={t('COURSES.ERROR_OCCURRED')}
-          description={t('COURSES.COURSE_LOAD_ERROR')}
-          type='error'
-          showIcon
-        />
-      </div>
+      <>
+        <div className='flex items-center border-none !text-gray-600 gap-2'>
+          <LeftOutlined size={30} />
+          {t<string>('EXAM.RESULT.BACK_TO_HOME')}
+        </div>
+        <div className='flex justify-center items-center h-screen px-2 xs:px-3 sm:px-4'>
+          <Alert
+            message={t('COURSES.ERROR_OCCURRED')}
+            description={t('COURSES.COURSE_LOAD_ERROR')}
+            type='error'
+            showIcon
+          />
+        </div>
+      </>
     );
   }
 
   return (
     <>
       <div className='min-h-screen p-2 xs:p-3 xsM:p-4 sm:p-5 md:p-6 lg:p-8' id='course-detail'>
-        <div className='max-w-7xl mx-auto'>
+        <div className='max-w-7xl mx-auto h-full'>
+          <Link
+            className='flex text-primary-gray items-center justify-start text-base md:text-lg !mb-3 md:!mb-5 hover:text-primary-light cursor-pointer'
+            to={'/'}
+          >
+            <div className='flex items-center border-none !text-gray-600 gap-2'>
+              <LeftOutlined size={30} />
+              {t<string>('EXAM.RESULT.BACK_TO_HOME')}
+            </div>
+          </Link>
           <div className='text-center mb-8'>
             <h1 className='text-3xl font-bold text-orange-500 mb-2'>{courseData.title}</h1>
           </div>
@@ -108,7 +123,7 @@ const AIReadinessCoursePage = () => {
               </div>
             </div>
 
-            <div className='space-y-3 xs:space-y-4 xsM:space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8 order-first lg:order-last lgL:col-span-1'>
+            <div className='lg:sticky top-6 self-start z-10 space-y-3 xs:space-y-4 xsM:space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8 order-first lg:order-last lgL:col-span-1'>
               <Card className='shadow-lg border-0 px-3 xs:px-4 sm:px-5 md:px-6 py-4 xs:py-5 sm:py-6 md:py-7 rounded-xl xs:rounded-2xl bg-[#FFE9E14F]'>
                 <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 mb-3 xs:mb-4 sm:mb-5'>
                   {t('COURSES.COURSE_OVERVIEW')}
@@ -171,4 +186,4 @@ const AIReadinessCoursePage = () => {
   );
 };
 
-export default AIReadinessCoursePage;
+export default ViewCourseDetail;

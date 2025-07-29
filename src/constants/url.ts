@@ -35,5 +35,7 @@ export const API_URL = {
   ZALO_OTP_COUNTRY_CODE: '/zalo-otp/country-codes',
   ZALO_OTP_CAN_SEND: '/zalo-otp/can-send-otp',
   COURSES: '/courses',
+  BOOKING: '/users/booking',
+  CHECK_BOOKING: '/users/booking/check',
   COURSES_REGISTER: (id: string) => `/courses/${id}/register`,
 };

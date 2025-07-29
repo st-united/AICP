@@ -11,7 +11,7 @@ interface TestResultContextProps {
   onNext: () => void;
   isPortfolioExpanded: boolean;
   setIsPortfolioExpanded: (expanded: boolean) => void;
-  data: ExamSetResult;
+  data: ExamSetResult | undefined;
   isLoading: boolean;
 }
 
@@ -41,9 +41,6 @@ export const TestResultProvider = ({ children }: { children: ReactNode }) => {
   const onNext = () => {
     setCurrentStep(currentStep + 1);
   };
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
   return (
     <TestResultContext.Provider
       value={{

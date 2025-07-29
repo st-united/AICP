@@ -1,6 +1,8 @@
 import { Modal } from 'antd';
 import React from 'react';
 
+import { SuccessIcon } from '@app/assets/svgs/NotificationIcon';
+
 interface SuccessModalProps {
   visible: boolean;
   onClose: () => void;
@@ -17,20 +19,10 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
   title,
   message,
   icon = null,
-  width = '90%',
-  maxWidth = 'max-w-md',
+  width = 1000,
+  maxWidth = 'max-w-xl',
 }) => {
-  const defaultIcon = (
-    <svg
-      className='w-6 h-6 xsM:w-8 xsM:h-8 text-green-500'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      viewBox='0 0 24 24'
-    >
-      <path strokeLinecap='round' strokeLinejoin='round' d='M5 13l4 4L19 7' />
-    </svg>
-  );
+  const defaultIcon = <img src={SuccessIcon} alt='success' className='w-20 h-20' />;
 
   return (
     <Modal
@@ -41,10 +33,10 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
       closable
       width={width}
       className={maxWidth}
-      classNames={{ content: '!rounded-3xl' }}
+      classNames={{ content: '!rounded-2xl' }}
     >
       <div className='text-center p-2 xsM:p-4'>
-        <div className='w-12 h-12 xsM:w-16 xsM:h-16 mx-auto mb-3 xsM:mb-4 rounded-full bg-green-100 flex items-center justify-center'>
+        <div className=' xsM:w-16 xsM:h-16 mx-auto mb-3 xsM:mb-4 rounded-full bg-green-100 flex items-center justify-center'>
           {icon || defaultIcon}
         </div>
 
