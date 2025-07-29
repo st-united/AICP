@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from 'recharts';
 
-interface ChartDataItem {
+export interface ChartDataItem {
   skill: string;
   value: number;
 }
