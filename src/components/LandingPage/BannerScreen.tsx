@@ -6,10 +6,6 @@ import { PartnerUnit1, PartnerUnit2, CelebUnit, DevPlus } from '@app/assets/imag
 
 import './homepage.scss';
 
-type Props = {
-  onScrollToNext: () => void;
-};
-
 const BannerScreen = () => {
   const { t } = useTranslation();
 
@@ -25,7 +21,7 @@ const BannerScreen = () => {
           />
         </div>
 
-        <div className='flex flex-col justify-center items-start flex-1 text-center sm:text-left'>
+        <div className='flex flex-row w-full flex-1 mt-20 gap-20 justify-center'>
           <div className='flex flex-row gap-8 md:gap-32 w-full'>
             <div className='flex h-full flex-col w-[40%] md:w-[24%] lgS:w-[24%] xl:w-[19%]'>
               <div className='w-full text-xl sm:text-2xl font-bold'>

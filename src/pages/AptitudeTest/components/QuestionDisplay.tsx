@@ -129,8 +129,6 @@ const QuestionDisplay = ({
     }
   }, [currentQuestion.timestamp, scrollToQuestion]);
 
-  console.log(prevQuestionRef.current);
-
   const handleAnswerSelect = (questionId: string, answerId: string) => {
     onAnswerSelect(questionId, answerId);
   };

@@ -200,15 +200,16 @@ const Testing = () => {
 
   return (
     <div className='exam-container relative overflow-hidden h-full'>
-      <div className='flex flex-col items-center w-full'>
-        <div className='flex text-lg sm:text-xl md:text-2xl leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
-          <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>{' '}
-          <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
-        </div>
+      {/* Header - Improved mobile spacing */}
+
+      <div className='justify-start items-center w-full text-lg sm:text-xl md:text-2xl leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
+        <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>{' '}
+        <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
       </div>
 
-      <div className='smM:flex p-3 smM:p-6 custom-no-padding-bottom'>
-        <div className='hidden smM:flex flex-col w-[300px] smM:w-80 md:w-96 space-y-6'>
+      <div className='flex flex-col sm:flex-row p-2 sm:p-3 md:p-6 custom-no-padding-bottom'>
+        {/* Desktop sidebar */}
+        <div className='hidden sm:flex flex-col w-[300px] md:w-80 lg:w-96 space-y-6'>
           <QuestionIndexPanel
             questions={examSet.questions}
             currentQuestion={currentQuestion}
@@ -219,62 +220,74 @@ const Testing = () => {
           />
         </div>
 
-        <div className='smM:hidden fixed top-52 left-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
+        <div className='smM:hidden fixed top-52 right-0 p-3 bg-white z-10 rounded-full shadow-lg cursor-pointer'>
           <MenuUnfoldOutlined
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className='flex text-2xl'
+            className='text-2xl text-[#FE7743] block'
+            style={{ fontSize: '24px', color: '#FE7743' }}
           />
         </div>
 
+        {/* Mobile menu overlay - Improved */}
         {isMenuOpen && (
-          <div className='smM:hidden'>
+          <div className='sm:hidden fixed inset-0 z-30'>
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  setIsMenuOpen(!isMenuOpen);
-                }
-              }}
-              className='fixed top-0 left-0 w-full h-full bg-black/50 z-10'
+              onClick={() => setIsMenuOpen(false)}
+              className='absolute inset-0 bg-black/50'
               aria-label='Close menu overlay'
             />
-            <div className='fixed bg-white z-10 left-2 top-24 rounded-3xl w-[300px]'>
-              <div className='fixed top-52 p-3 left-[280px] bg-white z-10 rounded-full shadow-lg'>
-                <MenuUnfoldOutlined
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className='flex text-2xl'
+            <div className='absolute right-2 top-2 bottom-2 w-[280px] bg-white rounded-2xl shadow-xl overflow-hidden'>
+              <div className='flex justify-between items-center p-4 border-b'>
+                <h3 className='font-semibold text-lg'>{t('TEST.QUESTIONS')}</h3>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className='p-2 rounded-full hover:bg-gray-100'
+                >
+                  <CloseOutlined className='text-xl' />
+                </button>
+              </div>
+              <div className='h-full overflow-y-auto pb-20'>
+                <QuestionIndexPanel
+                  questions={examSet.questions}
+                  currentQuestion={currentQuestion}
+                  currentQuestionScroll={currentQuestionScroll}
+                  answeredQuestions={answeredQuestions}
+                  onQuestionSelect={(questionId) => {
+                    handleQuestionSelect(questionId);
+                    setIsMenuOpen(false);
+                  }}
+                  isAutoScrolling={isAutoScrolling}
                 />
               </div>
-              <QuestionIndexPanel
-                questions={examSet.questions}
-                currentQuestion={currentQuestion}
-                currentQuestionScroll={currentQuestionScroll}
-                answeredQuestions={answeredQuestions}
-                onQuestionSelect={handleQuestionSelect}
-                isAutoScrolling={isAutoScrolling}
-              />
             </div>
           </div>
         )}
 
-        <div className='flex-1 smM:ml-6 shadow-xl h-full rounded-xl'>
-          <div className='flex flex-col w-full h-full bg-white p-6 rounded-xl mdM:pr-0 pr-0'>
+        {/* Main content area - Improved mobile spacing */}
+        <div className='flex-1 sm:ml-6 shadow-xl rounded-xl'>
+          <div className='flex flex-col w-full bg-white p-3 sm:p-6 md:p-10 rounded-xl'>
             <div className='w-full'>
-              <div className='flex justify-between mb-1'>
-                <span className='text-[14px] text-[#333]'>{formatSeconds(remainingTime)}</span>
+              <div className='flex justify-between mb-2'>
+                <span className='text-sm font-medium text-[#333]'>
+                  {formatSeconds(remainingTime)}
+                </span>
+                <span className='text-xs text-gray-500 sm:hidden'>
+                  {answeredQuestions.length}/{examSet.questions.length}
+                </span>
               </div>
 
               <Progress
-                className={`pr-6 mdM:pr-10 ${isShaking ? 'shake' : ''}`}
+                className={`${isShaking ? 'shake' : ''}`}
                 percent={percent}
                 strokeColor={getStrokeColor(percent)}
-                size={['100%', 16]}
+                size={['100%', 12]}
                 showInfo={false}
               />
             </div>
-            <div className='pr-6 mdM:pr-10'>
-              <Divider />
-            </div>
+
+            <Divider className='my-3 sm:my-4' />
+
+            {/* Improved mobile height calculation */}
             <div
               className='overflow-y-auto 
               h-[calc(100vh-270px)]
@@ -295,9 +308,11 @@ const Testing = () => {
                 selectedAnswers={selectedAnswers}
                 setIsAutoScrolling={setIsAutoScrolling}
               />
-              <div className='flex justify-center mb-2'>
+
+              {/* Submit button - Better mobile styling */}
+              <div className='flex justify-center my-4 px-4'>
                 <Button
-                  className='bg-[#FE7743] rounded-3xl text-white px-12 py-2 h-full text-lg font-bold border-[#FE7743] hover:border-2 hover:border-[#FE7743] hover:bg-white hover:text-[#FE7743] hover:cursor-pointer'
+                  className='bg-[#FE7743] rounded-3xl text-white px-8 py-3 h-auto text-base sm:text-lg font-bold border-[#FE7743] hover:border-2 hover:border-[#FE7743] hover:bg-white hover:text-[#FE7743] w-full sm:w-auto'
                   onClick={handleSubmit}
                 >
                   {t('BUTTON.SUBMIT')}
@@ -308,45 +323,49 @@ const Testing = () => {
         </div>
       </div>
 
+      {/* Submit Modal - Improved mobile responsive */}
       <Modal
-        width={750}
+        width='95%'
+        style={{ maxWidth: '750px' }}
         open={isSubmitModalOpen}
         onOk={handleConfirmSubmit}
         onCancel={() => setIsSubmitModalOpen(false)}
-        okText={t('BUTTON.CONFIRM')}
-        cancelText={t('BUTTON.CANCEL')}
         footer={null}
         closeIcon={
-          <div className='flex border border-black rounded-full cursor-pointer items-center justify-center'>
-            <CloseOutlined className='flex text-xl text-black p-2' />
+          <div className='flex border border-black rounded-full cursor-pointer items-center justify-center w-8 h-8'>
+            <CloseOutlined className='text-sm' />
           </div>
         }
       >
         {unansweredQuestions.length > 0 ? (
-          <div className='flex item-center justify-center flex-col gap-3 p-4'>
-            <div className='flex items-center justify-center '>
-              <div className='p-3 bg-[#FEEEEE] rounded-full'>
-                <div className='flex p-4 bg-[#FFDEDE] rounded-full'>
-                  <WarningOutlined className='flex text-[45px] text-[#FF0000]' />
+          <div className='flex item-center justify-center flex-col gap-3 p-2 sm:p-4'>
+            {/* Icon container */}
+            <div className='flex items-center justify-center'>
+              <div className='p-2 sm:p-3 bg-[#FEEEEE] rounded-full'>
+                <div className='flex p-3 sm:p-4 bg-[#FFDEDE] rounded-full'>
+                  <WarningOutlined className='text-3xl sm:text-[45px] text-[#FF0000]' />
                 </div>
               </div>
             </div>
+
             <h2 className='text-2xl font-bold text-black mb-1 text-center'>{t('SUBMIT.TITLE')}</h2>
-            <p className='text-lg font-medium text-center py-4'>
+            <p className='text-base sm:text-lg font-medium text-center py-2 sm:py-4 px-2'>
               {t('SUBMIT.UNANSWERED_MESSAGE', { count: unansweredQuestions.length })}
             </p>
-            <div className='text-lg flex flex-col gap-2 font-medium'>
-              <div className='flex gap-2'>
+
+            {/* Stats section - Better mobile layout */}
+            <div className='text-sm sm:text-lg flex flex-col gap-2 font-medium px-2'>
+              <div className='flex justify-between'>
                 <span>{t('TEST.TOTAL_QUESTION')}:</span>
                 <span className='font-bold'>{examSet.questions.length}</span>
               </div>
-              <div className='flex gap-2'>
+              <div className='flex justify-between'>
                 <span>{t('TEST.ANSWERED_QUESTION')}:</span>
                 <span className='font-bold'>{answeredQuestions.length}</span>
               </div>
-              <div className='flex gap-2'>
+              <div className='flex flex-col gap-1'>
                 <span>{t('TEST.UNANSWERED_QUESTION')}:</span>
-                <span className='font-bold text-[#FE7743]'>
+                <div className='font-bold text-[#FE7743] text-xs sm:text-sm'>
                   {unansweredQuestions.slice(0, 3).map((question, index) => {
                     const questionIndex =
                       examSet.questions.findIndex((q) => q.id === question.id) + 1;
@@ -387,50 +406,57 @@ const Testing = () => {
                       {')'}
                     </span>
                   )}
-                </span>
+                </div>
               </div>
             </div>
-            <span className='text-lg font-medium'>{t('TEST.CHECK_ANSWER')}</span>
-            <div className='flex items-center justify-center gap-4 mt-6 flex-col smM:flex-row'>
+
+            <span className='text-sm sm:text-lg font-medium px-2'>{t('TEST.CHECK_ANSWER')}</span>
+
+            {/* Buttons - Stack on mobile */}
+            <div className='flex items-center justify-center gap-2 sm:gap-4 mt-4 sm:mt-6 flex-col sm:flex-row px-2'>
               <Button
                 onClick={() => submitExam(examSet.examId)}
                 loading={isSubmitting}
                 disabled={isSubmitting}
-                className='border-2 border-[#FE7743] rounded-3xl text-[#FE7743] px-8 py-2 h-full text-lg font-bold hover:border-[#ff5029] hover:text-[#ff5029]'
+                className='border-2 border-[#FE7743] rounded-3xl text-[#FE7743] px-6 sm:px-8 py-2 h-auto text-sm sm:text-lg font-bold hover:border-[#ff5029] hover:text-[#ff5029] w-full sm:w-auto'
               >
                 {t('BUTTON.SUBMMIT_NOW')}
               </Button>
               <Button
                 onClick={() => setIsSubmitModalOpen(false)}
                 disabled={isSubmitting}
-                className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
+                className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-6 sm:px-8 py-2 h-auto text-sm sm:text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white w-full sm:w-auto'
               >
                 {t('BUTTON.CONTINUE_NOW')}
               </Button>
             </div>
           </div>
         ) : (
-          <div className='flex item-center justify-center flex-col gap-4 p-4'>
-            <div className='flex items-center justify-center '>
-              <div className='p-3 bg-[#E6F1FF] rounded-full'>
-                <div className='flex p-4 bg-[#BBDBFF] rounded-full'>
-                  <QuestionOutlined className='flex text-[45px] text-[#0069E2]' />
+          <div className='flex item-center justify-center flex-col gap-4 p-2 sm:p-4'>
+            <div className='flex items-center justify-center'>
+              <div className='p-2 sm:p-3 bg-[#E6F1FF] rounded-full'>
+                <div className='flex p-3 sm:p-4 bg-[#BBDBFF] rounded-full'>
+                  <QuestionOutlined className='text-3xl sm:text-[45px] text-[#0069E2]' />
                 </div>
               </div>
             </div>
-            <p className='text-2xl font-bold text-center py-4'>{t('TEST.CONFIRM')}</p>
-            <span className='text-lg flex flex-col gap-2 font-medium text-justify'>
+            <p className='text-xl sm:text-2xl font-bold text-center py-2 sm:py-4'>
+              {t('TEST.CONFIRM')}
+            </p>
+            <span className='text-sm sm:text-lg flex flex-col gap-2 font-medium text-justify px-2'>
               {t('TEST.CHECK_CONFIRM')}
             </span>
-            <div className='text-justify'>
-              <span className='text-lg font-bold text-[#FF7236]'>{t('TEST.WARNING')}: </span>
-              <span className='text-lg font-medium'>{t('TEST.CONFIRM_WARNING')}</span>
+            <div className='text-justify px-2'>
+              <span className='text-sm sm:text-lg font-bold text-[#FF7236]'>
+                {t('TEST.WARNING')}:{' '}
+              </span>
+              <span className='text-sm sm:text-lg font-medium'>{t('TEST.CONFIRM_WARNING')}</span>
             </div>
-            <div className='flex items-center justify-center gap-4 mt-6'>
+            <div className='flex items-center justify-center gap-2 sm:gap-4 mt-4 sm:mt-6 flex-col sm:flex-row px-2'>
               <Button
                 onClick={() => setIsSubmitModalOpen(false)}
                 disabled={isSubmitting}
-                className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
+                className='rounded-3xl px-6 sm:px-8 py-2 h-auto text-sm sm:text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949] w-full sm:w-auto'
               >
                 {t('BUTTON.CANCEL_TEST')}
               </Button>
@@ -438,7 +464,7 @@ const Testing = () => {
                 onClick={() => submitExam(examSet.examId)}
                 loading={isSubmitting}
                 disabled={isSubmitting}
-                className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
+                className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-6 sm:px-8 py-2 h-auto text-sm sm:text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white w-full sm:w-auto'
               >
                 {t('BUTTON.SUBMIT')}
               </Button>
@@ -447,8 +473,10 @@ const Testing = () => {
         )}
       </Modal>
 
+      {/* Exit Warning Modal - Mobile improvements */}
       <Modal
-        width={700}
+        width='95%'
+        style={{ maxWidth: '700px' }}
         open={isModalOpen}
         footer={null}
         closable={true}
@@ -456,38 +484,38 @@ const Testing = () => {
         onCancel={() => setIsModalOpen(false)}
         centered
       >
-        <div className='flex flex-col gap-4 p-4'>
-          <div className='flex items-center justify-center '>
-            <div className='p-3 bg-[#FEEEEE] rounded-full'>
-              <div className='flex p-4 bg-[#FFDEDE] rounded-full'>
-                <WarningOutlined className='flex text-[45px] text-[#FF0000]' />
+        <div className='flex flex-col gap-3 sm:gap-4 p-2 sm:p-4'>
+          <div className='flex items-center justify-center'>
+            <div className='p-2 sm:p-3 bg-[#FEEEEE] rounded-full'>
+              <div className='flex p-3 sm:p-4 bg-[#FFDEDE] rounded-full'>
+                <WarningOutlined className='text-3xl sm:text-[45px] text-[#FF0000]' />
               </div>
             </div>
           </div>
-          <h2 className='text-2xl font-bold text-black mb-4 text-center'>
+          <h2 className='text-lg sm:text-2xl font-bold text-black mb-2 sm:mb-4 text-center px-2'>
             {t('TEST.CLOSE_WARNING_TITLE')}
           </h2>
-          <p className='text-lg font-medium mb-4 sm:text-left text-center'>
+          <p className='text-sm sm:text-lg font-medium mb-2 sm:mb-4 text-center px-2'>
             {t('SUBMIT.UNANSWERED_NUMBERS_MESSAGE', { count: unansweredQuestions.length })}
           </p>
-          <div className='flex gap-1 items-start justify-start'>
-            <p className='flex text-lg font-bold min-w-[67px] uppercase text-[#FF7236]'>
+          <div className='flex gap-1 items-start justify-start px-2'>
+            <p className='text-sm sm:text-lg font-bold min-w-[50px] sm:min-w-[67px] uppercase text-[#FF7236]'>
               {t('SUBMIT.NOTE')}:
             </p>
-            <p className='text-lg font-medium'>{t('SUBMIT.NOTE_MESSAGE')}</p>
+            <p className='text-sm sm:text-lg font-medium'>{t('SUBMIT.NOTE_MESSAGE')}</p>
           </div>
-          <div className='flex items-center justify-center mt-4 gap-4'>
+          <div className='flex items-center justify-center mt-2 sm:mt-4 gap-2 sm:gap-4 flex-col sm:flex-row px-2'>
             <Button
               onClick={() => deleteExam(examSet.examId)}
               loading={isDeleting}
               disabled={isDeleting}
-              className='rounded-3xl px-8 py-2 h-full text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949]'
+              className='rounded-3xl px-6 sm:px-8 py-2 h-auto text-sm sm:text-lg font-bold text-[#686868] shadow-lg border-none hover:text-[#494949] w-full sm:w-auto'
             >
               {t('BUTTON.EXIT_NOW')}
             </Button>
             <Button
               onClick={() => setIsModalOpen(false)}
-              className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
+              className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-6 sm:px-8 py-2 h-auto text-sm sm:text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white w-full sm:w-auto'
             >
               {t('BUTTON.CONTINUE_NOW')}
             </Button>
