@@ -48,7 +48,7 @@ const Breadcrumbs = () => {
   ];
 
   return (
-    <div className='max-[400px]:px-16'>
+    <div className='max-xs400:px-16'>
       <Breadcrumb items={breadcrumbItems} />
     </div>
   );

@@ -62,6 +62,8 @@ module.exports = {
       lgM: '1440px',
       lgL: '1600px',
       xl: '1920px',
+      'max-xs400': { max: '400px' },
+      'max-xs370': { max: '370px' },
     },
   },
   plugins: [],

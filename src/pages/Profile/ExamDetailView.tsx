@@ -9,7 +9,6 @@ import SkillRadarChart from '@app/components/ai-assessment/SkillRadarChart';
 import { DetailExam } from '@app/interface/user.interface';
 import { useNavigate } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
-import './ExamDetailView.scss';
 interface ExamDetailViewProps {
   exam: DetailExam;
   onBack: () => void;
@@ -74,7 +73,7 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
           <div className='flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mb-4 px-1 pt-4'>
             <div className='flex items-center gap-2'>
               <ClockCircleOutlined className='text-gray-600 text-base sm:text-xl' />
-              <span className='text-sm sm:text-base text-xs-370'>
+              <span className='text-sm sm:text-base max-xs370:text-xs'>
                 {t('EXAM.CREATED_TIME')}
                 <span className='font-medium ml-1'>
                   {formatDateTime(exam.createdAt.toString())}
