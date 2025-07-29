@@ -55,18 +55,18 @@ const BannerUserScreen = () => {
                 <span className='text-sm font-medium text-gray-600'>
                   {t('HOMEPAGE.BANNER_USER.ORGANIZER')}
                 </span>
-                <div className='flex items-center gap-3'>
+                <div className='grid grid-cols-2 w-fit mx-auto'>
                   <Image
                     preview={false}
                     height={44}
-                    className='object-contain transition-transform hover:scale-110'
+                    className='object-contain hover:scale-110 aspect-square transition-transform duration-300'
                     src={CelebUnit2}
                     alt='celeb unit'
                   />
                   <Image
                     preview={false}
                     height={48}
-                    className='object-contain transition-transform hover:scale-110'
+                    className='object-contain hover:scale-110 aspect-square !pb-3 transition-transform duration-300'
                     src={DevPlus}
                     alt='dev plus'
                   />
@@ -152,18 +152,18 @@ const BannerUserScreen = () => {
               <p className='text-sm text-gray-600 font-medium'>
                 {t('HOMEPAGE.BANNER_USER.ORGANIZER')}
               </p>
-              <div className='flex justify-center space-x-4'>
+              <div className='grid grid-cols-2 w-fit mx-auto'>
                 <Image
                   preview={false}
-                  height={36}
-                  className='object-contain transition-transform hover:scale-110'
+                  height={40}
+                  className='object-contain hover:scale-110 aspect-square'
                   src={CelebUnit2}
                   alt='celeb unit'
                 />
                 <Image
                   preview={false}
                   height={40}
-                  className='object-contain transition-transform hover:scale-110'
+                  className='object-contain hover:scale-110 aspect-square !pb-2'
                   src={DevPlus}
                   alt='dev plus'
                 />
