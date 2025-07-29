@@ -1,5 +1,5 @@
 import { Button, Image, Layout } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { DevPlus, DevPlusS } from '@app/assets/images';
 import { ButtonHeader } from '@app/components/atoms';
 import { HomePageEnum } from '@app/constants/homePageEnum';
 import { smoothScrollTo } from '@app/utils/scroll';
+
 const Header = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -19,23 +20,51 @@ const Header = () => {
   const isHomePage = pathname === '/';
   const handleLoginClick = () => navigate('/login');
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      setIsScrolled(scrollTop > 0);
+  const debouncedScrollHandler = useCallback(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    return () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        setIsScrolled(scrollTop > 0);
+
+        if (isHomePage) {
+          const sections = [{ id: HomePageEnum.PARTNER_NETWORK }, { id: HomePageEnum.EXPERTS }];
+
+          const headerHeight = 80;
+          const scrollPosition = scrollTop + headerHeight + 50;
+
+          for (const section of sections) {
+            const element = document.getElementById(section.id);
+            if (element) {
+              const elementTop = element.offsetTop;
+              const elementBottom = elementTop + element.offsetHeight;
+
+              if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+                setCurrentSection(section.id);
+                break;
+              } else {
+                setCurrentSection(null);
+              }
+            }
+          }
+        }
+      }, 2);
     };
+  }, [isHomePage]);
 
+  useEffect(() => {
+    const handleScroll = debouncedScrollHandler();
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [debouncedScrollHandler, isHomePage]);
 
-  const handleSmoothScroll = (id: string, section: HomePageEnum) => {
+  const handleSmoothScroll = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      const yOffset = -10;
+      const yOffset = isHomePage && !isScrolled ? 70 : -10;
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       smoothScrollTo(y);
-      setCurrentSection(section);
     }
   };
 
@@ -62,7 +91,7 @@ const Header = () => {
       {isHomePage && (
         <div className='hidden md:flex gap-8 items-center'>
           <Button
-            onClick={() => handleSmoothScroll('partner-network', HomePageEnum.PARTNER_NETWORK)}
+            onClick={() => handleSmoothScroll('partner-network')}
             type='text'
             className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
               currentSection === HomePageEnum.PARTNER_NETWORK ? '!text-[#FE7743]' : ''
@@ -71,7 +100,7 @@ const Header = () => {
             {t('HOMEPAGE.PARTNER_TITLE')}
           </Button>
           <Button
-            onClick={() => handleSmoothScroll('experts', HomePageEnum.EXPERTS)}
+            onClick={() => handleSmoothScroll('experts')}
             type='text'
             className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
               currentSection === HomePageEnum.EXPERTS ? '!text-[#FE7743]' : ''
