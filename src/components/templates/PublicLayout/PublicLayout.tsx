@@ -4,7 +4,7 @@ import { SlideImages } from '../../molecules/index';
 
 const PublicLayout: React.FC = () => {
   return (
-    <div className='min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/SlideImages/background.png)]'>
+    <div className='grid grid-cols-1 lg:grid-cols-2 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/SlideImages/background.png)]'>
       <div className='h-full pt-6 sm:px-6 md:px-10'>
         <Outlet />
       </div>

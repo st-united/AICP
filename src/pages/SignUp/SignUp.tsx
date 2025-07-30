@@ -72,14 +72,14 @@ const SignUp = () => {
           </Link>
         </button>
 
-        <div className='mb-6 mt-4 md:mb-8 md:mt-32'>
+        <div className='mb-6 mt-4 lg:mt-3 md:mb-8 md:mt-32'>
           <h1 className='text-2xl md:text-[40px] !text-primary font-bold mb-3 md:mb-4'>
             {t<string>('SIGN_UP.TITLE')}
           </h1>
           <div className='text-base md:text-lg !mb-6 md:!mb-8 flex flex-col sm:flex-row gap-1 sm:gap-2'>
             <div className='text-primary-gray'>{t<string>('SIGN_UP.HAVE_ACCOUNT')}</div>
             <div
-              className='text-primary-bold cursor-pointer underline hover:text-primary-light font-bold'
+              className='text-primary-bold font-bold cursor-pointer underline hover:!text-primary-light bg-transparent border-none outline-none hover:no-underline'
               onClick={() => navigate('/login')}
               aria-hidden='true'
             >
@@ -201,7 +201,7 @@ const SignUp = () => {
           <Form.Item className='md:col-span-2 !mt-6'>
             <Button
               htmlType='submit'
-              className='w-full h-12 md:h-[3.75rem] !bg-primary-bold text-sm md:text-[1rem] !text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:!text-black transition duration-300'
+              className='w-full h-12 md:h-[3.75rem] !bg-primary-bold text-sm md:text-[1rem] !text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:!text-white transition duration-300'
               loading={isLoading}
               disabled={!isChecked}
             >
