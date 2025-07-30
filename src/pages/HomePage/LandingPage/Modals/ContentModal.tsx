@@ -14,7 +14,7 @@ export const ContentModal = ({ durationKey, hasTakenExam }: ModalContentProps) =
 
   return (
     <div className='px-2 space-y-2 md:px-6 md:space-y-3'>
-      {hasTakenExam?.examStatus !== 'IN_PROGRESS' && durationKey && (
+      {hasTakenExam?.examStatus !== ExamStatusEnum.IN_PROGRESS && durationKey && (
         <p className='text-base text-gray-900 md:text-xl'>
           <Trans
             i18nKey={durationKey}
