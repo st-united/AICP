@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import ConfirmBeforeTestModal from '../LandingPage/ConfirmBeforeTestModal';
+import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
 import { RootState } from '@app/redux/store';
 
 type Point = {
