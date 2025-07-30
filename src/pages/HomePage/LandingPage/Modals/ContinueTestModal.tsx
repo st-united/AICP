@@ -29,17 +29,17 @@ export const ContinueTestModal = ({
       <HeaderModal
         title={t('MODAL.TITLE_CONFIRM_CONTINUE_TEST')}
         onClose={confirmProps.onClose}
-        symbol='!'
+        symbol='?'
       />
 
-      <div className='px-6 w-full flex flex-col items-start md:my-6 !mt-0 !mb-6 gap-2.5'>
+      <div className='px-6 w-full flex flex-col items-start md:my-6 !my-0 gap-2.5'>
         <p className='text-base text-gray-900 md:text-xl'>
           <Trans i18nKey='MODAL.CONTINUE_TEST_DESCRIPTION_1' components={{ br: <br /> }} />
         </p>
-        <p className='text-base text-gray-900 md:text-xl'>
+        <p className='text-base text-gray-900 md:text-xl mt-[6px]'>
           <Trans i18nKey='MODAL.CONTINUE_TEST_DESCRIPTION_2' components={{ br: <br /> }} />
         </p>
-        <ul className='text-base text-gray-900 md:text-xl text-left list-disc list-inside pl-4 flex flex-col gap-1.5'>
+        <ul className='text-base text-gray-900 md:text-xl text-left list-disc list-inside pl-4 flex flex-col !leading-9'>
           <li>
             <Trans i18nKey='MODAL.CONTINUE_TEST_OPTION_CONTINUE' components={{ b: <b /> }} />
           </li>

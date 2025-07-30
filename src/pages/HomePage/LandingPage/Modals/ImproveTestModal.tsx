@@ -31,7 +31,7 @@ export const ImproveTestModal = ({
       <HeaderModal
         title={t('MODAL.TITLE_CONFIRM_IMPROVE_TEST')}
         onClose={confirmProps.onClose}
-        symbol='!'
+        symbol='?'
       />
 
       {hasTakenExam?.examSetDuration && (
