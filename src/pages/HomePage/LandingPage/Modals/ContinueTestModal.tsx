@@ -52,7 +52,7 @@ export const ContinueTestModal = ({
       <ContentModal durationKey='MODAL.TEST_DURATION_MESSAGE' hasTakenExam={hasTakenExam} />
 
       <div className='mt-4 px-3 w-full md:my-6'>
-        <div className='flex flex-col gap-2 md:flex-row md:justify-center md:gap-4'>
+        <div className='flex flex-col gap-4 md:flex-row md:justify-center md:gap-4'>
           <Button
             onClick={() => submitExam(examId)}
             className='w-full h-full text-base font-semibold px-3 py-2 rounded-full bg-white border-2 !border-orange-500 !text-orange-500 hover:border-orange-600 hover:text-orange-600 active:border-orange-700 active:text-orange-700 transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
