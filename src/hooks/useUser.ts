@@ -30,6 +30,10 @@ import {
   UpdateUserStudentInfoApi,
   getUserProfileAPI,
 } from '@app/services';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 export const useCreateUser = () => {
   const navigate = useNavigate();
@@ -164,8 +168,8 @@ export const useUpdateUserStudentInfo = () => {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: [QUERY_KEY.PROFILE] });
       },
-      onError: (error) => {
-        message.error(error.response.data.message);
+      onError: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
       },
     },
   );

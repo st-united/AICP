@@ -3,11 +3,15 @@ import { lazy } from 'react';
 import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
 import BaseLayout from '@app/components/templates/BaseLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
+import ResultLayout from '@app/components/templates/ResultLayout/ResultLayout';
 import { NAVIGATE_URL } from '@app/constants';
 import { AptitudeTest, Profile, Capacity } from '@app/pages';
+import ExamOverview from '@app/pages/ExamResult/ExamOverview';
+import PortfolioForResult from '@app/pages/ExamResult/PortfolioForResult';
 import Booking from '@app/pages/MentorBooking';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
+import ViewCourseDetail from '@app/pages/ViewCourseDetail/ViewCourseDetail';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
@@ -40,6 +44,10 @@ const routes = [
             path: NAVIGATE_URL.CAPACITY,
             element: <Capacity />,
           },
+          {
+            path: NAVIGATE_URL.DETAIL_COURSE,
+            element: <ViewCourseDetail />,
+          },
         ],
       },
       {
@@ -60,6 +68,20 @@ const routes = [
           {
             path: NAVIGATE_URL.TEST_RESULT,
             element: <ExamHistory />,
+          },
+        ],
+      },
+      {
+        path: NAVIGATE_URL.RESULT,
+        element: <ResultLayout />,
+        children: [
+          {
+            path: NAVIGATE_URL.RESULT,
+            element: <ExamOverview />,
+          },
+          {
+            path: NAVIGATE_URL.RESULT_PORTFOLIO,
+            element: <PortfolioForResult />,
           },
         ],
       },

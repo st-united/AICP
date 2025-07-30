@@ -197,18 +197,26 @@
     "PASSWORD_MIN": "Mật khẩu phải có ít nhất 8 ký tự",
     "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
+    "NEW_PASSWORD_DIFFERENT": "Mật khẩu mới phải khác mật khẩu cũ",
     "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
     "FILE_READ_ERROR": "Không thể đọc {{field}}, vui lòng thử lại",
+    "INVALID_DATE_RANGE": "Ngày bắt đầu không thể lớn hơn ngày kết thúc",
     "MIN_AGE": "Phải đủ {{age}} tuổi trở lên",
-    "INVALID_DATE_RANGE": "Ngày bắt đầu không được lớn hơn ngày kết thúc",
-    "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai"
+    "NO_FUTURE_DATE": "Không được chọn ngày trong tương lai",
+    "URL_INVALID": "URL không hợp lệ",
+    "UNIVERSITY_REQUIRED": "Vui lòng chọn trường học",
+    "STUDENT_CODE_REQUIRED": "Vui lòng nhập mã sinh viên",
+    "USER_INFO_REQUIRED": "Vui lòng chọn trạng thái của bạn",
+    "USER_UNIVERSITY_REQUIRED": "Vui lòng nhập tên trường",
+    "USER_STUDENT_CODE_REQUIRED": "Vui lòng nhập mã số sinh viên",
+    "END_BEFORE_START": "Ngày kết thúc không thể nhỏ hơn ngày bắt đầu"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "OLD_PASSWORD": "Mật khẩu cũ",
     "NEW_PASSWORD": "Mật khẩu mới",
-    "CONFIRM_PASSWORD": "Xác nhận mật khẩu",
+    "CONFIRM_PASSWORD": "Xác nhận mật khẩu mới",
     "TITLE": "Thông tin người dùng",
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Hồ sơ của tôi",
@@ -227,7 +235,7 @@
     "COUNTRY_PLACEHOLDER": "Chọn quốc gia",
     "PROVINCE": "Tỉnh thành",
     "PROVINCE_PLACEHOLDER": "Chọn tỉnh thành",
-    "OCCUPATION": "Nghề nghiệp",
+    "OCCUPATION": "Lĩnh vực",
     "OCCUPATION_PLACEHOLDER": "Chọn nghề nghiệp",
     "REFERRAL": "Mã giới thiệu",
     "REFERRAL_PLACEHOLDER": "Nhập mã giới thiệu",
@@ -237,7 +245,9 @@
     "PLACEHOLDER_NEW_PASSWORD": "Nhập mật khẩu mới",
     "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
-    "SAVE": "Lưu"
+    "SAVE": "Lưu",
+    "AVATAR_UPLOAD_SUCCESS": "Cập nhật ảnh đại diện thành công!",
+    "AVATAR_UPLOAD_FAILED": "Cập nhật ảnh đại diện thất bại. Vui lòng thử lại."
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -254,7 +264,16 @@
     "LOGIN_WITH_GOOGLE": "Đăng nhập với Google"
   },
   "HOMEPAGE": {
+    "PARTNER_TITLE": "Đối Tác",
+    "PARTNER_DESC": "DevPlus kết nối với nhiều đối tác doanh nghiệp uy tín để đảm bảo cơ hội thực tập và đầu ra việc làm cho sinh viên.",
+    "PARTNER_ORG1": "Devplus",
+    "PARTNER_ORG2": "Sở KHCN Đà Nẵng",
+    "PARTNER_PARTNER1": "Google Developer Groups",
+    "PARTNER_PARTNER2": "AI Leaders",
     "PRIMARY_TITLE": "Khám phá",
+    "EXPERTS_TITLE": "Chuyên Gia Đồng Hành",
+    "EXPERTS_DESC": "DevPlus quy tụ đội ngũ chuyên gia nhiều kinh nghiệm để đồng hành và cố vấn xuyên suốt hành trình học tập của sinh viên.",
+    "PARTNER_NETWORK_TITLE": "Mạng lưới doanh nghiệp",
     "TITLE": "Năng lực ứng dụng AI",
     "SUB_TITLE": "Tham gia bài kiểm tra đánh giá năng lực sử dụng AI để hiểu rõ khả năng của bạn và nhận lộ trình phát triển cá nhân hóa",
     "BUTTON": "Khám phá ngay",
@@ -323,7 +342,7 @@
     "FOOTER_ACTIVITIES_LIST": ["Workshop", "Sự kiện", "Cộng đồng", "Hoạt động ngoại khóa"],
     "FOOTER_ADDRESS": "116 - 118 Mai Thuc Lan, My An, Ngu Hanh Son, Da Nang",
     "FOOTER_EMAIL": "hello@devplus.edu.vn",
-    "FOOTER_PHONE": "(+84) 368492885",
+    "FOOTER_PHONE": "(+84)931901608",
     "BANNER_USER": {
       "ORGANIZER": "Đơn vị tổ chức",
       "PARTNER": "Đơn vị đồng hành",
@@ -374,7 +393,7 @@
   "PLACEHOLDER": {
     "SELECT_COUNTRY": "Chọn quốc gia",
     "SELECT_CITY": "Chọn tỉnh thành",
-    "SELECT_JOB": "Chọn công việc",
+    "SELECT_JOB": "Chọn lĩnh vực",
     "FIELD_REQUIRED": "{{field}} *"
   },
   "SIGN_UP": {
@@ -428,13 +447,23 @@
     },
     "LEVEL": {
       "NONE_LEVEL": "Chưa có đánh giá năng lực",
-      "LEVEL_1_AWARENESS": "Mức nhận thức",
-      "LEVEL_2_FOUNDATION": "Mức nền tảng",
-      "LEVEL_3_APPLICATION": "Mức ứng dụng",
-      "LEVEL_4_INTEGRATION": "Mức tích hợp",
-      "LEVEL_5_INNOVATION": "Mức đổi mới",
-      "LEVEL_6_LEADERSHIP": "Mức lãnh đạo",
-      "LEVEL_7_MASTERY": "Mức thành thạo"
+      "LEVEL_1_AWARENESS": "Nhận thức",
+      "LEVEL_2_FOUNDATION": "Nền tảng",
+      "LEVEL_3_APPLICATION": "Ứng dụng",
+      "LEVEL_4_INTEGRATION": "Tích hợp",
+      "LEVEL_5_INNOVATION": "Đổi mới",
+      "LEVEL_6_LEADERSHIP": "Lãnh đạo",
+      "LEVEL_7_MASTERY": "Thành thạo"
+    },
+    "EXAM_LEVEL": {
+      "NONE_LEVEL": "Chưa có đánh giá năng lực",
+      "LEVEL_1_STARTER": "Khởi đầu",
+      "LEVEL_2_EXPLORER": "Khám Phá",
+      "LEVEL_3_PRACTITIONER": "Thực Hành",
+      "LEVEL_4_INTEGRATOR": "Tích Hợp",
+      "LEVEL_5_STRATEGIST": "Chiến Lược",
+      "LEVEL_6_LEADER": "Dẫn dắt",
+      "LEVEL_7_EXPERT": "Chuyên Gia"
     },
     "RESULT": {
       "TITLE": "Kết quả đánh giá <span>năng lực AI</span> (Sơ bộ)",
@@ -465,6 +494,17 @@
     "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
     "SUCCESS": "Email đặt lại mật khẩu đã được gửi. Nếu không thấy, vui lòng kiểm tra thư mục Spam hoặc Quảng cáo."
   },
+  "ACTIVATION_EXPIRED": {
+    "TITLE": "Gửi lại email kích hoạt tài khoản",
+    "DESCRIPTION_1": "Liên kết kích hoạt tài khoản của bạn đã hết hạn!",
+    "DESCRIPTION_2": "Vui lòng nhấn nút <strong>\"Gửi lại email\"</strong> bên dưới để nhận liên kết kích hoạt mới được gửi đến email đã đăng ký",
+    "RESEND_EMAIL": "Gửi lại email",
+    "SEND_LOADING": "Đang gửi...",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Email kích hoạt đã được gửi lại thành công. Vui lòng kiểm tra hộp thư của bạn.",
+    "ERROR": "Có lỗi xảy ra khi gửi email kích hoạt. Vui lòng thử lại.",
+    "NO_EMAIL": "Không tìm thấy email trong URL. Vui lòng kiểm tra lại liên kết."
+  },
   "RESET_PASSWORD": {
     "TITLE": "Đặt lại mật khẩu!",
     "NEW_PASSWORD": "Mật khẩu mới",
@@ -488,8 +528,18 @@
     "DESCRIPTION": "Theo dõi bài kiểm tra, lịch phỏng vấn và các cơ hội nghề nghiệp của bạn.",
     "TEST_STATUS": {
       "TITLE": "Trạng thái bài kiểm tra",
-      "DESCRIPTION": "Chưa bắt đầu",
-      "BUTTON": "Bắt đầu bài kiểm tra"
+      "DESCRIPTION": {
+        "IN_PROGRESS": "Bạn đang làm bài kiểm tra",
+        "SUBMITTED": "Bạn đã nộp bài kiểm tra",
+        "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+        "GRADED": "Đã chấm điểm",
+        "DEFAULT": "Chưa bắt đầu"
+      },
+      "BUTTON": {
+        "START": "Bắt đầu bài kiểm tra",
+        "RESUME": "Tiếp tục làm bài",
+        "VIEW": "Xem kết quả"
+      }
     },
     "INTERVIEW_SCHEDULE": {
       "TITLE": "Lịch phỏng vấn",
@@ -514,12 +564,13 @@
       "TITLE": "Khoá học: AI cơ bản",
       "DESCRIPTION": "Nắm vững các khái niệm AI cơ bản để bắt đầu hành trình của bạn",
       "LINK": "Xem chi tiết"
-    }
+    },
+    "VIEW_DETAIL": "Xem chi tiết",
+    "SUGGESTION_REGISTER": "Đăng ký ngay"
   },
   "TEST": {
     "TEST_TITLE": "Bài kiểm tra năng lực",
     "TEST_TITLE_AI": "ứng dụng AI",
-    "SUB_TITLE": "Hãy trả lời lần lượt các câu hỏi dưới đây để khám phá khả năng ứng dụng AI của bạn.",
     "TIME_LEFT": "Thời gian còn lại",
     "HOURS": "Giờ",
     "MINUTES": "Phút",
@@ -600,8 +651,8 @@
   },
   "PORTFOLIO": {
     "TITLE": "Hoàn thiện hồ sơ",
-    "SUB_TITLE": "Hãy chia sẻ thêm một chút về bạn! Việc bổ sung thông tin sẽ giúp chúng tôi hiểu bạn rõ hơn và hỗ trợ bạn hiệu quả hơn!",
-    "SUB_TITLE_2": "Vui lòng cung cấp thông tin minh bạch để đội ngũ chúng tôi có thể xác minh chính xác",
+    "SUB_TITLE": "Để hỗ trợ cho buổi phỏng vấn, vui lòng bổ sung các thông tin bên dưới để đội ngũ chúng tôi có thể đánh giá năng lực của bạn một cách chính xác và toàn diện!",
+    "SUB_TITLE_2": "Thông tin minh bạch sẽ giúp đội ngũ chúng tôi xác minh nhanh chóng và chính xác",
     "VALIDATION": "Chấp nhận định dạng PNG, JPG, JPEG, DOCX, DOC, PDF. Dung lượng tối đa: 5MB",
     "CERTIFICATIONS": "Chứng chỉ chuyên môn",
     "URL": "Hồ sơ trực tuyến",
@@ -614,6 +665,8 @@
     "EDIT": "Chỉnh sửa",
     "CANCEL": "Hủy bỏ",
     "CANCEL_UPLOAD": "Đã hủy",
+    "RESULT_PORTFOLIO_BACK_BUTTON": "Quay lại",
+    "RESULT_PORTFOLIO_SAVE_BUTTON": "Hoàn tất",
     "SAVE": "Lưu",
     "NO_DATA": "Không có dữ liệu",
     "UPDATE_SUCCESS": "Cập nhật hồ sơ thành công",
@@ -627,7 +680,22 @@
     "NO_INFO": "Vui lòng cung cấp thông tin để cập nhật hồ sơ",
     "NOT_SUPPORT_PREVIEW": "Chưa hỗ trợ xem trước định dạng này",
     "UNSUPPORTED_FORMAT": "Định dạng file không hỗ trợ xem trước",
-    "DOWNLOAD": "Tải xuống"
+    "DOWNLOAD": "Tải xuống",
+    "USER_INFO": "Bạn là",
+    "INFO_DETAIL": "Thông tin chi tiết",
+    "UNIVERSITY": "Tên trường",
+    "STUDENT_CODE": "Mã số sinh viên",
+    "TITLE_2": "Hồ sơ chuyên môn",
+    "CONFIRM_SUBMIT_TITLE": "Bạn có chắc muốn gửi hồ sơ ngay bây giờ?",
+    "INCOMPLETE_INFO_WARNING": "Vẫn còn thông tin chưa được bổ sung. Việc này có thể ảnh hưởng đến độ chính xác khi đánh giá năng lực.",
+    "MISSING_ITEMS": "Thông tin chưa đầy đủ",
+    "COMPLETE_INFO_BENEFITS": "Việc bổ sung đầy đủ giúp hệ thống:",
+    "BENEFIT_ACCURATE_LEVEL": "Xác định đúng level trong khung năng lực",
+    "BENEFIT_BETTER_ROADMAP": "Gợi ý lộ trình học và phát triển phù hợp hơn",
+    "SUBMIT_NOW": "Gửi hồ sơ ngay",
+    "CONTINUE_SUPPLEMENT": "Tiếp tục bổ sung",
+    "DELETED_CERTIFICATIONS": "Chứng chỉ đã xóa",
+    "DELETED_EXPERIENCES": "Kinh nghiệm đã xóa"
   },
   "TERMS": {
     "TITLE": "Điều khoản & Điều kiện",
@@ -697,9 +765,97 @@
     "PERSONAL_INFO": "Hồ sơ cá nhân",
     "PHONE_INFO": "Xác nhận qua điện thoại"
   },
+  "TEST_RESULT": {
+    "CONGRATS": "Chúc mừng bạn đã hoàn thành bài đánh giá !",
+    "SUBTITLE": "AI Application Competency Assessment - Bài đánh giá năng lực ứng dụng AI",
+    "DOWNLOAD_CERT": "Tải chứng chỉ",
+    "FULLNAME": "Họ tên",
+    "EMAIL": "Email",
+    "PHONE": "Số điện thoại",
+    "ROLE": "Đối tượng tham gia",
+    "SCHOOL": "Tên trường",
+    "STUDENT_ID": "Mã số sinh viên",
+    "STEP_TEST": "Bài kiểm tra năng lực",
+    "STEP_PORTFOLIO": "Hoàn thiện hồ sơ",
+    "STEP_BOOKING": "Đặt lịch phỏng vấn",
+    "EVALUATION_PATH": "Lộ trình đánh giá năng lực",
+    "SUMMARY": "Tổng kết",
+    "SUMMARY_DESC": "Bạn đã hoàn thành bài đánh giá với kết quả bên dưới:",
+    "TIME": "Thời gian hoàn thành",
+    "CORRECT": "Trả lời đúng",
+    "WRONG": "Trả lời sai",
+    "SKIPPED": "Bỏ qua",
+    "DETAIL": "Xem chi tiết bài làm",
+    "RESULT_DETAIL_TITLE": "Chi tiết bài làm",
+    "QUESTION_NUMBER": "Câu hỏi {{number}}:",
+    "REVIEW": "Kết quả sơ bộ bài kiểm tra năng lực ",
+    "LEVEL": "Mức năng lực",
+    "SUGGEST": "Lộ trình phát triển",
+    "BOOKING_TITLE": "Bạn vừa hoàn thành bước đầu đánh giá năng lực ứng dụng AI! Vui lòng đặt lịch phỏng vấn với đội ngũ cố vấn của chúng tôi để nhận được kết quả toàn diện và chính xác!",
+    "BOOKING_BUTTON": "Đặt lịch phỏng vấn",
+    "SKILL_SUGGEST": "Bạn nên tham khảo các khoá học về ứng dụng AI trong công việc lập trình để phát triển kỹ năng nền tảng và cập nhật xu hướng mới.",
+    "SUGGESTION_TITLE": "Gợi ý dành cho bạn",
+    "SUGGESTION_BUTTON": "Truy cập",
+    "PORTFOLIO_STEP_DESC": "Bạn đã hoàn thành bước đầu đánh giá năng lực ứng dụng AI! Vui lòng bổ sung thông tin để chúng tôi có thể đánh giá toàn diện. Sau khi hoàn thiện hồ sơ, bạn có thể xem được kết quả bài đánh giá của mình.",
+    "PORTFOLIO_STEP_BUTTON": "Hoàn thiện hồ sơ",
+    "PORTFOLIO_STEP_SAVE": "Hoàn tất",
+    "PORTFOLIO_STEP_CANCEL": "Để sau",
+    "NO_DATA": "Không có dữ liệu",
+    "DOWNLOAD_CERT_SUCCESS": "Tải chứng chỉ thành công",
+    "DOWNLOAD_CERT_ERROR": "Tải chứng chỉ thất bại",
+    "SCORE_LABEL": "Điểm",
+    "NOT_FOUND": "Không tìm thấy kết quả đánh giá",
+    "BOOKING_BUTTON_BOOKED": "Đã đặt lịch phỏng vấn"
+  },
   "CONFIRM_BEFORE_TEST_MODAL": {
     "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",
     "INFO_TEXT": "Bạn là:",
     "UPDATE_INFO": "Thông tin chi tiết"
+  },
+  "OTP": {
+    "TITLE": "Xác thực số điện thoại",
+    "DESCRIPTION": "Vui lòng kiểm tra số điện thoại để nhận mã OTP xác thực",
+    "PHONE_PLACEHOLDER": "Nhập số điện thoại",
+    "OTP_PLACEHOLDER": "Nhập mã OTP",
+    "SEND_OTP": "Gửi mã OTP",
+    "RESEND_OTP": "Gửi lại mã OTP",
+    "VERIFY_OTP": "Xác nhận",
+    "BACK_TO_PHONE": "Quay lại nhập số điện thoại",
+    "PHONE_VERIFIED": "Vui lòng kiểm tra Zalo của bạn để nhận mã OTP",
+    "PHONE_VERIFIED_DESC": "Đã gửi OTP đến số điện thoại {{phone}}",
+    "SEND_OTP_SUCCESS": "Đã gửi mã OTP!",
+    "SEND_OTP_ERROR": "Gửi OTP thất bại",
+    "VERIFY_OTP_SUCCESS": "Xác thực OTP thành công!",
+    "VERIFY_OTP_ERROR": "Xác thực OTP thất bại",
+    "PHONE_REQUIRED": "Vui lòng nhập số điện thoại",
+    "OTP_REQUIRED": "Vui lòng nhập mã OTP",
+    "PHONE_INVALID": "Số điện thoại không đúng định dạng",
+    "OTP_INVALID": "Mã OTP không đúng",
+    "COUNTDOWN": "Gửi lại sau {{time}}s",
+    "WAIT_TIME": "Chờ {{time}}s",
+    "CANNOT_SEND_OTP": "Vui lòng chờ {{time}} giây trước khi gửi lại OTP",
+    "PHONE_ALREADY_VERIFIED": "Số điện thoại này đã được xác thực",
+    "PHONE_ALREADY_VERIFIED_DESC": "Bạn có thể tiếp tục với bước tiếp theo",
+    "UPDATE_PHONE_TITLE": "Cập nhật số điện thoại",
+    "CONFIRM_PHONE": "Gửi OTP",
+    "PHONE_NULL": "Bạn chưa có số điện thoại"
+  },
+  "NOTIFICATION_MODAL": {
+    "INTERVIEW_BOOKING_SUCCESS_TITLE": "Đăng ký lịch phỏng vấn thành công!",
+    "INTERVIEW_BOOKING_SUCCESS_DESCRIPTION": "Đội ngũ DevPlus sẽ sớm liên hệ với bạn để xác nhận thời gian và thông tin chi tiết của buổi phỏng vấn qua địa chỉ email"
+  },
+  "COURSES": {
+    "ERROR_OCCURRED": "Đã xảy ra lỗi",
+    "COURSE_LOAD_ERROR": "Không thể tải thông tin khóa học. Vui lòng thử lại sau.",
+    "COURSE_DESCRIPTION": "Mô tả khóa học",
+    "COURSE_INFORMATION": "Thông tin khóa học",
+    "CONTACT_INFORMATION": "Thông tin liên hệ",
+    "COURSE_OVERVIEW": "Thông tin tổng quan:",
+    "TARGET_AUDIENCE": "Đối tượng",
+    "REGISTER_NOW": "Đăng ký ngay",
+    "REGISTERED": "Đã đăng ký",
+    "RELATED_COURSES": "Các khóa học liên quan",
+    "COURSE_REGISTRATION_SUCCESS": "Đăng ký khóa học thành công!",
+    "COURSE_REGISTRATION_SUCCESS_MESSAGE": "Đội ngũ DevPlus sẽ sớm liên hệ với bạn để trao đổi về thông tin khóa học!"
   }
 }

@@ -5,7 +5,7 @@ import { Credentials, GoogleCredentials, RegisterUser } from '@app/interface/use
 
 export const loginApi = (credentials: Credentials) => axios.post(API_URL.LOGIN, credentials);
 
-export const useLoginWithGoogleApi = (GoogleCredentials: GoogleCredentials) =>
+export const loginWithGoogleApi = (GoogleCredentials: GoogleCredentials) =>
   axios.post(API_URL.LOGIN_WITH_GOOGLE, GoogleCredentials);
 
 export const refreshTokenApi = () => axios.get(API_URL.REFRESH_TOKEN);
@@ -17,3 +17,6 @@ export const registerApi = (registerUserDto: RegisterUser) =>
 
 export const getActivateAccount = (token: string) =>
   axios.get(`${API_URL.ACTIVATE_ACCOUNT}?token=${token}`);
+
+export const resendActivationEmailApi = (email: string) =>
+  axios.post(API_URL.RESEND_ACTIVATION_EMAIL, { email });

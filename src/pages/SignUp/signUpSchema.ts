@@ -6,6 +6,7 @@ import {
   PHONE_REGEX_PATTERN,
   NO_SPECIAL_CHARACTER_IN_NAME,
   PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER,
+  DIAL_CODE_REGEX_PATTERN,
 } from '@app/constants/regex';
 
 export const useSignUpSchema = () => {
@@ -23,7 +24,21 @@ export const useSignUpSchema = () => {
     phoneNumber: yup
       .string()
       .required(t('VALIDATE.PHONE_REQUIRED') as string)
-      .matches(PHONE_REGEX_PATTERN, t('VALIDATE.PHONE_INVALID') as string),
+      .trim()
+      .test('is-have-phone', t('VALIDATE.PHONE_REQUIRED') as string, (value) => {
+        if (!value || value.trim().length === 0 || value.trim() === '') return true;
+        const dialCodeMatch = value.match(DIAL_CODE_REGEX_PATTERN);
+        if (dialCodeMatch && value === dialCodeMatch[0]) return false;
+        return true;
+      })
+      .test(
+        'is-valid-phone',
+        t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
+        (value) => {
+          if (!value) return true;
+          return PHONE_REGEX_PATTERN.test(value);
+        },
+      ),
 
     email: yup
       .string()

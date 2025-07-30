@@ -16,8 +16,30 @@ const FaqSection = () => {
     QUESTION: string;
     ANSWER: string;
   }>;
+  const items = faqs.map((faq, index) => {
+    const isActive = expanded === String(index);
+    return {
+      key: String(index),
+      label: (
+        <span className={`text-lg font-semibold ${isActive ? 'text-white' : 'text-[#444444]'}`}>
+          {faq.QUESTION}
+        </span>
+      ),
+      children: (
+        <div className='faq-panel-content'>
+          <p className={`mt-3 text-base font-normal ${isActive ? 'text-white' : 'text-[#6B6B6B]'}`}>
+            {faq.ANSWER}
+          </p>
+        </div>
+      ),
+      className: `!rounded-xl !mb-2 border-none shadow-none ${
+        isActive ? 'bg-[#FE7743]' : 'bg-[#FFE9E1]'
+      }`,
+    };
+  });
+
   return (
-    <div className='w-full h-full pt-8 mdM:pt-20 pb-40 bg-[#FFFBF9]'>
+    <div className='w-full h-full pt-8 mdM:pt-20 pb-20 bg-[#FFFBF9]'>
       <div className='container w-full h-full mx-auto xsM:w-[90%] smM:px-2 py-10'>
         <div className='text-primary font-bold text-center text-base sm:text-2xl mdM::text-3xl mdM:text-start mb-10 md:mb-20'>
           {t('HOMEPAGE.FAQ')}
@@ -83,40 +105,8 @@ const FaqSection = () => {
                   setExpanded(val as string | undefined);
                 }
               }}
-            >
-              {Array.isArray(faqs) &&
-                faqs.map((faq, index) => {
-                  const isActive = expanded === String(index);
-                  return (
-                    <Collapse.Panel
-                      header={
-                        <span
-                          className={`text-lg font-semibold ${
-                            isActive ? 'text-white' : 'text-[#444444]'
-                          }`}
-                        >
-                          {faq.QUESTION}
-                        </span>
-                      }
-                      key={index}
-                      className={`!rounded-xl !mb-2 border-none shadow-none ${
-                        isActive ? 'bg-[#FE7743]' : 'bg-[#FFE9E1]'
-                      }`}
-                      extra={null}
-                    >
-                      <div className='faq-panel-content'>
-                        <p
-                          className={`mt-3 text-base font-normal ${
-                            isActive ? 'text-white' : 'text-[#6B6B6B]'
-                          }`}
-                        >
-                          {faq.ANSWER}
-                        </p>
-                      </div>
-                    </Collapse.Panel>
-                  );
-                })}
-            </Collapse>
+              items={items}
+            />
           </div>
         </div>
       </div>
