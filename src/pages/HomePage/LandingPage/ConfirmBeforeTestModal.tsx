@@ -1,23 +1,13 @@
-import { Button } from 'antd';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { ImproveTestModal } from './Modals/ImproveTestModal';
-import { InfoModal } from './Modals/InfoModal';
-import { NewTestModal } from './Modals/NewTestModal';
 import { ContinueTestModal } from './Modals/ContinueTestModal';
-
+import { ImproveTestModal } from './Modals/ImproveTestModal';
+import { NewTestModal } from './Modals/NewTestModal';
 import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
-import {
-  useHasTakenExamDefault,
-  useSubmitExam,
-  useUpdateUserStudentInfo,
-  useGetHistory,
-} from '@app/hooks';
-import { RootState } from '@app/redux/store';
+import { ExamStatusEnum } from '@app/constants/enum';
+import { useHasTakenExamDefault, useSubmitExam, useGetHistory } from '@app/hooks';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
@@ -29,16 +19,16 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
   const navigate = useNavigate();
 
   const { mutate: submitExam, isPending } = useSubmitExam();
-  const { mutate: updateUserStudentInfo } = useUpdateUserStudentInfo();
-  const { user } = useSelector((state: RootState) => state.auth);
-  const { data: hasTakenExam } = useHasTakenExamDefault();
+  const { data: exam } = useHasTakenExamDefault();
   const { data: historyData } = useGetHistory();
 
   const handleStartTest = () => navigate(NAVIGATE_URL.TEST);
   const handleReviewResult = () => navigate(NAVIGATE_URL.TEST_RESULT);
 
   const renderModalContent = () => {
-    const inProgressExam = historyData?.find((item) => item.examStatus === 'IN_PROGRESS');
+    const inProgressExam = historyData?.find(
+      (item) => item.examStatus === ExamStatusEnum.IN_PROGRESS,
+    );
     if (inProgressExam) {
       return (
         <ContinueTestModal
@@ -50,11 +40,11 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       );
     }
 
-    if (hasTakenExam?.hasTakenExam) {
+    if (exam?.hasTakenExam) {
       return (
         <ImproveTestModal
           confirmProps={{ onClose }}
-          hasTakenExam={hasTakenExam}
+          hasTakenExam={exam}
           handleReviewResult={handleReviewResult}
           handleStartTest={handleStartTest}
           submitExam={submitExam}
@@ -65,9 +55,8 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
     return (
       <NewTestModal
         confirmProps={{ onClose }}
-        handleBackInfo={() => {}}
         handleStartTest={handleStartTest}
-        hasTakenExam={hasTakenExam}
+        hasTakenExam={exam}
       />
     );
   };
@@ -80,7 +69,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       destroyOnHidden
       closable={false}
       className='p-3 sm:p-5'
-      classNames={{ content: '!rounded-3xl' }}
+      classNames={{ content: '!rounded-3xl', body: 'max-h-[90vh] overflow-y-auto' }}
       width={{
         xs: '90%',
         sm: '80%',

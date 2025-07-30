@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { RobotHand } from '@app/assets/images';
 import { PartnerUnit1, PartnerUnit2, CelebUnit2, DevPlus } from '@app/assets/images/Logos';
-import ConfirmBeforeTestModal from '@app/pages/LandingPage/ConfirmBeforeTestModal';
+import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
 import { RootState } from '@app/redux/store';
 
-import '@app/pages/LandingPage/homepage.scss';
+import '@app/pages/HomePage/LandingPage/homepage.scss';
 
 const BannerUserScreen = () => {
   const { t } = useTranslation();
