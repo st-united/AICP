@@ -19,22 +19,22 @@ export const InfoModal: React.FC<InfoModalProps> = ({
   isPending,
 }) => {
   const { t } = useTranslation();
-  const [selectedType, setSelectedType] = React.useState<UserType | null>(
-    userProfile?.isStudent === true
-      ? UserType.STUDENT
-      : userProfile?.isStudent === false
-      ? UserType.WORKER
-      : null,
+  const [selectedType, setSelectedType] = React.useState<UserType>(
+    userProfile?.isStudent === true ? UserType.STUDENT : UserType.WORKER,
   );
+
   const [university, setUniversity] = React.useState(userProfile?.university || '');
   const [studentCode, setStudentCode] = React.useState(userProfile?.studentCode || '');
 
   const handleContinue = () => {
-    if (selectedType === UserType.STUDENT) {
-      onSubmit({ isStudent: true, university, studentCode });
-    } else if (selectedType === UserType.WORKER) {
-      onSubmit({ isStudent: false, university: '', studentCode: '' });
-    }
+    const payload = {
+      isStudent: selectedType === UserType.STUDENT,
+      ...(selectedType === UserType.STUDENT
+        ? { university, studentCode }
+        : { university: '', studentCode: '' }),
+    };
+
+    onSubmit(payload);
   };
 
   const isStudentSelected = selectedType === UserType.STUDENT;
