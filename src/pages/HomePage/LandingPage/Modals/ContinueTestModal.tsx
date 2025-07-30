@@ -3,6 +3,7 @@ import { useTranslation, Trans } from 'react-i18next';
 
 import { ContentModal } from './ContentModal';
 import { HeaderModal } from './HeaderModal';
+import { ExamStatusEnum } from '@app/constants/enum';
 
 interface ContinueTestModalProps {
   confirmProps: { onClose: () => void };
@@ -20,7 +21,7 @@ export const ContinueTestModal = ({
   const { t } = useTranslation();
 
   const hasTakenExam = {
-    examStatus: 'IN_PROGRESS',
+    examStatus: ExamStatusEnum.IN_PROGRESS,
   };
 
   return (

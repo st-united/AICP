@@ -1,3 +1,4 @@
+import { ExamStatusEnum } from '@app/constants/enum';
 import { Trans, useTranslation } from 'react-i18next';
 
 interface ModalContentProps {
@@ -22,7 +23,7 @@ export const ContentModal = ({ durationKey, hasTakenExam }: ModalContentProps) =
           />
         </p>
       )}
-      {hasTakenExam?.examStatus !== 'IN_PROGRESS' && (
+      {hasTakenExam?.examStatus !== ExamStatusEnum.IN_PROGRESS && (
         <p className='text-base text-gray-900 md:text-xl'>{t('MODAL.RESULT_CONFIRM_TEST')}</p>
       )}
       <p className='text-base text-gray-900 md:text-xl'>
