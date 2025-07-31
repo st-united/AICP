@@ -15,11 +15,6 @@ export enum SFIALevel {
   LEVEL_7_MASTERY = 'LEVEL_7_MASTERY',
 }
 
-export enum UserType {
-  STUDENT = 'student',
-  WORKER = 'worker',
-}
-
 export enum ExamLevelEnum {
   LEVEL_1_STARTER = 'LEVEL_1_STARTER',
   LEVEL_2_EXPLORER = 'LEVEL_2_EXPLORER',
@@ -34,4 +29,9 @@ export enum CompetencyDimension {
   MINDSET = 'MINDSET',
   TOOLSET = 'TOOLSET',
   SKILLSET = 'SKILLSET',
+}
+
+export enum UserType {
+  STUDENT = 'student',
+  WORKER = 'worker',
 }
