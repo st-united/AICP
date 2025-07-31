@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,10 +17,9 @@ interface ConfirmBeforeTestModalProps {
 }
 
 export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeTestModalProps) {
-  const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { mutate: submitExam, isPending } = useSubmitExam();
+  const { mutate: submitExam } = useSubmitExam();
   const { data: exam } = useHasTakenExamDefault();
   const { data: historyData } = useGetHistory();
 
@@ -84,7 +82,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
     >
       <PerfectScrollbar
         style={{
-          maxHeight: '90vh',
+          maxHeight: '85vh',
           paddingRight: '10px',
         }}
         options={{
