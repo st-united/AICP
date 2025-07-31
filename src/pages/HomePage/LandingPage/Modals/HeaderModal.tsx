@@ -9,7 +9,7 @@ interface ModalHeaderProps {
 export const HeaderModal = ({ title, onClose, symbol }: ModalHeaderProps) => {
   return (
     <div className='w-full relative flex flex-col items-center'>
-      <div className='w-full flex justify-end'>
+      <div className='w-full flex justify-end absolute pr-1'>
         <CloseCircleOutlined
           onClick={onClose}
           className='text-2xl cursor-pointer text-gray-500 hover:text-gray-700 md:text-3xl'

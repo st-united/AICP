@@ -1,12 +1,12 @@
 import { Button } from 'antd';
-import { useTranslation } from 'react-i18next';
-
-import { noExamHistory } from '@app/assets/images';
 import { useState } from 'react';
-import { RootState } from '@app/redux/store';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ConfirmBeforeTestModal from '@app/pages/LandingPage/ConfirmBeforeTestModal';
+
+import { noExamHistory } from '@app/assets/images';
+import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
+import { RootState } from '@app/redux/store';
 
 interface EmptyStateProps {
   onStartFirst: () => void;

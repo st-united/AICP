@@ -1,3 +1,4 @@
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useNavigate } from 'react-router-dom';
 
 import { ContinueTestModal } from './Modals/ContinueTestModal';
@@ -7,6 +8,8 @@ import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
 import { ExamStatusEnum } from '@app/constants/enum';
 import { useHasTakenExamDefault, useSubmitExam, useGetHistory } from '@app/hooks';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import './confirmBeforeTestModal.scss';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
@@ -17,7 +20,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
   const navigate = useNavigate();
 
   const { mutate: submitExam } = useSubmitExam();
-  const { data: hasTakenExam } = useHasTakenExamDefault();
+  const { data: exam } = useHasTakenExamDefault();
   const { data: historyData } = useGetHistory();
 
   const handleStartTest = () => navigate(NAVIGATE_URL.TEST);
@@ -38,11 +41,11 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       );
     }
 
-    if (hasTakenExam?.hasTakenExam) {
+    if (exam?.hasTakenExam) {
       return (
         <ImproveTestModal
           confirmProps={{ onClose }}
-          hasTakenExam={hasTakenExam}
+          hasTakenExam={exam}
           handleReviewResult={handleReviewResult}
           handleStartTest={handleStartTest}
           submitExam={submitExam}
@@ -54,7 +57,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       <NewTestModal
         confirmProps={{ onClose }}
         handleStartTest={handleStartTest}
-        hasTakenExam={hasTakenExam}
+        hasTakenExam={exam}
       />
     );
   };
@@ -68,16 +71,21 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       closable={false}
       className='p-3 sm:p-5'
       classNames={{ content: '!rounded-3xl' }}
-      width={{
-        xs: '90%',
-        sm: '80%',
-        md: '70%',
-        lg: '60%',
-        xl: '50%',
-        xxl: '40%',
-      }}
+      width={900}
     >
-      {renderModalContent()}
+      <PerfectScrollbar
+        style={{
+          maxHeight: '85vh',
+          paddingRight: '10px',
+        }}
+        options={{
+          wheelSpeed: 0.5,
+          wheelPropagation: false,
+          suppressScrollX: true,
+        }}
+      >
+        {renderModalContent()}
+      </PerfectScrollbar>
     </Modal>
   );
 }
