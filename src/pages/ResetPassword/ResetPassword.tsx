@@ -50,7 +50,7 @@ export default function ResetPassword() {
     });
   };
   return (
-    <div className='flex justify-start'>
+    <div className='flex justify-start h-screen'>
       <div className='w-full px-4 py-6 md:py-0'>
         <div className='mt-14 mb-14'>
           <h1 className='text-3xl sm:text-3xl md:text-4xl lg:text-4xl text-primary font-bold'>

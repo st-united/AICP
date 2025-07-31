@@ -1,8 +1,35 @@
-import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { SlideImages } from '../../molecules/index';
+import { NAVIGATE_URL } from '@app/constants';
 
 const PublicLayout: React.FC = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const path = location.pathname;
+
+    // Reset class trước
+    document.body.className = '';
+
+    const isPublicPage = [
+      NAVIGATE_URL.SIGN_IN,
+      NAVIGATE_URL.SIGN_UP,
+      NAVIGATE_URL.FORGOT_PASSWORD,
+      NAVIGATE_URL.RESET_PASSWORD,
+    ].includes(path);
+
+    if (isPublicPage) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.add('default-page');
+    }
+
+    return () => {
+      document.body.className = '';
+    };
+  }, [location]);
+
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/SlideImages/background.png)]'>
       <div className='h-full pt-6 sm:px-6 md:px-10'>
