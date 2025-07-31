@@ -17,7 +17,7 @@ const BannerUserScreen = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <section className='bg-gradient-to-br from-[#FFFBF9] to-[#FFF5F0] flex justify-center px-6 min-h-[calc(100vh-5rem)]'>
+    <section className='bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0] flex justify-center px-6 min-h-[calc(100vh-5rem)]'>
       <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 w-full'>
         {/* Left Side - Robot Image */}
         <div className='order-2 md:order-1 px-4 md:px-6 lg:px-8 flex justify-center items-center'>
@@ -34,7 +34,7 @@ const BannerUserScreen = () => {
         </div>
 
         {/* Right Side - Content */}
-        <div className='order-1 md:order-2 text-center md:text-left px-4 md:px-6 lg:px-8'>
+        <div className='order-1 md:order-2 text-center md:text-left px-4 md:px-6 lg:px-8 flex flex-col justify-around'>
           {/* Sponsors Section - Tablet & Desktop */}
           <div className='hidden sm:block space-y-4 md:space-y-6 animate-slide-in mb-6'>
             <div className='flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-12'>
@@ -88,52 +88,53 @@ const BannerUserScreen = () => {
             </div>
           </div>
 
-          {/* Main Heading */}
-          <div
-            className='space-y-3 md:space-y-4 animate-slide-in mb-2 '
-            style={{ animationDelay: '0.2s' }}
-          >
-            <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[1000] text-[#FE7743] tracking-wide'>
-              {t('HOMEPAGE.BANNER_USER.TITLE')}
-            </h1>
-            <div className='w-16 md:w-20 h-1 bg-gradient-to-r from-[#FE7743] to-[#FF8242] mx-auto md:mx-0 rounded-full'></div>
-          </div>
-
-          {/* Subtitle */}
-          <p
-            className='text-base sm:text-lg md:text-xl font-[700] text-gray-800 leading-relaxed animate-slide-in mb-6 '
-            style={{ animationDelay: '0.4s' }}
-          >
-            {t('HOMEPAGE.BANNER_USER.SUBTITLE')}
-          </p>
-
-          {/* Stats Card */}
-          <Card
-            className='inline-block p-1 md:p-2  bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-[#FE7743]/20 hover:shadow-2xl transition-all duration-300 animate-slide-in border-0 rounded-2xl mb-6 '
-            style={{ animationDelay: '0.6s' }}
-          >
-            <div className='flex items-center space-x-3 md:space-x-4 lg:space-x-6'>
-              <div className='text-3xl sm:text-4xl md:text-5xl font-[900] text-[#FF8242]'>
-                {t('HOMEPAGE.BANNER_USER.STUDENT_COUNT')}
-              </div>
-              <div className='text-left'>
-                <div className='text-base md:text-lg font-semibold text-gray-800'>
-                  {t('HOMEPAGE.BANNER_USER.STUDENT_TEXT')}
+          <div>
+            {' '}
+            {/* Main Heading */}
+            <div
+              className='space-y-3 md:space-y-4 animate-slide-in mb-2 '
+              style={{ animationDelay: '0.2s' }}
+            >
+              <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[1000] text-[#FE7743] tracking-wide'>
+                {t('HOMEPAGE.BANNER_USER.TITLE')}
+              </h1>
+              <div className='w-16 md:w-20 h-1 bg-gradient-to-r from-[#FE7743] to-[#FF8242] mx-auto md:mx-0 rounded-full'></div>
+            </div>
+            {/* Subtitle */}
+            <p
+              className='text-base sm:text-lg md:text-xl font-[700] text-gray-800 leading-relaxed animate-slide-in mb-6 '
+              style={{ animationDelay: '0.4s' }}
+            >
+              {t('HOMEPAGE.BANNER_USER.SUBTITLE')}
+            </p>
+            {/* Stats Card */}
+            <Card
+              className='inline-block p-1 md:p-2  bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-[#FE7743]/20 hover:shadow-2xl transition-all duration-300 animate-slide-in border-0 rounded-2xl mb-6 '
+              style={{ animationDelay: '0.6s' }}
+            >
+              <div className='flex items-center space-x-3 md:space-x-4 lg:space-x-6'>
+                <div className='text-3xl sm:text-4xl md:text-5xl font-[900] text-[#FF8242]'>
+                  {t('HOMEPAGE.BANNER_USER.STUDENT_COUNT')}
+                </div>
+                <div className='text-left'>
+                  <div className='text-base md:text-lg font-semibold text-gray-800'>
+                    {t('HOMEPAGE.BANNER_USER.STUDENT_TEXT')}
+                  </div>
                 </div>
               </div>
+            </Card>
+            <div className='flex items-center justify-center md:justify-start mt-6'>
+              <Button
+                onClick={() => {
+                  isAuth ? setIsOpen(true) : navigate('/login');
+                }}
+                className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
+              >
+                {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
+              </Button>
+              {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
             </div>
-          </Card>
-          <div className='flex items-center justify-center md:justify-start mt-6'>
-            <Button
-              onClick={() => {
-                isAuth ? setIsOpen(true) : navigate('/login');
-              }}
-              className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
-            >
-              {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
-            </Button>
           </div>
-          {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
 
           {/* Mobile Sponsors */}
           <div
