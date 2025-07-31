@@ -43,11 +43,6 @@ const Sidebar = ({ onClose }: SidebarProps) => {
     //   label: t('SIDEBAR.ONLINE_COURSES'),
     //   path: '/profile/courses',
     // },
-    {
-      icon: SolutionOutlined,
-      label: t('SIDEBAR.PORTFOLIO'),
-      path: '/portfolio',
-    },
   ];
 
   const isActive = (currentPath: string, itemPath: string) => {

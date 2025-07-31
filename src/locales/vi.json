@@ -252,7 +252,20 @@
     "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
     "SAVE": "Lưu",
     "AVATAR_UPLOAD_SUCCESS": "Cập nhật ảnh đại diện thành công!",
-    "AVATAR_UPLOAD_FAILED": "Cập nhật ảnh đại diện thất bại. Vui lòng thử lại."
+    "AVATAR_UPLOAD_FAILED": "Cập nhật ảnh đại diện thất bại. Vui lòng thử lại.",
+    "STUDENT": "Sinh viên",
+    "WORKER": "Người đi làm",
+    "TARGET_LABEL": "Đối tượng",
+    "SCHOOL_LABEL": "Tên trường",
+    "STUDENT_ID_LABEL": "Mã số sinh viên",
+    "SCHOOL_PLACEHOLDER": "Vui lòng nhập tên trường học",
+    "STUDENT_ID_PLACEHOLDER": "Vui lòng nhập mã số sinh viên",
+    "PORTFOLIO_HEADER": "Hồ sơ chuyên môn",
+    "PORTFOLIO_ONLINE": "Hồ sơ trực tuyến",
+    "PORTFOLIO_CERTIFICATE": "Chứng chỉ chuyên môn",
+    "PORTFOLIO_EXPERIENCE": "Kinh nghiệm",
+    "LINKED_PLACEHOLDER": "Linked in URL (Tuỳ chọn)",
+    "GITHUB_PLACEHOLDER": "Github URL (Tuỳ chọn)"
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -608,7 +621,7 @@
   },
   "SUBMIT": {
     "TITLE": "Cảnh báo: Bài làm chưa hoàn tất",
-    "UNANSWERED_MESSAGE": "Bạn vẫn còn {{count}} câu hỏi chưa trả lời. Vui lòng kiểm tra lại trước khi nộp bài.",
+    "UNANSWERED_MESSAGE": "Bạn vẫn còn <bold>{{count}}</bold> câu hỏi chưa trả lời. Vui lòng kiểm tra lại trước khi nộp bài.",
     "UNANSWERED_NUMBERS": "Question numbers: {{numbers}}",
     "UNANSWERED_NUMBERS_MESSAGE": "Bạn còn {{count}} câu hỏi nữa. Bạn có muốn tiếp tục.",
     "NOTE": "Lưu ý",

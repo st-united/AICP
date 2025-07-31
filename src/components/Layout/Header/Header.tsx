@@ -16,9 +16,8 @@ const Header = () => {
   const { pathname } = useLocation();
   const isAuth = useSelector((state: any) => state.auth.isAuth);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
   const [currentSection, setCurrentSection] = useState<HomePageEnum | null>(null);
+
   const isHomePage = pathname === '/';
   const handleLoginClick = () => navigate('/login');
 
@@ -64,27 +63,17 @@ const Header = () => {
   const handleSmoothScroll = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      const yOffset = isHomePage && !isScrolled ? 70 : -10;
+      const yOffset = -10;
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       smoothScrollTo(y);
     }
   };
-  useEffect(() => {
-    if (isHomePage && !isScrolled && isMobile) {
-      document.body.style.paddingTop = '4rem';
-    } else {
-      document.body.style.paddingTop = '0';
-    }
-
-    return () => {
-      document.body.style.paddingTop = '0';
-    };
-  }, [isHomePage, isScrolled, isMobile]);
-
   return (
     <Layout.Header
       className={`${
-        isHomePage && !isScrolled ? 'fixed top-0 bg-[#FFFBF9]' : 'sticky top-0 bg-white shadow-md'
+        isHomePage && !isScrolled
+          ? 'sticky top-0 bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0]'
+          : 'sticky top-0 bg-white shadow-md'
       } flex justify-between w-full items-center h-[5rem] z-50  transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24`}
     >
       <div className='cursor-pointer flex items-center justify-center'>
