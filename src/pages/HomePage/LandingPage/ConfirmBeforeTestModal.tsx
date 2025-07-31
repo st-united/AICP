@@ -78,8 +78,8 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
         sm: '80%',
         md: '70%',
         lg: '60%',
-        xl: '50%',
-        xxl: '40%',
+        xl: '85%',
+        xxl: '60%',
       }}
     >
       <PerfectScrollbar
