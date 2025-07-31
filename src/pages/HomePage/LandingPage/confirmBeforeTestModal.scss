@@ -1,0 +1,26 @@
+.ps .ps__rail-y {
+  right: 0 !important;
+  left: auto !important;
+  width: 5px;
+  background: transparent;
+}
+
+.ps .ps__thumb-y {
+  background: #888;
+  border-radius: 10px;
+  width: 5px;
+}
+
+.ps .ps__thumb-y:hover {
+  background: #555;
+}
+
+.ps .ps__rail-y:hover,
+.ps .ps__rail-y.ps--clicking {
+  background: #f1f1f1;
+}
+
+.ps {
+  position: relative;
+  overflow: hidden !important;
+}
