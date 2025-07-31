@@ -9,7 +9,6 @@ import SkillRadarChart from '@app/components/ai-assessment/SkillRadarChart';
 import { DetailExam } from '@app/interface/user.interface';
 import { useNavigate } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
-
 interface ExamDetailViewProps {
   exam: DetailExam;
   onBack: () => void;
@@ -46,22 +45,35 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
     <>
       <div className='rounded-xl shadow-lg bg-white w-full auto h-full overflow-y-auto'>
         <div className='w-[95%] mx-auto'>
-          <button
+          <Button
             onClick={() => navigate(-1)}
-            className='flex items-center gap-1 text-sm sm:text-base text-black hover:text-[#000000] font-medium py-4'
+            type='text'
+            className='!border-0 !shadow-none px-0 ml-0 text-[15px] text-black text-sm flex items-center gap-1 hover:!text-black hover:!bg-transparent py-6'
           >
-            <LeftOutlined className='text-lg sm:text-lg' />
+            <LeftOutlined />
             {t('BUTTON.BACK')}
-          </button>
-          <div className='flex items-center justify-center sm:justify-start w-full sm:w-auto text-xl font-bold text-gray-800'>
-            {t('EXAM.QUIZ_ID_PREFIX')}
-            <span className='text-[#000000] ml-1'>#{exam.id.slice(0, 8)}</span>
+          </Button>
+          <div className='flex flex-col sm:flex-row items-center justify-center sm:justify-between w-full gap-3 sm:gap-0'>
+            <div className='text-xl font-bold text-gray-800 text-center sm:text-left'>
+              {t('EXAM.QUIZ_ID_PREFIX')}
+              <span className='text-black ml-1'>#{exam.id.slice(0, 8)}</span>
+            </div>
+
+            <Button
+              onClick={() => {
+                localStorage.setItem('examLatest', exam.id);
+                navigate('/result');
+              }}
+              className='text-sm text-[#FE7743] border border-[#FE7743] rounded-full px-4 py-1 hover:bg-orange-50 transition'
+            >
+              {t('EXAM.VIEW_DETAIL')}
+            </Button>
           </div>
 
           <div className='flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mb-4 px-1 pt-4'>
             <div className='flex items-center gap-2'>
-              <ClockCircleOutlined className='text-gray-600 text-lg sm:text-xl' />
-              <span className='text-sm sm:text-base'>
+              <ClockCircleOutlined className='text-gray-600 text-base sm:text-xl' />
+              <span className='text-sm sm:text-base max-xs370:text-xs'>
                 {t('EXAM.CREATED_TIME')}
                 <span className='font-medium ml-1'>
                   {formatDateTime(exam.createdAt.toString())}
@@ -81,7 +93,7 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
             className='p-4 sm:p-8 mb-4 rounded-2xl bg-white shadow-[rgba(0,0,0,0.12)_0px_10px_20px] hover:shadow-[rgba(0,0,0,0.15)_0px_12px_24px] transition-shadow duration-300 ease-in-out !border-0'
             classNames={{ body: '!p-0' }}
           >
-            <div className='mb-6 text-center sm:text-start border-b pb-6'>
+            <div className='mb-6 text-center sm:text-start border-b pb-0 sm:pb-6'>
               <h1 className='text-2xl sm:text-3xl font-bold text-gray-800 mb-2'>
                 {t('EXAM.COMPETENCY_DETAIL')}
               </h1>

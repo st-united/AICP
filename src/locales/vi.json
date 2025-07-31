@@ -425,6 +425,7 @@
     "AI_MINDSET_SCORE": "Kiến thức AI: <bold>{{score}}/{{maxScore}}</bold>",
     "AI_SKILLSET_SCORE": "Kỹ năng lập trình: <bold>{{score}}/{{maxScore}}</bold>",
     "AI_TOOLSET_SCORE": "Áp dụng thực tế: <bold>{{score}}/{{maxScore}}</bold>",
+    "VIEW_DETAIL": "Xem chi tiết bài làm",
     "STATUS": {
       "IN_PROGRESS": "Đang làm bài",
       "SUBMITTED": "Đã nộp bài",

@@ -13,6 +13,7 @@ interface QuizCardProps {
   onCheckboxChange: (quizId: string, checked: boolean) => void;
   isChecked: boolean;
   onClick: (quizId: string) => void;
+  disabled?: boolean;
 }
 
 export const getStatusText = (status: ExamStatusEnum) => {
@@ -97,7 +98,7 @@ export const formatDateTime = (dateString: string) => {
   }
 };
 
-const QuizCard = ({ quiz, onCheckboxChange, isChecked, onClick }: QuizCardProps) => {
+const QuizCard = ({ quiz, disabled, onCheckboxChange, isChecked, onClick }: QuizCardProps) => {
   const getLevelColor = (levelKey: string) => {
     switch (levelKey) {
       case ExamLevelEnum.LEVEL_1_STARTER:
@@ -118,8 +119,11 @@ const QuizCard = ({ quiz, onCheckboxChange, isChecked, onClick }: QuizCardProps)
 
   return (
     <Card
-      className='rounded-xl md:rounded-2xl shadow-sm border-0 bg-white hover:shadow-md transition-shadow duration-200 w-full'
-      onClick={() => onClick(quiz.id)}
+      className={`rounded-xl md:rounded-2xl shadow-sm border-0 bg-white transition-shadow duration-200 w-full
+        ${disabled ? 'opacity-50 pointer-events-none' : 'hover:shadow-md cursor-pointer'}`}
+      onClick={() => {
+        if (!disabled) onClick(quiz.id);
+      }}
     >
       <div className='flex flex-col sm:flex-row items-start sm:items-center space-y-0 sm:space-x-4'>
         <div className='flex-1 text-base sm:text-lg space-y-2 w-full cursor-pointer'>

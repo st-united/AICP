@@ -14,6 +14,7 @@ import { DATE_TIME } from '@app/constants';
 import { ExamStatusEnum } from '@app/constants/enum';
 import { useExamDetail, useGetHistory } from '@app/hooks';
 import { useNavigate } from 'react-router-dom';
+import './ExamHistory.scss';
 
 const ExamHistory = () => {
   const [selectedQuizzes, setSelectedQuizzes] = useState<Set<string>>(new Set());
@@ -110,14 +111,18 @@ const ExamHistory = () => {
             {!hasQuizzes ? (
               <EmptyState onStartFirst={handleStartFirst} />
             ) : (
-              <div className='overflow-y-auto flex-1 space-y-4 px-1'>
+              <div className='overflow-y-auto scroll-hidden flex-1 space-y-4 px-1 p-4'>
                 {historyData.map((quiz) => (
                   <QuizCard
                     key={quiz.id}
                     quiz={quiz}
                     onCheckboxChange={handleCheckboxChange}
                     isChecked={selectedQuizzes.has(quiz.id)}
-                    onClick={() => navigate(`/history/${quiz.id}`)}
+                    onClick={() =>
+                      quiz.examStatus !== ExamStatusEnum.IN_PROGRESS &&
+                      navigate(`/history/${quiz.id}`)
+                    }
+                    disabled={quiz.examStatus === ExamStatusEnum.IN_PROGRESS}
                   />
                 ))}
               </div>
