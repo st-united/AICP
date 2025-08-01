@@ -1,3 +1,4 @@
+import { CloseCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +36,6 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
     if (inProgressExam) {
       return (
         <ContinueTestModal
-          confirmProps={{ onClose }}
           examId={inProgressExam.id}
           handleStartTest={handleStartTest}
           submitExam={submitExam}
@@ -46,7 +46,6 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
     if (exam?.hasTakenExam) {
       return (
         <ImproveTestModal
-          confirmProps={{ onClose }}
           hasTakenExam={exam}
           handleReviewResult={handleReviewResult}
           handleStartTest={handleStartTest}
@@ -55,13 +54,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       );
     }
 
-    return (
-      <NewTestModal
-        confirmProps={{ onClose }}
-        handleStartTest={handleStartTest}
-        hasTakenExam={exam}
-      />
-    );
+    return <NewTestModal handleStartTest={handleStartTest} hasTakenExam={exam} />;
   };
 
   return (
@@ -82,19 +75,24 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
         xxl: '60%',
       }}
     >
-      <PerfectScrollbar
-        style={{
-          maxHeight: '90vh',
-          paddingRight: '10px',
-        }}
-        options={{
-          wheelSpeed: 0.5,
-          wheelPropagation: false,
-          suppressScrollX: true,
-        }}
-      >
-        {renderModalContent()}
-      </PerfectScrollbar>
+      <div className='relative'>
+        <div className='fixed-close-button text-right'>
+          <CloseCircleOutlined
+            onClick={onClose}
+            className='text-2xl cursor-pointer text-gray-500 hover:text-gray-700 md:text-3xl'
+          />
+        </div>
+        <PerfectScrollbar
+          className='custom-perfect-scrollbar'
+          options={{
+            wheelSpeed: 0.5,
+            wheelPropagation: false,
+            suppressScrollX: true,
+          }}
+        >
+          {renderModalContent()}
+        </PerfectScrollbar>
+      </div>
     </Modal>
   );
 }

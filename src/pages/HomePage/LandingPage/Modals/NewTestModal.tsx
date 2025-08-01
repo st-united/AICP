@@ -5,9 +5,6 @@ import { ContentModal } from './ContentModal';
 import { HeaderModal } from './HeaderModal';
 
 interface NewTestModalProps {
-  confirmProps: {
-    onClose: () => void;
-  };
   handleStartTest: () => void;
   hasTakenExam?: {
     examSetDuration: number;
@@ -15,20 +12,12 @@ interface NewTestModalProps {
   };
 }
 
-export const NewTestModal = ({
-  confirmProps,
-  handleStartTest,
-  hasTakenExam,
-}: NewTestModalProps) => {
+export const NewTestModal = ({ handleStartTest, hasTakenExam }: NewTestModalProps) => {
   const { t } = useTranslation();
 
   return (
     <div className='relative flex flex-col items-center justify-center'>
-      <HeaderModal
-        title={t('MODAL.TITLE_CONFIRM_TAKE_NEW_TEST')}
-        onClose={confirmProps.onClose}
-        symbol='?'
-      />
+      <HeaderModal title={t('MODAL.TITLE_CONFIRM_TAKE_NEW_TEST')} symbol='?' />
 
       <ContentModal
         durationKey='MODAL.DURATION_CONFIRM_TAKE_NEW_TEST'
