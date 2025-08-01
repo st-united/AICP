@@ -32,14 +32,14 @@ export const ContinueTestModal = ({
         symbol='?'
       />
 
-      <div className='px-6 w-full flex flex-col items-start md:my-6 !my-0 gap-2.5'>
-        <p className='text-base text-gray-900 md:text-xl'>
+      <div className='px-6 w-full flex flex-col items-start md:my-6 !my-0 gap-3'>
+        <p className='text-base text-gray-900 md:text-lg'>
           <Trans i18nKey='MODAL.CONTINUE_TEST_DESCRIPTION_1' components={{ br: <br /> }} />
         </p>
-        <p className='text-base text-gray-900 md:text-xl mt-[6px]'>
+        <p className='text-base text-gray-900 md:text-lg mt-[6px]'>
           <Trans i18nKey='MODAL.CONTINUE_TEST_DESCRIPTION_2' components={{ br: <br /> }} />
         </p>
-        <ul className='text-base text-gray-900 md:text-xl text-left list-disc list-inside pl-4 flex flex-col !leading-9'>
+        <ul className='text-base text-gray-900 md:text-lg text-left list-disc list-inside pl-4 flex flex-col !leading-9'>
           <li>
             <Trans i18nKey='MODAL.CONTINUE_TEST_OPTION_CONTINUE' components={{ b: <b /> }} />
           </li>

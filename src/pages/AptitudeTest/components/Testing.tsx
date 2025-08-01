@@ -202,7 +202,7 @@ const Testing = () => {
     <div className='exam-container relative overflow-hidden h-full'>
       {/* Header - Improved mobile spacing */}
 
-      <div className='justify-start items-center w-full text-lg sm:text-xl md:text-2xl leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
+      <div className='justify-start items-center w-full text-lg sm:text-xl md:text-[32px] leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
         <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>{' '}
         <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
       </div>
@@ -284,8 +284,7 @@ const Testing = () => {
               h-[calc(100vh-270px)]
               sm:h-[calc(100vh-310px)]
               md:h-[calc(100vh-360px)]
-              h-2xl:h-[calc(100vh-310px)]
-              pb-6'
+              h-2xl:h-[calc(100vh-310px)]'
             >
               <QuestionDisplay
                 questions={examSet.questions}
@@ -303,7 +302,7 @@ const Testing = () => {
               />
 
               {/* Submit button - Better mobile styling */}
-              <div className='flex justify-center my-4 px-4'>
+              <div className='flex justify-center mt-4 mb-1 px-4'>
                 <Button
                   className='bg-[#FE7743] rounded-3xl text-white px-8 py-3 h-auto text-base sm:text-lg font-bold border-[#FE7743] hover:border-2 hover:border-[#FE7743] hover:bg-white hover:text-[#FE7743] w-full sm:w-auto'
                   onClick={handleSubmit}
@@ -346,7 +345,7 @@ const Testing = () => {
               <Trans
                 i18nKey={'SUBMIT.UNANSWERED_MESSAGE'}
                 values={{ count: unansweredQuestions.length }}
-                components={{ bold: <span className='font-bold text-red-600' /> }}
+                components={{ bold: <span className='font-bold text-[#FE7743]' /> }}
               />
             </p>
 
