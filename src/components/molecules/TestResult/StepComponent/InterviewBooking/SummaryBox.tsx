@@ -55,7 +55,7 @@ const SummaryBox = () => {
     : [];
   return (
     <div className='flex flex-col items-center w-full mx-auto text-xl'>
-      <h3 className='text-[1.625rem] text-4xl font-[700] mb-4 text-[#fe7743]'>
+      <h3 className='text-[1.625rem] md:text-4xl font-[700] mb-4 text-[#fe7743]'>
         {t('TEST_RESULT.SUMMARY')}
       </h3>
       <p className='mb-6 text-gray-700 text-xl'>{t('TEST_RESULT.SUMMARY_DESC')}</p>

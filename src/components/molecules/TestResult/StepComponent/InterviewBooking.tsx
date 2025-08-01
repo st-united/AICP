@@ -31,7 +31,7 @@ const InterviewBooking: React.FC = () => {
   return (
     <div>
       <div className='flex flex-col items-center justify-center max-w-3xl mx-auto gap-8 text-center'>
-        <div className='text-[1.625rem] text-4xl font-bold text-[#FE7743]'>
+        <div className='text-[1.625rem] md:text-4xl font-bold text-[#FE7743]'>
           {t('TEST_RESULT.BOOKING_BUTTON')}
         </div>
         <div className='w-1/3'>
