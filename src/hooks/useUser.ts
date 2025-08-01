@@ -28,7 +28,6 @@ import {
   checkResetPasswordTokenApi,
   getDetailExam,
   UpdateUserStudentInfoApi,
-  getUserProfileAPI,
 } from '@app/services';
 import {
   NotificationTypeEnum,
@@ -173,17 +172,4 @@ export const useUpdateUserStudentInfo = () => {
       },
     },
   );
-};
-
-export const useGetUserProfile = () => {
-  return useQuery<UserProfile>({
-    queryKey: [QUERY_KEY.PROFILE],
-    queryFn: async () => {
-      const { data } = await getUserProfileAPI();
-      return data.data;
-    },
-    staleTime: 5 * 60 * 1000, // cache trong 5 phút
-    retry: 1,
-    refetchOnWindowFocus: false,
-  });
 };

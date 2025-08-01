@@ -164,7 +164,7 @@ const QuestionDisplay = ({
   };
 
   return (
-    <div className='min-h-screen pr-6 mdM:pr-10'>
+    <div className='min-h-screen pr-1'>
       {questions.map((question, index) => (
         <div
           key={question.id}

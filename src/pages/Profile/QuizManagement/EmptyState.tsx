@@ -1,14 +1,22 @@
 import { Button } from 'antd';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { noExamHistory } from '@app/assets/images';
+import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
+import { RootState } from '@app/redux/store';
 
 interface EmptyStateProps {
   onStartFirst: () => void;
 }
 
-const EmptyState = ({ onStartFirst }: EmptyStateProps) => {
+const EmptyState = ({}: EmptyStateProps) => {
   const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const { isAuth } = useSelector((state: RootState) => state.auth);
 
   return (
     <div className='w-full flex flex-col items-center justify-center sm:mx-auto px-6 sm:px-8 shadow-sm bg-white rounded-xl sm:rounded-2xl hover:shadow-md transition-shadow duration-200'>
@@ -31,11 +39,14 @@ const EmptyState = ({ onStartFirst }: EmptyStateProps) => {
           type='primary'
           size='large'
           className='w-full sm:w-auto !bg-orange-500 hover:bg-orange-600 !border-orange-500 !hover:border-orange-600 rounded-full px-6 sm:px-8 py-2 h-auto text-sm sm:text-base font-bold shadow-lg hover:shadow-xl transition-all duration-200'
-          onClick={onStartFirst}
+          onClick={() => {
+            isAuth ? setIsOpen(true) : navigate('/login');
+          }}
         >
           {t('EXAM.START_FIRST_QUIZ')}
         </Button>
       </div>
+      {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
     </div>
   );
 };

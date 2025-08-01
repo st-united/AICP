@@ -31,7 +31,7 @@ export const ImproveTestModal = ({
       <HeaderModal
         title={t('MODAL.TITLE_CONFIRM_IMPROVE_TEST')}
         onClose={confirmProps.onClose}
-        symbol='!'
+        symbol='?'
       />
 
       {hasTakenExam?.examSetDuration && (
@@ -44,8 +44,8 @@ export const ImproveTestModal = ({
         />
       )}
 
-      <div className='px-3 w-full md:my-6'>
-        <div className='flex flex-col gap-2 md:flex-row md:justify-center md:gap-4'>
+      <div className='mt-4 px-3 w-full md:my-6'>
+        <div className='flex flex-col gap-4 md:flex-row md:justify-center md:gap-4'>
           {hasTakenExam?.examStatus !== ExamStatusEnum.IN_PROGRESS ? (
             <Button
               onClick={handleReviewResult}
