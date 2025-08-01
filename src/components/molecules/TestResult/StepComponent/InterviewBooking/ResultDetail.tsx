@@ -14,6 +14,7 @@ interface ResultDetailProps {
 
 const ResultDetail: React.FC<ResultDetailProps> = ({ visible, onClose, examResult }) => {
   const { t } = useTranslation();
+
   const getQuestionStatus = (question: QuestionResult) => {
     const correctAnswers = question.answers
       .filter((answer: Answer) => answer.isCorrect)
