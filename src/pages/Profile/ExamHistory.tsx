@@ -111,7 +111,7 @@ const ExamHistory = () => {
             {!hasQuizzes ? (
               <EmptyState onStartFirst={handleStartFirst} />
             ) : (
-              <div className='overflow-y-auto scroll-hidden flex-1 space-y-4 px-1 p-4'>
+              <div className='quiz-history__list scroll-hidden overflow-y-auto flex-1 space-y-4 px-1 p-4'>
                 {historyData.map((quiz) => (
                   <QuizCard
                     key={quiz.id}
