@@ -6,14 +6,12 @@ import { HeaderModal } from './HeaderModal';
 import { ExamStatusEnum } from '@app/constants/enum';
 
 interface ContinueTestModalProps {
-  confirmProps: { onClose: () => void };
   examId: string;
   handleStartTest: () => void;
   submitExam: (examId: string) => void;
 }
 
 export const ContinueTestModal = ({
-  confirmProps,
   examId,
   handleStartTest,
   submitExam,
@@ -26,11 +24,7 @@ export const ContinueTestModal = ({
 
   return (
     <div className='relative flex flex-col items-center justify-center'>
-      <HeaderModal
-        title={t('MODAL.TITLE_CONFIRM_CONTINUE_TEST')}
-        onClose={confirmProps.onClose}
-        symbol='?'
-      />
+      <HeaderModal title={t('MODAL.TITLE_CONFIRM_CONTINUE_TEST')} symbol='?' />
 
       <div className='px-6 w-full flex flex-col items-start md:my-6 !my-0 gap-3'>
         <p className='text-base text-gray-900 md:text-lg'>
