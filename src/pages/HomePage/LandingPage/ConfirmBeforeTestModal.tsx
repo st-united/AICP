@@ -71,7 +71,14 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       closable={false}
       className='p-3 sm:p-5'
       classNames={{ content: '!rounded-3xl' }}
-      width={900}
+      width={{
+        xs: '90%',
+        sm: '80%',
+        md: '70%',
+        lg: '60%',
+        xl: '85%',
+        xxl: '60%',
+      }}
     >
       <PerfectScrollbar
         style={{
