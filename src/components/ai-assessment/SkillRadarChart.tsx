@@ -14,6 +14,15 @@ export interface ChartDataItem {
   value: number;
 }
 
+interface CustomTickProps {
+  x: number;
+  y: number;
+  textAnchor?: string;
+  payload: {
+    value: string;
+  };
+}
+
 interface SkillRadarChartProps {
   data: ChartDataItem[];
 }
@@ -23,8 +32,7 @@ const SkillRadarChart = ({ data }: SkillRadarChartProps) => {
     pilar: item.skill,
     score: item.value,
   }));
-  const CustomTick = (props: any) => {
-    const { payload, x, y, textAnchor } = props;
+  const CustomTick: React.FC<CustomTickProps> = ({ payload, x, y, textAnchor }) => {
     let adjustedY = y;
     let adjustedX = x;
 
@@ -44,14 +52,17 @@ const SkillRadarChart = ({ data }: SkillRadarChartProps) => {
       </text>
     );
   };
-
   return (
     <div className='flex justify-center'>
       <div className='w-full max-w-sm sm:max-w-md h-64 sm:h-80 relative'>
         <ResponsiveContainer width='100%' height='100%'>
           <RadarChart data={chartData}>
             <PolarGrid stroke='#e5e7eb' />
-            <PolarAngleAxis dataKey='pilar' tick={<CustomTick />} tickLine={false} />
+            <PolarAngleAxis
+              dataKey='pilar'
+              tick={(props) => <CustomTick {...props} />}
+              tickLine={false}
+            />
             <PolarRadiusAxis
               angle={90}
               domain={[0, 7]}
