@@ -72,7 +72,7 @@ const SignUp = () => {
           </Link>
         </button>
 
-        <div className='mb-6 mt-4 lg:mt-3 md:mb-8 md:mt-32'>
+        <div className='mb-6 mt-4 lg:mt-3 md:mb-8 md:mt-0 mdS:mt-0'>
           <h1 className='text-2xl md:text-[40px] !text-primary font-bold mb-3 md:mb-4'>
             {t<string>('SIGN_UP.TITLE')}
           </h1>
@@ -91,31 +91,31 @@ const SignUp = () => {
           form={form}
           layout='vertical'
           onFinish={onFinish}
-          className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2'
+          className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-[8px]'
           validateTrigger={['onChange', 'onBlur']}
         >
           <Form.Item name='fullName' rules={validator}>
             <Input
-              className='w-full !px-4 md:!px-6 !py-3 md:!py-4 !rounded-md !text-base md:!text-lg'
+              className='w-full !px-4 md:!px-6 !py-3 md:!py-[10px] !rounded-md !text-base md:!text-lg'
               placeholder={t('SIGN_UP.FULL_NAME') as string}
             />
           </Form.Item>
           <Form.Item name='phoneNumber' rules={validator}>
             <PhoneInput
-              className='w-full h-[50px] md:h-[62px]'
+              className='w-full h-[50px] md:h-[50px]'
               placeholder={t('SIGN_UP.PHONE') as string}
             />
           </Form.Item>
           <Form.Item className='md:col-span-2' name='email' rules={validator}>
             <Input
-              className='w-full !px-4 md:!px-6 !py-3 md:!py-4 !rounded-md !text-base md:!text-lg'
+              className='w-full !px-4 md:!px-6 !py-3 md:!py-[10px] !rounded-md !text-base md:!text-lg'
               placeholder={t('SIGN_UP.EMAIL') as string}
             />
           </Form.Item>
           <Form.Item className='md:col-span-2' name='password' rules={validator}>
             <Input.Password
               onChange={handlePasswordChange}
-              className='w-full !px-4 md:!px-6 !py-3 md:!py-4 !rounded-md !text-base md:!text-lg'
+              className='w-full !px-4 md:!px-6 !py-3 md:!py-[10px] !rounded-md !text-base md:!text-lg'
               placeholder={t<string>('SIGN_UP.PASSWORD')}
               iconRender={(visible) =>
                 visible ? (
@@ -148,7 +148,7 @@ const SignUp = () => {
             ]}
           >
             <Input.Password
-              className='w-full !px-4 md:!px-6 !py-3 md:!py-4 !rounded-md !text-base md:!text-lg'
+              className='w-full !px-4 md:!px-6 !py-3 md:!py-[10px] !rounded-md !text-base md:!text-lg'
               placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
               iconRender={(visible) =>
                 visible ? (
@@ -180,7 +180,7 @@ const SignUp = () => {
               <CheckOutlined className='mt-0.5 flex-shrink-0' />
               <div>{t<string>('SIGN_UP.PASSWORD_COMPLEXITY')}</div>
             </div>
-            <div className='flex gap-2 items-start !mt-4 md:!mt-6 !text-sm md:!text-base'>
+            <div className='flex gap-2 items-start !mt-4 md:!mt-2 !text-sm md:!text-base'>
               <Checkbox onChange={handleCheckboxChange} className='mt-0.5 flex-shrink-0' />
               <div className='leading-relaxed'>
                 {parse(
@@ -198,10 +198,10 @@ const SignUp = () => {
             </div>
           </div>
 
-          <Form.Item className='md:col-span-2 !mt-6'>
+          <Form.Item className='md:col-span-2 !mt-2'>
             <Button
               htmlType='submit'
-              className='w-full h-12 md:h-[3.75rem] !bg-primary-bold text-sm md:text-[1rem] !text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:!text-white transition duration-300'
+              className='w-full h-10 md:h-[2.75rem] !bg-primary-bold text-sm md:text-[1rem] !text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:!text-white transition duration-300'
               loading={isLoading}
               disabled={!isChecked}
             >

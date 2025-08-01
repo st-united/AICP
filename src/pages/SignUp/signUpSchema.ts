@@ -16,6 +16,7 @@ export const useSignUpSchema = () => {
     fullName: yup
       .string()
       .required(t('VALIDATE.FULL_NAME_REQUIRED') as string)
+      .min(5, t('VALIDATE.MIN_CHARACTER', { field: t('SIGN_UP.FULL_NAME'), length: 5 }) as string)
       .matches(
         NO_SPECIAL_CHARACTER_IN_NAME,
         t('VALIDATE.ONLY_ALPHABET', { field: t('SIGN_UP.FULL_NAME') }) as string,

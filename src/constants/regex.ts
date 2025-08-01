@@ -36,7 +36,7 @@ export const NO_ALLOW_SPACE =
 
 export const NO_NUMBER = /^([^0-9]*)+( ([^0-9]*)+)*$/;
 
-export const NO_SPECIAL_CHARACTER_IN_NAME = /^[a-zA-ZÀ-ỹ\s]*$/;
+export const NO_SPECIAL_CHARACTER_IN_NAME = /^(?=.*[a-zA-ZÀ-ỹ])[a-zA-ZÀ-ỹ\s]+$/;
 
 export const NO_TWO_SPACE = /^(?!.*\s{2}).*$/;
 
