@@ -32,10 +32,10 @@ const ResultHeader = () => {
     <div className='bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 lg:p-8 xl:p-10 space-y-6 lg:space-y-8'>
       {/* Header Section */}
       <div className='text-center space-y-3 lg:space-y-4'>
-        <h2 className='text-[26px] sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-[#FF872BCF] to-[#FF4D08] bg-clip-text text-transparent leading-tight px-2'>
+        <h2 className='text-[1.625rem] sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-[#FF872BCF] to-[#FF4D08] bg-clip-text text-transparent leading-tight px-2'>
           {t('TEST_RESULT.CONGRATS')}
         </h2>
-        <p className='text-[#5B5B5B] text-[18px] sm:text-base md:text-lg lg:text-xl font-semibold italic px-2 max-w-4xl mx-auto'>
+        <p className='text-[#5B5B5B] text-[1.125rem] sm:text-base md:text-lg lg:text-xl font-semibold italic px-2 max-w-4xl mx-auto'>
           {t('TEST_RESULT.SUBTITLE')}
         </p>
       </div>
