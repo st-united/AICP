@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Experts from '@app/components/LandingPage/Experts';
-import FeatureSection from '@app/components/LandingPage/FeatureSection';
-import PartnerNetwork from '@app/components/LandingPage/PartnerNetwork';
 import FaqSection from '@app/components/Layout/FaqSection/FaqSection';
 import FooterSection from '@app/components/Layout/Footer/FooterSection';
 import BannerUserScreen from '@app/components/UserPage/BannerUserScreen';
 import StepScreen from '@app/components/UserPage/StepScreen';
+import Experts from '@app/pages/HomePage/LandingPage/Experts';
+import FeatureSection from '@app/pages/HomePage/LandingPage/FeatureSection';
+import PartnerNetwork from '@app/pages/HomePage/LandingPage/PartnerNetwork';
 
 const Homepage = () => {
   const { t } = useTranslation();
