@@ -6,7 +6,6 @@ import { HeaderModal } from './HeaderModal';
 import { ExamStatusEnum } from '@app/constants/enum';
 
 interface ImproveTestModalProps {
-  confirmProps: { onClose: () => void };
   hasTakenExam?: {
     examId?: string;
     examStatus?: string;
@@ -18,7 +17,6 @@ interface ImproveTestModalProps {
 }
 
 export const ImproveTestModal = ({
-  confirmProps,
   hasTakenExam,
   handleReviewResult,
   handleStartTest,
@@ -28,11 +26,7 @@ export const ImproveTestModal = ({
 
   return (
     <div className='relative flex flex-col items-center'>
-      <HeaderModal
-        title={t('MODAL.TITLE_CONFIRM_IMPROVE_TEST')}
-        onClose={confirmProps.onClose}
-        symbol='?'
-      />
+      <HeaderModal title={t('MODAL.TITLE_CONFIRM_IMPROVE_TEST')} symbol='?' />
 
       {hasTakenExam?.examSetDuration && (
         <ContentModal
