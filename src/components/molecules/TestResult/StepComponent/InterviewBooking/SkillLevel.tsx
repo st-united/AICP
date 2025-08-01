@@ -45,28 +45,28 @@ const SkillLevel: React.FC = () => {
 
   return (
     <div className='text-lg'>
-      <Divider className='!p-1 !m-0 !mb-4 italic !text-[#5B5B5B] !text-[12px] xsL:!text-[20px] !font-bold'>
+      <Divider className='!p-1 !m-0 !mb-4 italic !text-[#5B5B5B] !text-[0.75rem] xsL:!text-[20px] !font-bold'>
         {t('TEST_RESULT.REVIEW')}
       </Divider>
       <div className='flex flex-col md:flex-row gap-6 w-full'>
         <div className='flex-1 flex flex-col gap-2'>
           <div className='mb-2'>
-            <span className='text-[18px] md:text-xl font-bold text-black relative inline-block align-bottom'>
+            <span className='text-[1.125rem] md:text-xl font-bold text-black relative inline-block align-bottom'>
               {t('TEST_RESULT.LEVEL')}:
               <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[90%] ml-1' />
             </span>
-            <span className='text-[18px] md:text-xl font-bold text-[#fe7743] ml-3 align-bottom'>
+            <span className='text-[1.125rem] md:text-xl font-bold text-[#fe7743] ml-3 align-bottom'>
               {level}
             </span>
           </div>
           <div className='text-gray-700 mb-2'>{data?.description}</div>
-          <div className='text-[18px] md:text-xl font-bold text-black relative inline-block align-bottom'>
+          <div className='text-[1.125rem] md:text-xl font-bold text-black relative inline-block align-bottom'>
             {t('TEST_RESULT.SUGGEST')}:
             <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[29%] ml-1' />
           </div>
           <div className='text-gray-700'>{data?.learningPath}</div>
         </div>
-        <div className='md:w-[0.5px] md:h-[200px] w-full h-[0.5px] bg-gray-50' />
+        <div className='md:w-[1.125rem] md:h-[12.5rem] w-full h-[0.031rem] bg-gray-50' />
         <div className='grid grid-cols-1 smL:grid-cols-2 md:grid-cols-1 gap-2 smL:gap-0 md:gap-8 flex-1'>
           <SkillChart chartData={chartData} />
           <CompetencyChart data={dataChart} />
