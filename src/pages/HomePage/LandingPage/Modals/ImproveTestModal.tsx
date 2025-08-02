@@ -38,7 +38,7 @@ export const ImproveTestModal = ({
         />
       )}
 
-      <div className='mt-4 px-3 w-full md:my-6'>
+      <div className='px-3 my-5 w-full'>
         <div className='flex flex-col gap-4 md:flex-row md:justify-center md:gap-4'>
           {hasTakenExam?.examStatus !== ExamStatusEnum.IN_PROGRESS ? (
             <Button

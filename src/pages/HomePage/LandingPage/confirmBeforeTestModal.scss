@@ -1,13 +1,13 @@
 .custom-perfect-scrollbar {
   position: relative;
   overflow: hidden !important;
-  max-height: 90vh;
+  max-height: 80vh;
+  margin: auto;
   padding-right: 10px;
 
   .ps__rail-y {
-    right: 0 !important;
     left: auto !important;
-    width: 6px;
+    width: 5px;
     background: white !important;
 
     &:hover,
@@ -19,10 +19,10 @@
   .ps__thumb-y {
     background: #bbbbbb;
     border-radius: 10px;
-    width: 6px;
+    width: 5px;
 
     &:hover {
-      width: 6px;
+      width: 5px;
     }
   }
 
