@@ -1,6 +1,7 @@
-import { E } from 'vitest/dist/global-58e8e951';
+import { Dayjs } from 'dayjs';
+
 import { GetListParams } from './common.interface';
-import { CompetencyDimension, ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
+import { ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 
 export interface UserColumns {
   id: number;
@@ -25,7 +26,7 @@ export interface UserProfile {
   fullName: string;
   email: string;
   phoneNumber?: string;
-  dob?: string;
+  dob?: string | Dayjs;
   avatarUrl?: string;
   permissions?: string[];
   province?: string;
@@ -101,6 +102,8 @@ export interface HistoryTesting {
     examLevel: ExamLevelEnum | null;
   };
   createdAt: Date;
+  attempt?: number;
+  isLatest?: boolean;
 }
 
 export interface GetHistoryParams {
@@ -150,4 +153,9 @@ export interface UpdateUserStudentInfo {
   isStudent: boolean;
   university?: string;
   studentCode?: string;
+}
+
+export interface ProfileJob {
+  id: string;
+  name: string;
 }

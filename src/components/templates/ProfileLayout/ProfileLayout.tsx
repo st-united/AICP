@@ -1,8 +1,9 @@
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined, LeftOutlined } from '@ant-design/icons';
 import { Button, Drawer, Layout, Grid } from 'antd';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import Breadcrumbs from '@app/components/common/Breadcrumbs';
 import HeaderComponent from '@app/components/Layout/Header/Header';
 import SidebarContent from '@app/components/Layout/Sidebar/Sidebar';
 
@@ -20,9 +21,11 @@ const ProfileLayout = () => {
   return (
     <Layout className='min-h-screen'>
       <HeaderComponent />
+      <div className='pt-6 pb-2 flex justify-center sm:justify-start sm:ml-4'>
+        <Breadcrumbs />
+      </div>
 
-      <Layout className='p-4'>
-        {/* Mobile Sidebar with Drawer */}
+      <Layout className=' p-4'>
         {isMobile ? (
           <>
             <Button
@@ -43,7 +46,7 @@ const ProfileLayout = () => {
           </>
         ) : (
           <Sider
-            width={isTablet ? 200 : 300} // Giảm width cho tablet
+            width={isTablet ? 200 : 300}
             collapsible={false}
             collapsed={collapsed}
             onCollapse={setCollapsed}

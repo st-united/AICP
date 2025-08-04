@@ -6,7 +6,6 @@ import * as yup from 'yup';
 dayjs.extend(isSameOrBefore);
 import {
   PHONE_REGEX_PATTERN,
-  EMAIL_REGEX_PATTERN,
   NO_SPECIAL_CHARACTER_IN_NAME,
   NO_SPACE_START_END,
   NO_TWO_SPACE,
@@ -35,10 +34,11 @@ export const useProfileSchema = () => {
 
     phoneNumber: yup
       .string()
+      .nullable()
       .required(t('VALIDATE.PHONE_REQUIRED') as string)
       .trim()
       .test('is-have-phone', t('VALIDATE.PHONE_REQUIRED') as string, (value) => {
-        if (!value || value.trim().length === 0 || value.trim() === '') return true;
+        if (!value || value.trim().length === 0 || value.trim() === '') return false;
         const dialCodeMatch = value.match(DIAL_CODE_REGEX_PATTERN);
         if (dialCodeMatch && value === dialCodeMatch[0]) return false;
         return true;
@@ -74,5 +74,11 @@ export const useProfileSchema = () => {
     job: yup.array().of(yup.string()).nullable(),
 
     referralCode: yup.string().nullable(),
+
+    isStudent: yup.boolean().required(),
+
+    university: yup.string().required(t<string>('VALIDATE.USER_UNIVERSITY_REQUIRED')),
+
+    studentCode: yup.string().required(t<string>('VALIDATE.USER_STUDENT_CODE_REQUIRED')),
   });
 };
