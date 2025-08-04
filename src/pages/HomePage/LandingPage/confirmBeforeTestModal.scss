@@ -3,11 +3,11 @@
   overflow: hidden !important;
   max-height: 80vh;
   margin: auto;
-  padding-right: 10px;
+  padding-right: 0.625rem;
 
   .ps__rail-y {
     left: auto !important;
-    width: 5px;
+    width: 0.3125rem;
     background: white !important;
 
     &:hover,
@@ -18,15 +18,15 @@
 
   .ps__thumb-y {
     background: #bbbbbb;
-    border-radius: 10px;
-    width: 5px;
+    border-radius: 0.625rem;
+    width: 0.3125rem;
 
     &:hover {
-      width: 5px;
+      width: 0.3125rem;
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 48rem) {
     .ps__rail-y {
       display: none !important;
     }

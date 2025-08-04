@@ -27,7 +27,7 @@ export const NewTestModal = ({ handleStartTest, hasTakenExam }: NewTestModalProp
       <div className='px-3 my-5 w-full flex justify-center items-center'>
         <Button
           onClick={handleStartTest}
-          className='w-[150px] h-full text-lg font-semibold px-4 py-2 rounded-full border !border-primary !bg-orange-500 hover:!bg-white hover:!text-primary active:bg-orange-700 !text-white transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-8 md:py-3 md:text-xl'
+          className='w-[9.375rem] h-full text-lg font-semibold px-4 py-2 rounded-full border !border-primary !bg-orange-500 hover:!bg-white hover:!text-primary active:bg-orange-700 !text-white transition-colors duration-200 md:w-auto md:min-w-[12rem] md:px-8 md:py-3 md:text-xl'
         >
           {t('MODAL.START_CONFIRM_TEST')}
         </Button>
