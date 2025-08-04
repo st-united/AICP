@@ -64,7 +64,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       destroyOnHidden
       closable={false}
       className='p-0 m-0'
-      classNames={{ content: '!rounded-3xl !pr-[14px]' }}
+      classNames={{ content: '!rounded-3xl !pr-[0.875rem]' }}
       width={{
         xs: '90%',
         sm: '80%',
