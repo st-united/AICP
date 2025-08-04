@@ -1,4 +1,5 @@
 import { Image, Layout } from 'antd';
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -56,9 +57,14 @@ const Header = () => {
 
   return (
     <Layout.Header
-      className={`${
-        isHomePage && !isScrolled ? 'fixed top-0 bg-[#FFFBF9]' : 'sticky top-0 bg-white shadow-md'
-      } flex justify-between w-full items-center h-[5rem] z-50  transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24`}
+      className={clsx(
+        'flex justify-between w-full items-center h-[5rem] z-50 transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24',
+        {
+          'fixed top-0 bg-[#FFFBF9]': isHomePage && !isScrolled,
+          'sticky top-0 bg-white shadow-md': !isHomePage || isScrolled,
+          'mt-2 !pr-[4.9375rem]': !isHomePage,
+        },
+      )}
     >
       <div className='cursor-pointer flex items-center justify-center'>
         <Image
