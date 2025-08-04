@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Space } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 interface QuizHeaderProps {
@@ -27,7 +27,7 @@ const QuizHeader = ({
         {examId && <span className='font-bold text-black'> #{examId.slice(0, 8)}</span>}
       </h1>
       {!disableButtons && (
-        <div className='flex flex-col sm:flex-row md:flex-row w-full md:w-auto gap-3 sm:gap-2 md:gap-3'></div>
+        <Space className='flex flex-col sm:flex-row w-full sm:w-auto gap-3 sm:gap-2'></Space>
       )}
     </div>
   );
