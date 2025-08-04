@@ -43,4 +43,4 @@ export const NO_TWO_SPACE = /^(?!.*\s{2}).*$/;
 export const NO_SPACE_START_END = /^[^\s]+(\s+[^\s]+)*$/;
 
 export const PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\S*$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[^\s]*$/;
