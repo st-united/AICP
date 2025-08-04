@@ -1,4 +1,4 @@
-import { Input, Select, Skeleton } from 'antd';
+import { Input, Select } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -22,7 +22,6 @@ const PhoneInput = ({
   disabled,
   value: formValue,
   onChange: formOnChange,
-  style,
   placeholder,
   size = 'large',
 }: PhoneInputProps) => {
@@ -30,51 +29,48 @@ const PhoneInput = ({
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const { t } = useTranslation();
   const { data: CallingCode } = useCallingCode();
-  const currentValue = formValue !== undefined ? formValue : '';
+
   useEffect(() => {
-    if (currentValue && CallingCode) {
+    if (formValue && CallingCode) {
       const matchedCallingCode = CallingCode.find(
-        (item) =>
-          currentValue.startsWith(item.dialCode) || currentValue.startsWith(`(${item.dialCode}`),
+        (item) => formValue.startsWith(item.dialCode) || formValue.startsWith(`(${item.dialCode})`),
       );
 
       if (matchedCallingCode) {
-        const remainingNumber = currentValue.substring(
-          currentValue.startsWith('(')
-            ? matchedCallingCode.dialCode.length + 2
-            : matchedCallingCode.dialCode.length,
-        );
+        const dialCodeLength = formValue.startsWith('(')
+          ? matchedCallingCode.dialCode.length + 2
+          : matchedCallingCode.dialCode.length;
+        const remainingNumber = formValue.substring(dialCodeLength);
         setSelectedCallingCode(matchedCallingCode.dialCode);
         setPhoneNumber(remainingNumber);
-        formOnChange?.(`(${matchedCallingCode.dialCode})${remainingNumber}`);
       } else {
         setSelectedCallingCode('+84');
-        setPhoneNumber(currentValue);
+        setPhoneNumber(formValue);
       }
+    } else {
+      setPhoneNumber('');
     }
-  }, [currentValue, CallingCode, formOnChange]);
+  }, [formValue, CallingCode]);
 
   const handleChangeCallingCode = (callingCode: string) => {
     setSelectedCallingCode(callingCode);
-    const newPhoneValue = callingCode + phoneNumber;
-    if (formOnChange) {
-      formOnChange(newPhoneValue);
-    }
+    const newPhoneValue = `(${callingCode})${phoneNumber}`;
+    formOnChange?.(newPhoneValue);
   };
 
   const handleChangePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
-    if (value.length < selectedCallingCode.length + 2 || value === `(${selectedCallingCode}`)
-      return;
-
     if (value.startsWith(`(${selectedCallingCode})`)) {
       value = value.slice(selectedCallingCode.length + 2);
-      setPhoneNumber(value);
-      const newPhoneValue = `(${selectedCallingCode})${value}`;
-      if (formOnChange) {
-        formOnChange(newPhoneValue);
-      }
+    } else if (value.startsWith(`(${selectedCallingCode}`)) {
+      value = value.slice(selectedCallingCode.length + 1);
+    } else if (value.startsWith(selectedCallingCode)) {
+      value = value.slice(selectedCallingCode.length);
     }
+
+    setPhoneNumber(value);
+    const newPhoneValue = `(${selectedCallingCode})${value}`;
+    formOnChange?.(newPhoneValue);
   };
 
   return (
@@ -88,7 +84,7 @@ const PhoneInput = ({
       addonBefore={
         <Select
           disabled={disabled}
-          className='!w-[80px] !h-full !rounded-[8px] '
+          className='!w-[80px] !h-full !rounded-[8px]'
           value={selectedCallingCode}
           onChange={handleChangeCallingCode}
           optionLabelProp='label'
@@ -109,7 +105,7 @@ const PhoneInput = ({
               key={item.dialCode + item.name + item.code}
               value={item.dialCode}
               disabled={disabled}
-              label={<img className=' w-full rounded-xl' src={item.flag} alt={item.name} />}
+              label={<img className='w-full' src={item.flag} alt={item.name} />}
             >
               <div className='flex items-center flex-row w-[400px]'>
                 <img className='mr-2 w-4' src={item.flag} alt={item.name} />
