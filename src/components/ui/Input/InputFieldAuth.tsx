@@ -1,3 +1,4 @@
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { Input, InputProps } from 'antd';
 import './InputAuth.scss';
 
@@ -19,6 +20,13 @@ export default function InputField({ ...props }: CustomInputFieldProps) {
           disabled={disabled}
           className={customClassName}
           placeholder={placeholder}
+          iconRender={(visible) =>
+            visible ? (
+              <EyeOutlined className='text-base md:text-lg' style={{ color: '#69c0ff' }} />
+            ) : (
+              <EyeInvisibleOutlined className='text-base md:text-lg' style={{ color: '#69c0ff' }} />
+            )
+          }
         />
       </div>
     );
