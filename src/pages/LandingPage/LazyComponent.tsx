@@ -31,11 +31,7 @@ const LazyComponent = ({ children, className }: LazySectionProps) => {
 
   return (
     <div ref={setRefs} className={className}>
-      {height === null && (
-        <div ref={measureRef} className='invisible absolute -z-[9999] pointer-events-none w-full'>
-          {children}
-        </div>
-      )}
+      {height === null && <div ref={measureRef}>{children}</div>}
       {height !== null && !inView && <div style={{ height }} />}
       {height !== null && inView && children}
     </div>

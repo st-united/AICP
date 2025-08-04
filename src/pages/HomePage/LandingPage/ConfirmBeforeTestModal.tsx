@@ -1,23 +1,17 @@
-import { Button } from 'antd';
-import React from 'react';
+import { CloseCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useNavigate } from 'react-router-dom';
 
-import { ImproveTestModal } from './Modals/ImproveTestModal';
-import { InfoModal } from './Modals/InfoModal';
-import { NewTestModal } from './Modals/NewTestModal';
 import { ContinueTestModal } from './Modals/ContinueTestModal';
-
+import { ImproveTestModal } from './Modals/ImproveTestModal';
+import { NewTestModal } from './Modals/NewTestModal';
 import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
-import {
-  useHasTakenExamDefault,
-  useSubmitExam,
-  useUpdateUserStudentInfo,
-  useGetHistory,
-} from '@app/hooks';
-import { RootState } from '@app/redux/store';
+import { ExamStatusEnum } from '@app/constants/enum';
+import { useHasTakenExamDefault, useSubmitExam, useGetHistory } from '@app/hooks';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import './confirmBeforeTestModal.scss';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
@@ -25,24 +19,22 @@ interface ConfirmBeforeTestModalProps {
 }
 
 export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeTestModalProps) {
-  const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { mutate: submitExam, isPending } = useSubmitExam();
-  const { mutate: updateUserStudentInfo } = useUpdateUserStudentInfo();
-  const { user } = useSelector((state: RootState) => state.auth);
-  const { data: hasTakenExam } = useHasTakenExamDefault();
+  const { mutate: submitExam } = useSubmitExam();
+  const { data: exam } = useHasTakenExamDefault();
   const { data: historyData } = useGetHistory();
 
   const handleStartTest = () => navigate(NAVIGATE_URL.TEST);
   const handleReviewResult = () => navigate(NAVIGATE_URL.TEST_RESULT);
 
   const renderModalContent = () => {
-    const inProgressExam = historyData?.find((item) => item.examStatus === 'IN_PROGRESS');
+    const inProgressExam = historyData?.find(
+      (item) => item.examStatus === ExamStatusEnum.IN_PROGRESS,
+    );
     if (inProgressExam) {
       return (
         <ContinueTestModal
-          confirmProps={{ onClose }}
           examId={inProgressExam.id}
           handleStartTest={handleStartTest}
           submitExam={submitExam}
@@ -50,11 +42,10 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       );
     }
 
-    if (hasTakenExam?.hasTakenExam) {
+    if (exam?.hasTakenExam) {
       return (
         <ImproveTestModal
-          confirmProps={{ onClose }}
-          hasTakenExam={hasTakenExam}
+          hasTakenExam={exam}
           handleReviewResult={handleReviewResult}
           handleStartTest={handleStartTest}
           submitExam={submitExam}
@@ -62,14 +53,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       );
     }
 
-    return (
-      <NewTestModal
-        confirmProps={{ onClose }}
-        handleBackInfo={() => {}}
-        handleStartTest={handleStartTest}
-        hasTakenExam={hasTakenExam}
-      />
-    );
+    return <NewTestModal handleStartTest={handleStartTest} hasTakenExam={exam} />;
   };
 
   return (
@@ -86,11 +70,28 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
         sm: '80%',
         md: '70%',
         lg: '60%',
-        xl: '50%',
-        xxl: '40%',
+        xl: '85%',
+        xxl: '60%',
       }}
     >
-      {renderModalContent()}
+      <div className='relative'>
+        <div className='fixed-close-button text-right'>
+          <CloseCircleOutlined
+            onClick={onClose}
+            className='text-2xl cursor-pointer text-gray-500 hover:text-gray-700 md:text-3xl'
+          />
+        </div>
+        <PerfectScrollbar
+          className='custom-perfect-scrollbar'
+          options={{
+            wheelSpeed: 0.5,
+            wheelPropagation: false,
+            suppressScrollX: true,
+          }}
+        >
+          {renderModalContent()}
+        </PerfectScrollbar>
+      </div>
     </Modal>
   );
 }

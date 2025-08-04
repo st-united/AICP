@@ -1,12 +1,11 @@
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined, LeftOutlined } from '@ant-design/icons';
 import { Button, Drawer, Layout, Grid } from 'antd';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { LeftOutlined } from '@ant-design/icons';
 
+import Breadcrumbs from '@app/components/common/Breadcrumbs';
 import HeaderComponent from '@app/components/Layout/Header/Header';
 import SidebarContent from '@app/components/Layout/Sidebar/Sidebar';
-import Breadcrumbs from '@app/components/common/Breadcrumbs';
 
 const { Sider, Content } = Layout;
 const { useBreakpoint } = Grid;
@@ -27,7 +26,6 @@ const ProfileLayout = () => {
       </div>
 
       <Layout className=' p-4'>
-        {/* Mobile Sidebar with Drawer */}
         {isMobile ? (
           <>
             <Button
@@ -48,7 +46,7 @@ const ProfileLayout = () => {
           </>
         ) : (
           <Sider
-            width={isTablet ? 200 : 300} // Giảm width cho tablet
+            width={isTablet ? 200 : 300}
             collapsible={false}
             collapsed={collapsed}
             onCollapse={setCollapsed}

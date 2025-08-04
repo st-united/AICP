@@ -37,6 +37,7 @@ export const useRegisterCourse = () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY.COURSES],
       });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.EXAM_RESULT] });
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY.COURSE_DETAIL],
       });

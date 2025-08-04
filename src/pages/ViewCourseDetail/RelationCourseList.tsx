@@ -1,8 +1,9 @@
 import { CheckCircleFilled } from '@ant-design/icons';
 import { Button } from 'antd';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import SuccessModal from '@app/components/molecules/Modal/SuccessModal';
 import { NAVIGATE_URL } from '@app/constants';
 import { useRegisterCourse } from '@app/hooks/useCourse';
 import { Course } from '@app/interface/course.interface';
@@ -15,12 +16,15 @@ interface RelationCourseListProps {
 const RelationCourseList: React.FC<RelationCourseListProps> = ({ courses, title }) => {
   const { t } = useTranslation();
   const { mutate: registerCourse, isPending } = useRegisterCourse();
-
+  const [selectedCourse, setSelectedCourse] = useState<string>();
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
   const handleRegister = useCallback(
     (courseId: string) => {
+      setSelectedCourse(courseId);
       registerCourse(courseId, {
         onSuccess: () => {
-          window.open(NAVIGATE_URL.DETAIL_COURSE_DYNAMIC(courseId), '_blank');
+          setIsSuccessModalVisible(true);
+          setSelectedCourse('');
         },
       });
     },
@@ -77,7 +81,7 @@ const RelationCourseList: React.FC<RelationCourseListProps> = ({ courses, title 
 
                     <Button
                       type='primary'
-                      loading={isPending}
+                      loading={isPending && selectedCourse === course.id}
                       disabled={isPending || course.isRegistered}
                       className={`rounded-full font-semibold text-xs xsM:text-sm sm:text-base px-3 xsM:px-4 sm:px-5 py-1 xsM:py-1.5 order-1 xsM:order-2 !text-white ${
                         course.isRegistered ? '!bg-[#16610E] cursor-not-allowed' : 'bg-[#fe7743]'
@@ -103,6 +107,12 @@ const RelationCourseList: React.FC<RelationCourseListProps> = ({ courses, title 
               </div>
             </div>
           ))}
+          <SuccessModal
+            visible={isSuccessModalVisible}
+            onClose={() => setIsSuccessModalVisible(false)}
+            title={t('COURSES.COURSE_REGISTRATION_SUCCESS')}
+            message={t('COURSES.COURSE_REGISTRATION_SUCCESS_MESSAGE')}
+          />
         </div>
       </div>
     </>
