@@ -5,9 +5,9 @@ import FaqSection from '@app/components/Layout/FaqSection/FaqSection';
 import FooterSection from '@app/components/Layout/Footer/FooterSection';
 import BannerUserScreen from '@app/components/UserPage/BannerUserScreen';
 import StepScreen from '@app/components/UserPage/StepScreen';
-import Experts from '@app/pages/LandingPage/Experts';
-import FeatureSection from '@app/pages/LandingPage/FeatureSection';
-import PartnerNetwork from '@app/pages/LandingPage/PartnerNetwork';
+import Experts from '@app/pages/HomePage/LandingPage/Experts';
+import FeatureSection from '@app/pages/HomePage/LandingPage/FeatureSection';
+import PartnerNetwork from '@app/pages/HomePage/LandingPage/PartnerNetwork';
 
 const Homepage = () => {
   const { t } = useTranslation();

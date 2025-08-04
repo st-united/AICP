@@ -19,22 +19,22 @@ export const InfoModal: React.FC<InfoModalProps> = ({
   isPending,
 }) => {
   const { t } = useTranslation();
-  const [selectedType, setSelectedType] = React.useState<UserType | null>(
-    userProfile?.isStudent === true
-      ? UserType.STUDENT
-      : userProfile?.isStudent === false
-      ? UserType.WORKER
-      : null,
+  const [selectedType, setSelectedType] = React.useState<UserType>(
+    userProfile?.isStudent === true ? UserType.STUDENT : UserType.WORKER,
   );
+
   const [university, setUniversity] = React.useState(userProfile?.university || '');
   const [studentCode, setStudentCode] = React.useState(userProfile?.studentCode || '');
 
   const handleContinue = () => {
-    if (selectedType === UserType.STUDENT) {
-      onSubmit({ isStudent: true, university, studentCode });
-    } else if (selectedType === UserType.WORKER) {
-      onSubmit({ isStudent: false, university: '', studentCode: '' });
-    }
+    const payload = {
+      isStudent: selectedType === UserType.STUDENT,
+      ...(selectedType === UserType.STUDENT
+        ? { university, studentCode }
+        : { university: '', studentCode: '' }),
+    };
+
+    onSubmit(payload);
   };
 
   const isStudentSelected = selectedType === UserType.STUDENT;
@@ -45,7 +45,6 @@ export const InfoModal: React.FC<InfoModalProps> = ({
     <div className='relative flex flex-col items-center w-full px-2 sm:px-6 max-w-xl mx-auto'>
       <HeaderModal
         title={t('CONFIRM_BEFORE_TEST_MODAL.TITLE_INFO')}
-        onClose={onClose}
         symbol={userProfile?.isStudent == null ? '!' : '?'}
       />
       <div className='w-full mb-2 text-base font-semibold text-start'>

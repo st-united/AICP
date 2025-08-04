@@ -1,4 +1,5 @@
-import { ReactNode, useCallback, useRef, useEffect, useState } from 'react';
+// components/LazySection.tsx
+import { ReactNode, useCallback, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 type LazySectionProps = {
@@ -8,18 +9,11 @@ type LazySectionProps = {
 
 const LazyComponent = ({ children, className }: LazySectionProps) => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const measureRef = useRef<HTMLDivElement | null>(null);
-  const [height, setHeight] = useState<number | null>(null);
 
   const { ref: inViewRef, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
-  useEffect(() => {
-    if (measureRef.current && height === null) {
-      setHeight(measureRef.current.offsetHeight);
-    }
-  }, [height]);
 
   const setRefs = useCallback(
     (node: HTMLDivElement) => {
@@ -31,9 +25,7 @@ const LazyComponent = ({ children, className }: LazySectionProps) => {
 
   return (
     <div ref={setRefs} className={className}>
-      {height === null && <div ref={measureRef}>{children}</div>}
-      {height !== null && !inView && <div style={{ height }} />}
-      {height !== null && inView && children}
+      {inView && children}
     </div>
   );
 };

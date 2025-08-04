@@ -1,0 +1,51 @@
+.custom-perfect-scrollbar {
+  position: relative;
+  overflow: hidden !important;
+  max-height: 80vh;
+  margin: auto;
+  padding-right: 0.625rem;
+
+  .ps__rail-y {
+    left: auto !important;
+    width: 0.3125rem;
+    background: white !important;
+
+    &:hover,
+    &.ps--clicking {
+      background: white;
+    }
+  }
+
+  .ps__thumb-y {
+    background: #bbbbbb;
+    border-radius: 0.625rem;
+    width: 0.3125rem;
+
+    &:hover {
+      width: 0.3125rem;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .ps__rail-y {
+      display: none !important;
+    }
+
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+
+.fixed-close-button {
+  .anticon {
+    transition: transform 0.2s, color 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}

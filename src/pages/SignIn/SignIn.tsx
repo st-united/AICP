@@ -74,7 +74,7 @@ const SignIn = () => {
             {t('LOGIN.BACK_TO_HOME')}
           </Link>
         </button>
-        <div className='mb-6 mt-20 md:mb-8 md:mt-40'>
+        <div className='mb-6 mt-20 md:mb-8 md:mt-10'>
           <h1 className='text-2xl md:text-[40px] !text-primary font-bold mb-3 md:mb-4'>
             {t<string>('LOGIN.TEXT')}
           </h1>
