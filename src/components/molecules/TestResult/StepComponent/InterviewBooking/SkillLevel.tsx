@@ -51,14 +51,16 @@ const SkillLevel: React.FC = () => {
       <div className='flex flex-col md:flex-row gap-6 w-full'>
         <div className='flex-1 flex flex-col gap-2'>
           <div className='mb-2'>
-            <span className='text-xl font-bold text-black relative inline-block align-bottom'>
+            <span className='text-[1.125rem] md:text-xl font-bold text-black relative inline-block align-bottom'>
               {t('TEST_RESULT.LEVEL')}:
               <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[90%] ml-1' />
             </span>
-            <span className='text-xl font-bold text-[#fe7743] ml-3 align-bottom'>{level}</span>
+            <span className='text-[1.125rem] md:text-xl font-bold text-[#fe7743] ml-3 align-bottom'>
+              {level}
+            </span>
           </div>
           <div className='text-gray-700 mb-2'>{data?.description}</div>
-          <div className='text-xl font-bold text-black relative inline-block align-bottom'>
+          <div className='text-[1.125rem] md:text-xl font-bold text-black relative inline-block align-bottom'>
             {t('TEST_RESULT.SUGGEST')}:
             <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[29%] ml-1' />
           </div>
