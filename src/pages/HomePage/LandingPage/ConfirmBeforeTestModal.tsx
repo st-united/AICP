@@ -63,8 +63,8 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       footer={null}
       destroyOnHidden
       closable={false}
-      className='p-3 sm:p-5'
-      classNames={{ content: '!rounded-3xl' }}
+      className='p-0 m-0'
+      classNames={{ content: '!rounded-3xl !pr-[0.875rem]' }}
       width={{
         xs: '90%',
         sm: '80%',
@@ -75,7 +75,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       }}
     >
       <div className='relative'>
-        <div className='fixed-close-button text-right'>
+        <div className='fixed-close-button text-right pr-2'>
           <CloseCircleOutlined
             onClick={onClose}
             className='text-2xl cursor-pointer text-gray-500 hover:text-gray-700 md:text-3xl'
