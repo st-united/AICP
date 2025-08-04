@@ -25,7 +25,6 @@ const ViewCourseDetail = () => {
   const { data: courseList, isLoading: listCourseLoading, error: listCourseError } = useCourse();
   const { mutate: registerCourse, isPending } = useRegisterCourse();
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleRegister = useCallback(
     (courseId: string) => {
