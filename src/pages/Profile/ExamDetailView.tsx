@@ -114,7 +114,7 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
               </div>
             </div>
             <div className='w-full overflow-x-auto'>
-              <div className='min-w-[1000px] h-full'>
+              <div className='min-w-[62.5rem] h-full'>
                 <CompetencyChart data={dataChart} />
               </div>
             </div>
