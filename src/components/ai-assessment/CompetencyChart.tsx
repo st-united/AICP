@@ -24,7 +24,7 @@ const CompetencyChart = ({ data }: ColumnChartProps) => {
             top: 20,
             right: 10,
             left: 10,
-            bottom: 60,
+            bottom: 0,
           }}
         >
           <defs>
