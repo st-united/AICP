@@ -15,11 +15,16 @@ export const useSignUpSchema = () => {
   return yup.object().shape({
     fullName: yup
       .string()
+      .test(
+        'no-leading-whitespace',
+        t('VALIDATE.NOT_ALLOW_SPACE', { field: t('USER.NAME') }) as string, // ví dụ: "Tên không được bắt đầu bằng khoảng trắng"
+        (value) => !/^\s/.test(value || ''),
+      )
       .required(t('VALIDATE.FULL_NAME_REQUIRED') as string)
-      .min(5, t('VALIDATE.MIN_CHARACTER', { field: t('SIGN_UP.FULL_NAME'), number: 5 }) as string)
+      .min(5, t('VALIDATE.MIN_CHARACTER', { field: t('USER.NAME'), number: 5 }) as string)
       .matches(
         NO_SPECIAL_CHARACTER_IN_NAME,
-        t('VALIDATE.ONLY_ALPHABET', { field: t('SIGN_UP.FULL_NAME') }) as string,
+        t('VALIDATE.ONLY_ALPHABET', { field: t('USER.NAME') }) as string,
       ),
 
     phoneNumber: yup

@@ -5,30 +5,28 @@ import { SlideImages } from '../../molecules/index';
 import { NAVIGATE_URL } from '@app/constants';
 
 const PublicLayout: React.FC = () => {
-  const location = useLocation();
-  useEffect(() => {
-    const path = location.pathname;
+  const { pathname } = useLocation();
 
-    // Reset class trước
+  useEffect(() => {
+    // Reset class trước mỗi lần pathname thay đổi
     document.body.className = '';
 
-    const isPublicPage = [
-      NAVIGATE_URL.SIGN_IN,
-      NAVIGATE_URL.SIGN_UP,
-      NAVIGATE_URL.FORGOT_PASSWORD,
-      NAVIGATE_URL.RESET_PASSWORD,
-    ].includes(path);
+    const routeClassMap: Record<string, string> = {
+      [NAVIGATE_URL.SIGN_UP]: 'sm:overflow-hidden',
+      [NAVIGATE_URL.SIGN_IN]: 'overflow-hidden',
+      [NAVIGATE_URL.FORGOT_PASSWORD]: 'overflow-hidden',
+      [NAVIGATE_URL.RESET_PASSWORD]: 'overflow-hidden',
+    };
 
-    if (isPublicPage) {
-      document.body.classList.add('overflow-hidden');
-    } else {
-      document.body.classList.add('default-page');
+    const className = routeClassMap[pathname];
+    if (className) {
+      document.body.classList.add(className);
     }
 
     return () => {
       document.body.className = '';
     };
-  }, [location]);
+  }, [pathname]);
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/SlideImages/background.png)]'>
