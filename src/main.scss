@@ -51,3 +51,12 @@ body {
 .animate-slide-in {
   animation: slide-in 0.6s ease-out forwards;
 }
+
+html {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
