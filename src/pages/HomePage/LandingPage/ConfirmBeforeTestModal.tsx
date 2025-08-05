@@ -1,6 +1,5 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useNavigate } from 'react-router-dom';
 
 import { ContinueTestModal } from './Modals/ContinueTestModal';
@@ -10,7 +9,6 @@ import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
 import { ExamStatusEnum } from '@app/constants/enum';
 import { useHasTakenExamDefault, useSubmitExam, useGetHistory } from '@app/hooks';
-import 'react-perfect-scrollbar/dist/css/styles.css';
 import './confirmBeforeTestModal.scss';
 
 interface ConfirmBeforeTestModalProps {
@@ -81,16 +79,10 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
             className='text-2xl cursor-pointer text-gray-500 hover:text-gray-700 md:text-3xl'
           />
         </div>
-        <PerfectScrollbar
-          className='custom-perfect-scrollbar'
-          options={{
-            wheelSpeed: 0.5,
-            wheelPropagation: false,
-            suppressScrollX: true,
-          }}
-        >
+
+        <div className='custom-scrollbar overflow-y-auto max-h-[80vh] pr-[0.625rem]'>
           {renderModalContent()}
-        </PerfectScrollbar>
+        </div>
       </div>
     </Modal>
   );
