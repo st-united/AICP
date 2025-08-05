@@ -35,7 +35,6 @@ export const useProfileForm = (initialData: UserProfile) => {
   useEffect(() => {
     const normalized = normalizeInitialValues(initialData);
     form.setFieldsValue(normalized);
-    console.log(initialData.dob?.toString());
   }, [initialData, form]);
 
   const onEdit = () => {
@@ -44,7 +43,7 @@ export const useProfileForm = (initialData: UserProfile) => {
 
   const onCancel = () => {
     const normalized = normalizeInitialValues(initialData);
-    form.setFieldsValue(normalized); // reset lại dữ liệu ban đầu
+    form.setFieldsValue(normalized);
     setEditing(false);
   };
 
@@ -58,10 +57,12 @@ export const useProfileForm = (initialData: UserProfile) => {
         province: values.province ?? null,
         phoneNumber: normalizePhoneNumber(values.phoneNumber),
         job: Array.isArray(values.job) ? values.job : values.job ? [values.job] : [],
-        university: values.isStudent ? values.university || '' : '',
-        studentCode: values.isStudent ? values.studentCode || '' : '',
+        isStudent: values.isStudent,
+        university: values.isStudent ? values.university : '',
+        studentCode: values.isStudent ? values.studentCode : '',
       };
 
+      console.log(values.isStudent);
       await updateProfile(updatedValues);
       setEditing(false);
     } catch (error) {
@@ -72,7 +73,8 @@ export const useProfileForm = (initialData: UserProfile) => {
   const onStudentChange = (value: boolean) => {
     form.setFieldValue('isStudent', value);
     if (!value) {
-      form.setFieldsValue({ university: '', studentCode: '' });
+      form.setFieldValue('university', '');
+      form.setFieldValue('studentCode', '');
     }
   };
 
