@@ -2,9 +2,15 @@ import { Form } from 'antd';
 import { useEffect, useState } from 'react';
 import { useUpdateProfile } from '@app/hooks';
 import { UserProfile } from '@app/interface/user.interface';
+import dayjs, { Dayjs } from 'dayjs';
+import { DATE_TIME } from '@app/constants';
+
+type UserProfileFormValues = Omit<UserProfile, 'dob'> & {
+  dob?: Dayjs | null;
+};
 
 export const useProfileForm = (initialData: UserProfile) => {
-  const [form] = Form.useForm<UserProfile>();
+  const [form] = Form.useForm<UserProfileFormValues>();
   const [editing, setEditing] = useState(false);
   const { mutateAsync: updateProfile, isPending: loading } = useUpdateProfile();
 
@@ -12,10 +18,10 @@ export const useProfileForm = (initialData: UserProfile) => {
   const shouldShowStudentFields = isStudent === true;
 
   const normalizePhoneNumber = (phone?: string) => phone?.replace('(', '').replace(')', '') ?? '';
-  const normalizeInitialValues = (data: UserProfile): UserProfile => {
+  const normalizeInitialValues = (data: UserProfile): UserProfileFormValues => {
     return {
       ...data,
-      // dob: data.dob ? dayjs(data.dob) : undefined,
+      dob: data.dob ? dayjs(data.dob) : null,
       job: Array.isArray(data.job)
         ? data.job.map((j) => (typeof j === 'string' ? j : (j as any).id))
         : [],
@@ -37,6 +43,8 @@ export const useProfileForm = (initialData: UserProfile) => {
   };
 
   const onCancel = () => {
+    const normalized = normalizeInitialValues(initialData);
+    form.setFieldsValue(normalized); // reset lại dữ liệu ban đầu
     setEditing(false);
   };
 
@@ -46,6 +54,7 @@ export const useProfileForm = (initialData: UserProfile) => {
 
       const updatedValues: UserProfile = {
         ...values,
+        dob: values.dob ? values.dob.toDate().toISOString() : '',
         province: values.province ?? null,
         phoneNumber: normalizePhoneNumber(values.phoneNumber),
         job: Array.isArray(values.job) ? values.job : values.job ? [values.job] : [],

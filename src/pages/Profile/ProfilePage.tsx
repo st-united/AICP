@@ -3,7 +3,7 @@ import ProfileForm from './ProfileForm';
 import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
 import { useTranslation } from 'react-i18next';
 import { useGetProfile } from '@app/hooks';
-import { Spin } from 'antd';
+import { Form, Spin } from 'antd';
 
 const ProfilePage = () => {
   const { t } = useTranslation();

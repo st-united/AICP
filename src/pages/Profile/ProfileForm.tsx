@@ -37,7 +37,6 @@ const ProfileForm = ({ userData }: ProfileFormProps) => {
     shouldShowStudentFields,
     onStudentChange,
   } = useProfileForm(userData);
-  const [portfolioForm] = Form.useForm();
 
   const studentOptions = [
     { label: <div className='!px-4'>{t('PROFILE.STUDENT')}</div>, value: true },
@@ -81,13 +80,13 @@ const ProfileForm = ({ userData }: ProfileFormProps) => {
           </Form.Item>
 
           <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
-            {/* <DatePicker
+            <DatePicker
               className='!px-6 !py-3 !rounded-lg w-full'
               format={DATE_TIME.DAY_MONTH_YEAR}
               placeholder={t('PROFILE.DOB_PLACEHOLDER') as string}
               disabled={!editing}
               showNow={false}
-            /> */}
+            />
           </Form.Item>
 
           <Form.Item name='province' label={t('PROFILE.PROVINCE')} rules={validator}>

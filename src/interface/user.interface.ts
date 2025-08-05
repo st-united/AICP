@@ -26,7 +26,7 @@ export interface UserProfile {
   fullName: string;
   email: string;
   phoneNumber?: string;
-  dob?: string | Dayjs;
+  dob?: string;
   avatarUrl?: string;
   permissions?: string[];
   province: string;

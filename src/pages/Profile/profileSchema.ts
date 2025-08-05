@@ -5,11 +5,9 @@ import * as yup from 'yup';
 
 dayjs.extend(isSameOrBefore);
 import {
-  PHONE_REGEX_PATTERN,
   NO_SPECIAL_CHARACTER_IN_NAME,
   NO_SPACE_START_END,
   NO_TWO_SPACE,
-  DIAL_CODE_REGEX_PATTERN,
 } from '@app/constants/regex';
 const MIN_AGE = 15;
 export const useProfileSchema = () => {
@@ -35,33 +33,20 @@ export const useProfileSchema = () => {
     phoneNumber: yup
       .string()
       .nullable()
-      .transform((value) => (value || '').trim())
       .required(t('VALIDATE.PHONE_REQUIRED') as string)
-      .test(
-        'is-not-empty',
-        t('VALIDATE.PHONE_REQUIRED') as string,
-        (value) => !!value && value.trim() !== '',
+      .matches(
+        /^\S(?:.*\S)?$/,
+        t('VALIDATE.NOT_ALLOW_SPACE', { field: t('PROFILE.PHONE') }) as string,
       )
-      .test(
-        'is-valid-phone-based-on-country-code',
+      .matches(/^(?!\s*$).+/, t('VALIDATE.PHONE_REQUIRED') as string)
+      .matches(
+        /^(\(\+84\)|\+84)\d{9}$/,
         t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
-        (value) => {
-          if (!value) return false;
-
-          const trimmed = value.trim();
-
-          if (trimmed.startsWith('+84')) {
-            const afterCode = trimmed.slice(3);
-            return /^\d{9}$/.test(afterCode);
-          }
-
-          return PHONE_REGEX_PATTERN.test(trimmed);
-        },
       ),
 
     dob: yup
       .mixed()
-      .nullable()
+      .required(t('VALIDATE.DOB_REQUIRED') as string)
       .test('is-valid-date', t('VALIDATE.DATE_NOT_FUTURE') as string, (value) => {
         if (!value) return true;
         const date = dayjs(value).startOf('day');
@@ -84,8 +69,15 @@ export const useProfileSchema = () => {
 
     isStudent: yup.boolean().required(),
 
-    university: yup.string().required(t<string>('VALIDATE.USER_UNIVERSITY_REQUIRED')),
+    university: yup
+      .string()
+      .required(t<string>('VALIDATE.USER_UNIVERSITY_REQUIRED'))
+      .matches(NO_SPACE_START_END, t('VALIDATE.NO_SPACE_START_END') as string)
+      .matches(NO_TWO_SPACE, t('VALIDATE.NO_TWO_SPACE') as string),
 
-    studentCode: yup.string().required(t<string>('VALIDATE.USER_STUDENT_CODE_REQUIRED')),
+    studentCode: yup
+      .string()
+      .required(t<string>('VALIDATE.USER_STUDENT_CODE_REQUIRED'))
+      .matches(NO_SPACE_START_END, t('VALIDATE.NO_SPACE_START_END') as string),
   });
 };
