@@ -1,4 +1,5 @@
 import { Button, Image, Layout } from 'antd';
+import clsx from 'clsx';
 import { useEffect, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -70,11 +71,14 @@ const Header = () => {
   };
   return (
     <Layout.Header
-      className={`${
-        isHomePage && !isScrolled
-          ? 'sticky top-0 bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0]'
-          : 'sticky top-0 bg-white shadow-md'
-      } flex justify-between w-full items-center h-[5rem] z-50  transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24`}
+      className={clsx(
+        'bg-white sticky top-0 flex justify-between w-full items-center h-[5rem] z-50  transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24',
+        {
+          'bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0]': isHomePage && !isScrolled,
+          'shadow-md': !isHomePage || isScrolled,
+          'mt-2 !pr-[4.9375rem]': !isHomePage,
+        },
+      )}
     >
       <div className='cursor-pointer flex items-center justify-center'>
         <Image

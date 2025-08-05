@@ -21,8 +21,10 @@ const ProfileLayout = () => {
   return (
     <Layout className='min-h-screen'>
       <HeaderComponent />
-      <div className='pt-6 pb-2 flex justify-center sm:justify-start sm:ml-4'>
-        <Breadcrumbs />
+      <div className='pt-6 pb-2 w-full flex justify-center sm:justify-start sm:ml-4'>
+        <div className='w-[90%] sm:w-full'>
+          <Breadcrumbs />
+        </div>
       </div>
 
       <Layout className=' p-4'>
