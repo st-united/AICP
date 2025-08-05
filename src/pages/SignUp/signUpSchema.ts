@@ -5,8 +5,9 @@ import {
   EMAIL_REGEX_PATTERN,
   PHONE_REGEX_PATTERN,
   NO_SPECIAL_CHARACTER_IN_NAME,
-  PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER,
   DIAL_CODE_REGEX_PATTERN,
+  NO_SPACE_START_END,
+  NO_TWO_SPACE,
 } from '@app/constants/regex';
 
 export const useSignUpSchema = () => {
@@ -15,16 +16,18 @@ export const useSignUpSchema = () => {
   return yup.object().shape({
     fullName: yup
       .string()
-      .test(
-        'no-leading-whitespace',
-        t('VALIDATE.NOT_ALLOW_SPACE', { field: t('USER.NAME') }) as string, // ví dụ: "Tên không được bắt đầu bằng khoảng trắng"
-        (value) => !/^\s/.test(value || ''),
-      )
       .required(t('VALIDATE.FULL_NAME_REQUIRED') as string)
-      .min(5, t('VALIDATE.MIN_CHARACTER', { field: t('USER.NAME'), number: 5 }) as string)
       .matches(
         NO_SPECIAL_CHARACTER_IN_NAME,
-        t('VALIDATE.ONLY_ALPHABET', { field: t('USER.NAME') }) as string,
+        t('VALIDATE.ONLY_ALPHABET', { field: t('PROFILE.FULLNAME') }) as string,
+      )
+      .matches(
+        NO_SPACE_START_END,
+        t('VALIDATE.NO_SPACE_START_END', { field: t('PROFILE.FULLNAME') }) as string,
+      )
+      .matches(
+        NO_TWO_SPACE,
+        t('VALIDATE.NO_TWO_SPACE', { field: t('PROFILE.FULLNAME') }) as string,
       ),
 
     phoneNumber: yup
