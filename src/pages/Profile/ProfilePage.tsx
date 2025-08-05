@@ -23,7 +23,7 @@ const ProfilePage = () => {
         <h1 className='text-[1.813rem] font-bold text-center my-2'>
           {t('PROFILE.PORTFOLIO_HEADER')}
         </h1>
-        {/* <PortfolioContent /> */}
+        <PortfolioContent />
       </div>
     </div>
   );

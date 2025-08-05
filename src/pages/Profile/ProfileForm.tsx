@@ -58,6 +58,7 @@ const ProfileForm = ({ userData }: ProfileFormProps) => {
         className='w-full flex flex-col items-center !mt-[120px] !px-4'
         onFinish={onSubmit}
       >
+        <h1 className='text-[1.813rem] font-bold text-center mb-6'>{t('PROFILE.TITLE_2')}</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4 max-w-[900px] w-full'>
           <Form.Item name='fullName' label={t('PROFILE.FULLNAME')} rules={validator}>
             <Input
