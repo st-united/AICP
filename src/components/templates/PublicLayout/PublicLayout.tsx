@@ -8,7 +8,6 @@ const PublicLayout: React.FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Reset class trước mỗi lần pathname thay đổi
     document.body.className = '';
 
     const routeClassMap: Record<string, string> = {

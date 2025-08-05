@@ -17,7 +17,7 @@ export const useSignUpSchema = () => {
       .string()
       .test(
         'no-leading-whitespace',
-        t('VALIDATE.NOT_ALLOW_SPACE', { field: t('USER.NAME') }) as string, // ví dụ: "Tên không được bắt đầu bằng khoảng trắng"
+        t('VALIDATE.NOT_ALLOW_SPACE', { field: t('USER.NAME') }) as string,
         (value) => !/^\s/.test(value || ''),
       )
       .required(t('VALIDATE.FULL_NAME_REQUIRED') as string)
