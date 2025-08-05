@@ -9,8 +9,6 @@ interface QuestionIndexPanelProps {
   currentQuestion: { id: string; timestamp: number };
   currentQuestionScroll: string;
   answeredQuestions: string[];
-  flaggedQuestions: string[];
-  onFlagToggle: (id: string) => void;
   onQuestionSelect: (id: string) => void;
   isAutoScrolling: boolean;
 }
@@ -18,10 +16,7 @@ interface QuestionIndexPanelProps {
 const QuestionIndexPanel = ({
   questions,
   currentQuestion,
-  currentQuestionScroll,
   answeredQuestions,
-  flaggedQuestions,
-  onFlagToggle,
   onQuestionSelect,
   isAutoScrolling,
 }: QuestionIndexPanelProps) => {
@@ -29,11 +24,10 @@ const QuestionIndexPanel = ({
 
   const getQuestionStatus = useCallback(
     (id: string) => {
-      if (flaggedQuestions.includes(id)) return 'flagged';
       if (answeredQuestions.includes(id)) return 'answered';
       return 'default';
     },
-    [answeredQuestions, flaggedQuestions],
+    [answeredQuestions],
   );
 
   const getQuestionClasses = useCallback(
@@ -42,7 +36,7 @@ const QuestionIndexPanel = ({
       const status = getQuestionStatus(id);
 
       const baseClasses =
-        'w-12 smM:w-10 h-12 smM:h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center text-sm font-semibold cursor-pointer transition-all duration-200 hover:scale-105';
+        'w-10 smM:w-10 h-10 smM:h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center text-sm font-semibold cursor-pointer transition-all duration-200 hover:scale-105';
 
       const statusClasses = {
         flagged: 'bg-[#FE7743] text-white shadow-md',
@@ -63,9 +57,9 @@ const QuestionIndexPanel = ({
   return (
     <div className='flex flex-col items-center justify-center bg-white rounded-xl p-6 shadow-lg border border-gray-100 h-full'>
       <div className='text-2xl font-bold text-center text-blue-900'>{t('TEST.QUESTION_INDEX')}</div>
-      <Divider className='!my-5' />
+      <Divider className='!my-3' />
       <div className='flex-1'>
-        <div className='flex items-start flex-col justify-around w-full pb-3 pl-2'>
+        <div className='flex items-start flex-raw justify-around w-full pb-3 pl-2'>
           <div className='flex items-center flex-row gap-2'>
             <div className='rounded-full bg-gray-100 aspect-square w-3 h-3'></div>
             <div className='text-sm text-gray-500'>{t('TEST.UNANSWERED_QUESTIONS')}</div>
@@ -74,12 +68,8 @@ const QuestionIndexPanel = ({
             <div className='rounded-full bg-[#FFE9E1] aspect-square w-3 h-3'></div>
             <div className='text-sm text-gray-500'>{t('TEST.ANSWERED_QUESTIONS')}</div>
           </div>
-          <div className='flex items-center flex-row gap-2'>
-            <div className='rounded-full bg-[#FE7743] aspect-square w-3 h-3'></div>
-            <div className='text-sm text-gray-500'>{t('TEST.FLAGGED_QUESTIONS')}</div>
-          </div>
         </div>
-        <div className='grid grid-cols-4 gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 p-2 w-full h-[calc(100vh-390px)]'>
+        <div className='grid grid-cols-4 gap-3 md:gap-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 p-2 w-full h-[calc(100vh-200px)] md:h-[calc(100vh-340px)]'>
           {questions.map((question, index) => (
             <button
               key={question.id}
@@ -88,7 +78,6 @@ const QuestionIndexPanel = ({
               onClick={() => onQuestionSelect(question.id)}
               onContextMenu={(e) => {
                 e.preventDefault();
-                onFlagToggle(question.id);
               }}
               title={`Question ${question.id} - ${getQuestionStatus(question.id)}`}
             >

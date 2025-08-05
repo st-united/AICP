@@ -1,6 +1,5 @@
-import { E } from 'vitest/dist/global-58e8e951';
 import { GetListParams } from './common.interface';
-import { CompetencyDimension, ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
+import { ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 
 export interface UserColumns {
   id: number;
