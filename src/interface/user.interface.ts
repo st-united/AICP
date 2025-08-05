@@ -29,7 +29,7 @@ export interface UserProfile {
   dob?: string | Dayjs;
   avatarUrl?: string;
   permissions?: string[];
-  province?: string;
+  province: string;
   job?: string[];
   referralCode: string;
   isStudent: boolean;
