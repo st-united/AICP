@@ -45,7 +45,7 @@ export const ContinueTestModal = ({
 
       <ContentModal durationKey='MODAL.TEST_DURATION_MESSAGE' hasTakenExam={hasTakenExam} />
 
-      <div className='mt-4 px-3 w-full md:my-6'>
+      <div className='px-3 my-6 w-full'>
         <div className='flex flex-col gap-4 md:flex-row md:justify-center md:gap-4'>
           <Button
             onClick={() => submitExam(examId)}

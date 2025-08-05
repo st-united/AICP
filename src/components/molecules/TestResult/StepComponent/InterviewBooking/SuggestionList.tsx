@@ -15,6 +15,7 @@ const SuggestionList: React.FC = () => {
     <RelationCourseList
       courses={data.recommendedCourses}
       title={t<string>('TEST_RESULT.SUGGESTION_TITLE')}
+      noShadow
     />
   );
 };
