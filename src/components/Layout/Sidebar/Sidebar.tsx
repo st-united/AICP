@@ -59,13 +59,17 @@ const Sidebar = ({ onClose }: SidebarProps) => {
           return (
             <Link to={item.path} key={index} onClick={onClose}>
               <div
-                className={`flex flex-row gap-2 items-center justify-start hover:bg-[#FFF2E8] !px-6 !p-4 rounded-lg cursor-pointer ${
-                  active ? 'bg-[#FFF2E8]' : ''
-                }`}
+                className={`flex flex-row gap-2 items-center justify-start hover:bg-[#FFF2E8] 
+                  ${isTablet ? '!px-3 !py-3' : '!px-6 !p-4'} 
+                  rounded-lg cursor-pointer ${active ? 'bg-[#FFF2E8]' : ''}`}
               >
-                <Icon className={`text-2xl ${active ? 'text-[#FF7A45]' : 'text-[#5B5B5B]'}`} />
+                <Icon
+                  className={`${isTablet ? 'text-xl' : 'text-2xl'} ${
+                    active ? 'text-[#FF7A45]' : 'text-[#5B5B5B]'
+                  }`}
+                />
                 <div
-                  className={`${
+                  className={`${isTablet ? 'text-sm' : 'text-base'} truncate flex-1 ${
                     active ? 'text-[#FF7A45] font-semibold' : 'text-[#5B5B5B] font-medium'
                   }`}
                 >
