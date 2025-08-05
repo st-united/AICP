@@ -140,7 +140,7 @@ const SignUp = () => {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    new Error(String(t('VALIDATE.MATCH', { field: t('SIGN_UP.PASSWORD') }))),
+                    new Error(String(t('VALIDATE.MATCH', { field: t('USER.PASSWORD') }))),
                   );
                 },
               }),
