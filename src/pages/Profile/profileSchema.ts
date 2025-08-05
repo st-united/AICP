@@ -6,7 +6,6 @@ import * as yup from 'yup';
 dayjs.extend(isSameOrBefore);
 import {
   PHONE_REGEX_PATTERN,
-  EMAIL_REGEX_PATTERN,
   NO_SPECIAL_CHARACTER_IN_NAME,
   NO_SPACE_START_END,
   NO_TWO_SPACE,
@@ -35,20 +34,28 @@ export const useProfileSchema = () => {
 
     phoneNumber: yup
       .string()
+      .nullable()
+      .transform((value) => (value || '').trim())
       .required(t('VALIDATE.PHONE_REQUIRED') as string)
-      .trim()
-      .test('is-have-phone', t('VALIDATE.PHONE_REQUIRED') as string, (value) => {
-        if (!value || value.trim().length === 0 || value.trim() === '') return true;
-        const dialCodeMatch = value.match(DIAL_CODE_REGEX_PATTERN);
-        if (dialCodeMatch && value === dialCodeMatch[0]) return false;
-        return true;
-      })
       .test(
-        'is-valid-phone',
+        'is-not-empty',
+        t('VALIDATE.PHONE_REQUIRED') as string,
+        (value) => !!value && value.trim() !== '',
+      )
+      .test(
+        'is-valid-phone-based-on-country-code',
         t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
         (value) => {
-          if (!value) return true;
-          return PHONE_REGEX_PATTERN.test(value);
+          if (!value) return false;
+
+          const trimmed = value.trim();
+
+          if (trimmed.startsWith('+84')) {
+            const afterCode = trimmed.slice(3);
+            return /^\d{9}$/.test(afterCode);
+          }
+
+          return PHONE_REGEX_PATTERN.test(trimmed);
         },
       ),
 
@@ -74,5 +81,11 @@ export const useProfileSchema = () => {
     job: yup.array().of(yup.string()).nullable(),
 
     referralCode: yup.string().nullable(),
+
+    isStudent: yup.boolean().required(),
+
+    university: yup.string().required(t<string>('VALIDATE.USER_UNIVERSITY_REQUIRED')),
+
+    studentCode: yup.string().required(t<string>('VALIDATE.USER_STUDENT_CODE_REQUIRED')),
   });
 };
