@@ -41,8 +41,8 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className='flex justify-center' id='container-forgot-password'>
-      <div className='w-full md:w-4/5 h-full'>
+    <div className='flex justify-center h-screen' id='container-forgot-password'>
+      <div className='w-full md:w-4/5 h-screen px-4 py-6 md:py-0'>
         <Link
           to={'/login'}
           className='mb-5 font-medium flex align-items gap-x-1 text-primary-gray text-lg hover:text-primary'

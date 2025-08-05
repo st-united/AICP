@@ -11,9 +11,16 @@ import { Course } from '@app/interface/course.interface';
 interface RelationCourseListProps {
   courses: Course[];
   title?: string;
+  className?: string;
+  noShadow?: boolean;
 }
 
-const RelationCourseList: React.FC<RelationCourseListProps> = ({ courses, title }) => {
+const RelationCourseList: React.FC<RelationCourseListProps> = ({
+  courses,
+  title,
+  className,
+  noShadow,
+}) => {
   const { t } = useTranslation();
   const { mutate: registerCourse, isPending } = useRegisterCourse();
   const [selectedCourse, setSelectedCourse] = useState<string>();
@@ -38,10 +45,11 @@ const RelationCourseList: React.FC<RelationCourseListProps> = ({ courses, title 
       </div>
     );
   }
-
+  const baseClass = 'w-full mx-auto mt-4 xsM:mt-6 bg-white rounded-xl smML:rounded-2xl';
+  const wrapperClass = className ?? `${baseClass} ${noShadow ? '' : 'shadow'}`;
   return (
     <>
-      <div className='w-full mx-auto mt-4 xsM:mt-6 bg-white rounded-xl smML:rounded-2xl shadow'>
+      <div className={wrapperClass}>
         <h3 className='text-xl xsM:text-2xl sm:text-3xl md:text-4xl lgM:text-5xl font-bold text-[#fe7743] py-4 xsM:py-6 sm:py-8 text-center px-4'>
           {title || t('TEST_RESULT.SUGGESTION_TITLE')}
         </h3>

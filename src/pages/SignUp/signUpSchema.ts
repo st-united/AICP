@@ -16,6 +16,7 @@ export const useSignUpSchema = () => {
     fullName: yup
       .string()
       .required(t('VALIDATE.FULL_NAME_REQUIRED') as string)
+      .min(5, t('VALIDATE.MIN_CHARACTER', { field: t('SIGN_UP.FULL_NAME'), number: 5 }) as string)
       .matches(
         NO_SPECIAL_CHARACTER_IN_NAME,
         t('VALIDATE.ONLY_ALPHABET', { field: t('SIGN_UP.FULL_NAME') }) as string,
@@ -47,12 +48,22 @@ export const useSignUpSchema = () => {
 
     password: yup
       .string()
+      .test(
+        'no-whitespace-anywhere',
+        t('VALIDATE.PASSWORD_NO_SPACE') as string,
+        (value) => !/\s/.test(value || ''),
+      )
       .required(t('VALIDATE.PASSWORD_REQUIRED') as string)
       .min(8, t('VALIDATE.PASSWORD_MIN') as string)
       .max(50, t('VALIDATE.PASSWORD_MAX') as string)
-      .matches(
-        PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER,
-        t('VALIDATE.PASSWORD_COMPLEXITY') as string,
+      .test('has-lowercase', t('VALIDATE.PASSWORD_NEED_LOWERCASE') as string, (value) =>
+        /[a-z]/.test(value || ''),
+      )
+      .test('has-uppercase', t('VALIDATE.PASSWORD_NEED_UPPERCASE') as string, (value) =>
+        /[A-Z]/.test(value || ''),
+      )
+      .test('has-number', t('VALIDATE.PASSWORD_NEED_NUMBER') as string, (value) =>
+        /[0-9]/.test(value || ''),
       ),
 
     confirm_password: yup.string().required(t('VALIDATE.CONFIRM_PASSWORD_REQUIRED') as string),
