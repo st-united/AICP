@@ -12,10 +12,7 @@ import {
   updateProfileApi,
   uploadAvatarApi,
 } from '@app/services';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 
 export const useGetProfile = (isAuth = true) => {
   const dispatch = useDispatch();

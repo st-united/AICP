@@ -9,10 +9,7 @@ import { PHONE_REGEX_PATTERN } from '@app/constants/regex';
 import { useUpdateProfile } from '@app/hooks/useProfile';
 import { useSendOtp, useVerifyOtp, useCheckOtpStatus, useCanSendOtp } from '@app/hooks/useZaloOtp';
 import { RootState } from '@app/redux/store';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 const { Title, Text } = Typography;
 
 interface OTPVerificationProps {

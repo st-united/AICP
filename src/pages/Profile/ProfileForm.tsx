@@ -1,16 +1,13 @@
 import { Form, Input, DatePicker, Button, Select, Divider } from 'antd';
 import { Rule } from 'antd/lib/form';
-import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
 import { useProfileSchema } from './profileSchema';
 import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
 import ProvinceSelect from '@app/components/atoms/CustomSelect/ProvinceSelect';
 import PhoneInput from '@app/components/atoms/PhoneInput/PhoneInput';
-import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
-import { DATE_TIME, NAVIGATE_URL } from '@app/constants';
+import { DATE_TIME } from '@app/constants';
 import { yupSync } from '@app/helpers';
 import { UserProfile } from '@app/interface/user.interface';
 
@@ -36,6 +33,9 @@ const ProfileForm = ({ userData }: ProfileFormProps) => {
     onSubmit,
     shouldShowStudentFields,
     onStudentChange,
+    previewImage,
+    setPreviewImage,
+    setFileImage,
   } = useProfileForm(userData);
 
   const studentOptions = [
@@ -47,7 +47,13 @@ const ProfileForm = ({ userData }: ProfileFormProps) => {
     <div>
       <div className='bg-[#FF8C5F] h-[145px] rounded-t-2xl'>
         <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
-          <CustomAvatar avatar={userData?.avatarUrl} isEdit={!editing} />
+          <CustomAvatar
+            avatar={userData?.avatarUrl}
+            previewImage={previewImage}
+            isEdit={!editing}
+            setPreviewImage={setPreviewImage}
+            setFileImage={setFileImage}
+          />
         </div>
       </div>
 
