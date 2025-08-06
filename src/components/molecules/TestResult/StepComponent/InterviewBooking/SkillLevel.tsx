@@ -16,10 +16,27 @@ import { useTestResultContext } from '../../TestResultContext';
 import { getStorageData } from '@app/config';
 import { EXAM_LATEST } from '@app/constants/testing';
 import { useExamDetail } from '@app/hooks';
-import { f } from 'vitest/dist/index-220c1d70';
 
-const capitalizeWords = (str: string) =>
-  str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+const getExamLevelText = (level: string, t: (key: string) => string): string => {
+  switch (level) {
+    case 'LEVEL_1 - STARTER':
+      return t('EXAM.EXAM_LEVEL.LEVEL_1_STARTER');
+    case 'LEVEL_2 - EXPLORER':
+      return t('EXAM.EXAM_LEVEL.LEVEL_2_EXPLORER');
+    case 'LEVEL_3 - PRACTITIONER':
+      return t('EXAM.EXAM_LEVEL.LEVEL_3_PRACTITIONER');
+    case 'LEVEL_4 - INTEGRATOR':
+      return t('EXAM.EXAM_LEVEL.LEVEL_4_INTEGRATOR');
+    case 'LEVEL_5 - STRATEGIST':
+      return t('EXAM.EXAM_LEVEL.LEVEL_5_STRATEGIST');
+    case 'LEVEL_6 - LEADER':
+      return t('EXAM.EXAM_LEVEL.LEVEL_6_LEADER');
+    case 'LEVEL_7 - EXPERT':
+      return t('EXAM.EXAM_LEVEL.LEVEL_7_EXPERT');
+    default:
+      return '-';
+  }
+};
 
 const SkillLevel: React.FC = () => {
   const { t } = useTranslation();
@@ -31,7 +48,8 @@ const SkillLevel: React.FC = () => {
     { skill: 'Skillset', value: examDetail?.skillsetScore.score },
     { skill: 'Toolset', value: examDetail?.toolsetScore.score },
   ];
-  const level = data.level ? capitalizeWords(data.level.replace('_', ' ')) : '-';
+
+  const level = data?.level ? getExamLevelText(data.level, t) : '-';
   return (
     <div className='text-lg'>
       <Divider className='!p-1 !m-0 !mb-4 italic !text-[#5B5B5B] !text-[20px] !font-bold'>
