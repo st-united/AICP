@@ -60,9 +60,10 @@ const SkillLevel: React.FC = () => {
   const dataChart = transformApiData(examDetail);
 
   const level = data?.level ? getExamLevelText(data.level, t) : '-';
+
   return (
     <div className='text-lg'>
-      <Divider className='!p-1 !m-0 !mb-4 italic !text-[#5B5B5B] !text-[1rem] xsL:!text-[20px] !font-bold'>
+      <Divider className='justify-center !p-1 !m-0 !mb-4 italic !text-[#5B5B5B] !text-[1rem] xsL:!text-[20px] !font-bold'>
         {t('TEST_RESULT.REVIEW')}
       </Divider>
       <div className='flex flex-col md:flex-row gap-6 w-full'>
