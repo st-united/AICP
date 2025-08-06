@@ -5,13 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { useResetPasswordSchema } from './ResetPasswordSchema';
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { Button, InputField } from '@app/components/ui/index';
 import { yupSync } from '@app/helpers/yupSync';
 import { useCheckResetPasswordToken, useUpdateForgotPassword } from '@app/hooks/useUser';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
 
 export default function ResetPassword() {
   const { t } = useTranslation();
