@@ -50,7 +50,7 @@ const RelationCourseList: React.FC<RelationCourseListProps> = ({
   return (
     <>
       <div className={wrapperClass}>
-        <h3 className='text-[1.625rem] xsM:text-2xl sm:text-3xl md:text-4xl lgM:text-5xl font-bold text-[#fe7743] py-4 xsM:py-6 sm:py-8 text-center px-4 !pt-0'>
+        <h3 className='text-[1.625rem] xsM:text-2xl sm:text-3xl md:text-4xl lgM:text-5xl font-bold text-[#fe7743] py-4 xsM:py-6 sm:pb-8 sm:!pt-0 text-center px-4'>
           {title || t('TEST_RESULT.SUGGESTION_TITLE')}
         </h3>
 
