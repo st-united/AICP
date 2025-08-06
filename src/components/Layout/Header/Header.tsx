@@ -76,7 +76,7 @@ const Header = () => {
         {
           'bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0]': isHomePage && !isScrolled,
           'shadow-md': !isHomePage || isScrolled,
-          'mt-2 !pr-[4.9375rem]': !isHomePage,
+          'mt-2': !isHomePage,
         },
       )}
     >
