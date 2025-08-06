@@ -13,6 +13,9 @@ dist-ssr
 *.local
 tsconfig.tsbuildinfo
 
+# Ignore package.json and package-lock.json
+package-lock.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
