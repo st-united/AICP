@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { openNotificationWithIcon, NotificationTypeEnum } from '@app/components/atoms/notification';
 import { QUERY_KEY } from '@app/constants/requestReactQuery';
 import { CallingCode } from '@app/interface/callingCode.interface';
 import { sendOtp, verifyOtp, checkOtpStatus, callingCode, canSendOtp } from '@app/services';
-import { openNotificationWithIcon, NotificationTypeEnum } from '@app/components/atoms/notification';
 
 export const useSendOtp = () => {
   const queryClient = useQueryClient();

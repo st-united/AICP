@@ -3,6 +3,7 @@ import { Spin, Checkbox } from 'antd';
 import { Dayjs } from 'dayjs';
 import { t } from 'i18next';
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import ExamDetailView from './ExamDetailView';
 import DateFilter from './QuizManagement/DateFilterProps';
@@ -13,7 +14,6 @@ import QuizHeader from './QuizManagement/QuizHeader';
 import { DATE_TIME } from '@app/constants';
 import { ExamStatusEnum } from '@app/constants/enum';
 import { useExamDetail, useGetHistory } from '@app/hooks';
-import { useNavigate } from 'react-router-dom';
 import './ExamHistory.scss';
 
 const ExamHistory = () => {

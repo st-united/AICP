@@ -1,9 +1,10 @@
 import { Form } from 'antd';
+import { RcFile } from 'antd/es/upload';
+import dayjs, { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
+
 import { useUpdateProfile, useUploadAvatar } from '@app/hooks';
 import { UserProfile } from '@app/interface/user.interface';
-import dayjs, { Dayjs } from 'dayjs';
-import { RcFile } from 'antd/es/upload';
 
 type UserProfileFormValues = Omit<UserProfile, 'dob'> & {
   dob?: Dayjs | null;

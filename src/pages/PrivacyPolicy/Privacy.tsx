@@ -1,12 +1,12 @@
+import { LeftOutlined } from '@ant-design/icons';
 import { Layout, Image, Button } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import PrivacyLayout from './PrivacyLayout';
 import logo from '../../assets/images/devplus.png';
 import termBg from '../../assets/images/term-background.png';
-import { LeftOutlined } from '@ant-design/icons';
 import { NAVIGATE_URL } from '@app/constants';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
 const { Content } = Layout;
 

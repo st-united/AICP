@@ -1,9 +1,10 @@
+import { Form, Spin } from 'antd';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import ProfileForm from './ProfileForm';
 import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
-import { useTranslation } from 'react-i18next';
 import { useGetProfile } from '@app/hooks';
-import { Form, Spin } from 'antd';
 
 const ProfilePage = () => {
   const { t } = useTranslation();
