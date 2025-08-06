@@ -8,6 +8,7 @@ import {
   DIAL_CODE_REGEX_PATTERN,
   NO_SPACE_START_END,
   NO_TWO_SPACE,
+  NO_SPACE_START,
 } from '@app/constants/regex';
 
 export const useSignUpSchema = () => {
@@ -17,6 +18,10 @@ export const useSignUpSchema = () => {
     fullName: yup
       .string()
       .required(t('VALIDATE.FULL_NAME_REQUIRED') as string)
+      .matches(
+        NO_SPACE_START,
+        t('VALIDATE.NO_SPACE_START_END', { field: t('PROFILE.FULLNAME') }) as string,
+      )
       .matches(
         NO_SPECIAL_CHARACTER_IN_NAME,
         t('VALIDATE.ONLY_ALPHABET', { field: t('PROFILE.FULLNAME') }) as string,

@@ -1,6 +1,7 @@
 import { Image } from 'antd';
-import { DevPlus, DevPlusS } from '@app/assets/images';
 import { Outlet, useNavigate } from 'react-router-dom';
+
+import { DevPlus, DevPlusS } from '@app/assets/images';
 
 const SimpleAuthLayout: React.FC = () => {
   const navigate = useNavigate();

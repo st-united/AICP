@@ -18,6 +18,7 @@ import {
   prepareFilesForUpload,
   isDocxFile,
 } from '../utils/fileUtils';
+import { openNotificationWithIcon, NotificationTypeEnum } from '@app/components/atoms/notification';
 import { PortfolioFileType } from '@app/constants/portfolioFileType';
 import {
   useUpdatePortfolio,
@@ -29,10 +30,6 @@ import {
   PortfolioContextType,
   PortfolioRequest,
 } from '@app/interface/portfolio.interface';
-import {
-  openNotificationWithIcon,
-  NotificationTypeEnum,
-} from '@app/services/notification/notificationService';
 
 const PortfolioContext = createContext<PortfolioContextType | undefined>(undefined);
 

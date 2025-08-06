@@ -1,14 +1,13 @@
-import { ClockCircleOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, LeftOutlined } from '@ant-design/icons';
 import { Button, Card, Tag } from 'antd';
 import { t } from 'i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { formatDateTime, getStatusColor, getStatusText } from './QuizManagement/QuizCard';
 import CompetencyChart from '@app/components/ai-assessment/CompetencyChart';
 import SkillsList from '@app/components/ai-assessment/SkillList';
 import SkillRadarChart from '@app/components/ai-assessment/SkillRadarChart';
 import { DetailExam } from '@app/interface/user.interface';
-import { useNavigate } from 'react-router-dom';
-import { LeftOutlined } from '@ant-design/icons';
 interface ExamDetailViewProps {
   exam: DetailExam;
   onBack: () => void;

@@ -26,10 +26,10 @@ export interface UserProfile {
   fullName: string;
   email: string;
   phoneNumber?: string;
-  dob?: string | Dayjs;
+  dob?: string | null;
   avatarUrl?: string;
   permissions?: string[];
-  province?: string;
+  province: string;
   job?: string[];
   referralCode: string;
   isStudent: boolean;
