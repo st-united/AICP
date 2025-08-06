@@ -1,9 +1,10 @@
 import { Form } from 'antd';
 import { useEffect, useState } from 'react';
-import { useUpdateProfile } from '@app/hooks';
+import { useUpdateProfile, useUploadAvatar } from '@app/hooks';
 import { UserProfile } from '@app/interface/user.interface';
 import dayjs, { Dayjs } from 'dayjs';
 import { DATE_TIME } from '@app/constants';
+import { RcFile } from 'antd/es/upload';
 
 type UserProfileFormValues = Omit<UserProfile, 'dob'> & {
   dob?: Dayjs | null;
@@ -13,6 +14,10 @@ export const useProfileForm = (initialData: UserProfile) => {
   const [form] = Form.useForm<UserProfileFormValues>();
   const [editing, setEditing] = useState(false);
   const { mutateAsync: updateProfile, isPending: loading } = useUpdateProfile();
+  const [previewImage, setPreviewImage] = useState(initialData?.avatarUrl ?? '');
+  const [fileImage, setFileImage] = useState<RcFile>();
+
+  const { mutateAsync: uploadAvatar } = useUploadAvatar();
 
   const isStudent = Form.useWatch('isStudent', form);
   const shouldShowStudentFields = isStudent === true;
@@ -35,7 +40,7 @@ export const useProfileForm = (initialData: UserProfile) => {
   useEffect(() => {
     const normalized = normalizeInitialValues(initialData);
     form.setFieldsValue(normalized);
-    console.log(initialData.dob?.toString());
+    console.log(form.getFieldValue('dob'));
   }, [initialData, form]);
 
   const onEdit = () => {
@@ -44,7 +49,9 @@ export const useProfileForm = (initialData: UserProfile) => {
 
   const onCancel = () => {
     const normalized = normalizeInitialValues(initialData);
-    form.setFieldsValue(normalized); // reset lại dữ liệu ban đầu
+    form.setFieldsValue(normalized);
+    setPreviewImage(initialData.avatarUrl ?? '');
+    setFileImage(undefined);
     setEditing(false);
   };
 
@@ -54,15 +61,23 @@ export const useProfileForm = (initialData: UserProfile) => {
 
       const updatedValues: UserProfile = {
         ...values,
-        dob: values.dob ? values.dob.toDate().toISOString() : '',
+        dob: values.dob ? values.dob.toDate().toISOString() : null,
         province: values.province ?? null,
         phoneNumber: normalizePhoneNumber(values.phoneNumber),
         job: Array.isArray(values.job) ? values.job : values.job ? [values.job] : [],
         university: values.isStudent ? values.university || '' : '',
         studentCode: values.isStudent ? values.studentCode || '' : '',
       };
-
-      await updateProfile(updatedValues);
+      if (fileImage) {
+        const formData = new FormData();
+        formData.append('avatar', fileImage);
+        uploadAvatar(formData, {
+          onSuccess: (response) => {
+            updatedValues.avatarUrl = response.data.avatarUrl || response.data.avatar;
+          },
+        });
+      }
+      updateProfile(updatedValues);
       setEditing(false);
     } catch (error) {
       console.error('Validation or update failed:', error);
@@ -85,5 +100,8 @@ export const useProfileForm = (initialData: UserProfile) => {
     onSubmit,
     shouldShowStudentFields,
     onStudentChange,
+    previewImage,
+    setPreviewImage,
+    setFileImage,
   };
 };

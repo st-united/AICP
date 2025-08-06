@@ -14,10 +14,7 @@ import {
   submitDraftQuestionApi,
   submitExamSetApi,
 } from '@app/services';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 
 export const useCountdown = (initialTime: number) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);

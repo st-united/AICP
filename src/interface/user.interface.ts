@@ -26,7 +26,7 @@ export interface UserProfile {
   fullName: string;
   email: string;
   phoneNumber?: string;
-  dob?: string;
+  dob?: string | null;
   avatarUrl?: string;
   permissions?: string[];
   province: string;
