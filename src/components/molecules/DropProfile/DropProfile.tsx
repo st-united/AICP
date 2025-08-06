@@ -74,7 +74,7 @@ export const DropProfile: FC = () => {
         },
       }}
       trigger={['click']}
-      className='cursor-pointer'
+      className='cursor-pointer flex'
       overlayClassName='w-[12rem] profile-dropdown-menu'
       placement='bottomRight'
       onOpenChange={() => setActiveItem(!activeItem)}
