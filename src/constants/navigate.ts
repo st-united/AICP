@@ -16,9 +16,10 @@ export const NAVIGATE_URL = {
   PROFILE: '/profile',
   TEST: '/aptitude-test',
   TEST_RESULT: '/history',
-  SCHEDULE: '/scheduler',
+  INTERVIEW: '/scheduler/:examId',
   PORTFOLIO: '/portfolio',
   CAPACITY: '/capacity/:examId',
   TEST_RESULT_DETAIL: '/result',
   CAPACITY_DYNAMIC: (examId: string) => `/capacity/${examId}`,
+  INTERVIEW_DYNAMIC: (examId: string) => `/scheduler/${examId}`,
 };

@@ -1,6 +1,11 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
+import { getStorageData } from '@app/config';
+import { NAVIGATE_URL } from '@app/constants';
+import { EXAM_LATEST } from '@app/constants/testing';
 
 enum InterviewBookingStep {
   OVERVIEW = 'overview',
@@ -9,6 +14,8 @@ enum InterviewBookingStep {
 
 const InterviewBooking: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const examId = getStorageData(EXAM_LATEST);
   const [interviewBookingStep, setInterviewBookingStep] = useState<InterviewBookingStep>(
     InterviewBookingStep.OVERVIEW,
   );
@@ -25,7 +32,7 @@ const InterviewBooking: React.FC = () => {
             <Button
               type='primary'
               className='rounded-full text-lg font-bold px-6 py-5 mb-6'
-              onClick={() => setInterviewBookingStep(InterviewBookingStep.BOOKING)}
+              onClick={() => navigate(NAVIGATE_URL.INTERVIEW_DYNAMIC(examId))}
             >
               {t('TEST_RESULT.BOOKING_BUTTON')}
             </Button>
