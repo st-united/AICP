@@ -53,7 +53,7 @@ const PasswordChangeForm = () => {
 
   return (
     <div className='flex justify-center w-full h-full ' id='change-password-form'>
-      <div className='w-full bg-white rounded-2xl p-6 shadow flex flex-col items-center overflow-y-auto'>
+      <div className='w-full bg-white rounded-2xl p-6 shadow flex flex-col items-center '>
         {/* Lock image */}
         <div className='flex justify-center'>
           <div className='bg-blue-100 rounded-full p-4 sm:p-6'>
