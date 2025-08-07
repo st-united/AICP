@@ -3,6 +3,7 @@ import React from 'react';
 import { FilePreview } from './components/FilePreview';
 import { PortfolioContentContainer } from './components/PortfolioContentContainer';
 import { PortfolioProvider } from './context/PortfolioContext';
+import { PortfolioRequest } from '@app/interface/portfolio.interface';
 
 import './PortfolioContent.scss';
 
@@ -12,6 +13,8 @@ interface PortfolioContentProps {
   onCancel?: () => void;
   onSave?: () => void;
   saveLabel?: string;
+  isWithUserInfo?: boolean;
+  triggerConfirmationModal?: (values: PortfolioRequest, onConfirm: () => void) => void;
 }
 
 const PortfolioContent: React.FC<PortfolioContentProps> = ({
@@ -20,6 +23,8 @@ const PortfolioContent: React.FC<PortfolioContentProps> = ({
   onSave,
   saveLabel,
   cancelLabel,
+  isWithUserInfo = false,
+  triggerConfirmationModal,
 }: PortfolioContentProps) => {
   return (
     <PortfolioProvider
@@ -28,6 +33,8 @@ const PortfolioContent: React.FC<PortfolioContentProps> = ({
       edit={edit}
       saveLabel={saveLabel}
       cancelLabel={cancelLabel}
+      isWithUserInfo={isWithUserInfo}
+      triggerConfirmationModal={triggerConfirmationModal}
     >
       <PortfolioContentContainer />
       <FilePreview />
