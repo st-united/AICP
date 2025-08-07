@@ -1,5 +1,4 @@
 import { Button, Image, Layout } from 'antd';
-import clsx from 'clsx';
 import { useEffect, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -18,7 +17,6 @@ const Header = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentSection, setCurrentSection] = useState<HomePageEnum | null>(null);
-
   const isHomePage = pathname === '/';
   const handleLoginClick = () => navigate('/login');
 
@@ -64,21 +62,17 @@ const Header = () => {
   const handleSmoothScroll = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      const yOffset = -10;
+      const yOffset = isHomePage && !isScrolled ? 70 : -10;
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       smoothScrollTo(y);
     }
   };
+
   return (
     <Layout.Header
-      className={clsx(
-        'bg-white sticky top-0 flex justify-between w-full items-center h-[5rem] z-50  transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24',
-        {
-          'bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0]': isHomePage && !isScrolled,
-          'shadow-md': !isHomePage || isScrolled,
-          'mt-2': !isHomePage,
-        },
-      )}
+      className={`${
+        isHomePage && !isScrolled ? 'fixed top-0 bg-transparent' : 'sticky top-0 bg-white shadow-md'
+      } flex justify-between w-full items-center h-[5rem] z-50 transition-all duration-300 ease-in-out mdL:px-16 xl:px-24`}
     >
       <div className='cursor-pointer flex items-center justify-center'>
         <Image
