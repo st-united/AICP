@@ -47,7 +47,7 @@ const CustomAvatar = ({ avatar, isEdit, previewImage, setPreviewImage, setFileIm
       <Avatar
         className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px]'
         src={previewImage ?? avatar}
-        icon={<UserOutlined className='md:!text-[180px] !text-[150px]' />}
+        icon={<UserOutlined className='md:!text-[180px] !text-[150px] bg-gray-300' />}
       />
 
       {!isEdit && (
