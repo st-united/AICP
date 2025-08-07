@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import DayCard from './DayCard';
 import showSkipInterviewConfirmation from './showSkipInterviewConfirmation';
+import { NotificationTypeEnum, openNotificationWithIcon } from '../notification';
 import { InterviewShift } from '@app/constants/enum';
 import { useCheckInterview, useCreateSchedule } from '@app/hooks/useMentor';
 import { useSocket } from '@app/hooks/useSocket';
@@ -12,10 +13,6 @@ import { DaySchedule, SlotStatus } from '@app/interface/interview.interface';
 import { CreateScheduleParams } from '@app/interface/mentor.interface';
 import SuccessBooking from '@app/pages/MentorBooking/components/MentorDetailModal';
 import SuccessBookingModal from '@app/pages/MentorBooking/components/SuccessBookingModal';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
 
 interface InterviewScheduleProps {
   examId: string;
