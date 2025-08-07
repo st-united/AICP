@@ -9,6 +9,7 @@ import { DevPlus, DevPlusS } from '@app/assets/images';
 import { ButtonHeader } from '@app/components/atoms';
 import { HomePageEnum } from '@app/constants/homePageEnum';
 import { smoothScrollTo } from '@app/utils/scroll';
+import { NAVIGATE_URL } from '@app/constants';
 
 const Header = () => {
   const { t } = useTranslation();
@@ -68,25 +69,32 @@ const Header = () => {
     }
   };
 
+  const handleBackToTop = () => {
+    if (pathname == NAVIGATE_URL.LANDING_PAGE) {
+      smoothScrollTo(0);
+    } else {
+      navigate(NAVIGATE_URL.LANDING_PAGE);
+    }
+  };
+
   return (
     <Layout.Header
       className={`${
         isHomePage && !isScrolled ? 'fixed top-0 bg-transparent' : 'sticky top-0 bg-white shadow-md'
       } flex justify-between w-full items-center h-[5rem] z-50 transition-all duration-300 ease-in-out mdL:px-16 xl:px-24`}
     >
-      <div className='cursor-pointer flex items-center justify-center'>
-        <Image
-          onClick={() => navigate('/')}
-          src={DevPlus}
-          className='hidden md:block !h-20'
-          preview={false}
-        />
-        <Image
-          onClick={() => navigate('/')}
-          src={DevPlusS}
-          className='block md:hidden !h-20'
-          preview={false}
-        />
+      <div className='flex items-center justify-center'>
+        <div onClick={handleBackToTop} className='cursor-pointer'>
+          <Image src={DevPlus} className='hidden md:block !h-20' preview={false} />
+        </div>
+        <div onClick={handleBackToTop} className='cursor-pointer'>
+          <Image
+            onClick={handleBackToTop}
+            src={DevPlusS}
+            className='block md:hidden !h-20'
+            preview={false}
+          />
+        </div>
       </div>
       {isHomePage && (
         <div className='hidden md:flex gap-8 items-center'>
