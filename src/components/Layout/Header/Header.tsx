@@ -69,11 +69,11 @@ const Header = () => {
   return (
     <Layout.Header
       className={clsx(
-        'flex justify-between w-full items-center h-[5rem] z-50 transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24',
+        'bg-white sticky top-0 flex justify-between w-full items-center h-[5rem] z-50  transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24',
         {
-          'fixed top-0 bg-[#FFFBF9]': isHomePage && !isScrolled,
-          'sticky top-0 bg-white shadow-md': !isHomePage || isScrolled,
-          'mt-2 !pr-[4.9375rem]': !isHomePage,
+          'bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0]': isHomePage && !isScrolled,
+          'shadow-md': !isHomePage || isScrolled,
+          'mt-2': !isHomePage,
         },
       )}
     >
