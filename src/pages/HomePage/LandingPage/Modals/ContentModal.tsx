@@ -1,5 +1,6 @@
-import { ExamStatusEnum } from '@app/constants/enum';
 import { Trans, useTranslation } from 'react-i18next';
+
+import { ExamStatusEnum } from '@app/constants/enum';
 
 interface ModalContentProps {
   durationKey: string;
@@ -15,7 +16,7 @@ export const ContentModal = ({ durationKey, hasTakenExam }: ModalContentProps) =
   return (
     <div className='px-2 space-y-2 md:px-6 md:space-y-3'>
       {hasTakenExam?.examStatus !== ExamStatusEnum.IN_PROGRESS && durationKey && (
-        <p className='text-base text-gray-900 md:text-xl'>
+        <p className='text-base text-gray-900 md:text-lg !leading-9'>
           <Trans
             i18nKey={durationKey}
             values={{ duration: hasTakenExam?.examSetDuration }}
@@ -24,9 +25,11 @@ export const ContentModal = ({ durationKey, hasTakenExam }: ModalContentProps) =
         </p>
       )}
       {hasTakenExam?.examStatus !== ExamStatusEnum.IN_PROGRESS && (
-        <p className='text-base text-gray-900 md:text-xl'>{t('MODAL.RESULT_CONFIRM_TEST')}</p>
+        <p className='text-base text-gray-900 md:text-lg !mt-3 !leading-9'>
+          {t('MODAL.RESULT_CONFIRM_TEST')}
+        </p>
       )}
-      <p className='text-base text-gray-900 md:text-xl'>
+      <p className='text-base text-gray-900 md:text-lg !mt-3 !leading-9'>
         <span className='text-orange-500 font-semibold'>{t('MODAL.NOTE_CONFIRM_TEST')}:</span>{' '}
         {t('MODAL.WARNING_CONFIRM_TEST')}
       </p>

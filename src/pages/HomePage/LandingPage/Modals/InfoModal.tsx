@@ -45,7 +45,6 @@ export const InfoModal: React.FC<InfoModalProps> = ({
     <div className='relative flex flex-col items-center w-full px-2 sm:px-6 max-w-xl mx-auto'>
       <HeaderModal
         title={t('CONFIRM_BEFORE_TEST_MODAL.TITLE_INFO')}
-        onClose={onClose}
         symbol={userProfile?.isStudent == null ? '!' : '?'}
       />
       <div className='w-full mb-2 text-base font-semibold text-start'>
