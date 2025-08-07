@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Divider } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -23,8 +23,14 @@ const InterviewBooking: React.FC = () => {
     <div>
       {interviewBookingStep === InterviewBookingStep.OVERVIEW && (
         <div className='flex flex-col gap-8 bg-white'>
-          <div className='flex flex-col items-center justify-center max-w-xl mx-auto mt-12'>
-            <div className='text-center'>
+          <div className='flex flex-col items-center justify-center max-w-xl mx-auto'>
+            <div className='flex flex-col items-center justify-center max-w-3xl mx-auto gap-8 text-center'>
+              <div className='text-[1.625rem] xsM:text-2xl sm:text-3xl md:text-4xl font-bold text-[#FE7743]'>
+                {t('TEST_RESULT.BOOKING_BUTTON')}
+              </div>
+              <div className='w-[50%]'>
+                <Divider className='border-[#FE7743] !p-0 !m-0' />
+              </div>
               <h2 className='text-xl font-semibold text-[#5B5B5B] mb-12'>
                 {t('TEST_RESULT.BOOKING_TITLE')}
               </h2>
