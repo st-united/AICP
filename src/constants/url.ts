@@ -34,4 +34,6 @@ export const API_URL = {
   ZALO_OTP_CHECK_STATUS: '/zalo-otp/status',
   ZALO_OTP_COUNTRY_CODE: '/zalo-otp/country-codes',
   ZALO_OTP_CAN_SEND: '/zalo-otp/can-send-otp',
+  SCHEDULE: '/mentors/create-scheduler',
+  CHECK_MY_INTERVIEW: '/mentors/check-my-interview-request',
 };

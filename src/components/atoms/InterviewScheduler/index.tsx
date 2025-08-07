@@ -1,17 +1,32 @@
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import DayCard from './DayCard';
+import showSkipInterviewConfirmation from './showSkipInterviewConfirmation';
+import { InterviewShift } from '@app/constants/enum';
+import { useCheckInterview, useCreateSchedule } from '@app/hooks/useMentor';
 import { useSocket } from '@app/hooks/useSocket';
 import { DaySchedule, SlotStatus } from '@app/interface/interview.interface';
+import { CreateScheduleParams } from '@app/interface/mentor.interface';
+import SuccessBooking from '@app/pages/MentorBooking/components/MentorDetailModal';
+import SuccessBookingModal from '@app/pages/MentorBooking/components/SuccessBookingModal';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 interface InterviewScheduleProps {
   examId: string;
 }
 
 const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
+  const { t } = useTranslation();
+  const { data, isLoading } = useCheckInterview(examId);
   const { availableSlots, joinDay } = useSocket(examId);
-  console.log('🚀 ~ InterviewSchedule ~ availableSlots:', availableSlots);
+  const { mutate: bookSchedule, isPending } = useCreateSchedule();
+  const navigate = useNavigate();
 
   const convertToDaySchedule = (backendData: {
     days: Array<{
@@ -28,7 +43,6 @@ const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
       const day = daysOfWeek[dateObj.getDay()];
       const dateStr = item.date.split('T')[0];
 
-      // Join the room for real-time updates
       joinDay(item.date);
 
       return {
@@ -37,14 +51,14 @@ const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
         month,
         slots: [
           {
-            id: `${dateStr}-morning`,
+            id: `${dateStr}_morning`,
             time: '8:00 - 12:00',
             type: 'morning',
             slotsAvailable: item.morning.slot,
             status: item.morning.status,
           },
           {
-            id: `${dateStr}-afternoon`,
+            id: `${dateStr}_afternoon`,
             time: '14:00 - 18:00',
             type: 'afternoon',
             slotsAvailable: item.afternoon.slot,
@@ -58,60 +72,142 @@ const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
   const scheduleData: DaySchedule[] = availableSlots ? convertToDaySchedule(availableSlots) : [];
 
   const [selectedSlot, setSelectedSlot] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedBooking, setSelectedBooking] = useState<
+    | {
+        date: string;
+        time: string;
+        status: string;
+      }
+    | undefined
+  >(undefined);
 
   const handleSlotSelect = (slotId: string) => {
     setSelectedSlot(slotId);
+
+    const selectedDay = scheduleData.find((day) => day.slots.some((slot) => slot.id === slotId));
+    const selectedTimeSlot = selectedDay?.slots.find((slot) => slot.id === slotId);
+
+    if (selectedTimeSlot && selectedDay) {
+      const dateObj = new Date(
+        availableSlots?.days.find((d) => d.date.includes(`${selectedDay.date}`))?.date || '',
+      );
+      const year = dateObj.getFullYear();
+
+      const bookingData = {
+        date: t('MENTOR_BOOKING.BOOKING_DATE_FORMAT', {
+          day: selectedDay.day,
+          date: selectedDay.date,
+          month: selectedDay.month,
+          year,
+        }),
+        time: selectedTimeSlot.time,
+        status:
+          selectedTimeSlot.status === SlotStatus.AVAILABLE
+            ? t('MENTOR_BOOKING.STATUS_AVAILABLE')
+            : selectedTimeSlot.status === SlotStatus.ALMOST_FULL
+            ? t('MENTOR_BOOKING.STATUS_ALMOST_FULL')
+            : t('MENTOR_BOOKING.STATUS_FULL'),
+      };
+
+      setSelectedBooking(bookingData);
+      setIsModalOpen(true);
+    }
   };
 
   const handleSkip = () => {
-    console.log('Skip clicked');
+    showSkipInterviewConfirmation(() => {
+      navigate('/');
+    });
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedSlot('');
+    setSelectedBooking(undefined);
+  };
+
+  const handleChooseAgain = () => {
+    setIsModalOpen(false);
+    setSelectedSlot('');
+    setSelectedBooking(undefined);
+  };
+
+  const handleConfirmBooking = () => {
+    if (selectedSlot) {
+      const [date, shift] = selectedSlot.split('_');
+      const payload: CreateScheduleParams = {
+        examId,
+        interviewDate: date,
+        interviewShift: shift === 'morning' ? InterviewShift.MORNING : InterviewShift.AFTERNOON,
+      };
+
+      bookSchedule(payload, {
+        onSuccess: (data) => {
+          setIsModalOpen(false);
+          setSelectedSlot('');
+          setSelectedBooking(undefined);
+          openNotificationWithIcon(NotificationTypeEnum.SUCCESS, data.data.message);
+        },
+        onError: () => {
+          openNotificationWithIcon(NotificationTypeEnum.ERROR, t('MENTOR_BOOKING.BOOKING_ERROR'));
+        },
+      });
+    }
   };
 
   return (
     <div className='bg-white'>
-      <div className='max-w-4xl md:max-w-6xl mx-auto p-6'>
-        <div className='text-center mb-8'>
-          <h1
-            className='text-2xl font-bold text-[#FE7743] mb-2
-            md:text-4xl md:mb-5'
-          >
-            Đăng ký lịch phỏng vấn
-          </h1>
-          <p
-            className='text-black text-base
-            md:text-2xl'
-          >
-            Vui lòng chọn thời gian tham gia phỏng vấn phù hợp để được đánh giá năng lực chính xác
-            hơn!
-          </p>
-        </div>
+      {isLoading ? (
+        <Spin className='top-1/2 left-1/2 fixed -translate-x-1/2 -translate-y-1/2' />
+      ) : data?.hasInterviewRequest ? (
+        <SuccessBooking data={data.interviewRequest!} />
+      ) : (
+        <div className='max-w-4xl md:max-w-6xl mx-auto p-6 rounded-2xl shadow-xl'>
+          <div className='text-center mb-8'>
+            <h1 className='text-2xl font-bold text-[#FE7743] mb-2 md:text-4xl md:mb-5'>
+              {t('MENTOR_BOOKING.REGISTER_TITLE')}
+            </h1>
+            <p className='text-black text-base md:text-2xl'>
+              {t('MENTOR_BOOKING.REGISTER_DESCRIPTION')}
+            </p>
+          </div>
 
-        {/* Schedule Cards */}
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-8'>
-          {scheduleData.length > 0 ? (
-            scheduleData.map((day) => (
-              <DayCard
-                key={day.date}
-                day={day}
-                selectedSlot={selectedSlot}
-                onSlotSelect={handleSlotSelect}
-              />
-            ))
-          ) : (
-            <div>Loading available slots...</div>
-          )}
-        </div>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-8'>
+            {scheduleData.length > 0 ? (
+              scheduleData.map((day) => (
+                <DayCard
+                  key={day.date}
+                  day={day}
+                  selectedSlot={selectedSlot}
+                  onSlotSelect={handleSlotSelect}
+                />
+              ))
+            ) : (
+              <Spin className='top-1/2 left-1/2 fixed -translate-x-1/2 -translate-y-1/2' />
+            )}
+          </div>
 
-        <div className='text-center'>
-          <Button
-            size='large'
-            className='px-8 py-2 h-auto border-orange-400 text-orange-500 hover:border-orange-500 hover:text-orange-600'
-            onClick={handleSkip}
-          >
-            Bỏ qua
-          </Button>
+          <div className='text-center'>
+            <Button
+              size='large'
+              className='px-8 py-2 h-auto border-orange-400 text-orange-500 hover:border-orange-500 hover:text-orange-600'
+              onClick={handleSkip}
+            >
+              {t('MENTOR_BOOKING.SKIP')}
+            </Button>
+          </div>
+
+          <SuccessBookingModal
+            open={isModalOpen}
+            onClose={handleModalClose}
+            onChooseAgain={handleChooseAgain}
+            onConfirm={handleConfirmBooking}
+            data={selectedBooking}
+            isLoading={isPending}
+          />
         </div>
-      </div>
+      )}
     </div>
   );
 };

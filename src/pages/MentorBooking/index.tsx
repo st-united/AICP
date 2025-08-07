@@ -16,9 +16,9 @@ const Booking = () => {
         icon={<LeftOutlined />}
         type='link'
         className='p-0 !text-secondary hover:!text-primary text-lg mb-6'
-        onClick={() => navigate('/')}
+        onClick={() => navigate(-1)}
       >
-        {t('MENTOR_BOOKING.BACK_HOME')}
+        {t('MENTOR_BOOKING.BACK')}
       </Button>
       <div className='flex flex-col lg:flex-row gap-6'>
         <div className='flex-1 flex flex-col'>

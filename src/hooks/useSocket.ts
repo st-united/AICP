@@ -18,9 +18,6 @@ export const useSocket = (examId: string): SocketHook => {
   useEffect(() => {
     socketRef.current = io(BACKEND_URL, {
       transports: ['websocket'],
-      // cors: {
-      //   origin: '*',
-      // },
     });
 
     socketRef.current.on(

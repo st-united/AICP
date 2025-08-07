@@ -30,3 +30,8 @@ export enum CompetencyDimension {
   TOOLSET = 'TOOLSET',
   SKILLSET = 'SKILLSET',
 }
+
+export enum InterviewShift {
+  MORNING = 'MORNING',
+  AFTERNOON = 'AFTERNOON',
+}

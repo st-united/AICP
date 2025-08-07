@@ -1,5 +1,6 @@
 import { Card } from 'antd';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import TimeSlotCard from './TimeSlotCard';
 import { DaySchedule } from '@app/interface/interview.interface';
@@ -11,16 +12,20 @@ interface DayCardProps {
 }
 
 const DayCard: React.FC<DayCardProps> = ({ day, selectedSlot, onSlotSelect }) => {
+  const { t } = useTranslation();
+
   return (
     <Card
       key={day.date}
       className='overflow-hidden shadow-xl border-0 rounded-2xl'
-      bodyStyle={{ padding: 0 }}
+      styles={{ body: { padding: 0 } }}
     >
       {/* Date Header */}
       <div className='bg-orange-500 text-white text-center py-4'>
         <div className='text-3xl font-extrabold'>{day.date}</div>
-        <div className='text-base'>Tháng {day.month}</div>
+        <div className='text-base'>
+          {t('MENTOR_BOOKING.BOOKING_MONTH_FORMAT', { month: day.month })}
+        </div>
         <div className='text-3xl font-bold'>{day.day}</div>
       </div>
 
