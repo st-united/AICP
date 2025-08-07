@@ -35,3 +35,8 @@ export enum UserType {
   STUDENT = 'student',
   WORKER = 'worker',
 }
+
+export enum InterviewShift {
+  MORNING = 'MORNING',
+  AFTERNOON = 'AFTERNOON',
+}

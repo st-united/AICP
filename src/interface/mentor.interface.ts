@@ -1,18 +1,23 @@
-export interface UseMentorInfiniteParams {
-  search?: string;
-  scheduledDate?: string | null;
-  timeSlot?: string | null;
-  take: number;
-  skip?: number;
-}
+import { InterviewShift } from '@app/constants/enum';
 
 export const PAGE_SIZE = 9;
 
 export interface CreateScheduleParams {
-  userId: string;
-  mentorId: string;
-  scheduledAt: string; // YYYY-MM-DD
-  timeSlot: string; // e.g., 'AM_08_09'
+  examId: string;
+  interviewDate: string; // YYYY-MM-DD
+  interviewShift: InterviewShift;
+}
+
+export interface InterviewRequest {
+  id: string;
+  interviewDate: string;
+  timeSlot: string;
+  examId: string;
+}
+
+export interface CheckInterviewRequestResponse {
+  hasInterviewRequest: boolean;
+  interviewRequest?: InterviewRequest;
 }
 
 export interface Mentor {

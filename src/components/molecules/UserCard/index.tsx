@@ -112,12 +112,12 @@ const UserCard = ({ dataUser, isSelected, setSelected }: UserCardProps) => {
         </div>
       )}
 
-      <MentorDetailModal
+      {/* <MentorDetailModal
         isOpen={open}
         onClose={() => setOpen(false)}
         advisor={advisorData}
         handleSubmit={handleBookMentor}
-      />
+      /> */}
     </div>
   );
 };
