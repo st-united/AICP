@@ -93,7 +93,7 @@ const ExamHistory = () => {
 
   return (
     <div className='h-full !rounded-2xl'>
-      <div className='max-w-7xl mx-auto space-y-4 h-full flex flex-col overflow-y-auto px-2'>
+      <div className='max-w-7xl mx-auto space-y-4 h-full flex flex-col px-2'>
         <QuizHeader
           onDownloadAll={handleDownloadAll}
           onStartNew={handleStartNew}
