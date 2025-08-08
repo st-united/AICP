@@ -10,10 +10,11 @@ import ExamOverview from '@app/pages/ExamResult/ExamOverview';
 import PortfolioForResult from '@app/pages/ExamResult/PortfolioForResult';
 import Booking from '@app/pages/MentorBooking';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
-import ExamDetailPage from '@app/pages/Profile/ExamDetailPage';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
-import ProfilePage from '@app/pages/Profile/ProfilePage';
 import ViewCourseDetail from '@app/pages/ViewCourseDetail/ViewCourseDetail';
+import ExamDetailPage from '@app/pages/Profile/ExamDetailPage';
+import AIReadinessCoursePage from '@app/pages/ViewCourseDetail/ViewCourseDetail';
+import ProfilePage from '@app/pages/Profile/ProfilePage';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
