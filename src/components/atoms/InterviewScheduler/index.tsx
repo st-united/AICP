@@ -1,237 +1,211 @@
-import { MailOutlined, PhoneOutlined } from '@ant-design/icons';
-import { Calendar, message, Button, Typography, Space, Divider, Card } from 'antd';
-import viVN from 'antd/es/calendar/locale/vi_VN';
-import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
-import 'dayjs/locale/vi';
+import { Button, Spin } from 'antd';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { useCreateSchedule } from '@app/hooks/useMentor';
-import MentorBooking from '@app/interface/mentor.interface';
+import DayCard from './DayCard';
+import showSkipInterviewConfirmation from './showSkipInterviewConfirmation';
+import { NotificationTypeEnum, openNotificationWithIcon } from '../notification';
+import { InterviewShift } from '@app/constants/enum';
+import { useAvailableInterview, useCheckInterview, useCreateSchedule } from '@app/hooks/useMentor';
+import { DaySchedule, SlotStatus } from '@app/interface/interview.interface';
+import { CreateScheduleParams } from '@app/interface/mentor.interface';
+import SuccessBooking from '@app/pages/MentorBooking/components/MentorDetailModal';
 import SuccessBookingModal from '@app/pages/MentorBooking/components/SuccessBookingModal';
-import { RootState } from '@app/redux/store';
-import type { Dayjs } from 'dayjs';
 
-dayjs.locale('vi');
-
-const timeSlots = [
-  { key: 'AM_08_09', label: '08 - 09 SA' },
-  { key: 'AM_09_10', label: '09 - 10 SA' },
-  { key: 'AM_10_11', label: '10 - 11 SA' },
-  { key: 'AM_11_12', label: '11 - 12 SA' },
-  { key: 'PM_02_03', label: '02 - 03 CH' },
-  { key: 'PM_03_04', label: '03 - 04 CH' },
-  { key: 'PM_04_05', label: '04 - 05 CH' },
-  { key: 'PM_05_06', label: '05 - 06 CH' },
-];
-
-interface InterviewSchedulerProps {
-  onSchedule?: (data: { date: string; time: string }) => void;
-  userSelected: string;
-  bookedSlots?: Record<string, string[]>;
+interface InterviewScheduleProps {
+  examId: string;
 }
 
-const InterviewScheduler: React.FC<InterviewSchedulerProps> = ({
-  onSchedule,
-  userSelected,
-  bookedSlots,
-}) => {
-  const { user } = useSelector((state: RootState) => state.auth);
-  const [dataModal, setDataModal] = useState<MentorBooking>();
-
-  const [showModal, setShowModal] = useState(false);
-
+const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
   const { t } = useTranslation();
-  const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
-  const [viewDate, setViewDate] = useState<Dayjs>(dayjs());
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const { data, isLoading } = useCheckInterview(examId);
+  const { data: availableSlots, isLoading: slotLoading } = useAvailableInterview(examId);
+  const { mutate: bookSchedule, isPending } = useCreateSchedule();
+  const navigate = useNavigate();
 
-  const { mutate: createSchedule } = useCreateSchedule();
+  const convertToDaySchedule = (backendData: {
+    days: Array<{
+      date: string;
+      morning: { slot: number; status: SlotStatus };
+      afternoon: { slot: number; status: SlotStatus };
+    }>;
+  }): DaySchedule[] => {
+    const daysOfWeek = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+    return backendData.days.map((item) => {
+      const dateObj = new Date(item.date);
+      const date = dateObj.getDate();
+      const month = dateObj.getMonth() + 1;
+      const day = daysOfWeek[dateObj.getDay()];
+      const dateStr = item.date.split('T')[0];
 
-  const handleSelect = (date: Dayjs) => {
-    if (date.isBefore(dayjs(), 'day')) {
-      message.warning(t('INTERVIEW_SCHEDULER.PAST_DATE_WARNING'));
-      return;
-    }
-    setSelectedDate(date);
+      return {
+        date,
+        day,
+        month,
+        slots: [
+          {
+            id: `${dateStr}_morning`,
+            time: '8:00 - 12:00',
+            type: 'morning',
+            slotsAvailable: item.morning.slot,
+            status: item.morning.status,
+          },
+          {
+            id: `${dateStr}_afternoon`,
+            time: '14:00 - 18:00',
+            type: 'afternoon',
+            slotsAvailable: item.afternoon.slot,
+            status: item.afternoon.status,
+          },
+        ],
+      };
+    });
   };
 
-  const handleConfirm = () => {
-    if (!selectedDate || !selectedTime) {
-      message.warning(t('INTERVIEW_SCHEDULER.SELECT_DATE_TIME_WARNING'));
-      return;
-    }
-    if (user) {
-      const payload = {
-        userId: user?.id,
-        mentorId: userSelected,
-        scheduledAt: selectedDate.format('YYYY-MM-DD'),
-        timeSlot: selectedTime,
+  const scheduleData: DaySchedule[] = availableSlots ? convertToDaySchedule(availableSlots) : [];
+
+  const [selectedSlot, setSelectedSlot] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedBooking, setSelectedBooking] = useState<
+    | {
+        date: string;
+        time: string;
+        status: string;
+      }
+    | undefined
+  >(undefined);
+
+  const handleSlotSelect = (slotId: string) => {
+    setSelectedSlot(slotId);
+
+    const selectedDay = scheduleData.find((day) => day.slots.some((slot) => slot.id === slotId));
+    const selectedTimeSlot = selectedDay?.slots.find((slot) => slot.id === slotId);
+
+    if (selectedTimeSlot && selectedDay) {
+      const dateObj = new Date(
+        availableSlots?.days.find((d) => d.date.includes(`${selectedDay.date}`))?.date || '',
+      );
+      const year = dateObj.getFullYear();
+
+      const bookingData = {
+        date: t('MENTOR_BOOKING.BOOKING_DATE_FORMAT', {
+          day: selectedDay.day,
+          date: selectedDay.date,
+          month: selectedDay.month,
+          year,
+        }),
+        time: selectedTimeSlot.time,
+        status:
+          selectedTimeSlot.status === SlotStatus.AVAILABLE
+            ? t('MENTOR_BOOKING.STATUS_AVAILABLE')
+            : selectedTimeSlot.status === SlotStatus.ALMOST_FULL
+            ? t('MENTOR_BOOKING.STATUS_ALMOST_FULL')
+            : t('MENTOR_BOOKING.STATUS_FULL'),
       };
-      createSchedule(payload, {
-        onSuccess: (response) => {
-          setDataModal(response.data?.data);
-          setShowModal(true);
-          setSelectedTime(null);
+
+      setSelectedBooking(bookingData);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleSkip = () => {
+    showSkipInterviewConfirmation(() => {
+      navigate('/');
+    });
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedSlot('');
+    setSelectedBooking(undefined);
+  };
+
+  const handleChooseAgain = () => {
+    setIsModalOpen(false);
+    setSelectedSlot('');
+    setSelectedBooking(undefined);
+  };
+
+  const handleConfirmBooking = () => {
+    if (selectedSlot) {
+      const [date, shift] = selectedSlot.split('_');
+      const payload: CreateScheduleParams = {
+        examId,
+        interviewDate: date,
+        interviewShift: shift === 'morning' ? InterviewShift.MORNING : InterviewShift.AFTERNOON,
+      };
+
+      bookSchedule(payload, {
+        onSuccess: (data) => {
+          setIsModalOpen(false);
+          setSelectedSlot('');
+          setSelectedBooking(undefined);
+          openNotificationWithIcon(NotificationTypeEnum.SUCCESS, data.data.message);
         },
         onError: () => {
-          message.error(t('INTERVIEW_SCHEDULER.BOOK_FAILED'));
+          openNotificationWithIcon(NotificationTypeEnum.ERROR, t('MENTOR_BOOKING.BOOKING_ERROR'));
         },
       });
     }
   };
 
-  useEffect(() => {
-    if (onSchedule && selectedTime) {
-      const result = {
-        date: selectedDate.format('YYYY-MM-DD'),
-        time: selectedTime,
-      };
-      onSchedule(result);
-    }
-  }, [selectedDate, selectedTime]);
-
-  const renderHeader = ({ onChange }: any) => {
-    const prevMonth = () => {
-      const newDate = viewDate.clone().subtract(1, 'month');
-      setViewDate(newDate);
-      onChange(newDate);
-    };
-
-    const nextMonth = () => {
-      const newDate = viewDate.clone().add(1, 'month');
-      setViewDate(newDate);
-      onChange(newDate);
-    };
-
-    return (
-      <div className='flex justify-between items-center px-4 py-2 border-b'>
-        <Button size='small' onClick={prevMonth}>
-          ←
-        </Button>
-        <div className='text-base font-semibold'>
-          {t('INTERVIEW_SCHEDULER.MONTH_LABEL', {
-            month: viewDate.format('M'),
-            year: viewDate.format('YYYY'),
-          })}
-        </div>
-        <Button size='small' onClick={nextMonth}>
-          →
-        </Button>
-      </div>
-    );
-  };
-  const bookedForSelectedDay = bookedSlots?.[selectedDate.format('YYYY-MM-DD')] ?? [];
-
   return (
-    <>
-      <div className='flex-1 flex flex-col gap-2'>
-        <Card
-          className='flex-1 !h-fit'
-          title={
-            userSelected ? (
-              <Typography className='!text-gray-700 text-sm font-normal'>
-                Bạn đang xem danh sách khung thời gian trống của cố vấn bạn đã chọn
-              </Typography>
+    <div className='bg-white rounded-2xl shadow-xl md:min-h-[80vh] flex items-center justify-center'>
+      {isLoading || slotLoading ? (
+        <Spin className='top-1/2 left-1/2 fixed -translate-x-1/2 -translate-y-1/2' />
+      ) : data?.hasInterviewRequest ? (
+        <div className='flex items-center justify-center min-h-[80vh]'>
+          <SuccessBooking data={data.interviewRequest!} />
+        </div>
+      ) : (
+        <div className='max-w-4xl md:max-w-6xl mx-auto p-6'>
+          <div className='text-center mb-8'>
+            <h1 className='text-2xl font-extrabold text-[#FE7743] mb-2 md:text-4xl md:mb-5'>
+              {t('MENTOR_BOOKING.REGISTER_TITLE')}
+            </h1>
+            <p className='text-black text-base md:text-2xl'>
+              {t('MENTOR_BOOKING.REGISTER_DESCRIPTION')}
+            </p>
+          </div>
+
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-8'>
+            {scheduleData.length > 0 ? (
+              scheduleData.map((day) => (
+                <DayCard
+                  key={day.date}
+                  day={day}
+                  selectedSlot={selectedSlot}
+                  onSlotSelect={handleSlotSelect}
+                />
+              ))
             ) : (
-              ''
-            )
-          }
-        >
-          <Typography className='mb-4 text-gray-700 text-base'>
-            {t('INTERVIEW_SCHEDULER.INSTRUCTION')}
-          </Typography>
-          <div className='mb-6'>
-            <div className='mb-2 font-semibold'>{t('INTERVIEW_SCHEDULER.SELECT_DATE')}</div>
-            <Calendar
-              locale={viVN}
-              fullscreen={false}
-              value={selectedDate}
-              onSelect={handleSelect}
-              disabledDate={(date) => {
-                const today = dayjs().startOf('day');
-                if (date.isBefore(today)) return true;
-
-                const dateStr = date.format('YYYY-MM-DD');
-                const bookedForDay = bookedSlots?.[dateStr] ?? [];
-                const allSlotsBooked = timeSlots.every((slot) => bookedForDay.includes(slot.key));
-
-                return allSlotsBooked;
-              }}
-              headerRender={renderHeader}
-              mode='month'
-            />
+              <Spin className='top-1/2 left-1/2 fixed -translate-x-1/2 -translate-y-1/2' />
+            )}
           </div>
 
-          <div className='mb-6'>
-            <div className='mb-2 font-semibold'>{t('INTERVIEW_SCHEDULER.SELECT_TIME')}</div>
-            <div className='flex flex-wrap gap-2'>
-              {timeSlots.map((slot) => {
-                const isBooked = bookedForSelectedDay.includes(slot.key);
-
-                return (
-                  <Button
-                    key={slot.key}
-                    type={selectedTime === slot.key ? 'primary' : 'default'}
-                    onClick={() => setSelectedTime(slot.key)}
-                    disabled={isBooked}
-                  >
-                    {t(`INTERVIEW_SCHEDULER.TIME_SLOT.${slot.key}`, slot.label)}
-                  </Button>
-                );
-              })}
-            </div>
-          </div>
-          <Divider />
-          <div className='flex w-full justify-center'>
+          <div className='text-center'>
             <Button
-              type='primary'
-              block
-              className='bg-orange-200 text-orange-900 hover:bg-orange-300 !w-fit p-4 rounded-2xl'
-              onClick={handleConfirm}
+              size='large'
+              className='px-8 py-2 h-auto border-orange-400 text-orange-500 hover:border-orange-500 hover:text-orange-600'
+              onClick={handleSkip}
             >
-              {t('INTERVIEW_SCHEDULER.CONFIRM')}
+              {t('MENTOR_BOOKING.SKIP')}
             </Button>
           </div>
-        </Card>
-        <Card>
-          <Space direction='vertical' size='small' className='w-full'>
-            <div className='flex gap-2'>
-              <Typography.Text strong>{t('INTERVIEW_SCHEDULER.DURATION_LABEL')}</Typography.Text>
-              <Typography.Text>{t('INTERVIEW_SCHEDULER.DURATION')}</Typography.Text>
-            </div>
-            <div className='flex gap-2'>
-              <Typography.Text strong>{t('INTERVIEW_SCHEDULER.LANGUAGE_LABEL')}</Typography.Text>
-              <Typography.Text>{t('INTERVIEW_SCHEDULER.LANGUAGE')}</Typography.Text>
-            </div>
-          </Space>
 
-          <Typography.Paragraph className='text-gray-700 mb-0'>
-            {t('INTERVIEW_SCHEDULER.CONTACT_NOTE')}
-          </Typography.Paragraph>
-
-          <Space direction='vertical' size='small' className='text-gray-600'>
-            <div className='flex items-center gap-2'>
-              <MailOutlined />
-              <Typography.Text>hello@devplus.edu.vn</Typography.Text>
-            </div>
-            <div className='flex items-center gap-2'>
-              <PhoneOutlined />
-              <Typography.Text>(+84) 368492885</Typography.Text>
-            </div>
-          </Space>
-        </Card>
-      </div>
-      {showModal && (
-        <SuccessBookingModal
-          open={showModal}
-          onClose={() => setShowModal(false)}
-          data={dataModal}
-        />
+          <SuccessBookingModal
+            open={isModalOpen}
+            onClose={handleModalClose}
+            onChooseAgain={handleChooseAgain}
+            onConfirm={handleConfirmBooking}
+            data={selectedBooking}
+            isLoading={isPending}
+          />
+        </div>
       )}
-    </>
+    </div>
   );
 };
 
-export default InterviewScheduler;
+export default InterviewSchedule;

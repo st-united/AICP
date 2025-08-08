@@ -35,7 +35,7 @@ const routes = [
         element: <BaseLayout />,
         children: [
           {
-            path: NAVIGATE_URL.SCHEDULE,
+            path: NAVIGATE_URL.INTERVIEW,
             element: <Booking />,
           },
           {

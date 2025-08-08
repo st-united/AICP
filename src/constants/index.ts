@@ -6,3 +6,4 @@ export * from './datetime';
 export * from './notification';
 export * from './navigate';
 export * from './appName';
+export * from './socket';
