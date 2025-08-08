@@ -1,17 +1,17 @@
 import { Modal } from 'antd';
-import React from 'react';
+import { ReactNode } from 'react';
 
 interface SuccessModalProps {
   visible: boolean;
   onClose: () => void;
   title: string;
   message: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   width?: string | number;
   maxWidth?: string;
 }
 
-const SuccessModal: React.FC<SuccessModalProps> = ({
+const SuccessModal = ({
   visible,
   onClose,
   title,
@@ -19,7 +19,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
   icon = null,
   width = '90%',
   maxWidth = 'max-w-md',
-}) => {
+}: SuccessModalProps) => {
   const defaultIcon = (
     <svg
       className='w-6 h-6 xsM:w-8 xsM:h-8 text-green-500'
