@@ -40,7 +40,6 @@ export const useProfileForm = (initialData: UserProfile) => {
   useEffect(() => {
     const normalized = normalizeInitialValues(initialData);
     form.setFieldsValue(normalized);
-    console.log(form.getFieldValue('dob'));
   }, [initialData, form]);
 
   const onEdit = () => {
@@ -65,8 +64,9 @@ export const useProfileForm = (initialData: UserProfile) => {
         province: values.province ?? null,
         phoneNumber: normalizePhoneNumber(values.phoneNumber),
         job: Array.isArray(values.job) ? values.job : values.job ? [values.job] : [],
-        university: values.isStudent ? values.university || '' : '',
-        studentCode: values.isStudent ? values.studentCode || '' : '',
+        isStudent: values.isStudent,
+        university: values.isStudent ? values.university : '',
+        studentCode: values.isStudent ? values.studentCode : '',
       };
       if (fileImage) {
         const formData = new FormData();
@@ -87,7 +87,8 @@ export const useProfileForm = (initialData: UserProfile) => {
   const onStudentChange = (value: boolean) => {
     form.setFieldValue('isStudent', value);
     if (!value) {
-      form.setFieldsValue({ university: '', studentCode: '' });
+      form.setFieldValue('university', '');
+      form.setFieldValue('studentCode', '');
     }
   };
 

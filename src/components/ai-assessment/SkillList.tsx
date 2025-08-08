@@ -15,7 +15,7 @@ interface Pilar {
 const SkillsList = ({ toolSetScore, mindSetScore, skillSetScore, examLevel, className }: Pilar) => {
   return (
     <div className={className}>
-      <h2 className='font-semibold mb-6 text-lg sm:text-xl text-gray-800 flex flex-wrap max-xs400:flex-col max-xs400:text-center max-max-xs400:items-center'>
+      <h2 className='font-semibold mb-6 text-lg sm:text-xl text-gray-800 flex flex-wrap max-xs400:flex-col max-xs400:text-center max-xs400:items-center'>
         <span className='mr-2'>{t('EXAM.COMPETENCY_LEVEL')}</span>
         <span className='text-[#FE7743] font-bold'>
           {examLevel ? getExamLevelText(examLevel) : t('EXAM.LEVEL.NONE_LEVEL')}

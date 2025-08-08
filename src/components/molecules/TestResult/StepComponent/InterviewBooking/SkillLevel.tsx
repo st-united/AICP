@@ -78,7 +78,7 @@ const SkillLevel: React.FC = () => {
             </span>
           </div>
           <div className='text-gray-700 mb-2'>{data?.description}</div>
-          <div className='text-[18px] md:text-xl font-bold text-black relative inline-block align-bottom'>
+          <div className='text-[1.125rem] md:text-xl font-bold text-black relative inline-block align-bottom'>
             {t('TEST_RESULT.SUGGEST')}:
             <span className='block h-1 bg-[#fe7743] absolute left-0 right-0 -bottom-1 rounded w-[29%] ml-1' />
           </div>

@@ -24,7 +24,7 @@ export default function ConfirmBeforeTestModal({
 }: ConfirmBeforeTestModalProps) {
   const navigate = useNavigate();
 
-  const { mutate: submitExam, isPending } = useSubmitExam();
+  const { mutate: submitExam } = useSubmitExam();
   const { data: exam } = useHasTakenExamDefault();
   const { data: hasTakenExam } = useHasTakenExamDefault();
   const { data: historyData } = useGetHistory({ examSetName: domain });
