@@ -13,6 +13,7 @@ import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
 import ViewCourseDetail from '@app/pages/ViewCourseDetail/ViewCourseDetail';
 import ExamDetailPage from '@app/pages/Profile/ExamDetailPage';
+import AIReadinessCoursePage from '@app/pages/ViewCourseDetail/ViewCourseDetail';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
