@@ -1,23 +1,31 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { QUERY_KEY } from '@app/constants';
-import { checkBookingApi, userBookingApi } from '@app/services/bookingAPI';
+import { CheckInterviewRequestResponse } from '@app/interface/booking.interface';
+import { checkInterviewRequestApi, userInterviewRequestApi } from '@app/services/bookingAPI';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
-export const useUserBooking = () => {
+export const useUserInterviewRequest = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: userBookingApi,
+    mutationFn: userInterviewRequestApi,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['booking'] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.BOOKING_STATUS] });
+    },
+    onError: ({ response }) => {
+      openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
     },
   });
 };
 
-export const useCheckBooking = () => {
-  return useQuery({
+export const useCheckInterviewRequest = () => {
+  return useQuery<CheckInterviewRequestResponse, Error>({
     queryKey: [QUERY_KEY.BOOKING_STATUS],
     queryFn: async () => {
-      const { data } = await checkBookingApi();
+      const { data } = await checkInterviewRequestApi();
       return data.data;
     },
   });

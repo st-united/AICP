@@ -10,6 +10,7 @@ import ExamOverview from '@app/pages/ExamResult/ExamOverview';
 import PortfolioForResult from '@app/pages/ExamResult/PortfolioForResult';
 import Booking from '@app/pages/MentorBooking';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
+import ExamDetailPage from '@app/pages/Profile/ExamDetailPage';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
 import ViewCourseDetail from '@app/pages/ViewCourseDetail/ViewCourseDetail';
 
@@ -68,6 +69,10 @@ const routes = [
           {
             path: NAVIGATE_URL.TEST_RESULT,
             element: <ExamHistory />,
+          },
+          {
+            path: NAVIGATE_URL.TEST_RESULT_DETAIL_EXAM,
+            element: <ExamDetailPage />,
           },
         ],
       },
