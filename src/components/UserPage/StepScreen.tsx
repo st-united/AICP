@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
-import { RootState } from '@app/redux/store';
 
 type Point = {
   label: string;
@@ -23,6 +22,8 @@ export default function StepScreen({ steps, activeStep }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
+  const isAuth = useSelector((state: any) => state.auth.isAuth);
+  const navigate = useNavigate();
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -142,12 +143,22 @@ export default function StepScreen({ steps, activeStep }: Props) {
       <div className='smL:absolute flex px-5 mt-10 smL:top-28 smL:left-28 z-10 smL:w-[380px] xl:w-[480px]'>
         <div className='flex items-center justify-center h-full'>
           <div className='flex flex-col gap-4'>
-            <span className='text-black text-2xl md:text-4xl xl:text-6xl text-center md:text-left font-[1000]'>
+            <span className='text-black text-2xl md:text-4xl xl:text-6xl font-[1000]'>
               {t('HOMEPAGE.STEP_SCREEN_HEADER.TITLE')}
             </span>
-            <span className='text-[#64607D] text-base xl:text-xl text-center md:text-left font-[500]'>
+            <span className='text-[#64607D] text-base xl:text-xl'>
               {t('HOMEPAGE.STEP_SCREEN_HEADER.SUBTITLE')}
             </span>
+            <div className='flex items-center justify-start'>
+              <Button
+                onClick={() => {
+                  isAuth ? setIsOpen(true) : navigate('/login');
+                }}
+                className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
+              >
+                {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -275,7 +286,7 @@ export default function StepScreen({ steps, activeStep }: Props) {
           ))}
         </svg>
       </div>
-      {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
+      <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }

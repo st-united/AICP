@@ -1,23 +1,12 @@
-import { Button, Space } from 'antd';
+import { Space } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 interface QuizHeaderProps {
-  onDownloadAll: () => void;
-  onStartNew: () => void;
-  hasQuizzes: boolean;
-  startNewDisabled: boolean;
   examId?: string | null;
   disableButtons?: boolean;
 }
 
-const QuizHeader = ({
-  onDownloadAll,
-  onStartNew,
-  hasQuizzes,
-  startNewDisabled,
-  examId,
-  disableButtons,
-}: QuizHeaderProps) => {
+const QuizHeader = ({ examId, disableButtons }: QuizHeaderProps) => {
   const { t } = useTranslation();
 
   return (

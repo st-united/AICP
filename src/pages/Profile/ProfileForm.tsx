@@ -1,7 +1,9 @@
-import { Form, Input, DatePicker, Button, Select, Divider } from 'antd';
+import { Form, Input, DatePicker, Button, Select } from 'antd';
 import { Rule } from 'antd/lib/form';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useProfileForm } from './hook/useProfileForm';
 import { useProfileSchema } from './profileSchema';
 import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
@@ -12,7 +14,6 @@ import { yupSync } from '@app/helpers';
 import { UserProfile } from '@app/interface/user.interface';
 
 import './Profile.scss';
-import { useProfileForm } from './hook/useProfileForm';
 
 interface ProfileFormProps {
   userData: UserProfile;
@@ -21,8 +22,7 @@ interface ProfileFormProps {
 const ProfileForm = ({ userData }: ProfileFormProps) => {
   const { t } = useTranslation();
   const validator = [yupSync(useProfileSchema())] as unknown as Rule[];
-
-  if (!userData) return null;
+  const memoizedUserData = useMemo(() => userData, [JSON.stringify(userData)]);
 
   const {
     form,
@@ -36,19 +36,21 @@ const ProfileForm = ({ userData }: ProfileFormProps) => {
     previewImage,
     setPreviewImage,
     setFileImage,
-  } = useProfileForm(userData);
+  } = useProfileForm(memoizedUserData);
 
   const studentOptions = [
     { label: <div className='!px-4'>{t('PROFILE.STUDENT')}</div>, value: true },
     { label: <div className='!px-4'>{t('PROFILE.WORKER')}</div>, value: false },
   ];
 
+  if (!userData) return null;
+
   return (
     <div>
       <div className='bg-[#FF8C5F] h-[145px] rounded-t-2xl'>
         <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
           <CustomAvatar
-            avatar={userData?.avatarUrl}
+            avatar={memoizedUserData?.avatarUrl}
             previewImage={previewImage}
             isEdit={!editing}
             setPreviewImage={setPreviewImage}
