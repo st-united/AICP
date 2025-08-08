@@ -134,25 +134,24 @@ const BannerUserScreen = () => {
               >
                 {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
               </Button>
-              {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
+              {isOpen && !domain ? (
+                <ExamDomainSelectModal
+                  open={isOpen}
+                  onClose={() => setIsOpen(false)}
+                  onSelectDomain={setDomain}
+                />
+              ) : (
+                <ConfirmBeforeTestModal
+                  domain={domain}
+                  open={!!domain}
+                  onClose={() => {
+                    setIsOpen(false);
+                    setDomain('');
+                  }}
+                />
+              )}{' '}
             </div>
           </div>
-          {isOpen && !domain ? (
-            <ExamDomainSelectModal
-              open={isOpen}
-              onClose={() => setIsOpen(false)}
-              onSelectDomain={setDomain}
-            />
-          ) : (
-            <ConfirmBeforeTestModal
-              domain={domain}
-              open={!!domain}
-              onClose={() => {
-                setIsOpen(false);
-                setDomain('');
-              }}
-            />
-          )}
 
           {/* Mobile Sponsors */}
           <div
