@@ -550,7 +550,9 @@
       "TITLE": "Khoá học: AI cơ bản",
       "DESCRIPTION": "Nắm vững các khái niệm AI cơ bản để bắt đầu hành trình của bạn",
       "LINK": "Xem chi tiết"
-    }
+    },
+    "VIEW_DETAIL": "Xem chi tiết",
+    "SUGGESTION_REGISTER": "Đăng ký ngay"
   },
   "TEST": {
     "TEST_TITLE": "Bài kiểm tra năng lực",
@@ -804,5 +806,19 @@
     "UPDATE_PHONE_TITLE": "Cập nhật số điện thoại",
     "CONFIRM_PHONE": "Gửi OTP",
     "PHONE_NULL": "Bạn chưa có số điện thoại"
+  },
+  "COURSES": {
+    "ERROR_OCCURRED": "Đã xảy ra lỗi",
+    "COURSE_LOAD_ERROR": "Không thể tải thông tin khóa học. Vui lòng thử lại sau.",
+    "COURSE_DESCRIPTION": "Mô tả khóa học",
+    "COURSE_INFORMATION": "Thông tin khóa học",
+    "CONTACT_INFORMATION": "Thông tin liên hệ",
+    "COURSE_OVERVIEW": "Thông tin tổng quan:",
+    "TARGET_AUDIENCE": "Đối tượng",
+    "REGISTER_NOW": "Đăng ký ngay",
+    "REGISTERED": "Đã đăng ký",
+    "RELATED_COURSES": "Các khóa học liên quan",
+    "COURSE_REGISTRATION_SUCCESS": "Đăng ký khóa học thành công!",
+    "COURSE_REGISTRATION_SUCCESS_MESSAGE": "Đội ngũ DevPlus sẽ sớm liên hệ với bạn để trao đổi về thông tin khóa học!"
   }
 }
