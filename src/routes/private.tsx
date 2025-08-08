@@ -64,10 +64,6 @@ const routes = [
             element: <PasswordChangeForm />,
           },
           {
-            path: NAVIGATE_URL.PORTFOLIO,
-            element: <PortfolioContent />,
-          },
-          {
             path: NAVIGATE_URL.TEST_RESULT,
             element: <ExamHistory />,
           },
