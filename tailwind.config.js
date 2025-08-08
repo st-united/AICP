@@ -62,6 +62,8 @@ module.exports = {
       lgM: '1440px',
       lgL: '1600px',
       xl: '1920px',
+      'max-xs400': { max: '400px' },
+      'max-xs370': { max: '370px' },
       'h-sm': { raw: '(min-height: 600px)' },
       'h-md': { raw: '(min-height: 700px)' },
       'h-lg': { raw: '(min-height: 800px)' },
