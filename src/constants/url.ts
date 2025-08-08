@@ -40,4 +40,5 @@ export const API_URL = {
   COURSES_REGISTER: (id: string) => `/courses/${id}/register`,
   SCHEDULE: '/mentors/create-scheduler',
   CHECK_MY_INTERVIEW: '/mentors/check-my-interview-request',
+  CHECK_AVAILABLE_INTERVIEW: '/bookings/available-slots',
 };

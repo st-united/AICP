@@ -7,6 +7,10 @@ export const checkMyInterview = async (examId: string) => {
   return await axios.get(`${API_URL.CHECK_MY_INTERVIEW}/${examId}`);
 };
 
+export const getAvailableInterview = async (examId: string) => {
+  return await axios.get(`${API_URL.CHECK_AVAILABLE_INTERVIEW}/${examId}`);
+};
+
 export const createBookedSlots = async (data: CreateScheduleParams) => {
   return await axios.post(API_URL.SCHEDULE, data);
 };
