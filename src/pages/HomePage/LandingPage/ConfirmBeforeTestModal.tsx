@@ -20,7 +20,7 @@ interface ConfirmBeforeTestModalProps {
 export default function ConfirmBeforeTestModal({
   open,
   onClose,
-  domain = 'AI For Fresher',
+  domain,
 }: ConfirmBeforeTestModalProps) {
   const navigate = useNavigate();
 
