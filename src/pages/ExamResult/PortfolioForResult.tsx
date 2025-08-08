@@ -6,7 +6,8 @@ import PortfolioConfirmationModal from '@app/components/molecules/Portfolio/comp
 import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
 import InterviewSuccessModal from '@app/components/molecules/TestResult/StepComponent/InterviewBooking/InterviewSuccessModal';
 import { NAVIGATE_URL } from '@app/constants';
-import { useCheckBooking, useUserBooking } from '@app/hooks/useBooking';
+import { EXAM_LATEST } from '@app/constants/testing';
+import { useCheckInterviewRequest, useUserInterviewRequest } from '@app/hooks/useBooking';
 import {
   PORTFOLIO_FIELD_DISPLAY_NAMES,
   PortfolioRequest,
@@ -23,15 +24,19 @@ const PortfolioForResult: React.FC = () => {
       }
     | undefined
   >();
-  const { data: bookingStatus } = useCheckBooking();
-  const { mutate: userBooking } = useUserBooking();
+  const { data: bookingStatus } = useCheckInterviewRequest();
+  const { mutate: userBooking } = useUserInterviewRequest();
+  const examId = localStorage.getItem(EXAM_LATEST);
   const handleBooking = () => {
-    if (!bookingStatus?.hasBooking) {
-      userBooking(undefined, {
-        onSuccess: () => {
-          setOpenInterviewBookingModal(true);
+    if (!bookingStatus?.hasInterviewRequest) {
+      userBooking(
+        { examId: examId as string },
+        {
+          onSuccess: () => {
+            setOpenInterviewBookingModal(true);
+          },
         },
-      });
+      );
     }
   };
   const missingItems = useMemo(() => {

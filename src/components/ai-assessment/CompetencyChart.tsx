@@ -24,7 +24,7 @@ const CompetencyChart = ({ data }: ColumnChartProps) => {
             top: 20,
             right: 10,
             left: 10,
-            bottom: 60,
+            bottom: 0,
           }}
         >
           <defs>
@@ -49,18 +49,6 @@ const CompetencyChart = ({ data }: ColumnChartProps) => {
             width={30}
           />
 
-          <ReferenceLine
-            y={1.5}
-            stroke='#ef4444'
-            strokeDasharray='5 5'
-            label={{
-              value: 'Chuẩn',
-              position: 'top',
-              fill: '#ef4444',
-              fontSize: 10,
-              offset: 10,
-            }}
-          />
           <Tooltip
             cursor={{ fill: '#f3f4f6' }}
             contentStyle={{
