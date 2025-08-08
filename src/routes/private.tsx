@@ -14,6 +14,7 @@ import ExamHistory from '@app/pages/Profile/ExamHistory';
 import ViewCourseDetail from '@app/pages/ViewCourseDetail/ViewCourseDetail';
 import ExamDetailPage from '@app/pages/Profile/ExamDetailPage';
 import AIReadinessCoursePage from '@app/pages/ViewCourseDetail/ViewCourseDetail';
+import ProfilePage from '@app/pages/Profile/ProfilePage';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
@@ -57,7 +58,7 @@ const routes = [
         children: [
           {
             path: NAVIGATE_URL.PROFILE,
-            element: <Profile />,
+            element: <ProfilePage />,
           },
           {
             path: NAVIGATE_URL.CHANGE_PASSWORD,
