@@ -36,7 +36,7 @@ const SuccessModal = ({
       classNames={{ content: '!rounded-2xl' }}
     >
       <div className='text-center p-2 xsM:p-4'>
-        <div className=' xsM:w-16 xsM:h-16 mx-auto mb-3 xsM:mb-4 rounded-full bg-green-100 flex items-center justify-center'>
+        <div className=' xsM:w-16 xsM:h-16 mx-auto mb-3 xsM:mb-4 rounded-full flex items-center justify-center'>
           {icon || defaultIcon}
         </div>
 

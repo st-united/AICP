@@ -27,8 +27,7 @@ const ProfileLayout = () => {
         </div>
       </div>
 
-      <Layout className='pt-0 px-4 pb-4'>
-        {/* Mobile Sidebar with Drawer */}
+      <Layout className=' p-4'>
         {isMobile ? (
           <>
             <Button
@@ -49,7 +48,7 @@ const ProfileLayout = () => {
           </>
         ) : (
           <Sider
-            width={isTablet ? 200 : 300} // Giảm width cho tablet
+            width={isTablet ? 200 : 300}
             collapsible={false}
             collapsed={collapsed}
             onCollapse={setCollapsed}

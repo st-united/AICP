@@ -20,10 +20,10 @@ export default function StepScreen({ steps, activeStep }: Props) {
   const pathRef = useRef<SVGPathElement>(null);
   const [animate, setAnimate] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
   const isAuth = useSelector((state: any) => state.auth.isAuth);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {

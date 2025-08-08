@@ -47,7 +47,11 @@ const Breadcrumbs = () => {
     ...extraBreadcrumbItems,
   ];
 
-  return <Breadcrumb items={breadcrumbItems} />;
+  return (
+    <div className='max-xs400:px-16'>
+      <Breadcrumb items={breadcrumbItems} />
+    </div>
+  );
 };
 
 export default Breadcrumbs;

@@ -23,8 +23,6 @@ export const checkHasTakenExamDefault = async () =>
 export const getHistoryTestingApi = (params?: GetHistoryParams) =>
   axios.get(API_URL.HISTORY_TESTING, { params });
 
-export const getUserProfileAPI = async () => await axios.get(API_URL.GET_PROFILE);
-
 export const updateUser = async (user: UserDetail) =>
   await axios.patch(`${API_URL.USERS}/${user.id}`, user);
 

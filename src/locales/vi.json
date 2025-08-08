@@ -159,7 +159,8 @@
     "START_CONFIRM_TEST_AGAIN": "Tiếp tục làm",
     "BACK": "Quay lại",
     "REVIEW_RESULT": "Xem lại kết quả",
-    "NOTE_CONFIRM_TEST": "LƯU Ý"
+    "NOTE_CONFIRM_TEST": "LƯU Ý",
+    "TITLE_SELECT_EXAM_DOMAIN": "Vui lòng chọn ngành nghề để tiếp tục"
   },
   "VALIDATE": {
     "MIN": " {{field}} phải lớn hơn hoặc bằng {{number}}",
@@ -337,9 +338,15 @@
     "FEATURES_TITLE": "Tại sao nên tham gia?",
     "FEATURES_SUBTITLE": "Khám phá hành trình phát triển năng lực ứng dụng AI toàn diện, kết nối cơ hội nghề nghiệp và tăng tốc thành công trong kỷ nguyên AI",
     "FEATURES_BENEFITS": [
-      { "TITLE": "Đánh giá chính xác" },
-      { "TITLE": "Kết nối chuyên gia" },
-      { "TITLE": "Lộ trình hóa cá nhân" }
+      {
+        "TITLE": "Đánh giá chính xác"
+      },
+      {
+        "TITLE": "Kết nối chuyên gia"
+      },
+      {
+        "TITLE": "Lộ trình hóa cá nhân"
+      }
     ],
     "STEP_LABEL": "Bước thực hiện",
     "STEP_TITLE": "Khám phá năng lực AI của bạn",
@@ -350,7 +357,6 @@
     "STEP1_TITLE": "Tham gia bài kiểm tra trực tuyến",
     "STEP1_DESC": "Đăng ký tài khoản và hoàn thành bài kiểm tra trực tuyến (30 - 45 phút) để đánh giá năng lực ứng dụng AI của bạn",
     "STEP1_BUTTON": "Tham gia ngay",
-
     "STEP2_MONITOR_NOTE": "Hơn 15,000 người đã nâng tầm sự nghiệp với AI - Bạn là người tiếp theo?",
     "STEP2": "Bước 2",
     "STEP2_TITLE": "Chọn thời gian và chuyên gia phỏng vấn",
@@ -773,7 +779,6 @@
     "EMAIL": "Email: hello@devplus.edu.vn",
     "HOTLINE": "Hotline: (+84) 93 190 1608"
   },
-
   "PRIVACY": {
     "TITLE": "Chính sách Bảo mật",
     "COLLECT_TITLE": "Thu thập thông tin",
