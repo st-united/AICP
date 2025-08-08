@@ -1,11 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { QUERY_KEY } from '@app/constants';
+import { ExamSlotsReportDto } from '@app/interface/interview.interface';
 import {
   CheckInterviewRequestResponse,
   CreateScheduleParams,
 } from '@app/interface/mentor.interface';
-import { checkMyInterview, createBookedSlots } from '@app/services/mentorAPI';
+import {
+  checkMyInterview,
+  createBookedSlots,
+  getAvailableInterview,
+} from '@app/services/mentorAPI';
 
 export const useCheckInterview = (examId: string) => {
   return useQuery({
@@ -18,12 +23,22 @@ export const useCheckInterview = (examId: string) => {
   });
 };
 
+export const useAvailableInterview = (examId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEY.SLOT_INTERVIEW, examId],
+    queryFn: async (): Promise<ExamSlotsReportDto | null> => {
+      const response = await getAvailableInterview(examId);
+      return response.data.data;
+    },
+    enabled: !!examId,
+  });
+};
+
 export const useCreateSchedule = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data: CreateScheduleParams) => {
-      console.log('🚀 ~ useCreateSchedule ~ data:', data);
       return await createBookedSlots(data);
     },
     onSuccess: () => {

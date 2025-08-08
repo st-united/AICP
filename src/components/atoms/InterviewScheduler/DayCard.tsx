@@ -22,11 +22,11 @@ const DayCard: React.FC<DayCardProps> = ({ day, selectedSlot, onSlotSelect }) =>
     >
       {/* Date Header */}
       <div className='bg-orange-500 text-white text-center py-4'>
-        <div className='text-3xl font-extrabold'>{day.date}</div>
+        <div className='text-2xl font-extrabold'>{day.date}</div>
         <div className='text-base'>
           {t('MENTOR_BOOKING.BOOKING_MONTH_FORMAT', { month: day.month })}
         </div>
-        <div className='text-3xl font-bold'>{day.day}</div>
+        <div className='text-2xl font-bold'>{day.day}</div>
       </div>
 
       {/* Time Slots */}
