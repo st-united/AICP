@@ -8,10 +8,7 @@ import { useForgotPasswordSchema } from './ForgotPasswordSchema';
 import { InputField, Button } from '@app/components/ui/index';
 import { yupSync } from '@app/helpers/yupSync';
 import { useForgotPassword } from '@app/hooks/useUser';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 
 import './ForgotPassword.scss';
 

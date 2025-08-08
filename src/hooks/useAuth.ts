@@ -14,10 +14,7 @@ import {
   loginWithGoogleApi,
   resendActivationEmailApi,
 } from '@app/services';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 
 export const useLogin = () => {
   const navigate = useNavigate();

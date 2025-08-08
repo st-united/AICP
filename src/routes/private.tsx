@@ -12,6 +12,7 @@ import Booking from '@app/pages/MentorBooking';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
 import ExamDetailPage from '@app/pages/Profile/ExamDetailPage';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
+import ProfilePage from '@app/pages/Profile/ProfilePage';
 import ViewCourseDetail from '@app/pages/ViewCourseDetail/ViewCourseDetail';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
@@ -56,7 +57,7 @@ const routes = [
         children: [
           {
             path: NAVIGATE_URL.PROFILE,
-            element: <Profile />,
+            element: <ProfilePage />,
           },
           {
             path: NAVIGATE_URL.CHANGE_PASSWORD,

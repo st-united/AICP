@@ -29,10 +29,7 @@ import {
   PortfolioContextType,
   PortfolioRequest,
 } from '@app/interface/portfolio.interface';
-import {
-  openNotificationWithIcon,
-  NotificationTypeEnum,
-} from '@app/services/notification/notificationService';
+import { openNotificationWithIcon, NotificationTypeEnum } from '@app/components/atoms/notification';
 
 const PortfolioContext = createContext<PortfolioContextType | undefined>(undefined);
 
