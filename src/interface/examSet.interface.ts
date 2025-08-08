@@ -1,3 +1,5 @@
+import { Course } from './course.interface';
+
 export interface ExamSetDetail {
   id: string;
   examId: string;
@@ -63,21 +65,4 @@ export interface Answer {
   id: string;
   content: string;
   isCorrect: boolean;
-}
-export interface Course {
-  id: string;
-  title: string;
-  description: string;
-  provider: string;
-  url: string;
-  linkImage: string;
-  courseType: string;
-  durationHours: string;
-  difficultyLevel: null;
-  aspectId: string;
-  domainId: string;
-  sfiaLevels: string[];
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
 }

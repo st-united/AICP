@@ -10,6 +10,7 @@ import Booking from '@app/pages/MentorBooking';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
 import ExamDetailPage from '@app/pages/Profile/ExamDetailPage';
+import AIReadinessCoursePage from '@app/pages/ViewCourseDetail/ViewCourseDetail';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
@@ -45,6 +46,10 @@ const routes = [
           {
             path: NAVIGATE_URL.TEST_RESULT_DETAIL,
             element: <ExamResult />,
+          },
+          {
+            path: NAVIGATE_URL.DETAIL_COURSE,
+            element: <AIReadinessCoursePage />,
           },
         ],
       },
