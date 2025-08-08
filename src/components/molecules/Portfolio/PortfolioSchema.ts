@@ -5,6 +5,17 @@ export const usePortfolioSchema = () => {
   const { t } = useTranslation();
 
   return yup.object().shape({
+    isStudent: yup.boolean().required(t('VALIDATE.USER_INFO_REQUIRED') as string),
+    university: yup.string().when('isStudent', {
+      is: true,
+      then: (schema) => schema.required(t('VALIDATE.USER_UNIVERSITY_REQUIRED') as string),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    studentCode: yup.string().when('isStudent', {
+      is: true,
+      then: (schema) => schema.required(t('VALIDATE.USER_STUDENT_CODE_REQUIRED') as string),
+      otherwise: (schema) => schema.notRequired(),
+    }),
     linkedInUrl: yup
       .string()
       .url(t('VALIDATE.URL_INVALID') as string)

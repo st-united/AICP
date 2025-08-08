@@ -88,9 +88,8 @@ const FilePreview: React.FC = () => {
             <iframe
               src={selectedFile?.url || selectedFile?.thumbUrl}
               title='File Preview'
-              className='w-full h-full border rounded'
+              className='w-full h-full border rounded min-height-[500]'
               onLoad={() => setIsPreviewLoading(false)}
-              style={{ minHeight: 500 }}
             />
           </div>
         )}

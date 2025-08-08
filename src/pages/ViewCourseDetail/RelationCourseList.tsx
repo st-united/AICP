@@ -1,8 +1,9 @@
 import { CheckCircleFilled } from '@ant-design/icons';
 import { Button } from 'antd';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import SuccessModal from '@app/components/molecules/Modal/SuccessModal';
 import { NAVIGATE_URL } from '@app/constants';
 import { useRegisterCourse } from '@app/hooks/useCourse';
 import { Course } from '@app/interface/course.interface';
@@ -10,17 +11,27 @@ import { Course } from '@app/interface/course.interface';
 interface RelationCourseListProps {
   courses: Course[];
   title?: string;
+  className?: string;
+  noShadow?: boolean;
 }
 
-const RelationCourseList: React.FC<RelationCourseListProps> = ({ courses, title }) => {
+const RelationCourseList: React.FC<RelationCourseListProps> = ({
+  courses,
+  title,
+  className,
+  noShadow,
+}) => {
   const { t } = useTranslation();
   const { mutate: registerCourse, isPending } = useRegisterCourse();
-
+  const [selectedCourse, setSelectedCourse] = useState<string>();
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
   const handleRegister = useCallback(
     (courseId: string) => {
+      setSelectedCourse(courseId);
       registerCourse(courseId, {
         onSuccess: () => {
-          window.open(NAVIGATE_URL.DETAIL_COURSE_DYNAMIC(courseId), '_blank');
+          setIsSuccessModalVisible(true);
+          setSelectedCourse('');
         },
       });
     },
@@ -34,11 +45,12 @@ const RelationCourseList: React.FC<RelationCourseListProps> = ({ courses, title 
       </div>
     );
   }
-
+  const baseClass = 'w-full mx-auto mt-4 xsM:mt-6 bg-white rounded-xl smML:rounded-2xl';
+  const wrapperClass = className ?? `${baseClass} ${noShadow ? '' : 'shadow'}`;
   return (
     <>
-      <div className='w-full mx-auto mt-4 xsM:mt-6 bg-white rounded-xl smML:rounded-2xl shadow'>
-        <h3 className='text-xl xsM:text-2xl sm:text-3xl md:text-4xl lgM:text-5xl font-bold text-[#fe7743] py-4 xsM:py-6 sm:py-8 text-center px-4'>
+      <div className={wrapperClass}>
+        <h3 className='text-[1.625rem] xsM:text-2xl sm:text-3xl md:text-4xl font-bold text-[#fe7743] py-4 xsM:py-6 sm:pb-8 sm:!pt-0 text-center px-4'>
           {title || t('TEST_RESULT.SUGGESTION_TITLE')}
         </h3>
 
@@ -77,7 +89,7 @@ const RelationCourseList: React.FC<RelationCourseListProps> = ({ courses, title 
 
                     <Button
                       type='primary'
-                      loading={isPending}
+                      loading={isPending && selectedCourse === course.id}
                       disabled={isPending || course.isRegistered}
                       className={`rounded-full font-semibold text-xs xsM:text-sm sm:text-base px-3 xsM:px-4 sm:px-5 py-1 xsM:py-1.5 order-1 xsM:order-2 !text-white ${
                         course.isRegistered ? '!bg-[#16610E] cursor-not-allowed' : 'bg-[#fe7743]'
@@ -103,6 +115,12 @@ const RelationCourseList: React.FC<RelationCourseListProps> = ({ courses, title 
               </div>
             </div>
           ))}
+          <SuccessModal
+            visible={isSuccessModalVisible}
+            onClose={() => setIsSuccessModalVisible(false)}
+            title={t('COURSES.COURSE_REGISTRATION_SUCCESS')}
+            message={t('COURSES.COURSE_REGISTRATION_SUCCESS_MESSAGE')}
+          />
         </div>
       </div>
     </>
