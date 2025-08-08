@@ -8,7 +8,6 @@ interface NewTestModalProps {
   confirmProps: {
     onClose: () => void;
   };
-  handleBackInfo: () => void;
   handleStartTest: () => void;
   hasTakenExam?: {
     examSetDuration: number;
@@ -18,7 +17,6 @@ interface NewTestModalProps {
 
 export const NewTestModal = ({
   confirmProps,
-  handleBackInfo,
   handleStartTest,
   hasTakenExam,
 }: NewTestModalProps) => {

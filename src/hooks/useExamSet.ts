@@ -1,11 +1,18 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { setStorageData } from '@app/config';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { EXAM_LATEST, TEST_RESULT_CURRENT_STEP } from '@app/constants/testing';
-import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
+import {
+  ExamSetDetail,
+  ExamSetResult,
+  Question,
+  SubmitExamSetPayload,
+} from '@app/interface/examSet.interface';
 import {
   deleteExamByIdApi,
   downloadCertificateApi,
@@ -14,7 +21,6 @@ import {
   submitDraftQuestionApi,
   submitExamSetApi,
 } from '@app/services';
-import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 
 export const useCountdown = (initialTime: number) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
@@ -158,10 +164,18 @@ export const useDeleteExam = () => {
   );
 };
 export const useGetExamResult = (examId: string) => {
-  return useQuery({
+  return useQuery<ExamSetResult>({
     queryKey: [QUERY_KEY.EXAM_RESULT, examId],
-    queryFn: () => getExamResultApi(examId),
-    select: (data) => data.data.data,
+    queryFn: async () => {
+      const response = await getExamResultApi(examId);
+      return response.data.data;
+    },
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: true,
+    refetchOnReconnect: false,
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
   });

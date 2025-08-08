@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { useForgotPasswordSchema } from './ForgotPasswordSchema';
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { InputField, Button } from '@app/components/ui/index';
 import { yupSync } from '@app/helpers/yupSync';
 import { useForgotPassword } from '@app/hooks/useUser';
-import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 
 import './ForgotPassword.scss';
 

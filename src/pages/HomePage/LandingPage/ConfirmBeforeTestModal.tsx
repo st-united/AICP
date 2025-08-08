@@ -1,5 +1,3 @@
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { ContinueTestModal } from './Modals/ContinueTestModal';
@@ -7,13 +5,7 @@ import { ImproveTestModal } from './Modals/ImproveTestModal';
 import { NewTestModal } from './Modals/NewTestModal';
 import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
-import {
-  useHasTakenExamDefault,
-  useSubmitExam,
-  useUpdateUserStudentInfo,
-  useGetHistory,
-} from '@app/hooks';
-import { RootState } from '@app/redux/store';
+import { useHasTakenExamDefault, useSubmitExam, useGetHistory } from '@app/hooks';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
@@ -21,12 +13,9 @@ interface ConfirmBeforeTestModalProps {
 }
 
 export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeTestModalProps) {
-  const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { mutate: submitExam, isPending } = useSubmitExam();
-  const { mutate: updateUserStudentInfo } = useUpdateUserStudentInfo();
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { mutate: submitExam } = useSubmitExam();
   const { data: hasTakenExam } = useHasTakenExamDefault();
   const { data: historyData } = useGetHistory();
 
@@ -61,7 +50,6 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
     return (
       <NewTestModal
         confirmProps={{ onClose }}
-        handleBackInfo={() => {}}
         handleStartTest={handleStartTest}
         hasTakenExam={hasTakenExam}
       />

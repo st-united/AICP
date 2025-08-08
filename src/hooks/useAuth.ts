@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { removeStorageData, setStorageData } from '@app/config';
 import { ACCESS_TOKEN, NAVIGATE_URL, REFRESH_TOKEN, USER_PROFILE } from '@app/constants';
 import { Credentials, GoogleCredentials, RegisterUser } from '@app/interface/user.interface';
@@ -14,7 +15,6 @@ import {
   loginWithGoogleApi,
   resendActivationEmailApi,
 } from '@app/services';
-import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 
 export const useLogin = () => {
   const navigate = useNavigate();

@@ -1,8 +1,9 @@
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined, LeftOutlined } from '@ant-design/icons';
 import { Button, Drawer, Layout, Grid } from 'antd';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import Breadcrumbs from '@app/components/common/Breadcrumbs';
 import HeaderComponent from '@app/components/Layout/Header/Header';
 import SidebarContent from '@app/components/Layout/Sidebar/Sidebar';
 
@@ -20,8 +21,13 @@ const ProfileLayout = () => {
   return (
     <Layout className='min-h-screen'>
       <HeaderComponent />
+      <div className='pt-6 pb-2 w-full flex justify-center sm:justify-start sm:ml-4'>
+        <div className='w-[90%] sm:w-full'>
+          <Breadcrumbs />
+        </div>
+      </div>
 
-      <Layout className='p-4'>
+      <Layout className='pt-0 px-4 pb-4'>
         {/* Mobile Sidebar with Drawer */}
         {isMobile ? (
           <>

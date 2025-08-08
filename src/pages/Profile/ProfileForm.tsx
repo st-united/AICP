@@ -1,7 +1,8 @@
-import { Form, Input, DatePicker, Button, Select, Divider } from 'antd';
+import { Form, Input, DatePicker, Button, Select } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
 
+import { useProfileForm } from './hook/useProfileForm';
 import { useProfileSchema } from './profileSchema';
 import CustomAvatar from '@app/components/atoms/CustomAvatar/CustomAvatar';
 import JobSelect from '@app/components/atoms/CustomSelect/JobSelect';
@@ -12,7 +13,6 @@ import { yupSync } from '@app/helpers';
 import { UserProfile } from '@app/interface/user.interface';
 
 import './Profile.scss';
-import { useProfileForm } from './hook/useProfileForm';
 
 interface ProfileFormProps {
   userData: UserProfile;
