@@ -102,14 +102,15 @@ export const useQuestionNavigation = (
   return { setQuestionRef, scrollToQuestion };
 };
 
-export const useGetExamSet = () =>
+export const useGetExamSet = (domain: string) =>
   useQuery<ExamSetDetail>(
-    [QUERY_KEY.EXAM_SETS],
+    [QUERY_KEY.EXAM_SETS, domain],
     async () => {
-      const { data } = await getExamSetsApi();
+      const { data } = await getExamSetsApi(domain);
       return data.data;
     },
     {
+      enabled: !!domain,
       cacheTime: 0,
       staleTime: 0,
       refetchOnWindowFocus: false,

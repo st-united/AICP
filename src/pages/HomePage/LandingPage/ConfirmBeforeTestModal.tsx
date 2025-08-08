@@ -14,17 +14,22 @@ import './confirmBeforeTestModal.scss';
 interface ConfirmBeforeTestModalProps {
   open: boolean;
   onClose: () => void;
+  domain?: string;
 }
 
-export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeTestModalProps) {
+export default function ConfirmBeforeTestModal({
+  open,
+  onClose,
+  domain = 'AI For Fresher',
+}: ConfirmBeforeTestModalProps) {
   const navigate = useNavigate();
 
   const { mutate: submitExam } = useSubmitExam();
   const { data: exam } = useHasTakenExamDefault();
   const { data: hasTakenExam } = useHasTakenExamDefault();
-  const { data: historyData } = useGetHistory();
+  const { data: historyData } = useGetHistory({ examSetName: domain });
 
-  const handleStartTest = () => navigate(NAVIGATE_URL.TEST);
+  const handleStartTest = () => navigate(NAVIGATE_URL.TEST, { state: { domain } });
   const handleReviewResult = () => navigate(NAVIGATE_URL.TEST_RESULT);
 
   const renderModalContent = () => {
