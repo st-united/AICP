@@ -1,8 +1,7 @@
 import { CameraFilled, LoadingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, GetProp, Upload, UploadFile, UploadProps } from 'antd';
-import { useState } from 'react';
-
 import { RcFile, UploadChangeParam } from 'antd/es/upload';
+import { useState } from 'react';
 
 interface Props {
   avatar?: string;

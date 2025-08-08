@@ -1,5 +1,4 @@
 import { UserOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 

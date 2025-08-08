@@ -3,15 +3,12 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
 
 import { noExamHistory } from '@app/assets/images';
+import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
 import { RootState } from '@app/redux/store';
-interface EmptyStateProps {
-  onStartFirst: () => void;
-}
 
-const EmptyState = ({}: EmptyStateProps) => {
+const EmptyState = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
