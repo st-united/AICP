@@ -34,27 +34,38 @@ export const useProfileSchema = () => {
       .string()
       .nullable()
       .required(t('VALIDATE.PHONE_REQUIRED') as string)
-      .matches(
-        /^\S(?:.*\S)?$/,
-        t('VALIDATE.NOT_ALLOW_SPACE', { field: t('PROFILE.PHONE') }) as string,
-      )
-      .matches(/^(?!\s*$).+/, t('VALIDATE.PHONE_REQUIRED') as string)
+      .matches(/^\S+$/, t('VALIDATE.NOT_ALLOW_SPACE', { field: t('PROFILE.PHONE') }) as string)
+      .test('no-leading-zero-after-84', t('VALIDATE.NO_LEADING_ZERO') as string, function (value) {
+        if (!value) return true;
+        const normalized = value.replace(/[\s()-]/g, '');
+        if (normalized.startsWith('+84')) {
+          return !/^(\+84)0/.test(normalized);
+        }
+        return true;
+      })
       .test(
-        'valid-phone',
+        'exactly-9-digits-after-84',
+        t('VALIDATE.PHONE_MUST_BE_9_DIGITS') as string,
+        function (value) {
+          if (!value) return true;
+          const normalized = value.replace(/[\s()-]/g, '');
+          if (normalized.startsWith('+84')) {
+            return /^\+84[1-9]\d{8}$/.test(normalized);
+          }
+          return true;
+        },
+      )
+      .test(
+        'valid-international-format',
         t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
         function (value) {
           if (!value) return false;
+          const normalized = value.replace(/[\s()-]/g, '');
 
-          // Chuẩn hóa giá trị để kiểm tra
-          const normalized = value.replace(/[\s()-]/g, '').replace(/^\(\+(\d{1,6})\)/, '+$1');
-
-          // Kiểm tra mã quốc gia +84 (phải có đúng 9 chữ số)
-          if (normalized.startsWith('+84') || normalized.startsWith('(+84)')) {
-            return /^(\(\+84\)|\+84)\d{9}$/.test(value);
+          if (normalized.startsWith('+84')) {
+            return true;
           }
-
-          // Các mã quốc gia khác: 6-14 chữ số
-          return /^(\(\+\d{1,6}\)|\+\d{1,6})\d{6,14}$/.test(value);
+          return /^\+\d{1,6}\d{6,14}$/.test(normalized);
         },
       ),
 
