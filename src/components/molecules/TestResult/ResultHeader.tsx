@@ -16,10 +16,7 @@ import { getStorageData } from '@app/config';
 import { EXAM_LATEST } from '@app/constants/testing';
 import { useDownloadCertificate } from '@app/hooks/useExamSet';
 import { RootState } from '@app/redux/store';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 
 const ResultHeader = () => {
   const { t } = useTranslation();

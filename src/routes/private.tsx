@@ -5,10 +5,11 @@ import ExamResult from '@app/components/molecules/TestResult/ExamResult';
 import BaseLayout from '@app/components/templates/BaseLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { NAVIGATE_URL } from '@app/constants';
-import { AptitudeTest, Profile, Capacity } from '@app/pages';
+import { AptitudeTest, Capacity } from '@app/pages';
 import Booking from '@app/pages/MentorBooking';
 import PasswordChangeForm from '@app/pages/Profile/ChangePassword';
 import ExamHistory from '@app/pages/Profile/ExamHistory';
+import ProfilePage from '@app/pages/Profile/ProfilePage';
 import AIReadinessCoursePage from '@app/pages/ViewCourseDetail/ViewCourseDetail';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
@@ -57,7 +58,7 @@ const routes = [
         children: [
           {
             path: NAVIGATE_URL.PROFILE,
-            element: <Profile />,
+            element: <ProfilePage />,
           },
           {
             path: NAVIGATE_URL.CHANGE_PASSWORD,
