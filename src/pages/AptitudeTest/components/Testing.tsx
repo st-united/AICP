@@ -7,7 +7,7 @@ import {
 import { Button, Divider, Modal, Progress, Spin } from 'antd';
 import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import QuestionDisplay from './QuestionDisplay';
 import QuestionIndexPanel from './QuestionIndexPanel';
@@ -23,7 +23,6 @@ const Testing = () => {
   });
   const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
   const [currentQuestionScroll, setCurrentQuestionScroll] = useState<string>('');
-  const [flaggedQuestions, setFlaggedQuestions] = useState<string[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
@@ -61,12 +60,6 @@ const Testing = () => {
   const handleQuestionSelect = useCallback((questionId: string) => {
     setCurrentQuestion({ id: questionId, timestamp: Date.now() });
     setCurrentQuestionScroll(questionId);
-  }, []);
-
-  const handleFlagToggle = useCallback((questionId: string) => {
-    setFlaggedQuestions((prev) =>
-      prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
-    );
   }, []);
 
   const handleAnswerSelect = useCallback(
@@ -127,17 +120,6 @@ const Testing = () => {
       },
     });
   }, [examSet, submitExam]);
-
-  const handleCloseModal = useCallback(() => {
-    if (!examSet?.questions) return;
-    const unanswered = examSet.questions.filter(
-      (question) => !answeredQuestions.includes(question.id),
-    );
-    if (unanswered.length > 0) {
-      setUnansweredQuestions(unanswered);
-    }
-    setIsModalOpen(true);
-  }, [examSet, answeredQuestions, setUnansweredQuestions]);
 
   const handleQuestionClick = useCallback((questionId: string) => {
     setIsSubmitModalOpen(false);
@@ -217,16 +199,12 @@ const Testing = () => {
   const isShaking = remainingTime <= 60;
 
   return (
-    <div className='exam-container relative overflow-hidden'>
+    <div className='exam-container relative overflow-hidden h-full'>
       {/* Header - Improved mobile spacing */}
-      <div className='flex flex-col justify-start items-center w-full py-4 px-4 gap-2 sm:py-8 sm:px-6 sm:gap-4'>
-        <div className='flex text-lg sm:text-xl md:text-2xl leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
-          <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>
-          <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
-        </div>
-        <span className='text-[#686868] text-base sm:text-lg md:text-xl font-semibold text-center px-2'>
-          {t('TEST.SUB_TITLE')}
-        </span>
+
+      <div className='justify-start items-center w-full text-lg sm:text-xl md:text-[32px] leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
+        <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>{' '}
+        <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
       </div>
 
       <div className='flex flex-col sm:flex-row p-2 sm:p-3 md:p-6 custom-no-padding-bottom'>
@@ -237,8 +215,6 @@ const Testing = () => {
             currentQuestion={currentQuestion}
             currentQuestionScroll={currentQuestionScroll}
             answeredQuestions={answeredQuestions}
-            flaggedQuestions={flaggedQuestions}
-            onFlagToggle={handleFlagToggle}
             onQuestionSelect={handleQuestionSelect}
             isAutoScrolling={isAutoScrolling}
           />
@@ -260,27 +236,16 @@ const Testing = () => {
               className='absolute inset-0 bg-black/50'
               aria-label='Close menu overlay'
             />
-            <div className='absolute right-2 top-2 bottom-2 w-[280px] bg-white rounded-2xl shadow-xl overflow-hidden'>
-              <div className='flex justify-between items-center p-4 border-b'>
-                <h3 className='font-semibold text-lg'>{t('TEST.QUESTIONS')}</h3>
-                <button
-                  onClick={() => setIsMenuOpen(false)}
-                  className='p-2 rounded-full hover:bg-gray-100'
-                >
-                  <CloseOutlined className='text-xl' />
-                </button>
-              </div>
-              <div className='h-full overflow-y-auto pb-20'>
+            <div className='absolute right-2 top-20 bottom-2 w-[280px] bg-white rounded-2xl shadow-xl overflow-hidden'>
+              <div className='h-full'>
                 <QuestionIndexPanel
                   questions={examSet.questions}
                   currentQuestion={currentQuestion}
                   currentQuestionScroll={currentQuestionScroll}
                   answeredQuestions={answeredQuestions}
-                  flaggedQuestions={flaggedQuestions}
-                  onFlagToggle={handleFlagToggle}
                   onQuestionSelect={(questionId) => {
                     handleQuestionSelect(questionId);
-                    setIsMenuOpen(false); // Close menu when question is selected
+                    setIsMenuOpen(false);
                   }}
                   isAutoScrolling={isAutoScrolling}
                 />
@@ -290,7 +255,7 @@ const Testing = () => {
         )}
 
         {/* Main content area - Improved mobile spacing */}
-        <div className='flex-1 sm:ml-6'>
+        <div className='flex-1 sm:ml-6 shadow-xl rounded-xl'>
           <div className='flex flex-col w-full bg-white p-3 sm:p-6 md:p-10 rounded-xl'>
             <div className='w-full'>
               <div className='flex justify-between mb-2'>
@@ -314,14 +279,18 @@ const Testing = () => {
             <Divider className='my-3 sm:my-4' />
 
             {/* Improved mobile height calculation */}
-            <div className='overflow-y-auto h-[calc(100vh-240px)] sm:h-[calc(100vh-310px)] md:h-[calc(100vh-320px)]'>
+            <div
+              className='overflow-y-auto 
+              h-[calc(100vh-270px)]
+              sm:h-[calc(100vh-310px)]
+              md:h-[calc(100vh-360px)]
+              h-2xl:h-[calc(100vh-310px)]'
+            >
               <QuestionDisplay
                 questions={examSet.questions}
                 currentQuestion={currentQuestion}
                 currentQuestionScroll={currentQuestionScroll}
                 onQuestionInViewChange={handleQuestionInViewChange}
-                flaggedQuestions={flaggedQuestions}
-                onFlagToggle={handleFlagToggle}
                 onAnswerSelect={(questionId, answerId) => {
                   const question = examSet.questions.find((q: Question) => q.id === questionId);
                   if (question) {
@@ -333,7 +302,7 @@ const Testing = () => {
               />
 
               {/* Submit button - Better mobile styling */}
-              <div className='flex justify-center my-4 px-4'>
+              <div className='flex justify-center mt-4 mb-1 px-4'>
                 <Button
                   className='bg-[#FE7743] rounded-3xl text-white px-8 py-3 h-auto text-base sm:text-lg font-bold border-[#FE7743] hover:border-2 hover:border-[#FE7743] hover:bg-white hover:text-[#FE7743] w-full sm:w-auto'
                   onClick={handleSubmit}
@@ -371,23 +340,28 @@ const Testing = () => {
               </div>
             </div>
 
-            <p className='text-base sm:text-lg font-medium text-center py-2 sm:py-4 px-2'>
-              {t('SUBMIT.UNANSWERED_MESSAGE', { count: unansweredQuestions.length })}
+            <h2 className='text-2xl font-bold text-black mb-1 text-center'>{t('SUBMIT.TITLE')}</h2>
+            <p className='text-base sm:text-lg font-medium text-center py-2 sm:p-2'>
+              <Trans
+                i18nKey={'SUBMIT.UNANSWERED_MESSAGE'}
+                values={{ count: unansweredQuestions.length }}
+                components={{ bold: <span className='font-bold text-[#FE7743]' /> }}
+              />
             </p>
 
             {/* Stats section - Better mobile layout */}
             <div className='text-sm sm:text-lg flex flex-col gap-2 font-medium px-2'>
-              <div className='flex justify-between'>
+              <div className='flex gap-2'>
                 <span>{t('TEST.TOTAL_QUESTION')}:</span>
                 <span className='font-bold'>{examSet.questions.length}</span>
               </div>
-              <div className='flex justify-between'>
+              <div className='flex gap-2'>
                 <span>{t('TEST.ANSWERED_QUESTION')}:</span>
                 <span className='font-bold'>{answeredQuestions.length}</span>
               </div>
-              <div className='flex flex-col gap-1'>
+              <div className='flex flex-col sm:flex-row gap-2 sm:items-center'>
                 <span>{t('TEST.UNANSWERED_QUESTION')}:</span>
-                <div className='font-bold text-[#FE7743] text-xs sm:text-sm'>
+                <span className='font-bold text-[#FE7743]'>
                   {unansweredQuestions.slice(0, 3).map((question, index) => {
                     const questionIndex =
                       examSet.questions.findIndex((q) => q.id === question.id) + 1;
@@ -428,7 +402,7 @@ const Testing = () => {
                       {')'}
                     </span>
                   )}
-                </div>
+                </span>
               </div>
             </div>
 

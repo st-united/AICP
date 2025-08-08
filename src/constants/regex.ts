@@ -1,4 +1,4 @@
-export const PHONE_REGEX_PATTERN = /^\(\+[1-9]\d{1,3}\)[1-9]\d{5,9}$/;
+export const PHONE_REGEX_PATTERN = /^\(\+[1-9]\d{1,4}\)[1-9]\d{7,15}$/;
 
 export const DIAL_CODE_REGEX_PATTERN = /^\(\+\d{1,4}\)$/;
 
