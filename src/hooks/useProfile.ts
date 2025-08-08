@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { ChangePassword, Job, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
@@ -12,7 +13,6 @@ import {
   updateProfileApi,
   uploadAvatarApi,
 } from '@app/services';
-import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 
 export const useGetProfile = (isAuth = true) => {
   const dispatch = useDispatch();

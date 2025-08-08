@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import {
   GetUsersParams,
@@ -30,7 +31,6 @@ import {
   UpdateUserStudentInfoApi,
   getUserProfileAPI,
 } from '@app/services';
-import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 
 export const useCreateUser = () => {
   const navigate = useNavigate();

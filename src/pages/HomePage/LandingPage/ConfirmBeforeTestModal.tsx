@@ -17,11 +17,11 @@ interface ConfirmBeforeTestModalProps {
 }
 
 export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeTestModalProps) {
-  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { mutate: submitExam, isPending } = useSubmitExam();
   const { data: exam } = useHasTakenExamDefault();
+  const { data: hasTakenExam } = useHasTakenExamDefault();
   const { data: historyData } = useGetHistory();
 
   const handleStartTest = () => navigate(NAVIGATE_URL.TEST);

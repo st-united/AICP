@@ -1,8 +1,9 @@
-import { useParams, useNavigate } from 'react-router-dom';
 import { Spin } from 'antd';
-import { useExamDetail } from '@app/hooks';
-import ErrorState from './QuizManagement/ErrorState';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import ExamDetailView from './ExamDetailView';
+import ErrorState from './QuizManagement/ErrorState';
+import { useExamDetail } from '@app/hooks';
 
 const ExamDetailPage = () => {
   const { examId } = useParams<{ examId: string }>();
