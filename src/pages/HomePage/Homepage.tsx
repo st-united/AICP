@@ -2,12 +2,12 @@ import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import FeatureSection from '@app/components/LandingPage/FeatureSection';
-import StepSection from '@app/components/LandingPage/StepSection';
 import FaqSection from '@app/components/Layout/FaqSection/FaqSection';
 import FooterSection from '@app/components/Layout/Footer/FooterSection';
 import BannerUserScreen from '@app/components/UserPage/BannerUserScreen';
 import StepScreen from '@app/components/UserPage/StepScreen';
+import FeatureSection from '@app/pages/HomePage/LandingPage/FeatureSection';
+import StepSection from '@app/pages/HomePage/LandingPage/StepSection';
 
 const Homepage = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);

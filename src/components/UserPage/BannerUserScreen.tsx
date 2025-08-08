@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { RobotHand } from '@app/assets/images';
 import { PartnerUnit1, PartnerUnit2, CelebUnit, DevPlus } from '@app/assets/images/Logos';
-import '../LandingPage/homepage.scss';
+import '@app/pages/HomePage/LandingPage/homepage.scss';
 
 const BannerUserScreen = () => {
   const { t } = useTranslation();
