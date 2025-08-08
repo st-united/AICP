@@ -107,6 +107,7 @@ export interface HistoryTesting {
 export interface GetHistoryParams {
   startDate?: string;
   endDate?: string;
+  examSetName?: string;
 }
 export interface Job {
   id: number;

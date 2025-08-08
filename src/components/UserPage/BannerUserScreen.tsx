@@ -10,12 +10,15 @@ import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBefor
 import { RootState } from '@app/redux/store';
 
 import '@app/pages/HomePage/LandingPage/homepage.scss';
+import ExamDomainSelectModal from '@app/pages/HomePage/LandingPage/Modals/ExamDomainSelectModal';
 
 const BannerUserScreen = () => {
   const { t } = useTranslation();
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [domain, setDomain] = useState('');
+
   return (
     <section className='min-h-screen bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0] flex items-center justify-center px-6 py-8 md:px-8 md:py-12 lg:px-12 lg:py-16'>
       <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center w-full'>
@@ -142,7 +145,22 @@ const BannerUserScreen = () => {
               {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
             </Button>
           </div>
-          {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
+          {isOpen && !domain ? (
+            <ExamDomainSelectModal
+              open={isOpen}
+              onClose={() => setIsOpen(false)}
+              onSelectDomain={setDomain}
+            />
+          ) : (
+            <ConfirmBeforeTestModal
+              domain={domain}
+              open={!!domain}
+              onClose={() => {
+                setIsOpen(false);
+                setDomain('');
+              }}
+            />
+          )}
 
           {/* Mobile Sponsors */}
           <div
