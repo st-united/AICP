@@ -3,7 +3,7 @@ import ProfileForm from './ProfileForm';
 import PortfolioContent from '@app/components/molecules/Portfolio/PortfolioContent';
 import { useTranslation } from 'react-i18next';
 import { useGetProfile } from '@app/hooks';
-import { Form, Spin } from 'antd';
+import { Divider, Form, Spin } from 'antd';
 
 const ProfilePage = () => {
   const { t } = useTranslation();
@@ -19,6 +19,9 @@ const ProfilePage = () => {
   return (
     <div className='relative rounded-2xl bg-white h-full shadow overflow-y-auto'>
       <ProfileForm userData={userData} />
+      <div className='flex justify-center px-4'>
+        <div className='w-[900px] border-t border-solid'></div>
+      </div>
       <div className='py-6 px-4'>
         <h1 className='text-[1.813rem] font-bold text-center my-2'>
           {t('PROFILE.PORTFOLIO_HEADER')}

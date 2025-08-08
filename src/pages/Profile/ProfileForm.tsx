@@ -65,7 +65,16 @@ const ProfileForm = ({ userData }: ProfileFormProps) => {
       >
         <h1 className='text-[1.813rem] font-bold text-center mb-6'>{t('PROFILE.TITLE_2')}</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4 max-w-[900px] w-full'>
-          <Form.Item name='fullName' label={t('PROFILE.FULLNAME')} rules={validator}>
+          <Form.Item
+            name='fullName'
+            label={
+              <span>
+                {t('PROFILE.FULLNAME')}
+                <span className='text-red-500 ml-1'>*</span>
+              </span>
+            }
+            rules={validator}
+          >
             <Input
               className='!px-6 !py-3 !rounded-lg'
               placeholder={t('PROFILE.FULLNAME_PLACEHOLDER') as string}
@@ -73,7 +82,15 @@ const ProfileForm = ({ userData }: ProfileFormProps) => {
             />
           </Form.Item>
 
-          <Form.Item name='email' label={t('PROFILE.EMAIL')}>
+          <Form.Item
+            name='email'
+            label={
+              <span>
+                {t('PROFILE.EMAIL')}
+                <span className='text-red-500 ml-1'>*</span>
+              </span>
+            }
+          >
             <Input
               className='!px-6 !py-3 !rounded-lg'
               placeholder={t('PROFILE.EMAIL_PLACEHOLDER') as string}
@@ -81,7 +98,16 @@ const ProfileForm = ({ userData }: ProfileFormProps) => {
             />
           </Form.Item>
 
-          <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator}>
+          <Form.Item
+            name='phoneNumber'
+            label={
+              <span>
+                {t('PROFILE.PHONE')}
+                <span className='text-red-500 ml-1'>*</span>
+              </span>
+            }
+            rules={validator}
+          >
             <PhoneInput disabled={!editing} className='h-[48px]' />
           </Form.Item>
 
@@ -116,7 +142,7 @@ const ProfileForm = ({ userData }: ProfileFormProps) => {
             <>
               <Form.Item name='university' label={t('PROFILE.SCHOOL_LABEL')} rules={validator}>
                 <Input
-                  className='!px-6 !py-3 !rounded-lg'
+                  className='!px-6 !py-3 !rounded-lg bg-white'
                   placeholder={t('PROFILE.SCHOOL_PLACEHOLDER') as string}
                   disabled={!editing}
                 />
