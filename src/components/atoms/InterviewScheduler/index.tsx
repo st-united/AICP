@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import DayCard from './DayCard';
 import showSkipInterviewConfirmation from './showSkipInterviewConfirmation';
 import { InterviewShift } from '@app/constants/enum';
-import { useCheckInterview, useCreateSchedule } from '@app/hooks/useMentor';
-import { useSocket } from '@app/hooks/useSocket';
+import { useAvailableInterview, useCheckInterview, useCreateSchedule } from '@app/hooks/useMentor';
 import { DaySchedule, SlotStatus } from '@app/interface/interview.interface';
 import { CreateScheduleParams } from '@app/interface/mentor.interface';
 import SuccessBooking from '@app/pages/MentorBooking/components/MentorDetailModal';
@@ -24,7 +23,7 @@ interface InterviewScheduleProps {
 const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
   const { t } = useTranslation();
   const { data, isLoading } = useCheckInterview(examId);
-  const { availableSlots, joinDay } = useSocket(examId);
+  const { data: availableSlots, isLoading: slotLoading } = useAvailableInterview(examId);
   const { mutate: bookSchedule, isPending } = useCreateSchedule();
   const navigate = useNavigate();
 
@@ -42,8 +41,6 @@ const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
       const month = dateObj.getMonth() + 1;
       const day = daysOfWeek[dateObj.getDay()];
       const dateStr = item.date.split('T')[0];
-
-      joinDay(item.date);
 
       return {
         date,
@@ -157,15 +154,17 @@ const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
   };
 
   return (
-    <div className='bg-white'>
-      {isLoading ? (
+    <div className='bg-white rounded-2xl shadow-xl md:min-h-[80vh] flex items-center justify-center'>
+      {isLoading || slotLoading ? (
         <Spin className='top-1/2 left-1/2 fixed -translate-x-1/2 -translate-y-1/2' />
       ) : data?.hasInterviewRequest ? (
-        <SuccessBooking data={data.interviewRequest!} />
+        <div className='flex items-center justify-center min-h-[80vh]'>
+          <SuccessBooking data={data.interviewRequest!} />
+        </div>
       ) : (
-        <div className='max-w-4xl md:max-w-6xl mx-auto p-6 rounded-2xl shadow-xl'>
+        <div className='max-w-4xl md:max-w-6xl mx-auto p-6'>
           <div className='text-center mb-8'>
-            <h1 className='text-2xl font-bold text-[#FE7743] mb-2 md:text-4xl md:mb-5'>
+            <h1 className='text-2xl font-extrabold text-[#FE7743] mb-2 md:text-4xl md:mb-5'>
               {t('MENTOR_BOOKING.REGISTER_TITLE')}
             </h1>
             <p className='text-black text-base md:text-2xl'>

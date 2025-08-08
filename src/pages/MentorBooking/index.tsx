@@ -11,20 +11,19 @@ const Booking = () => {
   const { examId } = useParams<{ examId: string }>();
 
   return (
-    <div className='h-full'>
-      <Button
-        icon={<LeftOutlined />}
-        type='link'
-        className='p-0 !text-secondary hover:!text-primary text-lg mb-6'
-        onClick={() => navigate(-1)}
-      >
-        {t('MENTOR_BOOKING.BACK')}
-      </Button>
-      <div className='flex flex-col lg:flex-row gap-6'>
-        <div className='flex-1 flex flex-col'>
-          <InterviewScheduler examId={examId || ''} />
-        </div>
+    <div className='h-full flex flex-col gap-5'>
+      <div>
+        <Button
+          icon={<LeftOutlined />}
+          type='link'
+          className='p-0 !text-secondary hover:!text-primary text-lg'
+          onClick={() => navigate(-1)}
+        >
+          {t('MENTOR_BOOKING.BACK')}
+        </Button>
       </div>
+
+      <InterviewScheduler examId={examId || ''} />
     </div>
   );
 };

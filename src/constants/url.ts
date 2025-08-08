@@ -36,4 +36,5 @@ export const API_URL = {
   ZALO_OTP_CAN_SEND: '/zalo-otp/can-send-otp',
   SCHEDULE: '/mentors/create-scheduler',
   CHECK_MY_INTERVIEW: '/mentors/check-my-interview-request',
+  CHECK_AVAILABLE_INTERVIEW: '/bookings/available-slots',
 };
