@@ -1,5 +1,3 @@
-import { Dayjs } from 'dayjs';
-
 import { GetListParams } from './common.interface';
 import { ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 

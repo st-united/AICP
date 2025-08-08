@@ -2,7 +2,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Modal, Button } from 'antd';
 import React from 'react';
 
-// import { WarningIcon } from '@app/assets/svgs/NotificationIcon';
+import { WarningIcon } from '@app/assets/svgs/NotificationIcon';
 
 interface PortfolioConfirmationModalProps {
   isOpen: boolean;
@@ -33,7 +33,7 @@ const PortfolioConfirmationModal: React.FC<PortfolioConfirmationModalProps> = ({
       <div className='text-center p-6'>
         <div className='mb-4'>
           <div className='inline-flex items-center justify-center'>
-            {/* <img src={WarningIcon} alt='warning' className='w-20 h-20' /> */}
+            <img src={WarningIcon} alt='warning' className='w-20 h-20' />
           </div>
         </div>
 

@@ -38,8 +38,8 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className='flex justify-center' id='container-forgot-password'>
-      <div className='w-full md:w-4/5 h-full'>
+    <div className='flex justify-center h-screen' id='container-forgot-password'>
+      <div className='w-full md:w-4/5 h-screen px-4 py-6 md:py-0'>
         <Link
           to={'/login'}
           className='mb-5 font-medium flex align-items gap-x-1 text-primary-gray text-lg hover:text-primary'
@@ -50,11 +50,15 @@ export default function ForgotPassword() {
           <span>{t('FORGOT_PASSWORD.TURN_BACK_SIGN_IN')}</span>
         </Link>
         <div>
-          <h1 className='text-[40px] !text-primary font-bold'>{t('FORGOT_PASSWORD.TITLE')}</h1>
+          <h1 className='text-3xl sm:text-3xl md:text-4xl lg:text-4xl text-primary font-bold'>
+            {t('FORGOT_PASSWORD.TITLE')}
+          </h1>
           <p className='text-primary-gray mt-4 mb-6 sm:my-4 md:my-6 lg:my-8 text-lg'>
             <span className='font-medium'>{t('FORGOT_PASSWORD.NO_ACCOUNT')}</span>{' '}
             <Link
-              className={'text-primary-bold font-bold underline hover:underline hover:text-primary'}
+              className={
+                'text-primary-bold font-bold underline hover:no-underline hover:text-primary'
+              }
               to={'/register'}
             >
               {t('FORGOT_PASSWORD.REGISTER')}
