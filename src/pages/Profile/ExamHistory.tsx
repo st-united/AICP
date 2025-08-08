@@ -1,7 +1,5 @@
-import { DownloadOutlined } from '@ant-design/icons';
-import { Spin, Checkbox } from 'antd';
+import { Spin } from 'antd';
 import { Dayjs } from 'dayjs';
-import { t } from 'i18next';
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -71,23 +69,6 @@ const ExamHistory = () => {
     setSelectedQuizzes(newSelectedQuizzes);
   };
 
-  const handleCheckAll = (checked: boolean) => {
-    if (!historyData) return;
-    setSelectedQuizzes(checked ? new Set(historyData.map((quiz) => quiz.id)) : new Set());
-  };
-
-  const handleDownloadAll = () => {
-    // Todo
-  };
-
-  const handleStartNew = () => {
-    // Todo
-  };
-
-  const handleStartFirst = () => {
-    // Todo
-  };
-
   if (isLoading) return <Spin className='flex items-center justify-center h-full' />;
   if (examError || detailError) return <ErrorState onRetry={refetch} />;
 
@@ -95,10 +76,6 @@ const ExamHistory = () => {
     <div className='h-full !rounded-2xl'>
       <div className='max-w-7xl mx-auto space-y-4 h-full flex flex-col px-2'>
         <QuizHeader
-          onDownloadAll={handleDownloadAll}
-          onStartNew={handleStartNew}
-          hasQuizzes={hasQuizzes}
-          startNewDisabled={hasInProgressQuiz}
           examId={selectedQuizId}
           disableButtons={historyData?.length === 0 ? true : false}
         />
@@ -109,7 +86,7 @@ const ExamHistory = () => {
           <>
             <DateFilter onDateChange={setDateRange} value={dateRange} />
             {!hasQuizzes ? (
-              <EmptyState onStartFirst={handleStartFirst} />
+              <EmptyState />
             ) : (
               <div className='quiz-history__list scroll-hidden overflow-y-auto flex-1 space-y-4 px-1 p-4'>
                 {historyData.map((quiz) => (

@@ -21,6 +21,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
 
   const { mutate: submitExam } = useSubmitExam();
   const { data: exam } = useHasTakenExamDefault();
+  const { data: hasTakenExam } = useHasTakenExamDefault();
   const { data: historyData } = useGetHistory();
 
   const handleStartTest = () => navigate(NAVIGATE_URL.TEST);

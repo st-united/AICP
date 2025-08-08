@@ -69,6 +69,8 @@ module.exports = {
       'h-lg': { raw: '(min-height: 800px)' },
       'h-xl': { raw: '(min-height: 900px)' },
       'h-2xl': { raw: '(min-height: 1024px)' },
+      'max-xs400': { max: '400px' },
+      'max-xs370': { max: '370px' },
     },
   },
   plugins: [],

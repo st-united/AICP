@@ -16,8 +16,8 @@ const BannerUserScreen = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <section className='bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0] flex justify-center px-6 min-h-[calc(100vh-5rem)]'>
-      <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 w-full'>
+    <section className='min-h-screen bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0] flex items-center justify-center px-6 py-8 md:px-8 md:py-12 lg:px-12 lg:py-16'>
+      <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center w-full'>
         {/* Left Side - Robot Image */}
         <div className='order-2 md:order-1 px-4 md:px-6 lg:px-8 flex justify-center items-center'>
           <div className='mt-5'>

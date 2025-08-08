@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import { SlideImages } from '../../molecules/index';
 import { NAVIGATE_URL } from '@app/constants';
+import background from '@app/assets/images/SlideImages/background.png';
 
 const PublicLayout: React.FC = () => {
   const { pathname } = useLocation();
@@ -28,7 +29,10 @@ const PublicLayout: React.FC = () => {
   }, [pathname]);
 
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-2 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/SlideImages/background.png)]'>
+    <div
+      className='grid grid-cols-1 lg:grid-cols-2 bg-cover bg-center bg-no-repeat'
+      style={{ backgroundImage: `url(${background})` }}
+    >
       <div className='h-full pt-6 sm:px-6 md:px-10'>
         <Outlet />
       </div>

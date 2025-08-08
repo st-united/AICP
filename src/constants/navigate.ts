@@ -17,6 +17,7 @@ export const NAVIGATE_URL = {
   TEST: '/aptitude-test',
   TEST_RESULT: '/history',
   TEST_RESULT_DETAIL_EXAM: '/history/:examId',
+  SCHEDULE: '/scheduler',
   INTERVIEW: '/scheduler/:examId',
   PORTFOLIO: '/portfolio',
   CAPACITY: '/capacity/:examId',
