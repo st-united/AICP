@@ -9,7 +9,7 @@ const BaseLayout = () => {
   return (
     <Layout className='min-h-screen'>
       <HeaderComponent />
-      <Content className='p-6 overflow-auto mb-10'>
+      <Content className='p-6 overflow-auto'>
         <Outlet />
       </Content>
     </Layout>

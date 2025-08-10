@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { ChangePassword, Job, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
@@ -12,10 +13,6 @@ import {
   updateProfileApi,
   uploadAvatarApi,
 } from '@app/services';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
 
 export const useGetProfile = (isAuth = true) => {
   const dispatch = useDispatch();
@@ -62,18 +59,20 @@ export const useChangePassword = () => {
 };
 
 export const useUpdateProfile = () => {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   return useMutation(
-    async (user: UserProfile) => {
+    async (user: Partial<UserProfile>) => {
       const response = await updateProfileApi(user);
       return response.data;
     },
     {
       onSuccess({ message }) {
         queryClient.refetchQueries([QUERY_KEY.PROFILE]);
-        navigate(NAVIGATE_URL.PROFILE);
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
       },
     },
   );
@@ -82,8 +81,8 @@ export const useUpdateProfile = () => {
 export const useUploadAvatar = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (data: { identityId: string; formData: FormData }) => {
-      const response = await uploadAvatarApi(data.identityId, data.formData);
+    async (formData: FormData) => {
+      const response = await uploadAvatarApi(formData);
       return response.data;
     },
     {

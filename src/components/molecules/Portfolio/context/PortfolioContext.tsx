@@ -18,6 +18,7 @@ import {
   prepareFilesForUpload,
   isDocxFile,
 } from '../utils/fileUtils';
+import { openNotificationWithIcon, NotificationTypeEnum } from '@app/components/atoms/notification';
 import { PortfolioFileType } from '@app/constants/portfolioFileType';
 import {
   useUpdatePortfolio,
@@ -29,10 +30,6 @@ import {
   PortfolioContextType,
   PortfolioRequest,
 } from '@app/interface/portfolio.interface';
-import {
-  openNotificationWithIcon,
-  NotificationTypeEnum,
-} from '@app/services/notification/notificationService';
 
 const PortfolioContext = createContext<PortfolioContextType | undefined>(undefined);
 
@@ -43,6 +40,8 @@ interface PortfolioProviderProps {
   edit?: boolean;
   saveLabel?: string;
   cancelLabel?: string;
+  isWithUserInfo?: boolean;
+  triggerConfirmationModal?: (values: PortfolioRequest, onSave: () => void) => void;
 }
 
 export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
@@ -52,6 +51,8 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
   edit = false,
   saveLabel,
   cancelLabel,
+  isWithUserInfo = true,
+  triggerConfirmationModal,
 }) => {
   const [form] = Form.useForm();
   const { t } = useTranslation();
@@ -61,7 +62,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
   const [docxError, setDocxError] = useState<string | null>(null);
 
   const { data: getPortfolio, isLoading } = useGetPortfolio();
-  const updatePortfolioMutation = useUpdatePortfolio();
+  const { mutate: updatePortfolioMutation, isPending: isUpdating } = useUpdatePortfolio();
   const downloadPortfolioFileMutation = useDownloadPortfolioFile();
 
   const [certificationFiles, setCertificationFiles] = useState<ExtendedUploadFile[]>([]);
@@ -125,20 +126,13 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
     resetFiles();
   }, [form, onCancel, resetFiles]);
 
-  const handleSubmit = useCallback(
-    async (values: PortfolioRequest) => {
-      const isAllEmpty =
-        !values.linkedInUrl?.trim() &&
-        !values.githubUrl?.trim() &&
-        certificationFiles.length === 0 &&
-        experienceFiles.length === 0;
-
-      if (isAllEmpty) {
-        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('PORTFOLIO.NO_INFO'));
-        return;
+  const executePortfolioSubmission = useCallback(
+    (values: PortfolioRequest, data: FormData) => {
+      if (values.isStudent !== undefined) {
+        data.append('isStudent', values.isStudent.toString());
+        values.university && data.append('university', values.university);
+        values.studentCode && data.append('studentCode', values.studentCode);
       }
-
-      const data = new FormData();
       values.linkedInUrl && data.append('linkedInUrl', values.linkedInUrl);
       values.githubUrl && data.append('githubUrl', values.githubUrl);
 
@@ -156,7 +150,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
         data.append('deleted_experiences', JSON.stringify(removedExperienceFiles));
       }
 
-      updatePortfolioMutation.mutate(data, {
+      updatePortfolioMutation(data, {
         onSuccess: () => {
           setIsEdit(false);
           openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('PORTFOLIO.UPDATE_SUCCESS'));
@@ -184,6 +178,34 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
       getPortfolio?.certificateFiles,
       getPortfolio?.experienceFiles,
       onSave,
+    ],
+  );
+
+  const handleSubmit = useCallback(
+    async (values: PortfolioRequest) => {
+      if (values.isStudent) {
+        await form.validateFields(['university', 'studentCode']);
+      }
+      const data = new FormData();
+      if (triggerConfirmationModal) {
+        const fullValues = {
+          ...values,
+          certificateFiles: certificationFiles,
+          experienceFiles: experienceFiles,
+        };
+        triggerConfirmationModal(fullValues, () => {
+          executePortfolioSubmission(fullValues, data);
+        });
+        return;
+      }
+      executePortfolioSubmission(values, data);
+    },
+    [
+      triggerConfirmationModal,
+      executePortfolioSubmission,
+      form,
+      certificationFiles,
+      experienceFiles,
     ],
   );
 
@@ -274,9 +296,11 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
 
     getPortfolio,
     updatePortfolioMutation,
+    isUpdating,
     downloadPortfolioFileMutation,
     t,
     form,
+    isWithUserInfo,
   };
 
   return <PortfolioContext.Provider value={value}>{children}</PortfolioContext.Provider>;

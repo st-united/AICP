@@ -1,63 +1,59 @@
-import { CameraFilled, UserOutlined } from '@ant-design/icons';
-import { Avatar, Upload, message } from 'antd';
-import { useTranslation } from 'react-i18next';
-
-import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB } from '@app/constants/file';
-import { validateFile } from '@app/helpers/fileValidation';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
-import type { UploadChangeParam } from 'antd/es/upload';
+import { CameraFilled, LoadingOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, GetProp, Upload, UploadFile, UploadProps } from 'antd';
+import { RcFile, UploadChangeParam } from 'antd/es/upload';
+import { useState } from 'react';
 
 interface Props {
   avatar?: string;
+  previewImage?: string;
   isEdit?: boolean;
-  onAvatarChange?: (base64: string) => void;
+  onAvatarChange?: () => void;
+  setPreviewImage: (file: string) => void;
+  setFileImage: (file: RcFile) => void;
 }
 
-const CustomAvatar = ({ avatar, isEdit, onAvatarChange }: Props) => {
-  const { t } = useTranslation();
-  const handleChange = (info: UploadChangeParam) => {
+type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
+
+const getBase64 = (file: FileType): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
+
+const CustomAvatar = ({ avatar, isEdit, previewImage, setPreviewImage, setFileImage }: Props) => {
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  const handleChange = async (info: UploadChangeParam) => {
     const file = info.fileList[0]?.originFileObj;
-    if (!file) return;
-    const validation = validateFile(file, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB);
-    if (!validation.isValid) {
-      openNotificationWithIcon(
-        NotificationTypeEnum.WARNING,
-        t(validation.errorMessageKey!, {
-          field: t('PROFILE.AVATAR'),
-          ...validation.errorMessageParams,
-        }),
-      );
+    if (!file) {
+      setFileList([]);
       return;
     }
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const base64 = e.target?.result as string;
-      onAvatarChange?.(base64);
-    };
-    reader.onerror = (e) => {
-      openNotificationWithIcon(
-        NotificationTypeEnum.ERROR,
-        t('VALIDATE.FILE_READ_ERROR', { field: t('PROFILE.AVATAR') }),
-      );
-    };
-    reader.readAsDataURL(file);
+    setFileList(info.file.originFileObj ? [info.file as UploadFile] : []);
+    setFileImage(file);
+    const fileBase = await getBase64(info.file as FileType);
+    setPreviewImage(fileBase as string);
+
+    const formData = new FormData();
+    formData.append('avatar', file);
   };
 
   return (
     <div className='relative'>
+      {/* {!isPending ? ( */}
       <Avatar
         className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px]'
-        src={avatar}
-        icon={<UserOutlined className='md:!text-[180px] !text-[150px]' />}
+        src={previewImage ?? avatar}
+        icon={<UserOutlined className='md:!text-[180px] !text-[150px] bg-gray-300' />}
       />
 
-      {isEdit && (
+      {!isEdit && (
         <Upload
           key={avatar}
           showUploadList={false}
+          fileList={fileList}
           beforeUpload={() => false}
           onChange={handleChange}
           accept='image/*'

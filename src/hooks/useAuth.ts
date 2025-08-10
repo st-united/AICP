@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { removeStorageData, setStorageData } from '@app/config';
 import { ACCESS_TOKEN, NAVIGATE_URL, REFRESH_TOKEN, USER_PROFILE } from '@app/constants';
 import { Credentials, GoogleCredentials, RegisterUser } from '@app/interface/user.interface';
@@ -11,12 +12,9 @@ import {
   getLogout,
   registerApi,
   getActivateAccount,
-  useLoginWithGoogleApi,
+  loginWithGoogleApi,
+  resendActivationEmailApi,
 } from '@app/services';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -56,7 +54,7 @@ export const useLoginWithGoogle = () => {
 
   return useMutation(
     async (GoogleCredentials: GoogleCredentials) => {
-      const { data } = await useLoginWithGoogleApi(GoogleCredentials);
+      const { data } = await loginWithGoogleApi(GoogleCredentials);
       return data;
     },
     {
@@ -126,9 +124,34 @@ export const useRegister = () => {
 };
 
 export const useActivateAccount = () => {
+  const navigate = useNavigate();
+
   return useMutation(
-    async (token: string) => {
-      const { data } = await getActivateAccount(token);
+    async ({ activateToken, email }: { activateToken: string; email: string }) => {
+      const { data } = await getActivateAccount(activateToken);
+      return { data, email };
+    },
+    {
+      onSuccess: ({ data }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, data.message);
+        navigate('/login', { replace: true });
+      },
+      onError: (error: any, { email }) => {
+        const message = error.response?.data?.message;
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, message);
+
+        if (message === 'Mã kích hoạt đã hết hạn') {
+          navigate(`/activation-expired?email=${email}`, { replace: true });
+        }
+      },
+    },
+  );
+};
+
+export const useResendActivationEmail = () => {
+  return useMutation(
+    async (email: string) => {
+      const { data } = await resendActivationEmailApi(email);
       return data;
     },
     {

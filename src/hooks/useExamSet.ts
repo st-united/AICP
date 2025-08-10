@@ -1,21 +1,26 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { setStorageData } from '@app/config';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { EXAM_LATEST } from '@app/constants/testing';
-import { ExamSetDetail, Question, SubmitExamSetPayload } from '@app/interface/examSet.interface';
+import { EXAM_LATEST, TEST_RESULT_CURRENT_STEP } from '@app/constants/testing';
+import {
+  ExamSetDetail,
+  ExamSetResult,
+  Question,
+  SubmitExamSetPayload,
+} from '@app/interface/examSet.interface';
 import {
   deleteExamByIdApi,
+  downloadCertificateApi,
+  getExamResultApi,
   getExamSetsApi,
   submitDraftQuestionApi,
   submitExamSetApi,
 } from '@app/services';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
 
 export const useCountdown = (initialTime: number) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
@@ -97,17 +102,19 @@ export const useQuestionNavigation = (
   return { setQuestionRef, scrollToQuestion };
 };
 
-export const useGetExamSet = () =>
+export const useGetExamSet = (domain: string) =>
   useQuery<ExamSetDetail>(
-    [QUERY_KEY.EXAM_SETS],
+    [QUERY_KEY.EXAM_SETS, domain],
     async () => {
-      const { data } = await getExamSetsApi();
+      const { data } = await getExamSetsApi(domain);
       return data.data;
     },
     {
-      keepPreviousData: true,
+      enabled: !!domain,
+      cacheTime: 0,
+      staleTime: 0,
       refetchOnWindowFocus: false,
-      refetchOnMount: false,
+      refetchOnMount: true,
       refetchOnReconnect: false,
       refetchInterval: false,
       refetchIntervalInBackground: false,
@@ -129,8 +136,9 @@ export const useSubmitExam = () => {
     {
       onSuccess({ message }, examId) {
         setStorageData(EXAM_LATEST, examId);
+        setStorageData(TEST_RESULT_CURRENT_STEP, 1);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        navigate(NAVIGATE_URL.SCHEDULE);
+        navigate(NAVIGATE_URL.TEST_RESULT_DETAIL);
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
@@ -155,4 +163,24 @@ export const useDeleteExam = () => {
       },
     },
   );
+};
+export const useGetExamResult = (examId: string) => {
+  return useQuery<ExamSetResult>({
+    queryKey: [QUERY_KEY.EXAM_RESULT, examId],
+    queryFn: async () => {
+      const response = await getExamResultApi(examId);
+      return response.data.data;
+    },
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: true,
+    refetchOnReconnect: false,
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 10 * 60 * 1000,
+  });
+};
+export const useDownloadCertificate = () => {
+  return useMutation((examId: string) => downloadCertificateApi(examId));
 };

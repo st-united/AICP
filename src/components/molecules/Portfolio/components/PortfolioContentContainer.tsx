@@ -2,7 +2,6 @@ import { Spin } from 'antd';
 import React from 'react';
 
 import { PortfolioForm } from './PortfolioForm';
-import { PortfolioHeader } from './PortfolioHeader';
 import { usePortfolioContext } from '../context/PortfolioContext';
 
 const PortfolioContentContainer: React.FC = () => {
@@ -17,8 +16,7 @@ const PortfolioContentContainer: React.FC = () => {
   }
 
   return (
-    <div className='portfolio-content h-full p-6 overflow-auto bg-white shadow rounded-2xl'>
-      <PortfolioHeader />
+    <div className='portfolio-content'>
       <PortfolioForm />
     </div>
   );

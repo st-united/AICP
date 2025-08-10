@@ -6,6 +6,7 @@ import {
   UserDetail,
   UpdateForgotPassword,
   GetHistoryParams,
+  UpdateUserStudentInfo,
 } from '@app/interface/user.interface';
 
 export const getUsersAPI = async (params: GetUsersParams) =>
@@ -46,3 +47,6 @@ export const checkResetPasswordTokenApi = async (token: string) =>
 
 export const getDetailExam = async (examId: string) =>
   await axios.get(`${API_URL.DETAIL_EXAM}/${examId}`);
+
+export const UpdateUserStudentInfoApi = async (payload: UpdateUserStudentInfo) =>
+  await axios.patch(API_URL.UPDATE_USER_STUDENT_INFO, payload);
