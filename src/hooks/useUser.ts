@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import {
   GetUsersParams,
@@ -10,6 +11,8 @@ import {
   HasTakenExam,
   HistoryTesting,
   DetailExam,
+  UpdateUserStudentInfo,
+  UserProfile,
 } from '@app/interface/user.interface';
 import {
   checkHasTakenExam,
@@ -25,6 +28,7 @@ import {
   updateForgotPasswordApi,
   checkResetPasswordTokenApi,
   getDetailExam,
+  UpdateUserStudentInfoApi,
 } from '@app/services';
 
 export const useCreateUser = () => {
@@ -148,4 +152,21 @@ export const useExamDetail = (examId: string) => {
     },
     enabled: !!examId,
   });
+};
+export const useUpdateUserStudentInfo = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (payload: UpdateUserStudentInfo) => {
+      const response = await UpdateUserStudentInfoApi(payload);
+      return response.data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [QUERY_KEY.PROFILE] });
+      },
+      onError: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+      },
+    },
+  );
 };

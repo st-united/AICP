@@ -1,6 +1,9 @@
+import { Course } from './course.interface';
+
 export interface ExamSetDetail {
   id: string;
   examId: string;
+  timeStart: Date;
   name: string;
   description: string;
   questions: Question[];
@@ -33,4 +36,33 @@ export interface SubmitExamSetPayload {
   questionId: string;
   answers: string[];
   type: AnswerChoice;
+}
+export interface ExamSetResult {
+  elapsedTime: number;
+  questions: QuestionResult[];
+  correctCount: number;
+  wrongCount: number;
+  skippedCount: number;
+  level: string;
+  description: string;
+  learningPath: string;
+  recommendedCourses: Course[];
+}
+export interface QuestionResult {
+  questionId: string;
+  question: string;
+  answers: Answer[];
+  sequence: number;
+  userAnswers: string[];
+  status: QuestionStatus;
+}
+export enum QuestionStatus {
+  CORRECT = 'correct',
+  WRONG = 'wrong',
+  SKIPPED = 'skipped',
+}
+export interface Answer {
+  id: string;
+  content: string;
+  isCorrect: boolean;
 }

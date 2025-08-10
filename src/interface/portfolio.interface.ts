@@ -1,13 +1,31 @@
-import { UseMutationResult } from '@tanstack/react-query';
+import { UseMutateFunction, UseMutationResult } from '@tanstack/react-query';
 import { FormInstance, UploadFile } from 'antd';
+import { AxiosError } from 'axios';
 
 import { PortfolioFileType } from '@app/constants/portfolioFileType';
 
+export const PORTFOLIO_FIELD_DISPLAY_NAMES: Record<keyof PortfolioRequest, string> = {
+  isStudent: 'PORTFOLIO.USER_INFO',
+  university: 'PORTFOLIO.UNIVERSITY',
+  studentCode: 'PORTFOLIO.STUDENT_CODE',
+  linkedInUrl: 'PORTFOLIO.LINKEDIN_URL',
+  githubUrl: 'PORTFOLIO.GITHUB_URL',
+  certificateFiles: 'PORTFOLIO.CERTIFICATIONS',
+  experienceFiles: 'PORTFOLIO.EXPERIENCE',
+  deletedCertifications: 'PORTFOLIO.DELETED_CERTIFICATIONS',
+  deletedExperiences: 'PORTFOLIO.DELETED_EXPERIENCES',
+};
+
 export interface PortfolioRequest {
+  isStudent?: boolean;
+  university?: string;
+  studentCode?: string;
   linkedInUrl?: string;
   githubUrl?: string;
-  certificateFiles?: File[];
-  experienceFiles?: File[];
+  certificateFiles?: File[] | ExtendedUploadFile[];
+  experienceFiles?: File[] | ExtendedUploadFile[];
+  deletedCertifications?: string[];
+  deletedExperiences?: string[];
 }
 
 export interface PortfolioResponse {
@@ -37,6 +55,7 @@ export interface FileItemProps {
 
 export interface PortfolioContextType {
   isEdit: boolean;
+  isWithUserInfo: boolean;
   selectedFile: ExtendedUploadFile | null;
   certificationFiles: ExtendedUploadFile[];
   experienceFiles: ExtendedUploadFile[];
@@ -71,7 +90,13 @@ export interface PortfolioContextType {
   onSave?: () => void;
 
   getPortfolio: PortfolioResponse | undefined;
-  updatePortfolioMutation: UseMutationResult<unknown, unknown, FormData>;
+  updatePortfolioMutation: UseMutateFunction<
+    PortfolioResponse,
+    AxiosError<unknown, any>,
+    FormData,
+    unknown
+  >;
+  isUpdating: boolean;
   downloadPortfolioFileMutation: UseMutationResult<
     unknown,
     unknown,

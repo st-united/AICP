@@ -1,17 +1,16 @@
-import { ArrowLeftOutlined } from '@ant-design/icons';
+import { LeftOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { useForgotPasswordSchema } from './ForgotPasswordSchema';
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { InputField, Button } from '@app/components/ui/index';
 import { yupSync } from '@app/helpers/yupSync';
 import { useForgotPassword } from '@app/hooks/useUser';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
+
+import './ForgotPassword.scss';
 
 export default function ForgotPassword() {
   const { t } = useTranslation();
@@ -39,15 +38,15 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className='flex justify-start h-full w-full'>
-      <div className='w-full'>
+    <div className='flex justify-center h-screen' id='container-forgot-password'>
+      <div className='w-full md:w-4/5 h-screen px-4 py-6 md:py-0'>
         <Link
           to={'/login'}
-          className='mb-14 font-medium flex align-items gap-x-1 text-primary-gray text-lg hover:text-primary'
+          className='mb-5 font-medium flex align-items gap-x-1 text-primary-gray text-lg hover:text-primary'
         >
-          <span>
-            <ArrowLeftOutlined className='-translate-y-[2px]' />
-          </span>
+          <div className='flex items-center justify-center'>
+            <LeftOutlined size={24} />
+          </div>
           <span>{t('FORGOT_PASSWORD.TURN_BACK_SIGN_IN')}</span>
         </Link>
         <div>
@@ -58,7 +57,7 @@ export default function ForgotPassword() {
             <span className='font-medium'>{t('FORGOT_PASSWORD.NO_ACCOUNT')}</span>{' '}
             <Link
               className={
-                'text-primary-bold font-medium underline hover:underline hover:text-primary'
+                'text-primary-bold font-bold underline hover:no-underline hover:text-primary'
               }
               to={'/register'}
             >

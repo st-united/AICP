@@ -5,7 +5,7 @@ import 'dayjs/locale/vi';
 import { t } from 'i18next';
 
 import { DATE_TIME } from '@app/constants';
-import { ExamStatusEnum, SFIALevel } from '@app/constants/enum';
+import { ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 import { HistoryTesting } from '@app/interface/user.interface';
 
 interface QuizCardProps {
@@ -13,6 +13,7 @@ interface QuizCardProps {
   onCheckboxChange: (quizId: string, checked: boolean) => void;
   isChecked: boolean;
   onClick: (quizId: string) => void;
+  disabled?: boolean;
 }
 
 export const getStatusText = (status: ExamStatusEnum) => {
@@ -51,6 +52,27 @@ export const getLevelText = (level: SFIALevel) => {
   }
 };
 
+export const getExamLevelText = (level: ExamLevelEnum) => {
+  switch (level) {
+    case ExamLevelEnum.LEVEL_1_STARTER:
+      return t('EXAM.EXAM_LEVEL.LEVEL_1_STARTER');
+    case ExamLevelEnum.LEVEL_2_EXPLORER:
+      return t('EXAM.EXAM_LEVEL.LEVEL_2_EXPLORER');
+    case ExamLevelEnum.LEVEL_3_PRACTITIONER:
+      return t('EXAM.EXAM_LEVEL.LEVEL_3_PRACTITIONER');
+    case ExamLevelEnum.LEVEL_4_INTEGRATOR:
+      return t('EXAM.EXAM_LEVEL.LEVEL_4_INTEGRATOR');
+    case ExamLevelEnum.LEVEL_5_STRATEGIST:
+      return t('EXAM.EXAM_LEVEL.LEVEL_5_STRATEGIST');
+    case ExamLevelEnum.LEVEL_6_LEADER:
+      return t('EXAM.EXAM_LEVEL.LEVEL_6_LEADER');
+    case ExamLevelEnum.LEVEL_7_EXPERT:
+      return t('EXAM.EXAM_LEVEL.LEVEL_7_EXPERT');
+    default:
+      return level;
+  }
+};
+
 export const getStatusColor = (statusKey: string) => {
   switch (statusKey) {
     case ExamStatusEnum.IN_PROGRESS:
@@ -76,39 +98,34 @@ export const formatDateTime = (dateString: string) => {
   }
 };
 
-const QuizCard = ({ quiz, onCheckboxChange, isChecked, onClick }: QuizCardProps) => {
+const QuizCard = ({ quiz, disabled, onCheckboxChange, isChecked, onClick }: QuizCardProps) => {
   const getLevelColor = (levelKey: string) => {
     switch (levelKey) {
-      case SFIALevel.LEVEL_1_AWARENESS:
-      case SFIALevel.LEVEL_2_FOUNDATION:
-        return 'text-green-500';
-      case SFIALevel.LEVEL_3_APPLICATION:
-      case SFIALevel.LEVEL_4_INTEGRATION:
-        return 'text-blue-500';
-      case SFIALevel.LEVEL_5_INNOVATION:
-      case SFIALevel.LEVEL_6_LEADERSHIP:
-        return 'text-orange-500';
-      case SFIALevel.LEVEL_7_MASTERY:
-        return 'text-red-500';
+      case ExamLevelEnum.LEVEL_1_STARTER:
+      case ExamLevelEnum.LEVEL_2_EXPLORER:
+        return 'text-[#FE7743]';
+      case ExamLevelEnum.LEVEL_3_PRACTITIONER:
+      case ExamLevelEnum.LEVEL_4_INTEGRATOR:
+        return 'text-[#FE7743]';
+      case ExamLevelEnum.LEVEL_5_STRATEGIST:
+      case ExamLevelEnum.LEVEL_6_LEADER:
+        return 'text-[#FE7743]';
+      case ExamLevelEnum.LEVEL_7_EXPERT:
+        return 'text-[#FE7743]';
       default:
-        return 'text-orange-500';
+        return 'text-[#FE7743]';
     }
   };
 
   return (
     <Card
-      className='rounded-xl md:rounded-2xl shadow-sm border-0 bg-white hover:shadow-md transition-shadow duration-200 w-full'
-      onClick={() => onClick(quiz.id)}
+      className={`rounded-xl md:rounded-2xl shadow-sm border-0 bg-white transition-shadow duration-200 w-full
+        ${disabled ? 'opacity-50 pointer-events-none' : 'hover:shadow-md cursor-pointer'}`}
+      onClick={() => {
+        if (!disabled) onClick(quiz.id);
+      }}
     >
       <div className='flex flex-col sm:flex-row items-start sm:items-center space-y-0 sm:space-x-4'>
-        <div className='flex-shrink-0'>
-          <Checkbox
-            checked={isChecked}
-            onChange={(e) => onCheckboxChange(quiz.id, e.target.checked)}
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-
         <div className='flex-1 text-base sm:text-lg space-y-2 w-full cursor-pointer'>
           <div className='flex flex-col items-center sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3'>
             <div className='text-gray-600 font-medium'>
@@ -135,8 +152,10 @@ const QuizCard = ({ quiz, onCheckboxChange, isChecked, onClick }: QuizCardProps)
             <TrophyOutlined className='text-gray-600 text-lg sm:text-xl hidden sm:block' />
             <span className='text-sm sm:text-base'>
               {t('EXAM.COMPETENCY_LEVEL')}{' '}
-              <span className={`font-medium ${getLevelColor(quiz.sfiaLevel)}`}>
-                {quiz.sfiaLevel ? getLevelText(quiz.sfiaLevel) : t('EXAM.LEVEL.NONE_LEVEL')}
+              <span className={`font-medium ${getLevelColor(quiz.examLevel?.examLevel ?? '')}`}>
+                {quiz.examLevel?.examLevel
+                  ? getExamLevelText(quiz.examLevel.examLevel)
+                  : t('EXAM.EXAM_LEVEL.NONE_LEVEL')}
               </span>
             </span>
           </div>

@@ -1,0 +1,56 @@
+.ant-notification-notice {
+  border-radius: 15px !important;
+  width: fit-content;
+  align-items: center !important;
+  display: flex !important;
+}
+
+.ant-notification-notice-wrapper {
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.notification-success {
+  background-color: #00c07e;
+}
+
+.notification-error {
+  background-color: #fb303e;
+}
+
+.notification-warning {
+  background-color: #f5a623;
+}
+
+.notification-info {
+  background-color: #5646ff;
+}
+
+.ant-notification-notice-message {
+  color: white !important;
+  font-size: 18px !important;
+  align-items: center !important;
+  display: flex !important;
+}
+
+.anticon.ant-notification-notice-icon-error {
+  color: white;
+}
+
+.anticon.ant-notification-notice-icon-success {
+  color: white;
+}
+
+.anticon.ant-notification-notice-icon-info {
+  color: white;
+}
+
+.anticon.ant-notification-notice-icon-warning {
+  color: white;
+}
+
+.ant-notification-notice-with-icon {
+  display: flex !important;
+  align-items: center !important;
+  color: white !important;
+}

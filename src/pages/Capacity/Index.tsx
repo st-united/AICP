@@ -18,13 +18,13 @@ const Capacity = () => {
 
   const { data: examDetail, isLoading, error } = useExamDetail(examId || '');
   const chartData = [
-    { skill: 'Mindset', value: examDetail?.mindsetScore || 0 },
-    { skill: 'Skillset', value: examDetail?.skillsetScore || 0 },
-    { skill: 'Toolset', value: examDetail?.toolsetScore || 0 },
+    { skill: 'Mindset', value: examDetail?.mindsetScore.score || 0 },
+    { skill: 'Skillset', value: examDetail?.skillsetScore.score || 0 },
+    { skill: 'Toolset', value: examDetail?.toolsetScore.score || 0 },
   ];
 
   const handleInterviewClick = () => {
-    navigate(NAVIGATE_URL.SCHEDULE);
+    navigate(NAVIGATE_URL.INTERVIEW_DYNAMIC(examId || ''));
   };
 
   const handleOtherClick = () => {
@@ -75,10 +75,10 @@ const Capacity = () => {
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start relative px-2 md:px-5'>
           <div>
             <SkillsList
-              mindSetScore={examDetail?.mindsetScore || 0}
-              skillSetScore={examDetail?.skillsetScore || 0}
-              toolSetScore={examDetail?.toolsetScore || 0}
-              sfiaLevel={examDetail?.sfiaLevel || null}
+              mindSetScore={examDetail?.mindsetScore.score || 0}
+              skillSetScore={examDetail?.skillsetScore.score || 0}
+              toolSetScore={examDetail?.toolsetScore.score || 0}
+              examLevel={examDetail?.examLevel?.examLevel || null}
               className='ps-3 sm:ps-7'
             />
             <Paragraph className='text-gray-600 text-sm md:text-base ps-3 sm:ps-7 italic'>

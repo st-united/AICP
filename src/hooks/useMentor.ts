@@ -1,49 +1,36 @@
-import { CreateScheduleParams, UseMentorInfiniteParams } from '@app/interface/mentor.interface';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+
+import { QUERY_KEY } from '@app/constants';
+import { ExamSlotsReportDto } from '@app/interface/interview.interface';
 import {
+  CheckInterviewRequestResponse,
+  CreateScheduleParams,
+} from '@app/interface/mentor.interface';
+import {
+  checkMyInterview,
   createBookedSlots,
-  fetchBookedSlots,
-  getMentorsAvailableAPI,
+  getAvailableInterview,
 } from '@app/services/mentorAPI';
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-export const useMentorInfinite = ({
-  search,
-  scheduledDate,
-  timeSlot,
-  take,
-}: UseMentorInfiniteParams) => {
-  return useInfiniteQuery({
-    queryKey: ['mentors', search, scheduledDate, timeSlot],
-    queryFn: async ({ pageParam = 1 }) => {
-      const skip = (pageParam - 1) * take;
-      const res = await getMentorsAvailableAPI({
-        take,
-        skip,
-        search,
-        scheduledDate,
-        timeSlot,
-      });
-
-      const { data, total } = res.data;
-
-      return {
-        data,
-        nextPage: pageParam + 1,
-        hasMore: skip + data.length < total,
-      };
+export const useCheckInterview = (examId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEY.CHECK_MY_INTERVIEW, examId],
+    queryFn: async (): Promise<CheckInterviewRequestResponse> => {
+      const response = await checkMyInterview(examId);
+      return response.data.data;
     },
-    getNextPageParam: (lastPage) => (lastPage.hasMore ? lastPage.nextPage : undefined),
+    enabled: !!examId,
   });
 };
 
-export const useBookedSlots = (mentorId: string) => {
+export const useAvailableInterview = (examId: string) => {
   return useQuery({
-    queryKey: ['bookedSlots', mentorId],
-    queryFn: async () => {
-      const response = await fetchBookedSlots(mentorId);
-      return response.data;
+    queryKey: [QUERY_KEY.SLOT_INTERVIEW, examId],
+    queryFn: async (): Promise<ExamSlotsReportDto | null> => {
+      const response = await getAvailableInterview(examId);
+      return response.data.data;
     },
-    enabled: !!mentorId,
+    enabled: !!examId,
   });
 };
 
@@ -51,9 +38,11 @@ export const useCreateSchedule = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: CreateScheduleParams) => await createBookedSlots(data),
+    mutationFn: async (data: CreateScheduleParams) => {
+      return await createBookedSlots(data);
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['bookedSlots'] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.CHECK_MY_INTERVIEW] });
     },
   });
 };

@@ -14,3 +14,29 @@ export enum SFIALevel {
   LEVEL_6_LEADERSHIP = 'LEVEL_6_LEADERSHIP',
   LEVEL_7_MASTERY = 'LEVEL_7_MASTERY',
 }
+
+export enum ExamLevelEnum {
+  LEVEL_1_STARTER = 'LEVEL_1_STARTER',
+  LEVEL_2_EXPLORER = 'LEVEL_2_EXPLORER',
+  LEVEL_3_PRACTITIONER = 'LEVEL_3_PRACTITIONER',
+  LEVEL_4_INTEGRATOR = 'LEVEL_4_INTEGRATOR',
+  LEVEL_5_STRATEGIST = 'LEVEL_5_STRATEGIST',
+  LEVEL_6_LEADER = 'LEVEL_6_LEADER',
+  LEVEL_7_EXPERT = 'LEVEL_7_EXPERT',
+}
+
+export enum CompetencyDimension {
+  MINDSET = 'MINDSET',
+  TOOLSET = 'TOOLSET',
+  SKILLSET = 'SKILLSET',
+}
+
+export enum UserType {
+  STUDENT = 'student',
+  WORKER = 'worker',
+}
+
+export enum InterviewShift {
+  MORNING = 'MORNING',
+  AFTERNOON = 'AFTERNOON',
+}

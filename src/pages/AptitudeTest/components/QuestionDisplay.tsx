@@ -1,6 +1,5 @@
-import { FlagOutlined } from '@ant-design/icons';
-import { Checkbox, Divider, Radio, Tooltip } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { Checkbox, Divider, Radio } from 'antd';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useQuestionNavigation } from '@app/hooks';
@@ -12,8 +11,6 @@ interface QuestionProps {
   currentQuestion: { id: string; timestamp: number };
   currentQuestionScroll: string;
   onQuestionInViewChange: (id: string, timestamp?: number) => void;
-  flaggedQuestions: string[];
-  onFlagToggle: (id: string) => void;
   onAnswerSelect: (questionId: string, answerId: string) => void;
   selectedAnswers: Record<string, string[]>;
   setIsAutoScrolling: (val: boolean) => void;
@@ -24,8 +21,6 @@ const QuestionDisplay = ({
   currentQuestion,
   currentQuestionScroll,
   onQuestionInViewChange,
-  flaggedQuestions,
-  onFlagToggle,
   onAnswerSelect,
   selectedAnswers,
   setIsAutoScrolling,
@@ -51,17 +46,14 @@ const QuestionDisplay = ({
 
           if (entry.isIntersecting && id) {
             if (!hasMounted.current) {
-              console.log('[observer] Initial trigger - accepting:', id);
               hasMounted.current = true;
               onQuestionInViewChange(id);
               return;
             }
             if (!isAutoScrollingRefs.current) {
-              console.log('[observer] Ignored due to auto scroll:', id);
               return;
             }
 
-            console.log('[observer] Manual scroll - accepting:', id);
             isAutoScrollingRef.current = false;
             onQuestionInViewChange(id);
 
@@ -73,7 +65,6 @@ const QuestionDisplay = ({
               isAutoScrollingRef.current = true;
               isAutoScrollingRefs.current = true;
               setIsAutoScrolling(false);
-              console.log('[observer] Auto scroll re-enabled');
             }, 1000);
           }
         });
@@ -129,12 +120,9 @@ const QuestionDisplay = ({
         isAutoScrollingRef.current = true;
         isAutoScrollingRefs.current = true;
         setIsAutoScrolling(false);
-        console.log('[scroll effect] Re-enabled observer & flags');
       }, 800);
     }
   }, [currentQuestion.timestamp, scrollToQuestion]);
-
-  console.log(prevQuestionRef.current);
 
   const handleAnswerSelect = (questionId: string, answerId: string) => {
     onAnswerSelect(questionId, answerId);
@@ -171,7 +159,7 @@ const QuestionDisplay = ({
   };
 
   return (
-    <div className='min-h-screen pr-6 mdM:pr-10'>
+    <div className='min-h-screen pr-1'>
       {questions.map((question, index) => (
         <div
           key={question.id}
@@ -183,24 +171,6 @@ const QuestionDisplay = ({
               <h3 className='text-2xl font-bold text-black'>
                 {t('TEST.QUESTION')} {index + 1}:
               </h3>
-              <Tooltip
-                title={
-                  flaggedQuestions.includes(question.id)
-                    ? t('TEST.UNFLAG_QUESTION')
-                    : t('TEST.FLAG_QUESTION')
-                }
-                placement='top'
-                trigger={'hover'}
-              >
-                <FlagOutlined
-                  className={`flex text-xl border p-2 rounded-lg cursor-pointer ${
-                    flaggedQuestions.includes(question.id)
-                      ? 'bg-[#02185B] text-white border-[#02185B]'
-                      : 'border-[#02185B] text-[#02185B]'
-                  }`}
-                  onClick={() => onFlagToggle(question.id)}
-                />
-              </Tooltip>
             </div>
             <p className='text-black leading-relaxed font-semibold text-lg'>{question.content}</p>
             <p className='text-[#686868] font-medium text-sm'>

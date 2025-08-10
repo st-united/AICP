@@ -1,16 +1,44 @@
-import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { SlideImages } from '../../molecules/index';
+import { NAVIGATE_URL } from '@app/constants';
+import background from '@app/assets/images/SlideImages/background.png';
 
 const PublicLayout: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    document.body.className = '';
+
+    const routeClassMap: Record<string, string> = {
+      [NAVIGATE_URL.SIGN_UP]: 'sm:overflow-hidden',
+      [NAVIGATE_URL.SIGN_IN]: 'overflow-hidden',
+      [NAVIGATE_URL.FORGOT_PASSWORD]: 'overflow-hidden',
+      [NAVIGATE_URL.RESET_PASSWORD]: 'overflow-hidden',
+    };
+
+    const className = routeClassMap[pathname];
+    if (className) {
+      document.body.classList.add(className);
+    }
+
+    return () => {
+      document.body.className = '';
+    };
+  }, [pathname]);
+
   return (
-    <div className='min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/SlideImages/background.png)]'>
-      <div className='h-full pt-12 p-6 sm:p-6 sm:pt-12 md:p-10 lg:p-14 xl:p-20'>
+    <div
+      className='grid grid-cols-1 lg:grid-cols-2 bg-cover bg-center bg-no-repeat'
+      style={{ backgroundImage: `url(${background})` }}
+    >
+      <div className='h-full pt-6 sm:px-6 md:px-10'>
         <Outlet />
       </div>
 
-      <div className='flex justify-center items-center p-10'>
-        <div className='shadow-md rounded-3xl p-12 overflow-hidden lg:block hidden w-full bg-white sm:w-6/6 md:w-6/6 lg:w-6/6 xl:w-5/6 max-h-screen'>
+      <div className='flex justify-center items-center lg:px-20 lg:py-6'>
+        <div className='shadow-md rounded-3xl lg:p-8 p-12 overflow-hidden lg:block hidden w-full bg-white xl:w-5/6 max-h-screen lg:max-h-[95%]'>
           <div className='flex flex-col justify-between'>
             <SlideImages />
           </div>
