@@ -14,8 +14,11 @@ import QuestionIndexPanel from './QuestionIndexPanel';
 import { useDeleteExam, useGetExamSet, useSubmitDraftQuestion, useSubmitExam } from '@app/hooks';
 import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 import './QuestionIndexPanel.scss';
+import { useLocation } from 'react-router-dom';
 
 const Testing = () => {
+  const { state } = useLocation();
+
   const { t } = useTranslation();
   const [currentQuestion, setCurrentQuestion] = useState<{ id: string; timestamp: number }>({
     id: '',
@@ -27,7 +30,7 @@ const Testing = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [unansweredQuestions, setUnansweredQuestions] = useState<Question[]>([]);
-  const { data: examSet } = useGetExamSet();
+  const { data: examSet } = useGetExamSet(state?.domain);
   const submitDraftQuestionMutation = useSubmitDraftQuestion();
   const { mutate: submitExam, isLoading: isSubmitting } = useSubmitExam();
   const { mutate: deleteExam, isLoading: isDeleting } = useDeleteExam();

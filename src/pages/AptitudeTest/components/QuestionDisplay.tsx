@@ -46,17 +46,14 @@ const QuestionDisplay = ({
 
           if (entry.isIntersecting && id) {
             if (!hasMounted.current) {
-              console.log('[observer] Initial trigger - accepting:', id);
               hasMounted.current = true;
               onQuestionInViewChange(id);
               return;
             }
             if (!isAutoScrollingRefs.current) {
-              console.log('[observer] Ignored due to auto scroll:', id);
               return;
             }
 
-            console.log('[observer] Manual scroll - accepting:', id);
             isAutoScrollingRef.current = false;
             onQuestionInViewChange(id);
 
@@ -68,7 +65,6 @@ const QuestionDisplay = ({
               isAutoScrollingRef.current = true;
               isAutoScrollingRefs.current = true;
               setIsAutoScrolling(false);
-              console.log('[observer] Auto scroll re-enabled');
             }, 1000);
           }
         });
@@ -124,7 +120,6 @@ const QuestionDisplay = ({
         isAutoScrollingRef.current = true;
         isAutoScrollingRefs.current = true;
         setIsAutoScrolling(false);
-        console.log('[scroll effect] Re-enabled observer & flags');
       }, 800);
     }
   }, [currentQuestion.timestamp, scrollToQuestion]);

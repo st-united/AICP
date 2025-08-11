@@ -1,5 +1,3 @@
-import { Dayjs } from 'dayjs';
-
 import { GetListParams } from './common.interface';
 import { ExamLevelEnum, ExamStatusEnum, SFIALevel } from '@app/constants/enum';
 
@@ -109,6 +107,7 @@ export interface HistoryTesting {
 export interface GetHistoryParams {
   startDate?: string;
   endDate?: string;
+  examSetName?: string;
 }
 export interface Job {
   id: number;

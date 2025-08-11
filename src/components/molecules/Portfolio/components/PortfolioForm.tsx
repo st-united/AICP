@@ -119,7 +119,7 @@ const PortfolioForm: React.FC = () => {
         </div>
       )}
       <section className='portfolio-content__section mb-[16px]'>
-        <h2>{t('PORTFOLIO.URL')}</h2>
+        <h2 className='!text-[1rem]'>{t('PORTFOLIO.URL')}</h2>
         <Form.Item name='linkedInUrl' rules={validator}>
           <Input
             className='!px-6 !py-3 !rounded-lg'
@@ -136,12 +136,12 @@ const PortfolioForm: React.FC = () => {
         </Form.Item>
       </section>
       <div>
-        <h2 className='mb-4 text-xl font-semibold' id='certificateFiles'>
+        <h2 className='mb-4 text-[1rem] font-semibold' id='certificateFiles'>
           {t('PORTFOLIO.CERTIFICATIONS')}
         </h2>
         <FileUpload type={PortfolioFileType.CERTIFICATION} />
         <FileList type={PortfolioFileType.CERTIFICATION} />
-        <h2 className='mb-4 text-xl font-semibold' id='experienceFiles'>
+        <h2 className='mb-4 text-[1rem] font-semibold' id='experienceFiles'>
           {t('PORTFOLIO.EXPERIENCE')}
         </h2>
         <FileUpload type={PortfolioFileType.EXPERIENCE} />

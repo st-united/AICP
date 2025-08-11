@@ -37,20 +37,40 @@ export const useSignUpSchema = () => {
 
     phoneNumber: yup
       .string()
+      .nullable()
       .required(t('VALIDATE.PHONE_REQUIRED') as string)
-      .trim()
-      .test('is-have-phone', t('VALIDATE.PHONE_REQUIRED') as string, (value) => {
-        if (!value || value.trim().length === 0 || value.trim() === '') return true;
-        const dialCodeMatch = value.match(DIAL_CODE_REGEX_PATTERN);
-        if (dialCodeMatch && value === dialCodeMatch[0]) return false;
+      .matches(/^\S+$/, t('VALIDATE.NOT_ALLOW_SPACE', { field: t('PROFILE.PHONE') }) as string)
+      .test('no-leading-zero-after-84', t('VALIDATE.NO_LEADING_ZERO') as string, function (value) {
+        if (!value) return true;
+        const normalized = value.replace(/[\s()-]/g, '');
+        if (normalized.startsWith('+84')) {
+          return !/^(\+84)0/.test(normalized);
+        }
         return true;
       })
       .test(
-        'is-valid-phone',
-        t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
-        (value) => {
+        'exactly-9-digits-after-84',
+        t('VALIDATE.PHONE_MUST_BE_9_DIGITS') as string,
+        function (value) {
           if (!value) return true;
-          return PHONE_REGEX_PATTERN.test(value);
+          const normalized = value.replace(/[\s()-]/g, '');
+          if (normalized.startsWith('+84')) {
+            return /^\+84[1-9]\d{8}$/.test(normalized);
+          }
+          return true;
+        },
+      )
+      .test(
+        'valid-international-format',
+        t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
+        function (value) {
+          if (!value) return false;
+          const normalized = value.replace(/[\s()-]/g, '');
+
+          if (normalized.startsWith('+84')) {
+            return true;
+          }
+          return /^\+\d{1,6}\d{6,14}$/.test(normalized);
         },
       ),
 

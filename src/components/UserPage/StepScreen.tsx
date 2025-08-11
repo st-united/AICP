@@ -1,11 +1,5 @@
-import { Button } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
-import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
-import { RootState } from '@app/redux/store';
 
 type Point = {
   label: string;
@@ -141,10 +135,10 @@ export default function StepScreen({ steps, activeStep }: Props) {
       <div className='smL:absolute flex px-5 mt-10 smL:top-28 smL:left-28 z-10 smL:w-[380px] xl:w-[480px]'>
         <div className='flex items-center justify-center h-full'>
           <div className='flex flex-col gap-4'>
-            <span className='text-black text-2xl md:text-4xl xl:text-6xl text-center md:text-left font-[1000]'>
+            <span className='text-black text-2xl md:text-4xl xl:text-6xl font-[1000]'>
               {t('HOMEPAGE.STEP_SCREEN_HEADER.TITLE')}
             </span>
-            <span className='text-[#64607D] text-base xl:text-xl text-center md:text-left font-[500]'>
+            <span className='text-[#64607D] text-base xl:text-xl'>
               {t('HOMEPAGE.STEP_SCREEN_HEADER.SUBTITLE')}
             </span>
           </div>

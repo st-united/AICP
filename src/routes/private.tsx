@@ -5,7 +5,7 @@ import BaseLayout from '@app/components/templates/BaseLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import ResultLayout from '@app/components/templates/ResultLayout/ResultLayout';
 import { NAVIGATE_URL } from '@app/constants';
-import { AptitudeTest, Profile, Capacity } from '@app/pages';
+import { AptitudeTest, Capacity } from '@app/pages';
 import ExamOverview from '@app/pages/ExamResult/ExamOverview';
 import PortfolioForResult from '@app/pages/ExamResult/PortfolioForResult';
 import Booking from '@app/pages/MentorBooking';
@@ -35,7 +35,7 @@ const routes = [
         element: <BaseLayout />,
         children: [
           {
-            path: NAVIGATE_URL.SCHEDULE,
+            path: NAVIGATE_URL.INTERVIEW,
             element: <Booking />,
           },
           {
