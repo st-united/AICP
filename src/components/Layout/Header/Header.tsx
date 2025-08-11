@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { DropProfile } from '../../molecules';
 import { DevPlus, DevPlusS } from '@app/assets/images';
 import { ButtonHeader } from '@app/components/atoms';
+import { NAVIGATE_URL } from '@app/constants';
 import { HomePageEnum } from '@app/constants/homePageEnum';
 import { smoothScrollTo } from '@app/utils/scroll';
 
@@ -18,7 +19,6 @@ const Header = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentSection, setCurrentSection] = useState<HomePageEnum | null>(null);
-
   const isHomePage = pathname === '/';
   const handleLoginClick = () => navigate('/login');
 
@@ -69,6 +69,15 @@ const Header = () => {
       smoothScrollTo(y);
     }
   };
+
+  const handleBackToTop = () => {
+    if (pathname == NAVIGATE_URL.LANDING_PAGE) {
+      smoothScrollTo(0);
+    } else {
+      navigate(NAVIGATE_URL.LANDING_PAGE);
+    }
+  };
+
   return (
     <Layout.Header
       className={clsx(
@@ -80,36 +89,36 @@ const Header = () => {
         },
       )}
     >
-      <div className='cursor-pointer flex items-center justify-center'>
+      <div className='flex items-center justify-center'>
         <Image
-          onClick={() => navigate('/')}
+          onClick={handleBackToTop}
           src={DevPlus}
-          className='hidden md:block !h-20'
+          className='hidden md:block !h-20 cursor-pointer'
           preview={false}
         />
         <Image
-          onClick={() => navigate('/')}
+          onClick={handleBackToTop}
           src={DevPlusS}
-          className='block md:hidden !h-20'
+          className='block md:hidden !h-20 cursor-pointer'
           preview={false}
         />
       </div>
       {isHomePage && (
         <div className='hidden md:flex gap-8 items-center'>
           <Button
-            onClick={() => handleSmoothScroll('partner-network')}
+            onClick={() => handleSmoothScroll(HomePageEnum.PARTNER_NETWORK)}
             type='text'
-            className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
-              currentSection === HomePageEnum.PARTNER_NETWORK ? '!text-[#FE7743]' : ''
+            className={`!font-semibold !text-base hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
+              currentSection === HomePageEnum.PARTNER_NETWORK ? '!text-[#FE7743]' : '!text-[#444]'
             }`}
           >
             {t('HOMEPAGE.PARTNER_TITLE')}
           </Button>
           <Button
-            onClick={() => handleSmoothScroll('experts')}
+            onClick={() => handleSmoothScroll(HomePageEnum.EXPERTS)}
             type='text'
-            className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
-              currentSection === HomePageEnum.EXPERTS ? '!text-[#FE7743]' : ''
+            className={`!font-semibold !text-base hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
+              currentSection === HomePageEnum.EXPERTS ? '!text-[#FE7743]' : '!text-[#444]'
             }`}
           >
             {t('HOMEPAGE.EXPERTS_TITLE')}
