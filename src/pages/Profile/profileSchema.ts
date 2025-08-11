@@ -5,12 +5,9 @@ import * as yup from 'yup';
 
 dayjs.extend(isSameOrBefore);
 import {
-  PHONE_REGEX_PATTERN,
-  EMAIL_REGEX_PATTERN,
   NO_SPECIAL_CHARACTER_IN_NAME,
   NO_SPACE_START_END,
   NO_TWO_SPACE,
-  DIAL_CODE_REGEX_PATTERN,
 } from '@app/constants/regex';
 const MIN_AGE = 15;
 export const useProfileSchema = () => {
@@ -35,20 +32,40 @@ export const useProfileSchema = () => {
 
     phoneNumber: yup
       .string()
+      .nullable()
       .required(t('VALIDATE.PHONE_REQUIRED') as string)
-      .trim()
-      .test('is-have-phone', t('VALIDATE.PHONE_REQUIRED') as string, (value) => {
-        if (!value || value.trim().length === 0 || value.trim() === '') return true;
-        const dialCodeMatch = value.match(DIAL_CODE_REGEX_PATTERN);
-        if (dialCodeMatch && value === dialCodeMatch[0]) return false;
+      .matches(/^\S+$/, t('VALIDATE.NOT_ALLOW_SPACE', { field: t('PROFILE.PHONE') }) as string)
+      .test('no-leading-zero-after-84', t('VALIDATE.NO_LEADING_ZERO') as string, function (value) {
+        if (!value) return true;
+        const normalized = value.replace(/[\s()-]/g, '');
+        if (normalized.startsWith('+84')) {
+          return !/^(\+84)0/.test(normalized);
+        }
         return true;
       })
       .test(
-        'is-valid-phone',
-        t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
-        (value) => {
+        'exactly-9-digits-after-84',
+        t('VALIDATE.PHONE_MUST_BE_9_DIGITS') as string,
+        function (value) {
           if (!value) return true;
-          return PHONE_REGEX_PATTERN.test(value);
+          const normalized = value.replace(/[\s()-]/g, '');
+          if (normalized.startsWith('+84')) {
+            return /^\+84[1-9]\d{8}$/.test(normalized);
+          }
+          return true;
+        },
+      )
+      .test(
+        'valid-international-format',
+        t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string,
+        function (value) {
+          if (!value) return false;
+          const normalized = value.replace(/[\s()-]/g, '');
+
+          if (normalized.startsWith('+84')) {
+            return true;
+          }
+          return /^\+\d{1,6}\d{6,14}$/.test(normalized);
         },
       ),
 
@@ -74,5 +91,18 @@ export const useProfileSchema = () => {
     job: yup.array().of(yup.string()).nullable(),
 
     referralCode: yup.string().nullable(),
+
+    isStudent: yup.boolean().required(),
+
+    university: yup
+      .string()
+      .required(t<string>('VALIDATE.USER_UNIVERSITY_REQUIRED'))
+      .matches(NO_SPACE_START_END, t('VALIDATE.NO_SPACE_START_END') as string)
+      .matches(NO_TWO_SPACE, t('VALIDATE.NO_TWO_SPACE') as string),
+
+    studentCode: yup
+      .string()
+      .required(t<string>('VALIDATE.USER_STUDENT_CODE_REQUIRED'))
+      .matches(NO_SPACE_START_END, t('VALIDATE.NO_SPACE_START_END') as string),
   });
 };

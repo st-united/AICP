@@ -24,10 +24,10 @@ export interface UserProfile {
   fullName: string;
   email: string;
   phoneNumber?: string;
-  dob?: string;
+  dob?: string | null;
   avatarUrl?: string;
   permissions?: string[];
-  province?: string;
+  province: string;
   job?: string[];
   referralCode: string;
   isStudent: boolean;
@@ -107,6 +107,7 @@ export interface HistoryTesting {
 export interface GetHistoryParams {
   startDate?: string;
   endDate?: string;
+  examSetName?: string;
 }
 export interface Job {
   id: number;
@@ -151,4 +152,9 @@ export interface UpdateUserStudentInfo {
   isStudent: boolean;
   university?: string;
   studentCode?: string;
+}
+
+export interface ProfileJob {
+  id: string;
+  name: string;
 }

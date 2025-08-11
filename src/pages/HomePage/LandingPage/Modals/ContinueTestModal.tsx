@@ -6,14 +6,12 @@ import { HeaderModal } from './HeaderModal';
 import { ExamStatusEnum } from '@app/constants/enum';
 
 interface ContinueTestModalProps {
-  confirmProps: { onClose: () => void };
   examId: string;
   handleStartTest: () => void;
   submitExam: (examId: string) => void;
 }
 
 export const ContinueTestModal = ({
-  confirmProps,
   examId,
   handleStartTest,
   submitExam,
@@ -26,20 +24,16 @@ export const ContinueTestModal = ({
 
   return (
     <div className='relative flex flex-col items-center justify-center'>
-      <HeaderModal
-        title={t('MODAL.TITLE_CONFIRM_CONTINUE_TEST')}
-        onClose={confirmProps.onClose}
-        symbol='?'
-      />
+      <HeaderModal title={t('MODAL.TITLE_CONFIRM_CONTINUE_TEST')} symbol='?' />
 
-      <div className='px-6 w-full flex flex-col items-start md:my-6 !my-0 gap-2.5'>
-        <p className='text-base text-gray-900 md:text-xl'>
+      <div className='px-6 w-full flex flex-col items-start md:my-6 !my-0 gap-3'>
+        <p className='text-base text-gray-900 md:text-lg'>
           <Trans i18nKey='MODAL.CONTINUE_TEST_DESCRIPTION_1' components={{ br: <br /> }} />
         </p>
-        <p className='text-base text-gray-900 md:text-xl mt-[6px]'>
+        <p className='text-base text-gray-900 md:text-lg mt-[6px]'>
           <Trans i18nKey='MODAL.CONTINUE_TEST_DESCRIPTION_2' components={{ br: <br /> }} />
         </p>
-        <ul className='text-base text-gray-900 md:text-xl text-left list-disc list-inside pl-4 flex flex-col !leading-9'>
+        <ul className='text-base text-gray-900 md:text-lg text-left list-disc list-inside pl-4 flex flex-col !leading-9'>
           <li>
             <Trans i18nKey='MODAL.CONTINUE_TEST_OPTION_CONTINUE' components={{ b: <b /> }} />
           </li>
@@ -51,7 +45,7 @@ export const ContinueTestModal = ({
 
       <ContentModal durationKey='MODAL.TEST_DURATION_MESSAGE' hasTakenExam={hasTakenExam} />
 
-      <div className='mt-4 px-3 w-full md:my-6'>
+      <div className='px-3 my-6 w-full'>
         <div className='flex flex-col gap-4 md:flex-row md:justify-center md:gap-4'>
           <Button
             onClick={() => submitExam(examId)}

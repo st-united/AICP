@@ -1,4 +1,5 @@
 import { Button, Image, Layout } from 'antd';
+import clsx from 'clsx';
 import { useEffect, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -7,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { DropProfile } from '../../molecules';
 import { DevPlus, DevPlusS } from '@app/assets/images';
 import { ButtonHeader } from '@app/components/atoms';
+import { NAVIGATE_URL } from '@app/constants';
 import { HomePageEnum } from '@app/constants/homePageEnum';
 import { smoothScrollTo } from '@app/utils/scroll';
 
@@ -68,44 +70,56 @@ const Header = () => {
       smoothScrollTo(y);
     }
   };
+
+  const handleBackToTop = () => {
+    if (pathname == NAVIGATE_URL.LANDING_PAGE) {
+      smoothScrollTo(0);
+    } else {
+      navigate(NAVIGATE_URL.LANDING_PAGE);
+    }
+  };
+
   return (
     <Layout.Header
-      className={`${
-        isHomePage && !isScrolled
-          ? 'sticky top-0 bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0]'
-          : 'sticky top-0 bg-white shadow-md'
-      } flex justify-between w-full items-center h-[5rem] z-50  transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24`}
+      className={clsx(
+        'bg-white sticky top-0 flex justify-between w-full items-center h-[5rem] z-50  transition-all duration-300 ease-in-out px-6 mdL:px-16 xl:px-24',
+        {
+          'bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0]': isHomePage && !isScrolled,
+          'shadow-md': !isHomePage || isScrolled,
+          'mt-2': !isHomePage,
+        },
+      )}
     >
-      <div className='cursor-pointer flex items-center justify-center'>
+      <div className='flex items-center justify-center'>
         <Image
-          onClick={() => navigate('/')}
+          onClick={handleBackToTop}
           src={DevPlus}
-          className='hidden md:block !h-20'
+          className='hidden md:block !h-20 cursor-pointer'
           preview={false}
         />
         <Image
-          onClick={() => navigate('/')}
+          onClick={handleBackToTop}
           src={DevPlusS}
-          className='block md:hidden !h-20'
+          className='block md:hidden !h-20 cursor-pointer'
           preview={false}
         />
       </div>
       {isHomePage && (
         <div className='hidden md:flex gap-8 items-center'>
           <Button
-            onClick={() => handleSmoothScroll('partner-network')}
+            onClick={() => handleSmoothScroll(HomePageEnum.PARTNER_NETWORK)}
             type='text'
-            className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
-              currentSection === HomePageEnum.PARTNER_NETWORK ? '!text-[#FE7743]' : ''
+            className={`!font-semibold !text-base hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
+              currentSection === HomePageEnum.PARTNER_NETWORK ? '!text-[#FE7743]' : '!text-[#444]'
             }`}
           >
             {t('HOMEPAGE.PARTNER_TITLE')}
           </Button>
           <Button
-            onClick={() => handleSmoothScroll('experts')}
+            onClick={() => handleSmoothScroll(HomePageEnum.EXPERTS)}
             type='text'
-            className={`!font-semibold !text-base !text-[#444] hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
-              currentSection === HomePageEnum.EXPERTS ? '!text-[#FE7743]' : ''
+            className={`!font-semibold !text-base hover:!text-[#FE7743] hover:!bg-transparent transition-colors duration-200 ${
+              currentSection === HomePageEnum.EXPERTS ? '!text-[#FE7743]' : '!text-[#444]'
             }`}
           >
             {t('HOMEPAGE.EXPERTS_TITLE')}

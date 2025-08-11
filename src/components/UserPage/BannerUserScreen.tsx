@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { RobotHand } from '@app/assets/images';
 import { PartnerUnit1, PartnerUnit2, CelebUnit2, DevPlus } from '@app/assets/images/Logos';
 import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
+import ExamDomainSelectModal from '@app/pages/HomePage/LandingPage/Modals/ExamDomainSelectModal';
 import { RootState } from '@app/redux/store';
-
 import '@app/pages/HomePage/LandingPage/homepage.scss';
 
 const BannerUserScreen = () => {
@@ -16,9 +16,11 @@ const BannerUserScreen = () => {
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [domain, setDomain] = useState('');
+
   return (
-    <section className='bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0] flex justify-center px-6 min-h-[calc(100vh-5rem)]'>
-      <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 w-full'>
+    <section className='min-h-[calc(100vh-5rem)] bg-gradient-to-r from-[#FFFBF9] to-[#FFF5F0] flex items-center justify-center px-6 md:px-8 lg:px-12 py-5 sm:py-0'>
+      <div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center w-full'>
         {/* Left Side - Robot Image */}
         <div className='order-2 md:order-1 px-4 md:px-6 lg:px-8 flex justify-center items-center'>
           <div className='mt-5'>
@@ -132,7 +134,22 @@ const BannerUserScreen = () => {
               >
                 {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
               </Button>
-              {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
+              {isOpen && !domain ? (
+                <ExamDomainSelectModal
+                  open={isOpen}
+                  onClose={() => setIsOpen(false)}
+                  onSelectDomain={setDomain}
+                />
+              ) : (
+                <ConfirmBeforeTestModal
+                  domain={domain}
+                  open={!!domain}
+                  onClose={() => {
+                    setIsOpen(false);
+                    setDomain('');
+                  }}
+                />
+              )}{' '}
             </div>
           </div>
 
@@ -145,21 +162,17 @@ const BannerUserScreen = () => {
               <p className='text-sm text-gray-600 font-medium'>
                 {t('HOMEPAGE.BANNER_USER.ORGANIZER')}
               </p>
-              <div className='grid grid-cols-2 gap-4 w-fit mx-auto'>
+              <div className='flex justify-center space-x-3'>
                 <div className='flex justify-center items-center'>
-                  <Image
-                    preview={false}
-                    height={40}
-                    className='object-contain transition-transform hover:scale-110'
+                  <img
+                    className='object-contain transition-transform hover:scale-110 !h-[70px]'
                     src={CelebUnit2}
                     alt='celeb unit'
                   />
                 </div>
                 <div>
-                  <Image
-                    preview={false}
-                    height={36}
-                    className='object-contain transition-transform hover:scale-110'
+                  <img
+                    className='object-contain transition-transform hover:scale-110 !h-[70px] pb-4'
                     src={DevPlus}
                     alt='dev plus'
                   />

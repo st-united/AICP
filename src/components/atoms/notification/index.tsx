@@ -16,20 +16,20 @@ export enum NotificationTypeEnum {
 }
 
 export const openNotificationWithIcon = (type: NotificationTypeEnum, description: string) => {
-  let icon = <CheckCircleFilled style={{ color: 'white' }} />;
+  let icon = <CheckCircleFilled className='text-white' />;
 
   switch (type) {
     case NotificationTypeEnum.INFO:
-      icon = <InfoCircleFilled style={{ color: 'white' }} />;
+      icon = <InfoCircleFilled className='text-white' />;
       break;
     case NotificationTypeEnum.ERROR:
-      icon = <ExclamationCircleFilled style={{ color: 'white' }} />;
+      icon = <ExclamationCircleFilled className='text-white' />;
       break;
     case NotificationTypeEnum.WARNING:
-      icon = <WarningFilled style={{ color: 'white' }} />;
+      icon = <WarningFilled className='text-white' />;
       break;
     case NotificationTypeEnum.SUCCESS:
-      icon = <CheckCircleFilled style={{ color: 'white' }} />;
+      icon = <CheckCircleFilled className='text-white' />;
       break;
   }
 

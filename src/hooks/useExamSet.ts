@@ -3,6 +3,7 @@ import { AxiosResponse } from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
 import { setStorageData } from '@app/config';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { EXAM_LATEST, TEST_RESULT_CURRENT_STEP } from '@app/constants/testing';
@@ -20,10 +21,6 @@ import {
   submitDraftQuestionApi,
   submitExamSetApi,
 } from '@app/services';
-import {
-  NotificationTypeEnum,
-  openNotificationWithIcon,
-} from '@app/services/notification/notificationService';
 
 export const useCountdown = (initialTime: number) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
@@ -105,14 +102,15 @@ export const useQuestionNavigation = (
   return { setQuestionRef, scrollToQuestion };
 };
 
-export const useGetExamSet = () =>
+export const useGetExamSet = (domain: string) =>
   useQuery<ExamSetDetail>(
-    [QUERY_KEY.EXAM_SETS],
+    [QUERY_KEY.EXAM_SETS, domain],
     async () => {
-      const { data } = await getExamSetsApi();
+      const { data } = await getExamSetsApi(domain);
       return data.data;
     },
     {
+      enabled: !!domain,
       cacheTime: 0,
       staleTime: 0,
       refetchOnWindowFocus: false,

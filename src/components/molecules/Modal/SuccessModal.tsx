@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import React from 'react';
+import { ReactNode } from 'react';
 
 import { SuccessIcon } from '@app/assets/svgs/NotificationIcon';
 
@@ -8,20 +8,20 @@ interface SuccessModalProps {
   onClose: () => void;
   title: string;
   message: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   width?: string | number;
   maxWidth?: string;
 }
 
-const SuccessModal: React.FC<SuccessModalProps> = ({
+const SuccessModal = ({
   visible,
   onClose,
   title,
   message,
   icon = null,
-  width = 1000,
+  width = '90%',
   maxWidth = 'max-w-xl',
-}) => {
+}: SuccessModalProps) => {
   const defaultIcon = <img src={SuccessIcon} alt='success' className='w-20 h-20' />;
 
   return (
@@ -36,7 +36,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
       classNames={{ content: '!rounded-2xl' }}
     >
       <div className='text-center p-2 xsM:p-4'>
-        <div className=' xsM:w-16 xsM:h-16 mx-auto mb-3 xsM:mb-4 rounded-full bg-green-100 flex items-center justify-center'>
+        <div className=' xsM:w-16 xsM:h-16 mx-auto mb-3 xsM:mb-4 rounded-full flex items-center justify-center'>
           {icon || defaultIcon}
         </div>
 

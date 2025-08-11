@@ -1,5 +1,5 @@
+import { CloseCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useNavigate } from 'react-router-dom';
 
 import { ContinueTestModal } from './Modals/ContinueTestModal';
@@ -9,23 +9,27 @@ import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
 import { ExamStatusEnum } from '@app/constants/enum';
 import { useHasTakenExamDefault, useSubmitExam, useGetHistory } from '@app/hooks';
-import 'react-perfect-scrollbar/dist/css/styles.css';
 import './confirmBeforeTestModal.scss';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
   onClose: () => void;
+  domain?: string;
 }
 
-export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeTestModalProps) {
-  const { t } = useTranslation();
+export default function ConfirmBeforeTestModal({
+  open,
+  onClose,
+  domain,
+}: ConfirmBeforeTestModalProps) {
   const navigate = useNavigate();
 
-  const { mutate: submitExam, isPending } = useSubmitExam();
+  const { mutate: submitExam } = useSubmitExam();
   const { data: exam } = useHasTakenExamDefault();
-  const { data: historyData } = useGetHistory();
+  const { data: hasTakenExam } = useHasTakenExamDefault();
+  const { data: historyData } = useGetHistory({ examSetName: domain });
 
-  const handleStartTest = () => navigate(NAVIGATE_URL.TEST);
+  const handleStartTest = () => navigate(NAVIGATE_URL.TEST, { state: { domain } });
   const handleReviewResult = () => navigate(NAVIGATE_URL.TEST_RESULT);
 
   const renderModalContent = () => {
@@ -35,7 +39,6 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
     if (inProgressExam) {
       return (
         <ContinueTestModal
-          confirmProps={{ onClose }}
           examId={inProgressExam.id}
           handleStartTest={handleStartTest}
           submitExam={submitExam}
@@ -46,7 +49,6 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
     if (exam?.hasTakenExam) {
       return (
         <ImproveTestModal
-          confirmProps={{ onClose }}
           hasTakenExam={exam}
           handleReviewResult={handleReviewResult}
           handleStartTest={handleStartTest}
@@ -55,13 +57,7 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       );
     }
 
-    return (
-      <NewTestModal
-        confirmProps={{ onClose }}
-        handleStartTest={handleStartTest}
-        hasTakenExam={exam}
-      />
-    );
+    return <NewTestModal handleStartTest={handleStartTest} hasTakenExam={exam} />;
   };
 
   return (
@@ -71,30 +67,29 @@ export default function ConfirmBeforeTestModal({ open, onClose }: ConfirmBeforeT
       footer={null}
       destroyOnHidden
       closable={false}
-      className='p-3 sm:p-5'
-      classNames={{ content: '!rounded-3xl' }}
+      className='p-0 m-0'
+      classNames={{ content: '!rounded-3xl !pr-[0.875rem]' }}
       width={{
         xs: '90%',
         sm: '80%',
         md: '70%',
         lg: '60%',
-        xl: '50%',
-        xxl: '40%',
+        xl: '85%',
+        xxl: '60%',
       }}
     >
-      <PerfectScrollbar
-        style={{
-          maxHeight: '90vh',
-          paddingRight: '10px',
-        }}
-        options={{
-          wheelSpeed: 0.5,
-          wheelPropagation: false,
-          suppressScrollX: true,
-        }}
-      >
-        {renderModalContent()}
-      </PerfectScrollbar>
+      <div className='relative'>
+        <div className='fixed-close-button text-right pr-2'>
+          <CloseCircleOutlined
+            onClick={onClose}
+            className='text-2xl cursor-pointer text-gray-500 hover:text-gray-700 md:text-3xl'
+          />
+        </div>
+
+        <div className='custom-scrollbar overflow-y-auto max-h-[80vh] pr-[0.625rem]'>
+          {renderModalContent()}
+        </div>
+      </div>
     </Modal>
   );
 }

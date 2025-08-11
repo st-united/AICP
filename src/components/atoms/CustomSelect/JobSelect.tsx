@@ -54,7 +54,7 @@ const JobSelect: React.FC<JobSelectProps> = (props) => {
         mode='multiple'
         className='w-full'
         maxTagCount='responsive'
-        maxTagTextLength={10}
+        maxTagTextLength={20}
         style={{ maxHeight: 'auto' }}
         placeholder={t('PLACEHOLDER.SELECT_JOB')}
         options={jobOptions}
