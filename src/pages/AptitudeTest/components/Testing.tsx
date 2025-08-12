@@ -156,7 +156,7 @@ const Testing = () => {
 
     let startTime = localStorage.getItem('examStartTime');
     if (!startTime) {
-      startTime = Date.now().toString();
+      startTime = dayjs(examSet.timeStart).valueOf().toString();
       localStorage.setItem('examStartTime', startTime);
     }
 
