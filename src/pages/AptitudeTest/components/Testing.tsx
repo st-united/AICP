@@ -123,6 +123,7 @@ const Testing = () => {
     submitExam(examSet.examId, {
       onSuccess: () => {
         setIsSubmitModalOpen(false);
+        localStorage.removeItem('examStartTime');
       },
     });
   }, [examSet, submitExam]);
