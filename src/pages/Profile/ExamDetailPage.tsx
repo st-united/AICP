@@ -7,7 +7,6 @@ import { useExamDetail } from '@app/hooks';
 
 const ExamDetailPage = () => {
   const { examId } = useParams<{ examId: string }>();
-  console.log(examId);
 
   const navigate = useNavigate();
 
