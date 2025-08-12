@@ -15,9 +15,11 @@ import { useDeleteExam, useGetExamSet, useSubmitDraftQuestion, useSubmitExam } f
 import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 import './QuestionIndexPanel.scss';
 import { useLocation } from 'react-router-dom';
+import TimeUpPopup from './TimeUpPopupProps';
 
 const Testing = () => {
   const { state } = useLocation();
+  const [isTimeUp, setIsTimeUp] = useState<boolean>(false);
 
   const { t } = useTranslation();
   const [currentQuestion, setCurrentQuestion] = useState<{ id: string; timestamp: number }>({
@@ -32,6 +34,7 @@ const Testing = () => {
   const [unansweredQuestions, setUnansweredQuestions] = useState<Question[]>([]);
   const { data: examSet } = useGetExamSet(state?.domain);
   const submitDraftQuestionMutation = useSubmitDraftQuestion();
+
   const { mutate: submitExam, isLoading: isSubmitting } = useSubmitExam();
   const { mutate: deleteExam, isLoading: isDeleting } = useDeleteExam();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -120,6 +123,7 @@ const Testing = () => {
     submitExam(examSet.examId, {
       onSuccess: () => {
         setIsSubmitModalOpen(false);
+        localStorage.removeItem('examStartTime');
       },
     });
   }, [examSet, submitExam]);
@@ -152,24 +156,30 @@ const Testing = () => {
   }, [examSet]);
 
   useEffect(() => {
-    if (!examSet || totalTime.current === 0) return;
+    if (!examSet) return;
 
-    const interval = setInterval(() => {
-      setRemainingTime((prev) => {
-        const next = prev - 1;
+    let startTime = localStorage.getItem('examStartTime');
 
-        if (next <= 0) {
-          clearInterval(interval);
-          if (!hasSubmittedRef.current) {
-            hasSubmittedRef.current = true;
-            submitExam?.(examSet.examId);
-          }
-          return 0;
-        }
+    if (!startTime) {
+      startTime = dayjs(examSet.timeStart).valueOf().toString();
+      localStorage.setItem('examStartTime', startTime);
+    }
 
-        return next;
-      });
-    }, 1000);
+    const timeEnd = Number(startTime) + examSet.timeLimitMinutes * 60 * 1000;
+
+    const updateRemaining = () => {
+      const now = Date.now();
+      const remaining = Math.max(Math.floor((timeEnd - now) / 1000), 0);
+      setRemainingTime(remaining);
+
+      if (remaining <= 0 && !isModalOpen) {
+        setIsTimeUp(true);
+        localStorage.removeItem('examStartTime');
+      }
+    };
+
+    updateRemaining();
+    const interval = setInterval(updateRemaining, 1000);
 
     return () => clearInterval(interval);
   }, [examSet, submitExam]);
@@ -204,7 +214,6 @@ const Testing = () => {
   return (
     <div className='exam-container relative overflow-hidden h-full'>
       {/* Header - Improved mobile spacing */}
-
       <div className='justify-start items-center w-full text-lg sm:text-xl md:text-[32px] leading-tight font-extrabold gap-1 sm:gap-2 flex-col sm:flex-row text-center'>
         <span className='text-[#FE7743]'>{t('TEST.TEST_TITLE')}</span>{' '}
         <span className='text-[#02185B]'>{t('TEST.TEST_TITLE_AI')}</span>
@@ -471,6 +480,16 @@ const Testing = () => {
           </div>
         )}
       </Modal>
+
+      <TimeUpPopup
+        visible={isTimeUp}
+        onSubmit={() => {
+          if (hasSubmittedRef.current) return;
+          hasSubmittedRef.current = true;
+          submitExam(examSet.examId);
+        }}
+        countdownSeconds={10}
+      />
 
       {/* Exit Warning Modal - Mobile improvements */}
       <Modal
