@@ -152,24 +152,29 @@ const Testing = () => {
   }, [examSet]);
 
   useEffect(() => {
-    if (!examSet || totalTime.current === 0) return;
+    if (!examSet) return;
 
-    const interval = setInterval(() => {
-      setRemainingTime((prev) => {
-        const next = prev - 1;
+    let startTime = localStorage.getItem('examStartTime');
+    if (!startTime) {
+      startTime = Date.now().toString();
+      localStorage.setItem('examStartTime', startTime);
+    }
 
-        if (next <= 0) {
-          clearInterval(interval);
-          if (!hasSubmittedRef.current) {
-            hasSubmittedRef.current = true;
-            submitExam?.(examSet.examId);
-          }
-          return 0;
-        }
+    const timeEnd = Number(startTime) + examSet.timeLimitMinutes * 60 * 1000;
 
-        return next;
-      });
-    }, 1000);
+    const updateRemaining = () => {
+      const now = Date.now();
+      const remaining = Math.max(Math.floor((timeEnd - now) / 1000), 0);
+      setRemainingTime(remaining);
+
+      if (remaining <= 0 && !hasSubmittedRef.current) {
+        hasSubmittedRef.current = true;
+        submitExam(examSet.examId);
+      }
+    };
+
+    updateRemaining();
+    const interval = setInterval(updateRemaining, 1000);
 
     return () => clearInterval(interval);
   }, [examSet, submitExam]);
