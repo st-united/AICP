@@ -146,6 +146,7 @@ export const useSubmitExam = () => {
     },
   );
 };
+
 export const useDeleteExam = () => {
   const navigate = useNavigate();
 
