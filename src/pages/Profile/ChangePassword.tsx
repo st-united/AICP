@@ -52,134 +52,131 @@ const PasswordChangeForm = () => {
   const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
 
   return (
-    <div
-      className='flex flex-col items-center p-4 rounded-2xl bg-white h-full shadow overflow-y-auto mdL:overflow-y-hidden'
-      id='change-password-form'
-    >
-      {/* Lock image */}
-      <div className='flex justify-center'>
-        <div className='bg-blue-100 rounded-full p-4 sm:p-6'>
-          <div className='bg-blue-200 rounded-full p-3 sm:p-4'>
-            <img
-              src={Lock}
-              alt='Lock Icon'
-              className='w-10 h-10 mdL:w-6 mdL:h-6 lgL:w-14 lgL:h-14'
+    <div className='flex justify-center w-full h-full' id='change-password-form'>
+      <div className='w-full max-w-full bg-white rounded-2xl shadow flex flex-col items-center overflow-y-auto'>
+        <div className='flex justify-center my-5 sm:mt-4 sm:mb-0'>
+          <div className='bg-blue-100 rounded-full p-3 sm:p-4'>
+            <div className='bg-blue-200 rounded-full  p-2 sm:p-3'>
+              <img
+                src={Lock}
+                alt='Lock Icon'
+                className='w-12 h-12 sm:w-14 sm:h-14s md:w-16 md:h-16'
+              />
+            </div>
+          </div>
+        </div>
+        <Form
+          form={form}
+          layout='vertical'
+          onFinish={onFinish}
+          validateTrigger={['onChange', 'onBlur']}
+          className='w-full lg:w-2/3 xl:w-1/2 px-5 sm:px-6 md:px-8 box-border space-y-7 sm:space-y-0'
+        >
+          {/* Old Password */}
+          <Form.Item
+            label={<span className='text-base sm:text-lg'>{t('PROFILE.OLD_PASSWORD')}</span>}
+            name='oldPassword'
+            rules={validator}
+            required
+          >
+            <Input.Password
+              placeholder={t<string>('PROFILE.PLACEHOLDER_OLD_PASSWORD')}
+              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
+              className='input-custom'
             />
-          </div>
-        </div>
-      </div>
+          </Form.Item>
 
-      <Form
-        form={form}
-        layout='vertical'
-        onFinish={onFinish}
-        validateTrigger={['onChange', 'onBlur']}
-        className='w-full md:w-3/4 lg:w-1/2'
-      >
-        {/* Old Password */}
-        <Form.Item
-          label={<span className='text-base sm:text-lg'>{t('PROFILE.OLD_PASSWORD')}</span>}
-          name='oldPassword'
-          rules={validator}
-          required
-        >
-          <Input.Password
-            placeholder={t<string>('PROFILE.PLACEHOLDER_OLD_PASSWORD')}
-            iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
-            className='rounded-md !px-6 !py-4 md:!py-2 text-base sm:text-lg'
-          />
-        </Form.Item>
+          {/* New Password */}
+          <Form.Item
+            label={<span className='text-base sm:text-lg'>{t('PROFILE.NEW_PASSWORD')}</span>}
+            name='newPassword'
+            rules={[
+              ...validator,
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  const oldPassword = getFieldValue('oldPassword');
+                  if (!value || value !== oldPassword) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error(t<string>('VALIDATE.NEW_PASSWORD_DIFFERENT')));
+                },
+              }),
+            ]}
+            required
+          >
+            <Input.Password
+              placeholder={t<string>('PROFILE.PLACEHOLDER_NEW_PASSWORD')}
+              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
+              onCopy={(e) => e.preventDefault()}
+              className='input-custom'
+            />
+          </Form.Item>
 
-        {/* New Password */}
-        <Form.Item
-          label={<span className='text-base sm:text-lg'>{t('PROFILE.NEW_PASSWORD')}</span>}
-          name='newPassword'
-          rules={[
-            ...validator,
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                const oldPassword = getFieldValue('oldPassword');
-                if (!value || value !== oldPassword) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(new Error(t<string>('VALIDATE.NEW_PASSWORD_DIFFERENT')));
+          {/* Confirm Password */}
+          <Form.Item
+            label={<span className='text-base sm:text-lg'>{t('PROFILE.CONFIRM_PASSWORD')}</span>}
+            name='confirmPassword'
+            dependencies={['newPassword']}
+            required
+            rules={[
+              {
+                required: true,
+                message: t<string>('VALIDATE.REQUIRED', { field: t('PROFILE.CONFIRM_PASSWORD') }),
               },
-            }),
-          ]}
-          required
-        >
-          <Input.Password
-            placeholder={t<string>('PROFILE.PLACEHOLDER_NEW_PASSWORD')}
-            iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
-            onCopy={(e) => e.preventDefault()}
-            className='rounded-md !px-6 !py-3 md:!py-2 text-base sm:text-lg'
-          />
-        </Form.Item>
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('newPassword') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error(t<string>('VALIDATE.MATCH', { field: t('PROFILE.NEW_PASSWORD') })),
+                  );
+                },
+              }),
+            ]}
+          >
+            <Input.Password
+              placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
+              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
+              className='input-custom'
+              onPaste={(e) => e.preventDefault()}
+            />
+          </Form.Item>
 
-        {/* Confirm Password */}
-        <Form.Item
-          label={<span className='text-base sm:text-lg'>{t('PROFILE.CONFIRM_PASSWORD')}</span>}
-          name='confirmPassword'
-          dependencies={['newPassword']}
-          required
-          rules={[
-            {
-              required: true,
-              message: t<string>('VALIDATE.REQUIRED', { field: t('PROFILE.CONFIRM_PASSWORD') }),
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue('newPassword') === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error(t<string>('VALIDATE.MATCH', { field: t('PROFILE.NEW_PASSWORD') })),
-                );
-              },
-            }),
-          ]}
-        >
-          <Input.Password
-            placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
-            iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
-            className='rounded-md !px-6 !py-3 md:!py-2 text-base sm:text-lg'
-            onPaste={(e) => e.preventDefault()}
-          />
-        </Form.Item>
-
-        {/* Password Requirements */}
-        <div className='text-[1rem] sm:text-base md:text-lg text-[#8B8B8B] mb-4'>
-          <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-grey'}`}>
-            <div>
-              <CheckOutlined style={{ fontSize: '24px' }} />
+          {/* Password Requirements */}
+          <div className='text-base text-gray-600 flex flex-col gap-y-2 !mt-4 !mb-2'>
+            <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-grey'}`}>
+              <div>
+                <CheckOutlined className='text-[1.2rem]' />
+              </div>
+              <div>{t<string>('PROFILE.PASSWORD_REQUIREMENT')}</div>
             </div>
-            <div>{t<string>('PROFILE.PASSWORD_REQUIREMENT')}</div>
-          </div>
-          <div className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-grey'}`}>
-            <div>
-              <CheckOutlined style={{ fontSize: '24px' }} />
+            <div className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-grey'}`}>
+              <div>
+                <CheckOutlined className='text-[1.2rem]' />
+              </div>
+              <div>{t<string>('PROFILE.PASSWORD_COMPLEXITY')}</div>
             </div>
-            <div>{t<string>('PROFILE.PASSWORD_COMPLEXITY')}</div>
           </div>
-        </div>
 
-        {/* Submit Button */}
-        <Form.Item className='flex justify-center'>
-          <Button
-            htmlType='submit'
-            className={`w-full px-8 sm:px-12 md:px-14 h-12 text-base sm:text-lg rounded-full text-white font-bold transition-colors duration-200
+          {/* Submit Button */}
+          <Form.Item className='flex justify-center'>
+            <Button
+              htmlType='submit'
+              className={`w-full px-8 sm:px-12 md:px-14 h-12 text-base sm:text-lg rounded-full text-white font-bold transition-colors duration-200
                 ${
                   isFormValid
                     ? 'bg-[#2563eb] hover:!bg-[#2563eb] !border-[#2563eb] hover:!text-white'
                     : 'bg-[#60a5fa] hover:!bg-[#60a5fa] !border-[#60a5fa] hover:!text-white'
                 }
               `}
-            loading={isLoading}
-          >
-            {t('PROFILE.SAVE')}
-          </Button>
-        </Form.Item>
-      </Form>
+              loading={isLoading}
+            >
+              {t('PROFILE.SAVE')}
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 };
