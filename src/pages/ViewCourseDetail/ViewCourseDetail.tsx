@@ -138,7 +138,8 @@ const ViewCourseDetail = () => {
                   {courseData.applicableObjects && (
                     <div className='mt-3 xs:mt-4 rounded-md xs:rounded-lg'>
                       <p className='text-[#000000] font-medium text-xs xs:text-sm sm:text-base'>
-                        <strong>{t('COURSES.TARGET_AUDIENCE')}</strong>{' '}
+                        <strong>{t('COURSES.TARGET_AUDIENCE')}</strong>
+                        {': '}
                         {courseData.applicableObjects}
                       </p>
                     </div>
