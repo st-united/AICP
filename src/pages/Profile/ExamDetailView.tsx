@@ -55,7 +55,7 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
           <div className='flex flex-col sm:flex-row items-center justify-center sm:justify-between w-full gap-3 sm:gap-0'>
             <div className='text-xl font-bold text-gray-800 text-center sm:text-left'>
               {t('EXAM.QUIZ_ID_PREFIX')}
-              <span className='text-black ml-1'>#{exam.id.slice(0, 8)}</span>
+              <span className='text-black ml-1'>#{exam.examSet.name}</span>
             </div>
 
             <Button
