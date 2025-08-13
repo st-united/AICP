@@ -123,7 +123,6 @@ const Testing = () => {
     submitExam(examSet.examId, {
       onSuccess: () => {
         setIsSubmitModalOpen(false);
-        localStorage.removeItem('examStartTime');
       },
     });
   }, [examSet, submitExam]);
@@ -174,7 +173,6 @@ const Testing = () => {
 
       if (remaining <= 0 && !isModalOpen) {
         setIsTimeUp(true);
-        localStorage.removeItem('examStartTime');
       }
     };
 

@@ -135,6 +135,7 @@ export const useSubmitExam = () => {
     },
     {
       onSuccess({ message }, examId) {
+        localStorage.removeItem('examStartTime');
         setStorageData(EXAM_LATEST, examId);
         setStorageData(TEST_RESULT_CURRENT_STEP, 1);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
