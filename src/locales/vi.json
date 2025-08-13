@@ -477,7 +477,8 @@
       "IN_PROGRESS": "Đang làm bài",
       "SUBMITTED": "Đã nộp bài",
       "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
-      "GRADED": "Đã chấm điểm"
+      "GRADED": "Đã chấm điểm",
+      "INTERVIEW_SCHEDULED": "Đã đặt lịch phỏng vấn"
     },
     "LEVEL": {
       "NONE_LEVEL": "Chưa có đánh giá năng lực",
@@ -566,6 +567,7 @@
         "IN_PROGRESS": "Bạn đang làm bài kiểm tra",
         "SUBMITTED": "Bạn đã nộp bài kiểm tra",
         "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+        "INTERVIEW_SCHEDULED": "Đã đặt lịch phỏng vấn",
         "GRADED": "Đã chấm điểm",
         "DEFAULT": "Chưa bắt đầu"
       },
@@ -862,7 +864,8 @@
     "SCORE_LABEL": "Điểm",
     "NOT_FOUND": "Không tìm thấy kết quả đánh giá",
     "CORRECT_RATIO": "câu trả lời đúng",
-    "BOOKING_BUTTON_BOOKED": "Đã đặt lịch phỏng vấn"
+    "BOOKING_BUTTON_BOOKED": "Đã đặt lịch phỏng vấn",
+    "VIEW_DETAIL_BUTTON_BOOKED": "Xem chi tiết lịch phỏng vấn"
   },
   "CONFIRM_BEFORE_TEST_MODAL": {
     "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",

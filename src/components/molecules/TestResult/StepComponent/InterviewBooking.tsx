@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { getStorageData } from '@app/config';
 import { NAVIGATE_URL } from '@app/constants';
 import { EXAM_LATEST } from '@app/constants/testing';
+import { useCheckInterview } from '@app/hooks/useMentor';
 
 enum InterviewBookingStep {
   OVERVIEW = 'overview',
@@ -16,9 +17,8 @@ const InterviewBooking: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const examId = getStorageData(EXAM_LATEST);
-  const [interviewBookingStep, setInterviewBookingStep] = useState<InterviewBookingStep>(
-    InterviewBookingStep.OVERVIEW,
-  );
+  const [interviewBookingStep] = useState<InterviewBookingStep>(InterviewBookingStep.OVERVIEW);
+  const { data, isLoading } = useCheckInterview(examId);
   return (
     <div>
       {interviewBookingStep === InterviewBookingStep.OVERVIEW && (
@@ -37,10 +37,13 @@ const InterviewBooking: React.FC = () => {
             </div>
             <Button
               type='primary'
+              loading={isLoading}
               className='rounded-full text-lg font-bold px-6 py-5 mb-6'
               onClick={() => navigate(NAVIGATE_URL.INTERVIEW_DYNAMIC(examId))}
             >
-              {t('TEST_RESULT.BOOKING_BUTTON')}
+              {!data?.hasInterviewRequest
+                ? t('TEST_RESULT.BOOKING_BUTTON')
+                : t('TEST_RESULT.VIEW_DETAIL_BUTTON_BOOKED')}
             </Button>
           </div>
         </div>

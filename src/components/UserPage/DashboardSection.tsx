@@ -22,6 +22,8 @@ const getStatusDescription = (status: ExamStatusEnum) => {
       return t('DASHBOARD.TEST_STATUS.DESCRIPTION.SUBMITTED');
     case ExamStatusEnum.WAITING_FOR_REVIEW:
       return t('DASHBOARD.TEST_STATUS.DESCRIPTION.WAITING_FOR_REVIEW');
+    case ExamStatusEnum.INTERVIEW_SCHEDULED:
+      return t('DASHBOARD.TEST_STATUS.DESCRIPTION.INTERVIEW_SCHEDULED');
     case ExamStatusEnum.GRADED:
       return t('DASHBOARD.TEST_STATUS.DESCRIPTION.GRADED');
     default:
@@ -36,6 +38,8 @@ const getStatusButton = (status: ExamStatusEnum) => {
     case ExamStatusEnum.SUBMITTED:
       return t('DASHBOARD.TEST_STATUS.BUTTON.VIEW');
     case ExamStatusEnum.WAITING_FOR_REVIEW:
+      return t('DASHBOARD.TEST_STATUS.BUTTON.VIEW');
+    case ExamStatusEnum.INTERVIEW_SCHEDULED:
       return t('DASHBOARD.TEST_STATUS.BUTTON.VIEW');
     case ExamStatusEnum.GRADED:
       return t('DASHBOARD.TEST_STATUS.BUTTON.VIEW');
@@ -56,6 +60,8 @@ const DashboardSection = () => {
       case ExamStatusEnum.SUBMITTED:
         return navigate(NAVIGATE_URL.TEST_RESULT);
       case ExamStatusEnum.WAITING_FOR_REVIEW:
+        return navigate(NAVIGATE_URL.TEST_RESULT);
+      case ExamStatusEnum.INTERVIEW_SCHEDULED:
         return navigate(NAVIGATE_URL.TEST_RESULT);
       case ExamStatusEnum.GRADED:
         return navigate(NAVIGATE_URL.TEST_RESULT);
