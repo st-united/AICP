@@ -52,27 +52,25 @@ const PasswordChangeForm = () => {
   const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
 
   return (
-    <div className='flex justify-center w-full h-full overflow-y-auto' id='change-password-form'>
-      <div className='w-full bg-white rounded-2xl p-6 shadow flex flex-col items-center '>
-        {/* Lock image */}
-        <div className='flex justify-center'>
-          <div className='bg-blue-100 rounded-full p-4 sm:p-6'>
-            <div className='bg-blue-200 rounded-full p-3 sm:p-4'>
+    <div className='flex justify-center w-full h-full' id='change-password-form'>
+      <div className='w-full max-w-full bg-white rounded-2xl shadow flex flex-col items-center overflow-y-auto'>
+        <div className='flex justify-center my-5 sm:mt-4 sm:mb-0'>
+          <div className='bg-blue-100 rounded-full p-3 sm:p-4'>
+            <div className='bg-blue-200 rounded-full  p-2 sm:p-3'>
               <img
                 src={Lock}
                 alt='Lock Icon'
-                className='w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24'
+                className='w-12 h-12 sm:w-14 sm:h-14s md:w-16 md:h-16'
               />
             </div>
           </div>
         </div>
-
         <Form
           form={form}
           layout='vertical'
           onFinish={onFinish}
           validateTrigger={['onChange', 'onBlur']}
-          className='w-full md:w-3/4 lg:w-1/2'
+          className='w-full lg:w-2/3 xl:w-1/2 px-5 sm:px-6 md:px-8 box-border space-y-7 sm:space-y-0'
         >
           {/* Old Password */}
           <Form.Item
@@ -84,7 +82,7 @@ const PasswordChangeForm = () => {
             <Input.Password
               placeholder={t<string>('PROFILE.PLACEHOLDER_OLD_PASSWORD')}
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
-              className='rounded-md px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg'
+              className='input-custom'
             />
           </Form.Item>
 
@@ -110,7 +108,7 @@ const PasswordChangeForm = () => {
               placeholder={t<string>('PROFILE.PLACEHOLDER_NEW_PASSWORD')}
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
               onCopy={(e) => e.preventDefault()}
-              className='rounded-md px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg'
+              className='input-custom'
             />
           </Form.Item>
 
@@ -140,22 +138,22 @@ const PasswordChangeForm = () => {
             <Input.Password
               placeholder={t<string>('PROFILE.PLACEHOLDER_CONFIRM_PASSWORD')}
               iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
-              className='rounded-md px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg'
+              className='input-custom'
               onPaste={(e) => e.preventDefault()}
             />
           </Form.Item>
 
           {/* Password Requirements */}
-          <div className='text-lg sm:text-base text-[#8B8B8B] mb-4'>
+          <div className='text-base text-gray-600 flex flex-col gap-y-2 !mt-4 !mb-2'>
             <div className={`flex gap-2 ${isLengthValid ? 'text-green-500' : 'text-grey'}`}>
               <div>
-                <CheckOutlined style={{ fontSize: '24px' }} />
+                <CheckOutlined className='text-[1.2rem]' />
               </div>
               <div>{t<string>('PROFILE.PASSWORD_REQUIREMENT')}</div>
             </div>
             <div className={`flex gap-2 ${isComplexValid ? 'text-green-500' : 'text-grey'}`}>
               <div>
-                <CheckOutlined style={{ fontSize: '24px' }} />
+                <CheckOutlined className='text-[1.2rem]' />
               </div>
               <div>{t<string>('PROFILE.PASSWORD_COMPLEXITY')}</div>
             </div>
