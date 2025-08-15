@@ -41,8 +41,10 @@ export const useCreateSchedule = () => {
     mutationFn: async (data: CreateScheduleParams) => {
       return await createBookedSlots(data);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.CHECK_MY_INTERVIEW] });
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.CHECK_MY_INTERVIEW, data.data.data.examId],
+      });
     },
   });
 };
