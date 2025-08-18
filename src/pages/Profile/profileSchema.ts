@@ -100,7 +100,7 @@ export const useProfileSchema = () => {
       .matches(NO_SPACE_START_END, t('VALIDATE.NO_SPACE_START_END') as string)
       .matches(NO_TWO_SPACE, t('VALIDATE.NO_TWO_SPACE') as string)
       .matches(
-        /^[A-Za-z0-9]+$/,
+        /^[A-Za-z0-9 ]+$/,
         t('VALIDATE.SPESIAL_CHARACTERS', { field: t('PROFILE.SCHOOL_LABEL') }) as string,
       )
       .max(
