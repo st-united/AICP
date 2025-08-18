@@ -98,11 +98,27 @@ export const useProfileSchema = () => {
       .string()
       .required(t<string>('VALIDATE.USER_UNIVERSITY_REQUIRED'))
       .matches(NO_SPACE_START_END, t('VALIDATE.NO_SPACE_START_END') as string)
-      .matches(NO_TWO_SPACE, t('VALIDATE.NO_TWO_SPACE') as string),
+      .matches(NO_TWO_SPACE, t('VALIDATE.NO_TWO_SPACE') as string)
+      .matches(
+        /^[A-Za-z0-9]+$/,
+        t('VALIDATE.SPESIAL_CHARACTERS', { field: t('PROFILE.SCHOOL_LABEL') }) as string,
+      )
+      .max(
+        255,
+        t('VALIDATE.MAX_CHARACTER', { field: t('PROFILE.SCHOOL_LABEL'), number: 255 }) as string,
+      ),
 
     studentCode: yup
       .string()
       .required(t<string>('VALIDATE.USER_STUDENT_CODE_REQUIRED'))
-      .matches(NO_SPACE_START_END, t('VALIDATE.NO_SPACE_START_END') as string),
+      .matches(NO_SPACE_START_END, t('VALIDATE.NO_SPACE_START_END') as string)
+      .matches(
+        /^[A-Za-z0-9]+$/,
+        t('VALIDATE.SPESIAL_CHARACTERS', { field: t('PROFILE.STUDENT_ID_LABEL') }) as string,
+      )
+      .max(
+        50,
+        t('VALIDATE.MAX_CHARACTER', { field: t('PROFILE.STUDENT_ID_LABEL'), number: 50 }) as string,
+      ),
   });
 };

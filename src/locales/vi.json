@@ -169,6 +169,7 @@
     "POSITIVE_NUMBER": " {{field}} giá trị phải lớn hơn 0",
     "INTEGER": " {{field}} phải là một số nguyên",
     "MIN_CHARACTER": "{{field}} phải lớn hơn hoặc bằng {{number}} ký tự",
+    "MAX_CHARACTER": "{{field}} không quá {{number}} ký tự",
     "NUMBER": "{{field}} phải là số",
     "MATCH": "{{field}} không khớp",
     "SPESIAL_CHARACTERS": "{{field}} không có ký tự đặc biệt",
