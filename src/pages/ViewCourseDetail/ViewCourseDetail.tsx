@@ -22,7 +22,11 @@ const ViewCourseDetail = () => {
 
   const { courseId } = useParams<{ courseId: string }>();
   const { data: courseData, isLoading, error } = useCourseDetail(courseId || '');
-  const { data: courseList, isLoading: listCourseLoading, error: listCourseError } = useCourse();
+  const {
+    data: courseList,
+    isLoading: listCourseLoading,
+    error: listCourseError,
+  } = useCourse(courseId);
   const { mutate: registerCourse, isPending } = useRegisterCourse();
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
 
@@ -94,7 +98,7 @@ const ViewCourseDetail = () => {
 
               <div className='grid gap-3 xs:gap-4 xsM:gap-5 sm:gap-6 md:gap-7'>
                 <Card className='border-none'>
-                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-[#000000] mb-2 xs:mb-3 sm:mb-4'>
+                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-[#02185B] mb-2 xs:mb-3 sm:mb-4'>
                     {t('COURSES.COURSE_DESCRIPTION')}
                   </h3>
                   <HTMLContent
@@ -104,7 +108,7 @@ const ViewCourseDetail = () => {
                 </Card>
 
                 <Card className='border-none'>
-                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-[#000000] mb-2 xs:mb-3 sm:mb-4'>
+                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-[#02185B] mb-2 xs:mb-3 sm:mb-4'>
                     {t('COURSES.COURSE_INFORMATION')}
                   </h3>
                   <HTMLContent
@@ -114,7 +118,7 @@ const ViewCourseDetail = () => {
                 </Card>
 
                 <Card className='border-none'>
-                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-[#000000] mb-2 xs:mb-3 sm:mb-4'>
+                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-[#02185B] mb-2 xs:mb-3 sm:mb-4'>
                     {t('COURSES.CONTACT_INFORMATION')}
                   </h3>
                   <HTMLContent
@@ -130,30 +134,38 @@ const ViewCourseDetail = () => {
                 <h3 className='text-base xs:text-lg sm:text-xl md:text-[1.42rem] font-extrabold text-[#000000] mb-3 xs:mb-4 sm:mb-5'>
                   {t('COURSES.COURSE_OVERVIEW')}
                 </h3>
-                <div className='text-xs xs:text-sm sm:text-base text-gray-600 mb-3 xs:mb-4 sm:mb-5'>
-                  <HTMLContent
-                    content={courseData.overview}
-                    className='text-[#000000] prose prose-sm xs:prose-base max-w-none [&>p]:mb-2 xs:[&>p]:mb-3 [&>ul]:ml-3 xs:[&>ul]:ml-4 [&>ul]:list-disc [&>li]:mb-1'
-                  />
+                <div className='text-xs xs:text-sm sm:text-base text-gray-600 px-4 mb-3 xs:mb-4 sm:mb-5'>
+                  <ul className='list-disc ml-4'>
+                    <li>
+                      <HTMLContent
+                        content={courseData.overview}
+                        className='text-[#000000] prose prose-sm xs:prose-base max-w-none [&>p]:mb-2 xs:[&>p]:mb-3 [&>ul]:ml-3 xs:[&>ul]:ml-4 [&>ul]:list-disc [&>li]:mb-1'
+                      />
+                    </li>
+                  </ul>
                   {courseData.applicableObjects && (
                     <div className='mt-3 xs:mt-4 rounded-md xs:rounded-lg'>
-                      <p className='text-[#000000] font-medium text-xs xs:text-sm sm:text-base'>
-                        <strong>{t('COURSES.TARGET_AUDIENCE')}</strong>
-                        {': '}
-                        {courseData.applicableObjects}
-                      </p>
+                      <ul className='list-disc ml-4'>
+                        <li>
+                          <p className='text-[#000000] font-medium text-xs xs:text-sm sm:text-base'>
+                            <strong>{t('COURSES.TARGET_AUDIENCE')}</strong>
+                            {': '}
+                            {courseData.applicableObjects}
+                          </p>
+                        </li>
+                      </ul>
                     </div>
                   )}
                 </div>
 
-                <div className='mt-4 xs:mt-5 sm:mt-6 md:mt-7'>
+                <div className='mt-4 xs:mt-5 sm:mt-6 md:mt-7 flex justify-center'>
                   <Button
                     type='primary'
                     size='large'
                     loading={isPending}
                     disabled={isPending || courseData.isRegistered}
                     onClick={() => handleRegister(courseData.id)}
-                    className={`w-full h-10 border-none rounded-full font-semibold text-xs xs:text-sm sm:text-base md:text-lg !text-white ${
+                    className={`w-[60%] h-10 border-none rounded-full font-semibold text-xs xs:text-sm sm:text-base md:text-lg !text-white ${
                       courseData.isRegistered ? '!bg-[#16610E] cursor-not-allowed' : 'bg-orange-500'
                     }`}
                   >
