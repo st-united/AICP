@@ -1,3 +1,4 @@
+import { Image } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import PartnerCard from './PartnerCard';

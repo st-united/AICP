@@ -1,10 +1,5 @@
-import { Button } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
-import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
 
 type Point = {
   label: string;
@@ -21,9 +16,6 @@ export default function StepScreen({ steps, activeStep }: Props) {
   const [animate, setAnimate] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
-  const isAuth = useSelector((state: any) => state.auth.isAuth);
-  const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -149,16 +141,6 @@ export default function StepScreen({ steps, activeStep }: Props) {
             <span className='text-[#64607D] text-base xl:text-xl'>
               {t('HOMEPAGE.STEP_SCREEN_HEADER.SUBTITLE')}
             </span>
-            <div className='flex items-center justify-start'>
-              <Button
-                onClick={() => {
-                  isAuth ? setIsOpen(true) : navigate('/login');
-                }}
-                className='!h-12 mdL:min-h-14 !text-white font-bold !uppercase !rounded-full shadow-light slide-in-left bg-primary border !border-primary px-8 text-base smM:text-xl cursor-pointer hover:bg-white hover:!text-primary transition-all duration-300'
-              >
-                {isAuth ? t('HOMEPAGE_LOGIN.START') : t('HOMEPAGE.BUTTON')}
-              </Button>
-            </div>
           </div>
         </div>
       </div>
@@ -286,7 +268,6 @@ export default function StepScreen({ steps, activeStep }: Props) {
           ))}
         </svg>
       </div>
-      <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }

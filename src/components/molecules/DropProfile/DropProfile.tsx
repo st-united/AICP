@@ -29,6 +29,7 @@ export const DropProfile: FC = () => {
     }
     if (key == NAVIGATE_URL.SIGN_OUT) {
       queryClient.clear();
+      localStorage.clear();
 
       removeStorageData(ACCESS_TOKEN);
       dispatchAuth(logout());
