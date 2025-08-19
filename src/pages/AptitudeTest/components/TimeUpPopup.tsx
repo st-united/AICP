@@ -1,6 +1,6 @@
 import { WarningOutlined } from '@ant-design/icons';
 import { Button, Modal } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface TimeUpPopupProps {
@@ -14,7 +14,10 @@ const TimeUpPopup = ({ visible = false, onSubmit, countdownSeconds = 10 }: TimeU
   const [isModalOpen, setIsModalOpen] = useState(visible);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const calcRemaining = (end: number) => Math.max(Math.ceil((end - Date.now()) / 1000), 0);
+  const calcRemaining = useCallback(
+    (end: number) => Math.max(Math.ceil((end - Date.now()) / 1000), 0),
+    [],
+  );
 
   const [submitCountdown, setSubmitCountdown] = useState<number>(() => {
     const endTime = localStorage.getItem('timeUpEndTime');
@@ -22,14 +25,14 @@ const TimeUpPopup = ({ visible = false, onSubmit, countdownSeconds = 10 }: TimeU
     return countdownSeconds;
   });
 
-  const stopTimerAndSubmit = () => {
+  const stopTimerAndSubmit = useCallback(() => {
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
     localStorage.removeItem('timeUpEndTime');
     onSubmit();
-  };
+  }, [onSubmit]);
 
   useEffect(() => {
     setIsModalOpen(visible);
