@@ -24,6 +24,8 @@ export const getStatusText = (status: ExamStatusEnum) => {
       return t('EXAM.STATUS.SUBMITTED');
     case ExamStatusEnum.WAITING_FOR_REVIEW:
       return t('EXAM.STATUS.WAITING_FOR_REVIEW');
+    case ExamStatusEnum.INTERVIEW_SCHEDULED:
+      return t('EXAM.STATUS.INTERVIEW_SCHEDULED');
     case ExamStatusEnum.GRADED:
       return t('EXAM.STATUS.GRADED');
     default:
@@ -81,6 +83,8 @@ export const getStatusColor = (statusKey: string) => {
       return 'warning';
     case ExamStatusEnum.WAITING_FOR_REVIEW:
       return 'default';
+    case ExamStatusEnum.INTERVIEW_SCHEDULED:
+      return 'blue';
     case ExamStatusEnum.GRADED:
       return 'success';
     default:
@@ -98,7 +102,7 @@ export const formatDateTime = (dateString: string) => {
   }
 };
 
-const QuizCard = ({ quiz, disabled, onCheckboxChange, isChecked, onClick }: QuizCardProps) => {
+const QuizCard = ({ quiz, disabled, onClick }: QuizCardProps) => {
   const getLevelColor = (levelKey: string) => {
     switch (levelKey) {
       case ExamLevelEnum.LEVEL_1_STARTER:
@@ -130,7 +134,7 @@ const QuizCard = ({ quiz, disabled, onCheckboxChange, isChecked, onClick }: Quiz
           <div className='flex flex-col items-center sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3'>
             <div className='text-gray-600 font-medium'>
               {t('EXAM.QUIZ_ID_PREFIX')}
-              <span className='font-bold text-black'> #{quiz.id.slice(0, 8)}</span>
+              <span className='font-bold text-black'> #{quiz.examSet.name}</span>
             </div>
             <Tag
               color={getStatusColor(quiz.examStatus)}
