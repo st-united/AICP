@@ -157,12 +157,10 @@ const Testing = () => {
   useEffect(() => {
     if (!examSet) return;
 
-    let startTime = localStorage.getItem('examStartTime');
+    localStorage.removeItem('examStartTime');
 
-    if (!startTime) {
-      startTime = dayjs(examSet.timeStart).valueOf().toString();
-      localStorage.setItem('examStartTime', startTime);
-    }
+    const startTime = dayjs(examSet.timeStart).valueOf().toString();
+    localStorage.setItem('examStartTime', startTime);
 
     const timeEnd = Number(startTime) + examSet.timeLimitMinutes * 60 * 1000;
 

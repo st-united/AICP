@@ -92,6 +92,12 @@ export interface HasTakenExam {
   examStatus?: ExamStatusEnum;
 }
 
+export interface ExamAttempt {
+  id?: string;
+  examStatus?: ExamStatusEnum;
+  examSetName?: string;
+}
+
 export interface HistoryTesting {
   id: string;
   examStatus: ExamStatusEnum;

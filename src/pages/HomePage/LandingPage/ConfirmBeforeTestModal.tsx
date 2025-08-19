@@ -8,7 +8,7 @@ import { NewTestModal } from './Modals/NewTestModal';
 import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
 import { ExamStatusEnum } from '@app/constants/enum';
-import { useHasTakenExamDefault, useSubmitExam, useGetHistory } from '@app/hooks';
+import { useHasTakenExamDefault, useSubmitExam, useGetHistory, useHasTakenExam } from '@app/hooks';
 import './confirmBeforeTestModal.scss';
 
 interface ConfirmBeforeTestModalProps {
@@ -27,19 +27,21 @@ export default function ConfirmBeforeTestModal({
   const { mutate: submitExam } = useSubmitExam();
   const { data: exam } = useHasTakenExamDefault();
   const { data: hasTakenExam } = useHasTakenExamDefault();
-  const { data: historyData } = useGetHistory({ examSetName: domain });
-
+  const { data: hasTakenExamDomain } = useHasTakenExam(domain);
   const handleStartTest = () => navigate(NAVIGATE_URL.TEST, { state: { domain } });
   const handleReviewResult = () => navigate(NAVIGATE_URL.TEST_RESULT);
 
   const renderModalContent = () => {
-    const inProgressExam = historyData?.find(
-      (item) => item.examStatus === ExamStatusEnum.IN_PROGRESS,
-    );
+    const inProgressExam =
+      hasTakenExamDomain?.examStatus === ExamStatusEnum.IN_PROGRESS &&
+      hasTakenExamDomain?.examSetName === domain
+        ? hasTakenExamDomain.id
+        : null;
+
     if (inProgressExam) {
       return (
         <ContinueTestModal
-          examId={inProgressExam.id}
+          examId={inProgressExam}
           handleStartTest={handleStartTest}
           submitExam={submitExam}
         />
