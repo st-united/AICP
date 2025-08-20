@@ -21,7 +21,6 @@ export const ContinueTestModal = ({
   const hasTakenExam = {
     examStatus: ExamStatusEnum.IN_PROGRESS,
   };
-  console.log(examId, 'examId in ContinueTestModal');
 
   return (
     <div className='relative flex flex-col items-center justify-center'>
