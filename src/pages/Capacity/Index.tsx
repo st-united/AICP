@@ -24,7 +24,7 @@ const Capacity = () => {
   ];
 
   const handleInterviewClick = () => {
-    navigate(NAVIGATE_URL.SCHEDULE);
+    navigate(NAVIGATE_URL.INTERVIEW_DYNAMIC(examId || ''));
   };
 
   const handleOtherClick = () => {

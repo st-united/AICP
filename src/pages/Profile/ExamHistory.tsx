@@ -1,8 +1,7 @@
-import { DownloadOutlined } from '@ant-design/icons';
-import { Spin, Checkbox } from 'antd';
+import { Spin } from 'antd';
 import { Dayjs } from 'dayjs';
-import { t } from 'i18next';
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import ExamDetailView from './ExamDetailView';
 import DateFilter from './QuizManagement/DateFilterProps';
@@ -13,11 +12,13 @@ import QuizHeader from './QuizManagement/QuizHeader';
 import { DATE_TIME } from '@app/constants';
 import { ExamStatusEnum } from '@app/constants/enum';
 import { useExamDetail, useGetHistory } from '@app/hooks';
+import './ExamHistory.scss';
 
 const ExamHistory = () => {
   const [selectedQuizzes, setSelectedQuizzes] = useState<Set<string>>(new Set());
   const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
   const [selectedQuizId, setSelectedQuizId] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const apiParams = useMemo(() => {
     if (!dateRange?.[0] && !dateRange?.[1]) return undefined;
@@ -68,34 +69,13 @@ const ExamHistory = () => {
     setSelectedQuizzes(newSelectedQuizzes);
   };
 
-  const handleCheckAll = (checked: boolean) => {
-    if (!historyData) return;
-    setSelectedQuizzes(checked ? new Set(historyData.map((quiz) => quiz.id)) : new Set());
-  };
-
-  const handleDownloadAll = () => {
-    // Todo
-  };
-
-  const handleStartNew = () => {
-    // Todo
-  };
-
-  const handleStartFirst = () => {
-    // Todo
-  };
-
   if (isLoading) return <Spin className='flex items-center justify-center h-full' />;
   if (examError || detailError) return <ErrorState onRetry={refetch} />;
 
   return (
     <div className='h-full !rounded-2xl'>
-      <div className='max-w-7xl mx-auto space-y-4 h-full flex flex-col overflow-y-auto px-2'>
+      <div className='max-w-7xl mx-auto space-y-4 h-full flex flex-col px-2'>
         <QuizHeader
-          onDownloadAll={handleDownloadAll}
-          onStartNew={handleStartNew}
-          hasQuizzes={hasQuizzes}
-          startNewDisabled={hasInProgressQuiz}
           examId={selectedQuizId}
           disableButtons={historyData?.length === 0 ? true : false}
         />
@@ -106,31 +86,20 @@ const ExamHistory = () => {
           <>
             <DateFilter onDateChange={setDateRange} value={dateRange} />
             {!hasQuizzes ? (
-              <EmptyState onStartFirst={handleStartFirst} />
+              <EmptyState />
             ) : (
-              <div className='overflow-y-auto flex-1 space-y-4 px-1'>
-                <div className='flex items-center space-x-2 mb-2 z-0'>
-                  <Checkbox
-                    checked={allChecked}
-                    indeterminate={someChecked}
-                    onChange={(e) => handleCheckAll(e.target.checked)}
-                  />
-                  <p className='font-medium'>{t('EXAM.SELECT_ALL')}</p>
-
-                  <button
-                    onClick={handleDownloadAll}
-                    className='w-[25px] h-[25px] flex items-center justify-center rounded-md border border-orange-500 text-orange-500 hover:bg-orange-50 transition'
-                  >
-                    <DownloadOutlined className='text-base' />
-                  </button>
-                </div>
+              <div className='quiz-history__list scroll-hidden overflow-y-auto flex-1 space-y-4 px-1 p-4'>
                 {historyData.map((quiz) => (
                   <QuizCard
                     key={quiz.id}
                     quiz={quiz}
                     onCheckboxChange={handleCheckboxChange}
                     isChecked={selectedQuizzes.has(quiz.id)}
-                    onClick={() => setSelectedQuizId(quiz.id)}
+                    onClick={() =>
+                      quiz.examStatus !== ExamStatusEnum.IN_PROGRESS &&
+                      navigate(`/history/${quiz.id}`)
+                    }
+                    disabled={quiz.examStatus === ExamStatusEnum.IN_PROGRESS}
                   />
                 ))}
               </div>
