@@ -10,6 +10,7 @@ import { NAVIGATE_URL } from '@app/constants';
 import { ExamStatusEnum } from '@app/constants/enum';
 import { useHasTakenExamDefault, useSubmitExam, useGetHistory, useHasTakenExam } from '@app/hooks';
 import './confirmBeforeTestModal.scss';
+import { useEffect } from 'react';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
@@ -27,38 +28,41 @@ export default function ConfirmBeforeTestModal({
   const { mutate: submitExam } = useSubmitExam();
   const { data: exam } = useHasTakenExamDefault();
   const { data: hasTakenExam } = useHasTakenExamDefault();
-  const { data: hasTakenExamDomain } = useHasTakenExam(domain);
+  const { data: hasTakenExamDomain, refetch } = useHasTakenExam(domain);
   const handleStartTest = () => navigate(NAVIGATE_URL.TEST, { state: { domain } });
   const handleReviewResult = () => navigate(NAVIGATE_URL.TEST_RESULT);
 
+  useEffect(() => {
+    if (open) {
+      refetch();
+    }
+  }, [open, refetch]);
+
+  console.log('hasTakenExamDomain', hasTakenExamDomain);
+  console.log(hasTakenExamDomain?.examStatus, 'hasTakenExamDomain.examStatus');
+
   const renderModalContent = () => {
-    const inProgressExam =
-      hasTakenExamDomain?.examStatus === ExamStatusEnum.IN_PROGRESS &&
-      hasTakenExamDomain?.examSetName === domain
-        ? hasTakenExamDomain.id
-        : null;
-
-    if (inProgressExam) {
-      return (
-        <ContinueTestModal
-          examId={inProgressExam}
-          handleStartTest={handleStartTest}
-          submitExam={submitExam}
-        />
-      );
+    const examId = hasTakenExamDomain?.id || '';
+    if (hasTakenExamDomain) {
+      if (hasTakenExamDomain?.examStatus === ExamStatusEnum.IN_PROGRESS) {
+        return (
+          <ContinueTestModal
+            examId={examId}
+            handleStartTest={handleStartTest}
+            submitExam={submitExam}
+          />
+        );
+      } else {
+        return (
+          <ImproveTestModal
+            hasTakenExam={exam}
+            handleReviewResult={handleReviewResult}
+            handleStartTest={handleStartTest}
+            submitExam={submitExam}
+          />
+        );
+      }
     }
-
-    if (exam?.hasTakenExam) {
-      return (
-        <ImproveTestModal
-          hasTakenExam={exam}
-          handleReviewResult={handleReviewResult}
-          handleStartTest={handleStartTest}
-          submitExam={submitExam}
-        />
-      );
-    }
-
     return <NewTestModal handleStartTest={handleStartTest} hasTakenExam={exam} />;
   };
 
