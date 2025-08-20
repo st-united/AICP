@@ -38,9 +38,6 @@ export default function ConfirmBeforeTestModal({
     }
   }, [open, refetch]);
 
-  console.log('hasTakenExamDomain', hasTakenExamDomain);
-  console.log(hasTakenExamDomain?.examStatus, 'hasTakenExamDomain.examStatus');
-
   const renderModalContent = () => {
     const examId = hasTakenExamDomain?.id || '';
     if (hasTakenExamDomain) {
