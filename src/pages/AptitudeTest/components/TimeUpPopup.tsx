@@ -1,4 +1,6 @@
 import { WarningOutlined } from '@ant-design/icons';
+import { getStorageData, removeStorageData, setStorageData } from '@app/config';
+import { STORAGE_KEYS } from '@app/constants/testing';
 import { Button, Modal } from 'antd';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +22,7 @@ const TimeUpPopup = ({ visible = false, onSubmit, countdownSeconds = 10 }: TimeU
   );
 
   const [submitCountdown, setSubmitCountdown] = useState<number>(() => {
-    const endTime = localStorage.getItem('timeUpEndTime');
+    const endTime = getStorageData(STORAGE_KEYS.TIME_UP_END_TIME);
     if (endTime) return calcRemaining(Number(endTime));
     return countdownSeconds;
   });
@@ -30,7 +32,7 @@ const TimeUpPopup = ({ visible = false, onSubmit, countdownSeconds = 10 }: TimeU
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
-    localStorage.removeItem('timeUpEndTime');
+    removeStorageData(STORAGE_KEYS.TIME_UP_END_TIME);
     onSubmit();
   }, [onSubmit]);
 
@@ -38,10 +40,10 @@ const TimeUpPopup = ({ visible = false, onSubmit, countdownSeconds = 10 }: TimeU
     setIsModalOpen(visible);
 
     if (visible) {
-      let endTime = localStorage.getItem('timeUpEndTime');
+      let endTime = getStorageData(STORAGE_KEYS.TIME_UP_END_TIME);
       if (!endTime) {
         endTime = (Date.now() + countdownSeconds * 1000).toString();
-        localStorage.setItem('timeUpEndTime', endTime);
+        setStorageData(STORAGE_KEYS.TIME_UP_END_TIME, endTime);
       }
 
       const end = Number(endTime);
@@ -91,7 +93,7 @@ const TimeUpPopup = ({ visible = false, onSubmit, countdownSeconds = 10 }: TimeU
         <div className='flex items-center justify-center mt-4'>
           <Button
             onClick={() => {
-              localStorage.removeItem('timeUpEndTime');
+              removeStorageData(STORAGE_KEYS.TIME_UP_END_TIME);
               onSubmit();
             }}
             className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
