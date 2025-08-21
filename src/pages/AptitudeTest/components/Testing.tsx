@@ -15,9 +15,9 @@ import { useDeleteExam, useGetExamSet, useSubmitDraftQuestion, useSubmitExam } f
 import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 import './QuestionIndexPanel.scss';
 import { useLocation } from 'react-router-dom';
-import TimeUpPopup from './TimeUpPopupProps';
 import { removeStorageData, setStorageData } from '@app/config';
 import { STORAGE_KEYS } from '@app/constants/testing';
+import TimeUpPopup from './TimeUpPopup';
 
 const Testing = () => {
   const { state } = useLocation();

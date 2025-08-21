@@ -6,4 +6,5 @@ export const TEST_RESULT_CURRENT_STEP = 'TEST_RESULT_CURRENT_STEP';
 
 export const STORAGE_KEYS = {
   EXAM_START_TIME: 'examStartTime',
+  TIME_UP_END_TIME: 'timeUpEndTime',
 };
