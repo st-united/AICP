@@ -40,7 +40,7 @@ export default function ConfirmBeforeTestModal({
 
   const renderModalContent = () => {
     const examId = hasTakenExamDomain?.id || '';
-    if (hasTakenExamDomain) {
+    if (hasTakenExamDomain?.examStatus !== null) {
       if (hasTakenExamDomain?.examStatus === ExamStatusEnum.IN_PROGRESS) {
         return (
           <ContinueTestModal
