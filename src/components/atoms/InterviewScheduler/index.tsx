@@ -142,7 +142,6 @@ const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
           setSelectedSlot('');
           setSelectedBooking(undefined);
           openNotificationWithIcon(NotificationTypeEnum.SUCCESS, data.data.message);
-          navigate(`/history/${examId}`);
         },
         onError: () => {
           openNotificationWithIcon(NotificationTypeEnum.ERROR, t('MENTOR_BOOKING.BOOKING_ERROR'));

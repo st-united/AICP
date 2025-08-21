@@ -43,21 +43,6 @@ const ExamHistory = () => {
   const isLoading = isExamLoading && isDetailLoading;
   const hasQuizzes = !!historyData?.length;
   const showDetailView = selectedQuizId && examDetail;
-  const totalQuizzes = historyData?.length || 0;
-  const selectedCount = selectedQuizzes.size;
-  const allChecked = totalQuizzes > 0 && selectedCount === totalQuizzes;
-  const someChecked = selectedCount > 0 && !allChecked;
-
-  const hasInProgressQuiz = useMemo(() => {
-    if (!historyData) return false;
-    return historyData.some((quiz) =>
-      [
-        ExamStatusEnum.IN_PROGRESS,
-        ExamStatusEnum.SUBMITTED,
-        ExamStatusEnum.WAITING_FOR_REVIEW,
-      ].includes(quiz.examStatus),
-    );
-  }, [historyData]);
 
   const handleCheckboxChange = (quizId: string, checked: boolean) => {
     const newSelectedQuizzes = new Set(selectedQuizzes);
