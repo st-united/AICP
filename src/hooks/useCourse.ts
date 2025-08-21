@@ -15,11 +15,11 @@ export const useCourseDetail = (courseId: string) => {
   });
 };
 
-export const useCourse = () => {
+export const useCourse = (excludeId?: string) => {
   return useQuery({
     queryKey: [QUERY_KEY.COURSES],
     queryFn: async (): Promise<Course[]> => {
-      const { data } = await getAllCourseAPI();
+      const { data } = await getAllCourseAPI(excludeId);
       return data.data;
     },
   });
