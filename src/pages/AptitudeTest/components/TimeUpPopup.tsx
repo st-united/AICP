@@ -1,6 +1,6 @@
 import { WarningOutlined } from '@ant-design/icons';
 import { Button, Modal } from 'antd';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface TimeUpPopupProps {
@@ -12,30 +12,59 @@ interface TimeUpPopupProps {
 const TimeUpPopup = ({ visible = false, onSubmit, countdownSeconds = 10 }: TimeUpPopupProps) => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(visible);
-  const [submitCountdown, setSubmitCountdown] = useState(countdownSeconds);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const calcRemaining = useCallback(
+    (end: number) => Math.max(Math.ceil((end - Date.now()) / 1000), 0),
+    [],
+  );
+
+  const [submitCountdown, setSubmitCountdown] = useState<number>(() => {
+    const endTime = localStorage.getItem('timeUpEndTime');
+    if (endTime) return calcRemaining(Number(endTime));
+    return countdownSeconds;
+  });
+
+  const stopTimerAndSubmit = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    localStorage.removeItem('timeUpEndTime');
+    onSubmit();
+  }, [onSubmit]);
 
   useEffect(() => {
     setIsModalOpen(visible);
-    setSubmitCountdown(countdownSeconds);
-  }, [visible, countdownSeconds]);
 
-  useEffect(() => {
-    if (!isModalOpen) return;
-    let timer: NodeJS.Timeout;
+    if (visible) {
+      let endTime = localStorage.getItem('timeUpEndTime');
+      if (!endTime) {
+        endTime = (Date.now() + countdownSeconds * 1000).toString();
+        localStorage.setItem('timeUpEndTime', endTime);
+      }
 
-    timer = setInterval(() => {
-      setSubmitCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          onSubmit();
-          return 0;
+      const end = Number(endTime);
+
+      setSubmitCountdown(calcRemaining(end));
+
+      timerRef.current = setInterval(() => {
+        const remaining = calcRemaining(end);
+        setSubmitCountdown(remaining);
+
+        if (remaining <= 0) {
+          stopTimerAndSubmit();
         }
-        return prev - 1;
-      });
-    }, 1000);
+      }, 1000);
+    }
 
-    return () => clearInterval(timer);
-  }, [isModalOpen, onSubmit]);
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [visible, countdownSeconds]);
 
   return (
     <Modal
@@ -61,7 +90,10 @@ const TimeUpPopup = ({ visible = false, onSubmit, countdownSeconds = 10 }: TimeU
         </p>
         <div className='flex items-center justify-center mt-4'>
           <Button
-            onClick={onSubmit}
+            onClick={() => {
+              localStorage.removeItem('timeUpEndTime');
+              onSubmit();
+            }}
             className='bg-[#FE7743] border-2 border-[#ff682d] rounded-3xl text-white px-8 py-2 h-full text-lg font-bold hover:bg-[#ff5029] hover:border-[#ff5029] hover:text-white'
           >
             {t('BUTTON.SUBMIT')}
