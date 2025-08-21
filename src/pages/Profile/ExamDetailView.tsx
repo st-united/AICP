@@ -8,6 +8,8 @@ import CompetencyChart from '@app/components/ai-assessment/CompetencyChart';
 import SkillsList from '@app/components/ai-assessment/SkillList';
 import SkillRadarChart from '@app/components/ai-assessment/SkillRadarChart';
 import { DetailExam } from '@app/interface/user.interface';
+import { setStorageData } from '@app/config';
+import { EXAM_LATEST } from '@app/constants/testing';
 interface ExamDetailViewProps {
   exam: DetailExam;
   onBack: () => void;
@@ -60,7 +62,7 @@ const ExamDetailView = ({ exam, onBack }: ExamDetailViewProps) => {
 
             <Button
               onClick={() => {
-                localStorage.setItem('examLatest', exam.id);
+                setStorageData(EXAM_LATEST, exam.id);
                 navigate('/result');
               }}
               className='text-sm text-[#FE7743] border border-[#FE7743] rounded-full px-4 py-1 hover:bg-orange-50 transition'
