@@ -197,6 +197,7 @@
     "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối",
     "NO_SPACE_START": "Không được bắt đầu bằng một hoặc nhiều khoảng trống",
     "NO_TWO_SPACE": "Không được có nhiều khoảng trống liên tiếp",
+    "MIN_MAX": "Mật khẩu tối thiểu 8 ký tự và tối đa 15 ký tự ",
     "FULL_NAME_REQUIRED": "Vui lòng nhập họ tên!",
     "DOB_REQUIRED": "Vui lòng nhập ngày tháng năm sinh",
     "PHONE_REQUIRED": "Vui lòng nhập số điện thoại!",
