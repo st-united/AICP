@@ -1,5 +1,5 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
-import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ContinueTestModal } from './Modals/ContinueTestModal';
@@ -8,9 +8,9 @@ import { NewTestModal } from './Modals/NewTestModal';
 import { Modal } from '@app/components/molecules';
 import { NAVIGATE_URL } from '@app/constants';
 import { ExamStatusEnum } from '@app/constants/enum';
-import { useHasTakenExamDefault, useSubmitExam, useGetHistory, useHasTakenExam } from '@app/hooks';
+import { useSubmitExam, useHasTakenExam } from '@app/hooks';
+
 import './confirmBeforeTestModal.scss';
-import { useEffect } from 'react';
 
 interface ConfirmBeforeTestModalProps {
   open: boolean;
@@ -26,8 +26,6 @@ export default function ConfirmBeforeTestModal({
   const navigate = useNavigate();
 
   const { mutate: submitExam } = useSubmitExam();
-  const { data: exam } = useHasTakenExamDefault();
-  const { data: hasTakenExam } = useHasTakenExamDefault();
   const { data: hasTakenExamDomain, refetch } = useHasTakenExam(domain);
   const handleStartTest = () => navigate(NAVIGATE_URL.TEST, { state: { domain } });
   const handleReviewResult = () => navigate(NAVIGATE_URL.TEST_RESULT);
@@ -40,19 +38,20 @@ export default function ConfirmBeforeTestModal({
 
   const renderModalContent = () => {
     const examId = hasTakenExamDomain?.id || '';
-    if (hasTakenExamDomain) {
+    if (hasTakenExamDomain?.examStatus) {
       if (hasTakenExamDomain?.examStatus === ExamStatusEnum.IN_PROGRESS) {
         return (
           <ContinueTestModal
             examId={examId}
             handleStartTest={handleStartTest}
             submitExam={submitExam}
+            totalExams={hasTakenExamDomain.totalExams}
           />
         );
       } else {
         return (
           <ImproveTestModal
-            hasTakenExam={exam}
+            hasTakenExam={hasTakenExamDomain}
             handleReviewResult={handleReviewResult}
             handleStartTest={handleStartTest}
             submitExam={submitExam}
@@ -60,7 +59,17 @@ export default function ConfirmBeforeTestModal({
         );
       }
     }
-    return <NewTestModal handleStartTest={handleStartTest} hasTakenExam={exam} />;
+    return (
+      <NewTestModal
+        handleStartTest={handleStartTest}
+        hasTakenExam={
+          hasTakenExamDomain && {
+            examSetDuration: hasTakenExamDomain.examSetDuration,
+            examStatus: hasTakenExamDomain.examStatus,
+          }
+        }
+      />
+    );
   };
 
   return (

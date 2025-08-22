@@ -10,6 +10,7 @@ interface ImproveTestModalProps {
     examId?: string;
     examStatus?: string;
     examSetDuration?: number;
+    totalExams?: number;
   };
   handleReviewResult: () => void;
   handleStartTest: () => void;
@@ -58,7 +59,15 @@ export const ImproveTestModal = ({
 
           <Button
             onClick={handleStartTest}
-            className='w-full h-full text-base font-semibold border !border-primary px-3 py-2 rounded-full !bg-orange-500 hover:!bg-white hover:!text-primary !text-white transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
+            disabled={(hasTakenExam?.totalExams ?? 0) >= 3}
+            className={`
+    w-full h-full text-base font-semibold px-3 py-2 rounded-full transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl
+    ${
+      (hasTakenExam?.totalExams ?? 0) >= 3
+        ? 'bg-gray-300 border-gray-300 text-gray-500 cursor-not-allowed'
+        : 'border !border-primary !bg-orange-500 !text-white hover:!bg-white hover:!text-primary'
+    }
+  `}
           >
             {hasTakenExam?.examStatus === ExamStatusEnum.IN_PROGRESS
               ? t('BUTTON.CONTINUE_NOW')
