@@ -42,25 +42,34 @@ const ExamDomainSelectModal = ({ open, onClose, onSelectDomain }: ExamDomainSele
             <ExclamationCircleTwoTone className='text-[4rem] bg-blue-300 rounded-full p-2 inset-ring-4' />
           </div>
           <span className='text-base font-bold !my-5 text-center px-2 sm:text-xl md:text-2xl md:px-4 md:my-6'>
-            {t('MODAL.TITLE_SELECT_EXAM_DOMAIN')}
+            {t('MODAL.SELECT_DOMAIN.TITLE_SELECT_EXAM_DOMAIN')}
           </span>
+
           <div className='px-4 w-full flex flex-col items-start md:my-6 !my-0 gap-3'>
             <p className='text-base text-gray-900 md:text-lg font-semibold'>
-              <Trans i18nKey='Bạn là' components={{ br: <br /> }} />
+              <Trans i18nKey='MODAL.SELECT_DOMAIN.FORM.LABEL_YOU_ARE' components={{ br: <br /> }} />
             </p>
 
             <Form className='w-full' name='exam-domain' onFinish={onFinish} autoComplete='off'>
               <Form.Item<FieldType>
                 name='domain'
-                rules={[{ required: true, message: 'Vui lòng chọn ngành nghề của bạn' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: t<string>('MODAL.SELECT_DOMAIN.FORM.ERROR_SELECT_DOMAIN'),
+                  },
+                ]}
               >
                 <Select
                   className='w-full h-12 md:h-14 text-base md:text-lg font-semibold'
-                  placeholder='Chọn ngành nghề của bạn'
+                  placeholder={t('MODAL.SELECT_DOMAIN.FORM.PLACEHOLDER_SELECT_DOMAIN')}
                   onChange={(value) => setSelectedDomain(value)}
                   options={[
-                    { value: 'AI For Fresher', label: 'Lập trình viên' },
-                    { value: 'AI For Fresher (Non-IT)', label: 'Ngành nghề khác' },
+                    { value: 'AI For Fresher', label: t('MODAL.SELECT_DOMAIN.DOMAIN_OPTIONS.IT') },
+                    {
+                      value: 'AI For Fresher (Non-IT)',
+                      label: t('MODAL.SELECT_DOMAIN.DOMAIN_OPTIONS.NON_IT'),
+                    },
                   ]}
                 />
               </Form.Item>
@@ -68,7 +77,7 @@ const ExamDomainSelectModal = ({ open, onClose, onSelectDomain }: ExamDomainSele
               <div className='min-h-[24px] flex items-center'>
                 {hasScheduled ? (
                   <span className='text-sm text-green-600 font-semibold'>
-                    Bạn đã đặt lịch cho bài thi này
+                    {t('MODAL.SELECT_DOMAIN.MESSAGE.HAS_SCHEDULED')}
                   </span>
                 ) : (
                   <span className='invisible text-sm font-semibold'>placeholder</span>
@@ -86,7 +95,7 @@ const ExamDomainSelectModal = ({ open, onClose, onSelectDomain }: ExamDomainSele
                         : 'border !border-primary !bg-orange-500 !text-white hover:!bg-white hover:!text-primary'
                     }`}
                   >
-                    {t('BUTTON.CONTINUE')}
+                    {t('MODAL.SELECT_DOMAIN.BUTTON.CONTINUE')}
                   </Button>
                 </div>
               </div>
