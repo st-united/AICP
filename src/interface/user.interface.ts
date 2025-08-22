@@ -104,6 +104,10 @@ export interface HistoryTesting {
   id: string;
   examStatus: ExamStatusEnum;
   sfiaLevel: SFIALevel;
+  examSet: {
+    id: string;
+    name: string;
+  };
   examLevel?: {
     examLevel: ExamLevelEnum | null;
   };

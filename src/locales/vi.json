@@ -215,6 +215,7 @@
     "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối",
     "NO_SPACE_START": "Không được bắt đầu bằng một hoặc nhiều khoảng trống",
     "NO_TWO_SPACE": "Không được có nhiều khoảng trống liên tiếp",
+    "MIN_MAX": "Mật khẩu tối thiểu 8 ký tự và tối đa 15 ký tự ",
     "FULL_NAME_REQUIRED": "Vui lòng nhập họ tên!",
     "DOB_REQUIRED": "Vui lòng nhập ngày tháng năm sinh",
     "PHONE_REQUIRED": "Vui lòng nhập số điện thoại!",
@@ -495,7 +496,8 @@
       "IN_PROGRESS": "Đang làm bài",
       "SUBMITTED": "Đã nộp bài",
       "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
-      "GRADED": "Đã chấm điểm"
+      "GRADED": "Đã chấm điểm",
+      "INTERVIEW_SCHEDULED": "Đã đặt lịch phỏng vấn"
     },
     "LEVEL": {
       "NONE_LEVEL": "Chưa có đánh giá năng lực",
@@ -584,6 +586,7 @@
         "IN_PROGRESS": "Bạn đang làm bài kiểm tra",
         "SUBMITTED": "Bạn đã nộp bài kiểm tra",
         "WAITING_FOR_REVIEW": "Đang chờ chấm điểm",
+        "INTERVIEW_SCHEDULED": "Đã đặt lịch phỏng vấn",
         "GRADED": "Đã chấm điểm",
         "DEFAULT": "Chưa bắt đầu"
       },
@@ -880,7 +883,8 @@
     "SCORE_LABEL": "Điểm",
     "NOT_FOUND": "Không tìm thấy kết quả đánh giá",
     "CORRECT_RATIO": "câu trả lời đúng",
-    "BOOKING_BUTTON_BOOKED": "Đã đặt lịch phỏng vấn"
+    "BOOKING_BUTTON_BOOKED": "Đã đặt lịch phỏng vấn",
+    "VIEW_DETAIL_BUTTON_BOOKED": "Xem chi tiết lịch phỏng vấn"
   },
   "CONFIRM_BEFORE_TEST_MODAL": {
     "TITLE_INFO": "Vui lòng bổ sung thông tin để tiếp tục",

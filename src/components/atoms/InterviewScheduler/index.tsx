@@ -143,7 +143,6 @@ const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
           setSelectedSlot('');
           setSelectedBooking(undefined);
           openNotificationWithIcon(NotificationTypeEnum.SUCCESS, data.data.message);
-          navigate(`/history/${examId}`);
         },
         onError: (error) => {
           const axiosError = error as AxiosError<{ message?: string }>;
