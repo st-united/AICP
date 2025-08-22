@@ -213,6 +213,21 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
     setIsEdit(true);
   }, []);
 
+  // helper encode
+  function encodeGcsUrl(rawUrl: string): string {
+    try {
+      const u = new URL(rawUrl.trim());
+      u.pathname = u.pathname
+        .split('/')
+        .map((seg) => encodeURIComponent(decodeURIComponent(seg)))
+        .join('/');
+      return u.toString();
+    } catch (e) {
+      console.error('Invalid URL:', rawUrl);
+      return rawUrl;
+    }
+  }
+
   const handleDownload = useCallback(() => {
     if (!selectedFile) return;
 
@@ -226,10 +241,13 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
     const url = selectedFile?.originalUrl || selectedFile?.url;
     if (!url) return;
 
+    // ✅ encode url trước khi gửi xuống backend
+    const encodedUrl = encodeGcsUrl(url);
+
     const processedFileName = getProcessedFileName(url, selectedFile.name);
 
     downloadPortfolioFileMutation.mutate(
-      { url: url, filename: processedFileName },
+      { url: encodedUrl, filename: processedFileName },
       {
         onSuccess: (response) => {
           const blob = new Blob([response.data], { type: response.headers['content-type'] });
@@ -242,7 +260,6 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
               ? (error as any).response?.data?.message || t('PORTFOLIO.DOWNLOAD_FAILED')
               : t('PORTFOLIO.DOWNLOAD_FAILED');
           openNotificationWithIcon(NotificationTypeEnum.ERROR, errorMessage);
-          window.open(url, '_blank');
         },
       },
     );

@@ -18,12 +18,18 @@ export const getFileSrc = (file: ExtendedUploadFile): string => {
   return src || '';
 };
 
-export const isImageFile = (fileType?: string): boolean => {
-  return fileType ? IMAGE_EXTENSIONS.some((ext) => fileType.includes(ext)) : false;
+export const isImageFile = (fileType?: string, fileName?: string): boolean => {
+  if (!fileType && !fileName) return false;
+  const lowerType = fileType?.toLowerCase() || '';
+  const lowerName = fileName?.toLowerCase() || '';
+  return IMAGE_EXTENSIONS.some((ext) => lowerType.includes(ext) || lowerName.endsWith(ext));
 };
 
-export const isPdfFile = (fileType?: string): boolean => {
-  return fileType ? PDF_MIME_TYPES.some((type) => fileType.includes(type)) : false;
+export const isPdfFile = (fileType?: string, fileName?: string): boolean => {
+  if (!fileType && !fileName) return false;
+  const lowerType = fileType?.toLowerCase() || '';
+  const lowerName = fileName?.toLowerCase() || '';
+  return PDF_MIME_TYPES.some((type) => lowerType.includes(type)) || lowerName.endsWith('.pdf');
 };
 
 export const isDocxFile = (fileName?: string): boolean => {

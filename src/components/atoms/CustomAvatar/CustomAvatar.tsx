@@ -2,6 +2,7 @@ import { CameraFilled, LoadingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, GetProp, Upload, UploadFile, UploadProps } from 'antd';
 import { RcFile, UploadChangeParam } from 'antd/es/upload';
 import { useState } from 'react';
+import { DefaultAvatar } from '@app/assets/images';
 
 interface Props {
   avatar?: string;
@@ -45,8 +46,7 @@ const CustomAvatar = ({ avatar, isEdit, previewImage, setPreviewImage, setFileIm
       {/* {!isPending ? ( */}
       <Avatar
         className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px]'
-        src={previewImage ?? avatar}
-        icon={<UserOutlined className='md:!text-[180px] !text-[150px] bg-gray-300' />}
+        src={previewImage || avatar || DefaultAvatar}
       />
 
       {!isEdit && (
