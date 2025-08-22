@@ -13,6 +13,7 @@ import {
   DetailExam,
   UpdateUserStudentInfo,
   UserProfile,
+  ExamAttempt,
 } from '@app/interface/user.interface';
 import {
   checkHasTakenExam,
@@ -60,11 +61,18 @@ export const useGetUsers = (params: GetUsersParams) =>
     },
   );
 
-export const useHasTakenExam = (examSetId: string) =>
-  useQuery([QUERY_KEY.HAS_TAKEN_EXAM, examSetId], async (): Promise<HasTakenExam> => {
-    const { data } = await checkHasTakenExam(examSetId);
-    return data.data;
-  });
+export const useHasTakenExam = (examSetName?: string) =>
+  useQuery(
+    [QUERY_KEY.HAS_TAKEN_EXAM, examSetName],
+    async (): Promise<ExamAttempt> => {
+      if (!examSetName) throw new Error('examSetName is required');
+      const { data } = await checkHasTakenExam(examSetName);
+      return data.data;
+    },
+    {
+      enabled: !!examSetName,
+    },
+  );
 
 export const useHasTakenExamDefault = () =>
   useQuery([QUERY_KEY.HAS_TAKEN_EXAM_DEFAULT], async (): Promise<HasTakenExam> => {
