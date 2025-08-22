@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { noExamHistory } from '@app/assets/images';
 import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
-import { RootState } from '@app/redux/store';
 import ExamDomainSelectModal from '@app/pages/HomePage/LandingPage/Modals/ExamDomainSelectModal';
+import { RootState } from '@app/redux/store';
 
 const EmptyState = () => {
   const { t } = useTranslation();
