@@ -22,7 +22,11 @@ const ViewCourseDetail = () => {
 
   const { courseId } = useParams<{ courseId: string }>();
   const { data: courseData, isLoading, error } = useCourseDetail(courseId || '');
-  const { data: courseList, isLoading: listCourseLoading, error: listCourseError } = useCourse();
+  const {
+    data: courseList,
+    isLoading: listCourseLoading,
+    error: listCourseError,
+  } = useCourse(courseId);
   const { mutate: registerCourse, isPending } = useRegisterCourse();
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
 
@@ -79,8 +83,8 @@ const ViewCourseDetail = () => {
             </h1>
           </div>
 
-          <div className='flex flex-col lg:grid lg:grid-cols-3 lgL:grid-cols-4 gap-4 xs:gap-5 xsM:gap-6 sm:gap-7 md:gap-8 lg:gap-10 bg-white p-3 xs:p-4 xsM:p-5 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-lg xs:rounded-xl lg:rounded-2xl shadow-lg'>
-            <div className='lg:col-span-2 lgL:col-span-3 flex flex-col gap-3 xs:gap-4 xsM:gap-5 sm:gap-6 md:gap-7 lg:gap-8'>
+          <div className='flex flex-col lg:grid lg:grid-cols-3 lgL:grid-cols-3 gap-4 xs:gap-5 xsM:gap-6 sm:gap-7 md:gap-8 lg:gap-10 bg-white p-3 xs:p-4 xsM:p-5 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-lg xs:rounded-xl lg:rounded-2xl shadow-lg'>
+            <div className='lg:col-span-2 lgL:col-span-2 flex flex-col gap-3 xs:gap-4 xsM:gap-5 sm:gap-6 md:gap-7 lg:gap-8'>
               <div className='w-full overflow-hidden rounded-lg xs:rounded-xl lg:rounded-2xl shadow-md'>
                 <img
                   src={courseData.linkImage}
@@ -94,7 +98,7 @@ const ViewCourseDetail = () => {
 
               <div className='grid gap-3 xs:gap-4 xsM:gap-5 sm:gap-6 md:gap-7'>
                 <Card className='border-none'>
-                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 mb-2 xs:mb-3 sm:mb-4'>
+                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-[#02185B] mb-2 xs:mb-3 sm:mb-4'>
                     {t('COURSES.COURSE_DESCRIPTION')}
                   </h3>
                   <HTMLContent
@@ -104,7 +108,7 @@ const ViewCourseDetail = () => {
                 </Card>
 
                 <Card className='border-none'>
-                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 mb-2 xs:mb-3 sm:mb-4'>
+                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-[#02185B] mb-2 xs:mb-3 sm:mb-4'>
                     {t('COURSES.COURSE_INFORMATION')}
                   </h3>
                   <HTMLContent
@@ -114,7 +118,7 @@ const ViewCourseDetail = () => {
                 </Card>
 
                 <Card className='border-none'>
-                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 mb-2 xs:mb-3 sm:mb-4'>
+                  <h3 className='text-base xs:text-lg sm:text-xl md:text-2xl font-semibold text-[#02185B] mb-2 xs:mb-3 sm:mb-4'>
                     {t('COURSES.CONTACT_INFORMATION')}
                   </h3>
                   <HTMLContent
@@ -125,34 +129,43 @@ const ViewCourseDetail = () => {
               </div>
             </div>
 
-            <div className='lg:sticky top-6 self-start z-10 space-y-3 xs:space-y-4 xsM:space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8 order-first lg:order-last lgL:col-span-1'>
+            <div className='lg:sticky top-6 self-start z-10 space-y-3 xs:space-y-4 xsM:space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8 order-first lg:order-last lgL:order-last  '>
               <Card className='shadow-lg border-0 px-3 xs:px-4 sm:px-5 md:px-6 py-4 xs:py-5 sm:py-6 md:py-7 rounded-xl xs:rounded-2xl bg-[#FFE9E14F]'>
-                <h3 className='text-base xs:text-lg sm:text-xl md:text-[1.42rem] font-semibold text-gray-800 mb-3 xs:mb-4 sm:mb-5'>
+                <h3 className='text-base xs:text-lg sm:text-xl md:text-[1.42rem] font-extrabold text-[#000000] mb-3 xs:mb-4 sm:mb-5'>
                   {t('COURSES.COURSE_OVERVIEW')}
                 </h3>
-                <div className='text-xs xs:text-sm sm:text-base text-gray-600 mb-3 xs:mb-4 sm:mb-5'>
-                  <HTMLContent
-                    content={courseData.overview}
-                    className='prose prose-sm xs:prose-base max-w-none [&>p]:mb-2 xs:[&>p]:mb-3 [&>ul]:ml-3 xs:[&>ul]:ml-4 [&>ul]:list-disc [&>li]:mb-1'
-                  />
+                <div className='text-xs xs:text-sm sm:text-base text-gray-600 px-4 mb-3 xs:mb-4 sm:mb-5'>
+                  <ul className='list-disc ml-4'>
+                    <li>
+                      <HTMLContent
+                        content={courseData.overview}
+                        className='text-[#000000] prose prose-sm xs:prose-base max-w-none [&>p]:mb-2 xs:[&>p]:mb-3 [&>ul]:ml-3 xs:[&>ul]:ml-4 [&>ul]:list-disc [&>li]:mb-1'
+                      />
+                    </li>
+                  </ul>
                   {courseData.applicableObjects && (
-                    <div className='mt-3 xs:mt-4 p-2 xs:p-3 bg-blue-50 rounded-md xs:rounded-lg'>
-                      <p className='text-blue-800 font-medium text-xs xs:text-sm sm:text-base'>
-                        <strong>{t('COURSES.TARGET_AUDIENCE')}</strong>{' '}
-                        {courseData.applicableObjects}
-                      </p>
+                    <div className='mt-3 xs:mt-4 rounded-md xs:rounded-lg'>
+                      <ul className='list-disc ml-4'>
+                        <li>
+                          <p className='text-[#000000] font-medium text-xs xs:text-sm sm:text-base'>
+                            <strong>{t('COURSES.TARGET_AUDIENCE')}</strong>
+                            {': '}
+                            {courseData.applicableObjects}
+                          </p>
+                        </li>
+                      </ul>
                     </div>
                   )}
                 </div>
 
-                <div className='mt-4 xs:mt-5 sm:mt-6 md:mt-7'>
+                <div className='mt-4 xs:mt-5 sm:mt-6 md:mt-7 flex justify-center'>
                   <Button
                     type='primary'
                     size='large'
                     loading={isPending}
                     disabled={isPending || courseData.isRegistered}
                     onClick={() => handleRegister(courseData.id)}
-                    className={`w-full h-10 border-none rounded-full font-semibold text-xs xs:text-sm sm:text-base md:text-lg !text-white ${
+                    className={`w-[60%] h-10 border-none rounded-full font-semibold text-xs xs:text-sm sm:text-base md:text-lg !text-white ${
                       courseData.isRegistered ? '!bg-[#16610E] cursor-not-allowed' : 'bg-orange-500'
                     }`}
                   >
@@ -173,7 +186,7 @@ const ViewCourseDetail = () => {
             </div>
           </div>
 
-          <div className='mt-6 xs:mt-7 sm:mt-8 md:mt-10 lg:mt-12'>
+          <div className='text-2xl sm:text-3xl mt-6 xs:mt-7 sm:mt-8 md:mt-10 lg:mt-12'>
             <RelationCourseList courses={courseList} title={t<string>('COURSES.RELATED_COURSES')} />
           </div>
         </div>
