@@ -31,7 +31,7 @@ export const ContentModal = ({ durationKey, hasTakenExam }: ModalContentProps) =
       )}
       <p className='text-base text-gray-900 md:text-lg !mt-3 !leading-9'>
         <span className='text-orange-500 font-semibold'>{t('MODAL.NOTE_CONFIRM_TEST')}:</span>{' '}
-        {t('MODAL.WARNING_CONFIRM_TEST')}
+        <Trans i18nKey='MODAL.WARNING_CONFIRM_TEST' components={{ b: <b /> }} />
       </p>
     </div>
   );

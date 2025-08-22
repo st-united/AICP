@@ -48,7 +48,7 @@ export default function BeforeTestComponent({ goBack }: StepItemComponent) {
       <p className='text-base text-gray-900 md:text-xl'>{t('MODAL.RESULT_CONFIRM_TEST')}</p>
       <p className='text-base text-gray-900 md:text-xl'>
         <span className='text-orange-500 font-semibold'>{t('MODAL.NOTE_CONFIRM_TEST')}:</span>{' '}
-        {t('MODAL.WARNING_CONFIRM_TEST')}
+        <Trans i18nKey='MODAL.WARNING_CONFIRM_TEST' components={{ b: <b /> }} />
       </p>
     </div>
   );

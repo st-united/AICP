@@ -30,6 +30,7 @@ import {
   checkResetPasswordTokenApi,
   getDetailExam,
   UpdateUserStudentInfoApi,
+  checkHasScheduledExamAPI,
 } from '@app/services';
 
 export const useCreateUser = () => {
@@ -68,6 +69,18 @@ export const useHasTakenExam = (examSetName?: string) =>
       if (!examSetName) throw new Error('examSetName is required');
       const { data } = await checkHasTakenExam(examSetName);
       return data.data;
+    },
+    {
+      enabled: !!examSetName,
+    },
+  );
+
+export const useHasScheduled = (examSetName: string) =>
+  useQuery(
+    [QUERY_KEY.HAS_SCHEDULED, examSetName],
+    async (): Promise<boolean> => {
+      const { data } = await checkHasScheduledExamAPI(examSetName);
+      return data;
     },
     {
       enabled: !!examSetName,
