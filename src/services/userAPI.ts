@@ -14,14 +14,21 @@ export const getUsersAPI = async (params: GetUsersParams) =>
 
 export const getUserByIdAPI = async (id: number) => await axios.get(`${API_URL.USERS}/${id}`);
 
-export const checkHasTakenExam = async (examSetId: string) =>
-  await axios.get(`${API_URL.CHECK_TAKEN_EXAM}/${examSetId}`);
+export const checkHasTakenExam = async (examSetName: string) =>
+  await axios.get(`${API_URL.CHECK_TAKEN_EXAM}?examSetName=${encodeURIComponent(examSetName)}`);
 
 export const checkHasTakenExamDefault = async () =>
   await axios.get(API_URL.CHECK_TAKEN_EXAM_DEFAULT);
 
 export const getHistoryTestingApi = (params?: GetHistoryParams) =>
   axios.get(API_URL.HISTORY_TESTING, { params });
+
+export const checkHasScheduledExamAPI = async (examSetName: string) => {
+  const response = await axios.get(API_URL.CHECK_HAS_SCHEDULED, {
+    params: { examSetName },
+  });
+  return response.data;
+};
 
 export const updateUser = async (user: UserDetail) =>
   await axios.patch(`${API_URL.USERS}/${user.id}`, user);

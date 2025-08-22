@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { noExamHistory } from '@app/assets/images';
 import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
+import ExamDomainSelectModal from '@app/pages/HomePage/LandingPage/Modals/ExamDomainSelectModal';
 import { RootState } from '@app/redux/store';
 
 const EmptyState = () => {
@@ -13,6 +14,7 @@ const EmptyState = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { isAuth } = useSelector((state: RootState) => state.auth);
+  const [domain, setDomain] = useState('');
 
   return (
     <div className='w-full overflow-y-auto rounded-2xl shadow-sm hover:shadow-md transition-shadow'>
@@ -43,7 +45,22 @@ const EmptyState = () => {
             {t('EXAM.START_FIRST_QUIZ')}
           </Button>
         </div>
-        {isOpen && <ConfirmBeforeTestModal open={isOpen} onClose={() => setIsOpen(false)} />}
+        {isOpen && !domain ? (
+          <ExamDomainSelectModal
+            open={isOpen}
+            onClose={() => setIsOpen(false)}
+            onSelectDomain={setDomain}
+          />
+        ) : (
+          <ConfirmBeforeTestModal
+            domain={domain}
+            open={!!domain}
+            onClose={() => {
+              setIsOpen(false);
+              setDomain('');
+            }}
+          />
+        )}{' '}
       </div>
     </div>
   );
