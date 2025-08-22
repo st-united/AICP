@@ -1,23 +1,30 @@
-import { CloseCircleOutlined, ExclamationCircleTwoTone } from '@ant-design/icons';
+import { ExclamationCircleTwoTone } from '@ant-design/icons';
+import { Button, Form, FormProps, Select } from 'antd';
+import { useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { Modal } from '@app/components/molecules';
-import { HeaderModal } from './HeaderModal';
-import { Trans, useTranslation } from 'react-i18next';
-import { Button, Form, FormProps, Select } from 'antd';
+import { useHasScheduled } from '@app/hooks';
 
 interface ExamDomainSelectModalProps {
   open: boolean;
   onClose: () => void;
   onSelectDomain: (domain: string) => void;
 }
+
 type FieldType = {
   domain?: string;
 };
+
 const ExamDomainSelectModal = ({ open, onClose, onSelectDomain }: ExamDomainSelectModalProps) => {
   const { t } = useTranslation();
+  const [selectedDomain, setSelectedDomain] = useState<string>();
+  const { data: hasScheduled } = useHasScheduled(selectedDomain || '');
+
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     onSelectDomain(values.domain || '');
   };
+
   return (
     <Modal
       open={open}
@@ -27,14 +34,7 @@ const ExamDomainSelectModal = ({ open, onClose, onSelectDomain }: ExamDomainSele
       closable={false}
       className='p-0 m-0'
       classNames={{ content: '!rounded-3xl !pr-[0.875rem]' }}
-      width={{
-        xs: '90%',
-        sm: '80%',
-        md: '70%',
-        lg: '60%',
-        xl: '85%',
-        xxl: '60%',
-      }}
+      width={{ xs: '90%', sm: '80%', md: '70%', lg: '60%', xl: '85%', xxl: '60%' }}
     >
       <div className='custom-scrollbar overflow-y-auto max-h-[80vh] w-[80vw] lg:w-[40vw]'>
         <div className='flex flex-col items-center justify-center p-10'>
@@ -48,28 +48,43 @@ const ExamDomainSelectModal = ({ open, onClose, onSelectDomain }: ExamDomainSele
             <p className='text-base text-gray-900 md:text-lg font-semibold'>
               <Trans i18nKey='Bạn là' components={{ br: <br /> }} />
             </p>
-            <Form className='w-full' name='basic' onFinish={onFinish} autoComplete='off'>
+
+            <Form className='w-full' name='exam-domain' onFinish={onFinish} autoComplete='off'>
               <Form.Item<FieldType>
                 name='domain'
                 rules={[{ required: true, message: 'Vui lòng chọn ngành nghề của bạn' }]}
               >
                 <Select
                   className='w-full h-12 md:h-14 text-base md:text-lg font-semibold'
-                  placeholder={'Chọn ngành nghề của bạn'}
+                  placeholder='Chọn ngành nghề của bạn'
+                  onChange={(value) => setSelectedDomain(value)}
                   options={[
                     { value: 'AI For Fresher', label: 'Lập trình viên' },
-                    {
-                      value: 'AI For Fresher (Non-IT)',
-                      label: 'Ngành nghề khác',
-                    },
+                    { value: 'AI For Fresher (Non-IT)', label: 'Ngành nghề khác' },
                   ]}
                 />
               </Form.Item>
+
+              <div className='min-h-[24px] flex items-center'>
+                {hasScheduled ? (
+                  <span className='text-sm text-green-600 font-semibold'>
+                    Bạn đã đặt lịch cho bài thi này
+                  </span>
+                ) : (
+                  <span className='invisible text-sm font-semibold'>placeholder</span>
+                )}
+              </div>
+
               <div className='px-3 my-6 w-full'>
                 <div className='flex flex-col gap-4 md:flex-row md:justify-center md:gap-4'>
                   <Button
                     htmlType='submit'
-                    className='w-full h-full text-base font-semibold border !border-primary px-3 py-2 rounded-full !bg-orange-500 hover:!bg-white hover:!text-primary !text-white transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
+                    disabled={hasScheduled}
+                    className={`w-full h-full text-base font-semibold px-3 py-2 rounded-full transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl ${
+                      hasScheduled
+                        ? 'bg-gray-300 border-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'border !border-primary !bg-orange-500 !text-white hover:!bg-white hover:!text-primary'
+                    }`}
                   >
                     {t('BUTTON.CONTINUE')}
                   </Button>
@@ -82,4 +97,5 @@ const ExamDomainSelectModal = ({ open, onClose, onSelectDomain }: ExamDomainSele
     </Modal>
   );
 };
+
 export default ExamDomainSelectModal;

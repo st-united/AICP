@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { RobotHand } from '@app/assets/images';
 import { PartnerUnit1, PartnerUnit2, CelebUnit2, DevPlus } from '@app/assets/images/Logos';
 import ConfirmBeforeTestModal from '@app/pages/HomePage/LandingPage/ConfirmBeforeTestModal';
+import ExamDomainSelectModal from '@app/pages/HomePage/LandingPage/Modals/ExamDomainSelectModal';
 import { RootState } from '@app/redux/store';
 import '@app/pages/HomePage/LandingPage/homepage.scss';
-import ExamDomainSelectModal from '@app/pages/HomePage/LandingPage/Modals/ExamDomainSelectModal';
 
 const BannerUserScreen = () => {
   const { t } = useTranslation();

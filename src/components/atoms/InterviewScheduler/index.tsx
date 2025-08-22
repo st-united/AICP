@@ -1,4 +1,5 @@
 import { Button, Spin } from 'antd';
+import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -144,8 +145,12 @@ const InterviewSchedule: React.FC<InterviewScheduleProps> = ({ examId }) => {
           openNotificationWithIcon(NotificationTypeEnum.SUCCESS, data.data.message);
           navigate(`/history/${examId}`);
         },
-        onError: () => {
-          openNotificationWithIcon(NotificationTypeEnum.ERROR, t('MENTOR_BOOKING.BOOKING_ERROR'));
+        onError: (error) => {
+          const axiosError = error as AxiosError<{ message?: string }>;
+          openNotificationWithIcon(
+            NotificationTypeEnum.ERROR,
+            axiosError.response?.data?.message || t('MENTOR_BOOKING.BOOKING_ERROR'),
+          );
         },
       });
     }
