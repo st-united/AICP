@@ -23,6 +23,13 @@ export const checkHasTakenExamDefault = async () =>
 export const getHistoryTestingApi = (params?: GetHistoryParams) =>
   axios.get(API_URL.HISTORY_TESTING, { params });
 
+export const checkHasScheduledExamAPI = async (examSetName: string) => {
+  const response = await axios.get(API_URL.CHECK_HAS_SCHEDULED, {
+    params: { examSetName },
+  });
+  return response.data;
+};
+
 export const updateUser = async (user: UserDetail) =>
   await axios.patch(`${API_URL.USERS}/${user.id}`, user);
 

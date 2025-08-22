@@ -154,13 +154,31 @@
     "CONTINUE_TEST_OPTION_CONTINUE": "<b>Tiếp tục làm bài</b> từ thời điểm đã dừng trước đó.",
     "CONTINUE_TEST_OPTION_EXIT": "<b>Kết thúc bài ngay</b>, hệ thống sẽ ghi nhận kết quả đến thời điểm hiện tại.",
     "RESULT_CONFIRM_TEST": "Sau khi hoàn thành, bạn sẽ nhận được bản đánh giá năng lực AI ở dạng dự thảo và chuyển sang bước tiếp theo: đặt lịch phỏng vấn với đội ngũ chuyên gia để hoàn thiện và xác nhận năng lực AI một cách chính xác nhất.",
-    "WARNING_CONFIRM_TEST": "Bạn chỉ được làm bài đánh giá một lần trước khi có kết quả chính thức. Ngay sau khi nhận được phản hồi từ đội ngũ cố vấn, bạn sẽ có thể tiếp tục với bài kiểm tra tiếp theo.",
+    "WARNING_CONFIRM_TEST": "Bạn chỉ được làm bài test tối đa <b>3</b> lần nếu chưa đặt lịch phỏng vấn. Khi đã đặt lịch phỏng vấn, bạn không thể làm lại bài test.",
     "START_CONFIRM_TEST": "Bắt đầu ngay",
     "START_CONFIRM_TEST_AGAIN": "Tiếp tục làm",
     "BACK": "Quay lại",
     "REVIEW_RESULT": "Xem lại kết quả",
     "NOTE_CONFIRM_TEST": "LƯU Ý",
-    "TITLE_SELECT_EXAM_DOMAIN": "Vui lòng chọn ngành nghề để tiếp tục"
+    "TITLE_SELECT_EXAM_DOMAIN": "Vui lòng chọn ngành nghề để tiếp tục",
+    "SELECT_DOMAIN": {
+      "TITLE_SELECT_EXAM_DOMAIN": "Vui lòng chọn ngành nghề để tiếp tục",
+      "FORM": {
+        "LABEL_YOU_ARE": "Bạn là",
+        "PLACEHOLDER_SELECT_DOMAIN": "Chọn ngành nghề của bạn",
+        "ERROR_SELECT_DOMAIN": "Vui lòng chọn ngành nghề của bạn"
+      },
+      "DOMAIN_OPTIONS": {
+        "IT": "Lập trình viên",
+        "NON_IT": "Ngành nghề khác"
+      },
+      "MESSAGE": {
+        "HAS_SCHEDULED": "Bạn đã đặt lịch cho bài thi này"
+      },
+      "BUTTON": {
+        "CONTINUE": "Tiếp tục"
+      }
+    }
   },
   "VALIDATE": {
     "MIN": " {{field}} phải lớn hơn hoặc bằng {{number}}",
