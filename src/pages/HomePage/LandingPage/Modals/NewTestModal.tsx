@@ -3,12 +3,13 @@ import { useTranslation } from 'react-i18next';
 
 import { ContentModal } from './ContentModal';
 import { HeaderModal } from './HeaderModal';
+import { ExamStatusEnum } from '@app/constants/enum';
 
 interface NewTestModalProps {
   handleStartTest: () => void;
   hasTakenExam?: {
     examSetDuration: number;
-    examStatus?: string;
+    examStatus?: ExamStatusEnum;
   };
 }
 

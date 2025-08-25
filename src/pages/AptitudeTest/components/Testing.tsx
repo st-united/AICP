@@ -16,6 +16,8 @@ import { AnswerChoice, Question } from '@app/interface/examSet.interface';
 import './QuestionIndexPanel.scss';
 import { useLocation } from 'react-router-dom';
 import TimeUpPopup from './TimeUpPopupProps';
+import { removeStorageData, setStorageData } from '@app/config';
+import { STORAGE_KEYS } from '@app/constants/testing';
 
 const Testing = () => {
   const { state } = useLocation();
@@ -157,12 +159,10 @@ const Testing = () => {
   useEffect(() => {
     if (!examSet) return;
 
-    let startTime = localStorage.getItem('examStartTime');
+    removeStorageData(STORAGE_KEYS.EXAM_START_TIME);
 
-    if (!startTime) {
-      startTime = dayjs(examSet.timeStart).valueOf().toString();
-      localStorage.setItem('examStartTime', startTime);
-    }
+    const startTime = dayjs(examSet.timeStart).valueOf().toString();
+    setStorageData(STORAGE_KEYS.EXAM_START_TIME, startTime);
 
     const timeEnd = Number(startTime) + examSet.timeLimitMinutes * 60 * 1000;
 

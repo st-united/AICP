@@ -4,9 +4,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { NotificationTypeEnum, openNotificationWithIcon } from '@app/components/atoms/notification';
-import { setStorageData } from '@app/config';
+import { removeStorageData, setStorageData } from '@app/config';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { EXAM_LATEST, TEST_RESULT_CURRENT_STEP } from '@app/constants/testing';
+import { EXAM_LATEST, STORAGE_KEYS, TEST_RESULT_CURRENT_STEP } from '@app/constants/testing';
 import {
   ExamSetDetail,
   ExamSetResult,
@@ -135,7 +135,7 @@ export const useSubmitExam = () => {
     },
     {
       onSuccess({ message }, examId) {
-        localStorage.removeItem('examStartTime');
+        removeStorageData(STORAGE_KEYS.EXAM_START_TIME);
         setStorageData(EXAM_LATEST, examId);
         setStorageData(TEST_RESULT_CURRENT_STEP, 1);
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
